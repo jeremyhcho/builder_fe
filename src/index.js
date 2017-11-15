@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
 
+// Global CSS
+import './Assets/Stylesheets/Main.scss'
+
 // Router
 import AppRouter from './Router'
 

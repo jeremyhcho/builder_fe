@@ -8,6 +8,9 @@ import { AppContainer } from 'react-hot-loader'
 // Components
 import Styleguide from 'Components/Styleguide'
 
+// Global CSS
+import './Assets/Stylesheets/Main.scss'
+
 const rootEl = document.getElementById('root')
 
 ReactDOM.render(

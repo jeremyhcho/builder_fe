@@ -1,0 +1,151 @@
+@import 'Variables';
+
+:global {
+  #root, .main, .app {
+    width: 100%;
+    height: 100%;
+    color: var(--font-color);
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  .small {
+    font-size: 1.2rem;
+  }
+
+  a.link {
+    color: var(--blue);
+  }
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow: hidden;
+}
+
+body {
+  font-size: 1.4rem;
+  font-weight: 400;
+  overflow: auto;
+  background-color: #fff;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font);
+  letter-spacing: 0.5px;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+}
+
+h1, h2, h3, h4, p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 3.6rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  color: inherit;
+}
+
+a, a:active, a:visited, a:link {
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: 0;
+}
+
+input {
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  font-family: var(--font);
+}
+
+a,
+b,
+big,
+i,
+small,
+tt,
+abbr,
+acronym,
+cite,
+code,
+dfn,
+em,
+kbd,
+strong,
+samp,
+time,
+var,
+bdo,
+br,
+img,
+map,
+object,
+q,
+span,
+sub,
+sup,
+label,
+button,
+input,
+select,
+textarea {
+  display: inline-block;
+}

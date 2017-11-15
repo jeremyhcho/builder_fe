@@ -1,1 +1,23 @@
-.styleguide {}
+.styleguide {
+  margin-top: 100px;
+
+  .subheader {
+    margin: 0 auto;
+    display: inline-block;
+
+    hr {
+      display: inline-block;
+      width: 50px;
+      line-height: 40px;
+      vertical-align: middle;
+      border: 0;
+      height: 1px;
+      background-color: var(--light-gray);
+    }
+
+    span {
+      margin: 0 15px;
+    }
+  }
+
+}
