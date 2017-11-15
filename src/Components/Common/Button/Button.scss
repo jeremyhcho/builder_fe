@@ -1,0 +1,16 @@
+.btn {
+  border-radius: 3px;
+  border: 1px solid var(--dark-blue);
+  background-color: var(--blue);
+  color: #FFF;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 15px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(38, 110, 175, 0.9);
+    transition: all 0.1s;
+  }
+}
