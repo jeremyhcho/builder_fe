@@ -14,7 +14,8 @@ const Elements = () => (
     <SubHeader subHeaderText='Buttons' />
 
     <Col xs={8} offset={{ xs: 2 }}>
-      <Button />
+      <Button>Primary</Button>
+      <Button theme="secondary">Secondary</Button>
     </Col>
   </Row>
 )
