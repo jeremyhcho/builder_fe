@@ -21,15 +21,14 @@ Button.propTypes = {
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   flat: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
 Button.defaultProps = {
   primary: false,
   secondary: false,
   flat: false,
-  children: ''
+  children: '',
 }
-
 
 export default Button
