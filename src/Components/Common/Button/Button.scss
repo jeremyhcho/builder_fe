@@ -1,5 +1,5 @@
 .btn {
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   border: 1px solid var(--dark-blue);
   background-color: var(--blue);
   color: #FFF;
