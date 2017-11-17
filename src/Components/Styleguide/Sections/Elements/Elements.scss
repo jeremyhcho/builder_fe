@@ -1,0 +1,21 @@
+.elements {
+  width: 80%;
+  margin: 20px auto 30px;
+
+  .buttons-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .button-container {
+      flex: 1;
+      text-align: center;
+
+      .label {
+        color: var(--dark-gray);
+      }
+    }
+  }
+}
