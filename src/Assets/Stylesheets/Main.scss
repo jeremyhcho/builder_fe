@@ -7,12 +7,20 @@
     color: var(--font-color);
   }
 
-  .bold {
+  .semibold {
     font-weight: 600;
+  }
+
+  .bold {
+    font-weight: 700;
   }
 
   .small {
     font-size: 1.2rem;
+  }
+
+  .flex {
+    display: flex;
   }
 
   a.link {
@@ -33,7 +41,7 @@ html {
 
 body {
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 300;
   overflow: auto;
   background-color: #fff;
 }
@@ -58,27 +66,27 @@ h1, h2, h3, h4, p {
 }
 
 h1 {
-  font-size: 3.6rem;
-  letter-spacing: 3px;
-  font-weight: 600;
+  font-size: 2.4rem;
+  letter-spacing: 1px;
+  font-weight: normal;
 }
 
 h2 {
   font-size: 2.2rem;
   letter-spacing: 1px;
-  font-weight: 600;
+  font-weight: normal;
 }
 
 h3 {
   font-size: 2rem;
   letter-spacing: 0.5px;
-  font-weight: 600;
+  font-weight: normal;
 }
 
 h4 {
   font-size: 1.8rem;
   letter-spacing: 0.5px;
-  font-weight: 600;
+  font-weight: normal;
 }
 
 li {

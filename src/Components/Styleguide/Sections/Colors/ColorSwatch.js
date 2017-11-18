@@ -10,10 +10,10 @@ const ColorSwatch = ({ color }) => (
       <div style={{ backgroundColor: color.hex }} />
     </div>
 
-    <p className='small' style={{ marginTop: '10px' }}>
-      <p><span className='bold' styleName='label'>VAR</span> {color.var}</p>
-      <p><span className='bold' styleName='label'>HEX</span> {color.hex}</p>
-    </p>
+    <div className='small' style={{ marginTop: '10px' }}>
+      <p><span className='semibold' styleName='label'>VAR</span> {color.var}</p>
+      <p><span className='semibold' styleName='label'>HEX</span> {color.hex}</p>
+    </div>
   </div>
 )
 

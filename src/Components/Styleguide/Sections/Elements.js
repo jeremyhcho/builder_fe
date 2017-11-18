@@ -6,7 +6,7 @@ import SubHeader from '../SubHeader'
 import Button from 'Components/Common/Button'
 
 const Elements = () => (
-  <div>
+  <div style={{ marginTop: '25px' }}>
     <SectionHeader headerText='Elements' />
     <SubHeader subHeaderText='Buttons' />
     <Button />

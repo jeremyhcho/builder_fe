@@ -54,7 +54,7 @@ const primaryColors = [
 const Colors = () => (
   <div styleName='colors'>
     <SectionHeader headerText='Colors' />
-    <SubHeader subHeaderText='Primary Colors' />
+    <SubHeader subHeaderText='Primary' />
 
     <div styleName='color-list'>
       {
