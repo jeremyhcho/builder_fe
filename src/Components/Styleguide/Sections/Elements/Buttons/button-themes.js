@@ -1,4 +1,4 @@
-export const buttonThemes = [
+export const defaultButtonThemes = [
   {
     primary: true,
     text: 'Primary'
@@ -10,5 +10,9 @@ export const buttonThemes = [
   {
     flat: true,
     text: 'Flat'
+  },
+  {
+    disabled: true,
+    text: 'Disabled'
   }
 ]
