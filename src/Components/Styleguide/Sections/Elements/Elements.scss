@@ -1,21 +1,4 @@
 .elements {
   width: 80%;
   margin: 20px auto 30px;
-
-  .buttons-list {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 5%;
-
-    .button-container {
-      flex-grow: 1;
-
-      .label {
-        color: var(--dark-gray);
-        margin-bottom: 8px;
-      }
-    }
-  }
 }
