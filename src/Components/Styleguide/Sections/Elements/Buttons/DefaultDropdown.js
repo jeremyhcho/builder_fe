@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Dropdown from 'Components/Common/Button/Dropdown'
+import { Dropdown } from 'Components/Common/Button'
 
 // CSS
 import './../Elements.scss'

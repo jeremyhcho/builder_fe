@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // Components
-import Button from 'Components/Common/Button'
+import { Button } from 'Components/Common/Button'
 
 // CSS
 import './../Elements.scss'

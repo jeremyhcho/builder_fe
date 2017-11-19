@@ -1,4 +1,4 @@
-export const defaultButtonThemes = [
+export const buttonThemes = [
   {
     primary: true,
     text: 'Primary'

@@ -16,7 +16,6 @@ class Dropdown extends Component {
   }
 
   render () {
-    console.log(this.props)
     const { isToggled } = this.state
     const { children, label } = this.props
     if (children) {
