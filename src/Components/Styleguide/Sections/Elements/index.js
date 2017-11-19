@@ -3,7 +3,7 @@ import React from 'react'
 // Components
 import SectionHeader from './../../SectionHeader'
 import SubHeader from './../../SubHeader'
-import { DefaultButton, DefaultDropdown, DefaultToggle } from './Buttons'
+import { DefaultButton, DefaultToggle } from './Buttons'
 
 // Props
 import { buttonThemes } from './Buttons/button-themes'
@@ -21,10 +21,6 @@ const Elements = () => (
           <DefaultButton theme={theme} key={theme.text} />
         ))
       }
-    </div>
-    <SubHeader subHeaderText='Dropdown' />
-    <div styleName="buttons-list">
-      <DefaultDropdown />
     </div>
     <SubHeader subHeaderText='Toggle' />
     <div styleName="buttons-list">
