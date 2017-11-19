@@ -1,10 +1,11 @@
 // Default buttons
 .btn {
   display: inline-block;
+  color: #FFF;
   height: 40px;
   line-height: 40px;
   padding: 0px 15px;
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   transition: all 200ms ease;
 
@@ -93,8 +94,9 @@
   }
   // offset pseudoselector when checked
   input[type=checkbox]:checked + .box:before {
+    box-shadow: 1px 1px 1px var(--dark-blue);
     color: var(--blue);
-    left: 31px;
+    left: 31.5px;
     content: attr((data-background-checked));
   }
 }
