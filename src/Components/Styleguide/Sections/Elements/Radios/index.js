@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import SubHeader from '../../SubHeader'
+import SubHeader from '../../../SubHeader'
 import Radio from 'Components/Common/Radio'
 
 // CSS
