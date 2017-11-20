@@ -8,6 +8,7 @@ import Toggles from './Toggles'
 import Radios from './Radios'
 import Checkboxes from './Checkboxes'
 import Tooltips from './Tooltips'
+import Tabs from './Tabs'
 
 // CSS
 import './Elements.scss'
@@ -30,6 +31,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Tooltips' style={{ marginTop: '60px' }} />
     <Tooltips />
+
+    <SubHeader subHeaderText='Tabs' style={{ marginTop: '60px' }} />
+    <Tabs />
   </div>
 )
 

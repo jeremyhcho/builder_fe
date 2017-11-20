@@ -1,0 +1,24 @@
+.tabs {
+  width: 100%;
+  border-bottom: 1px solid var(--light-gray);
+  display: flex;
+
+  .tab-item {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    user-select: none;
+    padding-bottom: 15px;
+
+    &.selected {
+      transition: border 150ms ease;
+      border-bottom: 3px solid var(--blue);
+    }
+
+    &.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
