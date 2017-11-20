@@ -7,6 +7,7 @@ import Buttons from './Buttons'
 import Toggles from './Toggles'
 import Radios from './Radios'
 import Checkboxes from './Checkboxes'
+import Tooltips from './Tooltips'
 
 // CSS
 import './Elements.scss'
@@ -26,6 +27,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Checkboxes' style={{ marginTop: '60px' }} />
     <Checkboxes />
+
+    <SubHeader subHeaderText='Tooltips' style={{ marginTop: '60px' }} />
+    <Tooltips />
   </div>
 )
 
