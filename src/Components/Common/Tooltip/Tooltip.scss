@@ -9,6 +9,7 @@
   font-size: 1.4rem;
   letter-spacing: 0.5px;
   transition: all 150ms ease;
+  box-shadow: 0 2px 2px var(--dark-gray);
 
   &.hovered {
     opacity: 1;
