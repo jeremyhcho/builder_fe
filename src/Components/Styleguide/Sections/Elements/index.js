@@ -9,6 +9,7 @@ import Radios from './Radios'
 import Checkboxes from './Checkboxes'
 import Tooltips from './Tooltips'
 import Tabs from './Tabs'
+import Dropdowns from './Dropdowns'
 
 // CSS
 import './Elements.scss'
@@ -34,6 +35,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Tabs' style={{ marginTop: '60px' }} />
     <Tabs />
+
+    <SubHeader subHeaderText='Dropdowns' style={{ marginTop: '60px' }} />
+    <Dropdowns />
   </div>
 )
 

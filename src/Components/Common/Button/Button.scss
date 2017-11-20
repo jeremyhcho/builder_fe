@@ -18,7 +18,7 @@
   }
 
   &.secondary {
-    border: 1px solid var(--dark-blue);
+    border: 1px solid var(--dark-gray);
     color: var(--dark-blue);
     background-color: #FFF;
     transform: perspective(1px) translateZ(0);
@@ -26,6 +26,7 @@
     transition-property: color, background-color;
     &:hover {
       background-color: var(--blue);
+      border: 1px solid var(--dark-blue);
       color: #FFF;
     }
   }
