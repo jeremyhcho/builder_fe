@@ -13,12 +13,8 @@ class Toggles extends React.Component {
     checked2: false
   }
 
-  handleChange1 = () => {
-    this.setState({ checked1: !this.state.checked1 })
-  }
-
-  handleChange2 = () => {
-    this.setState({ checked2: !this.state.checked2 })
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: !this.state[e.target.name] })
   }
 
   render () {
@@ -26,11 +22,15 @@ class Toggles extends React.Component {
       <div styleName="toggles">
         <div styleName="toggle-container">
           <p styleName='label'>{this.state.checked1 ? 'On' : 'Off'}</p>
-          <Toggle checked={this.state.checked1} onChange={this.handleChange1} />
+          <Toggle name="checked1" checked={this.state.checked1} onChange={this.handleChange} />
         </div>
         <div styleName="toggle-container">
           <p styleName='label'>{this.state.checked2 ? 'On' : 'Off'}</p>
-          <Toggle checked={this.state.checked2} onChange={this.handleChange2} />
+          <Toggle name="checked2" checked={this.state.checked2} onChange={this.handleChange} />
+        </div>
+        <div styleName="toggle-container">
+          <p styleName='label'>Disabled Off</p>
+          <Toggle disabled onChange={() => null} />
         </div>
       </div>
     )

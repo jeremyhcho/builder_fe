@@ -12,7 +12,7 @@
   &.primary {
     border: 1px solid var(--dark-blue);
     background-color: var(--blue);
-    &:hover {
+    &:not(.disabled):hover {
       background-color: rgba(38, 110, 175, 0.9);
     }
   }
@@ -24,7 +24,7 @@
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px transparent;
     transition-property: color, background-color;
-    &:hover {
+    &:not(.disabled):hover {
       background-color: var(--blue);
       color: #FFF;
     }
@@ -35,7 +35,7 @@
     border: none;
     color: var(--blue);
     background-color: #FFF;
-    &:hover {
+    &:not(.disabled):hover {
       box-shadow: 0 2px 3px var(--light-gray);
       transform: translateY(-1px);
     }

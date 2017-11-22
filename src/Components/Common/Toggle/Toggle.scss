@@ -16,6 +16,35 @@
       background: var(--blue);
     }
 
+    &.disabled {
+      background: var(--light-gray);
+      cursor: not-allowed;
+      &.checked:before {
+        background: var(--light-gray);
+        box-shadow: 0 1px 1px var(--dark-gray);
+        color: #FFF;
+        left: 31.5px;
+        content: attr((data-background-checked));
+      }
+      &:not(.checked):before {
+        font-family: "FontAwesome";
+        box-shadow: 0 1px 1px var(--dark-gray);
+        content: attr((data-background-unchecked));
+        color: #FFF;
+        text-align: center;
+        padding-left: 1px;
+        line-height: 26px;
+        font-size: 11px;
+        position: absolute;
+        height: 24px;
+        width: 24px;
+        border-radius: 15px;
+        background: var(--light-gray);
+        left: 2.5px;
+        top: 3px;
+      }
+    }
+
     // style for toggle button
     &:before {
       font-family: "FontAwesome";
@@ -23,7 +52,8 @@
       content: attr((data-background-unchecked));
       color: var(--dark-gray);
       text-align: center;
-      line-height: 25px;
+      padding-left: 1px;
+      line-height: 26px;
       font-size: 11px;
       position: absolute;
       height: 24px;
