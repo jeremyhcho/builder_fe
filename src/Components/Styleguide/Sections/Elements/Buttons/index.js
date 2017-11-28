@@ -31,7 +31,7 @@ const Buttons = () => (
       buttonThemes.map(theme => (
         <div styleName="button-container" key={theme.text}>
           <p styleName="label">{theme.text}</p>
-          <Button {...theme}>Button Default</Button>
+          <Button {...theme} onClick={() => console.log(`clicked ${Object.keys(theme)[0]} button`)}>Button Default</Button>
         </div>
       ))
     }

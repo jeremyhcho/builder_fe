@@ -5,15 +5,19 @@ import classNames from 'classnames'
 // CSS
 import './Button.scss'
 
-const Button = ({ primary, secondary, flat, disabled, children }) => {
+const Button = ({ primary, secondary, flat, disabled, onClick, children }) => {
   const buttonClass = classNames('btn', {
     primary: primary || (!secondary && !flat),
     secondary,
     flat,
     disabled
   })
+  const buttonClick = () => {
+    if (disabled) return;
+    onClick()
+  }
 
-  return <button styleName={buttonClass}>{children}</button>
+  return <button styleName={buttonClass} onClick={buttonClick}>{children}</button>
 }
 
 Button.propTypes = {
@@ -21,7 +25,8 @@ Button.propTypes = {
   secondary: PropTypes.bool,
   flat: PropTypes.bool,
   disabled: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  onClick: PropTypes.func.isRequired
 }
 
 Button.defaultProps = {
