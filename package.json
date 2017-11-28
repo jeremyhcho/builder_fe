@@ -28,6 +28,7 @@
     "http-auth": "^3.2.3",
     "image-webpack-loader": "^3.3.1",
     "lodash": "^4.17.4",
+    "lodash.uniqueid": "^4.0.1",
     "moment": "^2.18.1",
     "node-sass": "^4.5.3",
     "postcss-css-variables": "^0.8.0",
