@@ -5,16 +5,13 @@ import React, { Component } from 'react'
 import './SignupForm.scss'
 
 // Components
-import { Button, FieldTextStateless } from 'Components/Common'
+import {
+  Button,
+  FieldText
+} from 'Components/Common'
 
 // Redux-form
 // import { Field, reduxForm } from 'redux-form'
-
-const FieldText = (props) => (
-  <div style={{ margin: '15px 0' }}>
-    <FieldTextStateless {...props} />
-  </div>
-)
 
 class SignupForm extends Component {
   render () {
