@@ -16,7 +16,7 @@ import store from 'Config/Store'
 const rootEl = document.getElementById('root')
 
 ReactDOM.render(
-  <AppContainer>
+  <AppContainer warnings={false}>
     <Provider store={store}>
       <AppRouter />
     </Provider>
@@ -29,7 +29,7 @@ if (module.hot) {
     const NextApp = require('./Router').default
 
     ReactDOM.render(
-      <AppContainer>
+      <AppContainer warnings={false}>
         <Provider store={store}>
           <NextApp />
         </Provider>

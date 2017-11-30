@@ -32,10 +32,6 @@ app.all('/api/*', (req, res) => {
   })
 })
 
-app.get('/styleguide', basicMiddleware, (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/styleguide.html'))
-})
-
 // Catch All
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
