@@ -46,7 +46,6 @@ class SignupForm extends Component {
         />
         <div style={{ margin: '15px 0' }}>
           <Button
-            styleName='btn'
             shouldFitContainer
             appearance="primary"
           >
