@@ -44,7 +44,7 @@ const Login = () => (
     <LoginForm />
 
     <Link to={{ pathname: '/auth/forgot' }} style={styles.linkStyles}>
-      Can't log in?
+      Forgot your password?
     </Link>
 
     <Link to={{ pathname: '/auth/signup' }} style={styles.linkStyles}>

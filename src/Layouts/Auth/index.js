@@ -30,7 +30,7 @@ import { Login, Signup, Forgot } from 'Components/Auth'
 //   loading: Loader
 // })
 
-const Session = () => (
+const AuthLayout = () => (
   <div styleName='auth-wrapper'>
     {/* <SideDiv /> */}
 
@@ -45,4 +45,4 @@ const Session = () => (
   </div>
 )
 
-export default Session
+export default AuthLayout
