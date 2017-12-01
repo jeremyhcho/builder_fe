@@ -8,8 +8,7 @@ import './Auth.scss'
 // Components
 // import Loader from 'Components/Common/Loader'
 // import SideDiv from './SideDiv'
-import Login from 'Components/Login'
-import SignupPage from 'Components/User/SignupPage'
+import { Login, Signup, Forgot } from 'Components/Auth'
 
 // const LoginContainer = Loadable({
 //   loader: () => import('../../containers/Session/Login'),
@@ -38,9 +37,9 @@ const Session = () => (
     <div className='col' style={{ padding: 0 }}>
       <Switch>
         <Route exact path='/auth/login' component={Login} />
-        <Route exact path='/auth/signup' component={SignupPage} />
-        {/* <Route exact path='/auth/forgot' component={ForgotContainer} />
-        <Route exact path='/auth/reset' component={ResetContainer} /> */}
+        <Route exact path='/auth/signup' component={Signup} />
+        <Route exact path='/auth/forgot' component={Forgot} />
+        {/* <Route exact path='/auth/reset' component={ResetContainer} /> */}
       </Switch>
     </div>
   </div>

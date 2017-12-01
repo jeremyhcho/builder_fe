@@ -12,7 +12,7 @@ import {
 
 // Redux-form & validators
 import { Field, reduxForm } from 'redux-form'
-import { minChar } from '../../Helpers/Validators'
+// import { minChar } from '../../Helpers/Validators'
 
 class SignupForm extends Component {
   formInput = ({ input, meta: { touched, error }, ...customProps }) => {
