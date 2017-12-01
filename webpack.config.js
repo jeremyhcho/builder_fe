@@ -135,7 +135,8 @@ const config = {
       Sagas: path.resolve(__dirname, 'src/Sagas'),
       Apis: path.resolve(__dirname, 'src/Apis'),
       Assets: path.resolve(__dirname, 'src/Assets'),
-      Config: path.resolve(__dirname, 'src/Config')
+      Config: path.resolve(__dirname, 'src/Config'),
+      Layouts: path.resolve(__dirname, 'src/Layouts')
     },
     extensions: ['.js', '.scss', '.svg']
   }
