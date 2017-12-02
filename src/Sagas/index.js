@@ -1,11 +1,14 @@
-import { takeLatest } from 'redux-saga/effects'
+import userSaga from './user'
 
-function* testSaga () {
-  yield takeLatest('TEST', () => console.log('Nothing happening here yet.'))
-}
+import {
+  resetSaga,
+  loginSaga
+} from './auth'
 
 export default function* rootSaga() {
   yield [
-    testSaga()
+    loginSaga(),
+    userSaga(),
+    resetSaga()
   ]
 }

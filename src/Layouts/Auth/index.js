@@ -8,7 +8,7 @@ import './Auth.scss'
 // Components
 // import Loader from 'Components/Common/Loader'
 // import SideDiv from './SideDiv'
-import { Login, Signup, Forgot } from 'Components/Auth'
+import { Login, Signup, Forgot, Reset } from 'Components/Auth'
 
 // const LoginContainer = Loadable({
 //   loader: () => import('../../containers/Session/Login'),
@@ -30,19 +30,28 @@ import { Login, Signup, Forgot } from 'Components/Auth'
 //   loading: Loader
 // })
 
-const Session = () => (
+const AuthLayout = () => (
   <div styleName='auth-wrapper'>
-    {/* <SideDiv /> */}
+    <div style={{ height: '48px' }} />
 
-    <div className='col' style={{ padding: 0 }}>
-      <Switch>
-        <Route exact path='/auth/login' component={Login} />
-        <Route exact path='/auth/signup' component={Signup} />
-        <Route exact path='/auth/forgot' component={Forgot} />
-        {/* <Route exact path='/auth/reset' component={ResetContainer} /> */}
-      </Switch>
-    </div>
+    <h1
+      style={{
+        fontSize: '36px',
+        textAlign: 'center',
+        color: '#fff',
+        fontWeight: 'bold'
+      }}
+    >
+      QUARTZ
+    </h1>
+
+    <Switch>
+      <Route exact path='/auth/login' component={Login} />
+      <Route exact path='/auth/signup' component={Signup} />
+      <Route exact path='/auth/forgot' component={Forgot} />
+      <Route exact path='/auth/reset' component={Reset} />
+    </Switch>
   </div>
 )
 
-export default Session
+export default AuthLayout

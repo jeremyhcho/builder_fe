@@ -1,0 +1,1 @@
+export const CLEAR_SIGNUP_ERROR = 'auth/CLEAR_SIGNUP_ERROR'
