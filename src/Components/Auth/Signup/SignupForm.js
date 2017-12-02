@@ -12,7 +12,10 @@ import {
 
 // Redux-form & validators
 import { Field, reduxForm } from 'redux-form'
-// import { minChar } from '../../Helpers/Validators'
+import { presence, minChar, email, equality } from 'Helpers/Validators'
+
+const minChar5 = minChar(5)
+const equalityPassword = equality('Password')
 
 class SignupForm extends Component {
   formInput = ({ input, meta: { touched, error }, ...customProps }) => {
@@ -24,20 +27,19 @@ class SignupForm extends Component {
         />
         {
           touched &&
-          error && <p>{error}</p>
+          error && <p styleName="error">{error}</p>
         }
       </div>
     )
   }
 
   submit = (e) => {
-    // Submit action that gets passed into redux-form's handleSubmit prop
     console.log(e)
   }
 
   render () {
     return (
-      <div styleName="container">
+      <div styleName="signup-container">
         <form onSubmit={this.props.handleSubmit(this.submit)}>
           <Field
             name="Username"
@@ -47,41 +49,45 @@ class SignupForm extends Component {
             isLabelHidden
             shouldFitContainer
             placeholder="Enter username"
+            validate={[presence, minChar5]}
           />
           <Field
-            name="email"
+            name="Email"
             component={this.formInput}
             label="Email"
             type="email"
             isLabelHidden
             shouldFitContainer
             placeholder="Enter email"
+            validate={[presence, email]}
           />
           <Field
-            name="password"
+            name="Password"
             component={this.formInput}
             label="Password"
             type="password"
             isLabelHidden
             shouldFitContainer
             placeholder="Create password"
+            validate={[presence, minChar5]}
           />
           <Field
-            name="confirmPassword"
+            name="Password confirmation"
             component={this.formInput}
             label="Confirm password"
             type="password"
             isLabelHidden
             shouldFitContainer
             placeholder="Confirm password"
+            validate={[presence, equalityPassword]}
           />
-          <div style={{ margin: '15px 0' }}>
+          <div>
             <Button
               shouldFitContainer
               appearance="primary"
               type="submit"
             >
-              Log In
+              Create account
             </Button>
           </div>
         </form>

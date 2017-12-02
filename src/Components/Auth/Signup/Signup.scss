@@ -1,11 +1,10 @@
-.container {
+.signup-container {
   border: 1px solid var(--dark-blue);
   border-radius: var(--border-radius);
-  box-shadow: 1px 1px 1px var(--dark-blue);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  padding: 15px 30px;
+  padding: 48px;
   text-align: left;
-  margin-bottom: 15px;
 }
 
 .header {
@@ -13,4 +12,14 @@
   color: #FFF;
   margin-bottom: 30px;
   margin-top: 30%;
+}
+
+.link {
+  color: #FFF;
+  margin: 48px auto 0;
+  text-align: center;
+}
+
+.error {
+  color: var(--red);
 }

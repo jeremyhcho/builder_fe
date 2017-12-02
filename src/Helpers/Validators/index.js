@@ -1,36 +1,19 @@
-export const presence = () => {
-  return (label, val) => {
-    if (val) return null
-    return `${label} is required`
-  }
+export const presence = (value, form, input, name) => {
+  return value ? null : `${name} is required`
 }
 
-// export const minChar = (length) => {
-//   return (val, label) => {
-//     if (!val || val.length >= length) return null
-//
-//     return `${label} must be at least ${length} characters`
-//   }
-// }
-
-export const email = () => {
-  return (label, val) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (!val || re.test(val)) return null
-
-    return `Please enter a valid ${label.toLowerCase()} address`
-  }
+export const minChar = (length) => (value, form, input, name) => {
+  return value && value.length < length ? `${name} must be ${length} characters or more` : null
 }
 
-export const testValidation = (length) => {
-  return (value) => {
-    console.log(value)
-    if (!value || value >= length) return undefined
-
-    return `Must be ${length} characters or more`
-  }
+export const email = (value) => {
+  const emailRe = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  if (emailRe.test(value)) return null
+  return 'Please enter a valid email address'
 }
 
-export const minChar = min => (value, input) => (
-  value && value.length < min ? `${Object.keys(input)[0]} must be ${min} characters or more` : undefined
-)
+export const equality = (inputName) => (value, form) => {
+  // equality takes in the name(string) of an input
+  if (form[inputName] === value) return null
+  return `${inputName}s do not match`
+}

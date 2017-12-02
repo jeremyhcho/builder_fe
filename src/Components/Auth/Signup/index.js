@@ -22,7 +22,7 @@ class Signup extends Component {
         </Col>
         <Col xs={6} xsOffset={3}>
           <p
-            style={{ textAlign: 'center', color: '#FFF' }}
+            styleName="link"
           >
             Already have an account? <Link to="/login">Log in</Link>
           </p>
