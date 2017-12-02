@@ -1,11 +1,13 @@
-.forgot-container {
+.forgot-container, .email-sent {
   border: 1px solid var(--dark-blue);
   border-radius: var(--border-radius);
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   padding: 48px;
   text-align: left;
+}
 
+.forgot-container {
   .password {
     height: 0;
     transition: height 200ms;
@@ -14,4 +16,8 @@
       height: 40px;
     }
   }
+}
+
+.email-sent {
+
 }

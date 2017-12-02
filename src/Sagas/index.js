@@ -1,4 +1,4 @@
-import { userSaga } from './users'
+import userSaga from './user'
 
 import {
   resetSaga,

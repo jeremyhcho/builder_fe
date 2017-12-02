@@ -17,9 +17,6 @@ export const unauthorize = () => ({
   type: UNAUTHORIZE
 })
 
-
-
-
 // ASYNC
 export const loginUser = (params) => ({
   type: LOGIN,

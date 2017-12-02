@@ -10,12 +10,6 @@ const styles = {
     minHeight: '745px',
     margin: '0 auto'
   },
-  appNameStyles: {
-    fontSize: '36px',
-    textAlign: 'center',
-    color: '#fff',
-    fontWeight: 'bold'
-  },
   headerStyles: {
     color: '#fff',
     fontWeight: '500',
@@ -32,11 +26,6 @@ const styles = {
 
 const Login = () => (
   <div style={styles.wrapperStyle}>
-    <div style={{ height: '48px' }} />
-    <h1 style={styles.appNameStyles}>
-      QUARTZ
-    </h1>
-
     <h1 style={styles.headerStyles}>
       Log in to your account
     </h1>

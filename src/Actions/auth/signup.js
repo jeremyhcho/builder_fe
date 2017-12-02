@@ -8,8 +8,6 @@ export const clearSignUpError = () => ({
   type: CLEAR_SIGNUP_ERROR
 })
 
-
-
 // ASYNC
 export const createUser = (user) => ({
   type: CREATE_USER,

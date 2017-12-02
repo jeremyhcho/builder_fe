@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 // CSS
 import './Login.scss'
@@ -6,23 +9,65 @@ import './Login.scss'
 // Components
 import {
   Button,
-  FieldText
+  FieldText,
+  Spinner,
+  Checkbox
 } from 'Components/Common'
+
+// Auth
+import { loginUser } from 'Actions'
 
 // Redux-form
 // import { Field, reduxForm } from 'redux-form'
 
 class LoginForm extends Component {
   state = {
-    isEmailValidated: false
+    isEmailValidated: false,
+    email: '',
+    password: '',
+    rememberMe: false
+  }
+
+  toggleRememberMe = () => {
+    this.setState({ rememberMe: !this.state.rememberMe })
   }
 
   handleClick = () => {
-    if (this.state.isEmailValidated) {
-      console.log('Hello!')
+    const {
+      isEmailValidated,
+      email,
+      password,
+      rememberMe
+    } = this.state
+
+    if (isEmailValidated) {
+      this.props.loginUser({
+        user: {
+          email,
+          password
+        },
+        rememberMe
+      })
     }
 
     this.setState({ isEmailValidated: true })
+  }
+
+  handleChange = (field) => {
+    return e => {
+      this.setState({ [field]: e.target.value })
+    }
+  }
+
+  renderError () {
+    return (
+      <div styleName='error-dialog'>
+        <p>Incorrect email address and / or password.</p>
+        <p>
+          Do you need help <Link className='link' to={{ pathname: '/auth/forgot' }}>logging in?</Link>
+        </p>
+      </div>
+    )
   }
 
   renderPasswordField () {
@@ -44,8 +89,18 @@ class LoginForm extends Component {
         placeholder='Enter password'
         autoComplete='off'
         style={passwordStyles}
+        value={this.state.password}
+        onChange={this.handleChange('password')}
       />
     )
+  }
+
+  renderInnerButton () {
+    if (this.props.isLoggingIn) {
+      return <Spinner invertColor size='small' style={{ paddingTop: '8px' }} />
+    }
+
+    return this.state.isEmailValidated ? 'Log in' : 'Continue'
   }
 
   render () {
@@ -75,24 +130,53 @@ class LoginForm extends Component {
           OR
         </p>
 
+        {this.props.loginError && this.renderError()}
+
         <FieldText
           name='email'
           label='email'
-          type='email'
+          type='text'
           isLabelHidden
           shouldFitContainer
           placeholder='Enter email'
           autoComplete='off'
+          value={this.state.email}
+          onChange={this.handleChange('email')}
         />
 
         {this.renderPasswordField()}
 
+        <Checkbox
+          label='Remember me'
+          name='rememberme'
+          value='rememberMe'
+          onChange={this.toggleRememberMe}
+        />
+
         <Button shouldFitContainer appearance='primary' onClick={this.handleClick}>
-          {this.state.isEmailValidated ? 'Log in' : 'Continue' }
+          {this.renderInnerButton()}
         </Button>
       </div>
     )
   }
 }
 
-export default LoginForm
+LoginForm.propTypes = {
+  isLoggingIn: PropTypes.bool.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  loginError: PropTypes.string.isRequired
+}
+
+const mapStateToProps = ({ auth }) => ({
+  isLoggingIn: auth.login.loggingIn,
+  loginError: auth.login.error
+})
+
+const mapDispatchToProps = {
+  loginUser
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm)

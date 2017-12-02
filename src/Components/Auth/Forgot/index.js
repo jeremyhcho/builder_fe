@@ -7,14 +7,8 @@ import { Link } from 'react-router-dom'
 const styles = {
   wrapperStyle: {
     width: '400px',
-    minHeight: '745px',
+    minHeight: '565px',
     margin: '0 auto'
-  },
-  appNameStyles: {
-    fontSize: '36px',
-    textAlign: 'center',
-    color: '#fff',
-    fontWeight: 'bold'
   },
   headerStyles: {
     color: '#fff',
@@ -32,12 +26,6 @@ const styles = {
 
 const Forgot = () => (
   <div style={styles.wrapperStyle}>
-    <div style={{ height: '48px' }} />
-
-    <h1 style={styles.appNameStyles}>
-      QUARTZ
-    </h1>
-
     <h1 style={styles.headerStyles}>
       Forgot your password?
     </h1>
