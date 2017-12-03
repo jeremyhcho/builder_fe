@@ -62,7 +62,10 @@ class Reset extends React.Component {
           Reset your password
         </h1>
 
-        <ResetForm />
+        <ResetForm
+          token={this.state.token}
+          userId={this.state.userId}
+        />
       </div>
     )
   }
