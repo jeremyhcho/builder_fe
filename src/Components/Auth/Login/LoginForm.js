@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { Field, reduxForm, reset, initialize } from 'redux-form'
 
 // CSS
 import './Login.scss'
@@ -17,8 +18,7 @@ import {
 // Auth
 import { loginUser } from 'Actions'
 
-// Redux-form
-import { Field, reduxForm } from 'redux-form'
+// Validators
 import { presence, minChar, email } from 'Helpers/Validators'
 
 const minChar5 = minChar(5)
@@ -50,6 +50,10 @@ class LoginForm extends Component {
     }
 
     this.setState({ isEmailValidated: true })
+
+    // initializes reset value of Password to '' and keeps forms pristine
+    this.props.dispatch(initialize('login', { Email, Password: '', }, false))
+    this.props.dispatch(reset('login'))
   }
 
   renderError () {
@@ -69,8 +73,9 @@ class LoginForm extends Component {
       transition: 'height 300ms',
       transitionDelay: 'height 1s',
       overflow: 'hidden',
-      margin: this.state.isEmailValidated ? '15px 0' : '0'
+      margin: this.state.isEmailValidated ? '15px 0 0' : '0'
     }
+
     const passwordValidation = []
     // Adds validators to passwordValidation if email is validated
     if (this.state.isEmailValidated) {
@@ -88,7 +93,6 @@ class LoginForm extends Component {
         placeholder='Enter password'
         autoComplete='off'
         style={passwordStyles}
-        dirty={this.props.touch && this.state.isEmailValidated}
         validate={passwordValidation}
       />
     )
@@ -143,7 +147,7 @@ class LoginForm extends Component {
             validate={[presence, email]}
           />
 
-          {this.state.isEmailValidated && this.renderPasswordField()}
+          {this.renderPasswordField()}
 
           <Checkbox
             label='Remember me'
@@ -166,12 +170,12 @@ LoginForm.propTypes = {
   loginUser: PropTypes.func.isRequired,
   loginError: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  touch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
-  isLoggingIn: state.auth.login.loggingIn,
-  loginError: state.auth.login.error,
+const mapStateToProps = ({ auth }) => ({
+  isLoggingIn: auth.login.loggingIn,
+  loginError: auth.login.error,
 })
 
 const mapDispatchToProps = {
