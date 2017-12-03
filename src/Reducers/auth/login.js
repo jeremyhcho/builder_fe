@@ -3,9 +3,7 @@ import {
   LOGIN,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
-  CLEAR_LOGIN_ERROR,
-  AUTHORIZE,
-  UNAUTHORIZE
+  CLEAR_LOGIN_ERROR
 } from 'Constants'
 
 const initialState = {
@@ -27,12 +25,6 @@ const login = (state = initialState, action) => {
 
     case CLEAR_LOGIN_ERROR:
       return { ...state, error: '' }
-
-    case AUTHORIZE:
-      return { ...state, authorized: true }
-
-    case UNAUTHORIZE:
-      return { ...state, authorized: false }
 
     case '@@router/LOCATION_CHANGE':
       return initialState

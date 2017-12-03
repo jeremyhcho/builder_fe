@@ -37,7 +37,7 @@ const Signup = () => {
       <p
         style={styles.linkStyles}
       >
-        Already have an account? <Link to="/login">Log in</Link>
+        <Link to="/auth/login">Already have an account? Log in</Link>
       </p>
     </div>
   )

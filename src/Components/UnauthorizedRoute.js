@@ -21,8 +21,8 @@ UnauthorizedRoute.propTypes = {
   authorized: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = () => ({
-  authorized: false
+const mapStateToProps = ({ auth }) => ({
+  authorized: auth.authState.authorized
 })
 
 export default connect(

@@ -6,7 +6,8 @@ import { FieldTextStateless } from '@atlaskit/field-text'
 
 const errorStyle = {
   color: '#FE4A49',
-  fontSize: '0.8em'
+  fontSize: '0.8em',
+  margin: '5px 0 5px 5px'
 }
 
 const FieldText = ({ input, meta: { touched, error }, style, ...props }) => (
