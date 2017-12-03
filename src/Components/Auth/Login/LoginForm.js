@@ -18,13 +18,14 @@ import {
 import { loginUser } from 'Actions'
 
 // Redux-form
-// import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
+import { presence, minChar, email } from 'Helpers/Validators'
+
+const minChar5 = minChar(5)
 
 class LoginForm extends Component {
   state = {
     isEmailValidated: false,
-    email: '',
-    password: '',
     rememberMe: false
   }
 
@@ -32,31 +33,23 @@ class LoginForm extends Component {
     this.setState({ rememberMe: !this.state.rememberMe })
   }
 
-  handleClick = () => {
+  handleSubmit = ({ Email, Password }) => {
     const {
       isEmailValidated,
-      email,
-      password,
       rememberMe
     } = this.state
 
     if (isEmailValidated) {
       this.props.loginUser({
         user: {
-          email,
-          password
+          email: Email,
+          password: Password
         },
         rememberMe
       })
     }
 
     this.setState({ isEmailValidated: true })
-  }
-
-  handleChange = (field) => {
-    return e => {
-      this.setState({ [field]: e.target.value })
-    }
   }
 
   renderError () {
@@ -78,19 +71,25 @@ class LoginForm extends Component {
       overflow: 'hidden',
       margin: this.state.isEmailValidated ? '15px 0' : '0'
     }
+    const passwordValidation = []
+    // Adds validators to passwordValidation if email is validated
+    if (this.state.isEmailValidated) {
+      passwordValidation.push(presence, minChar5)
+    }
 
     return (
-      <FieldText
-        name='password'
+      <Field
+        name='Password'
         label='password'
         type='password'
+        component={FieldText}
         isLabelHidden
         shouldFitContainer
         placeholder='Enter password'
         autoComplete='off'
         style={passwordStyles}
-        value={this.state.password}
-        onChange={this.handleChange('password')}
+        dirty={this.props.touch && this.state.isEmailValidated}
+        validate={passwordValidation}
       />
     )
   }
@@ -131,31 +130,32 @@ class LoginForm extends Component {
         </p>
 
         {this.props.loginError && this.renderError()}
+        <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+          <Field
+            name='Email'
+            label='email'
+            type='text'
+            component={FieldText}
+            isLabelHidden
+            shouldFitContainer
+            placeholder='Enter email'
+            autoComplete='off'
+            validate={[presence, email]}
+          />
 
-        <FieldText
-          name='email'
-          label='email'
-          type='text'
-          isLabelHidden
-          shouldFitContainer
-          placeholder='Enter email'
-          autoComplete='off'
-          value={this.state.email}
-          onChange={this.handleChange('email')}
-        />
+          {this.state.isEmailValidated && this.renderPasswordField()}
 
-        {this.renderPasswordField()}
+          <Checkbox
+            label='Remember me'
+            name='rememberme'
+            value='rememberMe'
+            onChange={this.toggleRememberMe}
+          />
 
-        <Checkbox
-          label='Remember me'
-          name='rememberme'
-          value='rememberMe'
-          onChange={this.toggleRememberMe}
-        />
-
-        <Button shouldFitContainer appearance='primary' onClick={this.handleClick}>
-          {this.renderInnerButton()}
-        </Button>
+          <Button shouldFitContainer appearance='primary' type="submit">
+            {this.renderInnerButton()}
+          </Button>
+        </form>
       </div>
     )
   }
@@ -164,12 +164,14 @@ class LoginForm extends Component {
 LoginForm.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
   loginUser: PropTypes.func.isRequired,
-  loginError: PropTypes.string.isRequired
+  loginError: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  touch: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ auth }) => ({
-  isLoggingIn: auth.login.loggingIn,
-  loginError: auth.login.error
+const mapStateToProps = state => ({
+  isLoggingIn: state.auth.login.loggingIn,
+  loginError: state.auth.login.error,
 })
 
 const mapDispatchToProps = {
@@ -179,4 +181,6 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginForm)
+)(reduxForm({
+  form: 'login'
+})(LoginForm))

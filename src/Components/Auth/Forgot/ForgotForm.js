@@ -13,20 +13,16 @@ import {
 // CSS
 import './Forgot.scss'
 
+// Redux-form
+import { Field, reduxForm } from 'redux-form'
+import { presence, email } from 'Helpers/Validators'
+
 // Actions
 import { sendRecoveryEmail } from 'Actions'
 
 class ForgotForm extends React.Component {
-  state = {
-    email: ''
-  }
-
-  handleChange = (e) => {
-    this.setState({ email: e.target.value })
-  }
-
-  handleClick = () => {
-    this.props.sendRecoveryEmail(this.state.email)
+  handleSubmit = (form) => {
+    this.props.sendRecoveryEmail(form.Email)
   }
 
   renderInnerButton () {
@@ -59,20 +55,23 @@ class ForgotForm extends React.Component {
 
     return (
       <div styleName='forgot-container'>
-        <FieldText
-          name='email'
-          label="We'll send a recovery link to"
-          type='email'
-          shouldFitContainer
-          placeholder='Enter email'
-          autoComplete='off'
-          style={{ margin: 0 }}
-          onChange={this.handleChange}
-        />
+        <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+          <Field
+            name='Email'
+            label="We'll send a recovery link to"
+            type='email'
+            component={FieldText}
+            shouldFitContainer
+            placeholder='Enter email'
+            autoComplete='off'
+            style={{ margin: 0 }}
+            validate={[presence, email]}
+          />
 
-        <Button shouldFitContainer appearance='primary' onClick={this.handleClick}>
-          {this.renderInnerButton()}
-        </Button>
+          <Button shouldFitContainer appearance='primary' type="submit">
+            {this.renderInnerButton()}
+          </Button>
+        </form>
       </div>
     )
   }
@@ -81,7 +80,8 @@ class ForgotForm extends React.Component {
 ForgotForm.propTypes = {
   sendingEmail: PropTypes.bool.isRequired,
   sendRecoveryEmail: PropTypes.func.isRequired,
-  emailSentSuccess: PropTypes.bool.isRequired
+  emailSentSuccess: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ auth }) => ({
@@ -96,4 +96,6 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ForgotForm)
+)(reduxForm({
+  form: 'forgot'
+})(ForgotForm))

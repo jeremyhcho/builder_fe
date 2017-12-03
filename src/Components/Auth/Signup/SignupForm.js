@@ -18,21 +18,6 @@ const minChar5 = minChar(5)
 const equalityPassword = equality('Password')
 
 class SignupForm extends Component {
-  formInput = ({ input, meta: { touched, error }, ...customProps }) => {
-    return (
-      <div>
-        <FieldText
-          {...input}
-          {...customProps}
-        />
-        {
-          touched &&
-          error && <p styleName="error">{error}</p>
-        }
-      </div>
-    )
-  }
-
   submit = (e) => {
     console.log(e)
   }
@@ -43,41 +28,45 @@ class SignupForm extends Component {
         <form onSubmit={this.props.handleSubmit(this.submit)}>
           <Field
             name="Username"
-            component={this.formInput}
+            component={FieldText}
             label="username"
             type="text"
             isLabelHidden
             shouldFitContainer
+            autoComplete='off'
             placeholder="Enter username"
             validate={[presence, minChar5]}
           />
           <Field
             name="Email"
-            component={this.formInput}
+            component={FieldText}
             label="Email"
             type="email"
             isLabelHidden
             shouldFitContainer
+            autoComplete='off'
             placeholder="Enter email"
             validate={[presence, email]}
           />
           <Field
             name="Password"
-            component={this.formInput}
+            component={FieldText}
             label="Password"
             type="password"
             isLabelHidden
             shouldFitContainer
+            autoComplete='off'
             placeholder="Create password"
             validate={[presence, minChar5]}
           />
           <Field
             name="Password confirmation"
-            component={this.formInput}
+            component={FieldText}
             label="Confirm password"
             type="password"
             isLabelHidden
             shouldFitContainer
+            autoComplete='off'
             placeholder="Confirm password"
             validate={[presence, equalityPassword]}
           />
