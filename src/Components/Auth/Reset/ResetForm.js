@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
 
 // CSS
 import './Reset.scss'
@@ -11,65 +12,67 @@ import {
   Button
 } from 'Components/Common'
 
+// Validators
+import { presence, minChar, equality } from 'Helpers/Validators'
+
+const minChar6 = minChar(6)
+const equalityPassword = equality('Password')
+
 // Actions
 import { updateUserPassword } from 'Actions'
 
 class ResetForm extends React.Component {
-  state = {
-    password: '',
-    passwordConfirmation: ''
-  }
-
-  onSubmit = () => {
-    const { userId, password, token } = this.state
+  onSubmit = ({ Password }) => {
+    const { userId, token } = this.props
 
     this.props.updateUserPassword(userId, {
-      user: { password },
+      user: { password: Password },
       token
     })
-  }
-
-  handleChange = (field) => {
-    return (e) => this.setState({ [field]: e.target.value })
   }
 
   render () {
     return (
       <div styleName='reset-container'>
-        <FieldText
-          name="Password"
-          label="Password"
-          type="password"
-          isLabelHidden
-          shouldFitContainer
-          placeholder="Enter new password"
-          autoComplete='off'
-          value={this.state.password}
-          onChange={this.handleChange('password')}
-        />
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <Field
+            name="Password"
+            label="Password"
+            type="password"
+            component={FieldText}
+            isLabelHidden
+            shouldFitContainer
+            placeholder="Enter new password"
+            autoComplete='off'
+            validate={[presence, minChar6]}
+          />
 
-        <FieldText
-          name="Password Confirmation"
-          label="Password Confirmation"
-          type="password"
-          isLabelHidden
-          shouldFitContainer
-          placeholder="Retype password"
-          autoComplete='off'
-          value={this.state.passwordConfirmation}
-          onChange={this.handleChange('passwordConfirmation')}
-        />
+          <Field
+            name="Password confirmation"
+            label="Password Confirmation"
+            type="password"
+            component={FieldText}
+            isLabelHidden
+            shouldFitContainer
+            placeholder="Retype password"
+            autoComplete='off'
+            validate={[presence, equalityPassword]}
+          />
 
-        <Button shouldFitContainer appearance='primary'>
-          Update password
-        </Button>
+          <Button shouldFitContainer appearance='primary' type="submit">
+            Update password
+          </Button>
+        </form>
       </div>
     )
   }
 }
 
 ResetForm.propTypes = {
-  updateUserPassword: PropTypes.func.isRequired
+  updateUserPassword: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired
 }
 
 const mapStateToProps = () => ({})
@@ -81,4 +84,6 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ResetForm)
+)(reduxForm({
+  form: 'reset'
+})(ResetForm))

@@ -14,11 +14,14 @@ import {
 import './Forgot.scss'
 
 // Redux-form
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { presence, email } from 'Helpers/Validators'
 
 // Actions
 import { sendRecoveryEmail } from 'Actions'
+
+// Form Selector
+const selector = formValueSelector('forgot')
 
 class ForgotForm extends React.Component {
   handleSubmit = (form) => {
@@ -37,8 +40,8 @@ class ForgotForm extends React.Component {
     return (
       <div styleName='email-sent'>
         <p>
-          We've sent an email to <span className='blue'>{this.state.email}</span>
-          with instructions to recover your password.
+          We've sent an email to <span className='blue'>{this.props.email}</span>
+          &nbsp;with instructions to recover your password.
         </p>
         <p style={{ marginTop: '40px' }}>
           Didn't receive the e-mail?&nbsp;
@@ -77,16 +80,22 @@ class ForgotForm extends React.Component {
   }
 }
 
+ForgotForm.defaultProps = {
+  email: ''
+}
+
 ForgotForm.propTypes = {
   sendingEmail: PropTypes.bool.isRequired,
   sendRecoveryEmail: PropTypes.func.isRequired,
   emailSentSuccess: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  email: PropTypes.string
 }
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ ...state, auth }) => ({
   sendingEmail: auth.forgot.sendingEmail,
-  emailSentSuccess: auth.forgot.success
+  emailSentSuccess: auth.forgot.success,
+  email: selector(state, 'Email')
 })
 
 const mapDispatchToProps = {
