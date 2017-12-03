@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 
 // Components
 // import Loader from 'Components/Common/Loader'
-// import SideNav from './SideNav'
+import SideNav from 'Components/SideNav'
 import Dashboard from 'Components/Dashboard'
 
 // const CalendarContainer = Loadable({
@@ -19,7 +19,7 @@ import Dashboard from 'Components/Dashboard'
 
 const MainLayout = () => (
   <div className='grid app'>
-    {/* <SideNav /> */}
+    <SideNav />
 
     <div className='col' style={{ padding: 0 }}>
       <Switch>
