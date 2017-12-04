@@ -48,6 +48,7 @@
     "@atlaskit/avatar": "^8.3.4",
     "@atlaskit/button": "^5.4.12",
     "@atlaskit/checkbox": "^1.1.6",
+    "@atlaskit/dropdown-menu": "^3.11.4",
     "@atlaskit/field-text": "^4.1.2",
     "@atlaskit/navigation": "^26.8.3",
     "@atlaskit/page": "^5.0.4",
