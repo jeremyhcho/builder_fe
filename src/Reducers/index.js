@@ -4,9 +4,11 @@ import { routerReducer } from 'react-router-redux'
 
 // Reducers
 import auth from './auth'
+import matches from './matches'
 
 const rootReducer = combineReducers({
   auth,
+  matches,
   router: routerReducer,
   form: formReducer
 })

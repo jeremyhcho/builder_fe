@@ -1,11 +1,13 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+// import { Row, Col } from 'react-styled-flexboxgrid'
 // import Loadable from 'react-loadable'
 
 // Components
 // import Loader from 'Components/Common/Loader'
 import SideNav from 'Components/SideNav'
 import Dashboard from 'Components/Dashboard'
+import Matches from 'Components/Matches'
 
 // const CalendarContainer = Loadable({
 //   loader: () => import('../../containers/Calendar'),
@@ -21,9 +23,10 @@ const MainLayout = () => (
   <div className='grid app'>
     <SideNav />
 
-    <div className='col' style={{ padding: 0 }}>
+    <div className='col' style={{ padding: 0, marginLeft: '350px' }}>
       <Switch>
         <Route exact path='/' component={Dashboard} />
+        <Route exact path='/matches' component={Matches} />
       </Switch>
     </div>
   </div>

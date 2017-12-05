@@ -1,8 +1,15 @@
 import React from 'react'
-import Navigation, { AkNavigationItemGroup, AkNavigationItem, AkContainerTitle, AkGlobalItem } from '@atlaskit/navigation'
+import { Link } from 'react-router-dom'
 
 // Components
 import { Dropdown } from 'Components/Common'
+import Navigation, {
+  AkNavigationItemGroup,
+  AkNavigationItem,
+  AkContainerTitle,
+  AkGlobalItem,
+  // AkContainerNavigationNested
+} from '@atlaskit/navigation'
 
 class SideNav extends React.Component {
   state = {
@@ -37,38 +44,26 @@ class SideNav extends React.Component {
       </Dropdown>
     )
     return (
-      <div>
-        <Navigation
-          onResize={this.onResize}
-          isOpen={this.state.isOpen}
-          globalPrimaryIcon={<i className="fa fa-bar-chart" aria-hidden="true" />}
-          globalPrimaryItemHref="/"
-          globalSecondaryActions={[settings]}
-          globalPrimaryIconAppearance="round"
-          containerHeaderComponent={() => (
-            <AkContainerTitle text="Quartz" />
-          )}
-        >
-          <AkNavigationItemGroup title="Group 1">
-            <AkNavigationItem
-              text="Item 1"
-              href="#"
-            />
-            <AkNavigationItem
-              text="Item 2"
-              href="#"
-            />
-            <AkNavigationItem
-              text="Item 3"
-              href="#"
-            />
-            <AkNavigationItem
-              text="Item 4"
-              href="#"
-            />
-          </AkNavigationItemGroup>
-        </Navigation>
-      </div>
+      <Navigation
+        onResize={this.onResize}
+        isOpen={this.state.isOpen}
+        globalPrimaryIcon={<i className="fa fa-bar-chart" aria-hidden="true" />}
+        globalPrimaryItemHref="/"
+        globalSecondaryActions={[settings]}
+        globalPrimaryIconAppearance="round"
+        containerHeaderComponent={() => (
+          <AkContainerTitle text="Quartz" />
+        )}
+      >
+        <AkNavigationItemGroup>
+          <Link to={{ pathname: '/' }} style={{ display: 'inline', textDecoration: 'none' }}>
+            <AkNavigationItem text="Dashboard" />
+          </Link>
+          <Link to={{ pathname: '/matches' }} style={{ display: 'inline', textDecoration: 'none' }}>
+            <AkNavigationItem text="Matches" />
+          </Link>
+        </AkNavigationItemGroup>
+      </Navigation>
     )
   }
 }

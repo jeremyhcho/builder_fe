@@ -21,7 +21,7 @@ import { loginUser } from 'Actions'
 // Validators
 import { presence, minChar, email } from 'Helpers/Validators'
 
-const minChar5 = minChar(5)
+const minChar6 = minChar(6)
 
 class LoginForm extends Component {
   state = {
@@ -79,7 +79,7 @@ class LoginForm extends Component {
     const passwordValidation = []
     // Adds validators to passwordValidation if email is validated
     if (this.state.isEmailValidated) {
-      passwordValidation.push(presence, minChar5)
+      passwordValidation.push(presence, minChar6)
     }
 
     return (

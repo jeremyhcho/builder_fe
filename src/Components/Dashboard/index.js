@@ -1,7 +1,18 @@
 import React from 'react'
 
-const Dashboard = () => (
-  <div className='dashboard' />
-)
+// Components
+
+// CSS
+import './Dashboard.scss'
+
+class Dashboard extends React.Component {
+  render () {
+    return (
+      <div className='dashboard'>
+        DASHBOARD
+      </div>
+    )
+  }
+}
 
 export default Dashboard
