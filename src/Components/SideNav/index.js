@@ -1,11 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import PropTypes from 'prop-types'
 
 // Components
-import { Dropdown } from 'Components/Common'
+import { Dropdown, NavItem } from 'Components/Common'
 import Navigation, {
   AkNavigationItemGroup,
-  AkNavigationItem,
   AkContainerTitle,
   AkGlobalItem,
   // AkContainerNavigationNested
@@ -14,7 +13,7 @@ import Navigation, {
 class SideNav extends React.Component {
   state = {
     isOpen: true,
-    searchDrawerOpen: false
+    searchDrawerOpen: false,
   }
 
   onResize = ({ isOpen }) => {
@@ -56,12 +55,14 @@ class SideNav extends React.Component {
         )}
       >
         <AkNavigationItemGroup>
-          <Link to={{ pathname: '/' }} style={{ display: 'inline', textDecoration: 'none' }}>
-            <AkNavigationItem text="Dashboard" />
-          </Link>
-          <Link to={{ pathname: '/matches' }} style={{ display: 'inline', textDecoration: 'none' }}>
-            <AkNavigationItem text="Matches" />
-          </Link>
+          <NavItem
+            text="Dashboard"
+            path="/"
+          />
+          <NavItem
+            text="Matches"
+            path="/matches"
+          />
         </AkNavigationItemGroup>
       </Navigation>
     )
