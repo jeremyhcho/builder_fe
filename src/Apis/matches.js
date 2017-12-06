@@ -1,5 +1,7 @@
 import { axios } from 'Apis'
 
-export const fetchMatches = (params) => (
-  axios.post('/api/nba/v1/matches', params)
+export const getNBAData = (params) => (
+  axios.get('/api/nba/v1/matches', {
+    params
+  })
 )

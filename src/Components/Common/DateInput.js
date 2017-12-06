@@ -16,6 +16,7 @@ class DateInput extends React.Component {
   }
 
   componentWillMount() {
+    // sets input date to current date
     this.setState({
       selected: `${this.state.month}-${this.state.day}-${this.state.year}`
     }, () => {
@@ -36,12 +37,23 @@ class DateInput extends React.Component {
     this.setState({ day, month, year })
   }
 
+  focus = () => {
+    if (this.calendar) {
+      this.calendar.focus()
+    }
+  }
+
   openCalendar = () => {
-    this.setState({ isOpened: true })
+    this.setState({
+      isOpened: !this.state.isOpened
+    }, () => {
+      if (this.state.isOpened) {
+        this.focus()
+      }
+    })
   }
 
   render () {
-    console.log(this.state)
     return (
       <div>
         <FieldBase>
@@ -52,7 +64,7 @@ class DateInput extends React.Component {
             placeholder='mm-dd-yyyy'
             disabled
           />
-          <CalendarIcon label="calendar" onClick={() => this.openCalendar()} />
+          <CalendarIcon label="calendar" onClick={this.openCalendar} />
         </FieldBase>
         {this.state.isOpened
           ? <CalendarStateless
@@ -60,6 +72,10 @@ class DateInput extends React.Component {
             day={this.state.day}
             month={this.state.month}
             year={this.state.year}
+            onBlur={this.openCalendar}
+            ref={ref => {
+              this.calendar = ref
+            }}
             onSelect={(e) => this.selectDate(e)}
             onChange={(date) => this.changeInfo(date)}
           />

@@ -5,10 +5,15 @@ import {
   loginSaga
 } from './auth'
 
+import {
+  nbaSaga
+} from './matches'
+
 export default function* rootSaga() {
   yield [
     loginSaga(),
     userSaga(),
-    resetSaga()
+    resetSaga(),
+    nbaSaga()
   ]
 }

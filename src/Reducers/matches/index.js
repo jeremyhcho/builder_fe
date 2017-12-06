@@ -1,14 +1,12 @@
 // Constants
 import {
-  FETCH_MATCHES
+  RECEIVE_NBA_MATCHES
 } from 'Constants'
 
 const matches = (state = [], action) => {
   switch (action.type) {
-    case FETCH_MATCHES: {
-      console.log(action)
-      return { ...state }
-    }
+    case RECEIVE_NBA_MATCHES:
+      return action.data
 
     default:
       return state

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-// import { Row, Col } from 'react-styled-flexboxgrid'
+// import Page, { Grid, GridColumn } from '@atlaskit/page'
+import { Row, Col } from 'react-styled-flexboxgrid'
 // import Loadable from 'react-loadable'
 
 // Components
@@ -19,17 +20,20 @@ import Matches from 'Components/Matches'
 //   loading: Loader
 // })
 
-const MainLayout = () => (
-  <div className='grid app'>
-    <SideNav />
 
-    <div className='col' style={{ padding: 0, marginLeft: '350px' }}>
+const MainLayout = () => (
+  <Row>
+    <Col>
+      <SideNav />
+    </Col>
+
+    <Col lg>
       <Switch>
         <Route exact path='/' component={Dashboard} />
         <Route exact path='/matches' component={Matches} />
       </Switch>
-    </div>
-  </div>
+    </Col>
+  </Row>
 )
 
 export default MainLayout
