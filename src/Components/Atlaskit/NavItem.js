@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { AkNavigationItem } from '@atlaskit/navigation'
 
+/**
+ * [NavItem description]
+ * @param string path [endpoint required]
+ * @extends React
+ */
+
 class NavItem extends React.Component {
   handleClick = () => {
     if (this.props.path.length) {

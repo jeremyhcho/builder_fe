@@ -10,7 +10,7 @@ import './Reset.scss'
 import {
   FieldText,
   Button
-} from 'Components/Common'
+} from 'Components/Atlaskit'
 
 // Validators
 import { presence, minChar, equality } from 'Helpers/Validators'

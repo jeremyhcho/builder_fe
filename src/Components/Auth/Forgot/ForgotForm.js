@@ -8,7 +8,7 @@ import {
   FieldText,
   Button,
   Spinner
-} from 'Components/Common'
+} from 'Components/Atlaskit'
 
 // CSS
 import './Forgot.scss'

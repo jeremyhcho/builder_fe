@@ -1,0 +1,42 @@
+.input {
+  display: inline-block;
+  height: 40px;
+  // width: 200px;
+  width: 100%;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray);
+  transition: all 200ms ease;
+  padding: 0 10px;
+  margin: 8px 0;
+
+  &:focus {
+    border: 1px solid var(--dark-blue);
+    box-shadow: .1px .1px 1px 0.2px var(--blue);
+  }
+  // Errored input
+  &.error {
+    border: 1px solid var(--red);
+    box-shadow: .1px .1px 1px 0.2px var(--red);
+  }
+  // Required input
+  &.required {
+
+  }
+  // Submit button
+  &.submit {
+    border: 1px solid var(--dark-blue);
+    color: #FFF;
+    background-color: var(--blue);
+    cursor: pointer;
+    button::-moz-focus-inner { border: 0; }
+    &:hover {
+      background-color: darken(#3C90DF, 10%)
+    }
+    &.disabled {
+      background-color: var(--light-gray);
+      color: var(--dark-gray);
+      cursor: not-allowed;
+      border: 1px solid var(--light-gray);
+    }
+  }
+}

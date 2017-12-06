@@ -15,6 +15,7 @@ const config = {
       'react-hot-loader/patch',
       './src/index.js'
     ],
+    styleguide: ['babel-polyfill', 'react-hot-loader/patch', './src/styleguide.js'],
     vendor: VENDOR_LIBS,
   },
   output: {
@@ -120,6 +121,11 @@ const config = {
       filename: 'index.html',
       template: 'src/index.html',
       chunks: ['bundle', 'vendor', 'manifest']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'styleguide.html',
+      template: 'src/styleguide.html',
+      chunks: ['styleguide', 'vendor', 'manifest']
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

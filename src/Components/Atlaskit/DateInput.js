@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 // Components
 import { CalendarStateless } from '@atlaskit/calendar'
-import FieldBase from '@atlaskit/field-base'
 import CalendarIcon from '@atlaskit/icon/glyph/calendar'
 
 class DateInput extends React.Component {
@@ -17,20 +17,26 @@ class DateInput extends React.Component {
 
   componentWillMount() {
     // sets input date to current date
+    const currentDate = `${this.state.month}-${this.state.day}-${this.state.year}`
     this.setState({
-      selected: `${this.state.month}-${this.state.day}-${this.state.year}`
+      selected: this.convertDate(currentDate)
     }, () => {
-      this.props.getDate(this.state.selected)
+      this.props.getDate(currentDate)
     })
   }
 
-  selectDate = ({ day, month, year }) => {
-    const newDate = `${month}-${day}-${year}`
+  convertDate = (date) => {
+    const selectedDate = new Date(date).toISOString()
+    return moment(selectedDate).format('dddd, MMMM Do YYYY')
+  }
 
+  selectDate = ({ day, month, year }) => {
+    const selectedDate = `${month}-${day}-${year}`
     this.setState({
-      selected: newDate, isOpened: false
+      selected: this.convertDate(selectedDate),
+      isOpened: false
     })
-    this.props.getDate(newDate)
+    this.props.getDate(selectedDate)
   }
 
   changeInfo = ({ day, month, year }) => {
@@ -56,16 +62,18 @@ class DateInput extends React.Component {
   render () {
     return (
       <div>
-        <FieldBase>
-          <input
-            label="Pick a date"
-            style={{ backgroundColor: 'transparent', border: 'none', fontSize: '1em' }}
-            value={this.state.selected}
-            placeholder='mm-dd-yyyy'
-            disabled
-          />
-          <CalendarIcon label="calendar" onClick={this.openCalendar} />
-        </FieldBase>
+        {/* <input
+          style={{ backgroundColor: 'transparent', border: 'none', fontSize: '1em' }}
+          value={this.state.selected}
+          placeholder='mm-dd-yyyy'
+          disabled
+        /> */}
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <p>{this.state.selected}</p>
+          <button>
+            <CalendarIcon label="calendar" onClick={this.openCalendar} />
+          </button>
+        </div>
         {this.state.isOpened
           ? <CalendarStateless
             selected={this.props.value}

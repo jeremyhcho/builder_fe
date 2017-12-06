@@ -13,7 +13,7 @@ import {
   FieldText,
   Spinner,
   Checkbox
-} from 'Components/Common'
+} from 'Components/Atlaskit'
 
 // Auth
 import { loginUser } from 'Actions'

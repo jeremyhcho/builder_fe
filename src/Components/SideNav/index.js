@@ -2,12 +2,15 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 
 // Components
-import { Dropdown, NavItem } from 'Components/Common'
+import { Dropdown, NavItem } from 'Components/Atlaskit'
+import DashboardIcon from '@atlaskit/icon/glyph/dashboard'
+import GraphLineIcon from '@atlaskit/icon/glyph/graph-line'
+import DetailViewIcon from '@atlaskit/icon/glyph/detail-view'
+import SettingsIcon from '@atlaskit/icon/glyph/settings'
 import Navigation, {
   AkNavigationItemGroup,
   AkContainerTitle,
   AkGlobalItem,
-  // AkContainerNavigationNested
 } from '@atlaskit/navigation'
 
 class SideNav extends React.Component {
@@ -38,7 +41,7 @@ class SideNav extends React.Component {
         position="right bottom"
       >
         <AkGlobalItem href="#">
-          <i className="fa fa-cog" aria-hidden="true" />
+          <SettingsIcon label="settings" />
         </AkGlobalItem>
       </Dropdown>
     )
@@ -46,7 +49,7 @@ class SideNav extends React.Component {
       <Navigation
         onResize={this.onResize}
         isOpen={this.state.isOpen}
-        globalPrimaryIcon={<i className="fa fa-bar-chart" aria-hidden="true" />}
+        globalPrimaryIcon={<GraphLineIcon label="statistics" />}
         globalPrimaryItemHref="/"
         globalSecondaryActions={[settings]}
         globalPrimaryIconAppearance="round"
@@ -57,10 +60,12 @@ class SideNav extends React.Component {
         <AkNavigationItemGroup>
           <NavItem
             text="Dashboard"
+            icon={<DashboardIcon label="dashboard" />}
             path="/"
           />
           <NavItem
             text="Matches"
+            icon={<DetailViewIcon label="matches" />}
             path="/matches"
           />
         </AkNavigationItemGroup>

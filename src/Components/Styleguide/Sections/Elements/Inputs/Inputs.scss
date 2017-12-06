@@ -1,0 +1,16 @@
+.inputs {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5%;
+  width: 33%;
+
+  .input-container {
+    flex-grow: 1;
+
+    .label {
+      margin-bottom: 8px;
+    }
+  }
+}

@@ -12,7 +12,7 @@ import {
   Button,
   FieldText,
   Spinner
-} from 'Components/Common'
+} from 'Components/Atlaskit'
 
 // Redux-form & validators
 import { presence, minChar, email, equality } from 'Helpers/Validators'

@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { Label } from '@atlaskit/field-base'
-import { DateInput } from 'Components/Common'
+// import { Label } from '@atlaskit/field-base'
+import { DateInput, PageHeader } from 'Components/Atlaskit'
 import MatchList from './MatchList'
 
 // CSS
@@ -30,9 +30,13 @@ class Matches extends React.Component {
   render () {
     return (
       <Grid fluid>
-        <Row>
-          <Col>
-            <Label label="Pick a date" />
+        <Row middle="xs" style={{ paddingTop: '10px' }}>
+          <Col xs={4}>
+            <PageHeader>
+              Matches
+            </PageHeader>
+          </Col>
+          <Col xs={8}>
             <DateInput getDate={this.getDates} />
           </Col>
         </Row>

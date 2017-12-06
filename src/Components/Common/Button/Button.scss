@@ -1,0 +1,51 @@
+// Default buttons
+.btn {
+  display: inline-block;
+  color: #FFF;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 200ms ease;
+
+  &.primary {
+    border: 1px solid var(--dark-blue);
+    background-color: var(--blue);
+    &:not(.disabled):hover {
+      background-color: rgba(38, 110, 175, 0.9);
+    }
+  }
+
+  &.secondary {
+    border: 1px solid var(--dark-blue);
+    color: var(--dark-blue);
+    background-color: #FFF;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    transition-property: color, background-color;
+    &:not(.disabled):hover {
+      background-color: var(--blue);
+      color: #FFF;
+    }
+  }
+
+  // flat button
+  &.flat {
+    border: none;
+    color: var(--blue);
+    background-color: #FFF;
+    &:not(.disabled):hover {
+      box-shadow: 0 2px 3px var(--light-gray);
+      transform: translateY(-1px);
+    }
+  }
+
+  // disabled button
+  &.disabled {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 1px solid var(--light-gray);
+    cursor: not-allowed;
+  }
+}
