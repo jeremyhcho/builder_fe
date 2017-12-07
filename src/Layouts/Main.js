@@ -6,7 +6,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 // import Loader from 'Components/Common/Loader'
-import SideNav from 'Components/SideNav'
+import SideNav from './SideNav'
 import Dashboard from 'Components/Dashboard'
 import Matches from 'Components/Matches'
 
