@@ -4,8 +4,7 @@ import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 
 // Components
-// import NavigationItem from './NavigationItem'
-import Matches from 'Assets/Icons/nav/soccer-field.svg'
+import Matches from 'Assets/Icons/nav/matches.svg'
 import MatchesSelected from 'Assets/Icons/nav/matches-selected.svg'
 
 // CSS
