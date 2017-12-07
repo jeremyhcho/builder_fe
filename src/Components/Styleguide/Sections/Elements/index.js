@@ -7,6 +7,7 @@ import Buttons from './Buttons'
 import Toggles from './Toggles'
 import Inputs from './Inputs'
 import Radios from './Radios'
+import Checkboxes from './Checkboxes'
 
 // CSS
 import './Elements.scss'
@@ -16,12 +17,18 @@ const Elements = () => (
     <SectionHeader headerText='Elements' />
     <SubHeader subHeaderText='Buttons' />
     <Buttons />
+
     <SubHeader subHeaderText='Toggles' />
     <Toggles />
+
     <SubHeader subHeaderText='Inputs' />
     <Inputs />
+
     <SubHeader subHeaderText='Radios' />
     <Radios />
+
+    <SubHeader subHeaderText='Checkboxes' />
+    <Checkboxes />
   </div>
 )
 

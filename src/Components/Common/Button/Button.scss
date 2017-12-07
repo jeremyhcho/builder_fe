@@ -2,12 +2,14 @@
 .btn {
   display: inline-block;
   color: #FFF;
-  height: 40px;
-  line-height: 40px;
-  padding: 0px 15px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0px 10px;
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: all 200ms ease;
+  font-weight: 300;
+  font-size: 12px;
 
   &.shouldFitContainer {
     width: 100%;
@@ -26,7 +28,7 @@
     color: var(--font-color);
     background-color: var(--light-gray);
     &:not(.disabled):hover {
-      background-color: darken(#E5EDF0, 4%)
+      background-color: darken(#E5EDF0, 2.5%);
     }
   }
 

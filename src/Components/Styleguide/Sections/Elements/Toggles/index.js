@@ -28,7 +28,7 @@ class Toggles extends React.Component {
           <Toggle name="checked2" checked={this.state.checked2} onChange={this.handleChange} />
         </div>
         <div styleName="toggle-container">
-          <p styleName='label'>Disabled Off</p>
+          <p styleName='label'>Disabled</p>
           <Toggle disabled onChange={this.handleChange} />
         </div>
       </div>
