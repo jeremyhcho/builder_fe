@@ -21,8 +21,13 @@ UnauthorizedRoute.propTypes = {
   authorized: PropTypes.bool.isRequired
 }
 
+<<<<<<< Updated upstream
 const mapStateToProps = ({ auth }) => ({
   authorized: auth.authState.authorized
+=======
+const mapStateToProps = () => ({
+  authorized: true
+>>>>>>> Stashed changes
 })
 
 export default connect(
