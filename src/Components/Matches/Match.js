@@ -36,7 +36,7 @@ const Match = ({ match }) => {
 
       <Col xs={4} styleName="col-direction">
         <p>{date}</p>
-        <h2 style={{ fontStyle: 'italic' }}>@</h2>
+        <h2>@</h2>
         <p>{time}</p>
       </Col>
 

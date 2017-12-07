@@ -20,14 +20,13 @@ import Matches from 'Components/Matches'
 //   loading: Loader
 // })
 
-
 const MainLayout = () => (
   <Row>
-    <Col>
+    <Col xs={1}>
       <SideNav />
     </Col>
 
-    <Col lg>
+    <Col xs={11}>
       <Switch>
         <Route exact path='/' component={Dashboard} />
         <Route exact path='/matches' component={Matches} />
