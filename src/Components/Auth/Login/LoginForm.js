@@ -10,8 +10,8 @@ import './Login.scss'
 // Components
 import {
   Button,
-  FieldText,
   Spinner,
+  FieldText,
   Checkbox
 } from 'Components/Atlaskit'
 
@@ -85,13 +85,12 @@ class LoginForm extends Component {
     return (
       <Field
         name='Password'
-        label='password'
         type='password'
-        component={FieldText}
+        label="password"
         isLabelHidden
+        component={FieldText}
         shouldFitContainer
         placeholder='Enter password'
-        autoComplete='off'
         style={passwordStyles}
         validate={passwordValidation}
       />
@@ -137,13 +136,12 @@ class LoginForm extends Component {
         <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field
             name='Email'
-            label='email'
             type='text'
-            component={FieldText}
+            label="email"
             isLabelHidden
+            component={FieldText}
             shouldFitContainer
             placeholder='Enter email'
-            autoComplete='off'
             validate={[presence, email]}
           />
 

@@ -6,6 +6,7 @@ import SubHeader from '../../SubHeader'
 import Buttons from './Buttons'
 import Toggles from './Toggles'
 import Inputs from './Inputs'
+import Radios from './Radios'
 
 // CSS
 import './Elements.scss'
@@ -19,6 +20,8 @@ const Elements = () => (
     <Toggles />
     <SubHeader subHeaderText='Inputs' />
     <Inputs />
+    <SubHeader subHeaderText='Radios' />
+    <Radios />
   </div>
 )
 

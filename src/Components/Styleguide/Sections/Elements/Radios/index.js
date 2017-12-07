@@ -1,7 +1,6 @@
 import React from 'react'
 
 // Components
-import SubHeader from '../../SubHeader'
 import Radio from 'Components/Common/Radio'
 
 // CSS
@@ -17,7 +16,6 @@ class Radios extends React.Component {
 
     return (
       <div>
-        <SubHeader subHeaderText='Radios' />
         <div className='flex' styleName='radios'>
           <div className='flex'>
             <p>DEFAULT</p>
