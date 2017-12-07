@@ -9,6 +9,7 @@ import Inputs from './Inputs'
 import Radios from './Radios'
 import Checkboxes from './Checkboxes'
 import Tabs from './Tabs'
+import Tooltips from './Tooltips'
 
 // CSS
 import './Elements.scss'
@@ -33,6 +34,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Tabs' />
     <Tabs />
+
+    <SubHeader subHeaderText='Tooltips' />
+    <Tooltips />
   </div>
 )
 
