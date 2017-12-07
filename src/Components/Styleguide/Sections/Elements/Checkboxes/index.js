@@ -21,27 +21,45 @@ class Checkboxes extends React.Component {
       <div className='flex' styleName='checkboxes'>
         <div className='flex'>
           <p>Default</p>
-          <Checkbox onChange={this.handleChange('checked1')} checked={this.state.checked1}>
+          <Checkbox
+            style={{ marginTop: '15px' }}
+            onChange={this.handleChange('checked1')}
+            checked={this.state.checked1}
+          >
             Option 1
           </Checkbox>
         </div>
 
         <div className='flex'>
-          <Checkbox onChange={this.handleChange('checked2')} checked={this.state.checked2}>
+          <Checkbox
+            style={{ marginTop: '15px' }}
+            onChange={this.handleChange('checked2')}
+            checked={this.state.checked2}
+          >
             Option 1
           </Checkbox>
         </div>
 
         <div className='flex'>
           <p>Disabled</p>
-          <Checkbox onChange={() => console.log('Clicked')} checked={false} disabled>
+          <Checkbox
+            style={{ marginTop: '15px' }}
+            onChange={() => console.log('Clicked')}
+            checked={false}
+            disabled
+          >
             Option 1
           </Checkbox>
         </div>
 
         <div className='flex'>
           <p>Disabled / Checked</p>
-          <Checkbox onChange={() => console.log('Clicked')} checked disabled>
+          <Checkbox
+            style={{ marginTop: '15px' }}
+            onChange={() => console.log('Clicked')}
+            checked
+            disabled
+          >
             Option 1
           </Checkbox>
         </div>

@@ -23,12 +23,19 @@ class Toggles extends React.Component {
           <p styleName='label'>{this.state.checked1 ? 'On' : 'Off'}</p>
           <Toggle name="checked1" checked={this.state.checked1} onChange={this.handleChange} />
         </div>
+
         <div styleName="toggle-container">
           <p styleName='label'>{this.state.checked2 ? 'On' : 'Off'}</p>
           <Toggle name="checked2" checked={this.state.checked2} onChange={this.handleChange} />
         </div>
+
         <div styleName="toggle-container">
-          <p styleName='label'>Disabled</p>
+          <p styleName='label'>Disabled / On</p>
+          <Toggle disabled onChange={this.handleChange} checked />
+        </div>
+
+        <div styleName="toggle-container">
+          <p styleName='label'>Disabled / Off</p>
           <Toggle disabled onChange={this.handleChange} />
         </div>
       </div>

@@ -1,6 +1,7 @@
 .checkbox-label {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 
   &.disabled {
     cursor: not-allowed;

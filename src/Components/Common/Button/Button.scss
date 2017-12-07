@@ -35,10 +35,10 @@
   // flat button
   &.flat {
     border: none;
-    color: var(--blue);
     background-color: #FFF;
+    color: var(--font-color);
     &:not(.disabled):hover {
-      box-shadow: 0 2px 3px var(--light-gray);
+      box-shadow: 0 1px 8px var(--light-gray);
       transform: translateY(-1px);
     }
   }
