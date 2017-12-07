@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import { Dropdown } from 'Components/Common/Dropdown'
+import Dropdown from 'Components/Common/Dropdown'
 
 // CSS
 import './Dropdowns.scss'

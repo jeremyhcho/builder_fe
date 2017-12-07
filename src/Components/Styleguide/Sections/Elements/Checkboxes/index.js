@@ -36,7 +36,7 @@ class Checkboxes extends React.Component {
             onChange={this.handleChange('checked2')}
             checked={this.state.checked2}
           >
-            Option 1
+            Option 2
           </Checkbox>
         </div>
 
@@ -48,7 +48,7 @@ class Checkboxes extends React.Component {
             checked={false}
             disabled
           >
-            Option 1
+            Option 3
           </Checkbox>
         </div>
 
@@ -60,7 +60,7 @@ class Checkboxes extends React.Component {
             checked
             disabled
           >
-            Option 1
+            Option 4
           </Checkbox>
         </div>
       </div>
