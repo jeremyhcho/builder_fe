@@ -1,0 +1,30 @@
+.sidenav {
+  height: 100%;
+  width: 60px;
+  position: fixed;
+  border: 0 1px solid #eee;
+  z-index: 1;
+  background-color: var(--lightest-gray);
+  color: var(--font-color);
+  overflow-x: hidden; /* disable horizontal scrolling */
+  padding: 40px 4px;
+  text-align: center;
+  transition: all 300ms ease;
+
+  .nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    border-radius: var(--border-radius);
+    height: 56px;
+
+    &.selected {
+      background-color: rgba(9, 30, 66, 0.04);
+    }
+
+    &:hover {
+      background-color: rgba(9, 30, 66, 0.04);
+    }
+  }
+}
