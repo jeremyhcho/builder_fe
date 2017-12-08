@@ -74,7 +74,7 @@ class Dropdown extends React.Component {
 
     return (
       <div
-        style={{ ...wrapperStyle, position: 'relative' }}
+        style={{ ...wrapperStyle, position: 'relative', display: 'inline-block' }}
         onBlur={this.onBlur}
         tabIndex='0'
       >

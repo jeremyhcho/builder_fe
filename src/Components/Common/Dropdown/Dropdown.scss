@@ -10,6 +10,7 @@
   -ms-user-select: none;
   user-select: none;
   position: relative;
+  display: inline-block;
 
   &.open {
     background-color: var(--navy-blue);

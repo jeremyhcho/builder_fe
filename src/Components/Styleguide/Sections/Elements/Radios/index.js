@@ -16,7 +16,7 @@ class Radios extends React.Component {
 
     return (
       <div className='flex' styleName='radios'>
-        <div className='flex'>
+        <div>
           <p>Default</p>
           <Radio
             onChange={() => this.setState({ checked: !checked })}
@@ -29,7 +29,7 @@ class Radios extends React.Component {
           </Radio>
         </div>
 
-        <div className='flex'>
+        <div>
           <Radio
             onChange={() => console.log('Changed')}
             checked
@@ -41,7 +41,7 @@ class Radios extends React.Component {
           </Radio>
         </div>
 
-        <div className='flex'>
+        <div>
           <p>Disabled</p>
           <Radio
             onChange={() => console.log('Changed')}
@@ -54,7 +54,7 @@ class Radios extends React.Component {
           </Radio>
         </div>
 
-        <div className='flex'>
+        <div>
           <p>Disabled / Checked</p>
           <Radio
             onChange={() => console.log('Changed')}

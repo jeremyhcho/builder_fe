@@ -13,9 +13,9 @@ class Dropdowns extends React.Component {
     return (
       <div className='flex' styleName='dropdowns'>
         <div styleName='row'>
-          <div className='flex'>
+          <div>
             <p>Default</p>
-            <Dropdown defaultText='Choices'>
+            <Dropdown defaultText='Choices' wrapperStyle={{ marginTop: '15px' }}>
               <MenuItem onClick={() => console.log('Clicked')}>
                 Rates
               </MenuItem>
@@ -30,7 +30,7 @@ class Dropdowns extends React.Component {
             </Dropdown>
           </div>
 
-          <div className='flex'>
+          <div>
             <p>Vertical Reverse</p>
             <Dropdown defaultText='Choices' verticalReverse wrapperStyle={{ marginTop: '15px' }}>
               <MenuItem onClick={() => console.log('Clicked')}>
@@ -47,7 +47,7 @@ class Dropdowns extends React.Component {
             </Dropdown>
           </div>
 
-          <div className='flex'>
+          <div>
             <p>Horizontal Reverse</p>
             <Dropdown defaultText='Choices' horizontalReverse wrapperStyle={{ marginTop: '15px' }}>
               <MenuItem onClick={() => console.log('Clicked')}>
@@ -64,7 +64,7 @@ class Dropdowns extends React.Component {
             </Dropdown>
           </div>
 
-          <div className='flex'>
+          <div>
             <p>Disabled</p>
             <Dropdown defaultText='Choices' wrapperStyle={{ marginTop: '15px' }}>
               <MenuItem onClick={() => console.log('Clicked')}>
@@ -83,12 +83,13 @@ class Dropdowns extends React.Component {
         </div>
 
         <div styleName='row' style={{ marginTop: '45px' }}>
-          <div className='flex'>
+          <div>
             <p>Icon</p>
             <IconDropdown
+              wrapperStyle={{ marginTop: '15px' }}
               icon={
                 <i
-                  className='fa fa-cog'
+                  className='fa fa-bitcoin'
                   style={{ fontSize: '22px', marginLeft: '1.5px', marginTop: '0.5px' }}
                 />
               }
@@ -107,13 +108,14 @@ class Dropdowns extends React.Component {
             </IconDropdown>
           </div>
 
-          <div className='flex'>
+          <div>
             <p>Vertical Reverse</p>
             <IconDropdown
+              wrapperStyle={{ marginTop: '15px' }}
               verticalReverse
               icon={
                 <i
-                  className='fa fa-bars'
+                  className='fa fa-rebel'
                   style={{ fontSize: '22px', marginLeft: '1.5px', marginTop: '0.5px' }}
                 />
               }
@@ -132,9 +134,10 @@ class Dropdowns extends React.Component {
             </IconDropdown>
           </div>
 
-          <div className='flex'>
+          <div>
             <p>Horizontal Reverse</p>
             <IconDropdown
+              wrapperStyle={{ marginTop: '15px' }}
               horizontalReverse
               icon={
                 <i
@@ -157,13 +160,14 @@ class Dropdowns extends React.Component {
             </IconDropdown>
           </div>
 
-          <div className='flex'>
+          <div>
             <p>Disabled</p>
             <IconDropdown
+              wrapperStyle={{ marginTop: '15px' }}
               icon={
                 <i
                   className='fa fa-diamond'
-                  style={{ fontSize: '22px', marginLeft: '1.5px', marginTop: '0.5px' }}
+                  style={{ fontSize: '22px', marginLeft: '0.5px', marginTop: '0.5px' }}
                 />
               }
             >
