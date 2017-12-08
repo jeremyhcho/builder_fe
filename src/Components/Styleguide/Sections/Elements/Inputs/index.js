@@ -10,9 +10,10 @@ import './Inputs.scss'
 
 class Inputs extends React.Component {
   state = {
-    username: '',
-    email: '',
-    password: '',
+    text: '',
+    disabled: '',
+    invalid: '',
+    required: '',
   }
 
   handleChange = (e) => {
@@ -28,26 +29,50 @@ class Inputs extends React.Component {
   }
 
   render () {
-    const { username, password } = this.state
+    const { text, invalid, disabled, required } = this.state
     return (
       <div styleName="inputs">
         <div styleName="input-container">
-          <p styleName="label">{this.state.submitForm}</p>
           <Input
-            label="Username"
-            name="username"
-            type='text'
+            label="Text Input"
+            name="text"
+            type="text"
             onChange={this.handleChange}
-            value={username}
-            placeholder="Enter username"
+            value={text}
+            placeholder="Enter text"
           />
+        </div>
+        <div styleName="input-container">
           <Input
-            label="Password"
-            name="password"
-            type='password'
+            label="Invalid Input"
+            name="invalid"
+            type="text"
             onChange={this.handleChange}
-            value={password}
-            placeholder="Enter password"
+            value={invalid}
+            error
+            placeholder="Enter text"
+          />
+        </div>
+        <div styleName="input-container">
+          <Input
+            label="Disabled Input"
+            name="disabled"
+            type="text"
+            onChange={this.handleChange}
+            value={disabled}
+            disabled
+            placeholder="Enter text"
+          />
+        </div>
+        <div styleName="input-container">
+          <Input
+            label="Required Input"
+            name="required"
+            type="text"
+            onChange={this.handleChange}
+            value={required}
+            required
+            placeholder="Enter text"
           />
         </div>
       </div>

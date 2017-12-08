@@ -18,6 +18,7 @@ const FieldInput = ({ input, style, meta: { touched, error }, ...props }) => {
     <div>
       <Input
         style={{ ...style }}
+        error={error}
         {...input}
         {...props}
       />
