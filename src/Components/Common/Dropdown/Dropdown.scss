@@ -10,7 +10,6 @@
   -ms-user-select: none;
   user-select: none;
   position: relative;
-  display: inline-block;
 
   &.open {
     background-color: var(--navy-blue);
@@ -71,6 +70,7 @@
   border-radius: var(--border-radius);
   transition: opacity 150ms;
   pointer-events: none;
+  z-index: 10;
 
   &.open {
     pointer-events: auto;

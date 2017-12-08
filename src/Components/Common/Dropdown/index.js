@@ -8,18 +8,8 @@ import './Dropdown.scss'
 class Dropdown extends React.Component {
   state = {
     open: false,
-    vertReversed: false,
-    horReversed: false
-  }
-
-  componentDidMount () {
-    const { verticalReverse, horizontalReverse } = this.props
-    /* eslint-disable react/no-did-mount-set-state */
-    this.setState({
-      vertReversed: verticalReverse ? true : this.shouldVertReverse(),
-      horReversed: horizontalReverse ? true : this.shouldHorReverse()
-    })
-    /* eslint-enable react/no-did-mount-set-state */
+    vertReversed: this.props.verticalReverse,
+    horReversed: this.props.horizontalReverse
   }
 
   onBlur = () => {
@@ -34,18 +24,6 @@ class Dropdown extends React.Component {
 
   toggleDropdown = () => {
     this.setState({ open: !this.state.open })
-  }
-
-  shouldVertReverse () {
-    const rect = this.dropdown.getBoundingClientRect()
-
-    return (rect.y + rect.height) >= window.innerHeight
-  }
-
-  shouldHorReverse () {
-    const rect = this.dropdown.getBoundingClientRect()
-
-    return (rect.x + rect.width) >= window.innerWidth
   }
 
   reversedStyles () {
@@ -75,7 +53,7 @@ class Dropdown extends React.Component {
 
     return (
       <div
-        style={{ ...wrapperStyle, position: 'relative' }}
+        style={{ ...wrapperStyle, position: 'relative', display: 'inline-block' }}
         onBlur={this.onBlur}
         tabIndex='0'
       >
