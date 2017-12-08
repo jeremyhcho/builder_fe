@@ -66,12 +66,11 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { defaultText, children, wrapperStyle } = this.props
-    const { open, vertReversed } = this.state
+    const { icon, children, wrapperStyle } = this.props
+    const { open } = this.state
 
-    const dropdownClass = classNames('dropdown', { open })
+    const dropdownClass = classNames('icon-dropdown', { open })
     const optionsClass = classNames('options', { open })
-    const chevronClass = classNames('chevron-down', { open })
 
     return (
       <div
@@ -83,13 +82,7 @@ class Dropdown extends React.Component {
           styleName={dropdownClass}
           onClick={this.toggleDropdown}
         >
-          <span>{defaultText}</span>
-          <span>
-            <i
-              className={vertReversed ? 'fa fa-chevron-up' : 'fa fa-chevron-down'}
-              styleName={chevronClass}
-            />
-          </span>
+          <span>{icon}</span>
         </div>
 
         <ul
@@ -112,7 +105,7 @@ Dropdown.defaultProps = {
 }
 
 Dropdown.propTypes = {
-  defaultText: PropTypes.string.isRequired,
+  icon: PropTypes.element.isRequired,
   verticalReverse: PropTypes.bool,
   horizontalReverse: PropTypes.bool,
   wrapperStyle: PropTypes.object,

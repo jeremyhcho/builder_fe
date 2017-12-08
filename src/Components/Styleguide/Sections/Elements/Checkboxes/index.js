@@ -9,7 +9,7 @@ import './Checkboxes.scss'
 class Checkboxes extends React.Component {
   state = {
     checked1: false,
-    checked2: false
+    checked2: true
   }
 
   handleChange = (field) => {

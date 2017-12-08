@@ -14,12 +14,20 @@ const primaryColors = [
     hex: '#48545D'
   },
   {
+    var: '--tooltip-color',
+    hex: '#3B454D'
+  },
+  {
     var: '--blue',
     hex: '#3C90DF'
   },
   {
     var: '--dark-blue',
     hex: '#2E7BC4'
+  },
+  {
+    var: '--navy-blue',
+    hex: '#253858'
   },
   {
     var: '--red',

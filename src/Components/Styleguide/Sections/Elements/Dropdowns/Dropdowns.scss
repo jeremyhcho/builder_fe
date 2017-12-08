@@ -1,17 +1,18 @@
 .dropdowns {
-  width: 80%;
   margin: 0 auto;
+  flex-wrap: wrap;
 
-  > div {
-    flex: 1;
-    align-items: flex-end;
-    flex-wrap: wrap;
+  .row {
+    display: flex;
+    width: 100%;
 
-    p {
-      flex: 0 0 calc(100%);
+    > div {
+      flex: 1;
+      align-items: flex-end;
+      flex-wrap: wrap;
     }
 
-    .radio {
+    p {
       flex: 0 0 calc(100%);
     }
   }
