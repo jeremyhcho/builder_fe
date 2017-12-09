@@ -5,32 +5,26 @@ import PropTypes from 'prop-types'
 // CSS
 import './Slider.scss'
 
-const Slider = ({ disabled, onChange, ...props }) => {
-  const sliderStyle = classNames('slider', {
-    disabled
-  })
-
-  return (
-    <div styleName="wrapper">
-      {
-        disabled ? (
-          <input
-            styleName={sliderStyle}
-            type="range"
-            disabled
-            {...props}
-          />
-        ) : (
-          <input
-            styleName={sliderStyle}
-            type="range"
-            onChange={onChange}
-            {...props}
-          />
-        )
-      }
-    </div>
-  )
+class Slider extends React.Component {
+  render () {
+    const { onChange, disabled, ...props } = this.props
+    const sliderStyle = classNames('slider', {
+      disabled
+    })
+    return (
+      <div styleName="wrapper">
+        <div styleName="fill" />
+        <input
+          ref={ref => this.slider = ref}
+          styleName={sliderStyle}
+          type="range"
+          onChange={onChange}
+          disabled={disabled}
+          {...props}
+        />
+      </div>
+    )
+  }
 }
 
 Slider.defaultProps = {

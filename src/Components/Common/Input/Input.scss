@@ -1,21 +1,22 @@
 .wrapper {
   position: relative;
-  display: inline-block;
 
-
-  .fa-alert {
+  .icon {
     position: absolute;
-    top: 34px;
+    top: 35px;
     right: 10px;
     color: var(--red);
+    &.noLabel {
+      top: 13px;
+    }
   }
 
   .fa-required {
-    position: absolute;
-    top: 37px;
-    right: 10px;
-    color: var(--blue);
-    font-size: 9px;
+    color: var(--red);
+    font-size: 6px;
+    margin-left: 4px;
+    margin-top: -2.4px;
+    vertical-align: middle;
   }
 
   .input {
@@ -32,18 +33,17 @@
     &:focus {
       border: 1px solid var(--dark-blue);
       background-color: #FFF;
-      box-shadow: .1px .1px 1px 0.2px var(--blue);
+      box-shadow: .1px .1px 1px var(--blue);
     }
     // Errored input
     &.error {
       border: 1px solid var(--red);
       background-color: #FFF;
-      box-shadow: .1px .1px 1px 0.2px var(--red);
+      box-shadow: .1px .1px 1px var(--red);
     }
 
     &.disabled {
       cursor: not-allowed;
-
       &::placeholder {
         color: var(--dark-gray);
       }

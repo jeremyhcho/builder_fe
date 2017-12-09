@@ -14,40 +14,40 @@ const Input = ({
   shouldFitContainer,
   ...props
 }) => {
-  const inputClass = classNames('input', {
+  const inputStyle = classNames('input', {
     shouldFitContainer,
     error,
     disabled
   })
 
+  const iconStyle = classNames('icon', {
+    noLabel: isLabelHidden
+  })
+
   return (
-    <div styleName="wrapper">
-      {!isLabelHidden && <p style={{ margin: '0 0 5px 0' }}>{label}</p>}
+    <label styleName="wrapper">
+      {
+        !isLabelHidden &&
+        <p style={{ margin: '0 0 5px 0' }}>
+          {label}
+          {required && !error && <span styleName="fa-required"><i className="fa fa-asterisk" aria-hidden="true" /></span>}
+        </p>
+      }
       {
         error &&
-        <span styleName="fa-alert">
+        <span styleName={iconStyle}>
           <i
             className="fa fa-exclamation-triangle"
             aria-hidden="true"
           />
         </span>
       }
-      {
-        required && !error &&
-        <span styleName="fa-required">
-          <i
-
-            className="fa fa-asterisk"
-            aria-hidden="true"
-          />
-        </span>
-      }
       <input
-        styleName={inputClass}
+        styleName={inputStyle}
         disabled={disabled}
         {...props}
       />
-    </div>
+    </label>
   )
 }
 

@@ -1,11 +1,24 @@
 .wrapper {
   width: 100%;
+  position: relative;
+
+  .fill {
+    position: absolute;
+    height: 6px;
+    top: 0;
+    left: 0;
+    border: 0.2px solid var(--blue);
+    border-radius: var(--border-radius);
+    background-color: var(--blue);
+  }
 
   .slider {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    background-color: transparent;
+    background-color: linear-gradient(to right, var(--blue) 0%, var(--blue) 0%, var(--lightest-gray) 100%);
+    outline: none;
+    position: relative;
 
     &:focus, &:hover {
       outline: none;

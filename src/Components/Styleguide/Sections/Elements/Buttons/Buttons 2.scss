@@ -1,11 +1,15 @@
-.inputs {
+.buttons {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   margin-bottom: 5%;
 
-  .input-container {
+  .button-container {
     flex-grow: 1;
+
+    .label {
+      margin-bottom: 8px;
+    }
   }
 }

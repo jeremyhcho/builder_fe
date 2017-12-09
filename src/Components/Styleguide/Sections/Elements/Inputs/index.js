@@ -41,7 +41,7 @@ class Inputs extends React.Component {
         name: 'disabled',
         label: 'DISABLED',
         value: disabled,
-        disabled: true
+        disabled: true,
       },
       {
         name: 'required',

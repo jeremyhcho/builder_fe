@@ -9,7 +9,8 @@ import './Sliders.scss'
 class Sliders extends React.Component {
   state = {
     defaultSlider: 1,
-    disabledSlider: 25
+    disabledSlider: 25,
+    slidervalue: 25
   }
 
   handleChange = (e) => {
