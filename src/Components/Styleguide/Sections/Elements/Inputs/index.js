@@ -14,6 +14,7 @@ class Inputs extends React.Component {
     disabled: '',
     invalid: '',
     required: '',
+    focus: '',
   }
 
   handleChange = (e) => {
@@ -22,59 +23,54 @@ class Inputs extends React.Component {
     })
   }
 
-  handleSubmit = () => {
-    this.setState({
-      submitForm: `{ username: ${this.state.username}, password: ${this.state.password}, email: ${this.state.email} }`
-    })
-  }
-
   render () {
     const { text, invalid, disabled, required } = this.state
+    const InputsArray = [
+      {
+        name: 'text',
+        label: 'DEFAULT',
+        value: text,
+      },
+      {
+        name: 'invalid',
+        label: 'INVALID',
+        value: invalid,
+        error: true
+      },
+      {
+        name: 'disabled',
+        label: 'DISABLED',
+        value: disabled,
+        disabled: true
+      },
+      {
+        name: 'required',
+        label: 'REQUIRED',
+        value: required,
+        required: true,
+      }
+    ]
+    const InputSamples = InputsArray.map(input => {
+      return (
+        <div styleName="input-container" key={input.name}>
+          <Input
+            key={input.name}
+            name={input.name}
+            label={input.label}
+            type="text"
+            onChange={this.handleChange}
+            value={input.value}
+            required={input.required}
+            error={input.error}
+            disabled={input.disabled}
+            placeholder="Enter text"
+          />
+        </div>
+      )
+    })
     return (
       <div styleName="inputs">
-        <div styleName="input-container">
-          <Input
-            label="Text Input"
-            name="text"
-            type="text"
-            onChange={this.handleChange}
-            value={text}
-            placeholder="Enter text"
-          />
-        </div>
-        <div styleName="input-container">
-          <Input
-            label="Invalid Input"
-            name="invalid"
-            type="text"
-            onChange={this.handleChange}
-            value={invalid}
-            error
-            placeholder="Enter text"
-          />
-        </div>
-        <div styleName="input-container">
-          <Input
-            label="Disabled Input"
-            name="disabled"
-            type="text"
-            onChange={this.handleChange}
-            value={disabled}
-            disabled
-            placeholder="Enter text"
-          />
-        </div>
-        <div styleName="input-container">
-          <Input
-            label="Required Input"
-            name="required"
-            type="text"
-            onChange={this.handleChange}
-            value={required}
-            required
-            placeholder="Enter text"
-          />
-        </div>
+        {InputSamples}
       </div>
     )
   }

@@ -45,6 +45,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Dropdowns' />
     <Dropdowns />
+
+    <SubHeader subHeaderText="Sliders" />
+    <Sliders />
   </div>
 )
 

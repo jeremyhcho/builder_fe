@@ -22,7 +22,7 @@ const Input = ({
 
   return (
     <div styleName="wrapper">
-      {!isLabelHidden && <p style={{ margin: '0 0 4px 0' }}>{label}</p>}
+      {!isLabelHidden && <p style={{ margin: '0 0 5px 0' }}>{label}</p>}
       {
         error &&
         <span styleName="fa-alert">
@@ -57,7 +57,7 @@ Input.defaultProps = {
   disabled: false,
   shouldFitContainer: false,
   isLabelHidden: false,
-  required: false,
+  required: false
 }
 
 Input.propTypes = {
