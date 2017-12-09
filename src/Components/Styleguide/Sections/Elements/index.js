@@ -9,6 +9,9 @@ import Inputs from './Inputs'
 import Radios from './Radios'
 import Checkboxes from './Checkboxes'
 import Tabs from './Tabs'
+import Tooltips from './Tooltips'
+import Dropdowns from './Dropdowns'
+import Spinners from './Spinners'
 
 // CSS
 import './Elements.scss'
@@ -18,6 +21,9 @@ const Elements = () => (
     <SectionHeader headerText='Elements' />
     <SubHeader subHeaderText='Buttons' />
     <Buttons />
+
+    <SubHeader subHeaderText='Spinners' />
+    <Spinners />
 
     <SubHeader subHeaderText='Toggles' />
     <Toggles />
@@ -33,6 +39,12 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Tabs' />
     <Tabs />
+
+    <SubHeader subHeaderText='Tooltips' />
+    <Tooltips />
+
+    <SubHeader subHeaderText='Dropdowns' />
+    <Dropdowns />
   </div>
 )
 

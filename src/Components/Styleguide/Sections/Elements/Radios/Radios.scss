@@ -1,9 +1,8 @@
 .radios {
-  width: 80%;
   margin: 0 auto;
+  justify-content: space-between;
 
   > div {
-    flex: 1;
     align-items: flex-end;
     flex-wrap: wrap;
 

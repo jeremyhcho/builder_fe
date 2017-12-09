@@ -11,6 +11,7 @@ const Checkbox = ({
   onChange,
   value,
   disabled,
+  style,
   ...checkboxProps
 }) => {
   const labelClass = classNames('checkbox-label', {
@@ -26,7 +27,7 @@ const Checkbox = ({
   })
 
   return (
-    <label styleName={labelClass}>
+    <label styleName={labelClass} style={style}>
       <input
         styleName={checkboxClass}
         type='checkbox'
@@ -53,7 +54,8 @@ const Checkbox = ({
 Checkbox.defaultProps = {
   checked: false,
   disabled: false,
-  value: ''
+  value: '',
+  style: {}
 }
 
 Checkbox.propTypes = {
@@ -61,7 +63,8 @@ Checkbox.propTypes = {
   value: PropTypes.string,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  style: PropTypes.object
 }
 
 export default Checkbox

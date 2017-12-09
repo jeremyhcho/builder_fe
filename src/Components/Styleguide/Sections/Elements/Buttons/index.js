@@ -9,29 +9,35 @@ import './Buttons.scss'
 const buttonThemes = [
   {
     primary: true,
-    text: 'Primary'
+    label: 'Primary',
+    innerText: 'Market'
   },
   {
     secondary: true,
-    text: 'Secondary'
+    label: 'Secondary',
+    innerText: 'Manager'
   },
   {
     flat: true,
-    text: 'Flat'
+    label: 'Flat',
+    innerText: 'On-Demand'
   },
   {
     disabled: true,
-    text: 'Disabled'
+    label: 'Disabled',
+    innerText: 'Rates'
   }
 ]
 
 const Buttons = () => (
   <div styleName="buttons">
     {
-      buttonThemes.map(theme => (
-        <div styleName="button-container" key={theme.text}>
-          <p styleName="label">{theme.text}</p>
-          <Button {...theme} onClick={() => console.log(`clicked ${Object.keys(theme)[0]} button`)}>Button Default</Button>
+      buttonThemes.map(({ label, innerText, ...theme }) => (
+        <div styleName="button-container" key={label}>
+          <p styleName="label">{label}</p>
+          <Button {...theme} onClick={() => console.log('Clicked!')}>
+            {innerText}
+          </Button>
         </div>
       ))
     }
