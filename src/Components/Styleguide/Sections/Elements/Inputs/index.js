@@ -28,24 +28,24 @@ class Inputs extends React.Component {
     const InputsArray = [
       {
         name: 'text',
-        label: 'DEFAULT',
+        label: 'Default',
         value: text,
       },
       {
         name: 'invalid',
-        label: 'INVALID',
+        label: 'Invalid',
         value: invalid,
         error: true
       },
       {
         name: 'disabled',
-        label: 'DISABLED',
+        label: 'Disabled',
         value: disabled,
         disabled: true,
       },
       {
         name: 'required',
-        label: 'REQUIRED',
+        label: 'Required',
         value: required,
         required: true,
       }
