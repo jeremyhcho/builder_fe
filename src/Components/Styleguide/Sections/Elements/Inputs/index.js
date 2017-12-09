@@ -10,9 +10,11 @@ import './Inputs.scss'
 
 class Inputs extends React.Component {
   state = {
-    username: '',
-    email: '',
-    password: '',
+    text: '',
+    disabled: '',
+    invalid: '',
+    required: '',
+    focus: '',
   }
 
   handleChange = (e) => {
@@ -21,35 +23,54 @@ class Inputs extends React.Component {
     })
   }
 
-  handleSubmit = () => {
-    this.setState({
-      submitForm: `{ username: ${this.state.username}, password: ${this.state.password}, email: ${this.state.email} }`
-    })
-  }
-
   render () {
-    const { username, password } = this.state
-    return (
-      <div styleName="inputs">
-        <div styleName="input-container">
-          <p styleName="label">{this.state.submitForm}</p>
+    const { text, invalid, disabled, required } = this.state
+    const InputsArray = [
+      {
+        name: 'text',
+        label: 'Default',
+        value: text,
+      },
+      {
+        name: 'invalid',
+        label: 'Invalid',
+        value: invalid,
+        error: true
+      },
+      {
+        name: 'disabled',
+        label: 'Disabled',
+        value: disabled,
+        disabled: true,
+      },
+      {
+        name: 'required',
+        label: 'Required',
+        value: required,
+        required: true,
+      }
+    ]
+    const InputSamples = InputsArray.map(input => {
+      return (
+        <div styleName="input-container" key={input.name}>
           <Input
-            label="Username"
-            name="username"
-            type='text'
+            key={input.name}
+            name={input.name}
+            label={input.label}
+            type="text"
             onChange={this.handleChange}
-            value={username}
-            placeholder="Enter username"
-          />
-          <Input
-            label="Password"
-            name="password"
-            type='password'
-            onChange={this.handleChange}
-            value={password}
-            placeholder="Enter password"
+            value={input.value}
+            required={input.required}
+            error={input.error}
+            disabled={input.disabled}
+            placeholder="Enter text"
           />
         </div>
+      )
+    })
+    return (
+      <div styleName="inputs">
+        {InputSamples}
       </div>
     )
   }

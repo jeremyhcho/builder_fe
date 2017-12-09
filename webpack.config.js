@@ -84,16 +84,15 @@ const config = {
       },
       {
         test: /\.svg$/,
-        loaders: [
+        use: [
           {
-            loader: 'babel-loader',
-            query: {
-              presets: ['es2015']
-            }
+            loader: 'babel-loader'
           },
           {
             loader: 'react-svg-loader',
-            query: { jsx: true }
+            options: {
+              jsx: true
+            }
           }
         ]
       }

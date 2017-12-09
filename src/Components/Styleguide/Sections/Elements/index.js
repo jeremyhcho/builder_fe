@@ -12,6 +12,8 @@ import Tabs from './Tabs'
 import Tooltips from './Tooltips'
 import Dropdowns from './Dropdowns'
 import Spinners from './Spinners'
+import Sliders from './Sliders'
+import TextAreas from './TextAreas'
 
 // CSS
 import './Elements.scss'
@@ -31,6 +33,9 @@ const Elements = () => (
     <SubHeader subHeaderText='Inputs' />
     <Inputs />
 
+    <SubHeader subHeaderText='Text Areas' />
+    <TextAreas />
+
     <SubHeader subHeaderText='Radios' />
     <Radios />
 
@@ -45,6 +50,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Dropdowns' />
     <Dropdowns />
+
+    <SubHeader subHeaderText='Sliders' />
+    <Sliders />
   </div>
 )
 
