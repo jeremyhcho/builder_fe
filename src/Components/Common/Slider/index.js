@@ -6,6 +6,27 @@ import PropTypes from 'prop-types'
 import './Slider.scss'
 
 class Slider extends React.Component {
+  componentDidMount() {
+    // initializes fill width
+    const { value, max, disabled } = this.props
+    if (!disabled) this.offsetFill(value, max)
+  }
+
+  componentWillReceiveProps(newProps) {
+    // changes fill width onChange
+    if (newProps.value !== this.props.value) {
+      const { value, max, disabled } = newProps
+      if (!disabled) this.offsetFill(value, max)
+    }
+  }
+
+  offsetFill = (currentValue, maxValue) => {
+    const percentageValue = currentValue / maxValue
+    const width = this.slider.offsetWidth
+    const thumbPosition = width * percentageValue
+    this.fill.style.width = `${thumbPosition + 1}px`
+  }
+
   render () {
     const { onChange, disabled, ...props } = this.props
     const sliderStyle = classNames('slider', {
@@ -13,11 +34,11 @@ class Slider extends React.Component {
     })
     return (
       <div styleName="wrapper">
-        <div styleName="fill" />
-        <input      
-          ref={ref => this.slider = ref}
-          styleName={sliderStyle}
+        <div styleName="fill" ref={ref => this.fill = ref} />
+        <input
           type="range"
+          ref={input => this.slider = input}
+          styleName={sliderStyle}
           onChange={onChange}
           disabled={disabled}
           {...props}
@@ -29,12 +50,15 @@ class Slider extends React.Component {
 
 Slider.defaultProps = {
   disabled: false,
-  onChange: () => null
+  onChange: () => null,
 }
 
 Slider.propTypes = {
   disabled: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 }
 
 export default Slider

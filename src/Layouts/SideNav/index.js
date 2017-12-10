@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 
 // Components
-import Matches from 'Assets/Icons/nav/matches.svg'
-import MatchesSelected from 'Assets/Icons/nav/matches-selected.svg'
+import Matches from 'Assets/Icons/nav/basketball-13.svg'
+import MatchesSelected from 'Assets/Icons/nav/basketball-selected.svg'
 
 // CSS
 import './SideNav.scss'
