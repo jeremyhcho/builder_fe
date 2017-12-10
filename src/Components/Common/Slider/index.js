@@ -21,10 +21,21 @@ class Slider extends React.Component {
   }
 
   offsetFill = (currentValue, maxValue) => {
-    const percentageValue = currentValue / maxValue
+    let percentageValue = currentValue / maxValue
     const width = this.slider.offsetWidth
-    const thumbPosition = width * percentageValue
-    this.fill.style.width = `${thumbPosition + 1}px`
+    let thumbPosition = percentageValue * width
+    if (percentageValue > 0.95) {
+      percentageValue -= 0.005
+      thumbPosition = percentageValue * width
+      this.fill.style.width = `${thumbPosition}px`
+    } else if (percentageValue < 0.1) {
+      percentageValue += 0.005
+      thumbPosition = percentageValue * width
+      this.fill.style.width = `${thumbPosition}px`
+    } else {
+      this.fill.style.width = `${thumbPosition}px`
+    }
+    console.log(`Percentage: ${percentageValue}`, `Current Position: ${thumbPosition}`)
   }
 
   render () {

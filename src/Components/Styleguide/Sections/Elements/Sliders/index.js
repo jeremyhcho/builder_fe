@@ -27,7 +27,7 @@ class Sliders extends React.Component {
             name="defaultSlider"
             value={defaultSlider}
             min={0}
-            max={100}
+            max={1000}
             onChange={this.handleChange}
           />
           <p>The value of the slider is: {defaultSlider} from a range of 0 to 100</p>
