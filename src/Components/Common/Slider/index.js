@@ -6,6 +6,11 @@ import PropTypes from 'prop-types'
 import './Slider.scss'
 
 class Slider extends React.Component {
+  state = {
+    inputValue: this.props.value,
+    value: this.props.value
+  }
+
   componentDidMount() {
     // initializes fill width
     const { value, max, disabled } = this.props
@@ -15,9 +20,32 @@ class Slider extends React.Component {
   componentWillReceiveProps(newProps) {
     // changes fill width onChange
     if (newProps.value !== this.props.value) {
-      const { value, max, disabled } = newProps
-      if (!disabled) this.offsetFill(value, max)
+      this.setState({ value: newProps.value }, () => {
+        if (!this.props.disabled) this.offsetFill(this.state.value, newProps.max)
+      })
     }
+  }
+
+  handleChange = (e) => {
+    if (e.target.value < this.props.min || !e.target.value.length) {
+      this.setState({ value: this.props.min }, () => {
+        this.offsetFill(this.state.value, this.props.max)
+      })
+    } else if (e.target.value > this.props.max) {
+      this.setState({ value: this.props.max }, () => {
+        this.offsetFill(this.state.value, this.props.max)
+      })
+    } else {
+      this.setState({ value: e.target.value }, () => {
+        this.offsetFill(this.state.value, this.props.max)
+      })
+    }
+  }
+
+  handleBlur = () => {
+    this.setState({
+      value: Number(this.state.value).toFixed(0)
+    })
   }
 
   offsetFill = (currentValue, maxValue) => {
@@ -35,25 +63,43 @@ class Slider extends React.Component {
     } else {
       this.fill.style.width = `${thumbPosition}px`
     }
-    console.log(`Percentage: ${percentageValue}`, `Current Position: ${thumbPosition}`)
   }
 
   render () {
-    const { onChange, disabled, ...props } = this.props
+    const { showInputControl, onChange, disabled, value, ...props } = this.props
     const sliderStyle = classNames('slider', {
       disabled
     })
     return (
-      <div styleName="wrapper">
-        <div styleName="fill" ref={ref => this.fill = ref} />
-        <input
-          type="range"
-          ref={input => this.slider = input}
-          styleName={sliderStyle}
-          onChange={onChange}
-          disabled={disabled}
-          {...props}
-        />
+      <div>
+        {
+          showInputControl &&
+          <div styleName="control-wrapper">
+            <input
+              type="number"
+              value={this.state.value}
+              styleName="control-input"
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+            />
+            <div styleName="button-wrapper">
+              <button><i className="fa fa-caret-up" aria-hidden="true" /></button>
+              <button><i className="fa fa-caret-down" aria-hidden="true" /></button>
+            </div>
+          </div>
+        }
+        <div styleName="slider-wrapper">
+          <div styleName="fill" ref={ref => this.fill = ref} />
+          <input
+            type="range"
+            value={this.state.value}
+            ref={input => this.slider = input}
+            styleName={sliderStyle}
+            onChange={onChange}
+            disabled={disabled}
+            {...props}
+          />
+        </div>
       </div>
     )
   }
@@ -62,11 +108,13 @@ class Slider extends React.Component {
 Slider.defaultProps = {
   disabled: false,
   onChange: () => null,
+  showInputControl: false
 }
 
 Slider.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  showInputControl: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
