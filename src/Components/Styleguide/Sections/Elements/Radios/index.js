@@ -30,6 +30,7 @@ class Radios extends React.Component {
         </div>
 
         <div>
+          <p>Selected</p>
           <Radio
             onChange={() => console.log('Changed')}
             checked

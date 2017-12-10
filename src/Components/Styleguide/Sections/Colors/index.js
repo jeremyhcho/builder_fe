@@ -46,6 +46,10 @@ const primaryColors = [
     hex: '#0AA958'
   },
   {
+    var: '--lightest-gray',
+    hex: '#F4F5F7'
+  },
+  {
     var: '--light-gray',
     hex: '#E5EDF0'
   },
