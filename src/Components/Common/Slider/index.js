@@ -42,6 +42,12 @@ class Slider extends React.Component {
     }
   }
 
+  handleSubmit = (e) => {
+    if (e.keyCode === 13) {
+      this.handleBlur()
+    }
+  }
+
   handleBlur = () => {
     this.setState({
       value: Number(this.state.value).toFixed(0)
@@ -72,22 +78,6 @@ class Slider extends React.Component {
     })
     return (
       <div>
-        {
-          showInputControl &&
-          <div styleName="control-wrapper">
-            <input
-              type="number"
-              value={this.state.value}
-              styleName="control-input"
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-            />
-            <div styleName="button-wrapper">
-              <button><i className="fa fa-caret-up" aria-hidden="true" /></button>
-              <button><i className="fa fa-caret-down" aria-hidden="true" /></button>
-            </div>
-          </div>
-        }
         <div styleName="slider-wrapper">
           <div styleName="fill" ref={ref => this.fill = ref} />
           <input
@@ -99,6 +89,17 @@ class Slider extends React.Component {
             disabled={disabled}
             {...props}
           />
+          {
+            showInputControl &&
+            <input
+              type="number"
+              value={this.state.value}
+              styleName="control-input"
+              onChange={this.handleChange}
+              onKeyUp={this.handleSubmit}
+              onBlur={this.handleBlur}
+            />
+          }
         </div>
       </div>
     )

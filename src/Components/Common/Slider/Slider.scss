@@ -94,20 +94,12 @@
       }
     }
   }
-}
-
-.control-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 
   .control-input {
-    flex: 1;
+    float: right;
     outline: none;
     border: none;
-    text-align: center;
-    margin: 0 auto 7px;
+    // text-align: center;
     font-size: 1.6rem;
   }
 
@@ -115,12 +107,5 @@
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-
-  .button-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: 10px;
   }
 }
