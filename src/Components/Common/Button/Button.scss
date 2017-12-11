@@ -48,8 +48,8 @@
     background-color: var(--green);
     border: 1px solid var(--dark-green);
     &:not(.disabled):hover {
-      // background-color: darken(#0CCE6B, 4%);
-      background-color: var(--dark-green)
+      background-color: darken(#0CCE6B, 5%);
+      // background-color: var(--dark-green)
     }
   }
 
@@ -58,7 +58,7 @@
     background-color: var(--red);
     border: 1px solid var(--dark-red);
     &:not(.disabled):hover {
-      background-color: darken(#FE4A49, 4%);
+      background-color: darken(#FE4A49, 5%);
     }
   }
 

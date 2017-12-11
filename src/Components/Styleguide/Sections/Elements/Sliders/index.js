@@ -9,8 +9,8 @@ import './Sliders.scss'
 class Sliders extends React.Component {
   state = {
     defaultSlider: 500,
-    disabledSlider: 25,
-    inputSlider: 50
+    disabledSlider: 500,
+    inputSlider: 500
   }
 
   handleChange = (e) => {
@@ -38,7 +38,7 @@ class Sliders extends React.Component {
             name="disabledSlider"
             value={disabledSlider}
             min={0}
-            max={50}
+            max={1000}
             onChange={this.handleChange}
             disabled
           />
@@ -49,7 +49,7 @@ class Sliders extends React.Component {
             name="inputSlider"
             value={inputSlider}
             min={0}
-            max={10000}
+            max={1000}
             onChange={this.handleChange}
             showInputControl
           />
