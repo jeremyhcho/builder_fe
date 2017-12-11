@@ -10,6 +10,8 @@
   -ms-user-select: none;
   user-select: none;
   position: relative;
+  min-width: 105px;
+  max-width: 375px;
 
   &.open {
     background-color: var(--navy-blue);
@@ -72,6 +74,7 @@
   pointer-events: none;
   z-index: 10;
   box-shadow: 0 8px 6px -6px var(--dark-gray);
+  max-width: 375px;
 
   &.open {
     pointer-events: auto;
@@ -83,7 +86,7 @@
     padding: 10px;
     font-size: 1.3rem;
     white-space: nowrap;
-    max-width: 275px;
+    max-width: 375px;
     overflow: hidden;
     text-overflow: ellipsis;
 
