@@ -43,6 +43,25 @@
     }
   }
 
+  // success button
+  &.success {
+    background-color: var(--green);
+    border: 1px solid var(--dark-green);
+    &:not(.disabled):hover {
+      background-color: darken(#0CCE6B, 5%);
+      // background-color: var(--dark-green)
+    }
+  }
+
+  // warning button
+  &.danger {
+    background-color: var(--red);
+    border: 1px solid var(--dark-red);
+    &:not(.disabled):hover {
+      background-color: var(--dark-red);
+    }
+  }
+
   // disabled button
   &.disabled {
     background-color: var(--light-gray);

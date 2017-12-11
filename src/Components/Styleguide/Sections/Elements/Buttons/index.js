@@ -23,6 +23,16 @@ const buttonThemes = [
     innerText: 'On-Demand'
   },
   {
+    success: true,
+    label: 'Success',
+    innerText: 'Route'
+  },
+  {
+    danger: true,
+    label: 'Danger',
+    innerText: 'Hamper'
+  },
+  {
     disabled: true,
     label: 'Disabled',
     innerText: 'Rates'

@@ -15,6 +15,7 @@ import Spinners from './Spinners'
 import Sliders from './Sliders'
 import TextAreas from './TextAreas'
 import Selects from './Selects'
+import Modals from './Modals'
 
 // CSS
 import './Elements.scss'
@@ -57,6 +58,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Sliders' />
     <Sliders />
+
+    <SubHeader subHeaderText='Modals' />
+    <Modals />
   </div>
 )
 
