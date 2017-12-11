@@ -23,7 +23,15 @@ class Modal extends React.Component {
   }
 
   render () {
-    const { header, toggle, children, footer, isOpen, ...props } = this.props
+    const {
+      header,
+      toggle,
+      children,
+      footer,
+      // isOpen,
+      wrapperStyle,
+      // ...props
+    } = this.props
     const modalStyle = classNames('modal', {
       isOpen: this.state.isOpen
     })
@@ -32,16 +40,18 @@ class Modal extends React.Component {
         styleName={modalStyle}
         onClick={this.handleOutsideClicks}
       >
-        <div styleName="modal-content" {...props} ref={ref => this.content = ref}>
+        <div styleName="modal-content" style={wrapperStyle} ref={ref => this.content = ref}>
           <div styleName="header">
             <h1 styleName="title">{header}</h1>
             <button type="button" styleName="exit-button" onClick={toggle}>
               <i className="fa fa-times" aria-hidden="true" />
             </button>
           </div>
+          <hr />
           <div styleName="body">
             {children}
           </div>
+          <hr />
           <div styleName="footer">
             {footer}
           </div>
@@ -54,7 +64,8 @@ class Modal extends React.Component {
 Modal.defaultProps = {
   header: '',
   children: null,
-  footer: []
+  footer: [],
+  wrapperStyle: {}
 }
 
 Modal.propTypes = {
@@ -62,7 +73,8 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.node,
-  footer: PropTypes.array
+  footer: PropTypes.array,
+  wrapperStyle: PropTypes.object
 }
 
 export default Modal
