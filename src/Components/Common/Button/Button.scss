@@ -58,7 +58,7 @@
     background-color: var(--red);
     border: 1px solid var(--dark-red);
     &:not(.disabled):hover {
-      background-color: darken(#FE4A49, 5%);
+      background-color: var(--dark-red);
     }
   }
 
