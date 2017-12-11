@@ -22,7 +22,7 @@ class Sliders extends React.Component {
     return (
       <div styleName="sliders">
         <div styleName="slider-container">
-          <p style={{ margin: '8px 0' }}>DEFAULT</p>
+          <p style={{ margin: '8px 0' }}>Default</p>
           <Slider
             name="defaultSlider"
             value={defaultSlider}
@@ -32,8 +32,9 @@ class Sliders extends React.Component {
           />
           <p>The value of the slider is: {defaultSlider} from a range of 0 to 1000</p>
         </div>
+
         <div styleName="slider-container">
-          <p style={{ margin: '8px 0' }}>DISABLED</p>
+          <p style={{ margin: '8px 0' }}>Disabled</p>
           <Slider
             name="disabledSlider"
             value={disabledSlider}
@@ -43,8 +44,9 @@ class Sliders extends React.Component {
             disabled
           />
         </div>
+
         <div styleName="slider-container">
-          <p style={{ margin: '8px 0' }}>DEFAULT with INPUT CONTROL</p>
+          <p style={{ margin: '8px 0' }}>Input Control</p>
           <Slider
             name="inputSlider"
             value={inputSlider}

@@ -96,20 +96,22 @@
   .input-wrapper {
     position: absolute;
     top: -10px;
-    left: 102%;
+    right: 0;
 
     .control-input {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       text-align: center;
       border-radius: var(--border-radius);
-      border: 1px solid var(--dark-blue);
+      border: 1px solid var(--light-gray);
       outline: none;
-      background-color: #FFF;
+      background-color: var(--lightest-gray);
       color: var(--font-color);
 
       &:focus {
         box-shadow: .1px .1px 1px var(--blue);
+        background-color: #fff;
+        border: 1px solid var(--dark-blue);
       }
 
       &::-webkit-outer-spin-button,

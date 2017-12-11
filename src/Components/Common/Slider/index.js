@@ -9,14 +9,16 @@ class Slider extends React.Component {
   state = {
     // current value of slider
     value: this.props.value,
-    // initialize inputControl width
-    inputWidth: '40px'
+    inputValue: this.props.value
   }
 
   componentDidMount() {
     // initializes fill width
     const { value, max, disabled } = this.props
     if (!disabled) this.offsetFill(value, max)
+    /* eslint-disable react/no-did-mount-set-state */
+    this.setState({ inputWidth: this.findInputWidth(value) })
+    /* eslint-enable react/no-did-mount-set-state */
   }
 
   componentWillReceiveProps(newProps) {
@@ -24,6 +26,7 @@ class Slider extends React.Component {
     if (newProps.value !== this.props.value) {
       this.setState({
         value: newProps.value,
+        inputValue: newProps.value,
         inputWidth: this.findInputWidth(newProps.value)
       }, () => {
         if (!this.props.disabled) this.offsetFill(this.state.value, newProps.max)
@@ -31,28 +34,36 @@ class Slider extends React.Component {
     }
   }
 
+  onFocus = (e) => {
+    e.target.select()
+  }
+
   handleChange = (e) => {
+    const { min, max } = this.props
     // changes fill event and inputWidth when typed in input
-    if (e.target.value < this.props.min || !e.target.value.length) {
+    if (e.target.value < min || !e.target.value.length) {
       this.setState({
-        value: this.props.min,
-        inputWidth: this.findInputWidth(this.props.min)
+        value: min,
+        inputValue: min,
+        inputWidth: this.findInputWidth(min)
       }, () => {
-        this.offsetFill(this.state.value, this.props.max)
+        this.offsetFill(this.state.value, max)
       })
-    } else if (e.target.value > this.props.max) {
+    } else if (e.target.value > max) {
       this.setState({
-        value: this.props.max,
-        inputWidth: this.findInputWidth(this.props.max)
+        value: max,
+        inputValue: e.target.value,
+        inputWidth: this.findInputWidth(max)
       }, () => {
-        this.offsetFill(this.state.value, this.props.max)
+        this.offsetFill(this.state.value, max)
       })
     } else {
       this.setState({
         value: Number(e.target.value).toFixed(0),
+        inputValue: Number(e.target.value).toFixed(0),
         inputWidth: this.findInputWidth(Number(e.target.value).toFixed(0))
       }, () => {
-        this.offsetFill(this.state.value, this.props.max)
+        this.offsetFill(this.state.value, max)
       })
     }
   }
@@ -64,6 +75,14 @@ class Slider extends React.Component {
       return '40px'
     }
     return null;
+  }
+
+  resetInputValue = () => {
+    const { max } = this.props
+
+    if (this.state.inputValue > max) {
+      this.setState({ inputValue: max })
+    }
   }
 
   offsetFill = (currentValue, maxValue) => {
@@ -106,10 +125,12 @@ class Slider extends React.Component {
             <div styleName="input-wrapper">
               <input
                 type="number"
-                value={this.state.value}
+                value={this.state.inputValue}
                 styleName="control-input"
                 style={{ width: this.state.inputWidth }}
                 onChange={this.handleChange}
+                onBlur={this.resetInputValue}
+                onFocus={this.onFocus}
               />
             </div>
           }
