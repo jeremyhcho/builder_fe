@@ -103,14 +103,12 @@
       height: 40px;
       text-align: center;
       border-radius: var(--border-radius);
-      border: 1px solid var(--light-gray);
+      border: 1px solid var(--dark-blue);
       outline: none;
-      background-color: var(--lightest-gray);
+      background-color: #FFF;
       color: var(--font-color);
 
       &:focus {
-        border: 1px solid var(--dark-blue);
-        background-color: #FFF;
         box-shadow: .1px .1px 1px var(--blue);
       }
 

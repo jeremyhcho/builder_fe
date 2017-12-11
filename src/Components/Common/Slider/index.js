@@ -20,37 +20,50 @@ class Slider extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // changes fill width onChange
+    // changes fill width and input width when dragging slider
     if (newProps.value !== this.props.value) {
-      this.setState({ value: newProps.value }, () => {
+      this.setState({
+        value: newProps.value,
+        inputWidth: this.findInputWidth(newProps.value)
+      }, () => {
         if (!this.props.disabled) this.offsetFill(this.state.value, newProps.max)
       })
     }
   }
 
   handleChange = (e) => {
+    // changes fill event and inputWidth when typed in input
     if (e.target.value < this.props.min || !e.target.value.length) {
       this.setState({
         value: this.props.min,
         inputWidth: this.findInputWidth(this.props.min)
-      }, this.offsetFill(this.state.value, this.props.max))
+      }, () => {
+        this.offsetFill(this.state.value, this.props.max)
+      })
     } else if (e.target.value > this.props.max) {
       this.setState({
         value: this.props.max,
         inputWidth: this.findInputWidth(this.props.max)
-      }, this.offsetFill(this.state.value, this.props.max))
+      }, () => {
+        this.offsetFill(this.state.value, this.props.max)
+      })
     } else {
       this.setState({
         value: Number(e.target.value).toFixed(0),
         inputWidth: this.findInputWidth(Number(e.target.value).toFixed(0))
-      }, this.offsetFill(this.state.value, this.props.max))
+      }, () => {
+        this.offsetFill(this.state.value, this.props.max)
+      })
     }
   }
 
   findInputWidth = (value) => {
-    // Values outside of the range will read as number and return an undefined length
-    if (value.toString().length > 2) return `${value.toString().length}em`
-    return '40px'
+    if (this.props.showInputControl) {
+      // Values outside of the range will read as number and return an undefined length
+      if (value.toString().length > 2) return `${value.toString().length}em`
+      return '40px'
+    }
+    return null;
   }
 
   offsetFill = (currentValue, maxValue) => {
