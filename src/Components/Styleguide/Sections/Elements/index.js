@@ -14,6 +14,7 @@ import Dropdowns from './Dropdowns'
 import Spinners from './Spinners'
 import Sliders from './Sliders'
 import TextAreas from './TextAreas'
+import Selects from './Selects'
 
 // CSS
 import './Elements.scss'
@@ -50,6 +51,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Dropdowns' />
     <Dropdowns />
+
+    <SubHeader subHeaderText='Selects' />
+    <Selects />
 
     <SubHeader subHeaderText='Sliders' />
     <Sliders />

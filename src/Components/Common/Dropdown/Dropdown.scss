@@ -1,7 +1,7 @@
 .dropdown {
-  height: 32px;
+  height: 36px;
   vertical-align: middle;
-  padding: 8px 12px;
+  padding: 10px 12px;
   background-color: var(--light-gray);
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -10,6 +10,8 @@
   -ms-user-select: none;
   user-select: none;
   position: relative;
+  min-width: 105px;
+  max-width: 375px;
 
   &.open {
     background-color: var(--navy-blue);
@@ -65,12 +67,14 @@
   background-color: #fff;
   min-width: 100%;
   border: 1px solid var(--gray);
-  top: 38px;
+  top: 44px;
   padding: 6px 0;
   border-radius: var(--border-radius);
   transition: opacity 150ms;
   pointer-events: none;
   z-index: 10;
+  box-shadow: 0 8px 6px -6px var(--dark-gray);
+  max-width: 375px;
 
   &.open {
     pointer-events: auto;
@@ -82,7 +86,7 @@
     padding: 10px;
     font-size: 1.3rem;
     white-space: nowrap;
-    max-width: 275px;
+    max-width: 375px;
     overflow: hidden;
     text-overflow: ellipsis;
 

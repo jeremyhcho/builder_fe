@@ -45,7 +45,7 @@
     &.disabled {
       cursor: not-allowed;
       &::placeholder {
-        color: var(--dark-gray);
+        color: var(--gray);
       }
     }
 

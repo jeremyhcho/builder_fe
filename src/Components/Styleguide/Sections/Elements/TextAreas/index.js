@@ -21,7 +21,7 @@ class TextAreas extends React.Component {
     return (
       <div style={{ textAlign: 'center' }}>
         <TextArea
-          label="Text Area"
+          label="Default"
           name="text"
           enableResize={false}
           placeholder={loremIpsum}

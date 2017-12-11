@@ -31,6 +31,7 @@ class Checkboxes extends React.Component {
         </div>
 
         <div>
+          <p>Selected</p>
           <Checkbox
             style={{ marginTop: '15px' }}
             onChange={this.handleChange('checked2')}
