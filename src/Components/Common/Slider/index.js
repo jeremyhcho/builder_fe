@@ -7,8 +7,10 @@ import './Slider.scss'
 
 class Slider extends React.Component {
   state = {
-    inputValue: this.props.value,
-    value: this.props.value
+    // current value of slider
+    value: this.props.value,
+    // initialize inputControl width
+    inputWidth: '40px'
   }
 
   componentDidMount() {
@@ -28,30 +30,27 @@ class Slider extends React.Component {
 
   handleChange = (e) => {
     if (e.target.value < this.props.min || !e.target.value.length) {
-      this.setState({ value: this.props.min }, () => {
-        this.offsetFill(this.state.value, this.props.max)
-      })
+      this.setState({
+        value: this.props.min,
+        inputWidth: this.findInputWidth(this.props.min)
+      }, this.offsetFill(this.state.value, this.props.max))
     } else if (e.target.value > this.props.max) {
-      this.setState({ value: this.props.max }, () => {
-        this.offsetFill(this.state.value, this.props.max)
-      })
+      this.setState({
+        value: this.props.max,
+        inputWidth: this.findInputWidth(this.props.max)
+      }, this.offsetFill(this.state.value, this.props.max))
     } else {
-      this.setState({ value: e.target.value }, () => {
-        this.offsetFill(this.state.value, this.props.max)
-      })
+      this.setState({
+        value: Number(e.target.value).toFixed(0),
+        inputWidth: this.findInputWidth(Number(e.target.value).toFixed(0))
+      }, this.offsetFill(this.state.value, this.props.max))
     }
   }
 
-  handleSubmit = (e) => {
-    if (e.keyCode === 13) {
-      this.handleBlur()
-    }
-  }
-
-  handleBlur = () => {
-    this.setState({
-      value: Number(this.state.value).toFixed(0)
-    })
+  findInputWidth = (value) => {
+    // Values outside of the range will read as number and return an undefined length
+    if (value.toString().length > 2) return `${value.toString().length}em`
+    return '40px'
   }
 
   offsetFill = (currentValue, maxValue) => {
@@ -91,14 +90,15 @@ class Slider extends React.Component {
           />
           {
             showInputControl &&
-            <input
-              type="number"
-              value={this.state.value}
-              styleName="control-input"
-              onChange={this.handleChange}
-              onKeyUp={this.handleSubmit}
-              onBlur={this.handleBlur}
-            />
+            <div styleName="input-wrapper">
+              <input
+                type="number"
+                value={this.state.value}
+                styleName="control-input"
+                style={{ width: this.state.inputWidth }}
+                onChange={this.handleChange}
+              />
+            </div>
           }
         </div>
       </div>
@@ -109,7 +109,7 @@ class Slider extends React.Component {
 Slider.defaultProps = {
   disabled: false,
   onChange: () => null,
-  showInputControl: false
+  showInputControl: false,
 }
 
 Slider.propTypes = {

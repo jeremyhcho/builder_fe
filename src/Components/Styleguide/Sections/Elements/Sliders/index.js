@@ -44,12 +44,12 @@ class Sliders extends React.Component {
           />
         </div>
         <div styleName="slider-container">
-          <p style={{ margin: '8px 0' }}>Show Input Control</p>
+          <p style={{ margin: '8px 0' }}>DEFAULT with INPUT CONTROL</p>
           <Slider
             name="inputSlider"
             value={inputSlider}
             min={0}
-            max={100}
+            max={10000}
             onChange={this.handleChange}
             showInputControl
           />
