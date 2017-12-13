@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Checkbox from 'Components/Common/Checkbox'
+import { Checkbox } from 'Components/Common'
 
 // CSS
 import './Checkboxes.scss'

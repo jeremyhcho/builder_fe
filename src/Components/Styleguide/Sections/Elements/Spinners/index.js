@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Spinner from 'Components/Common/Spinner'
+import { Spinner } from 'Components/Common'
 
 // CSS
 import './Spinners.scss'

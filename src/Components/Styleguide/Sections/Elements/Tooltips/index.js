@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Tooltip from 'Components/Common/Tooltip'
+import { Tooltip } from 'Components/Common'
 
 // CSS
 import './Tooltips.scss'

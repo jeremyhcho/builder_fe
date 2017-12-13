@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import TextArea from 'Components/Common/TextArea'
+import { TextArea } from 'Components/Common'
 
 // CSS
 import './TextAreas.scss'

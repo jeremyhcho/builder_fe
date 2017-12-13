@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Toggle from 'Components/Common/Toggle'
+import { Toggle } from 'Components/Common'
 
 // CSS
 import './Toggles.scss'

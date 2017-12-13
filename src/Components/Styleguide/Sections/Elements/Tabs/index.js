@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Tab from 'Components/Common/Tab'
+import { Tab } from 'Components/Common'
 
 // CSS
 import './Tabs.scss'

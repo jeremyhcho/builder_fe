@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Component
-import Slider from 'Components/Common/Slider'
+import { Slider } from 'Components/Common'
 
 // CSS
 import './Sliders.scss'
