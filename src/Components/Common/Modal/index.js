@@ -42,9 +42,16 @@ class Modal extends React.Component {
       >
         <div styleName="modal-container" style={wrapperStyle} ref={ref => this.content = ref}>
           <div styleName="header">
-            <h1 styleName="title">{header}</h1>
-            <button type="button" styleName="exit-button" onClick={toggle}>
-              <i className="fa fa-times" aria-hidden="true" />
+            <h1 className='semibold' styleName="title">{header}</h1>
+            <button
+              type="button"
+              styleName="exit-button"
+              onClick={toggle}
+            >
+              <i
+                className="fa fa-times"
+                aria-hidden="true"
+              />
             </button>
           </div>
           <hr />

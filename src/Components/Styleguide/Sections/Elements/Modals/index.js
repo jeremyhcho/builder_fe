@@ -3,8 +3,6 @@ import React from 'react'
 // Components
 import Modal from 'Components/Common/Modal'
 import Button from 'Components/Common/Button'
-import TextArea from 'Components/Common/TextArea'
-// import Input from 'Components/Common/Input'
 
 // CSS
 import './Modals.scss'
@@ -24,17 +22,17 @@ class Modals extends React.Component {
   render () {
     const footerButtons = [
       <Button
+        key="close"
+        onClick={this.toggleModal}
+        flat
+      >
+        Close
+      </Button>,
+      <Button
         key="save"
         onClick={this.toggleModal}
       >
         Save Changes
-      </Button>,
-      <Button
-        key="close"
-        onClick={this.toggleModal}
-        danger
-      >
-        Close
       </Button>
     ]
 
@@ -50,18 +48,8 @@ class Modals extends React.Component {
           footer={footerButtons}
           wrapperStyle={{ width: '600px' }}
         >
-          <div>
-            <h1 style={{ textAlign: 'center' }}>Welcome to Quartz</h1>
+          <div style={{ padding: '30px' }}>
             <p>{loremIpsum}</p>
-            <TextArea
-              label="Modal Content"
-              rows={5}
-              cols={40}
-              placeholder="Enter text here"
-              wrap="soft"
-              value={this.state.text}
-              onChange={(e) => this.setState({ text: e.target.value })}
-            />
           </div>
         </Modal>
       </div>

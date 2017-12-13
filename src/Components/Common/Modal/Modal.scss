@@ -43,19 +43,15 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      padding: 10px 0;
+      padding: 20px 0;
 
       .title {
         word-wrap: break-word;
-        position: absolute;
-        flex: 0 1 auto;
-        transform: translateX(-50%);
-        left: 50%;
-        text-align: center;
-        // margin: 0 auto;
       }
+
       .exit-button {
-        flex: 0 1 auto;
+        width: 35px;
+        height: 35px;
         margin-left: auto;
         outline: none;
         border: none;
