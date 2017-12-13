@@ -51,6 +51,12 @@ class Modal extends React.Component {
               <i
                 className="fa fa-times"
                 aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  top: '9px',
+                  left: '11px',
+                  fontSize: '18px'
+                }}
               />
             </button>
           </div>
