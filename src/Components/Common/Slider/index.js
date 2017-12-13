@@ -9,7 +9,24 @@ class Slider extends React.Component {
   state = {
     // current value of slider
     value: this.props.value,
-    inputValue: this.props.value
+    // keeps state of valid values given in input
+    validValue: this.props.value,
+    inputValue: this.props.value,
+    sliderWidth: { width: '100%' }
+  }
+
+  componentWillMount() {
+    const { showInputControl, max } = this.props
+    // find max width of input value if showInputControl is set to true
+    // use to recalculate width of slider
+    if (showInputControl) {
+      // max width of input
+      const maxInputWidth = `${max.toString().length + 0.5}em`
+      console.log(maxInputWidth)
+      this.setState({
+        sliderWidth: { width: `calc(100% - ${maxInputWidth} )` }
+      })
+    }
   }
 
   componentDidMount() {
@@ -61,6 +78,7 @@ class Slider extends React.Component {
       this.setState({
         value: Number(e.target.value).toFixed(0),
         inputValue: Number(e.target.value).toFixed(0),
+        validValue: Number(e.target.value).toFixed(0),
         inputWidth: this.findInputWidth(Number(e.target.value).toFixed(0))
       }, () => {
         this.offsetFill(this.state.value, max)
@@ -81,7 +99,12 @@ class Slider extends React.Component {
     const { max } = this.props
 
     if (this.state.inputValue > max) {
-      this.setState({ inputValue: max })
+      this.setState({
+        inputValue: this.state.validValue,
+        value: this.state.validValue
+      }, () => {
+        this.offsetFill(this.state.value, max)
+      })
     }
   }
 
@@ -116,6 +139,7 @@ class Slider extends React.Component {
             value={this.state.value}
             ref={input => this.slider = input}
             styleName={sliderStyle}
+            style={this.state.sliderWidth}
             onChange={onChange}
             disabled={disabled}
             {...props}

@@ -13,7 +13,7 @@ const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 
 class Modals extends React.Component {
   state = {
-    modalOpen: true,
+    modalOpen: false,
     text: ''
   }
 
@@ -48,7 +48,7 @@ class Modals extends React.Component {
           toggle={this.toggleModal}
           isOpen={this.state.modalOpen}
           footer={footerButtons}
-          // wrapperStyle={{ width: '500px' }}
+          wrapperStyle={{ width: '600px' }}
         >
           <div>
             <h1 style={{ textAlign: 'center' }}>Welcome to Quartz</h1>
