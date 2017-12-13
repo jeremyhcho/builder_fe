@@ -40,7 +40,7 @@ class Modal extends React.Component {
         styleName={modalStyle}
         onClick={this.handleOutsideClicks}
       >
-        <div styleName="modal-content" style={wrapperStyle} ref={ref => this.content = ref}>
+        <div styleName="modal-container" style={wrapperStyle} ref={ref => this.content = ref}>
           <div styleName="header">
             <h1 styleName="title">{header}</h1>
             <button type="button" styleName="exit-button" onClick={toggle}>

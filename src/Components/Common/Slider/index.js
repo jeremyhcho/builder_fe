@@ -22,7 +22,6 @@ class Slider extends React.Component {
     if (showInputControl) {
       // max width of input
       const maxInputWidth = `${max.toString().length + 0.5}em`
-      console.log(maxInputWidth)
       this.setState({
         sliderWidth: { width: `calc(100% - ${maxInputWidth} )` }
       })
