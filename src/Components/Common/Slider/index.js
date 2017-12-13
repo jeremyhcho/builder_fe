@@ -99,8 +99,8 @@ class Slider extends React.Component {
 
     if (this.state.inputValue > max) {
       this.setState({
-        inputValue: this.state.validValue,
-        value: this.state.validValue
+        inputValue: max,
+        value: max
       }, () => {
         this.offsetFill(this.state.value, max)
       })

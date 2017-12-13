@@ -25,10 +25,15 @@
     color: var(--font-color);
     padding: 0 25px;
     max-width: 60%;
-    max-height: 80%;
-    margin: 15% auto;
+    max-height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.1);
     transition: all 200ms ease;
+    min-height: 335px;
+    min-width: 335px;
 
     hr {
       // ignore padding on parent div
