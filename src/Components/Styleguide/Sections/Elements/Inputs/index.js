@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Component
-import Input from 'Components/Common/Input'
+import { Input } from 'Components/Common'
 
 // CSS
 import './Inputs.scss'

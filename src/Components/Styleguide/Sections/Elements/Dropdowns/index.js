@@ -1,9 +1,10 @@
 import React from 'react'
 
 // Components
-import Dropdown from 'Components/Common/Dropdown'
-import IconDropdown from 'Components/Common/Dropdown/IconDropdown'
-import MenuItem from 'Components/Common/Dropdown/MenuItem'
+// import Dropdown from 'Components/Common/Dropdown'
+// import IconDropdown from 'Components/Common/Dropdown/IconDropdown'
+// import MenuItem from 'Components/Common/Dropdown/MenuItem'
+import { Dropdown, IconDropdown, MenuItem } from 'Components/Common'
 
 // CSS
 import './Dropdowns.scss'

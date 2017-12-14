@@ -1,8 +1,7 @@
 import React from 'react'
 
 // Components
-import Modal from 'Components/Common/Modal'
-import Button from 'Components/Common/Button'
+import { Modal, Button } from 'Components/Common'
 
 // CSS
 import './Modals.scss'

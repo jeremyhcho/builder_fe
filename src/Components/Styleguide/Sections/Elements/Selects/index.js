@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Select from 'Components/Common/Select'
+import { Select } from 'Components/Common'
 
 // CSS
 import './Selects.scss'

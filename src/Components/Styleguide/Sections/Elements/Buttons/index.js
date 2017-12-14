@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Component
-import Button from 'Components/Common/Button'
+import { Button } from 'Components/Common'
 
 // CSS
 import './Buttons.scss'

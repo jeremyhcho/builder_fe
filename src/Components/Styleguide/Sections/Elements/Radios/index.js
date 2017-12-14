@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import Radio from 'Components/Common/Radio'
+import { Radio } from 'Components/Common'
 
 // CSS
 import './Radios.scss'
