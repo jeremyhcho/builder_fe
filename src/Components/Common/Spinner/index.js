@@ -5,7 +5,7 @@ import classNames from 'classnames'
 // CSS
 import './Spinner.scss'
 
-const Spinner = ({ diameter, xs, sm, md, lg, show }) => {
+const Spinner = ({ diameter, xs, sm, md, lg, show, color }) => {
   const spinnerClass = classNames('spinner', {
     xs,
     sm,
@@ -33,6 +33,7 @@ const Spinner = ({ diameter, xs, sm, md, lg, show }) => {
       viewBox='0 0 66 66'
     >
       <circle
+        style={{ stroke: color }}
         styleName='path'
         fill='none'
         strokeWidth='6'
@@ -51,7 +52,8 @@ Spinner.defaultProps = {
   sm: false,
   md: false,
   lg: false,
-  diameter: undefined
+  diameter: undefined,
+  color: ''
 }
 
 Spinner.propTypes = {
@@ -60,7 +62,8 @@ Spinner.propTypes = {
   md: PropTypes.bool,
   lg: PropTypes.bool,
   diameter: PropTypes.number,
-  show: PropTypes.bool
+  show: PropTypes.bool,
+  color: PropTypes.string
 }
 
 export default Spinner
