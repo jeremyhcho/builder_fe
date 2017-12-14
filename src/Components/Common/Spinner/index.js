@@ -5,7 +5,7 @@ import classNames from 'classnames'
 // CSS
 import './Spinner.scss'
 
-const Spinner = ({ diameter, xs, sm, md, lg, show, color }) => {
+const Spinner = ({ diameter, xs, sm, md, lg, show, color, style }) => {
   const spinnerClass = classNames('spinner', {
     xs,
     sm,
@@ -28,7 +28,8 @@ const Spinner = ({ diameter, xs, sm, md, lg, show, color }) => {
       style={{
         ...spinnerStyle,
         display: show ? 'inline-block' : 'none',
-        verticalAlign: 'middle'
+        verticalAlign: 'middle',
+        ...style
       }}
       viewBox='0 0 66 66'
     >
@@ -53,7 +54,8 @@ Spinner.defaultProps = {
   md: false,
   lg: false,
   diameter: undefined,
-  color: ''
+  color: '',
+  style: {}
 }
 
 Spinner.propTypes = {
@@ -63,7 +65,8 @@ Spinner.propTypes = {
   lg: PropTypes.bool,
   diameter: PropTypes.number,
   show: PropTypes.bool,
-  color: PropTypes.string
+  color: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Spinner

@@ -30,6 +30,11 @@
     outline: none;
     background-color: var(--lightest-gray);
 
+    &.shouldFitContainer {
+      display: block;
+      width: 100%;
+    }
+
     &:focus {
       border: 1px solid var(--dark-blue);
       background-color: #FFF;
@@ -48,10 +53,5 @@
         color: var(--gray);
       }
     }
-
-    &.shouldFitContainer {
-      width: 100%;
-    }
-    // Required input
   }
 }

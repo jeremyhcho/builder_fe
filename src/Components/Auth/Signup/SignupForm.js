@@ -8,11 +8,7 @@ import { Link } from 'react-router-dom'
 import './Signup.scss'
 
 // Components
-import {
-  Button,
-  FieldText,
-  Spinner
-} from 'Components/Atlaskit'
+import { Button, FieldInput, Spinner } from 'Components/Common'
 
 // Redux-form & validators
 import { presence, minChar, email, equality } from 'Helpers/Validators'
@@ -33,7 +29,7 @@ class SignupForm extends Component {
 
   renderInnerButton () {
     if (this.props.creatingUser) {
-      return <Spinner invertColor size='small' style={{ paddingTop: '8px' }} />
+      return <Spinner xs style={{ marginBottom: '2px' }} color="#FFF" />
     }
 
     return 'Create account'
@@ -57,7 +53,7 @@ class SignupForm extends Component {
         <form onSubmit={this.props.handleSubmit(this.submit)}>
           <Field
             name="Email"
-            component={FieldText}
+            component={FieldInput}
             label="Email"
             type="email"
             isLabelHidden
@@ -68,7 +64,7 @@ class SignupForm extends Component {
           />
           <Field
             name="Password"
-            component={FieldText}
+            component={FieldInput}
             label="Password"
             type="password"
             isLabelHidden
@@ -79,7 +75,7 @@ class SignupForm extends Component {
           />
           <Field
             name="Password confirmation"
-            component={FieldText}
+            component={FieldInput}
             label="Confirm password"
             type="password"
             isLabelHidden
@@ -91,8 +87,8 @@ class SignupForm extends Component {
           <div>
             <Button
               shouldFitContainer
-              appearance="primary"
               type="submit"
+              style={{ margin: '15px 0 0' }}
             >
               {this.renderInnerButton()}
             </Button>

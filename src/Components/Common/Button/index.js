@@ -14,7 +14,8 @@ const Button = ({
   disabled,
   onClick,
   shouldFitContainer,
-  children
+  children,
+  ...props
 }) => {
   const buttonClass = classNames('btn', {
     primary: primary || (!secondary && !flat),
@@ -30,7 +31,15 @@ const Button = ({
     onClick()
   }
 
-  return <button styleName={buttonClass} onClick={buttonClick}>{children}</button>
+  return (
+    <button
+      styleName={buttonClass}
+      onClick={buttonClick}
+      {...props}
+    >
+      {children}
+    </button>
+  )
 }
 
 Button.defaultProps = {
@@ -42,6 +51,7 @@ Button.defaultProps = {
   disabled: false,
   shouldFitContainer: false,
   children: '',
+  onClick: () => null,
 }
 
 Button.propTypes = {
@@ -53,7 +63,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   shouldFitContainer: PropTypes.bool,
   children: PropTypes.node,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func,
 }
 
 export default Button

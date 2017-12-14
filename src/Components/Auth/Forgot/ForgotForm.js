@@ -4,11 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 // Components
-import {
-  FieldText,
-  Button,
-  Spinner
-} from 'Components/Atlaskit'
+import { FieldInput, Button, Spinner } from 'Components/Common'
 
 // CSS
 import './Forgot.scss'
@@ -30,7 +26,7 @@ class ForgotForm extends React.Component {
 
   renderInnerButton () {
     if (this.props.sendingEmail) {
-      return <Spinner invertColor size='small' style={{ paddingTop: '8px' }} />
+      return <Spinner xs show style={{ marginBottom: '2px' }} color="#FFF" />
     }
 
     return 'Send recovery link'
@@ -63,7 +59,7 @@ class ForgotForm extends React.Component {
             name='Email'
             label="We'll send a recovery link to"
             type='email'
-            component={FieldText}
+            component={FieldInput}
             shouldFitContainer
             placeholder='Enter email'
             autoComplete='off'
@@ -71,7 +67,7 @@ class ForgotForm extends React.Component {
             validate={[presence, email]}
           />
 
-          <Button shouldFitContainer appearance='primary' type="submit">
+          <Button shouldFitContainer type="submit" style={{ margin: '15px 0 0' }}>
             {this.renderInnerButton()}
           </Button>
         </form>

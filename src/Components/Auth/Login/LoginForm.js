@@ -8,12 +8,7 @@ import { Field, reduxForm, reset, initialize } from 'redux-form'
 import './Login.scss'
 
 // Components
-import {
-  Button,
-  Spinner,
-  FieldText,
-  Checkbox
-} from 'Components/Atlaskit'
+import { Button, Spinner, Checkbox, FieldInput } from 'Components/Common'
 
 // Auth
 import { loginUser } from 'Actions'
@@ -69,7 +64,7 @@ class LoginForm extends Component {
 
   renderPasswordField () {
     const passwordStyles = {
-      height: this.state.isEmailValidated ? '40px' : '0',
+      height: this.state.isEmailValidated ? 'auto' : '0',
       transition: 'height 300ms',
       transitionDelay: 'height 1s',
       overflow: 'hidden',
@@ -88,8 +83,9 @@ class LoginForm extends Component {
         type='password'
         label="password"
         isLabelHidden
-        component={FieldText}
+        component={FieldInput}
         shouldFitContainer
+        autoComplete="off"
         placeholder='Enter password'
         style={passwordStyles}
         validate={passwordValidation}
@@ -99,9 +95,8 @@ class LoginForm extends Component {
 
   renderInnerButton () {
     if (this.props.isLoggingIn) {
-      return <Spinner invertColor size='small' style={{ paddingTop: '8px' }} />
+      return <Spinner xs show style={{ marginBottom: '2px' }} color="#FFF" />
     }
-
     return this.state.isEmailValidated ? 'Log in' : 'Continue'
   }
 
@@ -109,15 +104,14 @@ class LoginForm extends Component {
     return (
       <div styleName='login-container'>
         <Button
-          style={{ textAlign: 'center', margin: 0 }}
+          style={{ textAlign: 'center', margin: 0, fontWeight: '600', position: 'relative' }}
           shouldFitContainer
-          iconBefore={
-            <i
-              className='fa fa-google'
-              style={{ display: 'block', fontSize: '14px' }}
-            />
-          }
+          secondary
         >
+          <i
+            className='fa fa-google'
+            style={{ fontSize: '14px', position: 'absolute', top: '11px', left: '15px' }}
+          />
           Log in with Google
         </Button>
 
@@ -139,8 +133,9 @@ class LoginForm extends Component {
             type='text'
             label="email"
             isLabelHidden
-            component={FieldText}
+            component={FieldInput}
             shouldFitContainer
+            autoComplete="off"
             placeholder='Enter email'
             validate={[presence, email]}
           />
@@ -148,13 +143,15 @@ class LoginForm extends Component {
           {this.renderPasswordField()}
 
           <Checkbox
-            label='Remember me'
-            name='rememberme'
             value='rememberMe'
             onChange={this.toggleRememberMe}
-          />
+            checked={this.state.rememberMe}
+            style={{ margin: '15px 0' }}
+          >
+            Remember me
+          </Checkbox>
 
-          <Button shouldFitContainer appearance='primary' type="submit">
+          <Button shouldFitContainer type="submit">
             {this.renderInnerButton()}
           </Button>
         </form>

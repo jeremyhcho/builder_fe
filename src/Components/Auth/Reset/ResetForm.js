@@ -7,10 +7,7 @@ import { Field, reduxForm } from 'redux-form'
 import './Reset.scss'
 
 // Component
-import {
-  FieldText,
-  Button
-} from 'Components/Atlaskit'
+import { FieldInput, Button } from 'Components/Common'
 
 // Validators
 import { presence, minChar, equality } from 'Helpers/Validators'
@@ -39,7 +36,7 @@ class ResetForm extends React.Component {
             name="Password"
             label="Password"
             type="password"
-            component={FieldText}
+            component={FieldInput}
             isLabelHidden
             shouldFitContainer
             placeholder="Enter new password"
@@ -51,7 +48,7 @@ class ResetForm extends React.Component {
             name="Password confirmation"
             label="Password Confirmation"
             type="password"
-            component={FieldText}
+            component={FieldInput}
             isLabelHidden
             shouldFitContainer
             placeholder="Retype password"
@@ -59,7 +56,7 @@ class ResetForm extends React.Component {
             validate={[presence, equalityPassword]}
           />
 
-          <Button shouldFitContainer appearance='primary' type="submit">
+          <Button shouldFitContainer type="submit" style={{ margin: '15px 0 0' }}>
             Update password
           </Button>
         </form>

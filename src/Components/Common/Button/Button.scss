@@ -24,11 +24,11 @@
   }
 
   &.secondary {
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--lightest-gray);
     color: var(--font-color);
-    background-color: var(--light-gray);
+    background-color: var(--lightest-gray);
     &:not(.disabled):hover {
-      background-color: darken(#E5EDF0, 2.5%);
+      background-color: darken(#F4F5F7, 2.5%);
     }
   }
 
