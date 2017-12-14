@@ -30,9 +30,7 @@ class Matches extends React.Component {
     return (
       <Grid fluid>
         <Row middle="xs" style={{ paddingTop: '10px' }}>
-          <Col xs={4}>
-          </Col>
-          <Col xs={8}>
+          <Col>
             <DateInput getDate={this.getDates} />
           </Col>
         </Row>
