@@ -24,8 +24,12 @@ const Input = ({
     noLabel: isLabelHidden
   })
 
+  const wrapperStyle = classNames('wrapper', {
+    shouldFitContainer
+  })
+
   return (
-    <div styleName="wrapper">
+    <div styleName={wrapperStyle}>
       {
         !isLabelHidden &&
         <p style={{ margin: '0 0 5px 0' }}>

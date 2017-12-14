@@ -5,6 +5,7 @@ import moment from 'moment'
 // Components
 import { CalendarStateless } from '@atlaskit/calendar'
 import CalendarIcon from '@atlaskit/icon/glyph/calendar'
+import { Input } from 'Components/Common'
 
 class DateInput extends React.Component {
   state = {
@@ -31,6 +32,9 @@ class DateInput extends React.Component {
   }
 
   selectDate = ({ day, month, year }) => {
+    console.log('month', month)
+    console.log('day', day)
+    console.log('year', year)
     const selectedDate = `${month}-${day}-${year}`
     this.setState({
       selected: this.convertDate(selectedDate),
@@ -40,6 +44,7 @@ class DateInput extends React.Component {
   }
 
   changeInfo = ({ day, month, year }) => {
+    console.log('on CHANGE?')
     this.setState({ day, month, year })
   }
 
@@ -69,8 +74,14 @@ class DateInput extends React.Component {
           disabled
         /> */}
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <p>{this.state.selected}</p>
-          <button>
+          {/* <p>{this.state.selected}</p> */}
+          <Input
+            label="date"
+            value={this.state.selected}
+            type="date"
+            onChange={(e) => this.setState({ selected: e.target.value })}
+          />
+          <button style={{ border: 'none', outline: 'none' }}>
             <CalendarIcon label="calendar" onClick={this.openCalendar} />
           </button>
         </div>

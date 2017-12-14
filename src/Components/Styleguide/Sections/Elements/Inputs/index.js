@@ -35,7 +35,7 @@ class Inputs extends React.Component {
         name: 'invalid',
         label: 'Invalid',
         value: invalid,
-        error: true
+        error: 'Error message'
       },
       {
         name: 'disabled',
