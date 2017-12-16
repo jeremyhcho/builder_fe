@@ -1,0 +1,10 @@
+.date-input {
+  position: relative;
+
+  .calendar {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 3;
+  }
+}

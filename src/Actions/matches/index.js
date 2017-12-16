@@ -3,9 +3,11 @@ import {
   RECEIVE_NBA_MATCHES
 } from 'Constants'
 
-export const fetchNBAMatches = (params) => ({
+export const fetchNBAMatches = ({ now, from, to }) => ({
   type: FETCH_NBA_MATCHES,
-  params
+  now,
+  from,
+  to
 })
 
 export const receiveNBAMatches = ({ data }) => ({

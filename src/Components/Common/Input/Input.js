@@ -12,16 +12,21 @@ const Input = ({
   required,
   isLabelHidden,
   shouldFitContainer,
+  type,
+  icon,
+  inputRef,
   ...props
 }) => {
   const inputStyle = classNames('input', {
     shouldFitContainer,
     error,
-    disabled
+    disabled,
+    date: type === 'date',
   })
 
   const iconStyle = classNames('icon', {
-    noLabel: isLabelHidden
+    noLabel: isLabelHidden,
+    error
   })
 
   const wrapperStyle = classNames('wrapper', {
@@ -46,9 +51,18 @@ const Input = ({
           />
         </span>
       }
+      {
+        icon && !error &&
+        <span styleName={iconStyle}>
+          {icon}
+        </span>
+      }
       <input
         styleName={inputStyle}
         disabled={disabled}
+        type={type}
+        required={required}
+        ref={inputRef}
         {...props}
       />
     </div>
@@ -62,6 +76,9 @@ Input.defaultProps = {
   shouldFitContainer: false,
   isLabelHidden: false,
   required: false,
+  type: 'text',
+  icon: null,
+  inputRef: () => null
 }
 
 Input.propTypes = {
@@ -71,6 +88,9 @@ Input.propTypes = {
   isLabelHidden: PropTypes.bool,
   disabled: PropTypes.bool,
   required: PropTypes.bool,
+  type: PropTypes.string,
+  icon: PropTypes.element,
+  inputRef: PropTypes.func
 }
 
 export default Input

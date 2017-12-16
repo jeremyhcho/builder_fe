@@ -57,7 +57,7 @@ class Slider extends React.Component {
   handleChange = (e) => {
     const { min, max } = this.props
     // changes fill event and inputWidth when typed in input
-    if (e.target.value < min || !e.target.value.length) {
+    if (e.targt.value < min || !e.target.value.length) {
       this.setState({
         value: min,
         inputValue: min,

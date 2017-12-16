@@ -10,7 +10,10 @@
     position: absolute;
     top: 35px;
     right: 10px;
-    color: var(--red);
+    color: var(--font-color);
+    &.error {
+      color: var(--red);
+    }
     &.noLabel {
       top: 13px;
     }
@@ -38,6 +41,20 @@
     &.shouldFitContainer {
       display: block;
       width: 100%;
+    }
+
+    &.date {
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      &::-webkit-calendar-picker-indicator {
+        display: none
+      }
+      &::-webkit-input-placeholder {
+        visibility: hidden !important;
+      }
     }
 
     &:focus {

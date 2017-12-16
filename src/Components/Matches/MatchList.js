@@ -1,22 +1,65 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import groupBy from 'lodash/groupBy'
 
 // CSS
 import './Matches.scss'
 
 // Components
-import Match from './Match'
+import DayWrapper from './DayWrapper'
+// import Match from './Match'
 
-const MatchList = ({ matches }) => (
-  <Row styleName="matches-container">
-    {matches.map(match => (
-      <Col xs={12} key={match.id}>
-        <Match key={match.id} match={match} />
-      </Col>
-    ))}
-  </Row>
-)
+class MatchList extends React.Component {
+  componentDidMount() {
+    document.body.style.overflow = 'hidden'
+    setTimeout(this.autoScroll, 1000)
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflow = 'auto'
+  }
+
+  autoScroll = () => {
+    this.scroller.scrollTop += 1856
+  }
+
+  handleScroll = () => {
+    if (this.scroller && this.scroller.scrollTop) {
+      const domRect = this.scroller.getBoundingClientRect()
+      const maxScrollHeight = this.scroller.scrollHeight - domRect.height
+      console.log(maxScrollHeight)
+    }
+  }
+
+  groupedMatches() {
+    return groupBy(this.props.matches, (match) => match.date.tz('America/New_York').format('dddd, MMMM Do'))
+  }
+
+  render () {
+    const groupedMatches = this.groupedMatches()
+    console.log(groupedMatches)
+    return (
+      <div
+        styleName="matches-container"
+        onScroll={this.handleScroll}
+        ref={(scroller) => {
+          this.scroller = scroller
+        }}
+      >
+        <Row>
+          <Col xs={12}>
+            {
+              Object.keys(groupedMatches).map(date => (
+                <DayWrapper matches={groupedMatches[date]} key={date} date={date} />
+              ))
+            }
+          </Col>
+        </Row>
+      </div>
+    )
+  }
+}
 
 MatchList.propTypes = {
   matches: PropTypes.array.isRequired

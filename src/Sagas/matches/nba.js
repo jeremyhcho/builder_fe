@@ -13,9 +13,11 @@ import {
 // Actions
 import { receiveNBAMatches } from 'Actions'
 
-function* getMatches ({ params }) {
+function* getMatches (params) {
   try {
-    const data = yield call(getNBAData, params)
+    const from = params.from.toDate().toISOString()
+    const to = params.to.toDate().toISOString()
+    const data = yield call(getNBAData, { from, to })
     yield put(receiveNBAMatches(data))
   } catch ({ response }) {
     // HANDLE ERROR HANDLE ERROR HANDLE ERROR HANDLE ERROR @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

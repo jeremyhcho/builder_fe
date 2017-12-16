@@ -95,7 +95,7 @@ class LoginForm extends Component {
 
   renderInnerButton () {
     if (this.props.isLoggingIn) {
-      return <Spinner xs show style={{ marginBottom: '2px' }} color="#FFF" />
+      return <Spinner xs show style={{ marginBottom: '3px' }} color="#FFF" />
     }
     return this.state.isEmailValidated ? 'Log in' : 'Continue'
   }

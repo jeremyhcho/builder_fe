@@ -1,23 +1,23 @@
 .sidenav {
-  height: 100%;
+  height: 100vh;
   width: 60px;
-  position: fixed;
+  position: absolute;
   border: 0 1px solid #eee;
-  z-index: 1;
-  background-color: var(--lightest-gray);
+  z-index: 999;
+  background-color: var(--blue);
   color: var(--font-color);
   overflow-x: hidden; /* disable horizontal scrolling */
-  padding: 40px 4px;
+  padding: 40px 0px;
   text-align: center;
   transition: all 300ms ease;
 
   .nav-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px 0;
-    border-radius: var(--border-radius);
-    height: 56px;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    margin: 5px auto;
+    padding: 12px 10px;
+    background-color: #FFF;
 
     &.selected {
       background-color: rgba(9, 30, 66, 0.04);
