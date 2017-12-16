@@ -13,36 +13,34 @@ import DayWrapper from './DayWrapper'
 class MatchList extends React.Component {
   componentDidMount() {
     document.body.style.overflow = 'hidden'
-    setTimeout(this.autoScroll, 1000)
+    // setTimeout(this.autoScroll, 1000)
   }
 
   componentWillUnmount() {
     document.body.style.overflow = 'auto'
   }
 
-  autoScroll = () => {
-    this.scroller.scrollTop += 1856
-  }
+  // autoScroll = () => {
+  //   this.scroller.scrollTop += 1856
+  // }
 
-  handleScroll = () => {
-    if (this.scroller && this.scroller.scrollTop) {
-      const domRect = this.scroller.getBoundingClientRect()
-      const maxScrollHeight = this.scroller.scrollHeight - domRect.height
-      console.log(maxScrollHeight)
-    }
-  }
+  // handleScroll = () => {
+  //   if (this.scroller && this.scroller.scrollTop) {
+  //     const domRect = this.scroller.getBoundingClientRect()
+  //     const maxScrollHeight = this.scroller.scrollHeight - domRect.height
+  //   }
+  // }
 
   groupedMatches() {
-    return groupBy(this.props.matches, (match) => match.date.tz('America/New_York').format('dddd, MMMM Do'))
+    return groupBy(this.props.matches, (match) => match.date.tz('America/New_York').format('D MMMM'))
   }
 
   render () {
     const groupedMatches = this.groupedMatches()
-    console.log(groupedMatches)
     return (
       <div
         styleName="matches-container"
-        onScroll={this.handleScroll}
+        // onScroll={this.handleScroll}
         ref={(scroller) => {
           this.scroller = scroller
         }}

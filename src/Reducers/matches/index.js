@@ -9,7 +9,7 @@ const matches = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_NBA_MATCHES:
       return action.data.map(match => ({
-        ...match, date: moment(match.date)
+        ...match, date: moment(new Date(match.date))
       }))
 
     default:

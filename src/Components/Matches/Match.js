@@ -1,71 +1,54 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment-timezone'
+import 'moment-timezone'
 import { Row, Col } from 'react-styled-flexboxgrid'
+
+// Components
+import { IconDropdown, MenuItem } from 'Components/Common'
 
 // CSS
 import './Matches.scss'
-import placeHolderLogo from './lal.png'
-
-const styleLogo = {
-  width: '70px',
-  height: '70px'
-}
 
 const Match = ({ match }) => {
-  const utcDate = new Date(match.date).toISOString()
-  // const date = moment(utcDate).format('dddd, MMMM Do YYYY')
-  const time = moment(utcDate).tz('America/New_York').format('ha z')
-  const awayTeam = match.away_team.name
+  // const time = match.date.tz('America/New_York').format('ha z')
+  const awayTeam = match.away_team.name.toUpperCase()
   const awayCity = match.away_team.city
 
-  const homeTeam = match.home_team.name
+  const homeTeam = match.home_team.name.toUpperCase()
   const homeCity = match.home_team.city
   return (
-    <Row styleName="match-container" middle="xs">
-      <Col xs={3} xsOffset={2}>
-        <Row middle="xs">
-          <Col xs={6}>
-            <div style={{ textAlign: 'right' }}>
-              <p className="small">{awayCity}</p>
-              <h1 className="semibold">{awayTeam.toUpperCase()}</h1>
-              <p className="small">4-1</p>
-            </div>
-          </Col>
-
-          <Col xs={4}>
-            <img src={placeHolderLogo} style={styleLogo} />
-          </Col>
-
-          <Col xs={2}>
-            <p className="semibold">{match.id}</p>
-          </Col>
-        </Row>
+    <Row styleName="match-container" middle='xs'>
+      <Col xs={2} style={{ textAlign: 'right' }}>
+        <p className="small">{awayCity}</p>
+        <h1 className="bold">{awayTeam}</h1>
+        <p>4-1</p>
       </Col>
-
-      <Col xs={2} styleName="col-direction">
+      <Col xs={1} xsOffset={0.5} styleName="col-direction">
         <h1 className="semibold">@</h1>
-        <p>{time}</p>
+        {/* <p className="small">{time}</p> */}
       </Col>
-
-      <Col xs={3}>
-        <Row middle="xs" reverse>
-          <Col xs={6}>
-            <div>
-              <p className="small">{homeCity}</p>
-              <h1 className="semibold">{homeTeam.toUpperCase()}</h1>
-              <p className="small">1-4</p>
-            </div>
-          </Col>
-
-          <Col xs={4}>
-            <img src={placeHolderLogo} style={styleLogo} />
-          </Col>
-
-          <Col xs={2}>
-            <p className="semibold">{match.id}</p>
-          </Col>
-        </Row>
+      <Col xs={2} xsOffset={0.5}>
+        <p className="small">{homeCity}</p>
+        <h1 className="bold">{homeTeam}</h1>
+        <p>1-3</p>
+      </Col>
+      <Col xs={4} xsOffset={1}>
+        <p className="small">Spread</p>
+        <p className="semibold">+9.5 Lakers(-110)</p>
+        <p className="semibold">-8.0 Lakers(-95)</p>
+      </Col>
+      <Col xs={1}>
+        <IconDropdown
+          horizontalReverse
+          icon={<i className="fa fa-ellipsis-v" aria-hidden="true" />}
+        >
+          <MenuItem onClick={() => console.log('Clicked')}>
+            <i className="fa fa-eye" aria-hidden="true" /> View
+          </MenuItem>
+          <MenuItem onClick={() => console.log('Clicked')}>
+            <i className="fa fa-plus" aria-hidden="true" /> Add to list
+          </MenuItem>
+        </IconDropdown>
       </Col>
     </Row>
   )
