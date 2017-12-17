@@ -4,7 +4,7 @@
   position: absolute;
   border: 0 1px solid #eee;
   z-index: 999;
-  background-color: var(--blue);
+  background-color: var(--dark-blue);
   color: var(--font-color);
   overflow-x: hidden; /* disable horizontal scrolling */
   padding: 40px 0px;
@@ -20,11 +20,13 @@
     background-color: #FFF;
 
     &.selected {
-      background-color: rgba(9, 30, 66, 0.04);
+      // background-color: rgba(9, 30, 66, 0.04);
+      background-color: var(--dark-blue);
     }
 
     &:hover {
-      background-color: rgba(9, 30, 66, 0.04);
+      background-color: var(--lightest-gray);
+      // background-color: rgba(9, 30, 66, 0.04);
     }
   }
 }

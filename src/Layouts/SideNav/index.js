@@ -5,7 +5,8 @@ import classNames from 'classnames'
 
 // Components
 import Matches from 'Assets/Icons/nav/basketball-13.svg'
-import MatchesSelected from 'Assets/Icons/nav/basketball-selected.svg'
+// import MatchesSelected from 'Assets/Icons/nav/basketball-selected.svg'
+import MatchesSelected from 'Assets/Icons/nav/basketball-13-white.svg'
 
 // CSS
 import './SideNav.scss'

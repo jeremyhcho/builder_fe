@@ -1,9 +1,21 @@
 .match-section {
-  margin: 0 60px;
+  padding: 0 65px;
+
+  // Pagination Icons
+  .pagination-icon {
+    color: var(--blue);
+    margin: 8px auto;
+    line-height: 10px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    text-align: center;
+    &:hover {
+    }
+  }
 
   .matches-container {
     overflow-y: scroll;
-    height: 80vh;
+    height: 75vh;
     width: 100vw;
 
     .day-wrapper {
@@ -21,15 +33,15 @@
       .match-container {
         border: 1px solid var(--light-gray);
         border-radius: 2px;
-        padding: 5px 30px;
-        transition: all 200ms ease;
+        padding: 5px 20px;
+        transition: all 300ms ease;
         transform: perspective(1px) translateZ(0);
         background-color: #FFF;
-        height: 140px;
-        box-shadow: 0 6px 8px -6px var(--gray);
+        height: 120px;
 
         &:hover {
-          // something
+          border-left: 5px solid var(--blue);
+          box-shadow: 0 6px 8px -6px var(--gray);
         }
       }
 
@@ -41,5 +53,18 @@
         flex-direction: column;
       }
     }
+  }
+}
+
+// Date Input styles
+.date-input {
+  position: relative;
+  margin-bottom: 10px;
+
+  .calendar {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 3;
   }
 }

@@ -19,7 +19,7 @@ const Match = ({ match }) => {
   return (
     <Row styleName="match-container" middle='xs'>
       <Col xs={2} style={{ textAlign: 'right' }}>
-        <p className="small">{awayCity}</p>
+        <p className="small label">{awayCity}</p>
         <h1 className="bold">{awayTeam}</h1>
         <p>4-1</p>
       </Col>
@@ -28,12 +28,12 @@ const Match = ({ match }) => {
         {/* <p className="small">{time}</p> */}
       </Col>
       <Col xs={2} xsOffset={0.5}>
-        <p className="small">{homeCity}</p>
+        <p className="small label">{homeCity}</p>
         <h1 className="bold">{homeTeam}</h1>
         <p>1-3</p>
       </Col>
-      <Col xs={4} xsOffset={1}>
-        <p className="small">Spread</p>
+      <Col xs={3} xsOffset={2}>
+        <p className="small label">Spread</p>
         <p className="semibold">+9.5 Lakers(-110)</p>
         <p className="semibold">-8.0 Lakers(-95)</p>
       </Col>

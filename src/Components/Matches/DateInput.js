@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 import { connect } from 'react-redux'
 
 // Components
 import { CalendarStateless } from '@atlaskit/calendar'
-// import CalendarIcon from '@atlaskit/icon/glyph/calendar'
 import { Input } from 'Components/Common'
 
 // CSS
-import './DateInput.scss'
+import './Matches.scss'
 
 // Actions
 import { fetchNBAMatches } from 'Actions'
@@ -24,15 +22,7 @@ class DateInput extends React.Component {
 
   componentWillMount() {
     // sets input date to current date
-    const currentDate = moment().format('YYYY-MM-DD')
-    this.props.fetchNBAMatches(this.getDates(currentDate))
-  }
-
-  getDates = (date) => {
-    const now = date
-    const from = moment(`${date} 21:00:00`).subtract(5, 'day')
-    const to = moment(`${date} 20:59:59`).add(4, 'day')
-    return { now, from, to }
+    this.props.fetchNBAMatches(this.props.dates.now._i)
   }
 
   focus = () => {
@@ -52,8 +42,7 @@ class DateInput extends React.Component {
 
   handleSelect = (e) => {
     // sets date when selected from calendar
-    console.log(e.iso)
-    this.props.fetchNBAMatches(this.getDates(e.iso))
+    this.props.fetchNBAMatches(e.iso)
     this.closeCalendar()
   }
 
@@ -63,15 +52,9 @@ class DateInput extends React.Component {
       return
     }
     if (e.target.value) {
-      this.props.fetchNBAMatches(this.getDates(e.target.value))
+      this.props.fetchNBAMatches(e.target.value)
     }
     this.closeCalendar()
-  }
-
-  handleDateInput = (e) => {
-    if (e.target.value) {
-      this.props.fetchNBAMatches(this.getDates(e.target.value))
-    }
   }
 
   closeCalendar = () => {
@@ -87,13 +70,13 @@ class DateInput extends React.Component {
       <div styleName="date-input">
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Input
-            value={dates.now}
+            value={dates.now._i}
             type="date"
             style={{ fontWeight: '600', backgroundColor: '#FFF', letterSpacing: '1.5px' }}
-            // onChange={this.handleDateInput}
             onBlur={this.closeDateInput}
             inputRef={ref => this.dateInput = ref}
             required
+            readOnly
             isLabelHidden
             onClick={this.openDateInput}
             icon={<i className="fa fa-calendar" aria-hidden="true" onClick={this.openDateInput} />}
@@ -103,7 +86,7 @@ class DateInput extends React.Component {
           ? <div styleName="calendar">
             <CalendarStateless
               className="calendar"
-              selected={dates.now}
+              selected={dates.now._i}
               day={day}
               month={month}
               year={year}

@@ -1,10 +1,12 @@
+import moment from 'moment'
+
 // Constants
 import {
   FETCH_NBA_MATCHES
 } from 'Constants'
 
 const initialState = {
-  now: '',
+  now: moment(moment().format('YYYY-MM-DD')),
   from: {},
   to: {}
 }

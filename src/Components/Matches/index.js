@@ -15,9 +15,7 @@ const Matches = ({ matches }) => (
     <Row>
       <DateInput />
     </Row>
-    <Row>
-      <MatchList matches={matches} />
-    </Row>
+    <MatchList matches={matches} />
   </Grid>
 )
 
