@@ -21,18 +21,28 @@ import Matches from 'Components/Matches'
 //   loading: Loader
 // })
 
+const layoutStyle = {
+  height: '100%',
+  width: '100%',
+  backgroundColor: 'var(--lightest-gray)',
+  margin: '0px'
+}
+
 const MainLayout = () => (
-  <main>
+  <main style={{ display: 'flex' }}>
     <SideNav />
-    <Header />
-    <Row style={{ marginLeft: '60px' }}>
-      <Col xs={12} style={{ marginTop: '20px' }}>
-        <Switch>
-          <Route exact path='/' component={Dashboard} />
-          <Route exact path='/matches' component={Matches} />
-        </Switch>
-      </Col>
-    </Row>
+
+    <div style={{ width: '100%', height: '100vh', minWidth: '964px' }}>
+      <Header />
+      <Row style={layoutStyle}>
+        <Col xs={12} style={{ marginTop: '20px' }}>
+          <Switch>
+            <Route exact path='/' component={Dashboard} />
+            <Route exact path='/matches' component={Matches} />
+          </Switch>
+        </Col>
+      </Row>
+    </div>
   </main>
 )
 

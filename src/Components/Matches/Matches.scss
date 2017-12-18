@@ -1,25 +1,33 @@
 .match-section {
   padding: 0 65px;
+  background-color: var(--lightest-gray);
 
   // Pagination Icons
-  .pagination-icon {
+  .pagination {
     color: var(--blue);
-    margin: 8px auto;
     line-height: 10px;
     cursor: pointer;
     transition: all 200ms ease;
     text-align: center;
+
+    &.up {
+      margin: 0 auto 12px;
+    }
+    &.down {
+      margin: 12px auto 0;
+    }
     &:hover {
     }
   }
 
   .matches-container {
-    overflow-y: scroll;
-    height: 75vh;
-    width: 100vw;
+    width: 100%;
 
     .day-wrapper {
       margin-bottom: 40px;
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .day-card {
         padding: 40px 0px;
@@ -59,7 +67,7 @@
 // Date Input styles
 .date-input {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 
   .calendar {
     position: absolute;

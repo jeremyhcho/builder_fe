@@ -1,11 +1,12 @@
 .header {
-  width: 100vw;
+  width: 100%;
   height: 60px;
   z-index: 1;
-  margin-left: 60px;
+  background-color: var(--lightest-gray);
 
   .header-content {
     position: relative;
+
     .title {
       position: absolute;
       top: 30px;
@@ -14,7 +15,7 @@
     .header-items {
       position: absolute;
       top: 30px;
-      right: 120px;
+      right: 40px;
     }
   }
 }

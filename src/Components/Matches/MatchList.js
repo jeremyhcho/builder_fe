@@ -14,28 +14,27 @@ import DayWrapper from './DayWrapper'
 import { fetchNBAMatches } from 'Actions'
 
 class MatchList extends React.Component {
+  componentWillMount() {
+    document.body.style.overflow = 'hidden'
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflow = 'auto'
+  }
+
   handleNext = () => {
-    const domRect = this.scroller.getBoundingClientRect()
-    // max scroll height of matches-container
-    const maxScrollHeight = this.scroller.scrollHeight - domRect.height
-    if (this.scroller.scrollTop !== maxScrollHeight) {
-      this.scroller.scrollTop = maxScrollHeight
-    } else {
-      // change to next date
-      const nextDate = this.props.now.add(1, 'days').format('YYYY-MM-DD')
-      this.props.fetchNBAMatches(nextDate)
-      this.scroller.scrollTop = 0
-    }
+    // const domRect = this.scroller.getBoundingClientRect()
+    // // max scroll height of matches-container
+    // const maxScrollHeight = this.scroller.scrollHeight - domRect.height
+    const nextDate = this.props.now.add(3, 'days').format('YYYY-MM-DD')
+    this.props.fetchNBAMatches(nextDate)
+    this.scroller.scrollTop = 0
   }
 
   handlePrevious = () => {
-    if (this.scroller.scrollTop !== 0) {
-      this.scroller.scrollTop = 0
-    } else {
-      // change to previous date
-      const previousDate = this.props.now.subtract(1, 'days').format('YYYY-MM-DD')
-      this.props.fetchNBAMatches(previousDate)
-    }
+    // change to previous date
+    const previousDate = this.props.now.subtract(1, 'days').format('YYYY-MM-DD')
+    this.props.fetchNBAMatches(previousDate)
   }
 
   groupedMatches() {
@@ -46,18 +45,18 @@ class MatchList extends React.Component {
     const groupedMatches = this.groupedMatches()
     return (
       <Row>
-        <div styleName="pagination-icon" onClick={this.handlePrevious}>
-          <i className="fa fa-angle-up" aria-hidden="true" style={{ fontSize: '16px' }} />
-          <p>Previous</p>
-        </div>
         <div
+          style={{ overflowY: 'scroll', height: '75vh' }}
           styleName="matches-container"
-          onScroll={this.handleScroll}
           ref={(scroller) => {
             this.scroller = scroller
           }}
         >
           <Row>
+            <div styleName='pagination up' onClick={this.handlePrevious}>
+              <i className="fa fa-angle-up" aria-hidden="true" style={{ fontSize: '16px' }} />
+              <p>Previous</p>
+            </div>
             <Col xs={12}>
               {
                 Object.keys(groupedMatches).map(date => (
@@ -65,11 +64,11 @@ class MatchList extends React.Component {
                 ))
               }
             </Col>
+            <div styleName='pagination down' onClick={this.handleNext}>
+              <p>Next</p>
+              <i className="fa fa-angle-down" aria-hidden="true" style={{ fontSize: '16px' }} />
+            </div>
           </Row>
-        </div>
-        <div styleName="pagination-icon" onClick={this.handleNext}>
-          <i className="fa fa-angle-down" aria-hidden="true" style={{ fontSize: '16px' }} />
-          <p>Next</p>
         </div>
       </Row>
     )
