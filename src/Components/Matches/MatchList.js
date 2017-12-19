@@ -42,9 +42,10 @@ class MatchList extends React.Component {
 
   render () {
     const groupedMatches = this.groupedMatches()
+
     if (this.props.fetchingMatches) {
       return (
-        <Row center='xs' bottom='xs'>
+        <Row center='xs' style={{ marginTop: 'calc(100vh * .25)' }}>
           <Col xs={12}>
             <Spinner lg show />
           </Col>
