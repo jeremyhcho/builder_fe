@@ -3,15 +3,17 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 import groupBy from 'lodash/groupBy'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 // CSS
 import './Matches.scss'
 
 // Components
 import DayWrapper from './DayWrapper'
+import { Spinner } from 'Components/Common'
 
 // Actions
-import { fetchNBAMatches } from 'Actions'
+import { paginateNBAMatches } from 'Actions'
 
 class MatchList extends React.Component {
   componentWillMount() {
@@ -23,18 +25,15 @@ class MatchList extends React.Component {
   }
 
   handleNext = () => {
-    // const domRect = this.scroller.getBoundingClientRect()
-    // // max scroll height of matches-container
-    // const maxScrollHeight = this.scroller.scrollHeight - domRect.height
-    const nextDate = this.props.now.add(3, 'days').format('YYYY-MM-DD')
-    this.props.fetchNBAMatches(nextDate)
-    this.scroller.scrollTop = 0
+    const { matches } = this.props
+    const nextDate = moment(matches[matches.length - 1].date._i).startOf('day').format('YYYY-MM-DD')
+    this.props.paginateNBAMatches(nextDate, 'next')
   }
 
   handlePrevious = () => {
-    // change to previous date
-    const previousDate = this.props.now.subtract(1, 'days').format('YYYY-MM-DD')
-    this.props.fetchNBAMatches(previousDate)
+    const { matches } = this.props
+    const previousDate = moment(matches[0].date._i).startOf('day').format('YYYY-MM-DD')
+    this.props.paginateNBAMatches(previousDate, 'previous')
   }
 
   groupedMatches() {
@@ -43,6 +42,15 @@ class MatchList extends React.Component {
 
   render () {
     const groupedMatches = this.groupedMatches()
+    if (this.props.fetchingMatches) {
+      return (
+        <Row center='xs' bottom='xs'>
+          <Col xs={12}>
+            <Spinner lg show />
+          </Col>
+        </Row>
+      )
+    }
     return (
       <Row>
         <div
@@ -54,7 +62,7 @@ class MatchList extends React.Component {
         >
           <Row>
             <div styleName='pagination up' onClick={this.handlePrevious}>
-              <i className="fa fa-angle-up" aria-hidden="true" style={{ fontSize: '16px' }} />
+              <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
               <p>Previous</p>
             </div>
             <Col xs={12}>
@@ -66,7 +74,7 @@ class MatchList extends React.Component {
             </Col>
             <div styleName='pagination down' onClick={this.handleNext}>
               <p>Next</p>
-              <i className="fa fa-angle-down" aria-hidden="true" style={{ fontSize: '16px' }} />
+              <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
             </div>
           </Row>
         </div>
@@ -77,16 +85,16 @@ class MatchList extends React.Component {
 
 MatchList.propTypes = {
   matches: PropTypes.array.isRequired,
-  now: PropTypes.object.isRequired,
-  fetchNBAMatches: PropTypes.func.isRequired
+  paginateNBAMatches: PropTypes.func.isRequired,
+  fetchingMatches: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = ({ dates }) => ({
-  now: dates.now
+const mapStateToProps = ({ matches }) => ({
+  fetchingMatches: matches.fetchingMatches
 })
 
 const mapDispatchToProps = {
-  fetchNBAMatches
+  paginateNBAMatches
 }
 
 export default connect(

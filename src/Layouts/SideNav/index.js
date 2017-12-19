@@ -5,7 +5,6 @@ import classNames from 'classnames'
 
 // Components
 import Matches from 'Assets/Icons/nav/basketball-13.svg'
-// import MatchesSelected from 'Assets/Icons/nav/basketball-selected.svg'
 import MatchesSelected from 'Assets/Icons/nav/basketball-13-white.svg'
 
 // CSS
@@ -39,7 +38,7 @@ class SideNav extends React.Component {
     return (
       <div styleName="sidenav">
         {navItems.map(({ icon: Icon, selectedIcon: SelectedIcon, route, key }) => {
-          const selected = key === this.state.selectedItem
+          const selected = route === this.props.history.location.pathname
           const navItemStyle = classNames('nav-item', {
             selected
           })

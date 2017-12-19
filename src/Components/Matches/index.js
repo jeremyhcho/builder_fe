@@ -28,7 +28,7 @@ Matches.propTypes = {
 }
 
 const mapStateToProps = ({ matches }) => ({
-  matches
+  matches: matches.matches
 })
 
 const mapDispatchToProps = {

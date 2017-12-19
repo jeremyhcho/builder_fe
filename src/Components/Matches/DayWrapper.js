@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Component
-import Match from './Match'
+import MatchCard from './MatchCard'
 
 // CSS
 import './Matches.scss'
@@ -26,7 +26,7 @@ const DayWrapper = ({ matches, date }) => {
             return (
               <Row key={match.id}>
                 <Col xs={12} key={match.id}>
-                  <Match key={match.id} match={match} />
+                  <MatchCard key={match.id} game={match} />
                 </Col>
               </Row>
             )

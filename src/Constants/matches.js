@@ -1,2 +1,4 @@
 export const FETCH_NBA_MATCHES = 'nba/matches/FETCH_MATCHES'
-export const RECEIVE_NBA_MATCHES = 'nba/matches/RECEIVE_MATCHES'
+export const PAGINATE_NBA_MATCHES = 'nba/matches/PAGINATE_NBA_MATCHES'
+export const RECEIVE_NBA_MATCHES = 'nba/matches/RECEIVE_NBA_MATCHES'
+export const RECEIVE_PAGINATED_NBA_MATCHES = 'nba/matches/RECEIVE_PAGINATED_NBA_MATCHES'

@@ -7,7 +7,7 @@ import { CalendarStateless } from '@atlaskit/calendar'
 import { Input } from 'Components/Common'
 
 // CSS
-import './Matches.scss'
+import './DateInput.scss'
 
 // Actions
 import { fetchNBAMatches } from 'Actions'
