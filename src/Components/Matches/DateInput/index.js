@@ -26,6 +26,13 @@ class DateInput extends React.Component {
     this.props.fetchNBAMatches(this.props.dates.now._i)
   }
 
+  componentDidMount() {
+    // prevent selecting text in Date Input field
+    this.dateInput.addEventListener('select', () => {
+      this.dateInput.selectionStart = this.dateInput.selectionEnd
+    }, false)
+  }
+
   focus = () => {
     if (this.calendar) {
       this.calendar.focus()
@@ -43,8 +50,9 @@ class DateInput extends React.Component {
 
   handleSelect = (e) => {
     // sets date when selected from calendar
-    if (e.iso === this.props.dates.now._i) return
-    this.props.fetchNBAMatches(e.iso)
+    if (e.iso !== this.props.dates.now._i) {
+      this.props.fetchNBAMatches(e.iso)
+    }
     this.closeCalendar()
   }
 
