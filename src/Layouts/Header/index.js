@@ -8,18 +8,18 @@ import { MenuItem, IconDropdown } from 'Components/Common'
 // CSS
 import './Header.scss'
 
-const routes = {
-  '/matches': 'Games',
-  '/matches/:id': 'Game Details'
-}
+// const routes = {
+//   '/matches': 'Games',
+//   '/matches/:id': 'Game Details'
+// }
 
-const Header = ({ location, match }) => {
-  console.log(match)
+const Header = ({ location }) => {
+  console.log(location.pathname)
   return (
     <div styleName='header'>
       <div styleName='header-content'>
         <div styleName='title'>
-          <h1 className="semibold">{routes[location.pathname]}</h1>
+          <h1 className="semibold">Games</h1>
         </div>
         <div styleName='header-items'>
           <IconDropdown
@@ -37,7 +37,6 @@ const Header = ({ location, match }) => {
 
 Header.propTypes = {
   location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
 }
 
 export default withRouter(Header)

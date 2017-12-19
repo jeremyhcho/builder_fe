@@ -16,8 +16,32 @@ import { Spinner } from 'Components/Common'
 import { paginateNBAMatches } from 'Actions'
 
 class MatchList extends React.Component {
+  state = {
+    maxScrollHeight: 0
+  }
+
   componentWillMount() {
     document.body.style.overflow = 'hidden'
+  }
+
+  componentDidUpdate(prevProps) {
+    /* eslint-disable react/no-did-update-set-state */
+    if (!prevProps.matches.length) {
+      this.setState({ maxScrollHeight: this.scroller.scrollHeight })
+      return
+    }
+
+    if (prevProps.matches.length !== this.props.matches.length) {
+      const height = this.scroller.scrollHeight
+      const previousHeight = this.state.maxScrollHeight
+      this.setState({
+        maxScrollHeight: height
+      }, () => {
+        this.scroller.scrollTop = this.state.maxScrollHeight - previousHeight - 50
+      })
+    }
+
+    /* eslint-enable react/no-did-update-set-state */
   }
 
   componentWillUnmount() {
@@ -40,54 +64,70 @@ class MatchList extends React.Component {
     return groupBy(this.props.matches, (match) => match.date.tz('America/New_York').format('D MMMM'))
   }
 
-  render () {
-    const groupedMatches = this.groupedMatches()
-
+  fetchingMatches() {
     if (this.props.fetchingMatches) {
       return (
-        <Row center='xs' style={{ marginTop: 'calc(100vh * .25)' }}>
-          <Col xs={12}>
-            <Spinner lg show />
-          </Col>
-        </Row>
+        <Col xs={12}>
+          <Spinner lg show />
+        </Col>
       )
     }
+    return null
+  }
+
+  render () {
+    const groupedMatches = this.groupedMatches()
+    const { paginatingMatches, fetchingMatches } = this.props
     return (
       <Row>
         <div
-          style={{ overflowY: 'scroll', height: 'calc(100vh - 150px)', paddingBottom: '25px' }}
+          style={{ height: 'calc(100vh - 150px)', paddingBottom: '25px', overflowY: 'scroll' }}
           styleName="matches-container"
-          ref={(scroller) => {
-            this.scroller = scroller
+          ref={ref => {
+            this.scroller = ref
           }}
         >
-          <Row>
-            {
-              this.props.paginatingMatches ?
-                <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (
-                  <div styleName='pagination up' onClick={this.handlePrevious}>
-                    <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
-                    <p>Previous</p>
-                  </div>
-                )
-            }
-            <Col xs={12}>
-              {
-                Object.keys(groupedMatches).map(date => (
-                  <DayWrapper matches={groupedMatches[date]} key={date} date={date} />
-                ))
-              }
-            </Col>
-            {
-              this.props.paginatingMatches ?
-                <Spinner xs show style={{ margin: '12px auto 0' }} /> : (
-                  <div styleName='pagination down' onClick={this.handleNext}>
-                    <p>Next</p>
-                    <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
-                  </div>
-                )
-            }
-          </Row>
+          {
+            fetchingMatches ? (
+              <Row center='xs' style={{ marginTop: 'calc(100vh * .25)' }}>
+                <Col xs={12}>
+                  <Spinner lg show />
+                </Col>
+              </Row>
+            ) : (
+              <Row>
+                {
+                  paginatingMatches ?
+                    <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (
+                      <div styleName='pagination up' onClick={this.handlePrevious}>
+                        <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
+                        <p>Previous</p>
+                      </div>
+                    )
+                }
+                <Col xs={12}>
+                  {
+                    Object.keys(groupedMatches).map((date) => (
+                      <DayWrapper
+                        matches={groupedMatches[date]}
+                        key={date}
+                        date={date}
+                      />
+                    ))
+                  }
+                </Col>
+                {
+                  paginatingMatches ?
+                    <Spinner xs show style={{ margin: '12px auto 0' }} /> : (
+                      <div styleName='pagination down' onClick={this.handleNext}>
+                        <p>Next</p>
+                        <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
+                      </div>
+                    )
+                }
+              </Row>
+            )
+          }
         </div>
       </Row>
     )
@@ -98,7 +138,7 @@ MatchList.propTypes = {
   matches: PropTypes.array.isRequired,
   paginateNBAMatches: PropTypes.func.isRequired,
   fetchingMatches: PropTypes.bool.isRequired,
-  paginatingMatches: PropTypes.bool.isRequired
+  paginatingMatches: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = ({ matches }) => ({
