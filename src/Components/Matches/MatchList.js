@@ -54,17 +54,22 @@ class MatchList extends React.Component {
     return (
       <Row>
         <div
-          style={{ overflowY: 'scroll', height: '75vh' }}
+          style={{ overflowY: 'scroll', height: 'calc(100vh - 150px)', paddingBottom: '25px' }}
           styleName="matches-container"
           ref={(scroller) => {
             this.scroller = scroller
           }}
         >
           <Row>
-            <div styleName='pagination up' onClick={this.handlePrevious}>
-              <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
-              <p>Previous</p>
-            </div>
+            {
+              this.props.paginatingMatches ?
+                <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (
+                  <div styleName='pagination up' onClick={this.handlePrevious}>
+                    <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
+                    <p>Previous</p>
+                  </div>
+                )
+            }
             <Col xs={12}>
               {
                 Object.keys(groupedMatches).map(date => (
@@ -72,10 +77,15 @@ class MatchList extends React.Component {
                 ))
               }
             </Col>
-            <div styleName='pagination down' onClick={this.handleNext}>
-              <p>Next</p>
-              <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
-            </div>
+            {
+              this.props.paginatingMatches ?
+                <Spinner xs show style={{ margin: '12px auto 0' }} /> : (
+                  <div styleName='pagination down' onClick={this.handleNext}>
+                    <p>Next</p>
+                    <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
+                  </div>
+                )
+            }
           </Row>
         </div>
       </Row>
@@ -86,11 +96,13 @@ class MatchList extends React.Component {
 MatchList.propTypes = {
   matches: PropTypes.array.isRequired,
   paginateNBAMatches: PropTypes.func.isRequired,
-  fetchingMatches: PropTypes.bool.isRequired
+  fetchingMatches: PropTypes.bool.isRequired,
+  paginatingMatches: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ matches }) => ({
-  fetchingMatches: matches.fetchingMatches
+  fetchingMatches: matches.fetchingMatches,
+  paginatingMatches: matches.paginatingMatches
 })
 
 const mapDispatchToProps = {

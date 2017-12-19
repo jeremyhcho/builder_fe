@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 // Components
 import { CalendarStateless } from '@atlaskit/calendar'
@@ -42,6 +43,7 @@ class DateInput extends React.Component {
 
   handleSelect = (e) => {
     // sets date when selected from calendar
+    if (e.iso === this.props.dates.now._i) return
     this.props.fetchNBAMatches(e.iso)
     this.closeCalendar()
   }
@@ -50,9 +52,6 @@ class DateInput extends React.Component {
     // sets date onBlur from input
     if (e.relatedTarget && e.relatedTarget.getAttribute('aria-label') === 'calendar') {
       return
-    }
-    if (e.target.value) {
-      this.props.fetchNBAMatches(e.target.value)
     }
     this.closeCalendar()
   }
@@ -70,9 +69,9 @@ class DateInput extends React.Component {
       <div styleName="date-input">
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Input
-            value={dates.now._i}
-            type="date"
-            style={{ fontWeight: '600', backgroundColor: '#FFF', letterSpacing: '1.5px' }}
+            value={moment(dates.now._i, 'YYYY-MM-DD').format('MM/DD/YYYY')}
+            type="text"
+            style={{ fontWeight: '600', backgroundColor: '#FFF', letterSpacing: '1.5px', outline: 'none' }}
             onBlur={this.closeDateInput}
             inputRef={ref => this.dateInput = ref}
             required

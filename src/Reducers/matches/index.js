@@ -10,7 +10,8 @@ import {
 
 const initialState = {
   matches: [],
-  fetchingMatches: false
+  fetchingMatches: false,
+  paginatingMatches: false
 }
 
 const matches = (state = initialState, action) => {
@@ -18,7 +19,7 @@ const matches = (state = initialState, action) => {
     case FETCH_NBA_MATCHES:
       return { ...state, fetchingMatches: true }
     case PAGINATE_NBA_MATCHES:
-      return { ...state, fetchingMatches: true }
+      return { ...state, paginatingMatches: true }
 
     case RECEIVE_NBA_MATCHES:
       return {
@@ -38,7 +39,7 @@ const matches = (state = initialState, action) => {
       }
       return {
         ...state,
-        fetchingMatches: false,
+        paginatingMatches: false,
         matches: newMatches.map(match => ({
           ...match, date: moment(new Date(match.date))
         }))
