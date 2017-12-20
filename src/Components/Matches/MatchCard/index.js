@@ -11,7 +11,6 @@ import './MatchCard.scss'
 
 class MatchCard extends React.Component {
   viewMatch = () => {
-    console.log('clicked')
     const { history, game } = this.props
     history.push(`${history.location.pathname}/${game.id}`)
   }

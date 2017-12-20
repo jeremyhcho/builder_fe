@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Grid, Row } from 'react-styled-flexboxgrid'
+import { Row } from 'react-styled-flexboxgrid'
 
 // Components
 import DateInput from './DateInput'
@@ -10,25 +10,25 @@ import MatchList from './MatchList'
 // CSS
 import './Matches.scss'
 
-const Matches = ({ matches }) => (
-  <Grid fluid styleName="match-section">
+const Matches = ({ nbaGames }) => (
+  <div>
     <Row>
       <DateInput />
     </Row>
-    <MatchList matches={matches} />
-  </Grid>
+    <MatchList matches={nbaGames} />
+  </div>
 )
 
 Matches.defaultProps = {
-  matches: []
+  nbaGames: []
 }
 
 Matches.propTypes = {
-  matches: PropTypes.array
+  nbaGames: PropTypes.array
 }
 
-const mapStateToProps = ({ matches }) => ({
-  matches: matches.matches
+const mapStateToProps = ({ nbaGames }) => ({
+  nbaGames: nbaGames.matches
 })
 
 const mapDispatchToProps = {

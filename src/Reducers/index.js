@@ -4,12 +4,14 @@ import { routerReducer } from 'react-router-redux'
 
 // Reducers
 import auth from './auth'
-import matches from './matches'
+import nbaGames from './matches'
+import matchDetails from './matchDetails'
 import dates from './dates'
 
 const rootReducer = combineReducers({
   auth,
-  matches,
+  nbaGames,
+  matchDetails,
   dates,
   router: routerReducer,
   form: formReducer

@@ -2,7 +2,7 @@ import { put, call, takeLatest } from 'redux-saga/effects'
 
 // Apis
 import {
-  getNBAData
+  getNBAGames
 } from 'Apis'
 
 // Constants
@@ -18,7 +18,7 @@ function* getMatches (params) {
   try {
     const from = params.from.toDate().toISOString()
     const to = params.to.toDate().toISOString()
-    const nbaMatches = yield call(getNBAData, { from, to })
+    const nbaMatches = yield call(getNBAGames, { from, to })
     yield put(receiveNBAMatches(nbaMatches))
   } catch ({ response }) {
     // HANDLE ERROR HANDLE ERROR HANDLE ERROR HANDLE ERROR @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -30,7 +30,7 @@ function* paginateMatches ({ from, to, paginateType }) {
   try {
     const fromString = from.toDate().toISOString()
     const toString = to.toDate().toISOString()
-    const { data } = yield call(getNBAData, { from: fromString, to: toString })
+    const { data } = yield call(getNBAGames, { from: fromString, to: toString })
     yield put(receiveNBAPaginatedMatches(data, paginateType))
   } catch ({ response }) {
     // HANDLE ERROR HANDLE ERROR HANDLE ERROR HANDLE ERROR @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

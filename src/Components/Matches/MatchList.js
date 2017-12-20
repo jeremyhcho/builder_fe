@@ -141,9 +141,9 @@ MatchList.propTypes = {
   paginatingMatches: PropTypes.bool.isRequired,
 }
 
-const mapStateToProps = ({ matches }) => ({
-  fetchingMatches: matches.fetchingMatches,
-  paginatingMatches: matches.paginatingMatches
+const mapStateToProps = ({ nbaGames }) => ({
+  fetchingMatches: nbaGames.fetchingMatches,
+  paginatingMatches: nbaGames.paginatingMatches
 })
 
 const mapDispatchToProps = {

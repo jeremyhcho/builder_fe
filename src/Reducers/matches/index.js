@@ -14,7 +14,7 @@ const initialState = {
   paginatingMatches: false
 }
 
-const matches = (state = initialState, action) => {
+const nbaGames = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_NBA_MATCHES:
       return { ...state, fetchingMatches: true }
@@ -51,4 +51,4 @@ const matches = (state = initialState, action) => {
   }
 }
 
-export default matches
+export default nbaGames

@@ -1,54 +1,49 @@
-.match-section {
-  padding: 0 65px;
-  background-color: var(--lightest-gray);
-  max-width: 1490px;
 
-  // Pagination Icons
-  .pagination {
-    color: var(--font-color);
-    line-height: 12px;
-    cursor: pointer;
-    transition: all 400ms ease;
-    text-align: center;
+// Pagination Icons
+.pagination {
+  color: var(--font-color);
+  line-height: 12px;
+  cursor: pointer;
+  transition: all 400ms ease;
+  text-align: center;
 
-    &.up {
-      margin: 0 auto 12px;
-    }
-    &.down {
-      margin: 12px auto 0;
-    }
-
-    .pagination-icon {
-      visibility: hidden;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    &:hover {
-      color: var(--blue);
-      .pagination-icon {
-        visibility: visible;
-      }
-    }
+  &.up {
+    margin: 0 auto 12px;
+  }
+  &.down {
+    margin: 12px auto 0;
   }
 
-  .matches-container {
-    width: 100%;
+  .pagination-icon {
+    visibility: hidden;
+    font-size: 16px;
+    font-weight: 600;
+  }
 
-    .day-wrapper {
-      margin-bottom: 40px;
-      &:last-child {
-        margin-bottom: 0;
-      }
+  &:hover {
+    color: var(--blue);
+    .pagination-icon {
+      visibility: visible;
+    }
+  }
+}
 
-      .day-card {
-        padding: 40px 0px;
-        display: flex;
-        justify-content: center;
-        color: #FFF;
-        background-color: var(--navy-blue);
-        position: relative;
-      }
+.matches-container {
+  width: 100%;
+
+  .day-wrapper {
+    margin-bottom: 40px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .day-card {
+      padding: 40px 0px;
+      display: flex;
+      justify-content: center;
+      color: #FFF;
+      background-color: var(--navy-blue);
+      position: relative;
     }
   }
 }
