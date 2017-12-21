@@ -6,6 +6,9 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 // Components
 import { Card, ButtonGroup, Spinner } from 'Components/Common'
 
+// CSS
+import './Overview.scss'
+
 class GameLeaders extends React.Component {
   state = {
     selected: 'points'
@@ -22,14 +25,17 @@ class GameLeaders extends React.Component {
     }
 
     if (selected === 'points') {
-      return key === 'name' ?
-        team.leaders.points.name : team.leaders.points.value
+      if (key === 'name') return `${team.leaders.points.first_name.slice(0, 1)}. ${team.leaders.points.last_name}`
+      else if (key === 'position') return team.leaders.points.position
+      return team.leaders.points.value
     } else if (selected === 'assists') {
-      return key === 'name' ?
-        team.leaders.assists.name : team.leaders.assists.value
+      if (key === 'name') return `${team.leaders.assists.first_name.slice(0, 1)}. ${team.leaders.assists.last_name}`
+      else if (key === 'position') return team.leaders.assists.position
+      return team.leaders.assists.value
     }
-    return key === 'name' ?
-      team.leaders.rebounds.name : team.leaders.rebounds.value
+    if (key === 'name') return `${team.leaders.rebounds.first_name.slice(0, 1)}. ${team.leaders.rebounds.last_name}`
+    else if (key === 'position') return team.leaders.rebounds.position
+    return team.leaders.rebounds.value
   }
 
   render () {
@@ -47,7 +53,7 @@ class GameLeaders extends React.Component {
               <Row middle='xs'>
                 <ButtonGroup
                   buttons={buttons}
-                  onChange={(button) => this.setState({ selected: button.key })}
+                  onChange={(e, button) => this.setState({ selected: button.key })}
                   defaultKey="points"
                 />
               </Row>
@@ -55,12 +61,12 @@ class GameLeaders extends React.Component {
               <Row>
                 <Col xs={5} xsOffset={1}>
                   <Card label={summary.away_team.name}>
-                    <Row>
+                    <Row style={{ padding: '25px' }}>
                       <Col xs={8}>
-                        <p>position</p>
-                        <h1>
+                        <p>{this.leaderStats('away', 'position')}</p>
+                        <h4>
                           {this.leaderStats('away', 'name')}
-                        </h1>
+                        </h4>
                       </Col>
                       <Col xs={4}>
                         <h1>
@@ -73,12 +79,12 @@ class GameLeaders extends React.Component {
 
                 <Col xs={5}>
                   <Card label={summary.home_team.name}>
-                    <Row>
+                    <Row style={{ padding: '25px' }}>
                       <Col xs={8}>
-                        <p>position</p>
-                        <h1>
+                        <p>{this.leaderStats('away', 'position')}</p>
+                        <h4>
                           {this.leaderStats('home', 'name')}
-                        </h1>
+                        </h4>
                       </Col>
                       <Col xs={4}>
                         <h1>

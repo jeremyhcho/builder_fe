@@ -1,0 +1,30 @@
+// Overview
+
+// Summary
+.summary {
+  display: flex;
+
+  &.away {
+    text-align: right;
+    margin-right: 30px;
+  }
+
+  &.home {
+    text-align: left;
+    flex-direction: row-reverse;
+    margin-left: 30px;
+  }
+
+  .points {
+    line-height: 42px;
+
+    &.away {
+      margin-left: 25px;
+    }
+    &.home {
+      margin-right: 25px;
+    }
+  }
+}
+
+// GameLeaders

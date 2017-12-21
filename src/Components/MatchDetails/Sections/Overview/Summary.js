@@ -9,6 +9,13 @@ import { Card, Spinner } from 'Components/Common'
 // Actions
 import { fetchNBASummary } from 'Actions'
 
+// CSS
+import './Overview.scss'
+
+const wrapperStyle = {
+  padding: '50px 25px'
+}
+
 class Summary extends React.Component {
   componentDidMount() {
     this.props.fetchNBASummary(this.props.idProp)
@@ -20,29 +27,29 @@ class Summary extends React.Component {
       <div>
         {
           summary ? (
-            <Card label="Summary" wrapperStyle={{ padding: '50px 25px' }}>
-              <Row middle='xs'>
-                <Col xs={4} style={{ textAlign: 'right' }}>
-                  <p className="semibold label">{summary.away_team.city}</p>
-                  <p className="semibold">{summary.away_team.name}</p>
-                </Col>
+            <Card label="Summary" wrapperStyle={wrapperStyle}>
+              <Row middle='xs' center='xs'>
+                <div styleName='summary away'>
+                  <div>
+                    <p className="semibold label small">{summary.away_team.city}</p>
+                    <h2 className="semibold">{summary.away_team.name.toUpperCase()}</h2>
+                  </div>
+                  <h1 styleName="points away" className="bold">{summary.away_team.points}</h1>
+                </div>
 
-                <Col xs={2}>
-                  <h1 className="bold">{summary.away_team.points}</h1>
-                </Col>
+                <h1 className='semibold'>@</h1>
 
-                <Col xs={2} style={{ textAlign: 'right' }}>
-                  <h1 className="bold">{summary.home_team.points}</h1>
-                </Col>
-
-                <Col xs={4} reverse>
-                  <p className="semibold label">{summary.home_team.city}</p>
-                  <p className="semibold">{summary.home_team.name}</p>
-                </Col>
+                <div styleName='summary home'>
+                  <div>
+                    <p className="semibold label small">{summary.home_team.city}</p>
+                    <h2 className="semibold">{summary.home_team.name.toUpperCase()}</h2>
+                  </div>
+                  <h1 styleName='points home' className="bold">{summary.home_team.points}</h1>
+                </div>
               </Row>
             </Card>
           ) : (
-            <Card label="Summary" wrapperStyle={{ padding: '50px 25px' }}>
+            <Card label="Summary" wrapperStyle={wrapperStyle}>
               <Row center='xs' middle='xs'>
                 <Col xs={12}>
                   <Spinner lg show />
