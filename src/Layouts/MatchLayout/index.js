@@ -8,7 +8,6 @@ import MatchDetails from 'Components/MatchDetails'
 const matchSectionStyle = {
   padding: '0 65px',
   backgroundColor: 'var(--lightest-gray)',
-  maxWidth: '1490px'
 }
 
 const MatchLayout = () => (

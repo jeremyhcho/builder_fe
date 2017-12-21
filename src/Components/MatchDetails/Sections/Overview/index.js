@@ -4,8 +4,9 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import Summary from './Summary'
-import Quarter from './Quarter'
+import Quarters from './Quarters'
 import GameLeaders from './GameLeaders'
+import RecentGames from './RecentGames'
 
 // CSS
 import './Overview.scss'
@@ -21,13 +22,13 @@ class Overview extends React.Component {
             <GameLeaders />
           </Col>
           <Col xs={12} lg={6}>
-            <Quarter idProp={idProp} />
+            <Quarters idProp={idProp} />
           </Col>
         </Row>
 
         <Row>
           <Col xs={4}>
-            Recent Games
+            <RecentGames idProp={idProp} />
           </Col>
           <Col xs={4}>
             Projected Lineup

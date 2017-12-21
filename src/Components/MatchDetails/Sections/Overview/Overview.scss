@@ -28,3 +28,48 @@
 }
 
 // GameLeaders
+.stat-container {
+  margin-top: 10px;
+
+  .stat-label {
+    margin-bottom: 5px;
+    padding: 0 15px;
+    border-radius: var(--border-radius);
+  }
+
+  .stats {
+    background-color: var(--lightest-gray);
+    border-radius: var(--border-radius);
+    padding: 15px;
+
+    .stat-position {
+      margin-right: 5px;
+    }
+  }
+}
+
+// Quarters
+.quarters-buttons {
+  margin-bottom: 15px;
+}
+
+.quarters-container {
+  display: flex;
+  justify-content: space-between;
+
+  &.stats {
+    overflow-x: scroll
+  }
+
+  .quarters-stat {
+    text-align: center;
+  }
+
+  .quarters-label {
+    margin: 15px;
+  }
+
+  .quarters-value {
+    margin-bottom: 15px;
+  }
+}

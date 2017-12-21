@@ -11,11 +11,14 @@ import { Overview, PlayerStats, TeamStats, Models } from './Sections'
 // CSS
 import './MatchDetails.scss'
 
-class MatchDetails extends React.Component {
-  state = {
-    game: null
-  }
+const sectionStyle = {
+  marginTop: '15px',
+  overflowY: 'scroll',
+  height: 'calc(100vh - 150px)',
+  paddingBottom: '25px'
+}
 
+class MatchDetails extends React.Component {
   handleNavigation = (e, menuItem) => {
     this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
   }
@@ -28,7 +31,7 @@ class MatchDetails extends React.Component {
       { label: 'Team Stats', key: 'teams' }
     ]
     return (
-      <div>
+      <div style={{ maxWidth: '1600px' }}>
         <Row style={{ marginTop: '15px' }}>
           <Col xs={6}>
             <Tab
@@ -38,7 +41,7 @@ class MatchDetails extends React.Component {
             />
           </Col>
         </Row>
-        <div style={{ marginTop: '15px', overflowY: 'scroll' }}>
+        <div style={sectionStyle}>
           <Switch>
             <Route exact path='/matches/:id/overview' component={Overview} />
             <Route exact path='/matches/:id/teams' component={TeamStats} />

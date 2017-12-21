@@ -22,7 +22,6 @@ class MatchList extends React.Component {
 
   componentDidUpdate(prevProps) {
     /* eslint-disable react/no-did-update-set-state */
-
     if (!prevProps.matches.length) {
       this.setState({ maxScrollHeight: this.scroller.scrollHeight })
       return
@@ -33,7 +32,7 @@ class MatchList extends React.Component {
       return
     }
 
-    if (prevProps.matches.length !== this.props.matches.length) {
+    if (prevProps.paginatingMatches && !this.props.paginatingMatches) {
       const height = this.scroller.scrollHeight
       const previousHeight = this.state.maxScrollHeight
       this.setState({

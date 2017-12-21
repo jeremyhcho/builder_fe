@@ -2,49 +2,59 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import uniqueId from 'lodash/uniqueid'
 
 // Components
-import { Card, ButtonGroup, Spinner } from 'Components/Common'
+import { Card, ButtonGroup } from 'Components/Common'
+import OverviewSpinner from './OverviewSpinner'
 
 // CSS
 import './Overview.scss'
+
+const Headers = {
+  points: ['PTS', 'FG', 'FT'],
+  rebounds: ['REB', 'OREB', 'DREB'],
+  assists: ['AST', 'TO', 'MIN']
+}
+
+const buttons = [
+  { label: 'Points', key: 'points' },
+  { label: 'Assists', key: 'assists' },
+  { label: 'Rebounds', key: 'rebounds' }
+]
 
 class GameLeaders extends React.Component {
   state = {
     selected: 'points'
   }
 
-  leaderStats(teamString, key) {
+  valueFactory (matchType) {
     const { summary } = this.props
-    const { selected } = this.state
-    let team
-    if (teamString === 'away') {
-      team = summary.away_team
-    } else {
-      team = summary.home_team
+    const stats = summary[matchType].leaders[this.state.selected].stats
+    const values = {
+      points: [
+        stats.points,
+        `${stats.field_goals_made}/${stats.field_goals_att}`,
+        `${stats.free_throws_made}/${stats.free_throws_att}`
+      ],
+      rebounds: [
+        stats.rebounds,
+        stats.offensive_rebounds,
+        stats.defensive_rebounds
+      ],
+      assists: [
+        stats.assists,
+        stats.turnovers,
+        `${stats.minutes.split(':')[0]}`
+      ]
     }
 
-    if (selected === 'points') {
-      if (key === 'name') return `${team.leaders.points.first_name.slice(0, 1)}. ${team.leaders.points.last_name}`
-      else if (key === 'position') return team.leaders.points.position
-      return team.leaders.points.value
-    } else if (selected === 'assists') {
-      if (key === 'name') return `${team.leaders.assists.first_name.slice(0, 1)}. ${team.leaders.assists.last_name}`
-      else if (key === 'position') return team.leaders.assists.position
-      return team.leaders.assists.value
-    }
-    if (key === 'name') return `${team.leaders.rebounds.first_name.slice(0, 1)}. ${team.leaders.rebounds.last_name}`
-    else if (key === 'position') return team.leaders.rebounds.position
-    return team.leaders.rebounds.value
+    return values[this.state.selected]
   }
 
   render () {
     const { summary } = this.props
-    const buttons = [
-      { label: 'Points', key: 'points' },
-      { label: 'Assists', key: 'assists' },
-      { label: 'Rebounds', key: 'rebounds' }
-    ]
+    const { selected } = this.state
     return (
       <div>
         {
@@ -58,52 +68,70 @@ class GameLeaders extends React.Component {
                 />
               </Row>
 
-              <Row>
-                <Col xs={5} xsOffset={1}>
-                  <Card label={summary.away_team.name}>
-                    <Row style={{ padding: '25px' }}>
-                      <Col xs={8}>
-                        <p>{this.leaderStats('away', 'position')}</p>
-                        <h4>
-                          {this.leaderStats('away', 'name')}
-                        </h4>
-                      </Col>
-                      <Col xs={4}>
-                        <h1>
-                          {this.leaderStats('away', 'value')}
-                        </h1>
-                      </Col>
+              <div styleName="stat-container">
+                <Row between='xs' center='xs' middle='xs' styleName="stat-label">
+                  <Col xs={5} />
+                  {Headers[selected].map(stat => (
+                    <Col xs={2} key={stat}>
+                      <p className="small" key={stat}>{stat}</p>
+                    </Col>
+                  ))}
+                </Row>
+                <Row between='xs' center='xs' middle='xs' styleName="stats">
+                  <Col xs={5}>
+                    <Row middle='xs'>
+                      <p styleName="stat-position" className="label small">{summary.away.leaders[selected].position}</p>
+                      <h4 className="semibold">
+                        {summary.away.leaders[selected].first_name.slice(0, 1)} {' '}
+                        {summary.away.leaders[selected].last_name}
+                      </h4>
                     </Row>
-                  </Card>
-                </Col>
+                  </Col>
+                  {
+                    this.valueFactory('away').map(stat => {
+                      return (
+                        <Col xs={2} key={uniqueId('stat_container')}>
+                          <h4 className="bold" key={uniqueId('stat_')}>{stat}</h4>
+                        </Col>
+                      )
+                    })
+                  }
+                </Row>
+              </div>
 
-                <Col xs={5}>
-                  <Card label={summary.home_team.name}>
-                    <Row style={{ padding: '25px' }}>
-                      <Col xs={8}>
-                        <p>{this.leaderStats('away', 'position')}</p>
-                        <h4>
-                          {this.leaderStats('home', 'name')}
-                        </h4>
-                      </Col>
-                      <Col xs={4}>
-                        <h1>
-                          {this.leaderStats('home', 'value')}
-                        </h1>
-                      </Col>
+              <div styleName="stat-container">
+                <Row between='xs' center='xs' middle='xs' styleName="stat-label">
+                  <Col xs={5} />
+                  {Headers[selected].map(stat => (
+                    <Col xs={2} key={stat}>
+                      <p className="small" key={stat}>{stat}</p>
+                    </Col>
+                  ))}
+                </Row>
+                <Row between='xs' center='xs' middle='xs' styleName="stats">
+                  <Col xs={5}>
+                    <Row middle='xs'>
+                      <p styleName="stat-position" className="label small">{summary.home.leaders[selected].position}</p>
+                      <h4 className="semibold">
+                        {summary.home.leaders[selected].first_name.slice(0, 1)} {' '}
+                        {summary.home.leaders[selected].last_name}
+                      </h4>
                     </Row>
-                  </Card>
-                </Col>
-              </Row>
+                  </Col>
+                  {
+                    this.valueFactory('home').map(stat => {
+                      return (
+                        <Col key={uniqueId('stat_container')} xs={2}>
+                          <h4 className="bold" key={uniqueId('stat_')}>{stat}</h4>
+                        </Col>
+                      )
+                    })
+                  }
+                </Row>
+              </div>
             </Card>
           ) : (
-            <Card label="Game Leaders" wrapperStyle={{ padding: '50px 25px' }}>
-              <Row center='xs' middle='xs'>
-                <Col xs={12}>
-                  <Spinner lg show />
-                </Col>
-              </Row>
-            </Card>
+            <OverviewSpinner label="Game Leaders" />
           )
         }
       </div>

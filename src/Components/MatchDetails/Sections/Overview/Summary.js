@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Row, Col } from 'react-styled-flexboxgrid'
+import { Row } from 'react-styled-flexboxgrid'
 
 // Components
-import { Card, Spinner } from 'Components/Common'
+import { Card } from 'Components/Common'
+import OverviewSpinner from './OverviewSpinner'
 
 // Actions
 import { fetchNBASummary } from 'Actions'
@@ -31,31 +32,25 @@ class Summary extends React.Component {
               <Row middle='xs' center='xs'>
                 <div styleName='summary away'>
                   <div>
-                    <p className="semibold label small">{summary.away_team.city}</p>
-                    <h2 className="semibold">{summary.away_team.name.toUpperCase()}</h2>
+                    <p className="semibold label small">{summary.away.city}</p>
+                    <h2 className="semibold">{summary.away.name.toUpperCase()}</h2>
                   </div>
-                  <h1 styleName="points away" className="bold">{summary.away_team.points}</h1>
+                  <h1 styleName="points away" className="bold">{summary.away.points}</h1>
                 </div>
 
                 <h1 className='semibold'>@</h1>
 
                 <div styleName='summary home'>
                   <div>
-                    <p className="semibold label small">{summary.home_team.city}</p>
-                    <h2 className="semibold">{summary.home_team.name.toUpperCase()}</h2>
+                    <p className="semibold label small">{summary.home.city}</p>
+                    <h2 className="semibold">{summary.home.name.toUpperCase()}</h2>
                   </div>
-                  <h1 styleName='points home' className="bold">{summary.home_team.points}</h1>
+                  <h1 styleName='points home' className="bold">{summary.home.points}</h1>
                 </div>
               </Row>
             </Card>
           ) : (
-            <Card label="Summary" wrapperStyle={wrapperStyle}>
-              <Row center='xs' middle='xs'>
-                <Col xs={12}>
-                  <Spinner lg show />
-                </Col>
-              </Row>
-            </Card>
+            <OverviewSpinner label="Summary" />
           )
         }
       </div>

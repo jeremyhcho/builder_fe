@@ -21,3 +21,9 @@
   text-align: center;
   flex-direction: column;
 }
+
+@media (max-width: 1024px) {
+  .match-container h1 {
+    font-size: 1.8rem;
+  }
+}

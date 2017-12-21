@@ -6,7 +6,7 @@ import overview from './overview'
 // import teamStats from './teamStats'
 
 const matchDetails = combineReducers({
-  overview
+  overview,
   // models,
   // playerStats,
   // teamStats
