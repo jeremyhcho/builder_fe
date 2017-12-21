@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { get } from 'lodash'
 import { Link } from 'react-router-dom'
 import { Field, reduxForm, reset, initialize } from 'redux-form'
+import randomstring from 'randomstring'
 
 // CSS
 import './Login.scss'
@@ -40,7 +42,7 @@ class LoginForm extends Component {
           email: Email,
           password: Password
         },
-        rememberMe
+        remember_me: get(rememberMe, randomstring.generate())
       })
     }
 
