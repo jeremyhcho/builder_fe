@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import uniqueId from 'lodash/uniqueid'
 
 // Components
-import { Card, ButtonGroup } from 'Components/Common'
+import { Card, ButtonGroup, Button } from 'Components/Common'
 import OverviewSpinner from './OverviewSpinner'
 
 // CSS
@@ -14,6 +15,10 @@ import './Overview.scss'
 import { fetchNBARecentGames } from 'Actions'
 
 class RecentGames extends React.Component {
+  state = {
+    selected: 'away'
+  }
+
   componentDidMount() {
     const { fetchNBARecentGames, idProp } = this.props
     fetchNBARecentGames(idProp)
@@ -21,15 +26,16 @@ class RecentGames extends React.Component {
 
   render () {
     const { recentGames, summary } = this.props
+    const { selected } = this.state
     if (recentGames && summary) {
       const buttons = [
-        { label: summary.away.name, key: summary.away.name },
-        { label: summary.home.name, key: summary.home.name },
+        { label: summary.away.name, key: 'away' },
+        { label: summary.home.name, key: 'home' },
       ]
       return (
         <div>
-          <Card label="Recent Games">
-            <Row between='xs' middle='xs'>
+          <Card label="Recent Games" wrapperStyle={{ padding: '25px' }} styleName="recent-games">
+            <Row between='xs' middle='xs' center='xs' styleName="recent-games-header">
               <Col xs={6}>
                 <h1>Streak W2</h1>
               </Col>
@@ -42,6 +48,32 @@ class RecentGames extends React.Component {
                 />
               </Col>
             </Row>
+
+            {
+              recentGames[selected].map(stats => (
+                <Row
+                  key={uniqueId('recent_games_match_')}
+                  center='xs'
+                  middle='xs'
+                  styleName="recent-games-match"
+                  between='xs'
+                >
+                  {stats.outcome === 'loss' ? (
+                    <Button danger>L</Button>
+                  ) : (
+                    <Button success>W</Button>
+                  )}
+                  {
+                    stats.match_type === selected ? (
+                      <p>@</p>
+                    ) : (
+                      <p>vs</p>
+                    )
+                  }
+                  <p>{stats.opposing_team} ({stats.score[selected]}-{stats.score.home})</p>
+                </Row>
+              ))
+            }
           </Card>
         </div>
       )

@@ -60,16 +60,40 @@
   &.stats {
     overflow-x: scroll
   }
-
   .quarters-stat {
     text-align: center;
   }
-
   .quarters-label {
     margin: 15px;
   }
-
   .quarters-value {
     margin-bottom: 15px;
+  }
+}
+
+// Recent Games
+.recent-games {
+  .recent-games-header {
+    margin-bottom: 25px;
+  }
+
+  .recent-games-match {
+    padding: 15px;
+    position: relative;
+
+    &:last-child {
+      padding: 15px 15px 0 15px;
+    }
+
+    &:not(:last-child):after {
+      content: '';
+      width: calc(100% + 40px);
+      border-bottom: 1px solid var(--light-gray);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+      margin: 0 -20px;
+    }
   }
 }
