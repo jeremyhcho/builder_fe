@@ -1,11 +1,11 @@
 .match-container {
   border: 1px solid var(--light-gray);
   border-radius: 2px;
-  padding: 5px 20px;
   transition: all 300ms ease;
   transform: perspective(1px) translateZ(0);
   background-color: #FFF;
   height: 120px;
+  width: 100%;
   cursor: pointer;
 
   &:hover {

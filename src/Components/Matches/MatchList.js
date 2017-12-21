@@ -28,7 +28,7 @@ class MatchList extends React.Component {
       return
     }
 
-    if (prevProps.dates.now.isSame(this.props.dates.now)) {
+    if (!prevProps.dates.now.isSame(this.props.dates.now)) {
       this.scroller.scrollTop = 0
       return
     }
@@ -90,13 +90,13 @@ class MatchList extends React.Component {
         >
           {
             fetchingMatches ? (
-              <Row center='xs' style={{ marginTop: 'calc(100vh * .25)' }}>
+              <Row center='xs' style={{ marginTop: 'calc(100vh * .25)', width: '100%' }}>
                 <Col xs={12}>
                   <Spinner lg show />
                 </Col>
               </Row>
             ) : (
-              <Row>
+              <Row style={{ width: '100%' }}>
                 {
                   paginatingMatches ?
                     <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (
