@@ -120,8 +120,8 @@ DateInput.propTypes = {
   fetchNBAMatches: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({ dates }) => ({
-  dates
+const mapStateToProps = ({ nbaGames }) => ({
+  dates: nbaGames.dates
 })
 
 const mapDispatchToProps = {

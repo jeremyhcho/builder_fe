@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 // import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
@@ -18,9 +17,7 @@ class MatchDetails extends React.Component {
   }
 
   handleNavigation = (e, menuItem) => {
-    this.props.history.push({
-      pathname: `${this.props.match.url}/${menuItem.key}`
-    })
+    this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
   }
 
   render () {
@@ -33,7 +30,7 @@ class MatchDetails extends React.Component {
     return (
       <div>
         <Row style={{ marginTop: '15px' }}>
-          <Col xs={7}>
+          <Col xs={6}>
             <Tab
               tabs={tabItems}
               defaultKey='overview'
@@ -41,7 +38,7 @@ class MatchDetails extends React.Component {
             />
           </Col>
         </Row>
-        <div style={{ marginTop: '15px' }}>
+        <div style={{ marginTop: '15px', overflowY: 'scroll' }}>
           <Switch>
             <Route exact path='/matches/:id/overview' component={Overview} />
             <Route exact path='/matches/:id/teams' component={TeamStats} />
@@ -60,4 +57,4 @@ MatchDetails.propTypes = {
   history: PropTypes.object.isRequired
 }
 
-export default withRouter(MatchDetails)
+export default MatchDetails

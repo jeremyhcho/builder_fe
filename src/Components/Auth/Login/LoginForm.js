@@ -86,6 +86,7 @@ class LoginForm extends Component {
         component={FieldInput}
         shouldFitContainer
         autoComplete="off"
+        spellCheck={false}
         placeholder='Enter password'
         style={passwordStyles}
         validate={passwordValidation}
@@ -136,6 +137,7 @@ class LoginForm extends Component {
             component={FieldInput}
             shouldFitContainer
             autoComplete="off"
+            spellCheck={false}
             placeholder='Enter email'
             validate={[presence, email]}
           />

@@ -20,14 +20,16 @@ class MatchList extends React.Component {
     maxScrollHeight: 0
   }
 
-  componentWillMount() {
-    document.body.style.overflow = 'hidden'
-  }
-
   componentDidUpdate(prevProps) {
     /* eslint-disable react/no-did-update-set-state */
+
     if (!prevProps.matches.length) {
       this.setState({ maxScrollHeight: this.scroller.scrollHeight })
+      return
+    }
+
+    if (prevProps.dates.now.isSame(this.props.dates.now)) {
+      this.scroller.scrollTop = 0
       return
     }
 
@@ -40,7 +42,6 @@ class MatchList extends React.Component {
         this.scroller.scrollTop = this.state.maxScrollHeight - previousHeight - 50
       })
     }
-
     /* eslint-enable react/no-did-update-set-state */
   }
 
@@ -139,11 +140,13 @@ MatchList.propTypes = {
   paginateNBAMatches: PropTypes.func.isRequired,
   fetchingMatches: PropTypes.bool.isRequired,
   paginatingMatches: PropTypes.bool.isRequired,
+  dates: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ nbaGames }) => ({
   fetchingMatches: nbaGames.fetchingMatches,
-  paginatingMatches: nbaGames.paginatingMatches
+  paginatingMatches: nbaGames.paginatingMatches,
+  dates: nbaGames.dates
 })
 
 const mapDispatchToProps = {

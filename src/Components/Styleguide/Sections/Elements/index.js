@@ -16,6 +16,7 @@ import Sliders from './Sliders'
 import TextAreas from './TextAreas'
 import Selects from './Selects'
 import Modals from './Modals'
+import ButtonGroups from './ButtonGroups'
 
 // CSS
 import './Elements.scss'
@@ -25,6 +26,9 @@ const Elements = () => (
     <SectionHeader headerText='Elements' />
     <SubHeader subHeaderText='Buttons' />
     <Buttons />
+
+    <SubHeader subHeaderText='Button Groups' />
+    <ButtonGroups />
 
     <SubHeader subHeaderText='Spinners' />
     <Spinners />

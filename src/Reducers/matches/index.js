@@ -11,13 +11,25 @@ import {
 const initialState = {
   matches: [],
   fetchingMatches: false,
-  paginatingMatches: false
+  paginatingMatches: false,
+  dates: {
+    now: moment(moment().format('YYYY-MM-DD')),
+    from: {},
+    to: {}
+  }
 }
 
 const nbaGames = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_NBA_MATCHES:
-      return { ...state, fetchingMatches: true }
+    case FETCH_NBA_MATCHES: {
+      const { now, from, to } = action
+      return {
+        ...state,
+        fetchingMatches: true,
+        dates: { now, from, to }
+      }
+    }
+
     case PAGINATE_NBA_MATCHES:
       return { ...state, paginatingMatches: true }
 

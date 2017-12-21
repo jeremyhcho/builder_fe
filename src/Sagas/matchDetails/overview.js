@@ -28,6 +28,6 @@ function* watchNBASummaryFetch () {
 
 export default function* overviewSaga () {
   yield [
-    watchNBASummaryFetch(),
+    watchNBASummaryFetch()
   ]
 }

@@ -1,23 +1,27 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import Summary from './Summary'
 import Quarter from './Quarter'
+import GameLeaders from './GameLeaders'
 
 // CSS
 import './Overview.scss'
 
 class Overview extends React.Component {
   render () {
+    const idProp = this.props.match.params.id
     return (
       <div>
         <Row>
-          <Col xs={5}>
-            <Summary />
+          <Col xs={12} lg={6}>
+            <Summary idProp={idProp} />
+            <GameLeaders />
           </Col>
-          <Col xs={7}>
-            <Quarter />
+          <Col xs={12} lg={6}>
+            <Quarter idProp={idProp} />
           </Col>
         </Row>
 
@@ -35,6 +39,10 @@ class Overview extends React.Component {
       </div>
     )
   }
+}
+
+Overview.propTypes = {
+  match: PropTypes.object.isRequired
 }
 
 export default Overview

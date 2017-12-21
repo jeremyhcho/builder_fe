@@ -29,7 +29,7 @@ const layoutStyle = {
 }
 
 const MainLayout = () => (
-  <main style={{ display: 'flex' }}>
+  <main style={{ display: 'flex', overflow: 'hidden' }}>
     <SideNav />
 
     <div style={{ width: '100%', height: '100vh', minWidth: '964px' }}>

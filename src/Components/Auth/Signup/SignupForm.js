@@ -29,7 +29,7 @@ class SignupForm extends Component {
 
   renderInnerButton () {
     if (this.props.creatingUser) {
-      return <Spinner xs style={{ marginBottom: '2px' }} color="#FFF" />
+      return <Spinner xs show style={{ marginBottom: '2px' }} color="#FFF" />
     }
 
     return 'Create account'
