@@ -4,21 +4,24 @@ import { put, call, takeLatest } from 'redux-saga/effects'
 import {
   getSummaryData,
   getQuartersData,
-  getRecentGamesData
+  getRecentGamesData,
+  getStartingLineupData
 } from 'Apis'
 
 // Constants
 import {
   FETCH_NBA_SUMMARY,
   FETCH_NBA_QUARTERS,
-  FETCH_NBA_RECENT_GAMES
+  FETCH_NBA_RECENT_GAMES,
+  FETCH_NBA_STARTING_LINEUP
 } from 'Constants'
 
 // Actions
 import {
   receiveNBASummary,
   receiveNBAQuarters,
-  receiveNBARecentGames
+  receiveNBARecentGames,
+  receiveNBAStartingLineup
 } from 'Actions'
 
 function* getSummary ({ id }) {
@@ -48,6 +51,16 @@ function* getRecentGames ({ id }) {
   }
 }
 
+
+function* getStartingLineup ({ id }) {
+  try {
+    const startingLineup = yield call(getStartingLineupData, id)
+    yield put(receiveNBAStartingLineup(startingLineup))
+  } catch ({ response }) {
+    console.log('no starting lineup found: ', response)
+  }
+}
+
 function* watchNBASummaryFetch () {
   yield takeLatest(FETCH_NBA_SUMMARY, getSummary)
 }
@@ -60,10 +73,15 @@ function* watchNBARecentGamesFetch () {
   yield takeLatest(FETCH_NBA_RECENT_GAMES, getRecentGames)
 }
 
+function* watchNBAStartingLineupFetch () {
+  yield takeLatest(FETCH_NBA_STARTING_LINEUP, getStartingLineup)
+}
+
 export default function* overviewSaga () {
   yield [
     watchNBASummaryFetch(),
     watchNBAQuartersFetch(),
     watchNBARecentGamesFetch(),
+    watchNBAStartingLineupFetch()
   ]
 }

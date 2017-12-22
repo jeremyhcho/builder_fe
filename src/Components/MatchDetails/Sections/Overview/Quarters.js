@@ -54,7 +54,7 @@ class Quarters extends React.Component {
       <div>
         {
           quarters && summary ? (
-            <Card label="Quarter" wrapperStyle={{ padding: '25px' }}>
+            <Card label="Quarterly Stats" wrapperStyle={{ padding: '25px' }}>
               <Row styleName="quarters-buttons">
                 {
                   quartersList.map(quarter => {
@@ -63,6 +63,7 @@ class Quarters extends React.Component {
                         flat
                         key={quarter}
                         onClick={() => this.setState({ selected: quarter })}
+                        style={{ marginLeft: '5px', width: '37.5px' }}
                       >
                         {quarter.toUpperCase()}
                       </Button>
@@ -70,7 +71,7 @@ class Quarters extends React.Component {
                       <Button
                         key={quarter}
                         disabled
-                        style={{ cursor: 'default' }}
+                        style={{ cursor: 'default', marginLeft: '5px', width: '37.5px' }}
                       >
                         {quarter.toUpperCase()}
                       </Button>
@@ -81,7 +82,7 @@ class Quarters extends React.Component {
 
               <div styleName="quarters-container">
                 <div styleName="quarters-stat">
-                  <p styleName="quarters-label" className="label">TEAM</p>
+                  <p styleName="quarters-label" className="label semibold small">TEAM</p>
                   <p styleName="quarters-value" className="semibold">{summary.away.name}</p>
                   <p styleName="quarters-value" className="semibold">{summary.home.name}</p>
                 </div>
@@ -91,9 +92,27 @@ class Quarters extends React.Component {
                     this.quarterStatsFactory('away').map(stats => {
                       return (
                         <div key={uniqueId('stat_')} styleName="quarters-stat">
-                          <p key={uniqueId('stat_label_')} styleName="quarters-label" className="label">{stats.stat.toUpperCase().slice(0, 3)}</p>
-                          <p styleName="quarters-value" className="semibold" key={uniqueId('stat_away_value_')}>{stats.value.away}</p>
-                          <p styleName="quarters-value" className="semibold" key={uniqueId('stat_home_value_')}>{stats.value.home}</p>
+                          <p
+                            key={uniqueId('stat_label_')}
+                            styleName="quarters-label"
+                            className="label semibold small"
+                          >
+                            {stats.stat.toUpperCase().slice(0, 3)}
+                          </p>
+
+                          <p
+                            styleName="quarters-value"
+                            key={uniqueId('stat_away_value_')}
+                          >
+                            {stats.value.away}
+                          </p>
+
+                          <p
+                            styleName="quarters-value"
+                            key={uniqueId('stat_home_value_')}
+                          >
+                            {stats.value.home}
+                          </p>
                         </div>
                       )
                     })
@@ -102,7 +121,7 @@ class Quarters extends React.Component {
               </div>
             </Card>
           ) : (
-            <OverviewSpinner label="Quarters" />
+            <OverviewSpinner label="Quarterly Stats" />
           )
         }
       </div>

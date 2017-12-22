@@ -9,9 +9,9 @@ const wrapperStyle = {
   padding: '50px 25px'
 }
 
-const OverviewSpinner = ({ label }) => (
-  <Card label={label} wrapperStyle={wrapperStyle}>
-    <Row center='xs' middle='xs'>
+const OverviewSpinner = ({ label, style }) => (
+  <Card label={label} wrapperStyle={{ wrapperStyle, ...style }}>
+    <Row center='xs' middle='xs' style={{ height: '100%' }}>
       <Col xs={12}>
         <Spinner lg show />
       </Col>
@@ -19,8 +19,13 @@ const OverviewSpinner = ({ label }) => (
   </Card>
 )
 
+OverviewSpinner.defaultProps = {
+  style: {}
+}
+
 OverviewSpinner.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  style: PropTypes.object
 }
 
 export default OverviewSpinner

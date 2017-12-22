@@ -73,7 +73,7 @@ class GameLeaders extends React.Component {
                   <Col xs={5} />
                   {Headers[selected].map(stat => (
                     <Col xs={2} key={stat}>
-                      <p className="small" key={stat}>{stat}</p>
+                      <p className="semibold label small" key={stat}>{stat}</p>
                     </Col>
                   ))}
                 </Row>
@@ -81,17 +81,17 @@ class GameLeaders extends React.Component {
                   <Col xs={5}>
                     <Row middle='xs'>
                       <p styleName="stat-position" className="label small">{summary.away.leaders[selected].position}</p>
-                      <h4 className="semibold">
-                        {summary.away.leaders[selected].first_name.slice(0, 1)} {' '}
+                      <p className="semibold">
+                        {summary.away.leaders[selected].first_name.slice(0, 1)}. {' '}
                         {summary.away.leaders[selected].last_name}
-                      </h4>
+                      </p>
                     </Row>
                   </Col>
                   {
                     this.valueFactory('away').map(stat => {
                       return (
                         <Col xs={2} key={uniqueId('stat_container')}>
-                          <h4 className="bold" key={uniqueId('stat_')}>{stat}</h4>
+                          <p className="bold" key={uniqueId('stat_')}>{stat}</p>
                         </Col>
                       )
                     })
@@ -102,27 +102,22 @@ class GameLeaders extends React.Component {
               <div styleName="stat-container">
                 <Row between='xs' center='xs' middle='xs' styleName="stat-label">
                   <Col xs={5} />
-                  {Headers[selected].map(stat => (
-                    <Col xs={2} key={stat}>
-                      <p className="small" key={stat}>{stat}</p>
-                    </Col>
-                  ))}
                 </Row>
                 <Row between='xs' center='xs' middle='xs' styleName="stats">
                   <Col xs={5}>
                     <Row middle='xs'>
                       <p styleName="stat-position" className="label small">{summary.home.leaders[selected].position}</p>
-                      <h4 className="semibold">
-                        {summary.home.leaders[selected].first_name.slice(0, 1)} {' '}
+                      <p className="semibold">
+                        {summary.home.leaders[selected].first_name.slice(0, 1)}. {' '}
                         {summary.home.leaders[selected].last_name}
-                      </h4>
+                      </p>
                     </Row>
                   </Col>
                   {
                     this.valueFactory('home').map(stat => {
                       return (
                         <Col key={uniqueId('stat_container')} xs={2}>
-                          <h4 className="bold" key={uniqueId('stat_')}>{stat}</h4>
+                          <p className="bold" key={uniqueId('stat_')}>{stat}</p>
                         </Col>
                       )
                     })

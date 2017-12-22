@@ -14,3 +14,8 @@ export const getQuartersData = (id) => (
 export const getRecentGamesData = (id) => (
   axios.get(`/api/nba/v1/matches/${id}/recent`)
 )
+
+// Starting Lineup
+export const getStartingLineupData = (id) => (
+  axios.get(`/api/nba/v1/matches/${id}/starters`)
+)

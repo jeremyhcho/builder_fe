@@ -1,4 +1,9 @@
 // Overview
+@media (min-width: 1201px) {
+  .recent-games-col {
+    margin-top: -65px;
+  }
+}
 
 // Summary
 .summary {
@@ -94,6 +99,17 @@
       bottom: 0;
       z-index: 1;
       margin: 0 -20px;
+    }
+  }
+}
+
+// Starting Lineup
+.starting-lineup {
+  .starter {
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }

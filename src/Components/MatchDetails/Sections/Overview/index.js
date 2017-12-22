@@ -7,6 +7,8 @@ import Summary from './Summary'
 import Quarters from './Quarters'
 import GameLeaders from './GameLeaders'
 import RecentGames from './RecentGames'
+import StartingLineup from './StartingLineup'
+import VegasLines from './VegasLines'
 
 // CSS
 import './Overview.scss'
@@ -15,29 +17,31 @@ class Overview extends React.Component {
   render () {
     const idProp = this.props.match.params.id
     return (
-      <div>
-        <Row>
-          <Col xs={12} lg={6}>
-            <Summary idProp={idProp} />
-            <GameLeaders />
-          </Col>
-          <Col xs={12} lg={6}>
-            <Quarters idProp={idProp} />
-          </Col>
-        </Row>
+      <Row>
+        <Col xs={6}>
+          <Summary idProp={idProp} />
+        </Col>
 
-        <Row>
-          <Col xs={4}>
-            <RecentGames idProp={idProp} />
-          </Col>
-          <Col xs={4}>
-            Projected Lineup
-          </Col>
-          <Col xs={4}>
-            Vegas Lines
-          </Col>
-        </Row>
-      </div>
+        <Col xs={6}>
+          <Quarters idProp={idProp} />
+        </Col>
+
+        <Col xs={6} lg={4}>
+          <GameLeaders />
+        </Col>
+
+        <Col xs={6} lg={4}>
+          <VegasLines />
+        </Col>
+
+        <Col xs={6} lg={4}>
+          <StartingLineup idProp={idProp} />
+        </Col>
+
+        <Col xs={6} styleName='recent-games-col'>
+          <RecentGames idProp={idProp} />
+        </Col>
+      </Row>
     )
   }
 }

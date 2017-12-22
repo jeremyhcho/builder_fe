@@ -14,7 +14,8 @@ import { fetchNBASummary } from 'Actions'
 import './Overview.scss'
 
 const wrapperStyle = {
-  padding: '50px 25px'
+  padding: '50px 25px',
+  height: '212px'
 }
 
 class Summary extends React.Component {
@@ -29,7 +30,7 @@ class Summary extends React.Component {
         {
           summary ? (
             <Card label="Summary" wrapperStyle={wrapperStyle}>
-              <Row middle='xs' center='xs'>
+              <Row middle='xs' center='xs' style={{ height: '100%' }}>
                 <div styleName='summary away'>
                   <div>
                     <p className="semibold label small">{summary.away.city}</p>
