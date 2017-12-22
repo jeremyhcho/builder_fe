@@ -5,7 +5,7 @@ class VegasLines extends React.Component {
   render () {
     return (
       <div>
-        <OverviewSpinner style={{ height: '236px' }} label='Vegas Lines' />
+        <OverviewSpinner label='Vegas Lines' />
       </div>
     )
   }

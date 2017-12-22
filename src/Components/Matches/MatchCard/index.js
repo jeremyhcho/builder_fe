@@ -28,7 +28,7 @@ class MatchCard extends React.Component {
         <Col xs={3} style={{ textAlign: 'right' }}>
           <p className="small label">{awayCity}</p>
           <h1 className="bold">{awayTeam}</h1>
-          <p>{game.away.wins}-{game.away.losses}</p>
+          <p className='small'>{game.away.wins}-{game.away.losses}</p>
         </Col>
         <Col xs={1} style={{ textAlign: 'center' }}>
           <p className="bold">{game.away.points}</p>
@@ -45,7 +45,7 @@ class MatchCard extends React.Component {
         <Col xs={3}>
           <p className="small label">{homeCity}</p>
           <h1 className="bold">{homeTeam}</h1>
-          <p>{game.home.wins}-{game.home.losses}</p>
+          <p className='small'>{game.home.wins}-{game.home.losses}</p>
         </Col>
         <Col xs={3}>
           <p className="small label">Spread</p>

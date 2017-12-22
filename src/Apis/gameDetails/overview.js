@@ -19,3 +19,8 @@ export const getRecentGamesData = (id) => (
 export const getStartingLineupData = (id) => (
   axios.get(`/api/nba/v1/matches/${id}/starters`)
 )
+
+// Injuries
+export const getInjuriesData = (id) => (
+  axios.get(`/api/nba/v1/matches/${id}/injuries`)
+)

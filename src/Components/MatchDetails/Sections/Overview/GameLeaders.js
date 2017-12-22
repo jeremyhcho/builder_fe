@@ -80,7 +80,9 @@ class GameLeaders extends React.Component {
                 <Row between='xs' center='xs' middle='xs' styleName="stats">
                   <Col xs={5}>
                     <Row middle='xs'>
-                      <p styleName="stat-position" className="label small">{summary.away.leaders[selected].position}</p>
+                      <p styleName="stat-position" className="label small">
+                        {summary.away.leaders[selected].position}
+                      </p>
                       <p className="semibold">
                         {summary.away.leaders[selected].first_name.slice(0, 1)}. {' '}
                         {summary.away.leaders[selected].last_name}

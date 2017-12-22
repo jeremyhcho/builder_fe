@@ -15,7 +15,7 @@ const sectionStyle = {
   marginTop: '15px',
   overflowY: 'scroll',
   height: 'calc(100vh - 150px)',
-  paddingBottom: '25px'
+  padding: '0 65px 25px 65px',
 }
 
 class MatchDetails extends React.Component {
@@ -32,7 +32,7 @@ class MatchDetails extends React.Component {
     ]
     return (
       <div>
-        <Row style={{ marginTop: '15px' }}>
+        <Row style={{ marginTop: '15px', padding: '0 65px' }}>
           <Col xs={6}>
             <Tab
               tabs={tabItems}
@@ -42,7 +42,7 @@ class MatchDetails extends React.Component {
             />
           </Col>
         </Row>
-        <div style={sectionStyle}>
+        <div className='matches-scroller' style={sectionStyle}>
           <Switch>
             <Route exact path='/matches/:id/overview' component={Overview} />
             <Route exact path='/matches/:id/teams' component={TeamStats} />

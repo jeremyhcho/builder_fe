@@ -37,11 +37,11 @@ class RecentGames extends React.Component {
       }
     }
     return streakType === 'win' ? (
-      <span style={{ color: 'var(--green)' }} className="semibold">
+      <span style={{ color: 'var(--green)', marginLeft: '5px' }} className="semibold">
         W{counter}
       </span>
     ) : (
-      <span style={{ color: 'var(--red)' }} className="semibold">
+      <span style={{ color: 'var(--red)', marginLeft: '5px' }} className="semibold">
         L{counter}
       </span>
     )
@@ -64,9 +64,9 @@ class RecentGames extends React.Component {
           >
             <Row middle='xs' center='xs' styleName="recent-games-header">
               <Col xs={6}>
-                <h1 className='semibold'>
+                <h4 className='semibold'>
                   Streak {this.parseStreak()}
-                </h1>
+                </h4>
               </Col>
 
               <Col xs={6}>
@@ -80,7 +80,7 @@ class RecentGames extends React.Component {
 
             <div styleName='recent-games-wrapper'>
               {
-                recentGames[selected].map(stats => {
+                recentGames[selected].map((stats, index) => {
                   const teamType = stats.match_type
                   let opposingTeamType = 'away'
                   if (teamType === 'away') opposingTeamType = 'home'
@@ -99,11 +99,11 @@ class RecentGames extends React.Component {
                       >
                         <div styleName="match-item">
                           {stats.outcome === 'loss' ? (
-                            <div styleName="outcome loss">
+                            <div className='small semibold' styleName="outcome loss">
                               L
                             </div>
                           ) : (
-                            <div styleName="outcome win">
+                            <div className='small semibold' styleName="outcome win">
                               W
                             </div>
                           )}
@@ -127,16 +127,20 @@ class RecentGames extends React.Component {
                         </div>
                       </div>
 
-                      <hr
-                        style={{
-                          border: 'none',
-                          width: '100%',
-                          height: '1px',
-                          backgroundColor: 'var(--light-gray)',
-                          margin: '10px 0 10px',
-                          display: 'flex'
-                        }}
-                      />
+                      {
+                        index !== recentGames[selected].length - 1 && (
+                          <hr
+                            style={{
+                              border: 'none',
+                              width: '100%',
+                              height: '1px',
+                              backgroundColor: 'var(--light-gray)',
+                              margin: '10px 0 10px',
+                              display: 'flex'
+                            }}
+                          />
+                        )
+                      }
                     </div>
                   )
                 })
@@ -148,7 +152,7 @@ class RecentGames extends React.Component {
     }
     return (
       <div>
-        <OverviewSpinner label="Recent Games" />
+        <OverviewSpinner style={{ height: '386px' }} label="Recent Games" />
       </div>
     )
   }

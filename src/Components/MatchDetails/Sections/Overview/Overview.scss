@@ -11,13 +11,11 @@
 
   &.away {
     text-align: right;
-    margin-right: 30px;
   }
 
   &.home {
     text-align: left;
     flex-direction: row-reverse;
-    margin-left: 30px;
   }
 
   .points {
@@ -49,6 +47,7 @@
 
     .stat-position {
       margin-right: 5px;
+      width: 15px;
     }
   }
 }
@@ -128,6 +127,35 @@
 
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+}
+
+// Injuries
+.injuries {
+  margin-top: -75px;
+
+  .headers {
+    display: flex;
+    padding: 0 35px 25px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .injury-items {
+    max-height: 300px;
+    overflow-y: auto;
+
+    .injury-item {
+      display: flex;
+      padding: 15px 35px;
+
+      .red {
+        color: var(--dark-red);
+      }
+
+      .gold {
+        color: var(--gold);
+      }
     }
   }
 }

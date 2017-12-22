@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './Card.scss'
 
 const Card = ({ wrapperStyle, label, children, ...props }) => (
-  <div {...props} style={{ height: '100%', marginTop: '25px' }}>
+  <div {...props} style={{ height: '100%', marginTop: '35px' }}>
     <p className="semibold" style={{ marginBottom: '5px', marginLeft: '15px' }}>{label}</p>
     <div styleName="card" style={wrapperStyle}>
       {children}

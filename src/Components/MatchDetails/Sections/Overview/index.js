@@ -9,6 +9,7 @@ import GameLeaders from './GameLeaders'
 import RecentGames from './RecentGames'
 import StartingLineup from './StartingLineup'
 import VegasLines from './VegasLines'
+import Injuries from './Injuries'
 
 // CSS
 import './Overview.scss'
@@ -17,12 +18,12 @@ class Overview extends React.Component {
   render () {
     const idProp = this.props.match.params.id
     return (
-      <Row style={{ maxWidth: '1300px' }}>
+      <Row style={{ maxWidth: '1300px', width: '100%' }}>
         <Col xs={12}>
           <Summary idProp={idProp} />
         </Col>
 
-        <Col sm={12}>
+        <Col xs={12}>
           <Quarters idProp={idProp} />
         </Col>
 
@@ -40,6 +41,10 @@ class Overview extends React.Component {
 
         <Col xs={5}>
           <RecentGames idProp={idProp} />
+        </Col>
+
+        <Col xs={7}>
+          <Injuries idProp={idProp} />
         </Col>
       </Row>
     )

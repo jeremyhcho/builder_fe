@@ -38,6 +38,10 @@ const primaryColors = [
     hex: '#D03D3C'
   },
   {
+    var: '--gold',
+    hex: '#FCBF49'
+  },
+  {
     var: '--green',
     hex: '#0CCE6B'
   },

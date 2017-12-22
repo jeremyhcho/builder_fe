@@ -13,3 +13,7 @@ export const RECEIVE_NBA_RECENT_GAMES = 'nba/matches/RECEIVE_NBA_RECENT_GAMES'
 // Starting Lineup
 export const FETCH_NBA_STARTING_LINEUP = 'nba/matches/FETCH_NBA_STARTING_LINEUP'
 export const RECEIVE_NBA_STARTING_LINEUP = 'nba/matches/RECEIVE_NBA_STARTING_LINEUP'
+
+// Starting Lineup
+export const FETCH_NBA_INJURIES = 'nba/matches/FETCH_NBA_INJURIES'
+export const RECEIVE_NBA_INJURIES = 'nba/matches/RECEIVE_NBA_INJURIES'

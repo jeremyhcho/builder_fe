@@ -30,21 +30,49 @@ class Summary extends React.Component {
         {
           summary ? (
             <Card label="Summary" wrapperStyle={wrapperStyle}>
-              <Row middle='xs' center='xs' style={{ height: '100%' }}>
-                <div styleName='summary away'>
+              <Row middle='xs' center='xs' style={{ height: '100%', position: 'relative' }}>
+                <div
+                  styleName='summary away'
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: '50%',
+                    transform: 'translateY(-50%) translateX(-78px)'
+                  }}
+                >
                   <div>
-                    <p className="semibold label small">{summary.away.city}</p>
+                    <p className="label small">{summary.away.city}</p>
                     <h2 className="semibold">{summary.away.name.toUpperCase()}</h2>
+                    <p className="label small">{summary.away.wins}-{summary.away.losses}</p>
                   </div>
                   <h1 styleName="points away" className="bold">{summary.away.points}</h1>
                 </div>
 
-                <h1 className='semibold'>@</h1>
+                <h1
+                  className='semibold'
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                >
+                  @
+                </h1>
 
-                <div styleName='summary home'>
+                <div
+                  styleName='summary home'
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translateY(-50%) translateX(78px)'
+                  }}
+                >
                   <div>
-                    <p className="semibold label small">{summary.home.city}</p>
+                    <p className="label small">{summary.home.city}</p>
                     <h2 className="semibold">{summary.home.name.toUpperCase()}</h2>
+                    <p className="label small">{summary.home.wins}-{summary.home.losses}</p>
                   </div>
                   <h1 styleName='points home' className="bold">{summary.home.points}</h1>
                 </div>

@@ -3,14 +3,16 @@ import {
   RECEIVE_NBA_SUMMARY,
   RECEIVE_NBA_QUARTERS,
   RECEIVE_NBA_RECENT_GAMES,
-  RECEIVE_NBA_STARTING_LINEUP
+  RECEIVE_NBA_STARTING_LINEUP,
+  RECEIVE_NBA_INJURIES
 } from 'Constants'
 
 const initialState = {
   summary: null,
   quarters: null,
   recentGames: null,
-  startingLineup: null
+  startingLineup: null,
+  injuries: null
 }
 
 const overview = (state = initialState, action) => {
@@ -37,6 +39,12 @@ const overview = (state = initialState, action) => {
       return {
         ...state,
         startingLineup: action.startingLineup.data
+      }
+
+    case RECEIVE_NBA_INJURIES:
+      return {
+        ...state,
+        injuries: action.injuries.data
       }
 
     default:

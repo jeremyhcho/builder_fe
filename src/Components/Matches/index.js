@@ -12,7 +12,7 @@ import './Matches.scss'
 
 const Matches = ({ nbaGames }) => (
   <div>
-    <Row>
+    <Row style={{ padding: '0 65px' }}>
       <DateInput />
     </Row>
     <MatchList matches={nbaGames} />

@@ -6,7 +6,6 @@ import Matches from 'Components/Matches'
 import MatchDetails from 'Components/MatchDetails'
 
 const matchSectionStyle = {
-  padding: '0 65px',
   backgroundColor: 'var(--lightest-gray)',
 }
 

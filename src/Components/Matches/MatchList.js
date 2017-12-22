@@ -79,7 +79,7 @@ class MatchList extends React.Component {
     const groupedMatches = this.groupedMatches()
     const { paginatingMatches, fetchingMatches } = this.props
     return (
-      <Row>
+      <Row style={{ padding: '0 65px' }}>
         <div
           style={{ height: 'calc(100vh - 150px)', paddingBottom: '25px', overflowY: 'scroll' }}
           styleName="matches-container"

@@ -25,8 +25,8 @@ const navItems = [
   {
     icon: Search,
     selectedIcon: SearchSelected,
-    route: '/search',
-    key: 'Search'
+    route: '/teams',
+    key: 'Teams'
   },
   {
     icon: Rocket,

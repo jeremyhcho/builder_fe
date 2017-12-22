@@ -7,7 +7,9 @@ import {
   FETCH_NBA_RECENT_GAMES,
   RECEIVE_NBA_RECENT_GAMES,
   FETCH_NBA_STARTING_LINEUP,
-  RECEIVE_NBA_STARTING_LINEUP
+  RECEIVE_NBA_STARTING_LINEUP,
+  FETCH_NBA_INJURIES,
+  RECEIVE_NBA_INJURIES
 } from 'Constants'
 
 // Summary
@@ -52,4 +54,15 @@ export const fetchNBAStartingLineup = (id) => ({
 export const receiveNBAStartingLineup = (startingLineup) => ({
   type: RECEIVE_NBA_STARTING_LINEUP,
   startingLineup
+})
+
+// Injuries
+export const fetchNBAInjuries = (id) => ({
+  type: FETCH_NBA_INJURIES,
+  id
+})
+
+export const receiveNBAInjuries = (injuries) => ({
+  type: RECEIVE_NBA_INJURIES,
+  injuries
 })

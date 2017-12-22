@@ -46,7 +46,7 @@ class StartingLineup extends React.Component {
               <Row style={{ width: '100%' }}>
                 <Col xs={5}>
                   <p
-                    className='label semibold'
+                    className='label small'
                     style={{ textAlign: 'right' }}
                   >
                     {summary.away.city}
@@ -85,7 +85,7 @@ class StartingLineup extends React.Component {
                 </Col>
 
                 <Col xs={5}>
-                  <p className='label semibold'>{summary.home.city}</p>
+                  <p className='label small'>{summary.home.city}</p>
                   <h4 className='semibold' style={{ marginBottom: '30px' }}>
                     {summary.home.name}
                   </h4>
@@ -109,7 +109,7 @@ class StartingLineup extends React.Component {
               </Row>
             </Card>
           ) : (
-            <OverviewSpinner label="Starting Lineups" />
+            <OverviewSpinner style={{ height: '313px' }} label="Starting Lineups" />
           )
         }
       </div>

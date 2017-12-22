@@ -5,7 +5,8 @@ import {
   getSummaryData,
   getQuartersData,
   getRecentGamesData,
-  getStartingLineupData
+  getStartingLineupData,
+  getInjuriesData
 } from 'Apis'
 
 // Constants
@@ -13,7 +14,8 @@ import {
   FETCH_NBA_SUMMARY,
   FETCH_NBA_QUARTERS,
   FETCH_NBA_RECENT_GAMES,
-  FETCH_NBA_STARTING_LINEUP
+  FETCH_NBA_STARTING_LINEUP,
+  FETCH_NBA_INJURIES
 } from 'Constants'
 
 // Actions
@@ -21,7 +23,8 @@ import {
   receiveNBASummary,
   receiveNBAQuarters,
   receiveNBARecentGames,
-  receiveNBAStartingLineup
+  receiveNBAStartingLineup,
+  receiveNBAInjuries
 } from 'Actions'
 
 function* getSummary ({ id }) {
@@ -51,13 +54,21 @@ function* getRecentGames ({ id }) {
   }
 }
 
-
 function* getStartingLineup ({ id }) {
   try {
     const startingLineup = yield call(getStartingLineupData, id)
     yield put(receiveNBAStartingLineup(startingLineup))
   } catch ({ response }) {
     console.log('no starting lineup found: ', response)
+  }
+}
+
+function* getInjuries ({ id }) {
+  try {
+    const injuries = yield call(getInjuriesData, id)
+    yield put(receiveNBAInjuries(injuries))
+  } catch ({ response }) {
+    console.log('no injuries found: ', response)
   }
 }
 
@@ -77,11 +88,16 @@ function* watchNBAStartingLineupFetch () {
   yield takeLatest(FETCH_NBA_STARTING_LINEUP, getStartingLineup)
 }
 
+function* watchNBAInjuriesFetch () {
+  yield takeLatest(FETCH_NBA_INJURIES, getInjuries)
+}
+
 export default function* overviewSaga () {
   yield [
     watchNBASummaryFetch(),
     watchNBAQuartersFetch(),
     watchNBARecentGamesFetch(),
-    watchNBAStartingLineupFetch()
+    watchNBAStartingLineupFetch(),
+    watchNBAInjuriesFetch()
   ]
 }
