@@ -3,10 +3,10 @@
   width: 60px;
   flex: 0 0 60px;
   z-index: 999;
-  background-color: var(--dark-blue);
+  background-color: var(--navy-blue);
   color: var(--font-color);
   overflow-x: hidden; /* disable horizontal scrolling */
-  padding: 70px 0px;
+  padding: 125px 0px;
   text-align: center;
   transition: all 300ms ease;
 
@@ -15,18 +15,16 @@
     height: 40px;
     width: 40px;
     margin: 5px auto;
-    padding: 12px 10px;
-    background-color: #FFF;
+    padding: 10px;
     transition: all 300ms ease;
+    cursor: pointer;
 
     &.selected {
-      // background-color: rgba(9, 30, 66, 0.04);
-      background-color: var(--dark-blue);
+      color: white;
     }
 
     &:hover {
-      background-color: var(--blue);
-      // background-color: rgba(9, 30, 66, 0.04);
+      background-color: darken(#253858, 5%)
     }
   }
 }

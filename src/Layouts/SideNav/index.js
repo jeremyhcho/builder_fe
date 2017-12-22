@@ -6,6 +6,11 @@ import classNames from 'classnames'
 // Components
 import Matches from 'Assets/Icons/nav/basketball-13.svg'
 import MatchesSelected from 'Assets/Icons/nav/basketball-13-white.svg'
+import Search from 'Assets/Icons/nav/m-search.svg'
+import SearchSelected from 'Assets/Icons/nav/m-search-white.svg'
+import Rocket from 'Assets/Icons/nav/rocket.svg'
+import RocketSelected from 'Assets/Icons/nav/rocket-white.svg'
+import { Tooltip } from 'Components/Common'
 
 // CSS
 import './SideNav.scss'
@@ -15,7 +20,19 @@ const navItems = [
     icon: Matches,
     selectedIcon: MatchesSelected,
     route: '/matches',
-    key: 'matches'
+    key: 'Matches'
+  },
+  {
+    icon: Search,
+    selectedIcon: SearchSelected,
+    route: '/search',
+    key: 'Search'
+  },
+  {
+    icon: Rocket,
+    selectedIcon: RocketSelected,
+    route: '/rocket',
+    key: 'Rocket'
   }
 ]
 
@@ -49,7 +66,9 @@ class SideNav extends React.Component {
               styleName={navItemStyle}
               onClick={this.handleClick(key, route)}
               selected={selected}
+              data-tip-for={`side-nav-item-${key}`}
             >
+              <Tooltip id={`side-nav-item-${key}`} pos='right'>{key}</Tooltip>
               {selected ?
                 <SelectedIcon height={20} width={20} />
                 : <Icon height={20} width={20} />

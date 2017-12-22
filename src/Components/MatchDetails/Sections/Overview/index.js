@@ -17,12 +17,12 @@ class Overview extends React.Component {
   render () {
     const idProp = this.props.match.params.id
     return (
-      <Row>
-        <Col xs={12} lg={6}>
+      <Row style={{ maxWidth: '1300px' }}>
+        <Col xs={12}>
           <Summary idProp={idProp} />
         </Col>
 
-        <Col xs={12} lg={6}>
+        <Col sm={12}>
           <Quarters idProp={idProp} />
         </Col>
 
@@ -34,11 +34,11 @@ class Overview extends React.Component {
           <VegasLines />
         </Col>
 
-        <Col xs={7} lg={6}>
+        <Col xs={7}>
           <StartingLineup idProp={idProp} />
         </Col>
 
-        <Col xs={5} lg={6}>
+        <Col xs={5}>
           <RecentGames idProp={idProp} />
         </Col>
       </Row>

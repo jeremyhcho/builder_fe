@@ -5,12 +5,8 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 // Components
 import { Spinner, Card } from 'Components/Common'
 
-const wrapperStyle = {
-  padding: '50px 25px'
-}
-
 const OverviewSpinner = ({ label, style }) => (
-  <Card label={label} wrapperStyle={{ wrapperStyle, ...style }}>
+  <Card label={label} wrapperStyle={{ padding: '50px 25px', ...style }}>
     <Row center='xs' middle='xs' style={{ height: '100%' }}>
       <Col xs={12}>
         <Spinner lg show />

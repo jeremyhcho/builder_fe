@@ -89,13 +89,13 @@ class MatchList extends React.Component {
         >
           {
             fetchingMatches ? (
-              <Row center='xs' style={{ marginTop: 'calc(100vh * .25)', width: '100%' }}>
+              <Row center='xs' style={{ marginTop: 'calc(100vh * .25)', width: '100%', maxWidth: '1600px' }}>
                 <Col xs={12}>
                   <Spinner lg show />
                 </Col>
               </Row>
             ) : (
-              <Row style={{ width: '100%' }}>
+              <Row style={{ width: '100%', maxWidth: '1600px' }}>
                 {
                   paginatingMatches ?
                     <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (

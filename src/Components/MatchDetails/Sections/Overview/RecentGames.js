@@ -64,7 +64,7 @@ class RecentGames extends React.Component {
           >
             <Row middle='xs' center='xs' styleName="recent-games-header">
               <Col xs={6}>
-                <h1>
+                <h1 className='semibold'>
                   Streak {this.parseStreak()}
                 </h1>
               </Col>
@@ -78,49 +78,70 @@ class RecentGames extends React.Component {
               </Col>
             </Row>
 
-            {
-              recentGames[selected].map(stats => {
-                const teamType = stats.match_type
-                let opposingTeamType = 'away'
-                if (teamType === 'away') opposingTeamType = 'home'
-                return (
-                  <Row
-                    key={uniqueId('recent_games_match_')}
-                    middle='xs'
-                    center='xs'
-                    styleName="recent-games-match"
-                    between='xs'
-                  >
-                    <div styleName="match-item">
-                      {stats.outcome === 'loss' ? (
-                        <div styleName="outcome loss">
-                          L
+            <div styleName='recent-games-wrapper'>
+              {
+                recentGames[selected].map(stats => {
+                  const teamType = stats.match_type
+                  let opposingTeamType = 'away'
+                  if (teamType === 'away') opposingTeamType = 'home'
+                  return (
+                    <div
+                      key={uniqueId('recent_games_match_')}
+                      style={{
+                        display: 'flex',
+                        width: '100%',
+                        flex: 1,
+                        flexDirection: 'column'
+                      }}
+                    >
+                      <div
+                        styleName="recent-games-match"
+                      >
+                        <div styleName="match-item">
+                          {stats.outcome === 'loss' ? (
+                            <div styleName="outcome loss">
+                              L
+                            </div>
+                          ) : (
+                            <div styleName="outcome win">
+                              W
+                            </div>
+                          )}
                         </div>
-                      ) : (
-                        <div styleName="outcome win">
-                          W
+                        <div styleName="match-item">
+                          {
+                            teamType === 'home' ? (
+                              <p className="semibold">vs</p>
+                            ) : (
+                              <p className="semibold">@</p>
+                            )
+                          }
                         </div>
-                      )}
+                        <div styleName="match-item">
+                          <p>
+                            <span>{stats.opposing_team} &nbsp;</span>
+                            <span className='semibold small'>
+                              ({stats.score[teamType]}-{stats.score[opposingTeamType]})
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+
+                      <hr
+                        style={{
+                          border: 'none',
+                          width: '100%',
+                          height: '1px',
+                          backgroundColor: 'var(--light-gray)',
+                          margin: '10px 0 10px',
+                          display: 'flex'
+                        }}
+                      />
                     </div>
-                    <div styleName="match-item">
-                      {
-                        teamType === 'home' ? (
-                          <p className="semibold">vs</p>
-                        ) : (
-                          <p className="semibold">@</p>
-                        )
-                      }
-                    </div>
-                    <div styleName="match-item">
-                      <p className="label semibold">
-                        {stats.opposing_team} {' '}
-                        ({stats.score[teamType]}-{stats.score[opposingTeamType]})
-                      </p>
-                    </div>
-                  </Row>
-                )
-              })
-            }
+                  )
+                })
+              }
+            </div>
           </Card>
         </div>
       )

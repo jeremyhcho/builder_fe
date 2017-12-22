@@ -31,13 +31,14 @@ class MatchDetails extends React.Component {
       { label: 'Team Stats', key: 'teams' }
     ]
     return (
-      <div style={{ maxWidth: '1600px' }}>
+      <div>
         <Row style={{ marginTop: '15px' }}>
           <Col xs={6}>
             <Tab
               tabs={tabItems}
               defaultKey='overview'
               onChange={this.handleNavigation}
+              listStyle={{ maxWidth: '560px' }}
             />
           </Col>
         </Row>
