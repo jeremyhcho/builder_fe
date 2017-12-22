@@ -8,11 +8,6 @@ import { MenuItem, IconDropdown } from 'Components/Common'
 // CSS
 import './Header.scss'
 
-// const routes = {
-//   '/matches': 'Games',
-//   '/matches/:id': 'Game Details'
-// }
-
 class Header extends React.Component {
   getCurrentRoute() {
     const { location } = this.props

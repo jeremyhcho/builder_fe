@@ -15,7 +15,6 @@ const wrapperStyle = {
   height: '212px'
 }
 
-<<<<<<< HEAD
 class Summary extends React.Component {
   componentDidMount() {
     this.props.fetchNBASummary(this.props.idProp)
@@ -84,39 +83,6 @@ class Summary extends React.Component {
     )
   }
 }
-=======
-const Summary = ({ summary }) => (
-  <div>
-    {
-      summary ? (
-        <Card label="Summary" wrapperStyle={wrapperStyle}>
-          <Row middle='xs' center='xs' style={{ height: '100%' }}>
-            <div styleName='summary away'>
-              <div>
-                <p className="semibold label small">{summary.away.city}</p>
-                <h2 className="semibold">{summary.away.name.toUpperCase()}</h2>
-              </div>
-              <h1 styleName="points away" className="bold">{summary.away.points}</h1>
-            </div>
-
-            <h1 className='semibold'>@</h1>
-
-            <div styleName='summary home'>
-              <div>
-                <p className="semibold label small">{summary.home.city}</p>
-                <h2 className="semibold">{summary.home.name.toUpperCase()}</h2>
-              </div>
-              <h1 styleName='points home' className="bold">{summary.home.points}</h1>
-            </div>
-          </Row>
-        </Card>
-      ) : (
-        <OverviewSpinner label="Summary" />
-      )
-    }
-  </div>
-)
->>>>>>> Changes Tabs Component default key to be dynamic on mount
 
 Summary.defaultProps = {
   summary: {}
