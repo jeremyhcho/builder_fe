@@ -10,6 +10,12 @@ class Tab extends React.Component {
     selectedTabItem: this.getInitialSelected()
   }
 
+  componentWillReceiveProps (newProps) {
+    this.setState({
+      selectedTabItem: newProps.tabs.find(tab => tab.key === newProps.selectedKey)
+    })
+  }
+
   onClick = (tabItem) => {
     return (e) => {
       if (tabItem.key === this.state.selectedTabItem.key || tabItem.disabled) {
@@ -22,10 +28,10 @@ class Tab extends React.Component {
   }
 
   getInitialSelected () {
-    const { tabs, defaultKey } = this.props
+    const { tabs, selectedKey } = this.props
 
-    if (defaultKey) {
-      return tabs.find(tabItem => tabItem.key === defaultKey)
+    if (selectedKey) {
+      return tabs.find(tabItem => tabItem.key === selectedKey)
     }
 
     return tabs[0]
@@ -60,14 +66,14 @@ class Tab extends React.Component {
 }
 
 Tab.defaultProps = {
-  defaultKey: undefined,
+  selectedKey: undefined,
   listStyle: {}
 }
 
 Tab.propTypes = {
   tabs: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  defaultKey: PropTypes.string,
+  selectedKey: PropTypes.string,
   listStyle: PropTypes.object
 }
 

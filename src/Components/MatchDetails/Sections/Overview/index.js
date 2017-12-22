@@ -20,7 +20,7 @@ class Overview extends React.Component {
     return (
       <Row style={{ maxWidth: '1300px', width: '100%' }}>
         <Col xs={12}>
-          <Summary idProp={idProp} />
+          <Summary />
         </Col>
 
         <Col xs={12}>

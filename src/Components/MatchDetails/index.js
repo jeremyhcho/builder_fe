@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
@@ -11,6 +11,9 @@ import { Overview, PlayerStats, TeamStats, Models } from './Sections'
 // CSS
 import './MatchDetails.scss'
 
+// Actions
+import { fetchNBASummary } from 'Actions'
+
 const sectionStyle = {
   marginTop: '15px',
   overflowY: 'scroll',
@@ -19,14 +22,12 @@ const sectionStyle = {
 }
 
 class MatchDetails extends React.Component {
-  getCurrentRoute () {
-    const path = this.props.location.pathname.split('/')
-    const route = path.slice(path.length - 1)[0]
-    if (!isNaN(route)) return 'overview'
-    return route
+  componentDidMount () {
+    this.props.fetchNBASummary(this.props.match.params.id)
   }
 
   handleNavigation = (e, menuItem) => {
+    this.setState({ selected: menuItem.key })
     this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
   }
 
@@ -37,13 +38,18 @@ class MatchDetails extends React.Component {
       { label: 'Player Stats', key: 'players' },
       { label: 'Team Stats', key: 'teams' }
     ]
+    const path = this.props.location.pathname.split('/')
+    const route = path.slice(path.length - 1)[0]
+    let routeKey
+    if (!isNaN(route)) routeKey = 'overview'
+    else routeKey = route
     return (
       <div>
         <Row style={{ marginTop: '15px', padding: '0 65px' }}>
           <Col xs={6}>
             <Tab
               tabs={tabItems}
-              defaultKey={this.getCurrentRoute()}
+              selectedKey={routeKey}
               onChange={this.handleNavigation}
               listStyle={{ maxWidth: '560px' }}
             />
@@ -66,7 +72,15 @@ class MatchDetails extends React.Component {
 MatchDetails.propTypes = {
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  fetchNBASummary: PropTypes.func.isRequired
 }
 
-export default MatchDetails
+const mapDispatchToProps = {
+  fetchNBASummary
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MatchDetails)
