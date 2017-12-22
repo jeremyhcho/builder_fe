@@ -5,7 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import uniqueId from 'lodash/uniqueid'
 
 // Components
-import { Card, ButtonGroup, Button } from 'Components/Common'
+import { Card, ButtonGroup } from 'Components/Common'
 import OverviewSpinner from './OverviewSpinner'
 
 // CSS
@@ -24,6 +24,29 @@ class RecentGames extends React.Component {
     fetchNBARecentGames(idProp)
   }
 
+  parseStreak () {
+    const { recentGames } = this.props
+    const { selected } = this.state
+    let counter = 1
+    const streakType = recentGames[selected][0].outcome
+    for (let i = 1; i < recentGames[selected].length; i++) {
+      if (recentGames[selected][i].outcome === streakType) {
+        counter += 1
+      } else {
+        break
+      }
+    }
+    return streakType === 'win' ? (
+      <span style={{ color: 'var(--green)' }} className="semibold">
+        W{counter}
+      </span>
+    ) : (
+      <span style={{ color: 'var(--red)' }} className="semibold">
+        L{counter}
+      </span>
+    )
+  }
+
   render () {
     const { recentGames, summary } = this.props
     const { selected } = this.state
@@ -34,10 +57,16 @@ class RecentGames extends React.Component {
       ]
       return (
         <div>
-          <Card label="Recent Games" wrapperStyle={{ padding: '25px' }} styleName="recent-games">
-            <Row between='xs' middle='xs' center='xs' styleName="recent-games-header">
+          <Card
+            label="Recent Games"
+            wrapperStyle={{ padding: '25px' }}
+            styleName="recent-games"
+          >
+            <Row middle='xs' center='xs' styleName="recent-games-header">
               <Col xs={6}>
-                <h1>Streak W2</h1>
+                <h1>
+                  Streak {this.parseStreak()}
+                </h1>
               </Col>
 
               <Col xs={6}>
@@ -50,29 +79,47 @@ class RecentGames extends React.Component {
             </Row>
 
             {
-              recentGames[selected].map(stats => (
-                <Row
-                  key={uniqueId('recent_games_match_')}
-                  center='xs'
-                  middle='xs'
-                  styleName="recent-games-match"
-                  between='xs'
-                >
-                  {stats.outcome === 'loss' ? (
-                    <Button danger>L</Button>
-                  ) : (
-                    <Button success>W</Button>
-                  )}
-                  {
-                    stats.match_type === selected ? (
-                      <p>@</p>
-                    ) : (
-                      <p>vs</p>
-                    )
-                  }
-                  <p>{stats.opposing_team} ({stats.score[selected]}-{stats.score.home})</p>
-                </Row>
-              ))
+              recentGames[selected].map(stats => {
+                const teamType = stats.match_type
+                let opposingTeamType = 'away'
+                if (teamType === 'away') opposingTeamType = 'home'
+                return (
+                  <Row
+                    key={uniqueId('recent_games_match_')}
+                    middle='xs'
+                    center='xs'
+                    styleName="recent-games-match"
+                    between='xs'
+                  >
+                    <div styleName="match-item">
+                      {stats.outcome === 'loss' ? (
+                        <div styleName="outcome loss">
+                          L
+                        </div>
+                      ) : (
+                        <div styleName="outcome win">
+                          W
+                        </div>
+                      )}
+                    </div>
+                    <div styleName="match-item">
+                      {
+                        teamType === 'home' ? (
+                          <p className="semibold">vs</p>
+                        ) : (
+                          <p className="semibold">@</p>
+                        )
+                      }
+                    </div>
+                    <div styleName="match-item">
+                      <p className="label semibold">
+                        {stats.opposing_team} {' '}
+                        ({stats.score[teamType]}-{stats.score[opposingTeamType]})
+                      </p>
+                    </div>
+                  </Row>
+                )
+              })
             }
           </Card>
         </div>

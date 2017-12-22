@@ -83,11 +83,31 @@
   }
 
   .recent-games-match {
-    padding: 15px;
+    padding: 10px;
     position: relative;
 
+    .match-item {
+      width: 33%;
+    }
+
+    .outcome {
+      display: inline-block;
+      width: 35px;
+      border-radius: var(--border-radius);
+      color: #FFF;
+      text-align: center;
+      &.win {
+        border: 1px solid var(--green);
+        background-color: var(--green);
+      }
+      &.loss {
+        border: 1px solid var(--red);
+        background-color: var(--red);
+      }
+    }
+
     &:last-child {
-      padding: 15px 15px 0 15px;
+      padding: 10px 10px 0 10px;
     }
 
     &:not(:last-child):after {
