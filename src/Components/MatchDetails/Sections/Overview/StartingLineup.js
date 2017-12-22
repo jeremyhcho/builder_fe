@@ -42,8 +42,8 @@ class StartingLineup extends React.Component {
       <div styleName='starting-lineup'>
         {
           startingLineup && summary ? (
-            <Card label='Starting Lineups' wrapperStyle={{ padding: '40px', minWidth: '400px' }}>
-              <Row>
+            <Card label='Starting Lineups' wrapperStyle={{ padding: '40px 0' }}>
+              <Row style={{ width: '100%' }}>
                 <Col xs={5}>
                   <p
                     className='label semibold'
@@ -73,7 +73,7 @@ class StartingLineup extends React.Component {
                   }
                 </Col>
 
-                <Col xs={1}>
+                <Col xs={2}>
                   <hr
                     style={{
                       height: '100%',
