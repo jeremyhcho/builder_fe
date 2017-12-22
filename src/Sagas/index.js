@@ -10,7 +10,8 @@ import {
 } from './matches'
 
 import {
-  overviewSaga
+  overviewSaga,
+  teamStatsSaga
 } from './matchDetails'
 
 export default function* rootSaga() {
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     resetSaga(),
     nbaSaga(),
     overviewSaga(),
+    teamStatsSaga(),
   ]
 }
