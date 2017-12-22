@@ -16,10 +16,6 @@ const wrapperStyle = {
 }
 
 class Summary extends React.Component {
-  componentDidMount() {
-    this.props.fetchNBASummary(this.props.idProp)
-  }
-
   render () {
     const { summary } = this.props
     return (
