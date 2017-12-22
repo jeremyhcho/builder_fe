@@ -21,7 +21,9 @@ const sectionStyle = {
 class MatchDetails extends React.Component {
   getCurrentRoute () {
     const path = this.props.location.pathname.split('/')
-    return path.slice(path.length - 1)[0]
+    const route = path.slice(path.length - 1)[0]
+    if (!isNaN(route)) return 'overview'
+    return route
   }
 
   handleNavigation = (e, menuItem) => {
