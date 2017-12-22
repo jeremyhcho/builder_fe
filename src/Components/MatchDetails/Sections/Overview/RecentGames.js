@@ -91,7 +91,7 @@ class RecentGames extends React.Component {
                     styleName="recent-games-match"
                     between='xs'
                   >
-                    <div styleName="match-item">
+                    <div styleName="match-item outcome">
                       {stats.outcome === 'loss' ? (
                         <div styleName="outcome loss">
                           L
@@ -111,11 +111,11 @@ class RecentGames extends React.Component {
                         )
                       }
                     </div>
-                    <div styleName="match-item">
+                    <div styleName="match-item score">
                       <p className="label semibold">
                         {stats.opposing_team} {' '}
-                        ({stats.score[teamType]}-{stats.score[opposingTeamType]})
                       </p>
+                      <p className="semibold">({stats.score[teamType]}-{stats.score[opposingTeamType]})</p>
                     </div>
                   </Row>
                 )

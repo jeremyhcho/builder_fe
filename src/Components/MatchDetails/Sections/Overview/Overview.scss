@@ -83,11 +83,18 @@
   }
 
   .recent-games-match {
-    padding: 10px;
+    padding: 10px 15px;
     position: relative;
 
     .match-item {
+      display: block;
       width: 33%;
+      &.outcome {
+
+      }
+      &.score {
+        display: inherit;
+      }
     }
 
     .outcome {
@@ -107,7 +114,7 @@
     }
 
     &:last-child {
-      padding: 10px 10px 0 10px;
+      padding: 10px 15px 0 15px;
     }
 
     &:not(:last-child):after {
