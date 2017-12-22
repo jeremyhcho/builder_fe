@@ -19,6 +19,11 @@ const sectionStyle = {
 }
 
 class MatchDetails extends React.Component {
+  getCurrentRoute () {
+    const path = this.props.location.pathname.split('/')
+    return path.slice(path.length - 1)[0]
+  }
+
   handleNavigation = (e, menuItem) => {
     this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
   }
@@ -36,7 +41,7 @@ class MatchDetails extends React.Component {
           <Col xs={6}>
             <Tab
               tabs={tabItems}
-              defaultKey='overview'
+              defaultKey={this.getCurrentRoute()}
               onChange={this.handleNavigation}
               listStyle={{ maxWidth: '560px' }}
             />
@@ -57,6 +62,7 @@ class MatchDetails extends React.Component {
 }
 
 MatchDetails.propTypes = {
+  location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 }
