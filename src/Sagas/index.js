@@ -12,9 +12,7 @@ import {
   playerStatsSaga
 } from './nba'
 
-import nbaTeamsSaga from './teams'
-
-import { teamDetailsOverviewSaga } from './teamDetails'
+import { nbaTeamsSaga } from './teams'
 
 export default function* rootSaga() {
   yield [
@@ -25,7 +23,6 @@ export default function* rootSaga() {
     overviewSaga(),
     teamStatsSaga(),
     playerStatsSaga(),
-    nbaTeamsSaga(),
-    teamDetailsOverviewSaga()
+    nbaTeamsSaga()
   ]
 }

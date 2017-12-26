@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   auth,
   games,
   gameDetails,
-  nbaTeams
+  nbaTeams,
   router: routerReducer,
   form: formReducer
 })

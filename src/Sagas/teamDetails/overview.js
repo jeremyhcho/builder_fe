@@ -8,7 +8,7 @@ import { receiveNBATeamDetails } from 'Actions'
 
 function* getNBATeamDetails ({ id }) {
   try {
-    const teamDetails = yield call(getTeamDetailsData)
+    const teamDetails = yield call(getTeamDetailsData, id)
     yield put(receiveNBATeamDetails(teamDetails))
   } catch ({ response }) {
     console.log('no team details found: ', response)

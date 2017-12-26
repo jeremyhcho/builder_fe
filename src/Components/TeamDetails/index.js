@@ -49,7 +49,7 @@ TeamDetails.propTypes = {
 }
 
 const mapDispatchToProps = {
-  fetchTeam
+  fetchNBATeamDetails
 }
 
 export default connect(
