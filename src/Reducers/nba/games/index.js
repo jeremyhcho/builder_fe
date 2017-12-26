@@ -9,9 +9,9 @@ import {
 } from 'Constants'
 
 const initialState = {
-  matches: [],
-  fetchingMatches: false,
-  paginatingMatches: false,
+  gamesList: [],
+  fetchingGames: false,
+  paginatingGames: false,
   dates: {
     now: moment(moment().format('YYYY-MM-DD')),
     from: {},
@@ -25,35 +25,35 @@ const games = (state = initialState, action) => {
       const { now, from, to } = action
       return {
         ...state,
-        fetchingMatches: true,
+        fetchingGames: true,
         dates: { now, from, to }
       }
     }
 
     case PAGINATE_NBA_GAMES:
-      return { ...state, paginatingMatches: true }
+      return { ...state, paginatingGames: true }
 
     case FETCH_NBA_GAMES_SUCCESS:
       return {
         ...state,
-        fetchingMatches: false,
-        matches: action.matches.map(match => ({
+        fetchingGames: false,
+        gamesList: action.games.data.map(match => ({
           ...match, date: moment(new Date(match.date))
         }))
       }
     case PAGINATE_NBA_GAMES_SUCCESS: {
-      let newMatches
+      let newGames
 
       if (action.paginateType === 'previous') {
-        newMatches = action.matches.concat(state.matches)
+        newGames = action.games.data.concat(state.gamesList)
       } else {
-        newMatches = state.matches.concat(action.matches)
+        newGames = state.gamesList.concat(action.games.data)
       }
       return {
         ...state,
-        paginatingMatches: false,
-        matches: newMatches.map(match => ({
-          ...match, date: moment(new Date(match.date))
+        paginatingGames: false,
+        gamesList: newGames.map(game => ({
+          ...game, date: moment(new Date(game.date))
         }))
       }
     }

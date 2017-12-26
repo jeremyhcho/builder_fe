@@ -58,8 +58,8 @@ Teams.propTypes = {
   teams: PropTypes.array.isRequired
 }
 
-const mapStateToProps = ({ nbaTeams }) => ({
-  teams: nbaTeams.teams
+const mapStateToProps = ({ nba }) => ({
+  teams: nba.teams.teamsList
 })
 
 const mapDispatchToProps = {

@@ -72,32 +72,32 @@ function* getInjuries ({ id }) {
   }
 }
 
-function* watchNBASummaryFetch () {
+function* watchSummaryFetch () {
   yield takeLatest(FETCH_NBA_SUMMARY, getSummary)
 }
 
-function* watchNBAQuartersFetch () {
+function* watchQuartersFetch () {
   yield takeLatest(FETCH_NBA_QUARTERS, getQuarters)
 }
 
-function* watchNBARecentGamesFetch () {
+function* watchRecentGamesFetch () {
   yield takeLatest(FETCH_NBA_RECENT_GAMES, getRecentGames)
 }
 
-function* watchNBAStartingLineupFetch () {
+function* watchStartingLineupFetch () {
   yield takeLatest(FETCH_NBA_STARTING_LINEUP, getStartingLineup)
 }
 
-function* watchNBAInjuriesFetch () {
+function* watchInjuriesFetch () {
   yield takeLatest(FETCH_NBA_INJURIES, getInjuries)
 }
 
 export default function* overviewSaga () {
   yield [
-    watchNBASummaryFetch(),
-    watchNBAQuartersFetch(),
-    watchNBARecentGamesFetch(),
-    watchNBAStartingLineupFetch(),
-    watchNBAInjuriesFetch()
+    watchSummaryFetch(),
+    watchQuartersFetch(),
+    watchRecentGamesFetch(),
+    watchStartingLineupFetch(),
+    watchInjuriesFetch()
   ]
 }

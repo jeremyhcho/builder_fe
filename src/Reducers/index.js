@@ -4,14 +4,11 @@ import { routerReducer } from 'react-router-redux'
 
 // Reducers
 import auth from './auth'
-import nbaTeams from './teams'
-import { games, gameDetails } from './nba'
+import nbaReducer from './nba'
 
 const rootReducer = combineReducers({
   auth,
-  games,
-  gameDetails,
-  nbaTeams,
+  nba: nbaReducer,
   router: routerReducer,
   form: formReducer
 })

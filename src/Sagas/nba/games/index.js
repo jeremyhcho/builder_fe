@@ -14,41 +14,41 @@ import {
 // Actions
 import { fetchNBAGamesSuccess, paginateNBAGamesSuccess } from 'Actions'
 
-function* getMatches (params) {
+function* getGames (params) {
   try {
     const from = params.from.toDate().toISOString()
     const to = params.to.toDate().toISOString()
-    const nbaMatches = yield call(getNBAGames, { from, to })
-    yield put(fetchNBAGamesSuccess(nbaMatches))
+    const nbaGames = yield call(getNBAGames, { from, to })
+    yield put(fetchNBAGamesSuccess(nbaGames))
   } catch ({ response }) {
     // HANDLE ERROR HANDLE ERROR HANDLE ERROR HANDLE ERROR @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     console.log('no matches found: ', response)
   }
 }
 
-function* paginateMatches ({ from, to, paginateType }) {
+function* paginateGames ({ from, to, paginateType }) {
   try {
     const fromString = from.toDate().toISOString()
     const toString = to.toDate().toISOString()
-    const { data } = yield call(getNBAGames, { from: fromString, to: toString })
-    yield put(paginateNBAGamesSuccess(data, paginateType))
+    const nbaGames = yield call(getNBAGames, { from: fromString, to: toString })
+    yield put(paginateNBAGamesSuccess(nbaGames, paginateType))
   } catch ({ response }) {
     // HANDLE ERROR HANDLE ERROR HANDLE ERROR HANDLE ERROR @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     console.log('no matches found: ', response)
   }
 }
 
-function* watchNBAMatchesFetch () {
-  yield takeLatest(FETCH_NBA_GAMES, getMatches)
+function* watchGamesFetch () {
+  yield takeLatest(FETCH_NBA_GAMES, getGames)
 }
 
-function* watchNBAMatchesPagination () {
-  yield takeLatest(PAGINATE_NBA_GAMES, paginateMatches)
+function* watchGamesPagination () {
+  yield takeLatest(PAGINATE_NBA_GAMES, paginateGames)
 }
 
-export default function* nbaMatchesSaga () {
+export default function* gamesSaga () {
   yield [
-    watchNBAMatchesFetch(),
-    watchNBAMatchesPagination()
+    watchGamesFetch(),
+    watchGamesPagination()
   ]
 }

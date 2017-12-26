@@ -36,17 +36,17 @@ function* getKeyStats ({ id }) {
   }
 }
 
-function* watchNBATeamStatsFetch () {
+function* watchTeamStatsFetch () {
   yield takeLatest(FETCH_NBA_TEAM_STATS, getTeamStats)
 }
 
-function* watchNBAKeyStatsFetch () {
+function* watchKeyStatsFetch () {
   yield takeLatest(FETCH_NBA_KEY_STATS, getKeyStats)
 }
 
 export default function* teamStatsSaga() {
   yield [
-    watchNBATeamStatsFetch(),
-    watchNBAKeyStatsFetch()
+    watchTeamStatsFetch(),
+    watchKeyStatsFetch()
   ]
 }

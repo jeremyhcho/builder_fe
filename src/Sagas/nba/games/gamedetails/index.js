@@ -1,3 +1,11 @@
-export { default as overviewSaga } from './overview'
-export { default as teamStatsSaga } from './teamstats'
-export { default as playerStatsSaga } from './playerstats'
+import overviewSaga from './overview'
+import playerStatsSaga from './playerstats'
+import teamStatsSaga from './teamstats'
+
+export default function* gameDetailsSaga() {
+  yield [
+    overviewSaga(),
+    teamStatsSaga(),
+    playerStatsSaga()
+  ]
+}

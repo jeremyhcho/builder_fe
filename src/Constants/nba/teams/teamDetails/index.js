@@ -1,0 +1,2 @@
+export const FETCH_NBA_TEAM_DETAILS = 'nba/teamDetails/FETCH_NBA_TEAM_DETAILS'
+export const FETCH_NBA_TEAM_DETAILS_SUCCESS = 'nba/teamDetails/FETCH_NBA_TEAM_DETAILS_SUCCESS'

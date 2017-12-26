@@ -39,13 +39,13 @@ export const paginateNBAGames = (date, paginateType) => {
   })
 }
 
-export const fetchNBAGamesSuccess = ({ data }) => ({
+export const fetchNBAGamesSuccess = (games) => ({
   type: FETCH_NBA_GAMES_SUCCESS,
-  matches: data
+  games
 })
 
-export const paginateNBAGamesSuccess = (data, paginateType) => ({
+export const paginateNBAGamesSuccess = (games, paginateType) => ({
   type: PAGINATE_NBA_GAMES_SUCCESS,
-  matches: data,
+  games,
   paginateType
 })

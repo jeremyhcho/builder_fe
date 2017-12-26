@@ -24,12 +24,12 @@ function* getPlayerStats ({ id }) {
   }
 }
 
-function* watchNBAPlayerStatsFetch () {
+function* watchPlayerStatsFetch () {
   yield takeLatest(FETCH_NBA_PLAYER_STATS, getPlayerStats)
 }
 
 export default function* playerStatsSaga () {
   yield [
-    watchNBAPlayerStatsFetch()
+    watchPlayerStatsFetch()
   ]
 }

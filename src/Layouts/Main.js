@@ -9,7 +9,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import Header from './Header'
 import SideNav from './SideNav'
 import Dashboard from 'Components/Dashboard'
-import MatchLayout from './Match'
+import GamesLayout from './Games'
 import TeamsLayout from './Team'
 
 // const CalendarContainer = Loadable({
@@ -39,7 +39,7 @@ const MainLayout = () => (
         <Col xs={12} style={{ marginTop: '20px' }}>
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route path='/matches' component={MatchLayout} />
+            <Route path='/matches' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />
           </Switch>
         </Col>

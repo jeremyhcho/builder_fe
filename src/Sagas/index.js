@@ -5,14 +5,7 @@ import {
   loginSaga
 } from './auth'
 
-import {
-  nbaSaga,
-  overviewSaga,
-  teamStatsSaga,
-  playerStatsSaga
-} from './nba'
-
-import { nbaTeamsSaga } from './teams'
+import nbaSaga from './nba'
 
 export default function* rootSaga() {
   yield [
@@ -20,9 +13,5 @@ export default function* rootSaga() {
     userSaga(),
     resetSaga(),
     nbaSaga(),
-    overviewSaga(),
-    teamStatsSaga(),
-    playerStatsSaga(),
-    nbaTeamsSaga()
   ]
 }
