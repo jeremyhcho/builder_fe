@@ -93,7 +93,6 @@ class Quarters extends React.Component {
                       return (
                         <div key={uniqueId('stat_')} styleName="quarters-stat">
                           <p
-                            key={uniqueId('stat_label_')}
                             styleName="quarters-label"
                             className="label semibold small"
                           >
@@ -102,14 +101,12 @@ class Quarters extends React.Component {
 
                           <p
                             styleName="quarters-value"
-                            key={uniqueId('stat_away_value_')}
                           >
                             {stats.value.away}
                           </p>
 
                           <p
                             styleName="quarters-value"
-                            key={uniqueId('stat_home_value_')}
                           >
                             {stats.value.home}
                           </p>

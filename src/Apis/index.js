@@ -1,5 +1,4 @@
 export * from './auth'
 export * from './users'
-export * from './matches'
-export * from './gameDetails'
+export * from './nba'
 export { default as axios } from './axios'

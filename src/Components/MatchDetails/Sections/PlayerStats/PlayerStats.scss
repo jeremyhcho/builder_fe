@@ -1,0 +1,31 @@
+.player-stats {
+  .players-container {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+
+    &.stats {
+      overflow-x: scroll;
+      margin: 0;
+    }
+
+    .players-label {
+      margin: 15px;
+    }
+    .players-value {
+      margin-bottom: 15px;
+
+      &.name {
+        cursor: pointer;
+
+        &:hover {
+          transition: all 200ms ease;
+          background-color: var(--navy-blue);
+          color: #fff;
+          text-align: center;
+          border-radius: var(--border-radius);
+        }
+      }
+    }
+  }
+}

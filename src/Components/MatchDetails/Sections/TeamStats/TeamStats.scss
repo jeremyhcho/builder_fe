@@ -1,0 +1,58 @@
+// points-graph
+.points-graph {
+
+}
+
+// team-statistics
+.statistics {
+  .linebreak {
+    height: 100%;
+    width: 1px;
+    border: 0;
+    background-color: var(--gray);
+  }
+
+  .totals {
+    width: 100%;
+    max-height: 280px;
+    overflow-y: scroll;
+    overflow-wrap: word-break;
+
+    .stat-value {
+      margin: 5px 0;
+    }
+  }
+}
+
+// key stats
+.key-stats {
+  .legend {
+    margin: 20px 60px;
+
+    .legend-team {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .team-color {
+        width: 45px;
+        height: 20px;
+        background-color: #FFF;
+        margin-right: 10px;
+      }
+    }
+  }
+  .team-wrapper {
+    margin-top: 25px;
+
+    .team-rows {
+      margin: 10px 0;
+      overflow-x: scroll;
+
+      .stat-display {
+        height: 20px;
+        border-radius: var(--border-radius);
+      }
+    }
+  }
+}

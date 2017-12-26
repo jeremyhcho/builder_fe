@@ -2,17 +2,20 @@ import { put, call, takeLatest } from 'redux-saga/effects'
 
 // Apis
 import {
-  getTeamStatsData
+  getTeamStatsData,
+  getKeyStatsData
 } from 'Apis'
 
 // Constants
 import {
-  FETCH_NBA_TEAM_STATS
+  FETCH_NBA_TEAM_STATS,
+  FETCH_NBA_KEY_STATS
 } from 'Constants'
 
 // Actions
 import {
-  receiveNBATeamStats
+  receiveNBATeamStats,
+  receiveNBAKeyStats
 } from 'Actions'
 
 function* getTeamStats ({ id }) {
@@ -24,12 +27,26 @@ function* getTeamStats ({ id }) {
   }
 }
 
+function* getKeyStats ({ id }) {
+  try {
+    const keyStats = yield call(getKeyStatsData, id)
+    yield put(receiveNBAKeyStats(keyStats))
+  } catch ({ response }) {
+    console.log('no key differences found from team stats ', response)
+  }
+}
+
 function* watchNBATeamStatsFetch () {
   yield takeLatest(FETCH_NBA_TEAM_STATS, getTeamStats)
 }
 
+function* watchNBAKeyStatsFetch () {
+  yield takeLatest(FETCH_NBA_KEY_STATS, getKeyStats)
+}
+
 export default function* teamStatsSaga() {
   yield [
-    watchNBATeamStatsFetch()
+    watchNBATeamStatsFetch(),
+    watchNBAKeyStatsFetch()
   ]
 }

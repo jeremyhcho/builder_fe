@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import uniqueId from 'lodash/uniqueid'
 
 // Components
 import { Card, ButtonGroup } from 'Components/Common'
@@ -92,8 +91,8 @@ class GameLeaders extends React.Component {
                   {
                     this.valueFactory('away').map(stat => {
                       return (
-                        <Col xs={2} key={uniqueId('stat_container')}>
-                          <p className="bold" key={uniqueId('stat_')}>{stat}</p>
+                        <Col xs={2} key={stat}>
+                          <p className="bold">{stat}</p>
                         </Col>
                       )
                     })
@@ -118,8 +117,8 @@ class GameLeaders extends React.Component {
                   {
                     this.valueFactory('home').map(stat => {
                       return (
-                        <Col key={uniqueId('stat_container')} xs={2}>
-                          <p className="bold" key={uniqueId('stat_')}>{stat}</p>
+                        <Col key={stat} xs={2}>
+                          <p className="bold">{stat}</p>
                         </Col>
                       )
                     })
