@@ -39,7 +39,7 @@ const MainLayout = () => (
         <Col xs={12} style={{ marginTop: '20px' }}>
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route path='/matches' component={GamesLayout} />
+            <Route path='/games' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />
           </Switch>
         </Col>

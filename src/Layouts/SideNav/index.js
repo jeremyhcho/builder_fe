@@ -7,8 +7,8 @@ import classNames from 'classnames'
 import { Tooltip } from 'Components/Common'
 
 // Icons
-import Matches from 'Assets/Icons/nav/basketball-13.svg'
-import MatchesSelected from 'Assets/Icons/nav/basketball-13-white.svg'
+import Game from 'Assets/Icons/nav/basketball-13.svg'
+import GameSelected from 'Assets/Icons/nav/basketball-13-white.svg'
 import Search from 'Assets/Icons/nav/m-search.svg'
 import SearchSelected from 'Assets/Icons/nav/m-search-white.svg'
 import Rocket from 'Assets/Icons/nav/rocket.svg'
@@ -19,11 +19,11 @@ import './SideNav.scss'
 
 const navItems = [
   {
-    icon: Matches,
-    selectedIcon: MatchesSelected,
-    route: '/matches',
-    key: 'matches',
-    sectionName: 'Matches'
+    icon: Game,
+    selectedIcon: GameSelected,
+    route: '/games',
+    key: 'games',
+    sectionName: 'Games'
   },
   {
     icon: Search,

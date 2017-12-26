@@ -57,11 +57,11 @@ class GameDetails extends React.Component {
         </Row>
         <div className='matches-scroller' style={sectionStyle}>
           <Switch>
-            <Route exact path='/matches/:id/overview' component={Overview} />
-            <Route exact path='/matches/:id/teams' component={TeamStats} />
-            <Route exact path='/matches/:id/players' component={PlayerStats} />
-            <Route exact path='/matches/:id/models' component={Models} />
-            <Redirect to={`/matches/${this.props.match.params.id}/overview`} />
+            <Route exact path='/games/:id/overview' component={Overview} />
+            <Route exact path='/games/:id/teams' component={TeamStats} />
+            <Route exact path='/games/:id/players' component={PlayerStats} />
+            <Route exact path='/games/:id/models' component={Models} />
+            <Redirect to={`/games/${this.props.match.params.id}/overview`} />
           </Switch>
         </div>
       </div>

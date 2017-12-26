@@ -12,8 +12,8 @@ const gamesSection = {
 const GamesLayout = () => (
   <div style={gamesSection}>
     <Switch>
-      <Route exact path='/matches' component={Games} />
-      <Route path='/matches/:id' component={GameDetails} />
+      <Route exact path='/games' component={Games} />
+      <Route path='/games/:id' component={GameDetails} />
     </Switch>
   </div>
 )

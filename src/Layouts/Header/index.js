@@ -10,8 +10,8 @@ import { MenuItem, IconDropdown } from 'Components/Common'
 import './Header.scss'
 
 const SECTION_NAMES = {
-  '/matches': 'Games',
-  '/matches/:id/:sectionName': 'Game Details',
+  '/games': 'Games',
+  '/games/:id/:sectionName': 'Game Details',
   '/teams': 'Teams',
   '/teams/:id/:sectionName': 'Team Details'
 }
