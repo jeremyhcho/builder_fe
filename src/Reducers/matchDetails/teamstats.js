@@ -1,7 +1,7 @@
 // Constants
 import {
-  RECEIVE_NBA_TEAM_STATS,
-  RECEIVE_NBA_KEY_STATS
+  FETCH_NBA_TEAM_STATS_SUCCESS,
+  FETCH_NBA_KEY_STATS_SUCCESS
 } from 'Constants'
 
 const initialState = {
@@ -11,10 +11,10 @@ const initialState = {
 
 const teamStats = (state = initialState, action) => {
   switch (action.type) {
-    case RECEIVE_NBA_TEAM_STATS:
+    case FETCH_NBA_TEAM_STATS_SUCCESS:
       return { ...state, stats: action.teamStats.data }
 
-    case RECEIVE_NBA_KEY_STATS:
+    case FETCH_NBA_KEY_STATS_SUCCESS:
       return { ...state, keyStats: action.keyStats.data }
 
     default:

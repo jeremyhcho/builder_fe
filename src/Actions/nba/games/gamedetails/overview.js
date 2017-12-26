@@ -1,15 +1,15 @@
 // Constants
 import {
   FETCH_NBA_SUMMARY,
-  RECEIVE_NBA_SUMMARY,
+  FETCH_NBA_SUMMARY_SUCCESS,
   FETCH_NBA_QUARTERS,
-  RECEIVE_NBA_QUARTERS,
+  FETCH_NBA_QUARTERS_SUCCESS,
   FETCH_NBA_RECENT_GAMES,
-  RECEIVE_NBA_RECENT_GAMES,
+  FETCH_NBA_RECENT_GAMES_SUCCESS,
   FETCH_NBA_STARTING_LINEUP,
-  RECEIVE_NBA_STARTING_LINEUP,
+  FETCH_NBA_STARTING_LINEUP_SUCCESS,
   FETCH_NBA_INJURIES,
-  RECEIVE_NBA_INJURIES
+  FETCH_NBA_INJURIES_SUCCESS
 } from 'Constants'
 
 // Summary
@@ -18,8 +18,8 @@ export const fetchNBASummary = (id) => ({
   id
 })
 
-export const receiveNBASummary = (summary) => ({
-  type: RECEIVE_NBA_SUMMARY,
+export const fetchNBASummarySuccess = (summary) => ({
+  type: FETCH_NBA_SUMMARY_SUCCESS,
   summary
 })
 
@@ -29,8 +29,8 @@ export const fetchNBAQuarters = (id) => ({
   id
 })
 
-export const receiveNBAQuarters = (quarters) => ({
-  type: RECEIVE_NBA_QUARTERS,
+export const fetchNBAQuartersSuccess = (quarters) => ({
+  type: FETCH_NBA_QUARTERS_SUCCESS,
   quarters
 })
 
@@ -40,8 +40,8 @@ export const fetchNBARecentGames = (id) => ({
   id
 })
 
-export const receiveNBARecentGames = (recentGames) => ({
-  type: RECEIVE_NBA_RECENT_GAMES,
+export const fetchNBARecentGamesSuccess = (recentGames) => ({
+  type: FETCH_NBA_RECENT_GAMES_SUCCESS,
   recentGames
 })
 
@@ -51,8 +51,8 @@ export const fetchNBAStartingLineup = (id) => ({
   id
 })
 
-export const receiveNBAStartingLineup = (startingLineup) => ({
-  type: RECEIVE_NBA_STARTING_LINEUP,
+export const fetchNBAStartingLineupSuccess = (startingLineup) => ({
+  type: FETCH_NBA_STARTING_LINEUP_SUCCESS,
   startingLineup
 })
 
@@ -62,7 +62,7 @@ export const fetchNBAInjuries = (id) => ({
   id
 })
 
-export const receiveNBAInjuries = (injuries) => ({
-  type: RECEIVE_NBA_INJURIES,
+export const fetchNBAInjuriesSuccess = (injuries) => ({
+  type: FETCH_NBA_INJURIES_SUCCESS,
   injuries
 })

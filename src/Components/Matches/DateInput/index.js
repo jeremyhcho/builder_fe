@@ -11,7 +11,7 @@ import { Input } from 'Components/Common'
 import './DateInput.scss'
 
 // Actions
-import { fetchNBAMatches } from 'Actions'
+import { fetchNBAGames } from 'Actions'
 
 class DateInput extends React.Component {
   state = {
@@ -23,7 +23,7 @@ class DateInput extends React.Component {
 
   componentWillMount() {
     // sets input date to current date
-    this.props.fetchNBAMatches(this.props.dates.now._i)
+    this.props.fetchNBAGames(this.props.dates.now._i)
   }
 
   componentDidMount() {
@@ -51,7 +51,7 @@ class DateInput extends React.Component {
   handleSelect = (e) => {
     // sets date when selected from calendar
     if (e.iso !== this.props.dates.now._i) {
-      this.props.fetchNBAMatches(e.iso)
+      this.props.fetchNBAGames(e.iso)
     }
     this.closeCalendar()
   }
@@ -114,7 +114,7 @@ class DateInput extends React.Component {
 DateInput.propTypes = {
   // getDate: PropTypes.func.isRequired,
   dates: PropTypes.object.isRequired,
-  fetchNBAMatches: PropTypes.func.isRequired,
+  fetchNBAGames: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ games }) => ({
@@ -122,7 +122,7 @@ const mapStateToProps = ({ games }) => ({
 })
 
 const mapDispatchToProps = {
-  fetchNBAMatches
+  fetchNBAGames
 }
 
 export default connect(

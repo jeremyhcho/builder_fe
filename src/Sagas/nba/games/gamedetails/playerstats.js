@@ -12,13 +12,13 @@ import {
 
 // Actions
 import {
-  receiveNBAPlayerStats
+  fetchNBAPlayerStatsSuccess
 } from 'Actions'
 
 function* getPlayerStats ({ id }) {
   try {
     const playerStats = yield call(getPlayerStatsData, id)
-    yield put(receiveNBAPlayerStats(playerStats))
+    yield put(fetchNBAPlayerStatsSuccess(playerStats))
   } catch ({ response }) {
     console.log('no player stats found ', response)
   }

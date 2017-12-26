@@ -13,7 +13,7 @@ import DayWrapper from './DayWrapper'
 import { Spinner } from 'Components/Common'
 
 // Actions
-import { paginateNBAMatches } from 'Actions'
+import { paginateNBAGames } from 'Actions'
 
 class MatchList extends React.Component {
   state = {
@@ -49,15 +49,15 @@ class MatchList extends React.Component {
   }
 
   handleNext = () => {
-    const { games, paginateNBAMatches } = this.props
+    const { games, paginateNBAGames } = this.props
     const nextDate = moment(games[games.length - 1].date._i).startOf('day').format('YYYY-MM-DD')
-    paginateNBAMatches(nextDate, 'next')
+    paginateNBAGames(nextDate, 'next')
   }
 
   handlePrevious = () => {
-    const { games, paginateNBAMatches } = this.props
+    const { games, paginateNBAGames } = this.props
     const previousDate = moment(games[0].date._i).startOf('day').format('YYYY-MM-DD')
-    paginateNBAMatches(previousDate, 'previous')
+    paginateNBAGames(previousDate, 'previous')
   }
 
   groupedMatches() {
@@ -136,7 +136,7 @@ class MatchList extends React.Component {
 
 MatchList.propTypes = {
   games: PropTypes.array.isRequired,
-  paginateNBAMatches: PropTypes.func.isRequired,
+  paginateNBAGames: PropTypes.func.isRequired,
   fetchingMatches: PropTypes.bool.isRequired,
   paginatingMatches: PropTypes.bool.isRequired,
   dates: PropTypes.object.isRequired
@@ -149,7 +149,7 @@ const mapStateToProps = ({ games }) => ({
 })
 
 const mapDispatchToProps = {
-  paginateNBAMatches
+  paginateNBAGames
 }
 
 export default connect(

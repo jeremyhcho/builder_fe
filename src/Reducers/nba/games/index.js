@@ -2,10 +2,10 @@ import moment from 'moment'
 
 // Constants
 import {
-  RECEIVE_NBA_MATCHES,
-  RECEIVE_PAGINATED_NBA_MATCHES,
-  FETCH_NBA_MATCHES,
-  PAGINATE_NBA_MATCHES
+  FETCH_NBA_GAMES_SUCCESS,
+  PAGINATE_NBA_GAMES_SUCCESS,
+  FETCH_NBA_GAMES,
+  PAGINATE_NBA_GAMES
 } from 'Constants'
 
 const initialState = {
@@ -21,7 +21,7 @@ const initialState = {
 
 const games = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_NBA_MATCHES: {
+    case FETCH_NBA_GAMES: {
       const { now, from, to } = action
       return {
         ...state,
@@ -30,10 +30,10 @@ const games = (state = initialState, action) => {
       }
     }
 
-    case PAGINATE_NBA_MATCHES:
+    case PAGINATE_NBA_GAMES:
       return { ...state, paginatingMatches: true }
 
-    case RECEIVE_NBA_MATCHES:
+    case FETCH_NBA_GAMES_SUCCESS:
       return {
         ...state,
         fetchingMatches: false,
@@ -41,7 +41,7 @@ const games = (state = initialState, action) => {
           ...match, date: moment(new Date(match.date))
         }))
       }
-    case RECEIVE_PAGINATED_NBA_MATCHES: {
+    case PAGINATE_NBA_GAMES_SUCCESS: {
       let newMatches
 
       if (action.paginateType === 'previous') {

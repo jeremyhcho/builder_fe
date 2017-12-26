@@ -1,25 +1,25 @@
 import moment from 'moment'
 
 import {
-  FETCH_NBA_MATCHES,
-  RECEIVE_NBA_MATCHES,
-  PAGINATE_NBA_MATCHES,
-  RECEIVE_PAGINATED_NBA_MATCHES
+  FETCH_NBA_GAMES,
+  FETCH_NBA_GAMES_SUCCESS,
+  PAGINATE_NBA_GAMES,
+  PAGINATE_NBA_GAMES_SUCCESS
 } from 'Constants'
 
-export const fetchNBAMatches = (date) => {
+export const fetchNBAGames = (date) => {
   const now = moment(date)
   const from = moment(`${date} 21:00:00`).subtract(1, 'day')
   const to = moment(`${date} 20:59:59`).add(5, 'day')
   return ({
-    type: FETCH_NBA_MATCHES,
+    type: FETCH_NBA_GAMES,
     now,
     from,
     to
   })
 }
 
-export const paginateNBAMatches = (date, paginateType) => {
+export const paginateNBAGames = (date, paginateType) => {
   let from
   let to
 
@@ -32,20 +32,20 @@ export const paginateNBAMatches = (date, paginateType) => {
     to = moment(`${date} 20:59:59`).add(3, 'days')
   }
   return ({
-    type: PAGINATE_NBA_MATCHES,
+    type: PAGINATE_NBA_GAMES,
     from,
     to,
     paginateType
   })
 }
 
-export const receiveNBAMatches = ({ data }) => ({
-  type: RECEIVE_NBA_MATCHES,
+export const fetchNBAGamesSuccess = ({ data }) => ({
+  type: FETCH_NBA_GAMES_SUCCESS,
   matches: data
 })
 
-export const receiveNBAPaginatedMatches = (data, paginateType) => ({
-  type: RECEIVE_PAGINATED_NBA_MATCHES,
+export const paginateNBAGamesSuccess = (data, paginateType) => ({
+  type: PAGINATE_NBA_GAMES_SUCCESS,
   matches: data,
   paginateType
 })

@@ -1,9 +1,9 @@
 // Constants
 import {
   FETCH_NBA_TEAM_STATS,
-  RECEIVE_NBA_TEAM_STATS,
+  FETCH_NBA_TEAM_STATS_SUCCESS,
   FETCH_NBA_KEY_STATS,
-  RECEIVE_NBA_KEY_STATS
+  FETCH_NBA_KEY_STATS_SUCCESS
 } from 'Constants'
 
 export const fetchNBATeamStats = (id) => ({
@@ -11,8 +11,8 @@ export const fetchNBATeamStats = (id) => ({
   id
 })
 
-export const receiveNBATeamStats = (teamStats) => ({
-  type: RECEIVE_NBA_TEAM_STATS,
+export const fetchNBATeamStatsSuccess = (teamStats) => ({
+  type: FETCH_NBA_TEAM_STATS_SUCCESS,
   teamStats
 })
 
@@ -21,7 +21,7 @@ export const fetchNBAKeyStats = (id) => ({
   id
 })
 
-export const receiveNBAKeyStats = (keyStats) => ({
-  type: RECEIVE_NBA_KEY_STATS,
+export const fetchNBAKeyStatsSuccess = (keyStats) => ({
+  type: FETCH_NBA_KEY_STATS_SUCCESS,
   keyStats
 })

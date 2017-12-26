@@ -20,17 +20,17 @@ import {
 
 // Actions
 import {
-  receiveNBASummary,
-  receiveNBAQuarters,
-  receiveNBARecentGames,
-  receiveNBAStartingLineup,
-  receiveNBAInjuries
+  fetchNBASummarySuccess,
+  fetchNBAQuartersSuccess,
+  fetchNBARecentGamesSuccess,
+  fetchNBAStartingLineupSuccess,
+  fetchNBAInjuriesSuccess
 } from 'Actions'
 
 function* getSummary ({ id }) {
   try {
     const summary = yield call(getSummaryData, id)
-    yield put(receiveNBASummary(summary))
+    yield put(fetchNBASummarySuccess(summary))
   } catch ({ response }) {
     console.log('no summaries found: ', response)
   }
@@ -39,7 +39,7 @@ function* getSummary ({ id }) {
 function* getQuarters ({ id }) {
   try {
     const quarters = yield call(getQuartersData, id)
-    yield put(receiveNBAQuarters(quarters))
+    yield put(fetchNBAQuartersSuccess(quarters))
   } catch ({ response }) {
     console.log('no quarters found: ', response)
   }
@@ -48,7 +48,7 @@ function* getQuarters ({ id }) {
 function* getRecentGames ({ id }) {
   try {
     const recentGames = yield call(getRecentGamesData, id)
-    yield put(receiveNBARecentGames(recentGames))
+    yield put(fetchNBARecentGamesSuccess(recentGames))
   } catch ({ response }) {
     console.log('no recent games found: ', response)
   }
@@ -57,7 +57,7 @@ function* getRecentGames ({ id }) {
 function* getStartingLineup ({ id }) {
   try {
     const startingLineup = yield call(getStartingLineupData, id)
-    yield put(receiveNBAStartingLineup(startingLineup))
+    yield put(fetchNBAStartingLineupSuccess(startingLineup))
   } catch ({ response }) {
     console.log('no starting lineup found: ', response)
   }
@@ -66,7 +66,7 @@ function* getStartingLineup ({ id }) {
 function* getInjuries ({ id }) {
   try {
     const injuries = yield call(getInjuriesData, id)
-    yield put(receiveNBAInjuries(injuries))
+    yield put(fetchNBAInjuriesSuccess(injuries))
   } catch ({ response }) {
     console.log('no injuries found: ', response)
   }

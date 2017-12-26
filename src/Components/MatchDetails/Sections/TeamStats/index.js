@@ -21,7 +21,7 @@ const TeamStats = ({ match }) => (
       <Col xs={6}>
         <Statistics idProp={match.params.id} />
       </Col>
-      <Col xs={6} lg={5}>
+      <Col xs={6}>
         <KeyStats idProp={match.params.id} />
       </Col>
     </Row>

@@ -14,14 +14,14 @@ import {
 
 // Actions
 import {
-  receiveNBATeamStats,
-  receiveNBAKeyStats
+  fetchNBATeamStatsSuccess,
+  fetchNBAKeyStatsSuccess
 } from 'Actions'
 
 function* getTeamStats ({ id }) {
   try {
     const teamStats = yield call(getTeamStatsData, id)
-    yield put(receiveNBATeamStats(teamStats))
+    yield put(fetchNBATeamStatsSuccess(teamStats))
   } catch ({ response }) {
     console.log('no team stats found ', response)
   }
@@ -30,7 +30,7 @@ function* getTeamStats ({ id }) {
 function* getKeyStats ({ id }) {
   try {
     const keyStats = yield call(getKeyStatsData, id)
-    yield put(receiveNBAKeyStats(keyStats))
+    yield put(fetchNBAKeyStatsSuccess(keyStats))
   } catch ({ response }) {
     console.log('no key differences found from team stats ', response)
   }

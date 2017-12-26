@@ -1,10 +1,10 @@
 // Constants
 import {
-  RECEIVE_NBA_SUMMARY,
-  RECEIVE_NBA_QUARTERS,
-  RECEIVE_NBA_RECENT_GAMES,
-  RECEIVE_NBA_STARTING_LINEUP,
-  RECEIVE_NBA_INJURIES
+  FETCH_NBA_SUMMARY_SUCCESS,
+  FETCH_NBA_QUARTERS_SUCCESS,
+  FETCH_NBA_RECENT_GAMES_SUCCESS,
+  FETCH_NBA_STARTING_LINEUP_SUCCESS,
+  FETCH_NBA_INJURIES_SUCCESS
 } from 'Constants'
 
 const initialState = {
@@ -17,31 +17,31 @@ const initialState = {
 
 const overview = (state = initialState, action) => {
   switch (action.type) {
-    case RECEIVE_NBA_SUMMARY:
+    case FETCH_NBA_SUMMARY_SUCCESS:
       return {
         ...state,
         summary: action.summary.data
       }
 
-    case RECEIVE_NBA_QUARTERS:
+    case FETCH_NBA_QUARTERS_SUCCESS:
       return {
         ...state,
         quarters: action.quarters.data
       }
 
-    case RECEIVE_NBA_RECENT_GAMES:
+    case FETCH_NBA_RECENT_GAMES_SUCCESS:
       return {
         ...state,
         recentGames: action.recentGames.data
       }
 
-    case RECEIVE_NBA_STARTING_LINEUP:
+    case FETCH_NBA_STARTING_LINEUP_SUCCESS:
       return {
         ...state,
         startingLineup: action.startingLineup.data
       }
 
-    case RECEIVE_NBA_INJURIES:
+    case FETCH_NBA_INJURIES_SUCCESS:
       return {
         ...state,
         injuries: action.injuries.data
