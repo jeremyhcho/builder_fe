@@ -1,0 +1,35 @@
+.teams-container {
+  margin-top: 60px;
+  padding: 0 65px;
+  max-width: 1200px;
+
+  .conference {
+    .team-item {
+      cursor: pointer;
+      display: flex;
+      padding: 15px 30px;
+      transition: box-shadow 200ms;
+
+      &:hover {
+        box-shadow: 0 8px 6px -6px var(--gray);
+
+        .right-arrow {
+          opacity: 1;
+        }
+      }
+
+      .team-details {
+        flex: 4;
+      }
+
+      .team-record {
+        flex: 1;
+      }
+
+      .right-arrow {
+        transition: opacity 200ms ease-in;
+        opacity: 0;
+      }
+    }
+  }
+}
