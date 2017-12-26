@@ -46,7 +46,7 @@ function* watchNBAMatchesPagination () {
   yield takeLatest(PAGINATE_NBA_GAMES, paginateMatches)
 }
 
-export default function* nbaSaga () {
+export default function* nbaMatchesSaga () {
   yield [
     watchNBAMatchesFetch(),
     watchNBAMatchesPagination()

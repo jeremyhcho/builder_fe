@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
+import pathToRegexp from 'path-to-regexp'
 
 // Components
 import { MenuItem, IconDropdown } from 'Components/Common'
@@ -8,17 +9,22 @@ import { MenuItem, IconDropdown } from 'Components/Common'
 // CSS
 import './Header.scss'
 
+const SECTION_NAMES = {
+  '/matches': 'Games',
+  '/matches/:id/:sectionName': 'Game Details',
+  '/teams': 'Teams',
+  '/teams/:id/:sectionName': 'Team Details'
+}
+
 class Header extends React.Component {
   getCurrentRoute() {
-    const { location } = this.props
-    const path = location.pathname.split('/').slice(1)
-    if (path[0] === 'matches' && path.length === 1) {
-      return 'Games'
+    for (const regexp of Object.keys(SECTION_NAMES)) {
+      if (pathToRegexp(regexp).exec(this.props.location.pathname)) {
+        return SECTION_NAMES[regexp]
+      }
     }
-    if (path[0] === 'matches' && !isNaN(path[1])) {
-      return 'Game Details'
-    }
-    return 'Admin'
+
+    return null
   }
 
   render () {

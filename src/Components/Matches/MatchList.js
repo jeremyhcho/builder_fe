@@ -79,7 +79,7 @@ class MatchList extends React.Component {
     const groupedMatches = this.groupedMatches()
     const { paginatingMatches, fetchingMatches } = this.props
     return (
-      <Row style={{ padding: '0 65px' }}>
+      <Row style={{ padding: '0 65px', position: 'relative' }}>
         <div
           style={{ height: 'calc(100vh - 150px)', paddingBottom: '25px', overflowY: 'scroll' }}
           styleName="matches-container"
@@ -95,13 +95,13 @@ class MatchList extends React.Component {
                 </Col>
               </Row>
             ) : (
-              <Row style={{ width: '100%', maxWidth: '1600px' }}>
+              <Row style={{ width: '100%', maxWidth: '1600px', position: 'relative' }}>
                 {
                   paginatingMatches ?
                     <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (
                       <div styleName='pagination up' onClick={this.handlePrevious}>
                         <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
-                        <p>Previous</p>
+                        <p className='small'>Previous</p>
                       </div>
                     )
                 }
@@ -120,7 +120,7 @@ class MatchList extends React.Component {
                   paginatingMatches ?
                     <Spinner xs show style={{ margin: '12px auto 0' }} /> : (
                       <div styleName='pagination down' onClick={this.handleNext}>
-                        <p>Next</p>
+                        <p className='small'>Next</p>
                         <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
                       </div>
                     )

@@ -17,7 +17,7 @@ class MatchCard extends React.Component {
 
   render () {
     const { game } = this.props
-    const time = game.date.tz('America/New_York').format('ha z')
+    const time = game.date.tz('America/New_York').format('hA')
     const awayTeam = game.away.name.toUpperCase()
     const awayCity = game.away.city
 
@@ -35,7 +35,7 @@ class MatchCard extends React.Component {
         </Col>
         <Col xs={1} styleName="col-direction">
           <h1 className="semibold">@</h1>
-          <p className="small">
+          <p className="small semibold" style={{ marginTop: '5px' }}>
             {game.status === 'SCHEDULED' ? time : 'FINAL'}
           </p>
         </Col>

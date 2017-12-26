@@ -12,14 +12,36 @@ class DayWrapper extends React.Component {
   render () {
     const { games, date } = this.props
     const day = date.split(' ').slice(0, 1)
-    const month = date.split(' ').slice(1)
+    const month = date.split(' ')[1].slice(0, 3).toUpperCase()
     return (
-      <Row styleName="day-wrapper">
+      <Row styleName="day-wrapper" style={{ position: 'relative' }}>
+        <p
+          className='small'
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '20px'
+          }}
+        >
+          All times displayed in EST
+        </p>
+
         <Col xs={2} styleName="day-card">
           <div>
             <h1 className="bold" style={{ textAlign: 'center' }}>{day}</h1>
-            <h2 className="semibold">{month}</h2>
-            <p className="semibold label" style={{ position: 'absolute', bottom: '40px' }}>{games.length} Games</p>
+            <h2 className="semibold" style={{ textAlign: 'center' }}>{month}</h2>
+            <p
+              className="semibold label"
+              style={{
+                position: 'absolute',
+                bottom: '40px',
+                width: '100%',
+                textAlign: 'center',
+                left: 0
+              }}
+            >
+              {games.length} Games
+            </p>
           </div>
         </Col>
         <Col xs={10}>
