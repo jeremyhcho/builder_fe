@@ -111,17 +111,14 @@ class DateInput extends React.Component {
   }
 }
 
-DateInput.defaultProps = {
-}
-
 DateInput.propTypes = {
   // getDate: PropTypes.func.isRequired,
   dates: PropTypes.object.isRequired,
   fetchNBAMatches: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({ nbaGames }) => ({
-  dates: nbaGames.dates
+const mapStateToProps = ({ games }) => ({
+  dates: games.dates
 })
 
 const mapDispatchToProps = {

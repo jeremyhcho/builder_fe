@@ -22,7 +22,7 @@ class MatchList extends React.Component {
 
   componentDidUpdate(prevProps) {
     /* eslint-disable react/no-did-update-set-state */
-    if (!prevProps.matches.length) {
+    if (!prevProps.games.length) {
       this.setState({ maxScrollHeight: this.scroller.scrollHeight })
       return
     }
@@ -49,19 +49,19 @@ class MatchList extends React.Component {
   }
 
   handleNext = () => {
-    const { matches } = this.props
-    const nextDate = moment(matches[matches.length - 1].date._i).startOf('day').format('YYYY-MM-DD')
-    this.props.paginateNBAMatches(nextDate, 'next')
+    const { games, paginateNBAMatches } = this.props
+    const nextDate = moment(games[games.length - 1].date._i).startOf('day').format('YYYY-MM-DD')
+    paginateNBAMatches(nextDate, 'next')
   }
 
   handlePrevious = () => {
-    const { matches } = this.props
-    const previousDate = moment(matches[0].date._i).startOf('day').format('YYYY-MM-DD')
-    this.props.paginateNBAMatches(previousDate, 'previous')
+    const { games, paginateNBAMatches } = this.props
+    const previousDate = moment(games[0].date._i).startOf('day').format('YYYY-MM-DD')
+    paginateNBAMatches(previousDate, 'previous')
   }
 
   groupedMatches() {
-    return groupBy(this.props.matches, (match) => match.date.tz('America/New_York').format('D MMMM'))
+    return groupBy(this.props.games, (game) => game.date.tz('America/New_York').format('D MMMM'))
   }
 
   fetchingMatches() {
@@ -109,7 +109,7 @@ class MatchList extends React.Component {
                   {
                     Object.keys(groupedMatches).map((date) => (
                       <DayWrapper
-                        matches={groupedMatches[date]}
+                        games={groupedMatches[date]}
                         key={date}
                         date={date}
                       />
@@ -135,17 +135,17 @@ class MatchList extends React.Component {
 }
 
 MatchList.propTypes = {
-  matches: PropTypes.array.isRequired,
+  games: PropTypes.array.isRequired,
   paginateNBAMatches: PropTypes.func.isRequired,
   fetchingMatches: PropTypes.bool.isRequired,
   paginatingMatches: PropTypes.bool.isRequired,
   dates: PropTypes.object.isRequired
 }
 
-const mapStateToProps = ({ nbaGames }) => ({
-  fetchingMatches: nbaGames.fetchingMatches,
-  paginatingMatches: nbaGames.paginatingMatches,
-  dates: nbaGames.dates
+const mapStateToProps = ({ games }) => ({
+  fetchingMatches: games.fetchingMatches,
+  paginatingMatches: games.paginatingMatches,
+  dates: games.dates
 })
 
 const mapDispatchToProps = {

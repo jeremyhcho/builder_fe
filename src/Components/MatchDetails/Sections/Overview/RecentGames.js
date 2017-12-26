@@ -170,9 +170,9 @@ RecentGames.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ matchDetails }) => ({
-  summary: matchDetails.overview.summary,
-  recentGames: matchDetails.overview.recentGames
+const mapStateToProps = ({ gameDetails }) => ({
+  summary: gameDetails.overview.summary,
+  recentGames: gameDetails.overview.recentGames
 })
 
 const mapDispatchToProps = {

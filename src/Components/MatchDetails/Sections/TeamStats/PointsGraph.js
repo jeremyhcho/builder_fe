@@ -223,9 +223,9 @@ PointsGraph.propTypes = {
   idProp: PropTypes.string.isRequired
 }
 
-const mapStateToProps = ({ matchDetails }) => ({
-  teamStats: matchDetails.teamStats.stats,
-  summary: matchDetails.overview.summary
+const mapStateToProps = ({ gameDetails }) => ({
+  teamStats: gameDetails.teamStats.stats,
+  summary: gameDetails.overview.summary
 })
 
 const mapDispatchToProps = {

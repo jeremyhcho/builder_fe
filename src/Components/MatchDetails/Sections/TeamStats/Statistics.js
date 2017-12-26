@@ -93,8 +93,8 @@ Statistics.propTypes = {
   teamStats: PropTypes.object
 }
 
-const mapStateToProps = ({ matchDetails }) => ({
-  teamStats: matchDetails.teamStats.stats,
+const mapStateToProps = ({ gameDetails }) => ({
+  teamStats: gameDetails.teamStats.stats,
 })
 
 export default connect(

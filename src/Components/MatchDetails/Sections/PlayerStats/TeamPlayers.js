@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // Components
-import { Card, Tooltip } from 'Components/Common'
+import { Card } from 'Components/Common'
 
 // CSS
 import './PlayerStats.scss'
@@ -29,14 +29,6 @@ class TeamPlayers extends React.Component {
                     >
                       {player.last_name}
                     </p>
-                    <Tooltip id={`player-${player.id}`} pos='right'>
-                      <p>Name: {player.full_name}</p>
-                      <p>Height: {player.height}</p>
-                      <p>Weight: {player.weight}</p>
-                      <p>Number: {player.jersey_number}</p>
-                      <p>Position: {player.position}</p>
-                      <p>Primary Position: {player.primary_position}</p>
-                    </Tooltip>
                   </div>
                 ))
               }
@@ -78,14 +70,6 @@ class TeamPlayers extends React.Component {
                     >
                       {player.last_name}
                     </p>
-                    <Tooltip id={`player-${player.id}`} pos='right'>
-                      <p>Name: {player.full_name}</p>
-                      <p>Height: {player.height}</p>
-                      <p>Weight: {player.weight}</p>
-                      <p>Number: {player.jersey_number}</p>
-                      <p>Position: {player.position}</p>
-                      <p>Primary Position: {player.primary_position}</p>
-                    </Tooltip>
                   </div>
                 ))
               }

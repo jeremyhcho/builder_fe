@@ -10,7 +10,7 @@ import './Matches.scss'
 
 class DayWrapper extends React.Component {
   render () {
-    const { matches, date } = this.props
+    const { games, date } = this.props
     const day = date.split(' ').slice(0, 1)
     const month = date.split(' ').slice(1)
     return (
@@ -19,16 +19,16 @@ class DayWrapper extends React.Component {
           <div>
             <h1 className="bold" style={{ textAlign: 'center' }}>{day}</h1>
             <h2 className="semibold">{month}</h2>
-            <p className="semibold label" style={{ position: 'absolute', bottom: '40px' }}>{matches.length} Games</p>
+            <p className="semibold label" style={{ position: 'absolute', bottom: '40px' }}>{games.length} Games</p>
           </div>
         </Col>
         <Col xs={10}>
           {
-            matches.map(match => {
+            games.map(game => {
               return (
-                <Row key={match.id}>
-                  <Col xs={12} key={match.id}>
-                    <MatchCard key={match.id} game={match} />
+                <Row key={game.id}>
+                  <Col xs={12} key={game.id}>
+                    <MatchCard key={game.id} game={game} />
                   </Col>
                 </Row>
               )
@@ -41,11 +41,11 @@ class DayWrapper extends React.Component {
 }
 
 DayWrapper.defaultProps = {
-  matches: []
+  games: []
 }
 
 DayWrapper.propTypes = {
-  matches: PropTypes.array,
+  games: PropTypes.array,
   date: PropTypes.string.isRequired
 }
 

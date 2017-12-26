@@ -138,9 +138,9 @@ Quarters.propTypes = {
   fetchNBAQuarters: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ matchDetails }) => ({
-  quarters: matchDetails.overview.quarters,
-  summary: matchDetails.overview.summary
+const mapStateToProps = ({ gameDetails }) => ({
+  quarters: gameDetails.overview.quarters,
+  summary: gameDetails.overview.summary
 })
 
 const mapDispatchToProps = {

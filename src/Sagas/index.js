@@ -6,14 +6,11 @@ import {
 } from './auth'
 
 import {
-  nbaSaga
-} from './matches'
-
-import {
+  nbaSaga,
   overviewSaga,
   teamStatsSaga,
   playerStatsSaga
-} from './matchDetails'
+} from './nba'
 
 export default function* rootSaga() {
   yield [

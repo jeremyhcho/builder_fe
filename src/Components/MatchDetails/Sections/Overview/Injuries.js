@@ -155,9 +155,9 @@ Injuries.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ matchDetails }) => ({
-  injuries: matchDetails.overview.injuries,
-  summary: matchDetails.overview.summary
+const mapStateToProps = ({ gameDetails }) => ({
+  injuries: gameDetails.overview.injuries,
+  summary: gameDetails.overview.summary
 })
 
 const mapDispatchToProps = {

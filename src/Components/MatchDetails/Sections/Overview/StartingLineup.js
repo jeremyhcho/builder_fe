@@ -117,9 +117,9 @@ class StartingLineup extends React.Component {
   }
 }
 
-const mapStateToProps = ({ matchDetails }) => ({
-  startingLineup: matchDetails.overview.startingLineup,
-  summary: matchDetails.overview.summary
+const mapStateToProps = ({ gameDetails }) => ({
+  startingLineup: gameDetails.overview.startingLineup,
+  summary: gameDetails.overview.summary
 })
 
 const mapDispatchToProps = {

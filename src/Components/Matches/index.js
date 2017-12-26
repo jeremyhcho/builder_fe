@@ -10,31 +10,28 @@ import MatchList from './MatchList'
 // CSS
 import './Matches.scss'
 
-const Matches = ({ nbaGames }) => (
+const Matches = ({ games }) => (
   <div>
     <Row style={{ padding: '0 65px' }}>
       <DateInput />
     </Row>
-    <MatchList matches={nbaGames} />
+    <MatchList games={games} />
   </div>
 )
 
 Matches.defaultProps = {
-  nbaGames: []
+  games: []
 }
 
 Matches.propTypes = {
-  nbaGames: PropTypes.array
+  games: PropTypes.array
 }
 
-const mapStateToProps = ({ nbaGames }) => ({
-  nbaGames: nbaGames.matches
+const mapStateToProps = ({ games }) => ({
+  games: games.matches
 })
-
-const mapDispatchToProps = {
-}
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Matches)

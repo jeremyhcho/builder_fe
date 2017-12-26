@@ -88,8 +88,8 @@ Summary.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ matchDetails }) => ({
-  summary: matchDetails.overview.summary
+const mapStateToProps = ({ gameDetails }) => ({
+  summary: gameDetails.overview.summary
 })
 
 export default connect(
