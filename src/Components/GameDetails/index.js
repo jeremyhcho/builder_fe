@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { Tab } from 'Components/Common'
-import { Overview, PlayerStats, TeamStats, Models } from './Sections'
+import CompletedGameDetails from './CompletedGameDetails'
+import ScheduledGameDetails from './ScheduledGameDetails'
 
 // CSS
 import './GameDetails.scss'
@@ -14,73 +12,51 @@ import './GameDetails.scss'
 // Actions
 import { fetchNBASummary } from 'Actions'
 
-const sectionStyle = {
-  marginTop: '15px',
-  overflowY: 'scroll',
-  height: 'calc(100vh - 150px)',
-  padding: '0 65px 25px 65px',
-}
-
 class GameDetails extends React.Component {
   componentDidMount () {
     this.props.fetchNBASummary(this.props.match.params.id)
   }
 
-  handleNavigation = (e, menuItem) => {
-    this.setState({ selected: menuItem.key })
-    this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
+  gameDetailsStatus () {
+    const { summary, ...routerProps } = this.props
+    if (summary.status === 'SCHEDULED') {
+      return <ScheduledGameDetails {...routerProps} />
+    } else if (summary.status === 'CLOSED') {
+      return <CompletedGameDetails {...routerProps} />
+    }
+    return null
   }
 
   render () {
-    const tabItems = [
-      { label: 'Overview', key: 'overview' },
-      { label: 'Models', key: 'models' },
-      { label: 'Player Stats', key: 'players' },
-      { label: 'Team Stats', key: 'teams' }
-    ]
-    const path = this.props.location.pathname.split('/')
-    const route = path.slice(path.length - 1)[0]
-    let routeKey
-    if (!isNaN(route)) routeKey = 'overview'
-    else routeKey = route
-    return (
-      <div>
-        <Row style={{ marginTop: '15px', padding: '0 65px' }}>
-          <Col xs={6}>
-            <Tab
-              tabs={tabItems}
-              selectedKey={routeKey}
-              onChange={this.handleNavigation}
-              listStyle={{ maxWidth: '560px' }}
-            />
-          </Col>
-        </Row>
-        <div className='matches-scroller' style={sectionStyle}>
-          <Switch>
-            <Route exact path='/games/:id/overview' component={Overview} />
-            <Route exact path='/games/:id/teams' component={TeamStats} />
-            <Route exact path='/games/:id/players' component={PlayerStats} />
-            <Route exact path='/games/:id/models' component={Models} />
-            <Redirect to={`/games/${this.props.match.params.id}/overview`} />
-          </Switch>
-        </div>
-      </div>
-    )
+    const { summary } = this.props
+    if (!summary) {
+      return null
+    }
+    return this.gameDetailsStatus()
   }
+}
+
+GameDetails.defaultProps = {
+  summary: {}
 }
 
 GameDetails.propTypes = {
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  fetchNBASummary: PropTypes.func.isRequired
+  fetchNBASummary: PropTypes.func.isRequired,
+  summary: PropTypes.object
 }
+
+const mapStateToProps = ({ nba }) => ({
+  summary: nba.gameDetails.overview.summary
+})
 
 const mapDispatchToProps = {
   fetchNBASummary
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(GameDetails)

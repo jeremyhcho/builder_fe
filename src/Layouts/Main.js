@@ -10,7 +10,7 @@ import Header from './Header'
 import SideNav from './SideNav'
 import Dashboard from 'Components/Dashboard'
 import GamesLayout from './Games'
-import TeamsLayout from './Team'
+import TeamsLayout from './Teams'
 
 // const CalendarContainer = Loadable({
 //   loader: () => import('../../containers/Calendar'),

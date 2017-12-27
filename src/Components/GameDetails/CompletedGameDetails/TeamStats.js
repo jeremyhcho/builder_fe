@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import PointsGraph from './PointsGraph'
-import Statistics from './Statistics'
-import KeyStats from './KeyStats'
-
-// CSS
-import './TeamStats.scss'
+import {
+  PointsGraph,
+  Statistics,
+  KeyStats
+} from 'Components/GameDetails/Blocks'
 
 const TeamStats = ({ match }) => (
   <div>

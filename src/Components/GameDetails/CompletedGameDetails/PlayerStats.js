@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // Components
-import TeamPlayers from './TeamPlayers'
+import { TeamPlayers } from 'Components/GameDetails/Blocks'
 
 // Actions
 import { fetchNBAPlayerStats } from 'Actions'

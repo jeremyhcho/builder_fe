@@ -3,16 +3,15 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import Summary from './Summary'
-import Quarters from './Quarters'
-import GameLeaders from './GameLeaders'
-import RecentGames from './RecentGames'
-import StartingLineup from './StartingLineup'
-import VegasLines from './VegasLines'
-import Injuries from './Injuries'
-
-// CSS
-import './Overview.scss'
+import {
+  Summary,
+  Quarters,
+  GameLeaders,
+  RecentGames,
+  StartingLineup,
+  VegasLines,
+  Injuries
+} from 'Components/GameDetails/Blocks'
 
 const Overview = ({ match }) => (
   <Row style={{ maxWidth: '1300px', width: '100%' }}>
