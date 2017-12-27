@@ -49,7 +49,7 @@ const config = {
                 exclude: 'node_modules',
                 generateScopedName: '[name]__[local]___[hash:base64:5]',
                 filetypes: {
-                  '.css': {
+                  '.scss': {
                     syntax: 'postcss-scss',
                     plugins: ['postcss-nesting', 'postcss-css-variables']
                   }
@@ -60,7 +60,7 @@ const config = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: extractSass.extract({
           use: 'css-loader?modules,localIdentName="[name]__[local]___[hash:base64:5]"',
           fallback: 'style-loader'
