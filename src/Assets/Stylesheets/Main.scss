@@ -1,4 +1,26 @@
-@import 'Variables';
+:root {
+  // Font
+  --font: 'proxima-nova', sans-serif;
+  --font-color: #48545D;
+
+  // Colors
+  --blue: #3C90DF;
+  --dark-blue: #2E7BC4;
+  --lightest-gray: #F4F5F7;
+  --light-gray: #E5EDF0;
+  --gray: #D1D8DB;
+  --dark-gray: #9EB1BC;
+  --red: #FE4A49;
+  --dark-red: #D03D3C;
+  --green: #0CCE6B;
+  --dark-green: #0AA958;
+  --tooltip-color: #3B454D;
+  --navy-blue: #253858;
+  --gold: #FCBF49;
+
+  // Border
+  --border-radius: 3px;
+}
 
 :global {
   #root, .main, .app {
