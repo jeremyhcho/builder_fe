@@ -61,10 +61,10 @@ const config = {
       },
       {
         test: /\.scss$/,
-        loader: extractSass.extract({
+        use: extractSass.extract({
           loader: [
             'css-loader?modules,localIdentName="[name]__[local]___[hash:base64:5]"',
-            'sass-loader'
+            'postcss-loader'
           ],
           fallbackLoader: 'style-loader'
         })
