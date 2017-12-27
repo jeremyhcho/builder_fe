@@ -11,7 +11,7 @@ const app = express()
 const httpProxy = require('http-proxy')
 const proxy = httpProxy.createProxyServer()
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3002
 
 const basic = auth.basic({
   realm: 'Secret'
@@ -28,7 +28,8 @@ app.use(express.static('dist'))
 
 app.all('/api/*', (req, res) => {
   proxy.web(req, res, {
-    target: process.env.API_HOST
+    target: process.env.API_HOST,
+    changeOrigin: process.env.ENV == 'production'
   })
 })
 
