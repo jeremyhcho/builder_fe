@@ -67,8 +67,18 @@ class KeyStats extends React.Component {
               Object.keys(keyStats).map(stat => {
                 const keyStat = stat.split('_').map(string => string[0].toUpperCase() + string.substr(1)).join(' ')
                 const totalValue = keyStats[stat].away + keyStats[stat].home
-                const awayWidth = (keyStats[stat].away / totalValue) * 100
-                const homeWidth = (keyStats[stat].home / totalValue) * 100
+                const awayWidth = keyStats[stat].away === 0 ? (
+                  0.01 * 90
+                ) : (
+                  (keyStats[stat].away / totalValue) * 90
+                )
+
+                const homeWidth = keyStats[stat].home === 0 ? (
+                  0.01 * 90
+                ) : (
+                  (keyStats[stat].home / totalValue) * 90
+                )
+
                 return (
                   <div key={stat} styleName="team-wrapper">
                     <Row style={{ margin: '0' }}>
