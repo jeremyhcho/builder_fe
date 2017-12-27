@@ -2,8 +2,12 @@
   margin-top: 60px;
   padding: 0 65px;
   max-width: 1200px;
+  overflow-y: scroll;
+  height: 100%;
 
   .conference {
+    min-height: 1050px;
+
     .team-item {
       cursor: pointer;
       display: flex;
