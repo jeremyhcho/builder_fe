@@ -13,7 +13,8 @@ const SECTION_NAMES = {
   '/games': 'Games',
   '/games/:id/:sectionName': 'Game Details',
   '/teams': 'Teams',
-  '/teams/:id/:sectionName': 'Team Details'
+  '/teams/:id/:sectionName': 'Team Details',
+  '/settings': 'Settings'
 }
 
 class Header extends React.Component {
@@ -27,6 +28,10 @@ class Header extends React.Component {
     return null
   }
 
+  navigateSettings = () => {
+    this.props.history.push('/settings')
+  }
+
   render () {
     return (
       <div styleName='header'>
@@ -38,7 +43,7 @@ class Header extends React.Component {
             <IconDropdown
               icon={<i className="fa fa-user-o" aria-hidden="true" />}
             >
-              <MenuItem onClick={() => console.log('CLICKED')}>
+              <MenuItem onClick={this.navigateSettings}>
                 Settings
               </MenuItem>
             </IconDropdown>
@@ -51,6 +56,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 export default withRouter(Header)
