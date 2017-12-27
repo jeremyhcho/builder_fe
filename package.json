@@ -91,11 +91,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jeremyhcho/builder_fe"
-  },
-  "postcss": {
-    "plugins": {
-      "postcss-nesting": {},
-      "postcss-css-variables": {}
-    }
   }
 }
