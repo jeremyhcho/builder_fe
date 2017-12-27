@@ -20,7 +20,7 @@ class PlayerStats extends React.Component {
     const { playerStats, summary } = this.props
     if (playerStats && summary) {
       return (
-        <div>
+        <div style={{ maxWidth: '1300px' }}>
           {
             Object.keys(playerStats).map(team => (
               <TeamPlayers

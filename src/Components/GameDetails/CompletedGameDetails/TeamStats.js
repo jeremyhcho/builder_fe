@@ -10,7 +10,7 @@ import {
 } from 'Components/GameDetails/Blocks'
 
 const TeamStats = ({ match }) => (
-  <div>
+  <div style={{ maxWidth: '1300px' }}>
     <Row>
       <Col xs={12}>
         <PointsGraph idProp={match.params.id} />
