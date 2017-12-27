@@ -40,7 +40,12 @@ class ScheduledGameDetails extends React.Component {
           </Col>
         </Row>
         <div className="matches-scroller" styleName="section">
-          HELLO WORLD
+          Scheduled Game... Under construction
+          {/* <Switch>
+            <Route exact path='/games/:id/overview' component={Overview} />
+            <Route exact path='/games:id/models' component={Models} />
+            <Redirect to={`/games/${this.props.match.params.id}/overview`} />
+          </Switch> */}
         </div>
       </div>
     )
