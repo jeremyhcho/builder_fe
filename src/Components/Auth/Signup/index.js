@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom'
 // Components
 import SignupForm from './SignupForm'
 
-// CSS
-import './Signup.scss'
-
 const styles = {
   wrapperStyle: {
     width: '400px',

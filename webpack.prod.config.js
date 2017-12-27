@@ -3,11 +3,6 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const extractSass = new ExtractTextPlugin({
-  filename: 'app.css',
-  allChunks: true
-})
-
 const VENDOR_LIBS = [
   'axios', 'classnames', 'react', 'react-dom',
   'react-redux', 'redux', 'redux-saga', 'react-router', 'react-router-dom'
@@ -61,13 +56,12 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: extractSass.extract({
-          use: [
-            'css-loader?modules,localIdentName="[name]__[local]___[hash:base64:5]"',
-            'sass-loader'
-          ],
-          fallback: 'style-loader'
-        })
+        exclude: /node_modules/,
+        loaders: [
+          'style-loader?sourceMap',
+          'css-loader?importLoader=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass-loader?sourceMap'
+        ]
       },
       {
         test: /\.(jpe?g|png|gif)$/,
@@ -97,6 +91,7 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
     }),
+    new ExtractTextPlugin({ filename: 'app.css', allChunks: true }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
@@ -113,8 +108,7 @@ const config = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    extractSass
+    new webpack.optimize.OccurrenceOrderPlugin()
   ],
   resolve: {
     alias: {
@@ -130,7 +124,7 @@ const config = {
       Config: path.resolve(__dirname, 'src/Config'),
       Layouts: path.resolve(__dirname, 'src/Layouts')
     },
-    extensions: ['.js', '.scss']
+    extensions: ['.js', '.scss', '.css']
   }
 }
 
