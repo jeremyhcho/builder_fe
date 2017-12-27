@@ -5,13 +5,16 @@ import { Row } from 'react-styled-flexboxgrid'
 import { Line } from 'react-chartjs-2'
 
 // Components
-import { Select } from 'Components/Common'
+import { Select, Card } from 'Components/Common'
 
 // CSS
 import './TeamStats.scss'
 
 // Actions
 import { fetchNBATeamStats } from 'Actions'
+
+// Helpers
+import { colorComparator } from 'Helpers'
 
 class PointsGraph extends React.Component {
   state = {
@@ -24,6 +27,38 @@ class PointsGraph extends React.Component {
     fetchNBATeamStats(idProp)
   }
 
+  componentWillReceiveProps (newProps) {
+    if (newProps.summary && newProps.teamStats) {
+      const teamOptions = this.teamOptions(newProps.summary)
+
+      this.setState({
+        selectedOption1: teamOptions[0].value,
+        selectedOption2: teamOptions[1].value
+      })
+    }
+  }
+
+  changeGraphOption = (key) => {
+    return (e, option) => this.setState({ [key]: option.value })
+  }
+
+  determineColors () {
+    const { summary } = this.props
+    const homeColor = summary.home.colors.primary.slice(1)
+    const awayColor = summary.away.colors.primary.slice(1)
+    const secondaryAwayColor = summary.away.colors.secondary.slice(1)
+
+    const ratio1 = colorComparator(homeColor, awayColor)
+    const ratio2 = colorComparator(homeColor, secondaryAwayColor)
+
+    const finalAwayColor = ratio1 > ratio2 ? secondaryAwayColor : awayColor
+
+    return ({
+      awayColor: `#${finalAwayColor}`,
+      homeColor: `#${homeColor}`
+    })
+  }
+
   teamStatsData () {
     const { teamStats, summary } = this.props
     const labels = ['Q1', 'Q2', 'Q3', 'Q4']
@@ -33,6 +68,9 @@ class PointsGraph extends React.Component {
         away: { points: [], avg_points: [] },
         home: { points: [], avg_points: [] }
       }
+
+      const colors = this.determineColors()
+
       Object.keys(teamStats.away).forEach(quarter => {
         teamPoints.away.points.push(teamStats.away[quarter].points)
         teamPoints.away.avg_points.push(teamStats.away[quarter].avg_points)
@@ -44,20 +82,21 @@ class PointsGraph extends React.Component {
         label: `${summary.away.name} Points`,
         fill: false,
         lineTension: 0.1,
-        backgroundColor: summary.away.colors.primary,
-        borderColor: summary.away.colors.primary,
+        cubicInterpolationMode: 'linear',
+        backgroundColor: colors.awayColor,
+        borderColor: colors.awayColor,
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: 'bevel',
-        pointBorderColor: summary.away.colors.primary,
-        pointBackgroundColor: summary.away.colors.secondary,
+        pointBorderColor: colors.awayColor,
+        pointBackgroundColor: colors.awayColor,
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: summary.away.colors.primary,
-        pointHoverBorderColor: summary.away.colors.secondary,
+        pointHoverBackgroundColor: colors.awayColor,
+        // pointHoverBorderColor: summary.away.colors.secondary,
         pointHoverBorderWidth: 2,
-        pointRadius: 5,
+        pointRadius: 4,
         pointHitRadius: 15,
         data: teamPoints.away.points
       }
@@ -65,8 +104,9 @@ class PointsGraph extends React.Component {
         label: `${summary.away.name} Average Points`,
         fill: false,
         lineTension: 0.1,
+        cubicInterpolationMode: 'linear',
         backgroundColor: 'transparent',
-        borderColor: summary.away.colors.primary,
+        borderColor: colors.awayColor,
         borderCapStyle: 'butt',
         borderDash: [5, 5],
         borderDashOffset: 0.0,
@@ -75,8 +115,8 @@ class PointsGraph extends React.Component {
         pointBackgroundColor: 'transparent',
         pointBorderWidth: 0,
         pointHoverRadius: 0,
-        pointHoverBackgroundColor: summary.away.colors.primary,
-        pointHoverBorderColor: summary.away.colors.secondary,
+        pointHoverBackgroundColor: colors.awayColor,
+        // pointHoverBorderColor: summary.away.colors.secondary,
         pointHoverBorderWidth: 0,
         pointRadius: 1,
         pointHitRadius: 15,
@@ -87,20 +127,21 @@ class PointsGraph extends React.Component {
         label: `${summary.home.name} Points`,
         fill: false,
         lineTension: 0.1,
-        backgroundColor: summary.home.colors.primary,
-        borderColor: summary.home.colors.primary,
+        cubicInterpolationMode: 'linear',
+        backgroundColor: colors.homeColor,
+        borderColor: colors.homeColor,
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: 'bevel',
-        pointBorderColor: summary.home.colors.primary,
-        pointBackgroundColor: summary.home.colors.secondary,
+        pointBorderColor: colors.homeColor,
+        // pointBackgroundColor: summary.home.colors.secondary,
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: summary.home.colors.primary,
-        pointHoverBorderColor: summary.home.colors.secondary,
+        pointHoverBackgroundColor: colors.homeColor,
+        // pointHoverBorderColor: summary.home.colors.secondary,
         pointHoverBorderWidth: 2,
-        pointRadius: 5,
+        pointRadius: 4,
         pointHitRadius: 15,
         data: teamPoints.home.points
       }
@@ -108,9 +149,9 @@ class PointsGraph extends React.Component {
         label: `${summary.home.name} Average Points`,
         fill: false,
         lineTension: 0.1,
-        cubicInterpolationMode: 'monotone',
+        cubicInterpolationMode: 'linear',
         backgroundColor: 'transparent',
-        borderColor: summary.home.colors.primary,
+        borderColor: colors.homeColor,
         borderCapStyle: 'butt',
         borderDash: [5, 5],
         borderDashOffset: 0.0,
@@ -119,8 +160,8 @@ class PointsGraph extends React.Component {
         pointBackgroundColor: 'transparent',
         pointBorderWidth: 0,
         pointHoverRadius: 0,
-        pointHoverBackgroundColor: summary.home.colors.primary,
-        pointHoverBorderColor: summary.home.colors.secondary,
+        pointHoverBackgroundColor: colors.homeColor,
+        // pointHoverBorderColor: summary.home.colors.secondary,
         pointHoverBorderWidth: 0,
         pointRadius: 1,
         pointHitRadius: 15,
@@ -128,71 +169,88 @@ class PointsGraph extends React.Component {
       }
       const pointsDatasets = { awayPoints, awayAvgPoints, homePoints, homeAvgPoints }
       const { selectedOption1, selectedOption2 } = this.state
-      if (!selectedOption1) datasets.push(pointsDatasets.awayPoints)
       if (selectedOption1) datasets.push(pointsDatasets[selectedOption1])
       if (selectedOption2) datasets.push(pointsDatasets[selectedOption2])
     }
     return { labels, datasets }
   }
 
+  teamOptions (summary) {
+    const updatedSummary = summary || this.props.summary
+
+    if (!updatedSummary) { return {} }
+
+    return ([
+      { label: `${updatedSummary.away.name} Points (Away)`, value: 'awayPoints' },
+      { label: `${updatedSummary.away.name} Average Points (Away)`, value: 'awayAvgPoints' },
+      { label: `${updatedSummary.home.name} Points (Home)`, value: 'homePoints' },
+      { label: `${updatedSummary.home.name} Average Points (Home)`, value: 'homeAvgPoints' }
+    ])
+  }
+
   render () {
     const { teamStats, summary } = this.props
-    if (teamStats && summary) {
-      const teamOptions = [
-        { label: `${summary.away.name} Points (Away)`, value: 'awayPoints' },
-        { label: `${summary.away.name} Average Points (Away)`, value: 'awayAvgPoints' },
-        { label: `${summary.home.name} Points (Home)`, value: 'homePoints' },
-        { label: `${summary.home.name} Average Points(Home)`, value: 'homeAvgPoints' }
-      ]
-      return (
-        <div styleName="points-graph">
-          <Row center='xs'>
-            <div style={{ width: '220px', margin: '10px 50px' }}>
-              <Select
-                defaultText="Option 1"
-                options={teamOptions}
-                onChange={(e, option) => this.setState({ selectedOption1: option.value })}
-                selectedVal={this.state.selectedOption1}
-              />
-            </div>
-            <div style={{ width: '220px', margin: '10px 50px' }}>
-              <Select
-                defaultText="Option 2"
-                options={teamOptions}
-                onChange={(e, option) => this.setState({ selectedOption2: option.value })}
-                selectedVal={this.state.selectedOption2}
-              />
-            </div>
-          </Row>
 
-          <Row center='xs'>
-            <div style={{ width: '800px' }}>
-              <Line
-                width={800}
-                height={400}
-                data={this.teamStatsData()}
-                options={{
-                  maintainAspectRatio: false,
-                  scales: {
-                    yAxes: [{
-                      ticks: {
-                        stepSize: 2
+    if (teamStats && summary) {
+      return (
+        <Card label='Points by quarter'>
+          <div styleName="points-graph">
+            <Row center='xs'>
+              <div style={{ width: '220px', margin: '10px 50px' }}>
+                <Select
+                  defaultText="Line 1"
+                  options={this.teamOptions()}
+                  onChange={this.changeGraphOption('selectedOption1')}
+                  selectedVal={this.state.selectedOption1}
+                />
+              </div>
+
+              <span
+                className='semibold'
+                style={{ lineHeight: '60px', verticalAlign: 'middle' }}
+              >
+                vs.
+              </span>
+
+              <div style={{ width: '220px', margin: '10px 50px' }}>
+                <Select
+                  defaultText="Line 2"
+                  options={this.teamOptions()}
+                  onChange={this.changeGraphOption('selectedOption2')}
+                  selectedVal={this.state.selectedOption2}
+                />
+              </div>
+            </Row>
+
+            <Row center='xs'>
+              <div style={{ width: '800px', marginTop: '15px' }}>
+                <Line
+                  width={800}
+                  height={400}
+                  data={this.teamStatsData()}
+                  options={{
+                    maintainAspectRatio: false,
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          stepSize: 2
+                        }
+                      }]
+                    },
+                    layout: {
+                      padding: {
+                        left: 40,
+                        right: 40,
+                        top: 0,
+                        bottom: 0
                       }
-                    }]
-                  },
-                  layout: {
-                    padding: {
-                      left: 40,
-                      right: 40,
-                      top: 0,
-                      bottom: 0
                     }
-                  }
-                }}
-              />
-            </div>
-          </Row>
-        </div>
+                  }}
+                />
+              </div>
+            </Row>
+          </div>
+        </Card>
       )
     }
     return (

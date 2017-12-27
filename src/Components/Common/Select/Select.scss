@@ -54,11 +54,6 @@
     transform: translateY(-50%);
     transition: transform 100ms;
 
-    &:before {
-      position: absolute;
-      top: 0;
-    }
-
     &.open {
       transform: rotate(180deg) translateY(50%);
     }

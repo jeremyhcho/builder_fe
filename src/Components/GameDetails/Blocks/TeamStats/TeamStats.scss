@@ -1,6 +1,6 @@
 // points-graph
 .points-graph {
-
+  padding: 45px 0;
 }
 
 // team-statistics
@@ -19,7 +19,7 @@
     overflow-wrap: word-break;
 
     .stat-value {
-      margin: 5px 0;
+      margin: 13px 0;
     }
   }
 }
@@ -35,10 +35,11 @@
       align-items: center;
 
       .team-color {
-        width: 45px;
-        height: 20px;
+        width: 20px;
+        height: 10px;
         background-color: #FFF;
         margin-right: 10px;
+        border-radius: var(--border-radius);
       }
     }
   }

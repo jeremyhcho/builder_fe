@@ -4,12 +4,17 @@ import PropTypes from 'prop-types'
 import pathToRegexp from 'path-to-regexp'
 
 // Components
-import { MenuItem, IconDropdown } from 'Components/Common'
+import { MenuItem, IconDropdown, Tooltip } from 'Components/Common'
 
 // CSS
 import './Header.scss'
 
+// Assets
+import ProfileIcon from 'Assets/Icons/header/profile.svg'
+import NotificationIcon from 'Assets/Icons/header/notification.svg'
+
 const SECTION_NAMES = {
+  '/': 'Dashboard',
   '/games': 'Games',
   '/games/:id/:sectionName': 'Game Details',
   '/teams': 'Teams',
@@ -39,15 +44,32 @@ class Header extends React.Component {
           <div styleName='title'>
             <h1 className="semibold">{this.getCurrentRoute()}</h1>
           </div>
-          <div styleName='header-items'>
-            <IconDropdown
-              icon={<i className="fa fa-user-o" aria-hidden="true" />}
-            >
-              <MenuItem onClick={this.navigateSettings}>
-                Settings
-              </MenuItem>
-            </IconDropdown>
-          </div>
+
+          <ul styleName='header-items'>
+            <li data-tip-for='notification-icon'>
+              <NotificationIcon
+                width={18}
+                height={18}
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)'
+                }}
+              />
+              <Tooltip id='notification-icon' pos='bottom'>Notifications</Tooltip>
+            </li>
+
+            <li>
+              <IconDropdown
+                icon={<ProfileIcon style={{ marginTop: '5px' }} />}
+              >
+                <MenuItem onClick={this.navigateSettings}>
+                  Settings
+                </MenuItem>
+              </IconDropdown>
+            </li>
+          </ul>
         </div>
       </div>
     )

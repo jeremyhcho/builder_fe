@@ -7,37 +7,47 @@ import classNames from 'classnames'
 import { Tooltip } from 'Components/Common'
 
 // Icons
-import Game from 'Assets/Icons/nav/basketball-13.svg'
-import GameSelected from 'Assets/Icons/nav/basketball-13-white.svg'
-import Search from 'Assets/Icons/nav/m-search.svg'
-import SearchSelected from 'Assets/Icons/nav/m-search-white.svg'
-import Rocket from 'Assets/Icons/nav/rocket.svg'
-import RocketSelected from 'Assets/Icons/nav/rocket-white.svg'
+import Games from 'Assets/Icons/nav/games.svg'
+import GamesSelected from 'Assets/Icons/nav/gamesSelected.svg'
+import Teams from 'Assets/Icons/nav/teams.svg'
+import TeamsSelected from 'Assets/Icons/nav/teamsSelected.svg'
+import PlaceholderIcon from 'Assets/Icons/nav/placeholderIcon.svg'
+import Dashboard from 'Assets/Icons/nav/dashboard.svg'
+import DashboardSelected from 'Assets/Icons/nav/dashboardSelected.svg'
+import Models from 'Assets/Icons/nav/model.svg'
+import ModelsSelected from 'Assets/Icons/nav/modelSelected.svg'
 
 // CSS
 import './SideNav.scss'
 
 const navItems = [
   {
-    icon: Game,
-    selectedIcon: GameSelected,
+    icon: Dashboard,
+    selectedIcon: DashboardSelected,
+    route: '/',
+    key: 'dashboard',
+    sectionName: 'Dashboard'
+  },
+  {
+    icon: Games,
+    selectedIcon: GamesSelected,
     route: '/games',
     key: 'games',
     sectionName: 'Games'
   },
   {
-    icon: Search,
-    selectedIcon: SearchSelected,
+    icon: Teams,
+    selectedIcon: TeamsSelected,
     route: '/teams',
     key: 'teams',
     sectionName: 'Teams'
   },
   {
-    icon: Rocket,
-    selectedIcon: RocketSelected,
-    route: '/rocket',
-    key: 'rocket',
-    sectionName: 'Rocket'
+    icon: Models,
+    selectedIcon: ModelsSelected,
+    route: '/models',
+    key: 'models',
+    sectionName: 'Models'
   }
 ]
 
@@ -61,28 +71,36 @@ class SideNav extends React.Component {
   render () {
     return (
       <div styleName="sidenav">
-        {navItems.map(({ icon: Icon, selectedIcon: SelectedIcon, route, key, sectionName }) => {
-          const selected = route === this.props.history.location.pathname
-          const navItemStyle = classNames('nav-item', {
-            selected
-          })
+        <PlaceholderIcon
+          width={25}
+          height={25}
+          style={{ marginBottom: '85px' }}
+        />
 
-          return (
-            <div
-              key={key}
-              styleName={navItemStyle}
-              onClick={this.handleClick(key, route)}
-              selected={selected}
-              data-tip-for={`side-nav-item-${key}`}
-            >
-              <Tooltip id={`side-nav-item-${key}`} pos='right'>{sectionName}</Tooltip>
-              {selected ?
-                <SelectedIcon height={20} width={20} />
-                : <Icon height={20} width={20} />
-              }
-            </div>
-          )
-        })}
+        {
+          navItems.map(({ icon: Icon, selectedIcon: SelectedIcon, route, key, sectionName }) => {
+            const selected = route === this.props.history.location.pathname
+            const navItemStyle = classNames('nav-item', {
+              selected
+            })
+
+            return (
+              <div
+                key={key}
+                styleName={navItemStyle}
+                onClick={this.handleClick(key, route)}
+                selected={selected}
+                data-tip-for={`side-nav-item-${key}`}
+              >
+                <Tooltip id={`side-nav-item-${key}`} pos='right'>{sectionName}</Tooltip>
+                {selected ?
+                  <SelectedIcon height={20} width={20} />
+                  : <Icon height={20} width={20} />
+                }
+              </div>
+            )
+          })
+        }
       </div>
     )
   }

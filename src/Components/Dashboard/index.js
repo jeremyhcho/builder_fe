@@ -8,9 +8,7 @@ import './Dashboard.scss'
 class Dashboard extends React.Component {
   render () {
     return (
-      <div className='dashboard'>
-        DASHBOARD
-      </div>
+      <div className='dashboard' />
     )
   }
 }

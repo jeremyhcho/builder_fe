@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 // import Page, { Grid, GridColumn } from '@atlaskit/page'
 import { Row, Col } from 'react-styled-flexboxgrid'
 // import Loadable from 'react-loadable'
@@ -43,6 +43,7 @@ const MainLayout = () => (
             <Route path='/games' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />
             <Route path='/settings' component={SettingsLayout} />
+            <Redirect from='/' to='/games' />
           </Switch>
         </Col>
       </Row>

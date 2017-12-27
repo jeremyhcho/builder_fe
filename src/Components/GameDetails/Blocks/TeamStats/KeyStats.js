@@ -12,32 +12,55 @@ import './TeamStats.scss'
 // Actions
 import { fetchNBAKeyStats } from 'Actions'
 
+// Helpers
+import { colorComparator } from 'Helpers'
+
 class KeyStats extends React.Component {
   componentDidMount () {
     const { fetchNBAKeyStats, idProp } = this.props
     fetchNBAKeyStats(idProp)
   }
 
+  determineColors () {
+    const { summary } = this.props
+    const homeColor = summary.home.colors.primary.slice(1)
+    const awayColor = summary.away.colors.primary.slice(1)
+    const secondaryAwayColor = summary.away.colors.secondary.slice(1)
+
+    const ratio1 = colorComparator(homeColor, awayColor)
+    const ratio2 = colorComparator(homeColor, secondaryAwayColor)
+
+    const finalAwayColor = ratio1 > ratio2 ? secondaryAwayColor : awayColor
+
+    return ({
+      awayColor: `#${finalAwayColor}`,
+      homeColor: `#${homeColor}`
+    })
+  }
+
   render () {
     const { keyStats, summary } = this.props
+
     if (keyStats && summary) {
+      const colors = this.determineColors()
+
       return (
         <div styleName="key-stats">
           <Card label="Key Differences" wrapperStyle={{ padding: '25px' }}>
-            <Row styleName="legend" center='xs' between='xs'>
+            <Row styleName="legend" center='xs' around='xs'>
               <div styleName="legend-team">
                 <div
                   styleName="team-color"
-                  style={{ border: `4px solid ${summary.away.colors.primary}` }}
+                  style={{ backgroundColor: colors.awayColor }}
                 />
-                <p className="bold">{summary.away.name}</p>
+                <p className="semibold">{summary.away.name}</p>
               </div>
               <div styleName="legend-team">
                 <div
                   styleName="team-color"
-                  style={{ border: `4px solid ${summary.home.colors.primary}` }}
+                  style={{ backgroundColor: colors.homeColor }}
                 />
-                <p className="bold">{summary.home.name}</p>
+                <p className="semibold">{summary.home.name}</p>
               </div>
             </Row>
             {
@@ -54,10 +77,10 @@ class KeyStats extends React.Component {
                     <Row styleName="team-rows">
                       <div
                         styleName="stat-display"
-                        style={{ backgroundColor: `${summary.away.colors.primary}`, width: `${awayWidth}%` }}
+                        style={{ backgroundColor: `${colors.awayColor}`, width: `${awayWidth}%` }}
                       />
                       <p
-                        className="semibold label"
+                        className="semibold"
                         style={{ marginLeft: '15px' }}
                       >
                         {keyStats[stat].away}
@@ -66,10 +89,10 @@ class KeyStats extends React.Component {
                     <Row styleName="team-rows">
                       <div
                         styleName="stat-display"
-                        style={{ backgroundColor: `${summary.home.colors.primary}`, width: `${homeWidth}%` }}
+                        style={{ backgroundColor: `${colors.homeColor}`, width: `${homeWidth}%` }}
                       />
                       <p
-                        className="semibold label"
+                        className="semibold"
                         style={{ marginLeft: '15px' }}
                       >
                         {keyStats[stat].home}
@@ -83,6 +106,7 @@ class KeyStats extends React.Component {
         </div>
       )
     }
+
     return (
       <div styleName="key-stats">
         <Card label="Key Differences" wrapperStyle={{ padding: '25px' }}>

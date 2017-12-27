@@ -16,14 +16,14 @@ const Statistics = ({ teamStats }) => {
       <Card label="Statistics" wrapperStyle={{ padding: '40px' }} styleName="statistics">
         <Row center='xs'>
           <Row style={{ width: '100%' }}>
-            <Col xs={3}>
-              <p className="bold">{stats.away.name}</p>
+            <Col xs={3} style={{ textAlign: 'right' }}>
+              <p className="semibold small">{stats.away.city}</p>
+              <p className="semibold label">{stats.away.name}</p>
             </Col>
-            <Col xs={6}>
-              <p className="bold">Stats</p>
-            </Col>
-            <Col xs={3}>
-              <p className="bold">{stats.home.name}</p>
+            <Col xs={6} />
+            <Col xs={3} style={{ textAlign: 'left' }}>
+              <p className="semibold small">{stats.home.city}</p>
+              <p className="semibold label">{stats.home.name}</p>
             </Col>
           </Row>
           <hr style={{ width: '100%', border: 0, height: '1px', backgroundColor: 'var(--gray)', margin: '15px 0' }} />
@@ -35,8 +35,8 @@ const Statistics = ({ teamStats }) => {
                   return (
                     <p
                       key={stat}
-                      className="semibold"
                       styleName="stat-value"
+                      style={{ textAlign: 'right' }}
                     >
                       {typeof value === 'string' ? value : Math.round(value * 100) / 100}
                     </p>
@@ -59,13 +59,13 @@ const Statistics = ({ teamStats }) => {
             </Col>
             <Col xs={3}>
               {
-                Object.keys(stats.away.statistics).map(stat => {
-                  const value = stats.away.statistics[stat]
+                Object.keys(stats.home.statistics).map(stat => {
+                  const value = stats.home.statistics[stat]
                   return (
                     <p
                       key={stat}
-                      className="semibold"
                       styleName="stat-value"
+                      style={{ textAlign: 'left' }}
                     >
                       {typeof value === 'string' ? value : Math.round(value * 100) / 100}
                     </p>

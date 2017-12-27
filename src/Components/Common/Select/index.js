@@ -22,7 +22,7 @@ class Select extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedVal !== this.props.selectedVal) {
+    if (!this.state.displayText || newProps.selectedVal !== this.props.selectedVal) {
       const label = this.props.options.find(option => (
         option.value === newProps.selectedVal
       )).label
@@ -36,7 +36,7 @@ class Select extends React.Component {
   }
 
   onBlur = (e) => {
-    if (this.dropdownWrapper.contains(e.target)) {
+    if (this.dropdownWrapper.contains(e.target) || !this.state.open) {
       return
     }
 
@@ -89,7 +89,7 @@ class Select extends React.Component {
     const { selectedVal, options, defaultText } = this.props
 
     if (selectedVal) {
-      return options.find(option => option.value === selectedVal)
+      return options.find(option => option.value === selectedVal).label
     }
 
     return defaultText || options[0].label

@@ -13,10 +13,25 @@
       top: 30px;
       left: 50px;
     }
+
     .header-items {
       position: absolute;
       top: 30px;
       right: 40px;
+      display: flex;
+      flex-direction: row;
+
+      > li {
+        width: 36px;
+        height: 36px;
+        position: relative;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--light-gray);
+        }
+      }
     }
   }
 }

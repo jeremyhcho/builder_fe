@@ -17,16 +17,15 @@ class TeamPlayers extends React.Component {
         <div className="flex">
           <div styleName="players-container">
             <div>
-              <p className="bold label" style={{ margin: '15px 0' }}>Starters</p>
+              <p className="semibold label" style={{ margin: '15px 0' }}>Starters</p>
               {
                 starterPlayers.map(player => (
                   <div key={player.id}>
                     <p
-                      data-tip-for={`player-${player.id}`}
                       className="semibold"
-                      styleName="players-value name"
+                      styleName="players-value"
                     >
-                      {player.last_name}
+                      {player.first_name.slice(0, 1)}. {player.last_name}
                     </p>
                   </div>
                 ))
@@ -58,16 +57,15 @@ class TeamPlayers extends React.Component {
         <div className="flex">
           <div styleName="players-container">
             <div>
-              <p className="bold label" style={{ margin: '15px 0' }}>Bench</p>
+              <p className="semibold label" style={{ margin: '15px 0' }}>Bench</p>
               {
                 benchPlayers.map(player => (
                   <div key={player.id}>
                     <p
-                      data-tip-for={`player-${player.id}`}
                       className="semibold"
-                      styleName="players-value name"
+                      styleName="players-value"
                     >
-                      {player.last_name}
+                      {player.first_name.slice(0, 1)}. {player.last_name}
                     </p>
                   </div>
                 ))
