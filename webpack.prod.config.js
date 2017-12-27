@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
-  filename: 'app.css'
-  // allChunks: true
+  filename: 'app.css',
+  allChunks: true
 })
 
 const VENDOR_LIBS = [
