@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
-  filename: 'app.css'
-  // allChunks: true
+  filename: 'app.css',
+  allChunks: true
 })
 
 const VENDOR_LIBS = [
@@ -62,10 +62,7 @@ const config = {
       {
         test: /\.scss$/,
         use: extractSass.extract({
-          use: [
-            'css-loader?modules,localIdentName="[name]__[local]___[hash:base64:5]"',
-            'sass-loader'
-          ],
+          use: 'css-loader?modules,localIdentName="[name]__[local]___[hash:base64:5]"',
           fallback: 'style-loader'
         })
       },
