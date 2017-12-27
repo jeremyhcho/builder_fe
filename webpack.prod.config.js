@@ -49,7 +49,7 @@ const config = {
                 exclude: 'node_modules',
                 generateScopedName: '[name]__[local]___[hash:base64:5]',
                 filetypes: {
-                  '.scss': {
+                  '.css': {
                     syntax: 'postcss-scss',
                     plugins: ['postcss-nesting', 'postcss-css-variables']
                   }
