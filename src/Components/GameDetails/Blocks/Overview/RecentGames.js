@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import uniqueId from 'lodash/uniqueid'
+import { uniqueId } from 'lodash'
 
 // Components
 import { Card, ButtonGroup } from 'Components/Common'
