@@ -10,7 +10,7 @@ import { Card, Spinner } from 'Components/Common'
 import './TeamStats.scss'
 
 const Statistics = ({ teamStats }) => {
-  if (teamStats && Object.keys(teamStats).length > 1000) {
+  if (teamStats) {
     const stats = teamStats.totals
     return (
       <Card label="Statistics" wrapperStyle={{ padding: '40px' }} styleName="statistics">
