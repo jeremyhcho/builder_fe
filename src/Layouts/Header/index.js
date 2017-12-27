@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import pathToRegexp from 'path-to-regexp'
 
 // Components
@@ -12,6 +13,9 @@ import './Header.scss'
 // Assets
 import ProfileIcon from 'Assets/Icons/header/profile.svg'
 import NotificationIcon from 'Assets/Icons/header/notification.svg'
+
+// Actions
+import { logoutUser } from 'Actions'
 
 const SECTION_NAMES = {
   '/': 'Dashboard',
@@ -62,10 +66,15 @@ class Header extends React.Component {
 
             <li>
               <IconDropdown
+                horizontalReverse
+                listStyle={{ textAlign: 'center', minWidth: '100px' }}
                 icon={<ProfileIcon style={{ marginTop: '5px' }} />}
               >
                 <MenuItem onClick={this.navigateSettings}>
                   Settings
+                </MenuItem>
+                <MenuItem onClick={() => this.props.logoutUser()}>
+                  Sign out
                 </MenuItem>
               </IconDropdown>
             </li>
@@ -78,7 +87,15 @@ class Header extends React.Component {
 
 Header.propTypes = {
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired
 }
 
-export default withRouter(Header)
+const mapDispatchToProps = {
+  logoutUser
+}
+
+export default withRouter(connect(
+  null,
+  mapDispatchToProps
+)(Header))

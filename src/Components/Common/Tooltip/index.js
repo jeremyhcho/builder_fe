@@ -12,13 +12,13 @@ class Tooltip extends React.Component {
 
   componentDidMount () {
     this.target = document.querySelector(`[data-tip-for=${this.props.id}]`)
-    this.target.addEventListener('mouseenter', () => this.setState({ hovered: true }))
-    this.target.addEventListener('mouseleave', () => this.setState({ hovered: false }))
+    this.target.addEventListener('mouseenter', this.mouseEnter)
+    this.target.addEventListener('mouseleave', this.mouseLeave)
   }
 
   componentWillUnmount () {
-    this.target.removeEventListener('mouseenter')
-    this.target.removeEventListener('mouseleave')
+    this.target.removeEventListener('mouseenter', this.mouseEnter)
+    this.target.removeEventListener('mouseleave', this.mouseLeave)
   }
 
   getPos () {
@@ -48,6 +48,14 @@ class Tooltip extends React.Component {
       default:
         return this.topPos(x, y)
     }
+  }
+
+  mouseEnter = () => {
+    this.setState({ hovered: true })
+  }
+
+  mouseLeave = () => {
+    this.setState({ hovered: false })
   }
 
   topPos (x, y) {

@@ -40,7 +40,7 @@ class Dropdown extends React.Component {
       styles.right = '0'
     }
 
-    return styles
+    return { ...styles, ...this.props.listStyle }
   }
 
   render () {
@@ -86,7 +86,8 @@ class Dropdown extends React.Component {
 Dropdown.defaultProps = {
   verticalReverse: false,
   horizontalReverse: false,
-  wrapperStyle: {}
+  wrapperStyle: {},
+  listStyle: {}
 }
 
 Dropdown.propTypes = {
@@ -97,7 +98,8 @@ Dropdown.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object
-  ]).isRequired
+  ]).isRequired,
+  listStyle: PropTypes.object
 }
 
 export default Dropdown

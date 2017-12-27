@@ -2,7 +2,8 @@ import {
   CLEAR_LOGIN_ERROR,
   AUTHORIZE,
   UNAUTHORIZE,
-  LOGIN
+  LOGIN,
+  LOGOUT
 } from 'Constants'
 
 export const clearLoginError = () => ({
@@ -20,5 +21,10 @@ export const unauthorize = () => ({
 // ASYNC
 export const loginUser = (params) => ({
   type: LOGIN,
+  params
+})
+
+export const logoutUser = (params) => ({
+  type: LOGOUT,
   params
 })

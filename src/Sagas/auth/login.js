@@ -2,14 +2,16 @@ import { put, call, takeLatest } from 'redux-saga/effects'
 
 // Apis
 import {
-  login
+  login,
+  logout
 } from 'Apis'
 
 // Constants
 import {
   LOGIN,
   LOGIN_FAILED,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGOUT
 } from 'Constants'
 
 // Actions
@@ -29,12 +31,26 @@ function* callLogin ({ params }) {
   }
 }
 
+function* callLogout ({ params }) {
+  try {
+    yield call(logout, params)
+    yield put(unauthorize())
+  } catch ({ response }) {
+    console.log('Failed to log out')
+  }
+}
+
 function* watchLogin () {
   yield takeLatest(LOGIN, callLogin)
 }
 
+function* watchLogout () {
+  yield takeLatest(LOGOUT, callLogout)
+}
+
 export default function* sessionSaga () {
   yield [
-    watchLogin()
+    watchLogin(),
+    watchLogout()
   ]
 }
