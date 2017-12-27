@@ -60,13 +60,9 @@ const config = {
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: extractSass.extract({
-          use: [
-            'style-loader?sourceMap',
-            'css-loader?importLoader=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
-            'sass-loader?sourceMap'
-          ],
+          use: 'css-loader?importLoader=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
           fallback: 'style-loader'
         })
       },
