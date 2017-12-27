@@ -1,6 +1,6 @@
 // games
 import gamesSaga from './games'
-import gameDetailsSaga from './games/gameDetails'
+import gameDetailsSaga from './games/gamesDetails'
 
 // teams
 import teamsSaga from './teams'
