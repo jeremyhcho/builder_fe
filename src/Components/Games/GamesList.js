@@ -78,7 +78,7 @@ class GamesList extends React.Component {
         >
           {
             fetchingGames ? (
-              <Row center='xs' style={{ marginTop: 'calc(100vh * .25)', width: '100%', maxWidth: '1600px' }}>
+              <Row center='xs' className="loader">
                 <Col xs={12}>
                   <Spinner lg show />
                 </Col>

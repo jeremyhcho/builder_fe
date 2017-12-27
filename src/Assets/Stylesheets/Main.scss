@@ -57,6 +57,11 @@
     color: var(--dark-gray);
   }
 
+  .loader {
+    margin-top: 30vh;
+    width: 100%;
+    max-width: 1600px;
+  }
 }
 
 *, *:before, *:after {

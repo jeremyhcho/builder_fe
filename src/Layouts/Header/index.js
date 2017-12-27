@@ -23,7 +23,8 @@ const SECTION_NAMES = {
   '/games/:id/:sectionName': 'Game Details',
   '/teams': 'Teams',
   '/teams/:id/:sectionName': 'Team Details',
-  '/settings': 'Settings'
+  '/settings': 'Settings',
+  '/models': 'Models'
 }
 
 class Header extends React.Component {

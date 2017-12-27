@@ -12,6 +12,7 @@ import Dashboard from 'Components/Dashboard'
 import GamesLayout from './Games'
 import TeamsLayout from './Teams'
 import SettingsLayout from './Settings'
+import ModelsLayout from './Models'
 
 // const CalendarContainer = Loadable({
 //   loader: () => import('../../containers/Calendar'),
@@ -42,6 +43,7 @@ const MainLayout = () => (
             <Route exact path='/' component={Dashboard} />
             <Route path='/games' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />
+            <Route path='/models' component={ModelsLayout} />
             <Route path='/settings' component={SettingsLayout} />
             <Redirect from='/' to='/games' />
           </Switch>

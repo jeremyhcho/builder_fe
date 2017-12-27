@@ -5,7 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Tab } from 'Components/Common'
-import Models from './Models'
+import ModelView from './ModelView'
 import Overview from './Overview'
 import PlayerStats from './PlayerStats'
 import TeamStats from './TeamStats'
@@ -48,7 +48,7 @@ class CompletedGameDetails extends React.Component {
             <Route exact path='/games/:id/overview' component={Overview} />
             <Route exact path='/games/:id/teams' component={TeamStats} />
             <Route exact path='/games/:id/players' component={PlayerStats} />
-            <Route exact path='/games/:id/models' component={Models} />
+            <Route exact path='/games/:id/models' component={ModelView} />
             <Redirect to={`/games/${this.props.match.params.id}/overview`} />
           </Switch>
         </div>

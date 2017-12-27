@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { Card } from 'Components/Common'
+import { Card, Spinner } from 'Components/Common'
 
 // CSS
 import './TeamStats.scss'
 
 const Statistics = ({ teamStats }) => {
-  if (teamStats) {
+  if (teamStats && Object.keys(teamStats).length > 1000) {
     const stats = teamStats.totals
     return (
       <Card label="Statistics" wrapperStyle={{ padding: '40px' }} styleName="statistics">
@@ -80,7 +80,13 @@ const Statistics = ({ teamStats }) => {
   }
   return (
     <div>
-      TEAMSTATISTICS LOADER SPINNER TIHNGY HERE...
+      <Card label="Statistics" wrapperStyle={{ padding: '186px 0' }}>
+        <Row center='xs'>
+          <Col xs={12}>
+            <Spinner lg show />
+          </Col>
+        </Row>
+      </Card>
     </div>
   )
 }

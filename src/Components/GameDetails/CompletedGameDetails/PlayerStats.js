@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
+import { Spinner } from 'Components/Common'
 import { TeamPlayers } from 'Components/GameDetails/Blocks'
 
 // Actions
@@ -33,7 +35,11 @@ class PlayerStats extends React.Component {
     }
     return (
       <div>
-        SPINNER
+        <Row center='xs' className="loader">
+          <Col xs={12}>
+            <Spinner lg show />
+          </Col>
+        </Row>
       </div>
     )
   }

@@ -1,13 +1,13 @@
 import React from 'react'
 
-class Models extends React.Component {
+class ModelView extends React.Component {
   render () {
     return (
       <div>
-        MODELS
+        VIEW MODELS
       </div>
     )
   }
 }
 
-export default Models
+export default ModelView
