@@ -29,7 +29,7 @@ app.use(express.static('dist'))
 app.all('/api/*', (req, res) => {
   proxy.web(req, res, {
     target: process.env.API_HOST,
-    changeOrigin: process.env.ENV == 'production'
+    changeOrigin: process.env.NODE_ENV == 'production'
   })
 })
 
