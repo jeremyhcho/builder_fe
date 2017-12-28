@@ -1,0 +1,98 @@
+.models {
+  padding: 65px;
+  max-width: 1300px;
+
+  .model-list {
+    margin-top: 35px;
+    overflow-y: scroll;
+    height: calc(100vh - 150px);
+    padding-bottom: 45px;
+
+    .model-card {
+      height: 400px;
+      margin-bottom: 35px;
+      max-width: 442px;
+
+      .upper {
+        background-color: var(--blue);
+        height: 50%;
+        position: relative;
+        padding: 30px;
+        color: #fff;
+        margin: 0;
+        border-radius: 3px 3px 0 0;
+
+        .graph-wrapper {
+          width: 70%;
+          position: absolute;
+          z-index: 1;
+          background-color: #FFF;
+          padding: 35px 30px 15px 20px;
+          border-radius: var(--border-radius);
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%);
+          box-shadow: 0 4px 4px var(--gray);
+          border: 1px solid var(--lightest-gray);
+        }
+      }
+
+      .lower {
+        height: 50%;
+        position: relative;
+        margin: 0;
+        padding: 25px;
+        border-radius: 0 0 3px 3px;
+        transition: all 200ms ease;
+
+        &.fill {
+          background-color: var(--blue);
+        }
+
+        .overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          overflow: hidden;
+          width: 100%;
+          height: 0;
+          transition: all 400ms ease;
+          background-color: #fff;
+
+          .overlay-content {
+            display: flex;
+            justify-content: flex-end;
+            overflow: hidden;
+            padding: 26px 25px;
+            position: relative;
+
+            .toggle {
+              position: absolute;
+              left: 50px;
+              bottom: 30px;
+            }
+
+            .buttons {
+              margin-left: 20px;
+              border-radius: 50%;
+              height: 35px;
+              width: 35px;
+              padding-top: 9px;
+              transition: all 200ms ease;
+              cursor: pointer;
+              
+              &:hover {
+                background-color: var(--gray);
+              }
+            }
+          }
+
+          &.show {
+            height: 40%;
+          }
+        }
+      }
+    }
+  }
+}

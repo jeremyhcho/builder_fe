@@ -4,3 +4,6 @@ export * from './games/gamesDetails'
 
 // teams
 export * from './teams'
+
+// models
+export * from './models'

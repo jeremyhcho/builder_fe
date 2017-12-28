@@ -4,7 +4,7 @@ class ModelView extends React.Component {
   render () {
     return (
       <div>
-        VIEW MODELS
+        Under construction...
       </div>
     )
   }

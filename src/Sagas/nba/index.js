@@ -6,10 +6,14 @@ import gameDetailsSaga from './games/gamesDetails'
 // teams
 import teamsSaga from './teams'
 
+// models
+import modelsSaga from './models'
+
 export default function* nbaSaga() {
   yield all([
     gamesSaga(),
     gameDetailsSaga(),
-    teamsSaga()
-  ])
+    teamsSaga(),
+    modelsSaga()
+  ]
 }
