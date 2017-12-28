@@ -15,10 +15,10 @@ const initialState = {
 const authState = (state = initialState, action) => {
   switch (action.type) {
     case AUTHORIZE:
-      return { ...state, authorized: true }
+      return { ...state, authorized: true, fetchingUser: false }
 
     case UNAUTHORIZE:
-      return { ...state, authorized: false }
+      return { ...state, authorized: false, fetchingUser: false }
 
     case FETCH_USER:
       return { ...state, fetchingUser: true }
@@ -27,7 +27,7 @@ const authState = (state = initialState, action) => {
       return { ...state, user: action.user, fetchingUser: false }
 
     case CREATE_USER_SUCCESS:
-      return { ...state, user: action.user }
+      return { ...state, user: action.user, fetchingUser: false }
 
     default:
       return state
