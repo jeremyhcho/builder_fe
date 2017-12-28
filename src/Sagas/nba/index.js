@@ -15,5 +15,5 @@ export default function* nbaSaga() {
     gameDetailsSaga(),
     teamsSaga(),
     modelsSaga()
-  ]
+  ])
 }

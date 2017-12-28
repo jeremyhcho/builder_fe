@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 
 // Apis
 import { postNBAModel, getNBAModels, deleteNBAModel } from 'Apis'
@@ -49,9 +49,9 @@ function* watchDeleteModel () {
 }
 
 export default function* modelsSaga () {
-  yield [
+  yield all([
     watchCreateModel(),
     watchFetchModels(),
     watchDeleteModel()
-  ]
+  ])
 }
