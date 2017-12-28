@@ -109,7 +109,6 @@ const config = {
         'PUSHER_KEY': process.env.PUSHER_KEY
       }
     }),
-    new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
   ],
   resolve: {
