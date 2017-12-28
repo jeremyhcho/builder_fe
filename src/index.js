@@ -3,6 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
+import { setPusherClient } from 'Components/Pusher'
+import Pusher from 'pusher-js'
 
 // Global CSS
 import './Assets/Stylesheets/Main.scss'
@@ -14,6 +16,12 @@ import AppRouter from './Router'
 import store from 'Config/Store'
 
 const rootEl = document.getElementById('root')
+
+const pusherClient = new Pusher(process.env.PUSHER_KEY, {
+  cluster: 'us2'
+})
+
+setPusherClient(pusherClient)
 
 ReactDOM.render(
   <AppContainer warnings={false}>

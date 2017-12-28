@@ -1,3 +1,4 @@
+import { all } from 'redux-saga/effects'
 // games
 import gamesSaga from './games'
 import gameDetailsSaga from './games/gamesDetails'
@@ -6,9 +7,9 @@ import gameDetailsSaga from './games/gamesDetails'
 import teamsSaga from './teams'
 
 export default function* nbaSaga() {
-  yield [
+  yield all([
     gamesSaga(),
     gameDetailsSaga(),
     teamsSaga()
-  ]
+  ])
 }

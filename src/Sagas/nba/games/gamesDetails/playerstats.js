@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 
 // Apis
 import {
@@ -29,7 +29,7 @@ function* watchPlayerStatsFetch () {
 }
 
 export default function* playerStatsSaga () {
-  yield [
+  yield all([
     watchPlayerStatsFetch()
-  ]
+  ])
 }

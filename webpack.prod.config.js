@@ -105,7 +105,8 @@ const config = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify('production'),
+        'PUSHER_KEY': process.env.PUSHER_KEY
       }
     }),
     new webpack.optimize.UglifyJsPlugin(),

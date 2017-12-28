@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 
 import { getTeamDetailsData } from 'Apis'
 
@@ -20,7 +20,7 @@ function* watchTeamDetailsFetch () {
 }
 
 export default function* teamDetailsOverviewSaga () {
-  yield [
+  yield all([
     watchTeamDetailsFetch()
-  ]
+  ])
 }

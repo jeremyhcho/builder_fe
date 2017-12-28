@@ -1,11 +1,12 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 
 // Apis
 import {
   createUser,
   updateUser,
-  sendRecoveryEmail
+  sendRecoveryEmail,
+  fetchUser
 } from 'Apis'
 
 // Constants
@@ -18,7 +19,9 @@ import {
   UPDATE_USER_PASSWORD_FAIL,
   SEND_RECOVERY_EMAIL,
   SEND_RECOVERY_EMAIL_FAIL,
-  SEND_RECOVERY_EMAIL_SUCCESS
+  SEND_RECOVERY_EMAIL_SUCCESS,
+  FETCH_USER,
+  FETCH_USER_SUCCESS
 } from 'Constants'
 
 // Actions
@@ -32,9 +35,9 @@ import errorMessage from 'Helpers/errorMessage'
 
 function* callCreateUser (user) {
   try {
-    yield call(createUser, user)
+    const response = yield call(createUser, user)
     yield put(authorize())
-    yield put({ type: CREATE_USER_SUCCESS })
+    yield put({ type: CREATE_USER_SUCCESS, user: response.data })
   } catch ({ response }) {
     yield put(unauthorize())
     yield put({ type: CREATE_USER_FAIL, error: errorMessage(response) })
@@ -60,6 +63,16 @@ function* callSendRecoveryEmail ({ email }) {
   }
 }
 
+function* callFetchUser () {
+  try {
+    const user = yield call(fetchUser)
+    yield put(authorize())
+    yield put({ type: FETCH_USER_SUCCESS, user: user.data })
+  } catch ({ response }) {
+    yield put(unauthorize())
+  }
+}
+
 function* watchCreateUser () {
   yield takeLatest(CREATE_USER, callCreateUser)
 }
@@ -72,10 +85,15 @@ function* watchSendRecoveryEmail () {
   yield takeLatest(SEND_RECOVERY_EMAIL, callSendRecoveryEmail)
 }
 
+function* watchFetchUser () {
+  yield takeLatest(FETCH_USER, callFetchUser)
+}
+
 export default function* userSaga () {
-  yield [
+  yield all([
     watchCreateUser(),
     watchUpdateUserPassword(),
-    watchSendRecoveryEmail()
-  ]
+    watchSendRecoveryEmail(),
+    watchFetchUser()
+  ])
 }

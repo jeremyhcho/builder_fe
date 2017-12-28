@@ -1,6 +1,17 @@
+require('dotenv').config()
+
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const dotEnv = new webpack.DefinePlugin({
+  'process.env': {
+    'NODE_ENV': JSON.stringify('development'),
+    'PUSHER_KEY': JSON.stringify(process.env.PUSHER_KEY)
+  }
+})
+
+console.log(dotEnv)
 
 const VENDOR_LIBS = [
   'axios', 'classnames', 'react', 'react-dom',
@@ -116,6 +127,7 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
     }),
+    dotEnv,
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',

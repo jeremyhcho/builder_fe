@@ -1,3 +1,4 @@
+import { all } from 'redux-saga/effects'
 import userSaga from './user'
 
 import {
@@ -8,10 +9,10 @@ import {
 import nbaSaga from './nba'
 
 export default function* rootSaga() {
-  yield [
+  yield all([
     loginSaga(),
     userSaga(),
     resetSaga(),
     nbaSaga(),
-  ]
+  ])
 }

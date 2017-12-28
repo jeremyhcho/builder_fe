@@ -1,14 +1,16 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-// import Page, { Grid, GridColumn } from '@atlaskit/page'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 // import Loadable from 'react-loadable'
 
 // Components
 // import Loader from 'Components/Common/Loader'
 import Header from './Header'
 import SideNav from './SideNav'
-import Dashboard from 'Components/Dashboard'
+import Pusher from 'Components/Pusher'
+// import Dashboard from 'Components/Dashboard'
 import GamesLayout from './Games'
 import TeamsLayout from './Teams'
 import SettingsLayout from './Settings'
@@ -31,8 +33,14 @@ const layoutStyle = {
   margin: '0px'
 }
 
-const MainLayout = () => (
+const MainLayout = ({ userId }) => (
   <main style={{ display: 'flex', overflow: 'hidden' }}>
+    <Pusher
+      channel={`builder_api_${userId}`}
+      event='notification_received'
+      onUpdate={() => console.log(arguments)}
+    />
+
     <SideNav />
 
     <div style={{ width: '100%', height: '100vh', minWidth: '964px' }}>
@@ -40,7 +48,7 @@ const MainLayout = () => (
       <Row style={layoutStyle}>
         <Col xs={12} style={{ marginTop: '20px' }}>
           <Switch>
-            <Route exact path='/' component={Dashboard} />
+            {/* <Route exact path='/' component={Dashboard} /> */}
             <Route path='/games' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />
             <Route path='/models' component={ModelsLayout} />
@@ -53,4 +61,22 @@ const MainLayout = () => (
   </main>
 )
 
-export default MainLayout
+MainLayout.defaultProps = {
+  userId: 0
+}
+
+MainLayout.propTypes = {
+  userId: PropTypes.number
+}
+
+const mapStateToProps = ({ auth }) => ({
+  userId: auth.authState.user.id
+})
+
+// const mapDispatchToProps = {
+//   receivePusherNotification
+// }
+
+export default connect(
+  mapStateToProps
+)(MainLayout)

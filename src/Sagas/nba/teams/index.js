@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 
 // Apis
 import { getNBATeamsData } from 'Apis'
@@ -25,7 +25,7 @@ function* watchTeamsFetch () {
 }
 
 export default function* teamsSaga () {
-  yield [
+  yield all([
     watchTeamsFetch()
-  ]
+  ])
 }

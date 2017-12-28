@@ -15,3 +15,7 @@ export const sendRecoveryEmail = (email) => (
 export const validateResetToken = (params) => (
   axios.get('/api/v1/users/validate_reset', { params })
 )
+
+export const fetchUser = () => (
+  axios.get('/api/v1/users/current')
+)

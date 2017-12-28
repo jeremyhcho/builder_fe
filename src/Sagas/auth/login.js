@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 
 // Apis
 import {
@@ -49,8 +49,8 @@ function* watchLogout () {
 }
 
 export default function* sessionSaga () {
-  yield [
+  yield all([
     watchLogin(),
     watchLogout()
-  ]
+  ])
 }

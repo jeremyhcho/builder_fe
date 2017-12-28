@@ -3,7 +3,8 @@ import {
   AUTHORIZE,
   UNAUTHORIZE,
   LOGIN,
-  LOGOUT
+  LOGOUT,
+  FETCH_USER
 } from 'Constants'
 
 export const clearLoginError = () => ({
@@ -27,4 +28,8 @@ export const loginUser = (params) => ({
 export const logoutUser = (params) => ({
   type: LOGOUT,
   params
+})
+
+export const fetchUser = () => ({
+  type: FETCH_USER
 })
