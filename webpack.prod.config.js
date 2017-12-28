@@ -1,7 +1,16 @@
+require('dotenv').config()
+
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const dotEnv = new webpack.DefinePlugin({
+  'process.env': {
+    'NODE_ENV': JSON.stringify('development'),
+    'PUSHER_KEY': JSON.stringify(process.env.PUSHER_KEY)
+  }
+})
 
 const VENDOR_LIBS = [
   'axios', 'classnames', 'react', 'react-dom',
@@ -103,12 +112,7 @@ const config = {
       template: 'src/styleguide.html',
       chunks: ['styleguide', 'vendor', 'manifest']
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
-        'PUSHER_KEY': process.env.PUSHER_KEY
-      }
-    }),
+    dotEnv,
     new webpack.optimize.OccurrenceOrderPlugin()
   ],
   resolve: {

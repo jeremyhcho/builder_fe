@@ -11,8 +11,6 @@ const dotEnv = new webpack.DefinePlugin({
   }
 })
 
-console.log(dotEnv)
-
 const VENDOR_LIBS = [
   'axios', 'classnames', 'react', 'react-dom',
   'react-redux', 'redux', 'redux-saga', 'react-router', 'react-router-dom'
