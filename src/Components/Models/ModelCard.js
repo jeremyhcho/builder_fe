@@ -71,7 +71,7 @@ class ModelCard extends React.Component {
       <div styleName={overlayStyles}>
         <div styleName="overlay-content">
           <div styleName="toggle">
-            <p style={{ marginBottom: '-15px' }} className="label">{modelStatus ? 'Active' : 'Disabled'}</p>
+            <p style={{ marginBottom: '-15px' }} className="label">Status</p>
             <Toggle
               checked={modelStatus}
               onChange={this.toggleStatus}
@@ -93,60 +93,68 @@ class ModelCard extends React.Component {
 
   render () {
     const { model } = this.props
-    const lowerStyle = classNames('lower', {
-      fill: this.state.hovered
-    })
+
     return (
       <div styleName="model-card" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
-        <Card wrapperStyle={{ height: '100%', width: '100%' }} style={{ marginTop: '0' }}>
+        <Card
+          wrapperStyle={{
+            height: '100%',
+            width: '100%',
+            position: 'relative'
+          }}
+          style={{ marginTop: '0' }}
+        >
           <Row styleName="upper">
             <div>
               <p className="semibold">Standard</p>
               <h2 className="semibold">{model.name}</h2>
             </div>
-            <div styleName="graph-wrapper">
-              <Line
-                data={{ labels: fakeLabel, datasets: [fakeData] }}
-                options={{
-                  maintainAspectRatio: false,
-                  legend: {
-                    display: false
-                  },
-                  scales: {
-                    xAxes: [{
-                      ticks: {
-                        fontSize: 9,
-                        autoSkip: true,
-                        maxTicksLimit: 2
-                      }
-                    }],
-                    yAxes: [{
-                      ticks: {
-                        fontSize: 9
-                      }
-                    }]
-                  }
-                }}
-              />
-            </div>
           </Row>
-          <Row styleName={lowerStyle} bottom='xs' center='xs'>
-            {this.renderOverlayActions()}
+
+          <div styleName="graph-wrapper" style={{ position: 'absolute' }}>
+            <Line
+              data={{ labels: fakeLabel, datasets: [fakeData] }}
+              options={{
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                scales: {
+                  xAxes: [{
+                    ticks: {
+                      fontSize: 9,
+                      autoSkip: true,
+                      maxTicksLimit: 2
+                    }
+                  }],
+                  yAxes: [{
+                    ticks: {
+                      fontSize: 9
+                    }
+                  }]
+                }
+              }}
+            />
+          </div>
+
+          <Row styleName='lower'>
             <Col xs={4}>
               <p className="semibold label">SEASON</p>
               <h3 className="semibold">42W - 27L</h3>
             </Col>
-            <Col xs={4}>
+            <Col xs={4} style={{ marginLeft: '19px' }}>
               <p className="semibold label">
                 WIN RATE <span style={{ color: 'var(--green)' }}>+3%</span>
               </p>
               <h3 className="semibold">60.5%</h3>
             </Col>
-            <Col xs={4}>
-              <p className="semibold label">LAST S</p>
+            <Col xs={3} style={{ marginLeft: '10px' }}>
+              <p className="semibold label">LAST 5</p>
               <h3 className="semibold">W3 - L2</h3>
             </Col>
           </Row>
+
+          {this.renderOverlayActions()}
         </Card>
       </div>
     )

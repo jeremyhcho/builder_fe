@@ -26,6 +26,9 @@ import ModelsLayout from './Models'
 //   loading: Loader
 // })
 
+// Actions
+import { receivePusherNotification } from 'Actions'
+
 const layoutStyle = {
   height: '100%',
   width: '100%',
@@ -33,12 +36,12 @@ const layoutStyle = {
   margin: '0px'
 }
 
-const MainLayout = ({ userId }) => (
+const MainLayout = ({ userId, receivePusherNotification }) => (
   <main style={{ display: 'flex', overflow: 'hidden' }}>
     <Pusher
       channel={`builder_api_${userId}`}
       event='notification_received'
-      onUpdate={() => console.log(arguments)}
+      onUpdate={receivePusherNotification}
     />
 
     <SideNav />
@@ -66,17 +69,19 @@ MainLayout.defaultProps = {
 }
 
 MainLayout.propTypes = {
-  userId: PropTypes.number
+  userId: PropTypes.number,
+  receivePusherNotification: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   userId: auth.authState.user.id
 })
 
-// const mapDispatchToProps = {
-//   receivePusherNotification
-// }
+const mapDispatchToProps = {
+  receivePusherNotification
+}
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(MainLayout)
