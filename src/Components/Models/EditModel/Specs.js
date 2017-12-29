@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Slider } from 'Components/Common'
@@ -18,17 +19,21 @@ class Specs extends React.Component {
       <div styleName="specs">
         {
           Object.keys(specs).map(stat => (
-            <div key={stat} styleName="slider-container">
-              <p className="semibold">{this.nameToLabel(stat)}</p>
-              <Slider
-                style={{ marginTop: '15px' }}
-                name={stat}
-                value={specs[stat]}
-                min={0}
-                max={10}
-                onChange={changeSpecs}
-              />
-            </div>
+            <Row key={stat} styleName="slider-container" middle='xs'>
+              <Col xs={3}>
+                <p className="semibold">{this.nameToLabel(stat)}</p>
+              </Col>
+              <Col xs={9} style={{ paddingRight: '35px' }}>
+                <Slider
+                  name={stat}
+                  value={specs[stat]}
+                  min={0}
+                  max={10}
+                  onChange={changeSpecs}
+                  showInputControl
+                />
+              </Col>
+            </Row>
           ))
         }
       </div>

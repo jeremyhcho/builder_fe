@@ -109,9 +109,18 @@ class ModelCard extends React.Component {
     )
   }
 
-  render () {
-    const { model, color } = this.props
+  renderColor () {
+    if (!this.state.modelStatus) {
+      return 'var(--gray)'
+    }
+    return this.props.color
+  }
 
+  render () {
+    const { model } = this.props
+    const upperStyle = classNames('upper', {
+      disabled: !this.state.modelStatus
+    })
     return (
       <div styleName="model-card" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
         <Card
@@ -122,7 +131,7 @@ class ModelCard extends React.Component {
           }}
           style={{ marginTop: '0' }}
         >
-          <Row styleName="upper" style={{ backgroundColor: `${color}` }}>
+          <Row style={{ backgroundColor: this.renderColor() }} styleName={upperStyle}>
             <div>
               <p className="semibold">Standard</p>
               <h2 className="semibold">{model.name}</h2>

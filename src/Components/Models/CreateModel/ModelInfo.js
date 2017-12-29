@@ -10,7 +10,7 @@ import './CreateModel.scss'
 const ModelInfo = ({ changeInput, name }) => (
   <div styleName="modal-info">
     <Input
-      label="Name"
+      label="Model Name"
       type="text"
       placeholder="Enter Model Name"
       value={name}

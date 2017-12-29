@@ -58,9 +58,10 @@ class CreateModel extends React.Component {
   }
 
   createModel = () => {
+    const name = this.state.name || `Model_${Date.now().toString().slice(9)}`
     this.props.createNBAModel({
       model: {
-        name: this.state.name,
+        name,
         specs: this.state.specs
       }
     })
@@ -82,9 +83,7 @@ class CreateModel extends React.Component {
     let footer
     if (creatingModel) {
       footer = [
-        <Button key="disabled" disabled>
-          Close
-        </Button>,
+        <Button key="disabled" disabled>Close</Button>,
         <Button key="spinner" style={{ padding: '0 20.3px' }}>
           <Spinner xs show color="#fff" style={{ marginBottom: '3px' }} />
         </Button>
@@ -112,7 +111,7 @@ class CreateModel extends React.Component {
         toggle={toggle}
         isOpen={isOpen}
         footer={footer}
-        wrapperStyle={{ minWidth: '500px', minHeight: '500px' }}
+        wrapperStyle={{ minWidth: '800px', minHeight: '500px' }}
       >
         <div styleName="modal-body">
           <ModelInfo name={this.state.name} changeInput={this.changeInput} />
