@@ -5,7 +5,9 @@ import {
   FETCH_NBA_MODELS,
   FETCH_NBA_MODELS_SUCCESS,
   DELETE_NBA_MODEL,
-  DELETE_NBA_MODEL_SUCCESS
+  DELETE_NBA_MODEL_SUCCESS,
+  UPDATE_NBA_MODEL,
+  UPDATE_NBA_MODEL_SUCCESS
 } from 'Constants'
 
 export const createNBAModel = (model) => ({
@@ -35,4 +37,15 @@ export const deleteNBAModel = (id) => ({
 export const deleteNBAModelSuccess = (id) => ({
   type: DELETE_NBA_MODEL_SUCCESS,
   id
+})
+
+export const updateNBAModel = (id, model) => ({
+  type: UPDATE_NBA_MODEL,
+  id,
+  model
+})
+
+export const updateNBAModelSuccess = (newModel) => ({
+  type: UPDATE_NBA_MODEL_SUCCESS,
+  newModel
 })

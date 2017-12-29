@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { Input } from 'Components/Common'
 
 // CSS
-import './CreateModel.scss'
+import './EditModel.scss'
 
 const ModelInfo = ({ changeInput, name }) => (
   <div styleName="modal-info">

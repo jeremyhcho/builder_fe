@@ -11,3 +11,7 @@ export const getNBAModels = () => (
 export const deleteNBAModel = (id) => (
   axios.delete(`/api/nba/v1/models/${id}`)
 )
+
+export const putNBAModel = (id, model) => (
+  axios.put(`/api/nba/v1/models/${id}`, model)
+)

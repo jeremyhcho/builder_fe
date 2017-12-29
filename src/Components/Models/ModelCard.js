@@ -6,7 +6,8 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import classNames from 'classnames'
 
 // Components
-import { Card, Toggle } from 'Components/Common'
+import { Card, Toggle, Tooltip } from 'Components/Common'
+import EditModel from './EditModel'
 import View from 'Assets/Icons/models/eye-17.svg'
 import Edit from 'Assets/Icons/models/pen-01.svg'
 import Delete from 'Assets/Icons/models/trash.svg'
@@ -41,7 +42,8 @@ const fakeData = {
 class ModelCard extends React.Component {
   state = {
     hovered: false,
-    modelStatus: true
+    modelStatus: true,
+    modalOpen: false
   }
 
   handleEnter = () => {
@@ -56,16 +58,21 @@ class ModelCard extends React.Component {
     this.setState({ modelStatus: !this.state.modelStatus })
   }
 
+  toggleModal = () => {
+    this.setState({ modalOpen: !this.state.modalOpen })
+  }
+
   deleteModel = () => {
     this.props.deleteNBAModel(this.props.model.id)
   }
+
 
   renderOverlayActions () {
     const overlayStyles = classNames('overlay', {
       show: this.state.hovered
     })
-
-    const { modelStatus } = this.state
+    const { model } = this.props
+    const { modelStatus, modalOpen } = this.state
 
     return (
       <div styleName={overlayStyles}>
@@ -77,14 +84,25 @@ class ModelCard extends React.Component {
               onChange={this.toggleStatus}
             />
           </div>
-          <div styleName="buttons" onClick={this.viewModel}>
+          <div styleName="buttons" onClick={this.viewModel} data-tip-for={`view-${model.id}`}>
             <View />
+            <Tooltip id={`view-${model.id}`} pos='top'>View Model</Tooltip>
           </div>
-          <div styleName="buttons" onClick={this.editModel}>
+          <div styleName="buttons" onClick={this.toggleModal} data-tip-for={`edit-${model.id}`}>
             <Edit />
+            <Tooltip id={`edit-${model.id}`} pos='top'>Edit Model</Tooltip>
           </div>
-          <div styleName="buttons" onClick={this.deleteModel}>
+          {
+            modalOpen &&
+            <EditModel
+              isOpen
+              toggle={this.toggleModal}
+              model={model}
+            />
+          }
+          <div styleName="buttons" onClick={this.deleteModel} data-tip-for={`delete-${model.id}`}>
             <Delete />
+            <Tooltip id={`delete-${model.id}`} pos='top'>Delete Model</Tooltip>
           </div>
         </div>
       </div>
@@ -92,7 +110,7 @@ class ModelCard extends React.Component {
   }
 
   render () {
-    const { model } = this.props
+    const { model, color } = this.props
 
     return (
       <div styleName="model-card" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
@@ -104,7 +122,7 @@ class ModelCard extends React.Component {
           }}
           style={{ marginTop: '0' }}
         >
-          <Row styleName="upper">
+          <Row styleName="upper" style={{ backgroundColor: `${color}` }}>
             <div>
               <p className="semibold">Standard</p>
               <h2 className="semibold">{model.name}</h2>
@@ -163,7 +181,8 @@ class ModelCard extends React.Component {
 
 ModelCard.propTypes = {
   model: PropTypes.object.isRequired,
-  deleteNBAModel: PropTypes.func.isRequired
+  deleteNBAModel: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired
 }
 
 const mapDispatchToProps = {

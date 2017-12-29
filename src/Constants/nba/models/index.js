@@ -6,3 +6,6 @@ export const FETCH_NBA_MODELS_SUCCESS = 'nba/models/FETCH_NBA_MODELS_SUCCESS'
 
 export const DELETE_NBA_MODEL = 'nba/models/DELETE_NBA_MODEL'
 export const DELETE_NBA_MODEL_SUCCESS = 'nba/models/DELETE_NBA_MODEL_SUCCESS'
+
+export const UPDATE_NBA_MODEL = 'nba/models/UPDATE_NBA_MODEL'
+export const UPDATE_NBA_MODEL_SUCCESS = 'nba/models/UPDATE_NBA_MODEL_SUCCESS'

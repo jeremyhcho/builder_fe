@@ -17,18 +17,18 @@ class CreateModel extends React.Component {
   state = {
     name: `Model_${Date.now().toString().slice(9)}`,
     specs: {
-      field_goals_made: 1,
-      three_points_made: 1,
-      field_goals_pct: 1,
-      offensive_rebounds: 1,
-      assists: 1,
-      turnovers: 1,
-      fast_break_made: 1,
-      second_chance_made: 1,
-      offensive_points_per_possession: 1,
-      defensive_points_per_possession: 1,
-      offensive_rating: 1,
-      defensive_rating: 1
+      field_goals_made: 10,
+      three_points_made: 10,
+      field_goals_pct: 10,
+      offensive_rebounds: 10,
+      assists: 10,
+      turnovers: 10,
+      fast_break_made: 10,
+      second_chance_made: 10,
+      offensive_points_per_possession: 10,
+      defensive_points_per_possession: 10,
+      offensive_rating: 10,
+      defensive_rating: 10
     }
   }
 
@@ -37,22 +37,22 @@ class CreateModel extends React.Component {
       this.setState({
         name: `Model_${Date.now().toString().slice(9)}`,
         specs: {
-          field_goals_made: 1,
-          three_points_made: 1,
-          field_goals_pct: 1,
-          offensive_rebounds: 1,
-          assists: 1,
-          turnovers: 1,
-          fast_break_made: 1,
-          second_chance_made: 1,
-          offensive_points_per_possession: 1,
-          defensive_points_per_possession: 1,
-          offensive_rating: 1,
-          defensive_rating: 1
+          field_goals_made: 10,
+          three_points_made: 10,
+          field_goals_pct: 10,
+          offensive_rebounds: 10,
+          assists: 10,
+          turnovers: 10,
+          fast_break_made: 10,
+          second_chance_made: 10,
+          offensive_points_per_possession: 10,
+          defensive_points_per_possession: 10,
+          offensive_rating: 10,
+          defensive_rating: 10
         }
       })
     }
-    if (!newProps.models.creatingModel && this.props.models.creatingModel) {
+    if (!newProps.creatingModel && this.props.creatingModel) {
       this.props.toggle()
     }
   }
@@ -73,15 +73,22 @@ class CreateModel extends React.Component {
     this.setState({ specs: newSpecs })
   }
 
-  changeName = (e) => {
+  changeInput = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
   render () {
-    const { toggle, isOpen, models } = this.props
+    const { toggle, isOpen, creatingModel } = this.props
     let footer
-    if (models.creatingModel) {
-      footer = [<Spinner key="spinner" md show />]
+    if (creatingModel) {
+      footer = [
+        <Button key="disabled" disabled>
+          Close
+        </Button>,
+        <Button key="spinner" style={{ padding: '0 20.3px' }}>
+          <Spinner xs show color="#fff" style={{ marginBottom: '3px' }} />
+        </Button>
+      ]
     } else {
       footer = [
         <Button
@@ -108,7 +115,7 @@ class CreateModel extends React.Component {
         wrapperStyle={{ minWidth: '500px', minHeight: '500px' }}
       >
         <div styleName="modal-body">
-          <ModelInfo name={this.state.name} changeName={this.changeName} />
+          <ModelInfo name={this.state.name} changeInput={this.changeInput} />
           <Specs specs={this.state.specs} changeSpecs={this.changeSpecs} />
         </div>
       </Modal>
@@ -120,12 +127,11 @@ CreateModel.propTypes = {
   toggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   createNBAModel: PropTypes.func.isRequired,
-  // createModel: PropTypes.bool.isRequired
-  models: PropTypes.object.isRequired
+  creatingModel: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = ({ nba }) => ({
-  models: nba.models
+  creatingModel: nba.models.creatingModel
 })
 
 const mapDispatchToProps = {

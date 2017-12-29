@@ -2,6 +2,17 @@
   width: 100%;
   position: relative;
 
+  .valueLabel {
+    position: absolute;
+    bottom: 16px;
+    color: transparent;
+
+    &.show {
+      display: block;
+      color: var(--dark-gray);
+    }
+  }
+
   .fill {
     position: absolute;
     width: 0px;
@@ -50,15 +61,6 @@
       border: 3px solid var(--blue);
       background-color: #FFF;
       &:after {
-        content: '';
-        width: 100px;
-        background: transparent;
-        color: transparent;
-        border: 1px solid black;
-        pointer-events: none;
-        padding: 50px;
-        position: relative;
-        top: 50px;
       }
     }
 

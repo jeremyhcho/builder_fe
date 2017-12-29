@@ -12,7 +12,9 @@ class Slider extends React.Component {
     // keeps state of valid values given in input
     validValue: this.props.value,
     inputValue: this.props.value,
-    sliderWidth: { width: '100%' }
+    sliderWidth: { width: '100%' },
+    showValue: false,
+    valuePos: 0
   }
 
   componentWillMount() {
@@ -29,10 +31,9 @@ class Slider extends React.Component {
   }
 
   componentDidMount() {
-    // initializes fill width
-    const { value, max, disabled } = this.props
-    if (!disabled) this.offsetFill(value, max)
     /* eslint-disable react/no-did-mount-set-state */
+    const { value, max, disabled } = this.props
+    if (!disabled) this.offsetFill(this.state.value, max)
     this.setState({ inputWidth: this.findInputWidth(value) })
     /* eslint-enable react/no-did-mount-set-state */
   }
@@ -52,6 +53,13 @@ class Slider extends React.Component {
 
   onFocus = (e) => {
     e.target.select()
+  }
+
+  setValuePos = () => {
+    this.offsetValuePos()
+    this.setState({
+      showValue: true
+    })
   }
 
   handleChange = (e) => {
@@ -122,16 +130,43 @@ class Slider extends React.Component {
     } else {
       this.fill.style.width = `${thumbPosition}px`
     }
+
+    this.offsetValuePos()
+  }
+
+  offsetValuePos = () => {
+    const percentage = this.state.value / this.props.max
+    const { width: labelRefWidth } = this.labelRef.getBoundingClientRect()
+    const thumbOffset = 9 - (labelRefWidth / 2)
+    const sliderMaxWidth = this.slider.offsetWidth
+    const randomMultiplier = (percentage * 2) + 1
+    const thumbPosition = ((sliderMaxWidth * percentage) - (18 * percentage)) + thumbOffset
+    if (this.props.showInputControl) {
+      this.setState({ valuePos: thumbPosition + randomMultiplier })
+    } else {
+      this.setState({ valuePos: thumbPosition + randomMultiplier })
+    }
   }
 
   render () {
-    const { showInputControl, onChange, disabled, value, ...props } = this.props
+    const { showInputControl, onChange, disabled, value, style, ...props } = this.props
     const sliderStyle = classNames('slider', {
       disabled
     })
+    const valueLabel = classNames('valueLabel', {
+      show: this.state.showValue
+    })
     return (
-      <div>
+      <div style={style}>
         <div styleName="slider-wrapper">
+          <p
+            ref={ref => this.labelRef = ref}
+            className="label"
+            styleName={valueLabel}
+            style={{ left: `${this.state.valuePos}px` }}
+          >
+            {this.state.value}
+          </p>
           <div styleName="fill" ref={ref => this.fill = ref} />
           <input
             type="range"
@@ -141,6 +176,9 @@ class Slider extends React.Component {
             style={this.state.sliderWidth}
             onChange={onChange}
             disabled={disabled}
+            onFocus={this.setValuePos}
+            data-thumb={this.state.value.toString()}
+            onBlur={() => this.setState({ showValue: false })}
             {...props}
           />
           {
@@ -167,6 +205,7 @@ Slider.defaultProps = {
   disabled: false,
   onChange: () => null,
   showInputControl: false,
+  style: {}
 }
 
 Slider.propTypes = {
@@ -175,7 +214,8 @@ Slider.propTypes = {
   showInputControl: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  style: PropTypes.object
 }
 
 export default Slider

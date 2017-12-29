@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { Slider } from 'Components/Common'
 
 // CSS
-import './CreateModel.scss'
+import './EditModel.scss'
 
 class Specs extends React.Component {
   nameToLabel(name) {

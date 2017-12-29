@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Row } from 'react-styled-flexboxgrid'
+import { Row, Col } from 'react-styled-flexboxgrid'
 import { Line } from 'react-chartjs-2'
 
 // Components
-import { Select, Card } from 'Components/Common'
+import { Select, Card, Spinner } from 'Components/Common'
 
 // CSS
 import './TeamStats.scss'
@@ -254,17 +254,13 @@ class PointsGraph extends React.Component {
       )
     }
     return (
-      <div>
-        <Row center='xs'>
-          <div style={{ width: '800px' }}>
-            <Line
-              width={800}
-              height={400}
-              data={this.teamStatsData()}
-            />
-          </div>
+      <Card label="Points by quarter">
+        <Row center='xs' middle='xs' style={{ height: '567px' }}>
+          <Col xs={12}>
+            <Spinner lg show />
+          </Col>
         </Row>
-      </div>
+      </Card>
     )
   }
 }

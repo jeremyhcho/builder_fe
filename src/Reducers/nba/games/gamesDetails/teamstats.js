@@ -1,3 +1,5 @@
+import pathToRegexp from 'path-to-regexp'
+
 // Constants
 import {
   FETCH_NBA_TEAM_STATS_SUCCESS,
@@ -16,6 +18,14 @@ const teamStats = (state = initialState, action) => {
 
     case FETCH_NBA_KEY_STATS_SUCCESS:
       return { ...state, keyStats: action.keyStats.data }
+
+    case '@@router/LOCATION_CHANGE': {
+      const route = '/games/:id/:teams'
+      if (pathToRegexp(route).exec(action.payload.pathname)) {
+        return state
+      }
+      return initialState
+    }
 
     default:
       return state

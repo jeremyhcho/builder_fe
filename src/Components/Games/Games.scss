@@ -46,12 +46,32 @@
     }
 
     .day-card {
-      padding: 40px 0px;
+      padding: 20px 0px;
       display: flex;
       justify-content: center;
       color: #FFF;
       background-color: var(--navy-blue);
       position: relative;
+
+      .card-info {
+        padding-top: 20px;
+
+        &.oneGame {
+          padding-top: 0;
+        }
+      }
+
+      .gamesLength {
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+        text-align: center;
+        left: 0;
+
+        &.oneGame {
+          bottom: 15px;
+        }
+      }
     }
   }
 }

@@ -19,7 +19,7 @@ class Models extends React.Component {
     modalOpen: false
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.props.fetchNBAModels()
   }
 
@@ -27,31 +27,61 @@ class Models extends React.Component {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
 
+  renderModelColor (index) {
+    const colors = [
+      '#4DA1A9',
+      '#944654',
+      '#3A4040',
+      '#3C90DF'
+    ]
+    if (index < 4) return colors[index]
+    return colors[4 % index]
+  }
+
   render () {
     const { modelList } = this.props
+    const { modalOpen } = this.state
     return (
       <div styleName="models">
         <Row>
-          <Button
-            flat
-            onClick={this.toggleModal}
-          >
-            Create Model
-          </Button>
-          <CreateModel toggle={this.toggleModal} isOpen={this.state.modalOpen} />
+          <Col xsOffset={10} xs={2}>
+            <Button
+              onClick={this.toggleModal}
+            >
+              <span style={{ marginRight: '5px', color: '#fff' }}>
+                <i className="fa fa-plus" aria-hidden="true" />
+              </span>
+              Create Model
+            </Button>
+          </Col>
+
+          {
+            modalOpen &&
+            <CreateModel toggle={this.toggleModal} isOpen />
+          }
         </Row>
 
         <div styleName="model-list">
           <Row>
             {
               modelList.length ? (
-                modelList.map(model => (
+                modelList.map((model, index) => (
                   <Col xs={6} key={model.id}>
-                    <ModelCard model={model} />
+                    <ModelCard
+                      model={model}
+                      color={this.renderModelColor(index)}
+                    />
                   </Col>
                 ))
               ) : (
-                null
+                <Col xs={12}>
+                  <Row center='xs' middle='xs' style={{ height: '40vh', opacity: '0.2' }}>
+                    <div>
+                      <h1 className="bold">Looks like you haven't created any Models</h1>
+                      <h4 className="semibold">You can create a Model by clicking the Create Model button</h4>
+                    </div>
+                  </Row>
+                </Col>
               )
             }
           </Row>

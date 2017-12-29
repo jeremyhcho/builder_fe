@@ -5,6 +5,7 @@
   .model-list {
     margin-top: 35px;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: calc(100vh - 150px);
     padding-bottom: 45px;
 
@@ -20,7 +21,6 @@
       }
 
       .upper {
-        background-color: var(--blue);
         height: 50%;
         position: relative;
         padding: 30px;
@@ -49,6 +49,7 @@
         position: absolute;
         width: 100%;
         bottom: 0;
+        left: 10px;
         margin: 0;
         padding: 25px;
       }
