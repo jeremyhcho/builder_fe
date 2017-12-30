@@ -41,6 +41,12 @@ const config = {
         loader: 'eslint-loader'
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        include: /node_modules\/react/,
+        exclude: /node_modules/
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'react-hot-loader/webpack'
@@ -77,12 +83,6 @@ const config = {
           'css-loader?importLoader=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
           'sass-loader?sourceMap'
         ]
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules',
-        include: /flexboxgrid/,
-        exclude: /node_modules/
       },
       {
         test: /\.(jpe?g|png|gif)$/,

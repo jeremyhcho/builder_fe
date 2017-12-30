@@ -16,9 +16,9 @@ import { fetchNBAGames } from 'Actions'
 class DateInput extends React.Component {
   state = {
     isOpened: false,
-    day: new Date().getDate(),
-    month: new Date().getMonth() + 1,
-    year: new Date().getFullYear()
+    day: moment().date(),
+    month: moment().month() + 1,
+    year: moment().year(),
   }
 
   componentWillMount() {
@@ -28,9 +28,25 @@ class DateInput extends React.Component {
 
   componentDidMount() {
     // prevent selecting text in Date Input field
-    this.dateInput.addEventListener('select', () => {
-      this.dateInput.selectionStart = this.dateInput.selectionEnd
-    }, false)
+    this.dateInput.addEventListener('select', this.preventDateSelection(), false)
+  }
+
+  componentWillUnmount() {
+    this.dateInput.removeEventListener('select', this.preventDateSelection(), false)
+  }
+
+  getDisabledDates () {
+    const lastDateOfMonth = moment().daysInMonth()
+    const dayOfLastDate = moment().date(lastDateOfMonth).day()
+    const disabledDates = []
+    for (let i = moment().date() + 2; i <= lastDateOfMonth + (7 - dayOfLastDate); i++) {
+      disabledDates.push(moment().date(i).format('YYYY-MM-DD'))
+    }
+    return disabledDates
+  }
+
+  preventDateSelection = () => {
+    this.dateInput.selectionStart = this.dateInput.selectionEnd
   }
 
   focus = () => {
@@ -39,7 +55,14 @@ class DateInput extends React.Component {
     }
   }
 
-  changeInfo = ({ day, month, year }) => {
+  changeCalendar = ({ day, month, year }) => {
+    console.log(month, this.state.month)
+    // Prevents users from changing to next month unless it is the last day of the month
+    const lastDateOfMonth = moment().daysInMonth()
+    if ((month > moment().month() + 1 || year > moment().year()) &&
+          moment().date() !== lastDateOfMonth) {
+      return
+    }
     this.setState({ day, month, year })
   }
 
@@ -100,8 +123,9 @@ class DateInput extends React.Component {
               ref={ref => {
                 this.calendar = ref
               }}
+              disabled={this.getDisabledDates()}
               onSelect={this.handleSelect}
-              onChange={(date) => this.changeInfo(date)}
+              onChange={this.changeCalendar}
             />
           </div>
           : null
