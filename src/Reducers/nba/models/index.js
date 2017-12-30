@@ -34,7 +34,8 @@ const models = (state = initialState, action) => {
     case FETCH_NBA_MODELS_SUCCESS:
       return {
         ...state,
-        modelList: action.models.data
+        modelList: action.models.data,
+        fetchedModels: false
       }
 
     case DELETE_NBA_MODEL_SUCCESS:
