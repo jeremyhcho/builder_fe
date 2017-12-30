@@ -39,17 +39,19 @@ class Models extends React.Component {
   }
 
   renderModels () {
-    const { modelList, fetchedModels } = this.props
-    if (modelList.length && fetchedModels) {
-      return modelList.map((model, index) => (
-        <Col xs={6} key={model.id}>
-          <ModelCard
-            model={model}
-            color={this.renderModelColor(index)}
-          />
+    const { modelList, fetchingModels } = this.props
+
+    if (fetchingModels) {
+      return (
+        <Col xs={12}>
+          <Row center='xs' middle='xs' style={{ height: '40vh' }}>
+            <Spinner lg show />
+          </Row>
         </Col>
-      ))
-    } else if (!modelList.length && fetchedModels) {
+      )
+    }
+
+    if (!modelList.length) {
       return (
         <Col xs={12}>
           <Row center='xs' middle='xs' style={{ height: '40vh', opacity: '0.2' }}>
@@ -61,13 +63,15 @@ class Models extends React.Component {
         </Col>
       )
     }
-    return (
-      <Col xs={12}>
-        <Row center='xs' middle='xs' style={{ height: '40vh' }}>
-          <Spinner lg show />
-        </Row>
+
+    return modelList.map((model, index) => (
+      <Col xs={6} key={model.id}>
+        <ModelCard
+          model={model}
+          color={this.renderModelColor(index)}
+        />
       </Col>
-    )
+    ))
   }
 
   render () {
@@ -109,12 +113,12 @@ Models.defaultProps = {
 Models.propTypes = {
   modelList: PropTypes.array,
   fetchNBAModels: PropTypes.func.isRequired,
-  fetchedModels: PropTypes.bool.isRequired
+  fetchingModels: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
   modelList: nba.models.modelList,
-  fetchedModels: nba.models.fetchedModels
+  fetchingModels: nba.models.fetchingModels
 })
 
 const mapDispatchToProps = {

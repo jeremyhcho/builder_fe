@@ -13,7 +13,7 @@ const initialState = {
   modelList: [],
   creatingModel: false,
   updatingModel: false,
-  fetchedModels: false
+  fetchingModels: false
 }
 
 const models = (state = initialState, action) => {
@@ -29,13 +29,13 @@ const models = (state = initialState, action) => {
       }
 
     case FETCH_NBA_MODELS:
-      return { ...state, fetchedModels: true }
+      return { ...state, fetchingModels: true }
 
     case FETCH_NBA_MODELS_SUCCESS:
       return {
         ...state,
         modelList: action.models.data,
-        fetchedModels: false
+        fetchingModels: false
       }
 
     case DELETE_NBA_MODEL_SUCCESS:
