@@ -122,7 +122,7 @@ class ModelCard extends React.Component {
       disabled: !this.state.modelStatus
     })
     return (
-      <div styleName="model-card" onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}>
+      <div styleName="model-card" onMouseOver={this.handleEnter} onMouseLeave={this.handleLeave}>
         <Card
           wrapperStyle={{
             height: '100%',

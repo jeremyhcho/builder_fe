@@ -9,8 +9,10 @@ import {
 
 export const fetchNBAGames = (date) => {
   const now = moment(date)
+  // beginning of current date in EST
   const from = moment(`${date} 21:00:00`).subtract(1, 'day')
-  const to = moment(`${date} 20:59:59`).add(5, 'day')
+  // end of specified date
+  const to = moment(`${date} 20:59:59`).add(1, 'day')
   return ({
     type: FETCH_NBA_GAMES,
     now,
@@ -20,6 +22,8 @@ export const fetchNBAGames = (date) => {
 }
 
 export const paginateNBAGames = (date, paginateType) => {
+  const tomorrow = moment().add(1, 'days')
+  const maxDiff = moment(date).add(3, 'days').diff(tomorrow, 'days')
   let from
   let to
 
@@ -27,10 +31,17 @@ export const paginateNBAGames = (date, paginateType) => {
     from = moment(`${date} 21:00:00`).subtract(4, 'days')
     to = moment(`${date} 20:59:59`).subtract(1, 'days')
   }
+
   if (paginateType === 'next') {
     from = moment(`${date} 21:00:00`)
     to = moment(`${date} 20:59:59`).add(3, 'days')
   }
+
+  if (maxDiff >= 0) {
+    // Prevents pagination from loading tomorrow's games
+    to = moment(`${tomorrow.format('YYYY-MM-DD')} 20:59:59`)
+  }
+
   return ({
     type: PAGINATE_NBA_GAMES,
     from,
