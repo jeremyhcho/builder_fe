@@ -15,22 +15,25 @@ const Input = ({
   type,
   icon,
   inputRef,
+  sm,
   ...props
 }) => {
   const inputStyle = classNames('input', {
     shouldFitContainer,
     error,
+    sm,
     disabled,
     date: type === 'date',
   })
 
   const iconStyle = classNames('icon', {
     noLabel: isLabelHidden,
+    sm,
     error
   })
 
   const wrapperStyle = classNames('wrapper', {
-    shouldFitContainer
+    shouldFitContainer,
   })
 
   return (
@@ -78,6 +81,7 @@ Input.defaultProps = {
   required: false,
   type: 'text',
   icon: null,
+  sm: false,
   inputRef: () => null
 }
 
@@ -90,7 +94,8 @@ Input.propTypes = {
   required: PropTypes.bool,
   type: PropTypes.string,
   icon: PropTypes.element,
-  inputRef: PropTypes.func
+  inputRef: PropTypes.func,
+  sm: PropTypes.bool
 }
 
 export default Input

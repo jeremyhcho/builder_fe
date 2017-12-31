@@ -11,6 +11,10 @@
     top: 35px;
     right: 10px;
     color: var(--font-color);
+
+    &.sm {
+      top: 34px;
+    }
     &.error {
       color: var(--red);
     }
@@ -38,6 +42,9 @@
     outline: none;
     background-color: var(--lightest-gray);
 
+    &.sm {
+      height: 36px;
+    }
     &.shouldFitContainer {
       display: block;
       width: 100%;

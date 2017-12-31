@@ -17,3 +17,14 @@ export const equality = (inputName) => (value, form) => {
   if (form[inputName] === value) return null
   return `${inputName}s do not match`
 }
+
+export const minWord = (length) => (value, form, input, name) => {
+  const words = value.split(' ')
+  if (words.length >= length && words.every(word => word.length)) return null
+  return `${name} must be ${length} words or more`
+}
+
+export const zipCode = (value) => {
+  const usZipCode = /(^\d{5}$)|(^\d{5}-\d{4}$)/
+  return usZipCode.test(value) ? null : 'Not a valid zip code'
+}

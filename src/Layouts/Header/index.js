@@ -6,6 +6,8 @@ import pathToRegexp from 'path-to-regexp'
 
 // Components
 import { MenuItem, IconDropdown, Tooltip } from 'Components/Common'
+import AccountSettingsIcon from 'Assets/Icons/settings/a-edit-2.svg'
+import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
 // CSS
 import './Header.scss'
@@ -72,10 +74,14 @@ class Header extends React.Component {
                 icon={<ProfileIcon style={{ marginTop: '5px' }} />}
               >
                 <MenuItem onClick={this.navigateSettings}>
-                  Settings
+                  <div styleName='menu-item'>
+                    <AccountSettingsIcon /> Settings
+                  </div>
                 </MenuItem>
                 <MenuItem onClick={() => this.props.logoutUser()}>
-                  Sign out
+                  <div styleName='menu-item'>
+                    <SignoutIcon /> Sign out
+                  </div>
                 </MenuItem>
               </IconDropdown>
             </li>

@@ -99,6 +99,8 @@
   transition: opacity 150ms;
   pointer-events: none;
   z-index: 10;
+  max-height: 250px;
+  overflow-y: scroll;
   box-shadow: 0 8px 6px -6px var(--dark-gray);
 
   &.open {

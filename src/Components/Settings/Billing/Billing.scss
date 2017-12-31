@@ -1,0 +1,58 @@
+.billing {
+  padding: 0 65px;
+
+  .membership-plan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+    margin: 0 25px;
+
+    .plan-container {
+      width: 100%;
+      color: #fff;
+      padding: 45px 0;
+      margin-bottom: 15px;
+
+      .plan {
+      }
+
+      .price {
+        margin-top: 15px;
+
+        .dollar {
+          font-size: 1.6rem;
+          vertical-align: top;
+          line-height: 35px;
+        }
+
+        .amount {
+          margin: 0 4px;
+          font-size: 4.0rem;
+        }
+      }
+    }
+
+    .features {
+      margin: 25px 0;
+      width: 100%;
+      line-height: 20px;
+      padding: 0 15px;
+
+      hr {
+        border: 0;
+        height: 1px;
+        background-color: var(--light-gray);
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 25px;
+      width: 100%;
+      padding: 0 25px;
+    }
+  }
+}
