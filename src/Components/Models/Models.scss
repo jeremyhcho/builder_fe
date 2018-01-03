@@ -1,6 +1,5 @@
 .models {
   padding: 65px;
-  max-width: 1300px;
 
   .model-list {
     margin-top: 35px;
@@ -9,10 +8,19 @@
     height: calc(100vh - 150px);
     padding-bottom: 45px;
 
+    .model-overlay {
+      height: 50vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.2;
+    }
+
     .model-card {
       height: 450px;
-      margin-bottom: 35px;
-      max-width: 442px;
+      margin: 0 35px 35px 0;
+      width: 442px;
 
       &:hover {
         .upper {

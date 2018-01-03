@@ -16,7 +16,7 @@ import Delete from 'Assets/Icons/models/trash.svg'
 import './Models.scss'
 
 // Actions
-import { deleteNBAModel } from 'Actions'
+import { deleteNBAModel, updateNBAModel } from 'Actions'
 
 const fakeLabel = []
 for (let i = 0; i < 31; i++) {
@@ -42,7 +42,6 @@ const fakeData = {
 class ModelCard extends React.Component {
   state = {
     hovered: false,
-    modelStatus: true,
     modalOpen: false
   }
 
@@ -55,7 +54,18 @@ class ModelCard extends React.Component {
   }
 
   toggleStatus = () => {
-    this.setState({ modelStatus: !this.state.modelStatus })
+    const { updateNBAModel, model } = this.props
+    let newStatus
+    if (model.status === 'ACTIVE') {
+      newStatus = 'INACTIVE'
+    } else {
+      newStatus = 'ACTIVE'
+    }
+    updateNBAModel(model.id, {
+      model: {
+        status: newStatus
+      }
+    })
   }
 
   toggleModal = () => {
@@ -66,13 +76,19 @@ class ModelCard extends React.Component {
     this.props.deleteNBAModel(this.props.model.id)
   }
 
+  checkModelStatus () {
+    if (this.props.model.status === 'ACTIVE') {
+      return true
+    }
+    return false
+  }
 
   renderOverlayActions () {
     const overlayStyles = classNames('overlay', {
       show: this.state.hovered
     })
     const { model } = this.props
-    const { modelStatus, modalOpen } = this.state
+    const { modalOpen } = this.state
 
     return (
       <div styleName={overlayStyles}>
@@ -80,7 +96,7 @@ class ModelCard extends React.Component {
           <div styleName="toggle">
             <p style={{ marginBottom: '-15px' }} className="label">Status</p>
             <Toggle
-              checked={modelStatus}
+              checked={this.checkModelStatus()}
               onChange={this.toggleStatus}
             />
           </div>
@@ -110,7 +126,7 @@ class ModelCard extends React.Component {
   }
 
   renderColor () {
-    if (!this.state.modelStatus) {
+    if (this.props.model.status === 'INACTIVE') {
       return 'var(--gray)'
     }
     return this.props.color
@@ -119,7 +135,7 @@ class ModelCard extends React.Component {
   render () {
     const { model } = this.props
     const upperStyle = classNames('upper', {
-      disabled: !this.state.modelStatus
+      disabled: !this.checkModelStatus()
     })
     return (
       <div styleName="model-card" onMouseOver={this.handleEnter} onMouseLeave={this.handleLeave}>
@@ -191,11 +207,13 @@ class ModelCard extends React.Component {
 ModelCard.propTypes = {
   model: PropTypes.object.isRequired,
   deleteNBAModel: PropTypes.func.isRequired,
+  updateNBAModel: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired
 }
 
 const mapDispatchToProps = {
-  deleteNBAModel
+  deleteNBAModel,
+  updateNBAModel
 }
 
 export default connect(

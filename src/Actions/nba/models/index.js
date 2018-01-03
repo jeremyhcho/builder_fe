@@ -7,7 +7,8 @@ import {
   DELETE_NBA_MODEL,
   DELETE_NBA_MODEL_SUCCESS,
   UPDATE_NBA_MODEL,
-  UPDATE_NBA_MODEL_SUCCESS
+  UPDATE_NBA_MODEL_SUCCESS,
+  UPDATE_NBA_MODEL_STATUS
 } from 'Constants'
 
 export const createNBAModel = (model) => ({
@@ -48,4 +49,10 @@ export const updateNBAModel = (id, model) => ({
 export const updateNBAModelSuccess = (newModel) => ({
   type: UPDATE_NBA_MODEL_SUCCESS,
   newModel
+})
+
+export const updateNBAModelStatus = (id, model) => ({
+  type: UPDATE_NBA_MODEL_STATUS,
+  id,
+  model
 })

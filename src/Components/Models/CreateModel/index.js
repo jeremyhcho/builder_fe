@@ -29,7 +29,8 @@ class CreateModel extends React.Component {
       defensive_points_per_possession: 10,
       offensive_rating: 10,
       defensive_rating: 10
-    }
+    },
+    status: 'ACTIVE'
   }
 
   componentWillReceiveProps (newProps) {
@@ -49,7 +50,8 @@ class CreateModel extends React.Component {
           defensive_points_per_possession: 10,
           offensive_rating: 10,
           defensive_rating: 10
-        }
+        },
+        status: 'ACTIVE'
       })
     }
     if (!newProps.creatingModel && this.props.creatingModel) {
@@ -62,9 +64,19 @@ class CreateModel extends React.Component {
     this.props.createNBAModel({
       model: {
         name,
-        specs: this.state.specs
+        specs: this.state.specs,
+        status: this.state.status
       }
     })
+  }
+
+  changeStatus = () => {
+    const { status } = this.state
+    if (status === 'ACTIVE') {
+      this.setState({ status: 'INACTIVE' })
+    } else {
+      this.setState({ status: 'ACTIVE' })
+    }
   }
 
   changeSpecs = (e) => {
@@ -80,6 +92,7 @@ class CreateModel extends React.Component {
 
   render () {
     const { toggle, isOpen, creatingModel } = this.props
+    const { specs, status, name } = this.state
     let footer
     if (creatingModel) {
       footer = [
@@ -114,8 +127,13 @@ class CreateModel extends React.Component {
         wrapperStyle={{ minWidth: '800px', minHeight: '500px' }}
       >
         <div styleName="modal-body">
-          <ModelInfo name={this.state.name} changeInput={this.changeInput} />
-          <Specs specs={this.state.specs} changeSpecs={this.changeSpecs} />
+          <ModelInfo
+            name={name}
+            changeInput={this.changeInput}
+            changeStatus={this.changeStatus}
+            status={status}
+          />
+          <Specs specs={specs} changeSpecs={this.changeSpecs} />
         </div>
       </Modal>
     )

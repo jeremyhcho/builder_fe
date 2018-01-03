@@ -56,11 +56,10 @@ class DateInput extends React.Component {
   }
 
   changeCalendar = ({ day, month, year }) => {
-    console.log(month, this.state.month)
     // Prevents users from changing to next month unless it is the last day of the month
     const lastDateOfMonth = moment().daysInMonth()
-    if ((month > moment().month() + 1 || year > moment().year()) &&
-          moment().date() !== lastDateOfMonth) {
+    if ((month > moment().month() + 1 && year === moment().year()) &&
+        moment().date() !== lastDateOfMonth) {
       return
     }
     this.setState({ day, month, year })

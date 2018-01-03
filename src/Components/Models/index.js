@@ -53,24 +53,21 @@ class Models extends React.Component {
 
     if (!modelList.length) {
       return (
-        <Col xs={12}>
-          <Row center='xs' middle='xs' style={{ height: '40vh', opacity: '0.2' }}>
-            <div>
-              <h1 className="bold">Looks like you haven't created any Models</h1>
-              <h4 className="semibold">You can create a Model by clicking the Create Model button</h4>
-            </div>
-          </Row>
-        </Col>
+        <div styleName="model-overlay">
+          <div>
+            <h1 className="bold">Looks like you haven't created any Models</h1>
+            <h4 className="semibold">You can create a Model by clicking the Create Model button</h4>
+          </div>
+        </div>
       )
     }
 
     return modelList.map((model, index) => (
-      <Col xs={6} key={model.id}>
-        <ModelCard
-          model={model}
-          color={this.renderModelColor(index)}
-        />
-      </Col>
+      <ModelCard
+        key={model.id}
+        model={model}
+        color={this.renderModelColor(index)}
+      />
     ))
   }
 
