@@ -42,7 +42,8 @@ class EditModel extends React.Component {
     this.props.updateNBAModel(this.props.model.id, {
       model: {
         name,
-        specs: this.state.specs
+        specs: this.state.specs,
+        status: this.props.model.status
       }
     })
   }

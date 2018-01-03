@@ -63,6 +63,8 @@ class ModelCard extends React.Component {
     }
     updateNBAModel(model.id, {
       model: {
+        name: model.name,
+        specs: model.specs,
         status: newStatus
       }
     })
