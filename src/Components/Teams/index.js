@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { groupBy } from 'lodash'
-import { Row } from 'react-styled-flexboxgrid'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // CSS
 import './Teams.scss'
@@ -45,9 +45,13 @@ class Teams extends React.Component {
     const eastTeams = teamsGroupedByConference.EAST
 
     return (
-      <Row styleName='teams-container'>
-        <Conference teams={westTeams} />
-        <Conference teams={eastTeams} />
+      <Row style={{ overflowY: 'scroll', height: '100%' }}>
+        <Col xs={12}>
+          <Row styleName='teams-container'>
+            <Conference teams={westTeams} />
+            <Conference teams={eastTeams} />
+          </Row>
+        </Col>
       </Row>
     )
   }

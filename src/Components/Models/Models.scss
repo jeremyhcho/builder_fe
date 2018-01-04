@@ -3,7 +3,7 @@
 
   .model-list {
     margin-top: 35px;
-    overflow-y: scroll;
+    position: relative;
     overflow-x: hidden;
     height: calc(100vh - 150px);
     padding-bottom: 45px;

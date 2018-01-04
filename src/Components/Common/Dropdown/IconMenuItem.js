@@ -5,8 +5,8 @@ import classNames from 'classnames'
 // CSS
 import './Dropdown.scss'
 
-const MenuItem = ({ onClick, children, disabled, icon: Icon }) => {
-  const listItemClass = classNames('option', {
+const IconMenuItem = ({ onClick, children, disabled, icon }) => {
+  const listItemClass = classNames('option', 'icon', {
     disabled
   })
 
@@ -17,22 +17,20 @@ const MenuItem = ({ onClick, children, disabled, icon: Icon }) => {
 
   return (
     <li styleName={listItemClass} onClick={handleClick}>
-      <Icon />
-      <span>
-        {children}
-      </span>
+      <span styleName='icon'>{icon}</span>
+      <span styleName='text'>{children}</span>
     </li>
   )
 }
 
-MenuItem.defaultProps = {
+IconMenuItem.defaultProps = {
   disabled: false
 }
 
-MenuItem.propTypes = {
+IconMenuItem.propTypes = {
   onClick: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
   icon: PropTypes.node.isRequired,
+  disabled: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
@@ -40,4 +38,4 @@ MenuItem.propTypes = {
   ]).isRequired
 }
 
-export default MenuItem
+export default IconMenuItem

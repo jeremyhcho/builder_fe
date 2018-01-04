@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import pathToRegexp from 'path-to-regexp'
 
 // Components
-import { MenuItem, IconDropdown, Tooltip } from 'Components/Common'
+import { IconMenuItem, IconDropdown, Tooltip } from 'Components/Common'
 import AccountSettingsIcon from 'Assets/Icons/settings/a-edit-2.svg'
 import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
@@ -70,19 +70,22 @@ class Header extends React.Component {
             <li>
               <IconDropdown
                 horizontalReverse
-                listStyle={{ textAlign: 'center', minWidth: '100px' }}
+                listStyle={{ minWidth: '200px' }}
                 icon={<ProfileIcon style={{ marginTop: '5px' }} />}
               >
-                <MenuItem onClick={this.navigateSettings}>
-                  <div styleName='menu-item'>
-                    <AccountSettingsIcon /> Settings
-                  </div>
-                </MenuItem>
-                <MenuItem onClick={() => this.props.logoutUser()}>
-                  <div styleName='menu-item'>
-                    <SignoutIcon /> Sign out
-                  </div>
-                </MenuItem>
+                <IconMenuItem
+                  icon={<AccountSettingsIcon width={14} height={14} />}
+                  onClick={this.navigateSettings}
+                >
+                  <span>Settings</span>
+                </IconMenuItem>
+
+                <IconMenuItem
+                  onClick={() => this.props.logoutUser()}
+                  icon={<SignoutIcon width={14} height={14} />}
+                >
+                  Sign out
+                </IconMenuItem>
               </IconDropdown>
             </li>
           </ul>

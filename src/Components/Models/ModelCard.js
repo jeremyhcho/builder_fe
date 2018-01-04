@@ -104,11 +104,11 @@ class ModelCard extends React.Component {
           </div>
           <div styleName="buttons" onClick={this.viewModel} data-tip-for={`view-${model.id}`}>
             <View />
-            <Tooltip id={`view-${model.id}`} pos='top'>View Model</Tooltip>
+            <Tooltip id={`view-${model.id}`} pos='top'>View</Tooltip>
           </div>
           <div styleName="buttons" onClick={this.toggleModal} data-tip-for={`edit-${model.id}`}>
             <Edit />
-            <Tooltip id={`edit-${model.id}`} pos='top'>Edit Model</Tooltip>
+            <Tooltip id={`edit-${model.id}`} pos='top'>Edit</Tooltip>
           </div>
           {
             modalOpen &&
@@ -120,7 +120,7 @@ class ModelCard extends React.Component {
           }
           <div styleName="buttons" onClick={this.deleteModel} data-tip-for={`delete-${model.id}`}>
             <Delete />
-            <Tooltip id={`delete-${model.id}`} pos='top'>Delete Model</Tooltip>
+            <Tooltip id={`delete-${model.id}`} pos='top'>Delete</Tooltip>
           </div>
         </div>
       </div>
