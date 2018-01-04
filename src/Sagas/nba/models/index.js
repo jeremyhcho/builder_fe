@@ -11,9 +11,11 @@ import {
 // Constants
 import {
   CREATE_NBA_MODEL,
+  CREATE_NBA_MODEL_FAIL,
   FETCH_NBA_MODELS,
   DELETE_NBA_MODEL,
-  UPDATE_NBA_MODEL
+  UPDATE_NBA_MODEL,
+  UPDATE_NBA_MODEL_FAIL
 } from 'Constants'
 
 // Actions
@@ -24,12 +26,15 @@ import {
   updateNBAModelSuccess
 } from 'Actions'
 
+// Helpers
+import errorMessage from 'Helpers/errorMessage'
+
 function* createModel ({ model }) {
   try {
     const modelData = yield call(postNBAModel, model)
     yield put(createNBAModelSuccess(modelData))
   } catch ({ response }) {
-    console.log('Failed to create model')
+    yield put({ type: CREATE_NBA_MODEL_FAIL, error: errorMessage(response) })
   }
 }
 
@@ -56,7 +61,7 @@ function* updateModel ({ id, model }) {
     const newModel = yield call(putNBAModel, id, model)
     yield put(updateNBAModelSuccess(newModel))
   } catch ({ response }) {
-    console.log('Failed to udpate model')
+    yield put({ type: UPDATE_NBA_MODEL_FAIL, error: errorMessage(response) })
   }
 }
 

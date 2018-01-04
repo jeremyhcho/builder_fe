@@ -2,11 +2,13 @@
 import {
   CREATE_NBA_MODEL,
   CREATE_NBA_MODEL_SUCCESS,
+  CREATE_NBA_MODEL_FAIL,
   FETCH_NBA_MODELS,
   FETCH_NBA_MODELS_SUCCESS,
   DELETE_NBA_MODEL_SUCCESS,
   UPDATE_NBA_MODEL,
-  UPDATE_NBA_MODEL_SUCCESS
+  UPDATE_NBA_MODEL_SUCCESS,
+  UPDATE_NBA_MODEL_FAIL
 } from 'Constants'
 
 const initialState = {
@@ -25,6 +27,12 @@ const models = (state = initialState, action) => {
       return {
         ...state,
         modelList: [...state.modelList, action.model.data],
+        creatingModel: false
+      }
+
+    case CREATE_NBA_MODEL_FAIL:
+      return {
+        ...state,
         creatingModel: false
       }
 
@@ -54,6 +62,12 @@ const models = (state = initialState, action) => {
           if (model.id !== action.newModel.data.id) return model
           return action.newModel.data
         }),
+        updatingModel: false
+      }
+
+    case UPDATE_NBA_MODEL_FAIL:
+      return {
+        ...state,
         updatingModel: false
       }
 
