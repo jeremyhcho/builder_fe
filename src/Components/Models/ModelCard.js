@@ -96,7 +96,7 @@ class ModelCard extends React.Component {
       <div styleName={overlayStyles}>
         <div styleName="overlay-content">
           <div styleName="toggle">
-            <p style={{ marginBottom: '-15px' }} className="label">Status</p>
+            <p className="label">Status</p>
             <Toggle
               checked={this.checkModelStatus()}
               onChange={this.toggleStatus}

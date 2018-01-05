@@ -19,10 +19,7 @@
   .modal-container {
     pointer-events: all;
     background-color: #FFF;
-    border-radius: var(--border-radius);
-    border: 1px solid #FFF;
     color: var(--font-color);
-    padding: 0 25px;
     max-width: 60%;
     max-height: 90%;
     position: absolute;
@@ -35,7 +32,7 @@
 
     hr {
       // ignore padding on parent div
-      margin: 0px -25px;
+      width: 100%;
       border: none;
       height: 1px;
       background-color: var(--light-gray);
@@ -46,7 +43,10 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      padding: 20px 0;
+      padding: 25px;
+      background-color: #fff;
+      color: var(--font-color);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
       .title {
         word-wrap: break-word;
@@ -59,7 +59,7 @@
         outline: none;
         border: none;
         border-radius: var(--border-radius);
-        background-color: #FFF;
+        background-color: transparent;
         color: var(--font-color);
         font-size: 2rem;
         cursor: pointer;
@@ -68,13 +68,14 @@
 
         &:hover {
           border-radius: 50%;
-          background-color: var(--lightest-gray);
+          background-color: var(--light-gray);
         }
       }
     }
 
     .body {
       margin: 10px 0;
+      padding: 0 25px;
       max-height: 50vh;
       overflow-x: hidden;
       overflow-y: scroll;
@@ -82,10 +83,11 @@
 
     .footer {
       display: flex;
-      padding: 10px 0;
+      padding: 10px 25px;
       justify-content: flex-end;
       align-items: center;
       flex-direction: row;
+      margin-bottom: 5px;
 
       button {
         margin: 0 6px;

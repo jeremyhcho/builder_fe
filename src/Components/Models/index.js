@@ -35,7 +35,7 @@ class Models extends React.Component {
       '#3C90DF'
     ]
     if (index < 4) return colors[index]
-    return colors[4 % index]
+    return colors[index % 4]
   }
 
   renderModels () {

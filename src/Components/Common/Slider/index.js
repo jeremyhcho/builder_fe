@@ -159,14 +159,14 @@ class Slider extends React.Component {
     return (
       <div style={style}>
         <div styleName="slider-wrapper">
-          <p
+          <label
             ref={ref => this.labelRef = ref}
             className="label"
             styleName={valueLabel}
             style={{ left: `${this.state.valuePos}px` }}
           >
             {this.state.value}
-          </p>
+          </label>
           <div styleName="fill" ref={ref => this.fill = ref} />
           <input
             type="range"
@@ -205,7 +205,7 @@ Slider.defaultProps = {
   disabled: false,
   onChange: () => null,
   showInputControl: false,
-  style: {}
+  style: {},
 }
 
 Slider.propTypes = {

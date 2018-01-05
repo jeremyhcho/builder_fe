@@ -15,7 +15,7 @@ const initialState = {
   modelList: [],
   creatingModel: false,
   updatingModel: false,
-  fetchingModels: false
+  fetchingModels: false,
 }
 
 const models = (state = initialState, action) => {

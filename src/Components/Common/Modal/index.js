@@ -54,13 +54,12 @@ class Modal extends React.Component {
                 style={{
                   position: 'absolute',
                   top: '9px',
-                  left: '11px',
+                  left: '10.5px',
                   fontSize: '18px'
                 }}
               />
             </button>
           </div>
-          <hr />
           <div styleName="body">
             {children}
           </div>

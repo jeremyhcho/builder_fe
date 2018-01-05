@@ -4,9 +4,6 @@ import PropTypes from 'prop-types'
 // Components
 import { Select } from 'Components/Common'
 
-// CSS
-import './Input.scss'
-
 const errorStyle = {
   color: '#FE4A49',
   fontSize: '0.9em',

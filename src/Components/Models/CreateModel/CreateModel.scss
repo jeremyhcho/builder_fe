@@ -1,17 +1,120 @@
 .modal-body {
-  .modal-info {
-    margin: 20px 0;
+  padding: 0 20px;
+
+
+  .model-steps-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+
+    .model-steps {
+      display: flex;
+      margin: 0 0 10px 25px;
+
+      .step {
+        border: 2px solid var(--gray);
+        border-radius: 100%;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 22px;
+        position: relative;
+        margin-right: 25px;
+        padding-left: 1px;
+        cursor: pointer;
+        transition: all 200ms ease;
+
+        &.selected {
+          color: #fff;
+          border: 2px solid var(--blue);
+          background-color: var(--blue);
+          cursor: default;
+        }
+
+        &:not(:last-child):after {
+          border: 1px solid var(--gray);
+          width: 25px;
+          height: 1px;
+          border: 1px solid var(--gray);
+          position: absolute;
+          top: 9px;
+          left: 23px;
+          content: '';
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .model-type-container {
+    display: flex;
     justify-content: space-between;
-    padding-right: 20px;
+    align-items: center;
+    padding: 0 100px;
+    margin: 35px 0;
+    cursor: pointer;
+
+    .model-type-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 230px;
+      height: 180px;
+      background-color: var(--lightest-gray);
+      border: 1px solid var(--gray);
+      border-radius: var(--border-radius);
+
+      &.selected {
+        border: 3px solid var(--blue);
+        position: relative;
+        &:after {
+          position: absolute;
+          content: "\f00c";
+          font-family: "FontAwesome";
+          color: #fff;
+          background-color: var(--blue);
+          border-radius: 100%;
+          height: 24px;
+          width: 24px;
+          top: -10px;
+          right: -10px;
+          z-index: 1;
+          text-align: center;
+          line-height: 24px;
+          padding-left: 1px;
+        }
+      }
+    }
+  }
+
+  .model-info-container {
+    margin: 20px 0 40px;
+
+    .model-info {
+      margin: 30px 0;
+    }
   }
 
   .specs {
     margin: 40px 0 20px;
+
+    .title {
+      margin-bottom: 25px;
+    }
+
     .slider-container {
       padding: 0 5px;
-      margin-top: 30px;
+      margin: 20px 0;
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 80%;
+      }
     }
   }
 }

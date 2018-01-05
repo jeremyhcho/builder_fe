@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Input, Toggle } from 'Components/Common'
@@ -15,19 +16,30 @@ const ModelInfo = ({ changeInput, name, status, changeStatus }) => {
     checked = false
   }
   return (
-    <div styleName="modal-info">
-      <Input
-        label="Model Name"
-        type="text"
-        placeholder="Enter Model Name"
-        value={name}
-        name="name"
-        onChange={changeInput}
-      />
-      <div style={{ textAlign: 'center' }}>
-        <p className="label" style={{ marginBottom: '-15px' }}>Status</p>
-        <Toggle checked={checked} onChange={changeStatus} />
-      </div>
+    <div styleName="model-info-container">
+      <Row middle='xs' styleName="model-info">
+        <Col xs={2}>
+          <p className="semibold">Model Name</p>
+        </Col>
+        <Col>
+          <Input
+            type="text"
+            placeholder="Enter Model Name"
+            value={name}
+            name="name"
+            onChange={changeInput}
+          />
+        </Col>
+      </Row>
+
+      <Row middle='xs' styleName="model-info">
+        <Col xs={2}>
+          <p className="semibold">Status</p>
+        </Col>
+        <Col>
+          <Toggle checked={checked} onChange={changeStatus} />
+        </Col>
+      </Row>
     </div>
   )
 }
