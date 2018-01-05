@@ -46,7 +46,7 @@ const MainLayout = ({ userId, receivePusherNotification }) => (
 
     <SideNav />
 
-    <div style={{ width: '100%', height: '100vh', minWidth: '964px' }}>
+    <div style={{ width: '100%', height: '100vh', minWidth: '964px', minHeight: '700px' }}>
       <Header />
       <Row style={layoutStyle}>
         <Col xs={12} style={{ marginTop: '20px' }}>

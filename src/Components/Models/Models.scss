@@ -1,5 +1,17 @@
 .models {
   padding: 65px;
+  height: calc(100% - 60px);
+
+  .model-overlay {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.2;
+  }
 
   .model-list {
     margin-top: 35px;
@@ -7,15 +19,6 @@
     overflow-x: hidden;
     height: calc(100vh - 150px);
     padding-bottom: 45px;
-
-    .model-overlay {
-      height: 50vh;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0.2;
-    }
 
     .model-card {
       height: 450px;

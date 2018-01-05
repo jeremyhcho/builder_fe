@@ -7,6 +7,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { Button, Spinner } from 'Components/Common'
 import CreateModel from './CreateModel'
 import ModelCard from './ModelCard'
+import NoModelsIcon from 'Assets/Icons/models/no-models.svg'
 
 // CSS
 import './Models.scss'
@@ -54,21 +55,33 @@ class Models extends React.Component {
     if (!modelList.length) {
       return (
         <div styleName="model-overlay">
-          <div>
-            <h1 className="bold">Looks like you haven't created any Models</h1>
-            <h4 className="semibold">You can create a Model by clicking the Create Model button</h4>
+          <div style={{ textAlign: 'center' }}>
+            <NoModelsIcon height={256} width={256} />
+
+            <h1 className="bold" style={{ marginTop: '15px' }}>
+              Ready to get started?
+            </h1>
+            <p className='semibold' style={{ marginTop: '5px' }}>
+              Create your first model by clicking the 'Create Model' button
+            </p>
           </div>
         </div>
       )
     }
 
-    return modelList.map((model, index) => (
-      <ModelCard
-        key={model.id}
-        model={model}
-        color={this.renderModelColor(index)}
-      />
-    ))
+    return (
+      <div styleName="model-list">
+        {
+          modelList.map((model, index) => (
+            <ModelCard
+              key={model.id}
+              model={model}
+              color={this.renderModelColor(index)}
+            />
+          ))
+        }
+      </div>
+    )
   }
 
   render () {
@@ -79,11 +92,17 @@ class Models extends React.Component {
           <Col xsOffset={10} xs={2}>
             <Button
               onClick={this.toggleModal}
+              style={{ position: 'relative' }}
             >
-              <span style={{ marginRight: '5px', color: '#fff' }}>
-                <i className="fa fa-plus" aria-hidden="true" />
+              <span style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }}>
+                <i
+                  className="fa fa-plus"
+                  aria-hidden="true"
+                  style={{ color: '#fff', fontSize: '9px' }}
+                />
               </span>
-              Create Model
+
+              <span style={{ marginLeft: '15px' }}>Create Model</span>
             </Button>
           </Col>
 
@@ -93,11 +112,9 @@ class Models extends React.Component {
           }
         </Row>
 
-        <div styleName="model-list">
-          <Row>
-            {this.renderModels()}
-          </Row>
-        </div>
+        <Row style={{ position: 'relative', height: '100%' }}>
+          {this.renderModels()}
+        </Row>
       </div>
     )
   }
