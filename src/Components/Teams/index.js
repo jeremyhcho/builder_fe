@@ -26,17 +26,9 @@ class Teams extends React.Component {
   render () {
     if (!this.props.teams.length) {
       return (
-        <Row styleName='teams-container'>
-          <Spinner
-            show
-            lg
-            style={{
-              position: 'absolute',
-              top: '40%',
-              left: '50%'
-            }}
-          />
-        </Row>
+        <div className="loader">
+          <Spinner show lg />
+        </div>
       )
     }
 

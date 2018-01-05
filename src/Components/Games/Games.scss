@@ -15,10 +15,11 @@
   }
 
   &.up {
-    position: absolute;
-    left: 50%;
-    top: -5px;
-    z-index: 1;
+    // position: absolute;
+    // left: 50%;
+    // top: -5px;
+    // z-index: 1;
+    margin: 0 auto 12px;
   }
 
   &.down {
@@ -46,15 +47,13 @@
   width: 100%;
 
   .day-wrapper {
-    margin-bottom: 30px;
-    padding-top: 30px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    margin: 60px 0;
 
     &:first-child {
-      paddin-top: 0;
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
     }
 
     .day-card {

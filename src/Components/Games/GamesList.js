@@ -26,8 +26,10 @@ class GamesList extends React.Component {
     const { games } = newProps
     const lastGame = games[games.length - 1].date._i
 
-    if (moment(lastGame).startOf('day').diff(moment().add(1, 'days').startOf('day'), 'days') > -1) {
+    if (moment(lastGame).startOf('day').diff(moment().add(1, 'days').startOf('day'), 'days') >= 0) {
       this.setState({ disableNextPagination: true })
+    } else {
+      this.setState({ disableNextPagination: false })
     }
   }
 
@@ -81,13 +83,54 @@ class GamesList extends React.Component {
     return groupBy(this.props.games, (game) => game.date.tz('America/New_York').format('D MMMM'))
   }
 
-  render () {
-    const groupedMatches = this.groupedMatches()
-    const { paginatingGames, fetchingGames } = this.props
+  renderPaginationPrevious () {
+    if (this.props.paginatingGames) {
+      return (
+        <Spinner
+          xs
+          show
+          style={{
+            margin: '0 auto 12px'
+          }}
+        />
+      )
+    }
+
+    return (
+      <button
+        styleName='pagination up'
+        onClick={this.handlePrevious}
+      >
+        <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
+        <p className='small'>Previous</p>
+      </button>
+    )
+  }
+
+  renderPaginationNext () {
     const { disableNextPagination } = this.state
     const paginationDown = classNames('pagination down', {
       disable: disableNextPagination
     })
+    if (this.props.paginatingGames) {
+      return <Spinner xs show style={{ margin: '12px auto 0' }} />
+    }
+
+    return (
+      <button
+        styleName={paginationDown}
+        onClick={this.handleNext}
+        disabled={disableNextPagination}
+      >
+        <p className='small'>Next</p>
+        <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
+      </button>
+    )
+  }
+
+  render () {
+    const groupedMatches = this.groupedMatches()
+    const { fetchingGames } = this.props
 
     return (
       <Row style={{ padding: '0 65px', position: 'relative' }}>
@@ -100,25 +143,13 @@ class GamesList extends React.Component {
         >
           {
             fetchingGames ? (
-              <Row center='xs' className="loader">
-                <Col xs={12}>
-                  <Spinner lg show />
-                </Col>
-              </Row>
+              <div className="loader">
+                <Spinner lg show />
+              </div>
             ) : (
               <Row style={{ width: '100%', maxWidth: '1600px', position: 'relative' }}>
-                {
-                  paginatingGames ?
-                    <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (
-                      <button
-                        styleName='pagination up'
-                        onClick={this.handlePrevious}
-                      >
-                        <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
-                        <p className='small'>Previous</p>
-                      </button>
-                    )
-                }
+                {this.renderPaginationPrevious()}
+
                 <Col xs={12}>
                   {
                     Object.keys(groupedMatches).map((date) => (
@@ -130,19 +161,8 @@ class GamesList extends React.Component {
                     ))
                   }
                 </Col>
-                {
-                  paginatingGames ?
-                    <Spinner xs show style={{ margin: '12px auto 0' }} /> : (
-                      <button
-                        styleName={paginationDown}
-                        onClick={this.handleNext}
-                        disabled={disableNextPagination}
-                      >
-                        <p className='small'>Next</p>
-                        <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
-                      </button>
-                    )
-                }
+
+                {this.renderPaginationNext()}
               </Row>
             )
           }

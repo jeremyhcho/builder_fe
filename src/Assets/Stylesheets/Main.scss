@@ -58,9 +58,12 @@
   }
 
   .loader {
-    margin-top: 30vh;
-    width: 100%;
-    max-width: 1600px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    // margin-top: 30vh;
+    // width: 100%;
+    // max-width: 1600px;
   }
 }
 

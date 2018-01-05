@@ -37,7 +37,7 @@ export const paginateNBAGames = (date, paginateType) => {
     to = moment(`${date} 20:59:59`).add(3, 'days')
   }
 
-  if (maxDiff >= 0) {
+  if (maxDiff >= 0 && paginateType === 'next') {
     // Prevents pagination from loading tomorrow's games
     to = moment(`${tomorrow.format('YYYY-MM-DD')} 20:59:59`)
   }

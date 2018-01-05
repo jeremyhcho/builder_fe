@@ -26,7 +26,7 @@ class DayWrapper extends React.Component {
           className='small'
           style={{
             position: 'absolute',
-            top: '10px',
+            top: '-18px',
             right: '20px'
           }}
         >
@@ -50,8 +50,8 @@ class DayWrapper extends React.Component {
             games.map(game => {
               return (
                 <Row key={game.id}>
-                  <Col xs={12} key={game.id}>
-                    <GameCard key={game.id} game={game} />
+                  <Col xs={12}>
+                    <GameCard game={game} />
                   </Col>
                 </Row>
               )
