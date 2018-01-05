@@ -4,19 +4,27 @@ import { connect } from 'react-redux'
 import { Row } from 'react-styled-flexboxgrid'
 
 // Components
-// import Calendar from './Calendar'
+import { Spinner } from 'Components/Common'
 import DateInput from './DateInput'
 import GamesList from './GamesList'
 
 // CSS
 import './Games.scss'
 
-const Games = ({ games }) => (
+const Games = ({ games, fetchingGames }) => (
   <div>
     <Row style={{ padding: '0 65px' }}>
       <DateInput />
     </Row>
-    <GamesList games={games} />
+    {
+      fetchingGames ? (
+        <div className="loader">
+          <Spinner lg show />
+        </div>
+      ) : (
+        <GamesList games={games} />
+      )
+    }
   </div>
 )
 
@@ -25,10 +33,12 @@ Games.defaultProps = {
 }
 
 Games.propTypes = {
-  games: PropTypes.array
+  games: PropTypes.array,
+  fetchingGames: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
+  fetchingGames: nba.games.fetchingGames,
   games: nba.games.gamesList
 })
 

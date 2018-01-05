@@ -22,12 +22,26 @@ class GamesList extends React.Component {
     disableNextPagination: false,
   }
 
+  componentWillMount () {
+    // check dates when date is selected
+    const { games } = this.props
+
+    if (games.length && moment(games[games.length - 1].date._i).isSame(moment().add(1, 'day'), 'days')) {
+      this.setState({ disableNextPagination: true })
+    } else {
+      this.setState({ disableNextPagination: false })
+    }
+  }
+
   componentWillReceiveProps (newProps) {
+    // check dates on pagination
     const { games } = newProps
     const lastGame = games[games.length - 1].date._i
 
-    if (moment(lastGame).startOf('day').diff(moment().add(1, 'days').startOf('day'), 'days') > -1) {
+    if (moment(lastGame).startOf('day').diff(moment().add(1, 'days').startOf('day'), 'days') >= 0) {
       this.setState({ disableNextPagination: true })
+    } else {
+      this.setState({ disableNextPagination: false })
     }
   }
 
@@ -81,13 +95,47 @@ class GamesList extends React.Component {
     return groupBy(this.props.games, (game) => game.date.tz('America/New_York').format('D MMMM'))
   }
 
-  render () {
-    const groupedMatches = this.groupedMatches()
-    const { paginatingGames, fetchingGames } = this.props
+  renderPaginationPrevious () {
+    if (this.props.paginatingGames) {
+      return (
+        <Spinner xs show style={{ margin: '0 auto 12px' }} />
+      )
+    }
+
+    return (
+      <button
+        styleName='pagination up'
+        onClick={this.handlePrevious}
+      >
+        <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
+        <p className='small'>Previous</p>
+      </button>
+    )
+  }
+
+  renderPaginationNext () {
     const { disableNextPagination } = this.state
     const paginationDown = classNames('pagination down', {
       disable: disableNextPagination
     })
+    if (this.props.paginatingGames) {
+      return <Spinner xs show style={{ margin: '12px auto 0' }} />
+    }
+
+    return (
+      <button
+        styleName={paginationDown}
+        onClick={this.handleNext}
+        disabled={disableNextPagination}
+      >
+        <p className='small'>Next</p>
+        <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
+      </button>
+    )
+  }
+
+  render () {
+    const groupedMatches = this.groupedMatches()
 
     return (
       <Row style={{ padding: '0 65px', position: 'relative' }}>
@@ -98,54 +146,23 @@ class GamesList extends React.Component {
             this.scroller = ref
           }}
         >
-          {
-            fetchingGames ? (
-              <Row center='xs' className="loader">
-                <Col xs={12}>
-                  <Spinner lg show />
-                </Col>
-              </Row>
-            ) : (
-              <Row style={{ width: '100%', maxWidth: '1600px', position: 'relative' }}>
-                {
-                  paginatingGames ?
-                    <Spinner xs show style={{ margin: '0 auto 12px' }} /> : (
-                      <button
-                        styleName='pagination up'
-                        onClick={this.handlePrevious}
-                      >
-                        <i className="fa fa-angle-up" aria-hidden="true" styleName="pagination-icon" />
-                        <p className='small'>Previous</p>
-                      </button>
-                    )
-                }
-                <Col xs={12}>
-                  {
-                    Object.keys(groupedMatches).map((date) => (
-                      <DayWrapper
-                        games={groupedMatches[date]}
-                        key={date}
-                        date={date}
-                      />
-                    ))
-                  }
-                </Col>
-                {
-                  paginatingGames ?
-                    <Spinner xs show style={{ margin: '12px auto 0' }} /> : (
-                      <button
-                        styleName={paginationDown}
-                        onClick={this.handleNext}
-                        disabled={disableNextPagination}
-                      >
-                        <p className='small'>Next</p>
-                        <i className="fa fa-angle-down" aria-hidden="true" styleName="pagination-icon" />
-                      </button>
-                    )
-                }
-              </Row>
-            )
-          }
+          <Row style={{ width: '100%', maxWidth: '1600px', position: 'relative' }}>
+            {this.renderPaginationPrevious()}
+
+            <Col xs={12}>
+              {
+                Object.keys(groupedMatches).map((date) => (
+                  <DayWrapper
+                    games={groupedMatches[date]}
+                    key={date}
+                    date={date}
+                  />
+                ))
+              }
+            </Col>
+
+            {this.renderPaginationNext()}
+          </Row>
         </div>
       </Row>
     )
@@ -155,13 +172,11 @@ class GamesList extends React.Component {
 GamesList.propTypes = {
   games: PropTypes.array.isRequired,
   paginateNBAGames: PropTypes.func.isRequired,
-  fetchingGames: PropTypes.bool.isRequired,
   paginatingGames: PropTypes.bool.isRequired,
   dates: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
-  fetchingGames: nba.games.fetchingGames,
   paginatingGames: nba.games.paginatingGames,
   dates: nba.games.dates
 })
