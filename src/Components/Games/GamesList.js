@@ -22,7 +22,19 @@ class GamesList extends React.Component {
     disableNextPagination: false,
   }
 
+  componentWillMount () {
+    // check dates when date is selected
+    const { games } = this.props
+
+    if (games.length && moment(games[games.length - 1].date._i).isSame(moment().add(1, 'day'), 'days')) {
+      this.setState({ disableNextPagination: true })
+    } else {
+      this.setState({ disableNextPagination: false })
+    }
+  }
+
   componentWillReceiveProps (newProps) {
+    // check dates on pagination
     const { games } = newProps
     const lastGame = games[games.length - 1].date._i
 
@@ -86,13 +98,7 @@ class GamesList extends React.Component {
   renderPaginationPrevious () {
     if (this.props.paginatingGames) {
       return (
-        <Spinner
-          xs
-          show
-          style={{
-            margin: '0 auto 12px'
-          }}
-        />
+        <Spinner xs show style={{ margin: '0 auto 12px' }} />
       )
     }
 
@@ -130,7 +136,6 @@ class GamesList extends React.Component {
 
   render () {
     const groupedMatches = this.groupedMatches()
-    const { fetchingGames } = this.props
 
     return (
       <Row style={{ padding: '0 65px', position: 'relative' }}>
@@ -141,31 +146,23 @@ class GamesList extends React.Component {
             this.scroller = ref
           }}
         >
-          {
-            fetchingGames ? (
-              <div className="loader">
-                <Spinner lg show />
-              </div>
-            ) : (
-              <Row style={{ width: '100%', maxWidth: '1600px', position: 'relative' }}>
-                {this.renderPaginationPrevious()}
+          <Row style={{ width: '100%', maxWidth: '1600px', position: 'relative' }}>
+            {this.renderPaginationPrevious()}
 
-                <Col xs={12}>
-                  {
-                    Object.keys(groupedMatches).map((date) => (
-                      <DayWrapper
-                        games={groupedMatches[date]}
-                        key={date}
-                        date={date}
-                      />
-                    ))
-                  }
-                </Col>
+            <Col xs={12}>
+              {
+                Object.keys(groupedMatches).map((date) => (
+                  <DayWrapper
+                    games={groupedMatches[date]}
+                    key={date}
+                    date={date}
+                  />
+                ))
+              }
+            </Col>
 
-                {this.renderPaginationNext()}
-              </Row>
-            )
-          }
+            {this.renderPaginationNext()}
+          </Row>
         </div>
       </Row>
     )
@@ -175,13 +172,11 @@ class GamesList extends React.Component {
 GamesList.propTypes = {
   games: PropTypes.array.isRequired,
   paginateNBAGames: PropTypes.func.isRequired,
-  fetchingGames: PropTypes.bool.isRequired,
   paginatingGames: PropTypes.bool.isRequired,
   dates: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
-  fetchingGames: nba.games.fetchingGames,
   paginatingGames: nba.games.paginatingGames,
   dates: nba.games.dates
 })

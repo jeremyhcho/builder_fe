@@ -39,17 +39,7 @@ class Models extends React.Component {
   }
 
   renderModels () {
-    const { modelList, fetchingModels } = this.props
-
-    if (fetchingModels) {
-      return (
-        <Col xs={12}>
-          <Row center='xs' middle='xs' style={{ height: '40vh' }}>
-            <Spinner lg show />
-          </Row>
-        </Col>
-      )
-    }
+    const { modelList } = this.props
 
     if (!modelList.length) {
       return (
@@ -73,6 +63,16 @@ class Models extends React.Component {
 
   render () {
     const { modalOpen } = this.state
+    const { fetchingModels } = this.props
+    if (fetchingModels) {
+      return (
+        <div className="loader">
+          <Spinner lg show />
+        </div>
+      )
+    }
+
+
     return (
       <div styleName="models">
         <Row>
