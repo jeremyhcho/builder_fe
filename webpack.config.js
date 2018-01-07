@@ -7,7 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const dotEnv = new webpack.DefinePlugin({
   'process.env': {
     'NODE_ENV': JSON.stringify('development'),
-    'PUSHER_KEY': JSON.stringify(process.env.PUSHER_KEY)
+    'PUSHER_KEY': JSON.stringify(process.env.PUSHER_KEY),
+    'STRIPE_KEY': JSON.stringify(process.env.STRIPE_KEY)
   }
 })
 

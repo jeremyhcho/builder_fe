@@ -84,6 +84,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
+    "react-stripe-elements": "^1.2.1",
     "react-styled-flexboxgrid": "^2.1.1",
     "redux": "^3.7.2",
     "redux-form": "^7.2.0",

@@ -28,6 +28,7 @@ class MembershipPlan extends React.Component {
     const { plan, userPlan } = this.props
     return (
       <Card
+        style={{ margin: '0 25px' }}
         wrapperStyle={{ height: '368px', width: '275px', position: 'relative' }}
         styleName="membership-plan"
       >

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
 import { setPusherClient } from 'Components/Pusher'
+import { StripeProvider } from 'react-stripe-elements'
 import Pusher from 'pusher-js'
 
 // Global CSS
@@ -26,7 +27,9 @@ setPusherClient(pusherClient)
 ReactDOM.render(
   <AppContainer warnings={false}>
     <Provider store={store}>
-      <AppRouter />
+      <StripeProvider apiKey={process.env.STRIPE_KEY}>
+        <AppRouter />
+      </StripeProvider>
     </Provider>
   </AppContainer>,
   rootEl

@@ -25,6 +25,7 @@ class Settings extends React.Component {
         <Account />
 
         <SubHeader text="Billing Info" subText={BillingSubText} />
+
         <Billing />
       </div>
     )
