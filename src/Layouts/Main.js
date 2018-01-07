@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { Row, Col } from 'react-styled-flexboxgrid'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 // import Loadable from 'react-loadable'
@@ -29,13 +28,6 @@ import ModelsLayout from './Models'
 // Actions
 import { receivePusherNotification } from 'Actions'
 
-const layoutStyle = {
-  height: '100%',
-  width: '100%',
-  backgroundColor: 'var(--lightest-gray)',
-  margin: '0px'
-}
-
 const MainLayout = ({ userId, receivePusherNotification }) => (
   <main style={{ display: 'flex', overflow: 'hidden' }}>
     <Pusher
@@ -46,20 +38,25 @@ const MainLayout = ({ userId, receivePusherNotification }) => (
 
     <SideNav />
 
-    <div style={{ width: '100%', height: '100vh', minWidth: '964px', minHeight: '700px' }}>
+    <div
+      style={{
+        width: '100%',
+        height: '100vh',
+        minWidth: '964px',
+        minHeight: '700px'
+      }}
+    >
       <Header />
-      <Row style={layoutStyle}>
-        <Col xs={12} style={{ marginTop: '20px' }}>
-          <Switch>
-            {/* <Route exact path='/' component={Dashboard} /> */}
-            <Route path='/games' component={GamesLayout} />
-            <Route path='/teams' component={TeamsLayout} />
-            <Route path='/models' component={ModelsLayout} />
-            <Route path='/settings' component={SettingsLayout} />
-            <Redirect from='/' to='/games' />
-          </Switch>
-        </Col>
-      </Row>
+      <div style={{ overflowY: 'scroll', height: 'calc(100% - 60px)' }}>
+        <Switch>
+          {/* <Route exact path='/' component={Dashboard} /> */}
+          <Route path='/games' component={GamesLayout} />
+          <Route path='/teams' component={TeamsLayout} />
+          <Route path='/models' component={ModelsLayout} />
+          <Route path='/settings' component={SettingsLayout} />
+          <Redirect from='/' to='/games' />
+        </Switch>
+      </div>
     </div>
   </main>
 )

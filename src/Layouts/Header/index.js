@@ -6,8 +6,6 @@ import pathToRegexp from 'path-to-regexp'
 
 // Components
 import { IconMenuItem, IconDropdown, Tooltip } from 'Components/Common'
-import AccountSettingsIcon from 'Assets/Icons/settings/a-edit-2.svg'
-import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
 // CSS
 import './Header.scss'
@@ -15,6 +13,8 @@ import './Header.scss'
 // Assets
 import ProfileIcon from 'Assets/Icons/header/profile.svg'
 import NotificationIcon from 'Assets/Icons/header/notification.svg'
+import AccountSettingsIcon from 'Assets/Icons/settings/a-edit-2.svg'
+import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
 // Actions
 import { logoutUser } from 'Actions'
@@ -84,7 +84,7 @@ class Header extends React.Component {
                   onClick={() => this.props.logoutUser()}
                   icon={<SignoutIcon width={14} height={14} />}
                 >
-                  Sign out
+                  Log out
                 </IconMenuItem>
               </IconDropdown>
             </li>

@@ -50,6 +50,26 @@ class Select extends React.Component {
     this.setState({ open: false })
   }
 
+  parseVertReversed () {
+    if (this.props.verticalReverse) {
+      return true
+    }
+
+    const { y, height } = this.dropdown.getBoundingClientRect()
+
+    return (y + height < 0) || (y > window.innerHeight)
+  }
+
+  parseHorReversed () {
+    if (this.props.horizontalReverse) {
+      return true
+    }
+
+    const { x, width } = this.dropdown.getBoundingClientRect()
+
+    return (x + width < 0) || (x > window.innerWidth)
+  }
+
   handleClick = (e, { value, label }) => {
     const { selectedVal, selectedVals, onChange, multi } = this.props
 

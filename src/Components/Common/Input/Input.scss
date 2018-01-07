@@ -42,6 +42,10 @@
     outline: none;
     background-color: var(--lightest-gray);
 
+    &::placeholder {
+      color: var(--dark-gray);
+    }
+
     &.sm {
       height: 36px;
     }

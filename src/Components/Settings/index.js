@@ -14,7 +14,13 @@ const BillingSubText = 'Choose a payment plan and fill out the payment option an
 class Settings extends React.Component {
   render () {
     return (
-      <div style={{ overflowY: 'scroll', overflowX: 'hidden', height: '90vh', maxWidth: '1600px' }}>
+      <div
+        style={{
+          overflowX: 'hidden',
+          maxWidth: '1600px',
+          paddingBottom: '60px'
+        }}
+      >
         <SubHeader text="Account Info" subText={AccountSubText} />
         <Account />
 

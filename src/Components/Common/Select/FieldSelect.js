@@ -24,11 +24,28 @@ class FieldSelect extends React.Component {
   }
 
   render () {
-    const { input, label, style, options, meta: { touched, error }, ...props } = this.props
+    const {
+      input,
+      label,
+      style,
+      options,
+      meta: { touched, error },
+      shouldShowLabel,
+      ...props
+    } = this.props
+
     return (
       <div>
         <div style={{ margin: '15px 0 0', ...style }}>
-          <p style={{ margin: '0 0 5px 0' }}>{label}</p>
+          <p
+            style={{
+              margin: '0 0 5px 0',
+              height: shouldShowLabel ? '17px' : ''
+            }}
+          >
+            {label}
+          </p>
+
           <Select
             options={options}
             selectedVal={input.value}
@@ -44,7 +61,8 @@ class FieldSelect extends React.Component {
 
 FieldSelect.defaultProps = {
   style: {},
-  label: ''
+  label: '',
+  shouldShowLabel: false
 }
 
 FieldSelect.propTypes = {
@@ -52,7 +70,8 @@ FieldSelect.propTypes = {
   meta: PropTypes.object.isRequired,
   style: PropTypes.object,
   options: PropTypes.array.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
+  shouldShowLabel: PropTypes.bool
 }
 
 export default FieldSelect

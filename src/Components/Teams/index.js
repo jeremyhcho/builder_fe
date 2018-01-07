@@ -37,7 +37,7 @@ class Teams extends React.Component {
     const eastTeams = teamsGroupedByConference.EAST
 
     return (
-      <Row style={{ overflowY: 'scroll', height: '100%' }}>
+      <Row>
         <Col xs={12}>
           <Row styleName='teams-container'>
             <Conference teams={westTeams} />

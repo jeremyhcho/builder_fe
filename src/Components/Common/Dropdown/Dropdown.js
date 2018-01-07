@@ -22,6 +22,16 @@ class Dropdown extends React.Component {
     this.setState({ open: false })
   }
 
+  onScroll = (e) => {
+    const { scrollTop, scrollHeight, offsetHeight } = this.dropdown
+    const scrolledToTop = scrollTop === 0
+    const scrolledToBottom = scrollTop === (scrollHeight - offsetHeight)
+
+    if (scrolledToTop || scrolledToBottom) {
+      e.stopPropagation()
+    }
+  }
+
   toggleDropdown = () => {
     this.setState({ open: !this.state.open })
   }
@@ -75,6 +85,7 @@ class Dropdown extends React.Component {
           styleName={optionsClass}
           onClick={this.onListClick}
           ref={dropdown => this.dropdown = dropdown}
+          onScroll={this.onScroll}
         >
           {children}
         </ul>
