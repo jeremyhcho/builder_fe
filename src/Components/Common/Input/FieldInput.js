@@ -10,7 +10,7 @@ import './Input.scss'
 const errorStyle = {
   color: '#FE4A49',
   fontSize: '0.9em',
-  margin: '5px 0 5px 5px'
+  margin: '5px 0 0 5px'
 }
 
 const FieldInput = ({ input, style, meta: { touched, error }, ...props }) => {

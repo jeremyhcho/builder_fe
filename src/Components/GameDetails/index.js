@@ -19,7 +19,7 @@ class GameDetails extends React.Component {
 
   gameDetailsStatus () {
     const { summary, ...routerProps } = this.props
-    if (summary.status === 'SCHEDULED') {
+    if (summary.status === 'SCHEDULED' || summary.status === 'IN PROGRESS') {
       return <ScheduledGameDetails {...routerProps} />
     } else if (summary.status === 'CLOSED') {
       return <CompletedGameDetails {...routerProps} />

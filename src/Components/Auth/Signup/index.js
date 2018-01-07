@@ -3,41 +3,33 @@ import { Link } from 'react-router-dom'
 
 // Components
 import SignupForm from './SignupForm'
+// import { Stepper } from 'Components/Common'
 
-const styles = {
-  wrapperStyle: {
-    width: '400px',
-    minHeight: '745px',
-    margin: '0 auto'
-  },
-  headerStyles: {
-    color: '#fff',
-    fontWeight: '500',
-    textAlign: 'center',
-    margin: '48px 0'
-  },
-  linkStyles: {
-    color: '#fff',
-    margin: '48px auto 0',
-    display: 'block',
-    textAlign: 'center'
+// CSS
+import './Signup.scss'
+
+class Signup extends React.Component {
+  render () {
+    return (
+      <div styleName="signup">
+        <h2 className="semibold">
+          Get your free Quartz account now.
+        </h2>
+        <p className="small label" style={{ margin: '15px 0' }}>
+          Try Quartz free for 7 days with access to basic models
+        </p>
+        {/* <Stepper
+          steps={['User information', 'Account information', 'Billing Information']}
+          activeStep={0}
+        /> */}
+        <SignupForm />
+
+        <p styleName="login-link" className="small">
+          <Link to="/auth/login">Already have an account? Log in</Link>
+        </p>
+      </div>
+    )
   }
-}
-
-const Signup = () => {
-  return (
-    <div style={styles.wrapperStyle}>
-      <h1 style={styles.headerStyles}>
-        Sign up for your account
-      </h1>
-      <SignupForm />
-      <p
-        style={styles.linkStyles}
-      >
-        <Link to="/auth/login">Already have an account? Log in</Link>
-      </p>
-    </div>
-  )
 }
 
 export default Signup

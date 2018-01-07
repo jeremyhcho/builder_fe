@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // CSS
 import './Signup.scss'
@@ -51,6 +52,34 @@ class SignupForm extends Component {
       <div styleName="signup-container">
         {this.props.signUpError && this.renderError()}
         <form onSubmit={this.props.handleSubmit(this.submit)}>
+          <Row>
+            <Col xs={6}>
+              <Field
+                name="First name"
+                component={FieldInput}
+                label="First"
+                type="text"
+                isLabelHidden
+                shouldFitContainer
+                autoComplete='off'
+                placeholder="Enter first name"
+                validate={[presence]}
+              />
+            </Col>
+            <Col xs={6}>
+              <Field
+                name="Last name"
+                component={FieldInput}
+                label="Last"
+                type="text"
+                isLabelHidden
+                shouldFitContainer
+                autoComplete='off'
+                placeholder="Enter last name"
+                validate={[presence]}
+              />
+            </Col>
+          </Row>
           <Field
             name="Email"
             component={FieldInput}

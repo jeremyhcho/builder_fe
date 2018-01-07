@@ -39,7 +39,7 @@ class ForgotForm extends React.Component {
           We've sent an email to <span className='blue'>{this.props.email}</span>
           &nbsp;with instructions to recover your password.
         </p>
-        <p style={{ marginTop: '40px' }}>
+        <p style={{ marginTop: '20px' }}>
           Didn't receive the e-mail?&nbsp;
           <Link className='link' to={{ pathname: '/auth/forgot' }}>Try again.</Link>
         </p>

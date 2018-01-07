@@ -15,9 +15,23 @@ class GameCard extends React.Component {
     history.push(`${history.location.pathname}/${game.id}`)
   }
 
-  render () {
+  renderGameStatus () {
     const { game } = this.props
     const time = game.date.tz('America/New_York').format('hA')
+    switch (game.status) {
+      case 'SCHEDULED':
+        return time
+      case 'IN PROGRESS':
+        return 'IN PROGRESS'
+      case 'FINAL':
+        return 'FINAL'
+      default:
+        return null
+    }
+  }
+
+  render () {
+    const { game } = this.props
     const awayTeam = game.away.name.toUpperCase()
     const awayCity = game.away.city
 
@@ -36,7 +50,7 @@ class GameCard extends React.Component {
         <Col xs={1} styleName="col-direction">
           <h1 className="semibold">@</h1>
           <p className="small semibold" style={{ marginTop: '5px' }}>
-            {game.status === 'SCHEDULED' ? time : 'FINAL'}
+            {this.renderGameStatus()}
           </p>
         </Col>
         <Col xs={1} style={{ textAlign: 'center' }}>

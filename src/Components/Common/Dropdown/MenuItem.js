@@ -15,9 +15,10 @@ const MenuItem = ({ onClick, children, disabled, icon: Icon }) => {
     onClick(e)
   }
 
+
   return (
     <li styleName={listItemClass} onClick={handleClick}>
-      <Icon />
+      {Icon && <Icon />}
       <span>
         {children}
       </span>
@@ -26,13 +27,14 @@ const MenuItem = ({ onClick, children, disabled, icon: Icon }) => {
 }
 
 MenuItem.defaultProps = {
-  disabled: false
+  disabled: false,
+  icon: null
 }
 
 MenuItem.propTypes = {
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
-  icon: PropTypes.node.isRequired,
+  icon: PropTypes.node,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,

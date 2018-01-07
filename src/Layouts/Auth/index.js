@@ -1,14 +1,16 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { Row, Col } from 'react-styled-flexboxgrid'
 // import Loadable from 'react-loadable'
 
 // CSS
 import './Auth.scss'
 
 // Components
-// import Loader from 'Components/Common/Loader'
-// import SideDiv from './SideDiv'
 import { Login, Signup, Forgot, Reset } from 'Components/Auth'
+
+// Icons
+import AnalyticsIcon from 'Assets/Icons/auth/analytics-89.svg'
 
 // const LoginContainer = Loadable({
 //   loader: () => import('../../containers/Session/Login'),
@@ -32,25 +34,30 @@ import { Login, Signup, Forgot, Reset } from 'Components/Auth'
 
 const AuthLayout = () => (
   <div styleName='auth-wrapper'>
-    <div style={{ height: '48px' }} />
+    <Row styleName='auth-card'>
+      <Row middle='xs' styleName='branding-logo'>
+        <h4 className="bold">Quartz</h4>
+        <AnalyticsIcon style={{ marginLeft: '5px', width: '17px', height: '17px' }} />
+      </Row>
 
-    <h1
-      style={{
-        fontSize: '36px',
-        textAlign: 'center',
-        color: '#fff',
-        fontWeight: 'bold'
-      }}
-    >
-      QUARTZ
-    </h1>
-
-    <Switch>
-      <Route exact path='/auth/login' component={Login} />
-      <Route exact path='/auth/signup' component={Signup} />
-      <Route exact path='/auth/forgot' component={Forgot} />
-      <Route exact path='/auth/reset' component={Reset} />
-    </Switch>
+      <Col xs={6} style={{ padding: '75px 75px 0', overflow: 'hidden' }}>
+        <Switch>
+          <Route exact path='/auth/login' component={Login} />
+          <Route exact path='/auth/signup' component={Signup} />
+          <Route exact path='/auth/forgot' component={Forgot} />
+          <Route exact path='/auth/reset' component={Reset} />
+        </Switch>
+      </Col>
+      <Col
+        xs={6}
+        style={{
+          backgroundColor: 'var(--lightest-gray)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      />
+    </Row>
   </div>
 )
 

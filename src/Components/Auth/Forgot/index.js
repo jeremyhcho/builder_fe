@@ -1,41 +1,63 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 // Components
 import ForgotForm from './ForgotForm'
 import { Link } from 'react-router-dom'
 
-const styles = {
-  wrapperStyle: {
-    width: '400px',
-    minHeight: '565px',
-    margin: '0 auto'
-  },
-  headerStyles: {
-    color: '#fff',
-    fontWeight: '500',
-    textAlign: 'center',
-    margin: '48px 0'
-  },
-  linkStyles: {
-    color: '#fff',
-    margin: '48px auto 0',
-    display: 'block',
-    textAlign: 'center'
-  }
+// Icons
+import KeyIcon from 'Assets/Icons/auth/key-26.svg'
+import CheckIcon from 'Assets/Icons/auth/check-2.svg'
+
+// CSS
+import './Forgot.scss'
+
+const iconStyle = {
+  width: '40px',
+  height: '40px',
+  position: 'absolute',
+  top: '-10px',
+  left: '-10px'
 }
 
-const Forgot = () => (
-  <div style={styles.wrapperStyle}>
-    <h1 style={styles.headerStyles}>
-      Forgot your password?
-    </h1>
+const Forgot = ({ emailSentSuccess }) => (
+  <div styleName="forgot">
+    <div styleName="forgot-header">
+      {
+        emailSentSuccess ? (
+          <CheckIcon style={iconStyle} />
+        ) : (
+          <KeyIcon style={iconStyle} />
+        )
+      }
+      <h2 className="semibold" style={{ marginBottom: '25px' }}>
+        {
+          emailSentSuccess ? (
+            'Email recovery link sent!'
+          ) : (
+            'Forgot your password?'
+          )
+        }
+      </h2>
+    </div>
 
     <ForgotForm />
 
-    <Link to={{ pathname: '/auth/login' }} style={styles.linkStyles}>
-      Return to log in
-    </Link>
+    <p styleName="login-link" className="small">
+      <Link to={{ pathname: '/auth/login' }}>Return to log in</Link>
+    </p>
   </div>
 )
 
-export default Forgot
+Forgot.propTypes = {
+  emailSentSuccess: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = ({ auth }) => ({
+  emailSentSuccess: auth.forgot.success
+})
+
+export default connect(
+  mapStateToProps
+)(Forgot)

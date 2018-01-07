@@ -17,6 +17,7 @@ import TextAreas from './TextAreas'
 import Selects from './Selects'
 import Modals from './Modals'
 import ButtonGroups from './ButtonGroups'
+import Steppers from './Steppers'
 
 // CSS
 import './Elements.scss'
@@ -65,6 +66,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Modals' />
     <Modals />
+
+    <SubHeader subHeaderText='Steppers' />
+    <Steppers />
   </div>
 )
 

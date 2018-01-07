@@ -1,16 +1,19 @@
-.signup-container {
-  border: 1px solid var(--dark-blue);
-  border-radius: var(--border-radius);
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  padding: 48px;
-  text-align: left;
+.signup {
+  .signup-container {
+    background-color: #fff;
+    text-align: left;
 
-  .error-dialog {
-    font-size: 11px;
-    box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
+    .error-dialog {
+      font-size: 11px;
+      box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+  }
+
+  .login-link {
     text-align: center;
-    padding: 20px;
-    margin-top: 20px;
+    margin: 25px 0;
   }
 }

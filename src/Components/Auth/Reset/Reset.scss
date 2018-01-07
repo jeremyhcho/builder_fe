@@ -1,8 +1,21 @@
-.reset-container {
-  border: 1px solid var(--dark-blue);
-  border-radius: var(--border-radius);
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  padding: 48px;
-  text-align: left;
+.reset {
+  padding-top: 65px;
+
+  .reset-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 15px 0;
+
+    h2 {
+      margin-left: 10px;
+    }
+  }
+
+  .reset-container {
+    background-color: #fff;
+    text-align: left;
+  }
+
 }

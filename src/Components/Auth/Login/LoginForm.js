@@ -122,13 +122,12 @@ class LoginForm extends Component {
             textAlign: 'center',
             color: '#97A0AF',
             fontSize: '11px',
-            marginTop: '20px'
+            marginTop: '10px'
           }}
         >
           OR
         </p>
 
-        {this.props.loginError && this.renderError()}
         <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field
             name='Email'
@@ -166,14 +165,12 @@ class LoginForm extends Component {
 LoginForm.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
   loginUser: PropTypes.func.isRequired,
-  loginError: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   isLoggingIn: auth.login.loggingIn,
-  loginError: auth.login.error,
 })
 
 const mapDispatchToProps = {

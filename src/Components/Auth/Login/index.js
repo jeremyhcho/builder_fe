@@ -1,45 +1,81 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import classNames from 'classnames'
 
 // Components
 import LoginForm from './LoginForm'
 
-const styles = {
-  wrapperStyle: {
-    width: '400px',
-    minHeight: '745px',
-    margin: '0 auto'
-  },
-  headerStyles: {
-    color: '#fff',
-    fontWeight: '500',
-    textAlign: 'center',
-    margin: '48px 0'
-  },
-  linkStyles: {
-    color: '#fff',
-    margin: '48px auto 0',
-    display: 'block',
-    textAlign: 'center'
+// CSS
+import './Login.scss'
+
+class Login extends React.Component {
+  state = {
+    loginError: false,
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.loginError) {
+      this.setState({ loginError: true })
+    }
+  }
+
+  closeErrorDialog = () => {
+    this.setState({ loginError: false })
+  }
+
+  render () {
+    const errorDialog = classNames('error-dialog', {
+      open: this.state.loginError
+    })
+
+    return (
+      <div styleName="login">
+        <div styleName="login-header">
+          <h2 className="semibold">
+            Get your free Quartz account now.
+          </h2>
+          <p className="small label" style={{ margin: '15px 0' }}>
+            Try Quartz free for 7 days with access to basic models
+          </p>
+        </div>
+
+        <div styleName={errorDialog}>
+          <div onClick={this.closeErrorDialog}>
+            <i className="fa fa-times" aria-hidden="true" />
+          </div>
+          <p>Incorrect email address and / or password.</p>
+          <p>
+            Do you need help <Link className='link' to={{ pathname: '/auth/forgot' }}>logging in?</Link>
+          </p>
+        </div>
+
+        <LoginForm />
+
+        <div styleName="login-links">
+          <Link
+            to={{ pathname: '/auth/forgot' }}
+            className="small"
+          >
+            Forgot your password?
+          </Link>
+
+          <Link
+            to={{ pathname: '/auth/signup' }}
+            className="small"
+          >
+            Sign up for an account
+          </Link>
+        </div>
+      </div>
+    )
   }
 }
 
-const Login = () => (
-  <div style={styles.wrapperStyle}>
-    <h1 style={styles.headerStyles}>
-      Log in to your account
-    </h1>
+const mapStateToProps = ({ auth }) => ({
+  loginError: auth.login.error
+})
 
-    <LoginForm />
-
-    <Link to={{ pathname: '/auth/forgot' }} style={styles.linkStyles}>
-      Forgot your password?
-    </Link>
-
-    <Link to={{ pathname: '/auth/signup' }} style={styles.linkStyles}>
-      Sign up for an account
-    </Link>
-  </div>
-)
-
-export default Login
+export default connect(
+  mapStateToProps
+)(Login)
