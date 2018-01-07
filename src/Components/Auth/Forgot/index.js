@@ -7,7 +7,6 @@ import ForgotForm from './ForgotForm'
 import { Link } from 'react-router-dom'
 
 // Icons
-import KeyIcon from 'Assets/Icons/auth/key-26.svg'
 import CheckIcon from 'Assets/Icons/auth/check-2.svg'
 
 // CSS
@@ -24,13 +23,7 @@ const iconStyle = {
 const Forgot = ({ emailSentSuccess }) => (
   <div styleName="forgot">
     <div styleName="forgot-header">
-      {
-        emailSentSuccess ? (
-          <CheckIcon style={iconStyle} />
-        ) : (
-          <KeyIcon style={iconStyle} />
-        )
-      }
+      {emailSentSuccess && <CheckIcon style={iconStyle} />}
       <h2 className="semibold" style={{ marginBottom: '25px' }}>
         {
           emailSentSuccess ? (

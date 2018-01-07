@@ -105,29 +105,6 @@ class LoginForm extends Component {
   render () {
     return (
       <div styleName='login-container'>
-        <Button
-          style={{ textAlign: 'center', margin: 0, fontWeight: '600', position: 'relative' }}
-          shouldFitContainer
-          secondary
-        >
-          <i
-            className='fa fa-google'
-            style={{ fontSize: '14px', position: 'absolute', top: '11px', left: '15px' }}
-          />
-          Log in with Google
-        </Button>
-
-        <p
-          style={{
-            textAlign: 'center',
-            color: '#97A0AF',
-            fontSize: '11px',
-            marginTop: '10px'
-          }}
-        >
-          OR
-        </p>
-
         <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field
             name='Email'

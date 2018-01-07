@@ -40,7 +40,7 @@ const AuthLayout = () => (
         <AnalyticsIcon style={{ marginLeft: '5px', width: '17px', height: '17px' }} />
       </Row>
 
-      <Col xs={6} style={{ padding: '75px 75px 0', overflow: 'hidden' }}>
+      <Col xs={6} style={{ padding: '85px 75px 0', overflow: 'hidden' }}>
         <Switch>
           <Route exact path='/auth/login' component={Login} />
           <Route exact path='/auth/signup' component={Signup} />

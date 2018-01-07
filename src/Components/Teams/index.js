@@ -24,7 +24,7 @@ class Teams extends React.Component {
   }
 
   render () {
-    if (!this.props.teams.length || this.props.teams.length) {
+    if (!this.props.teams.length) {
       return (
         <div className="loader">
           <Spinner show lg />
