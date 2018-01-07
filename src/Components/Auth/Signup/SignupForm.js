@@ -13,7 +13,7 @@ import { Button, FieldInput, Spinner } from 'Components/Common'
 // Redux-form & validators
 import { presence, minChar, email, equality } from 'Helpers/Validators'
 
-const minChar6 = minChar(6)
+const minChar8 = minChar(8)
 const equalityPassword = equality('Password')
 
 // Actions
@@ -55,33 +55,33 @@ class SignupForm extends Component {
             name="Email"
             component={FieldInput}
             label="Email"
-            type="email"
             isLabelHidden
+            type="email"
             shouldFitContainer
             autoComplete='off'
-            placeholder="Enter email"
+            placeholder="example@address.com"
             validate={[presence, email]}
           />
           <Field
             name="Password"
             component={FieldInput}
             label="Password"
-            type="password"
             isLabelHidden
+            type="password"
             shouldFitContainer
             autoComplete='off'
-            placeholder="Create password"
-            validate={[presence, minChar6]}
+            placeholder="Password (must be 8 characters)"
+            validate={[presence, minChar8]}
           />
           <Field
             name="Password confirmation"
             component={FieldInput}
-            label="Confirm password"
-            type="password"
+            label="Password Confirmation"
             isLabelHidden
+            type="password"
             shouldFitContainer
             autoComplete='off'
-            placeholder="Confirm password"
+            placeholder="Retype password"
             validate={[presence, equalityPassword]}
           />
           <div>

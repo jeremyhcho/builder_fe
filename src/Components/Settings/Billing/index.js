@@ -20,7 +20,6 @@ class Billing extends React.Component {
     return (
       <div styleName="billing">
         <Row center='xs' style={{ margin: '0 auto 45px', maxWidth: '945px' }} between='xs'>
-          <MembershipPlan plan="basic" userPlan={userPlan} />
           <MembershipPlan plan="standard" userPlan={userPlan} />
           <MembershipPlan plan="advanced" userPlan={userPlan} />
         </Row>

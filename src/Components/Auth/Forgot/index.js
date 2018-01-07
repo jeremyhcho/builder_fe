@@ -15,9 +15,7 @@ import './Forgot.scss'
 const iconStyle = {
   width: '40px',
   height: '40px',
-  position: 'absolute',
-  top: '-10px',
-  left: '-10px'
+  textAlign: 'center'
 }
 
 const Forgot = ({ emailSentSuccess }) => (

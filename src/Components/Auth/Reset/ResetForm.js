@@ -12,7 +12,7 @@ import { FieldInput, Button } from 'Components/Common'
 // Validators
 import { presence, minChar, equality } from 'Helpers/Validators'
 
-const minChar6 = minChar(6)
+const minChar8 = minChar(8)
 const equalityPassword = equality('Password')
 
 // Actions
@@ -35,21 +35,21 @@ class ResetForm extends React.Component {
           <Field
             name="Password"
             label="Password"
-            type="password"
-            component={FieldInput}
+            type="Password"
             isLabelHidden
+            component={FieldInput}
             shouldFitContainer
-            placeholder="Enter new password"
+            placeholder="New password (must be 8 characters)"
             autoComplete='off'
-            validate={[presence, minChar6]}
+            validate={[presence, minChar8]}
           />
 
           <Field
             name="Password confirmation"
             label="Password Confirmation"
             type="password"
-            component={FieldInput}
             isLabelHidden
+            component={FieldInput}
             shouldFitContainer
             placeholder="Retype password"
             autoComplete='off'
@@ -72,14 +72,12 @@ ResetForm.propTypes = {
   userId: PropTypes.string.isRequired
 }
 
-const mapStateToProps = () => ({})
-
 const mapDispatchToProps = {
   updateUserPassword
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(reduxForm({
   form: 'reset'

@@ -59,9 +59,10 @@ class ForgotForm extends React.Component {
             name='Email'
             label="We'll send a recovery link to"
             type='email'
+            isLabelHidden
             component={FieldInput}
             shouldFitContainer
-            placeholder='Enter email'
+            placeholder='example@address.com'
             autoComplete='off'
             style={{ margin: 0 }}
             validate={[presence, email]}

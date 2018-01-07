@@ -10,15 +10,10 @@ import './Billing.scss'
 class MembershipPlan extends React.Component {
   planFactory (info) {
     const planInfo = {
-      basic: {
-        color: 'var(--blue)',
-        price: '18',
-        features: ['Access to basic models', 'Access to game details', 'Use up to 1 active model']
-      },
       standard: {
         color: '#4DA1A9',
         price: '20',
-        features: ['Access to all basic features', 'Access to shared models', 'Use up to 3 active models']
+        features: ['Access to basic models', 'Access to game details and all basic features', 'Use up to 3 active models']
       },
       advanced: {
         color: '#FFBD3F',

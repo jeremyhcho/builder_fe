@@ -10,9 +10,6 @@ import { validateResetToken } from 'Actions'
 // Components
 import ResetForm from './ResetForm'
 
-// Icons
-import RefreshIcon from 'Assets/Icons/auth/refresh-01.svg'
-
 // CSS
 import './Reset.scss'
 
@@ -48,18 +45,9 @@ class Reset extends React.Component {
   }
 
   render () {
-    const iconStyle = {
-      position: 'absolute',
-      left: '-10px',
-      top: '-10px',
-      height: '40px',
-      width: '40px'
-    }
-
     return (
       <div styleName="reset">
         <div styleName="reset-header">
-          <RefreshIcon style={iconStyle} />
           <h2 className="semibold" style={{ marginBottom: '25px' }}>
             Reset your password
           </h2>

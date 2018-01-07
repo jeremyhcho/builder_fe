@@ -2,15 +2,8 @@
   padding-top: 65px;
 
   .forgot-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    text-align: center;
     margin: 15px 0;
-
-    h2 {
-      margin-left: 10px;
-    }
   }
 
   .forgot-container, .email-sent {

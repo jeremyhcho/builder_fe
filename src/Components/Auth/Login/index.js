@@ -53,19 +53,23 @@ class Login extends React.Component {
         <LoginForm />
 
         <div styleName="login-links">
-          <Link
-            to={{ pathname: '/auth/forgot' }}
-            className="small"
-          >
-            Forgot your password?
-          </Link>
+          <p>
+            <Link
+              to={{ pathname: '/auth/forgot' }}
+              className="small"
+            >
+              Forgot your password?
+            </Link>
+          </p>
 
-          <Link
-            to={{ pathname: '/auth/signup' }}
-            className="small"
-          >
-            Sign up for an account
-          </Link>
+          <p style={{ marginTop: '15px' }}>
+            <Link
+              to={{ pathname: '/auth/signup' }}
+              className="small"
+            >
+              Sign up for an account
+            </Link>
+          </p>
         </div>
       </div>
     )

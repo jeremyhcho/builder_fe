@@ -17,11 +17,10 @@ import { loginUser } from 'Actions'
 // Validators
 import { presence, minChar, email } from 'Helpers/Validators'
 
-const minChar6 = minChar(6)
+const minChar8 = minChar(8)
 
 class LoginForm extends Component {
   state = {
-    isEmailValidated: false,
     rememberMe: false
   }
 
@@ -30,22 +29,15 @@ class LoginForm extends Component {
   }
 
   handleSubmit = ({ Email, Password }) => {
-    const {
-      isEmailValidated,
-      rememberMe
-    } = this.state
+    const { rememberMe } = this.state
 
-    if (isEmailValidated) {
-      this.props.loginUser({
-        user: {
-          email: Email,
-          password: Password
-        },
-        remember_me: rememberMe ? randomstring.generate() : null
-      })
-    }
-
-    this.setState({ isEmailValidated: true })
+    this.props.loginUser({
+      user: {
+        email: Email,
+        password: Password
+      },
+      remember_me: rememberMe ? randomstring.generate() : null
+    })
 
     // initializes reset value of Password to '' and keeps forms pristine
     this.props.dispatch(initialize('login', { Email, Password: '', }, false))
@@ -63,43 +55,11 @@ class LoginForm extends Component {
     )
   }
 
-  renderPasswordField () {
-    const passwordStyles = {
-      height: this.state.isEmailValidated ? 'auto' : '0',
-      transition: 'height 300ms',
-      transitionDelay: 'height 1s',
-      overflow: 'hidden',
-      margin: this.state.isEmailValidated ? '15px 0 0' : '0'
-    }
-
-    const passwordValidation = []
-    // Adds validators to passwordValidation if email is validated
-    if (this.state.isEmailValidated) {
-      passwordValidation.push(presence, minChar6)
-    }
-
-    return (
-      <Field
-        name='Password'
-        type='password'
-        label="password"
-        isLabelHidden
-        component={FieldInput}
-        shouldFitContainer
-        autoComplete="off"
-        spellCheck={false}
-        placeholder='Enter password'
-        style={passwordStyles}
-        validate={passwordValidation}
-      />
-    )
-  }
-
   renderInnerButton () {
     if (this.props.isLoggingIn) {
       return <Spinner xs show style={{ marginBottom: '3px' }} color="#FFF" />
     }
-    return this.state.isEmailValidated ? 'Log in' : 'Continue'
+    return 'Log in'
   }
 
   render () {
@@ -109,17 +69,28 @@ class LoginForm extends Component {
           <Field
             name='Email'
             type='text'
-            label="email"
+            label="Email"
             isLabelHidden
             component={FieldInput}
             shouldFitContainer
             autoComplete="off"
             spellCheck={false}
-            placeholder='Enter email'
+            placeholder='example@address.com'
             validate={[presence, email]}
           />
 
-          {this.renderPasswordField()}
+          <Field
+            name='Password'
+            type='password'
+            label="Password"
+            isLabelHidden
+            component={FieldInput}
+            shouldFitContainer
+            autoComplete="off"
+            spellCheck={false}
+            placeholder="Password"
+            validate={[presence, minChar8]}
+          />
 
           <Checkbox
             value='rememberMe'
