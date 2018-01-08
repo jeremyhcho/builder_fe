@@ -92,7 +92,17 @@ class GamesList extends React.Component {
   }
 
   groupedMatches() {
-    return groupBy(this.props.games, (game) => game.date.tz('America/New_York').format('D MMMM'))
+    const groupedMatches = groupBy(this.props.games, (game) => game.date.tz('America/New_York').format('D MMMM'))
+    // split games by date, then sort games by time of the day
+    for (const date in groupedMatches) {
+      if (groupedMatches[date]) {
+        groupedMatches[date].sort((gameA, gameB) => (
+          gameA.date.format('H.mm') - gameB.date.format('H.mm')
+        ))
+      }
+    }
+
+    return groupedMatches
   }
 
   renderPaginationPrevious () {

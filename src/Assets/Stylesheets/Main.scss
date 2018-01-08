@@ -62,9 +62,29 @@
     position: absolute;
     top: 45%;
     left: 50%;
-    // margin-top: 30vh;
-    // width: 100%;
-    // max-width: 1600px;
+  }
+
+  .StripeElement {
+    height: 40px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    padding: 0 30px 0 10px;
+    outline: none;
+    background-color: var(--lightest-gray);
+    padding: 11px;
+    transition: all 200ms ease;
+  }
+
+  .StripeElement--focus {
+    border-color: var(--dark-blue);
+    background-color: #fff;
+    box-shadow: .1px .1px 1px var(--blue);
+  }
+
+  .StripeElement--invalid {
+    border: 1px solid var(--red);
+    background-color: #FFF;
+    box-shadow: .1px .1px 1px var(--red);
   }
 }
 

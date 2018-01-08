@@ -6,7 +6,8 @@ import {
   createUser,
   updateUser,
   sendRecoveryEmail,
-  fetchUser
+  fetchUser,
+  fetchBillingInformation
 } from 'Apis'
 
 // Constants
@@ -21,7 +22,8 @@ import {
   SEND_RECOVERY_EMAIL_FAIL,
   SEND_RECOVERY_EMAIL_SUCCESS,
   FETCH_USER,
-  FETCH_USER_SUCCESS
+  FETCH_USER_SUCCESS,
+  FETCH_BILLING_SUCCESS
 } from 'Constants'
 
 // Actions
@@ -68,6 +70,10 @@ function* callFetchUser () {
     const user = yield call(fetchUser)
     yield put(authorize())
     yield put({ type: FETCH_USER_SUCCESS, user: user.data })
+
+    const billing = yield call(fetchBillingInformation, user.data.id)
+    console.log('billing response: ', billing)
+    yield put({ type: FETCH_BILLING_SUCCESS, billing: billing.data })
   } catch ({ response }) {
     yield put(unauthorize())
   }

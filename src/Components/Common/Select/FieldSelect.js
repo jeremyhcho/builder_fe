@@ -10,6 +10,17 @@ const errorStyle = {
   margin: '5px 0 5px 5px'
 }
 
+/* **example**
+  <Field
+    name="State"
+    component={FieldSelect}
+    options={options}
+    validate={[presence]}
+    label='State'
+    selectedVal='Alabama'
+  />
+*/
+
 class FieldSelect extends React.Component {
   state = {
     selectedValue: this.props.input.value

@@ -3,7 +3,8 @@ import {
   UNAUTHORIZE,
   FETCH_USER,
   FETCH_USER_SUCCESS,
-  CREATE_USER_SUCCESS
+  CREATE_USER_SUCCESS,
+  FETCH_BILLING_SUCCESS
 } from 'Constants'
 
 const initialState = {
@@ -25,6 +26,14 @@ const authState = (state = initialState, action) => {
 
     case FETCH_USER_SUCCESS:
       return { ...state, user: action.user, fetchingUser: false }
+
+    case FETCH_BILLING_SUCCESS: {
+      const userInformation = {
+        ...state.user,
+        billing: action.billing
+      }
+      return { ...state, user: userInformation }
+    }
 
     case CREATE_USER_SUCCESS:
       return { ...state, user: action.user, fetchingUser: false }
