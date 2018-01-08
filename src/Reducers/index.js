@@ -5,12 +5,14 @@ import { routerReducer } from 'react-router-redux'
 // Reducers
 import auth from './auth'
 import nbaReducer from './nba'
+import notificationsReducer from './notifications'
 
 const rootReducer = combineReducers({
   auth,
   nba: nbaReducer,
   router: routerReducer,
-  form: formReducer
+  form: formReducer,
+  notifications: notificationsReducer
 })
 
 export default rootReducer

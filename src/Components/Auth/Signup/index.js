@@ -12,11 +12,11 @@ class Signup extends React.Component {
     return (
       <div styleName="signup">
         <div styleName="signup-header">
-          <h2 className="semibold">
+          <h1 className="semibold">
             Get your free Quartz account now.
-          </h2>
+          </h1>
           <p className="small label" style={{ margin: '15px 0' }}>
-            Try Quartz free for 7 days with access to basic models
+            Try Quartz free for 7 days with access to standard models
           </p>
         </div>
 

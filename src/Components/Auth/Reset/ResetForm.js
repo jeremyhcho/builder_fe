@@ -51,7 +51,7 @@ class ResetForm extends React.Component {
             isLabelHidden
             component={FieldInput}
             shouldFitContainer
-            placeholder="Retype password"
+            placeholder="Confirm password"
             autoComplete='off'
             validate={[presence, equalityPassword]}
           />

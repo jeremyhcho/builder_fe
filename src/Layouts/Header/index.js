@@ -5,19 +5,19 @@ import { connect } from 'react-redux'
 import pathToRegexp from 'path-to-regexp'
 
 // Components
-import { IconMenuItem, IconDropdown, Tooltip } from 'Components/Common'
+import { IconMenuItem, IconDropdown } from 'Components/Common'
+import Notifications from './Notifications'
 
 // CSS
 import './Header.scss'
 
 // Assets
 import ProfileIcon from 'Assets/Icons/header/profile.svg'
-import NotificationIcon from 'Assets/Icons/header/notification.svg'
 import AccountSettingsIcon from 'Assets/Icons/settings/a-edit-2.svg'
 import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
 // Actions
-import { logoutUser } from 'Actions'
+import { logoutUser, fetchNotifications } from 'Actions'
 
 const SECTION_NAMES = {
   '/': 'Dashboard',
@@ -30,6 +30,10 @@ const SECTION_NAMES = {
 }
 
 class Header extends React.Component {
+  componentDidMount () {
+    this.props.fetchNotifications()
+  }
+
   getCurrentRoute() {
     for (const regexp of Object.keys(SECTION_NAMES)) {
       if (pathToRegexp(regexp).exec(this.props.location.pathname)) {
@@ -53,19 +57,7 @@ class Header extends React.Component {
           </div>
 
           <ul styleName='header-items'>
-            <li data-tip-for='notification-icon'>
-              <NotificationIcon
-                width={18}
-                height={18}
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)'
-                }}
-              />
-              <Tooltip id='notification-icon' pos='bottom'>Notifications</Tooltip>
-            </li>
+            <Notifications />
 
             <li>
               <IconDropdown
@@ -98,11 +90,13 @@ class Header extends React.Component {
 Header.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  logoutUser: PropTypes.func.isRequired
+  logoutUser: PropTypes.func.isRequired,
+  fetchNotifications: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = {
-  logoutUser
+  logoutUser,
+  fetchNotifications
 }
 
 export default withRouter(connect(

@@ -81,7 +81,7 @@ class SignupForm extends Component {
             type="password"
             shouldFitContainer
             autoComplete='off'
-            placeholder="Retype password"
+            placeholder="Confirm password"
             validate={[presence, equalityPassword]}
           />
           <div>

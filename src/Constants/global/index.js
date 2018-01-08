@@ -1,1 +1,2 @@
-export * from './pusher.js'
+export * from './pusher'
+export * from './notifications'

@@ -27,7 +27,7 @@
         border-radius: 50%;
         cursor: pointer;
 
-        &:hover {
+        &:not(:first-child):hover {
           background-color: var(--light-gray);
         }
       }

@@ -13,24 +13,33 @@ import CheckIcon from 'Assets/Icons/auth/check-2.svg'
 import './Forgot.scss'
 
 const iconStyle = {
-  width: '40px',
-  height: '40px',
   textAlign: 'center'
 }
 
 const Forgot = ({ emailSentSuccess }) => (
   <div styleName="forgot">
     <div styleName="forgot-header">
-      {emailSentSuccess && <CheckIcon style={iconStyle} />}
-      <h2 className="semibold" style={{ marginBottom: '25px' }}>
-        {
-          emailSentSuccess ? (
-            'Email recovery link sent!'
-          ) : (
-            'Forgot your password?'
-          )
-        }
-      </h2>
+      {emailSentSuccess && <CheckIcon style={iconStyle} width={64} height={64} />}
+      {
+        emailSentSuccess ? (
+          <h2 className="semibold" style={{ margin: '25px' }}>
+            Email recovery link sent!
+          </h2>
+        ) : (
+          <h2 className="semibold" style={{ marginBottom: '15px', textAlign: 'left' }}>
+            Forgot your password?
+          </h2>
+        )
+      }
+      {
+        emailSentSuccess ? (
+          ''
+        ) : (
+          <p className='small label' style={{ textAlign: 'left', marginBottom: '30px' }}>
+            Don't worry, we'll send you instructions on how to <br />recover your account
+          </p>
+        )
+      }
     </div>
 
     <ForgotForm />

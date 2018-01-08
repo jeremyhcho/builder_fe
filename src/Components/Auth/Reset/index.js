@@ -47,11 +47,9 @@ class Reset extends React.Component {
   render () {
     return (
       <div styleName="reset">
-        <div styleName="reset-header">
-          <h2 className="semibold" style={{ marginBottom: '25px' }}>
-            Reset your password
-          </h2>
-        </div>
+        <h2 className="semibold" style={{ marginBottom: '30px', textAlign: 'left' }}>
+          Reset your password
+        </h2>
 
         <ResetForm
           token={this.state.token}

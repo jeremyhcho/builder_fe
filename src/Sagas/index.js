@@ -7,6 +7,7 @@ import {
 } from './auth'
 
 import nbaSaga from './nba'
+import { notificationsSaga } from './global'
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     userSaga(),
     resetSaga(),
     nbaSaga(),
+    notificationsSaga()
   ])
 }
