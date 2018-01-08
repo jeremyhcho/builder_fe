@@ -1,5 +1,6 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
+import { Elements } from 'react-stripe-elements'
 import { Row } from 'react-styled-flexboxgrid'
 
 // Components
@@ -25,7 +26,9 @@ class Billing extends React.Component {
           <MembershipPlan plan="advanced" userPlan={userPlan} />
         </Row>
 
-        <BillingInfo />
+        <Elements>
+          <BillingInfo />
+        </Elements>
       </div>
     )
   }
