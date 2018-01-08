@@ -24,11 +24,11 @@ class Billing extends React.Component {
         <Row center='xs' style={{ margin: '0 auto 45px', maxWidth: '945px' }}>
           <MembershipPlan plan="standard" userPlan={userPlan} />
           <MembershipPlan plan="advanced" userPlan={userPlan} />
-        </Row>
 
-        <Elements>
-          <BillingInfo />
-        </Elements>
+          <Elements>
+            <BillingInfo />
+          </Elements>
+        </Row>
       </div>
     )
   }

@@ -19,3 +19,13 @@ export const validateResetToken = (params) => (
 export const fetchUser = () => (
   axios.get('/api/v1/users/current')
 )
+
+export const createBillingInformation = (token) => (
+  axios.post('/api/v1/billing', {
+    source: token
+  })
+)
+
+export const fetchBillingInformation = (userId) => (
+  axios.get(`/api/v1/billing/${userId}`)
+)

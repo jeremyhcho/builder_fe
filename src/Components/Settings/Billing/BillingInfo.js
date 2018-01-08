@@ -15,6 +15,9 @@ import StripeInput from './StripeInput'
 // CSS
 import './Billing.scss'
 
+// Apis
+import { createBillingInformation } from 'Apis'
+
 /* eslint-disable max-len */
 /* To change input wrapper styling for react-stripe-elements change .StripeElement in 'Assets/Stylesheets/Main.scss' */
 /* eslint-enable max-len */
@@ -33,16 +36,19 @@ class BillingInfo extends React.Component {
       name
     }).then(({ token }) => {
       console.log('Received Stripe token: ', token)
+      createBillingInformation(token.id)
+        .then(res => console.log(res))
     })
   }
 
   render () {
     return (
       <Card
-        label="Billing Information"
+        label="Card Information"
         wrapperStyle={{
           width: '500px',
-          padding: '25px 45px 45px'
+          padding: '25px 45px 45px',
+          textAlign: 'left'
         }}
       >
         <form onSubmit={this.handleSubmit}>
