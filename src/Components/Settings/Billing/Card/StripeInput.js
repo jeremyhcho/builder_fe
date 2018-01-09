@@ -6,8 +6,7 @@ class StripeInput extends React.Component {
     error: false
   }
 
-  handleChange = ({ error, ...stripeProps }) => {
-    console.log(stripeProps)
+  handleChange = ({ error }) => {
     if (error) {
       this.setState({ error: error.message })
     } else {
