@@ -23,7 +23,7 @@
         font-weight: 600;
         transition: all 200ms ease;
         color: #fff;
-        background-color: var(--dark-gray);
+        background-color: var(--gray);
 
         &.selected {
           background-color: var(--blue);
@@ -43,7 +43,7 @@
         }
 
         &:not(.last):after {
-          background-color: var(--dark-gray);
+          background-color: var(--gray);
           width: 30px;
           height: 1px;
           position: absolute;
