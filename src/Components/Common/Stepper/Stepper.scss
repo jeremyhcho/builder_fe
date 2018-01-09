@@ -9,33 +9,42 @@
   margin: 0 0 20px 25px;
 
   .step {
-    border: 2px solid var(--gray);
     border-radius: 100%;
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
     text-align: center;
-    line-height: 22px;
-    position: relative;
-    margin-right: 25px;
+    line-height: 24px;
+    margin-right: 12px;
+    color: #fff;
+    cursor: default;
+    font-weight: 600;
     padding-left: 0.5px;
-    cursor: pointer;
+    background-color: var(--dark-gray);
     transition: all 200ms ease;
 
     &.selected {
-      color: #fff;
-      border: 2px solid var(--blue);
       background-color: var(--blue);
-      cursor: default;
+    }
+  }
+
+  .step-label {
+    position: relative;
+    line-height: 24px;
+    color: var(--gray);
+    transition: all 200ms ease;
+
+    &.selected {
+      font-weight: 400;
+      color: var(--font-color);
     }
 
-    &:not(:last-child):after {
-      border: 1px solid var(--gray);
-      width: 25px;
+    &:not(.last):after {
+      background-color: var(--dark-gray);
+      width: 30px;
       height: 1px;
-      border: 1px solid var(--gray);
       position: absolute;
-      top: 9px;
-      left: 23px;
+      top: 12px;
+      left: 48px;
       content: '';
       cursor: default;
     }

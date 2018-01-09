@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import './CreateModel.scss'
 
@@ -7,25 +8,30 @@ class ModalStep extends React.Component {
   renderSteps () {
     const { currentStep, steps, changeStep } = this.props
     return steps.map((step, i) => {
-      if (currentStep === i) {
-        return (
-          <div
-            key={step}
-            styleName="step selected"
-            className="semibold"
-          >
-            {i + 1}
-          </div>
-        )
-      }
+      const stepStyle = classNames('step', {
+        selected: i === currentStep
+      })
+
+      const labelStyle = classNames('step-label', {
+        selected: i === currentStep,
+        last: i === steps.length - 1
+      })
+
       return (
         <div
-          styleName="step"
+          className='flex'
+          style={{ paddingRight: '48px' }}
           key={step}
-          className="semibold"
-          onClick={() => changeStep(i)}
         >
-          {i + 1}
+          <div
+            styleName={stepStyle}
+            onClick={i !== currentStep ? () => changeStep(i) : null}
+          >
+            <p className="small">{i + 1}</p>
+          </div>
+          <div styleName={labelStyle}>
+            <p>{step}</p>
+          </div>
         </div>
       )
     })
@@ -45,16 +51,12 @@ class ModalStep extends React.Component {
   }
 
   render () {
-    const { currentStep, steps } = this.props
     return (
       <div styleName="model-steps-container">
         <div styleName="model-steps">
           {this.renderSteps()}
         </div>
-        <p className="label">
-          Step {currentStep + 1} of {steps.length} - {steps[currentStep]}
-        </p>
-        <p className="semibold">{this.renderStepHeader()}</p>
+        <p className="small label">{this.renderStepHeader()}</p>
       </div>
     )
   }

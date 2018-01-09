@@ -22,7 +22,7 @@ class Stepper extends React.Component {
 
   render () {
     const { currentStep } = this.state
-    const { steps, isLabelHidden, wrapperStyle } = this.props
+    const { steps, wrapperStyle } = this.props
     return (
       <div styleName="stepper" style={wrapperStyle}>
         <div styleName="stepper-container">
@@ -32,32 +32,36 @@ class Stepper extends React.Component {
                 selected: i === currentStep
               })
 
+              const labelStyle = classNames('step-label', {
+                selected: i === currentStep,
+                last: i === steps.length - 1
+              })
+
               return (
-                <div styleName={stepStyle} key={step}>
-                  {i + 1}
+                <div className='flex' style={{ paddingRight: '48px' }} key={step}>
+                  <div styleName={stepStyle}>
+                    <p className="small">{i + 1}</p>
+                  </div>
+                  <div styleName={labelStyle}>
+                    <p>{step}</p>
+                  </div>
                 </div>
               )
             })
           }
         </div>
-        {
-          !isLabelHidden &&
-          <p className="semibold">{steps[currentStep]}</p>
-        }
       </div>
     )
   }
 }
 
 Stepper.defaultProps = {
-  isLabelHidden: false,
-  wrapperStyle: {}
+  wrapperStyle: {},
 }
 
 Stepper.propTypes = {
   steps: PropTypes.array.isRequired,
   activeStep: PropTypes.number.isRequired,
-  isLabelHidden: PropTypes.bool,
   wrapperStyle: PropTypes.object
 }
 
