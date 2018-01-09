@@ -11,7 +11,7 @@ import SubHeader from './SubHeader'
 import './Settings.scss'
 
 const AccountSubText = 'Manage and personalize account settings'
-const BillingSubText = 'Choose a payment plan and fill out the payment option and information below'
+const PaymentSubText = 'Choose a payment plan and fill out the payment option and information below'
 
 class Settings extends React.Component {
   render () {
@@ -30,7 +30,7 @@ class Settings extends React.Component {
         <SubHeader text="Account Info" subText={AccountSubText} />
         <Account />
 
-        <SubHeader text="Billing Info" subText={BillingSubText} />
+        <SubHeader text="Payment Options" subText={PaymentSubText} />
         <Billing />
       </div>
     )

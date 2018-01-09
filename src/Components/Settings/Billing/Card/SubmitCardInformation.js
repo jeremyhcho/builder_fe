@@ -13,7 +13,9 @@ import {
 import { Input, Card, Button, Spinner } from 'Components/Common'
 import StripeInput from './StripeInput'
 
-// CSS
+// Icons
+import AlertIcon from 'Assets/Icons/settings/alert.svg'
+import CardUpdateIcon from 'Assets/Icons/settings/card_update.svg'
 
 // Actions
 import { createBillingInformation, updateBillingInformation } from 'Actions'
@@ -62,11 +64,11 @@ class SubmitCardInformation extends React.Component {
 
     if (updating) {
       return (
-        <div style={{ marginTop: '15px' }}>
+        <div style={{ marginTop: '15px', textAlign: 'right' }}>
           <Button flat onClick={toggleUpdate}>
             Back
           </Button>
-          <Button type="submit">
+          <Button type="submit" style={{ marginLeft: '15px' }}>
             {
               updatingBilling ? (
                 <div>
@@ -102,6 +104,30 @@ class SubmitCardInformation extends React.Component {
     )
   }
 
+  renderCardHeader () {
+    const headerStyle = {
+      textAlign: 'center',
+      marginBottom: '25px'
+    }
+
+    if (!this.props.updating) {
+      return (
+        <div style={headerStyle}>
+          <AlertIcon />
+          <p className="label small">You currently have no payment method.</p>
+          <p className="label small">Fill and submit the card form below to create a payment method.</p>
+        </div>
+      )
+    }
+
+    return (
+      <div style={headerStyle}>
+        <CardUpdateIcon />
+        <p className="label small">Replace existing payment method with new card</p>
+      </div>
+    )
+  }
+
   renderLabel () {
     if (this.props.updating) {
       return 'New card information'
@@ -111,56 +137,58 @@ class SubmitCardInformation extends React.Component {
 
   render () {
     return (
-      <Card
-        label={this.renderLabel()}
-        style={{ textAlign: 'left' }}
-        wrapperStyle={{
-          width: '600px',
-          padding: '25px 45px 45px',
-          textAlign: 'left'
-        }}
-      >
-        <form onSubmit={this.handleSubmit}>
-          <Input
-            type="text"
-            value={this.state.name}
-            onChange={(e) => this.setState({ name: e.target.value })}
-            label="Name on card"
-            placeholder="Jane Doe"
-            shouldFitContainer
-          />
+      <div>
+        <Card
+          style={{ textAlign: 'left', margin: '0' }}
+          wrapperStyle={{
+            width: '600px',
+            padding: '25px 45px 45px',
+            textAlign: 'left'
+          }}
+        >
+          {this.renderCardHeader()}
+          <form onSubmit={this.handleSubmit}>
+            <Input
+              type="text"
+              value={this.state.name}
+              onChange={(e) => this.setState({ name: e.target.value })}
+              label="Name on card"
+              placeholder="Jane Doe"
+              shouldFitContainer
+            />
 
-          <StripeInput
-            label="Card number"
-            component={CardNumberElement}
-          />
+            <StripeInput
+              label="Card number"
+              component={CardNumberElement}
+            />
 
-          <div className="flex">
-            <div style={{ width: '40%' }}>
-              <StripeInput
-                label="Expiration date"
-                component={CardExpiryElement}
-              />
+            <div className="flex">
+              <div style={{ width: '40%' }}>
+                <StripeInput
+                  label="Expiration date"
+                  component={CardExpiryElement}
+                />
+              </div>
+
+              <div style={{ width: '25%', paddingLeft: '15px' }}>
+                <StripeInput
+                  label="CVC"
+                  component={CardCVCElement}
+                />
+              </div>
+
+              <div style={{ width: '35%', paddingLeft: '15px' }}>
+                <StripeInput
+                  label="Zip Code"
+                  component={PostalCodeElement}
+                />
+              </div>
             </div>
 
-            <div style={{ width: '25%', paddingLeft: '15px' }}>
-              <StripeInput
-                label="CVC"
-                component={CardCVCElement}
-              />
-            </div>
-
-            <div style={{ width: '35%', paddingLeft: '15px' }}>
-              <StripeInput
-                label="Zip Code"
-                component={PostalCodeElement}
-              />
-            </div>
-          </div>
-
-          {this.renderSubmitButton()}
-        </form>
-      </Card>
+            {this.renderSubmitButton()}
+          </form>
+        </Card>
+      </div>
     )
   }
 }

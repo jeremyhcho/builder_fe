@@ -7,6 +7,7 @@ import { Row } from 'react-styled-flexboxgrid'
 // Components
 import MembershipPlan from './MembershipPlan'
 import BillingInfo from './BillingInfo'
+import SubHeader from '../SubHeader'
 import { Spinner } from 'Components/Common'
 
 // CSS
@@ -41,10 +42,11 @@ class Billing extends React.Component {
   render () {
     const { userPlan } = this.state
     const { fetchingBilling } = this.props
+    const BillingSubText = 'Create a new payment method or change your existing payment method stored in your Quartz account'
 
     if (fetchingBilling) {
       return (
-        <div className="loader">
+        <div style={{ textAlign: 'center', paddingTop: '127.5px' }}>
           <Spinner lg show />
         </div>
       )
@@ -52,11 +54,12 @@ class Billing extends React.Component {
 
     return (
       <div styleName="billing">
-        <Row center='xs' style={{ margin: '0 auto 45px', maxWidth: '945px' }}>
+        <Row center='xs' style={{ margin: '0 auto', maxWidth: '945px' }}>
           <MembershipPlan plan="standard" userPlan={userPlan} />
           <MembershipPlan plan="advanced" userPlan={userPlan} />
         </Row>
 
+        <SubHeader text="Billing Info" subText={BillingSubText} />
         {this.renderBillingInfo()}
       </div>
     )

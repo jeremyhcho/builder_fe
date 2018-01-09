@@ -12,8 +12,17 @@ import CreditCardIcon from 'Assets/Icons/settings/credit_card.svg'
 import './CardInformation.scss'
 
 const CardInformation = ({ card, toggleUpdate }) => {
+  const convertToMonth = (month) => {
+    if (month.toString().length === 1) {
+      return `0${month}`
+    }
+
+    return month
+  }
+
   return (
     <Card
+      style={{ margin: '0' }}
       styleName="card-info-container"
       label="Your current card information"
       wrapperStyle={{ padding: '5px 0 5px 45px' }}
@@ -40,7 +49,7 @@ const CardInformation = ({ card, toggleUpdate }) => {
             Expires
           </p>
           <p className="semibold">
-            {card.exp_month}/{card.exp_year.toString().substr(2)}
+            {convertToMonth(card.exp_month)}/{card.exp_year.toString().substr(2)}
           </p>
         </Col>
 
