@@ -8,9 +8,10 @@ import {
   CardCVCElement,
   PostalCodeElement
 } from 'react-stripe-elements'
+import { Field, reduxForm } from 'redux-form'
 
 // Components
-import { Input, Card, Button, Spinner } from 'Components/Common'
+import { FieldInput, Card, Button, Spinner } from 'Components/Common'
 import StripeInput from './StripeInput'
 
 // Icons
@@ -20,11 +21,10 @@ import CardUpdateIcon from 'Assets/Icons/settings/card_update.svg'
 // Actions
 import { createBillingInformation, updateBillingInformation } from 'Actions'
 
-class SubmitCardInformation extends React.Component {
-  state = {
-    name: ''
-  }
+// Validators
+import { presence } from 'Helpers/Validators'
 
+class SubmitCardInformation extends React.Component {
   componentWillReceiveProps (newProps) {
     // Toggle after billing information has been updated
     if (!newProps.updatingBilling && this.props.updatingBilling) {
@@ -32,9 +32,7 @@ class SubmitCardInformation extends React.Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-
+  submitCard = ({ Name }) => {
     const {
       updating,
       userId,
@@ -42,19 +40,21 @@ class SubmitCardInformation extends React.Component {
       createBillingInformation
     } = this.props
 
-    const { name } = this.state
-
     if (updating) {
       this.props.stripe.createToken({
-        name
+        name: Name
       }).then(({ token }) => {
-        updateBillingInformation(userId, token.id)
+        if (token) {
+          updateBillingInformation(userId, token.id)
+        }
       })
     } else {
       this.props.stripe.createToken({
-        name
+        name: Name
       }).then(({ token }) => {
-        createBillingInformation(token.id)
+        if (token) {
+          createBillingInformation(token.id)
+        }
       })
     }
   }
@@ -64,7 +64,7 @@ class SubmitCardInformation extends React.Component {
 
     if (updating) {
       return (
-        <div style={{ marginTop: '15px', textAlign: 'right' }}>
+        <div style={{ marginTop: '30px', textAlign: 'right' }}>
           <Button flat onClick={toggleUpdate}>
             Back
           </Button>
@@ -88,7 +88,7 @@ class SubmitCardInformation extends React.Component {
       <Button
         type="submit"
         shouldFitContainer
-        style={{ marginTop: '15px' }}
+        style={{ marginTop: '30px' }}
       >
         {
           creatingBilling ? (
@@ -147,14 +147,15 @@ class SubmitCardInformation extends React.Component {
           }}
         >
           {this.renderCardHeader()}
-          <form onSubmit={this.handleSubmit}>
-            <Input
+          <form onSubmit={this.props.handleSubmit(this.submitCard)}>
+            <Field
               type="text"
-              value={this.state.name}
-              onChange={(e) => this.setState({ name: e.target.value })}
+              component={FieldInput}
+              name="Name"
               label="Name on card"
               placeholder="Jane Doe"
               shouldFitContainer
+              validate={[presence]}
             />
 
             <StripeInput
@@ -201,7 +202,8 @@ SubmitCardInformation.propTypes = {
   createBillingInformation: PropTypes.func.isRequired,
   updateBillingInformation: PropTypes.func.isRequired,
   updatingBilling: PropTypes.bool.isRequired,
-  creatingBilling: PropTypes.bool.isRequired
+  creatingBilling: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
@@ -214,7 +216,9 @@ const mapDispatchToProps = {
   updateBillingInformation
 }
 
-export default connect(
+export default injectStripe(connect(
   mapStateToProps,
   mapDispatchToProps
-)(injectStripe(SubmitCardInformation))
+)(reduxForm({
+  form: 'billing'
+})(SubmitCardInformation)))
