@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 // Components
 import Account from './Account'
@@ -13,6 +15,10 @@ const BillingSubText = 'Choose a payment plan and fill out the payment option an
 
 class Settings extends React.Component {
   render () {
+    if (!Object.keys(this.props.user).length) {
+      return null
+    }
+
     return (
       <div
         style={{
@@ -25,11 +31,20 @@ class Settings extends React.Component {
         <Account />
 
         <SubHeader text="Billing Info" subText={BillingSubText} />
-
         <Billing />
       </div>
     )
   }
 }
 
-export default Settings
+Settings.propTypes = {
+  user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = ({ auth }) => ({
+  user: auth.authState.user
+})
+
+export default connect(
+  mapStateToProps
+)(Settings)

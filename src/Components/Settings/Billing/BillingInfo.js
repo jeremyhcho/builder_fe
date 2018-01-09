@@ -1,22 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  injectStripe,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement,
-  PostalCodeElement
-} from 'react-stripe-elements'
+import { connect } from 'react-redux'
+
 
 // Components
-import { Input, Card, Button } from 'Components/Common'
-import StripeInput from './StripeInput'
+import SubmitCardInformation from './Card/SubmitCardInformation'
+import CardInformation from './Card/CardInformation'
 
 // CSS
 import './Billing.scss'
-
-// Apis
-import { createBillingInformation } from 'Apis'
 
 /* eslint-disable max-len */
 /* To change input wrapper styling for react-stripe-elements change .StripeElement in 'Assets/Stylesheets/Main.scss' */
@@ -24,80 +16,44 @@ import { createBillingInformation } from 'Apis'
 
 class BillingInfo extends React.Component {
   state = {
-    name: ''
+    updatingCard: false
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-
-    const { name } = this.state
-
-    this.props.stripe.createToken({
-      name
-    }).then(({ token }) => {
-      console.log('Received Stripe token: ', token)
-      createBillingInformation(token.id)
-        .then(res => console.log(res))
-    })
+  toggleUpdateCard = () => {
+    this.setState({ updatingCard: !this.state.updatingCard })
   }
 
   render () {
+    const { user } = this.props
+
+    if (Object.keys(user.billing).length && !this.state.updatingCard) {
+      return (
+        <CardInformation
+          userId={user.id}
+          card={user.billing.sources.data[0]}
+          toggleUpdate={this.toggleUpdateCard}
+        />
+      )
+    }
+
     return (
-      <Card
-        label="Card Information"
-        wrapperStyle={{
-          width: '500px',
-          padding: '25px 45px 45px',
-          textAlign: 'left'
-        }}
-      >
-        <form onSubmit={this.handleSubmit}>
-          <Input
-            type="text"
-            value={this.state.name}
-            onChange={(e) => this.setState({ name: e.target.value })}
-            placeholder="Jane Doe"
-            label="Name on card"
-            shouldFitContainer
-          />
-
-          <StripeInput
-            label="Card number"
-            component={CardNumberElement}
-          />
-
-          <div className="flex">
-            <div style={{ width: '40%' }}>
-              <StripeInput
-                label="Expiration date"
-                component={CardExpiryElement}
-              />
-            </div>
-
-            <div style={{ width: '25%', paddingLeft: '15px' }}>
-              <StripeInput
-                label="CVC"
-                component={CardCVCElement}
-              />
-            </div>
-
-            <div style={{ width: '35%', paddingLeft: '15px' }}>
-              <StripeInput
-                label="Zip Code"
-                component={PostalCodeElement}
-              />
-            </div>
-          </div>
-
-          <Button type="submit" shouldFitContainer style={{ marginTop: '15px' }}>Submit card information</Button>
-        </form>
-      </Card>
+      <SubmitCardInformation
+        userId={user.id}
+        updating={this.state.updatingCard}
+        toggleUpdate={this.toggleUpdateCard}
+      />
     )
   }
 }
 
 BillingInfo.propTypes = {
-  stripe: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired
 }
 
-export default injectStripe(BillingInfo)
+const mapStateToProps = ({ auth }) => ({
+  user: auth.authState.user
+})
+
+export default connect(
+  mapStateToProps
+)(BillingInfo)

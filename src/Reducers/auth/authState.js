@@ -4,13 +4,22 @@ import {
   FETCH_USER,
   FETCH_USER_SUCCESS,
   CREATE_USER_SUCCESS,
-  FETCH_BILLING_SUCCESS
+  FETCH_BILLING,
+  FETCH_BILLING_SUCCESS,
+  FETCH_BILLING_FAIL,
+  CREATE_BILLING,
+  CREATE_BILLING_SUCCESS,
+  UPDATE_BILLING,
+  UPDATE_BILLING_SUCCESS
 } from 'Constants'
 
 const initialState = {
   authorized: false,
   user: {},
-  fetchingUser: false
+  fetchingUser: false,
+  fetchingBilling: false,
+  updatingBilling: false,
+  creatingBilling: false
 }
 
 const authState = (state = initialState, action) => {
@@ -27,12 +36,50 @@ const authState = (state = initialState, action) => {
     case FETCH_USER_SUCCESS:
       return { ...state, user: action.user, fetchingUser: false }
 
+    // Billing Actions
+    case FETCH_BILLING:
+      return { ...state, fetchingBilling: true }
+
+    case FETCH_BILLING_FAIL: {
+      const userInformation = {
+        ...state.user,
+        billing: {}
+      }
+
+      return { ...state, fetchingBilling: false, user: userInformation }
+    }
+
     case FETCH_BILLING_SUCCESS: {
       const userInformation = {
         ...state.user,
         billing: action.billing
       }
-      return { ...state, user: userInformation }
+
+      return { ...state, user: userInformation, fetchingBilling: false }
+    }
+
+    case CREATE_BILLING:
+      return { ...state, creatingBilling: true }
+
+    case CREATE_BILLING_SUCCESS: {
+      const userInformation = {
+        ...state.user,
+        billing: action.billing
+      }
+
+      return { ...state, user: userInformation, creatingBilling: false }
+    }
+
+    case UPDATE_BILLING:
+      return { ...state, updatingBilling: true }
+
+    case UPDATE_BILLING_SUCCESS: {
+      const userInformation = {
+        ...state.user,
+        billing: action.billing
+      }
+
+      return { ...state, user: userInformation, updatingBilling: false }
     }
 
     case CREATE_USER_SUCCESS:

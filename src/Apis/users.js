@@ -26,6 +26,12 @@ export const createBillingInformation = (token) => (
   })
 )
 
+export const updateBillingInformation = (userId, token) => (
+  axios.put(`/api/v1/billing/${userId}`, {
+    source: token
+  })
+)
+
 export const fetchBillingInformation = (userId) => (
   axios.get(`/api/v1/billing/${userId}`)
 )

@@ -7,7 +7,9 @@ import {
   updateUser,
   sendRecoveryEmail,
   fetchUser,
-  fetchBillingInformation
+  fetchBillingInformation,
+  createBillingInformation,
+  updateBillingInformation
 } from 'Apis'
 
 // Constants
@@ -23,7 +25,13 @@ import {
   SEND_RECOVERY_EMAIL_SUCCESS,
   FETCH_USER,
   FETCH_USER_SUCCESS,
-  FETCH_BILLING_SUCCESS
+  FETCH_BILLING,
+  FETCH_BILLING_SUCCESS,
+  FETCH_BILLING_FAIL,
+  CREATE_BILLING,
+  CREATE_BILLING_SUCCESS,
+  UPDATE_BILLING,
+  UPDATE_BILLING_SUCCESS
 } from 'Constants'
 
 // Actions
@@ -70,12 +78,35 @@ function* callFetchUser () {
     const user = yield call(fetchUser)
     yield put(authorize())
     yield put({ type: FETCH_USER_SUCCESS, user: user.data })
-
-    const billing = yield call(fetchBillingInformation, user.data.id)
-    console.log('billing response: ', billing)
-    yield put({ type: FETCH_BILLING_SUCCESS, billing: billing.data })
   } catch ({ response }) {
     yield put(unauthorize())
+  }
+}
+
+function* callFetchBilling ({ userId }) {
+  try {
+    const billing = yield call(fetchBillingInformation, userId)
+    yield put({ type: FETCH_BILLING_SUCCESS, billing: billing.data })
+  } catch ({ response }) {
+    yield put({ type: FETCH_BILLING_FAIL })
+  }
+}
+
+function* callCreateBilling ({ token }) {
+  try {
+    const billing = yield call(createBillingInformation, token)
+    yield put({ type: CREATE_BILLING_SUCCESS, billing: billing.data })
+  } catch ({ response }) {
+    console.log('Failed to create billing information')
+  }
+}
+
+function* callUpdatingBilling ({ userId, token }) {
+  try {
+    const billing = yield call(updateBillingInformation, userId, token)
+    yield put({ type: UPDATE_BILLING_SUCCESS, billing: billing.data })
+  } catch ({ response }) {
+    console.log('Failed to update billing information')
   }
 }
 
@@ -95,11 +126,26 @@ function* watchFetchUser () {
   yield takeLatest(FETCH_USER, callFetchUser)
 }
 
+function* watchFetchBilling () {
+  yield takeLatest(FETCH_BILLING, callFetchBilling)
+}
+
+function* watchCreateBilling () {
+  yield takeLatest(CREATE_BILLING, callCreateBilling)
+}
+
+function* watchUpdateBilling () {
+  yield takeLatest(UPDATE_BILLING, callUpdatingBilling)
+}
+
 export default function* userSaga () {
   yield all([
     watchCreateUser(),
     watchUpdateUserPassword(),
     watchSendRecoveryEmail(),
-    watchFetchUser()
+    watchFetchUser(),
+    watchFetchBilling(),
+    watchCreateBilling(),
+    watchUpdateBilling()
   ])
 }

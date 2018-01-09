@@ -4,7 +4,7 @@ import {
   UNAUTHORIZE,
   LOGIN,
   LOGOUT,
-  FETCH_USER
+  FETCH_USER,
 } from 'Constants'
 
 export const clearLoginError = () => ({

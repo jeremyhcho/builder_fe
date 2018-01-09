@@ -6,3 +6,4 @@ export const UNAUTHORIZE = 'auth/UNAUTHORIZE'
 export const AUTHORIZE = 'auth/AUTHORIZE'
 
 export const LOGOUT = 'auth/LOGOUT'
+export const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS'

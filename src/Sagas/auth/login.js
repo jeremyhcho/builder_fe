@@ -11,7 +11,8 @@ import {
   LOGIN,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  LOGOUT_SUCCESS
 } from 'Constants'
 
 // Actions
@@ -35,6 +36,7 @@ function* callLogout ({ params }) {
   try {
     yield call(logout, params)
     yield put(unauthorize())
+    yield put({ type: LOGOUT_SUCCESS })
   } catch ({ response }) {
     console.log('Failed to log out')
   }

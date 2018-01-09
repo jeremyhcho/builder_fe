@@ -1,0 +1,15 @@
+.card-info-container {
+  width: 750px;
+  text-align: left;
+
+  .card-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .update {
+    position: absolute;
+    right: -75px;
+  }
+}

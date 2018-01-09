@@ -15,7 +15,7 @@ class StripeInput extends React.Component {
   }
 
   render () {
-    const { component: Component, label } = this.props
+    const { component: Component, label, placeholder } = this.props
 
     const errorStyle = {
       color: '#FE4A49',
@@ -42,10 +42,20 @@ class StripeInput extends React.Component {
     return (
       <div style={{ marginTop: '15px' }}>
         <p style={{ marginBottom: '5px' }}>{label}</p>
-        <Component
-          onChange={this.handleChange}
-          style={cardStyle}
-        />
+        {
+          placeholder ? (
+            <Component
+              onChange={this.handleChange}
+              style={cardStyle}
+              placeholder={placeholder}
+            />
+          ) : (
+            <Component
+              onChange={this.handleChange}
+              style={cardStyle}
+            />
+          )
+        }
         {this.state.error && <p style={errorStyle}>{this.state.error}</p>}
       </div>
     )
@@ -53,12 +63,14 @@ class StripeInput extends React.Component {
 }
 
 StripeInput.defaultProps = {
-  label: ''
+  label: '',
+  placeholder: ''
 }
 
 StripeInput.propTypes = {
   label: PropTypes.string,
-  component: PropTypes.func.isRequired
+  component: PropTypes.func.isRequired,
+  placeholder: PropTypes.string
 }
 
 export default StripeInput
