@@ -21,9 +21,9 @@ class GameCard extends React.Component {
     switch (game.status) {
       case 'SCHEDULED':
         return time
-      case 'IN PROGRESS':
+      case 'INPROGRESS':
         return 'IN PROGRESS'
-      case 'FINAL':
+      case 'CLOSED':
         return 'FINAL'
       default:
         return null
