@@ -11,9 +11,8 @@ import {
   UPDATE_BILLING,
   UPDATE_BILLING_SUCCESS,
   CREATE_SUBSCRIPTION_SUCCESS,
-  UPDATE_SUBSCRIPTION_SUCCESS
+  UPDATE_SUBSCRIPTION_SUCCESS,
   LOGIN_SUCCESS
-
 } from 'Constants'
 
 const initialState = {
@@ -21,7 +20,7 @@ const initialState = {
   user: {},
   fetchingBilling: false,
   updatingBilling: false,
-  creatingBilling: false
+  creatingBilling: false,
   fetchingUser: true
 }
 
