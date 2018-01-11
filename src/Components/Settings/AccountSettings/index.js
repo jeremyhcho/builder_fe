@@ -49,7 +49,7 @@ class AccountSettings extends React.Component {
   renderUnsubscribedUser () {
     return (
       <div style={{ textAlign: 'center' }}>
-        <AlertIcon style={{ marginBottom: '1  0px' }} />
+        <AlertIcon style={{ marginBottom: '10px' }} />
         <p>You are not subscribed to any plans on your Quartz account.</p>
         <p>Click <Link to="/settings/subscription" style={{ color: 'var(--blue)' }}>here</Link> to subscribe for a payment plan.</p>
       </div>

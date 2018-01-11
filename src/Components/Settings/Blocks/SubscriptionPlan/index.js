@@ -22,6 +22,17 @@ class SubscriptionPlan extends React.Component {
       )
     }
 
+    if (plan === 'advanced-plan') {
+      return (
+        <Button
+          style={{ marginTop: '15px' }}
+          disabled
+        >
+          This plan is currently unavailable
+        </Button>
+      )
+    }
+
     return (
       <Button
         style={{ marginTop: '15px' }}
