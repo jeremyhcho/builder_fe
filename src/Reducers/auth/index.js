@@ -5,13 +5,15 @@ import signup from './signup'
 import forgot from './forgot'
 import reset from './reset'
 import authState from './authState'
+import verify from './verify'
 
 const auth = combineReducers({
   login,
   signup,
   forgot,
   reset,
-  authState
+  authState,
+  verify
 })
 
 export default auth

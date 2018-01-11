@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 // Components
-import { FieldInput, Button, Spinner } from 'Components/Common'
+import { FieldInput, Button } from 'Components/Common'
 
 // CSS
 import './Forgot.scss'
@@ -24,14 +24,6 @@ class ForgotForm extends React.Component {
     this.props.sendRecoveryEmail(form.Email)
   }
 
-  renderInnerButton () {
-    if (this.props.sendingEmail) {
-      return <Spinner xs show style={{ marginBottom: '2px' }} color="#FFF" />
-    }
-
-    return 'Send recovery link'
-  }
-
   renderEmailSentMessage () {
     return (
       <div styleName='email-sent'>
@@ -40,7 +32,7 @@ class ForgotForm extends React.Component {
           &nbsp;with instructions to recover your password.
         </p>
         <p style={{ marginTop: '20px' }}>
-          Didn't receive the e-mail?&nbsp;
+          Didn't receive the email?&nbsp;
           <Link className='link' to={{ pathname: '/auth/forgot' }}>Try again.</Link>
         </p>
       </div>
@@ -68,8 +60,13 @@ class ForgotForm extends React.Component {
             validate={[presence, email]}
           />
 
-          <Button shouldFitContainer type="submit" style={{ margin: '15px 0 0' }}>
-            {this.renderInnerButton()}
+          <Button
+            shouldFitContainer
+            type="submit"
+            style={{ margin: '15px 0 0' }}
+            loading={this.props.sendingEmail}
+          >
+            Send recovery link
           </Button>
         </form>
       </div>

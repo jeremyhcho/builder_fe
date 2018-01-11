@@ -148,9 +148,13 @@ class GamesList extends React.Component {
     const groupedMatches = this.groupedMatches()
 
     return (
-      <Row style={{ padding: '0 65px', position: 'relative' }}>
+      <Row style={{ position: 'relative' }}>
         <div
-          style={{ height: 'calc(100vh - 150px)', paddingBottom: '25px', overflowY: 'scroll' }}
+          style={{
+            height: 'calc(100vh - 150px)',
+            padding: '0 0 25px 65px',
+            overflowY: 'scroll'
+          }}
           styleName="matches-container"
           ref={ref => {
             this.scroller = ref

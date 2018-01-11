@@ -7,7 +7,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import './Auth.scss'
 
 // Components
-import { Login, Signup, Forgot, Reset } from 'Components/Auth'
+import { Login, Signup, Forgot, Reset, Verify } from 'Components/Auth'
 
 // Icons
 import AnalyticsIcon from 'Assets/Icons/auth/analytics-89.svg'
@@ -56,6 +56,7 @@ const AuthLayout = () => (
           <Route exact path='/auth/signup' component={Signup} />
           <Route exact path='/auth/forgot' component={Forgot} />
           <Route exact path='/auth/reset' component={Reset} />
+          <Route exact path='/auth/verify' component={Verify} />
         </Switch>
       </Col>
 

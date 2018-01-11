@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import 'moment-timezone'
 import { withRouter } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import { get } from 'lodash'
 
 // Components
 
@@ -34,9 +35,14 @@ class GameCard extends React.Component {
     const { game } = this.props
     const awayTeam = game.away.name.toUpperCase()
     const awayCity = game.away.city
+    const awaySpread = get(game, 'away.odds.spread')
+    const awayOdds = get(game, 'away.odds.spread_odds')
 
     const homeTeam = game.home.name.toUpperCase()
     const homeCity = game.home.city
+    const homeSpread = get(game, 'home.odds.spread')
+    const homeOdds = get(game, 'home.odds.spread_odds')
+
     return (
       <Row styleName="game-container" middle='xs' onClick={this.viewMatch}>
         <Col xs={3} style={{ textAlign: 'right' }}>
@@ -61,11 +67,19 @@ class GameCard extends React.Component {
           <h1 className="bold">{homeTeam}</h1>
           <p className='small'>{game.home.wins}-{game.home.losses}</p>
         </Col>
-        <Col xs={3}>
-          <p className="small label">Spread</p>
-          <p className="semibold">+9.5 Lakers(-110)</p>
-          <p className="semibold">-8.0 Lakers(-95)</p>
-        </Col>
+        {
+          awaySpread && (
+            <Col xs={3}>
+              <p className="small label">Spread</p>
+              <p className="semibold">
+                {awaySpread} {game.away.name} ({awayOdds})
+              </p>
+              <p className="semibold">
+                {homeSpread} {game.home.name} ({homeOdds})
+              </p>
+            </Col>
+          )
+        }
       </Row>
     )
   }

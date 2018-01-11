@@ -3,7 +3,8 @@ import userSaga from './user'
 
 import {
   resetSaga,
-  loginSaga
+  loginSaga,
+  verifySaga
 } from './auth'
 
 import nbaSaga from './nba'
@@ -15,6 +16,7 @@ export default function* rootSaga() {
     userSaga(),
     resetSaga(),
     nbaSaga(),
-    notificationsSaga()
+    notificationsSaga(),
+    verifySaga()
   ])
 }

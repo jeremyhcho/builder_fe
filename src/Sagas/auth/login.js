@@ -23,9 +23,9 @@ import errorMessage from 'Helpers/errorMessage'
 
 function* callLogin ({ params }) {
   try {
-    yield call(login, params)
+    const user = yield call(login, params)
     yield put(authorize())
-    yield put({ type: LOGIN_SUCCESS })
+    yield put({ type: LOGIN_SUCCESS, user })
   } catch ({ response }) {
     yield put(unauthorize())
     yield put({ type: LOGIN_FAILED, error: errorMessage(response) })

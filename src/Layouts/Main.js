@@ -14,6 +14,10 @@ import GamesLayout from './Games'
 import TeamsLayout from './Teams'
 import SettingsLayout from './Settings'
 import ModelsLayout from './Models'
+import { Button } from 'Components/Common'
+
+// Assets
+import Lock from 'Assets/Icons/auth/lock.svg'
 
 // const CalendarContainer = Loadable({
 //   loader: () => import('../../containers/Calendar'),
@@ -26,9 +30,54 @@ import ModelsLayout from './Models'
 // })
 
 // Actions
-import { receivePusherNotification } from 'Actions'
+import {
+  receivePusherNotification,
+  resendVerificationEmail
+} from 'Actions'
 
-const MainLayout = ({ userId, receivePusherNotification }) => {
+const MainLayout = ({
+  userId,
+  isVerified,
+  sendingEmail,
+  receivePusherNotification,
+  resendVerificationEmail
+}) => {
+  const sendVerificationEmail = () => resendVerificationEmail(userId)
+
+  if (!isVerified) {
+    return (
+      <main>
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '400px',
+            textAlign: 'center'
+          }}
+        >
+          <Lock height={128} width={128} style={{ opacity: '0.2' }} />
+
+          <h1 className='semibold' style={{ marginTop: '45px' }}>
+            Uh oh, looks like you haven't verified your email yet.
+          </h1>
+
+          <div style={{ width: '200px', margin: '0 auto' }}>
+            <Button
+              style={{ marginTop: '45px' }}
+              onClick={sendVerificationEmail}
+              loading={sendingEmail}
+              shouldFitContainer
+            >
+              Resend email verification
+            </Button>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main style={{ display: 'flex', overflow: 'hidden' }}>
       <Pusher
@@ -64,20 +113,27 @@ const MainLayout = ({ userId, receivePusherNotification }) => {
 }
 
 MainLayout.defaultProps = {
-  userId: 0
+  userId: 0,
+  isVerified: false
 }
 
 MainLayout.propTypes = {
   userId: PropTypes.number,
-  receivePusherNotification: PropTypes.func.isRequired
+  receivePusherNotification: PropTypes.func.isRequired,
+  isVerified: PropTypes.bool.isRequired,
+  resendVerificationEmail: PropTypes.func.isRequired,
+  sendingEmail: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
-  userId: auth.authState.user.id
+  userId: auth.authState.user.id,
+  isVerified: auth.authState.user.is_verified,
+  sendingEmail: auth.signup.sendingEmail
 })
 
 const mapDispatchToProps = {
-  receivePusherNotification
+  receivePusherNotification,
+  resendVerificationEmail
 }
 
 export default connect(

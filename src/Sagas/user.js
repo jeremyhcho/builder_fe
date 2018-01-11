@@ -53,7 +53,6 @@ import errorMessage from 'Helpers/errorMessage'
 function* callCreateUser (user) {
   try {
     const response = yield call(createUser, user)
-    yield put(authorize())
     yield put({ type: CREATE_USER_SUCCESS, user: response.data })
   } catch ({ response }) {
     yield put(unauthorize())

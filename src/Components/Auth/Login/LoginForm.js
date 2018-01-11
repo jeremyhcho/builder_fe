@@ -9,7 +9,7 @@ import randomstring from 'randomstring'
 import './Login.scss'
 
 // Components
-import { Button, Spinner, Checkbox, FieldInput } from 'Components/Common'
+import { Button, Checkbox, FieldInput } from 'Components/Common'
 
 // Auth
 import { loginUser } from 'Actions'
@@ -55,13 +55,6 @@ class LoginForm extends Component {
     )
   }
 
-  renderInnerButton () {
-    if (this.props.isLoggingIn) {
-      return <Spinner xs show style={{ marginBottom: '3px' }} color="#FFF" />
-    }
-    return 'Log in'
-  }
-
   render () {
     return (
       <div styleName='login-container'>
@@ -101,8 +94,12 @@ class LoginForm extends Component {
             Remember me
           </Checkbox>
 
-          <Button shouldFitContainer type="submit">
-            {this.renderInnerButton()}
+          <Button
+            shouldFitContainer
+            type="submit"
+            loading={this.props.isLoggingIn}
+          >
+            Log in
           </Button>
         </form>
       </div>

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import './Signup.scss'
 
 // Components
-import { Button, FieldInput, Spinner } from 'Components/Common'
+import { Button, FieldInput } from 'Components/Common'
 
 // Redux-form & validators
 import { presence, minChar, email, equality } from 'Helpers/Validators'
@@ -25,14 +25,6 @@ class SignupForm extends Component {
       email: Email,
       password: Password
     })
-  }
-
-  renderInnerButton () {
-    if (this.props.creatingUser) {
-      return <Spinner xs show style={{ marginBottom: '2px' }} color="#FFF" />
-    }
-
-    return 'Create account'
   }
 
   renderError () {
@@ -89,8 +81,9 @@ class SignupForm extends Component {
               shouldFitContainer
               type="submit"
               style={{ margin: '15px 0 0' }}
+              loading={this.props.creatingUser}
             >
-              {this.renderInnerButton()}
+              Create account
             </Button>
           </div>
         </form>

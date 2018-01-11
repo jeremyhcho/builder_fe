@@ -6,11 +6,6 @@ import { connect } from 'react-redux'
 // CSS
 import './NotificationDropdown.scss'
 
-// Assets
-// import InfoIcon from 'Assets/Icons/header/info.svg'
-// import WarningIcon from 'Assets/Icons/header/warning.svg'
-// import ErrorIcon from 'Assets/Icons/header/error.svg'
-
 const PRIORITIES_TO_COLOR = {
   INFO: 'blue',
   DANGER: 'red',

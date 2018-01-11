@@ -67,8 +67,8 @@ Reset.propTypes = {
   validateResetToken: PropTypes.func.isRequired
 }
 
-const mapStateToProps = () => ({
-  validToken: true
+const mapStateToProps = ({ auth }) => ({
+  validToken: auth.reset.validToken
 })
 
 const mapDispatchToProps = {

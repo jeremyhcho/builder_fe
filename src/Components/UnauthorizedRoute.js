@@ -9,6 +9,7 @@ const UnauthorizedRoute = ({
   location,
   authorized,
   fetchingUser,
+  user,
   ...rest
 }) => {
   if (fetchingUser) {
@@ -21,7 +22,7 @@ const UnauthorizedRoute = ({
     <Route
       {...rest}
       render={componentProps => {
-        return authorized ? (
+        return (authorized && user.is_verified) ? (
           <Redirect to={redirectUrl} />
         ) : (
           <Component {...componentProps} />
@@ -35,12 +36,14 @@ UnauthorizedRoute.propTypes = {
   component: PropTypes.func.isRequired,
   authorized: PropTypes.bool.isRequired,
   fetchingUser: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   authorized: auth.authState.authorized,
-  fetchingUser: auth.authState.fetchingUser
+  fetchingUser: auth.authState.fetchingUser,
+  user: auth.authState.user
 })
 
 export default connect(

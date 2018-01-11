@@ -47,3 +47,11 @@ export const updateSubscription = (userId, plan) => (
     plan
   })
 )
+
+export const verifyUser = (params) => (
+  axios.put('/api/v1/users/verify', params)
+)
+
+export const resendVerificationEmail = (userId) => (
+  axios.post(`/api/v1/users/${userId}/resend_verify`)
+)

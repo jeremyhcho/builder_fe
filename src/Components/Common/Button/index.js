@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
+// Components
+import { Spinner } from 'Components/Common'
+
 // CSS
 import './Button.scss'
 
@@ -15,6 +18,7 @@ const Button = ({
   onClick,
   shouldFitContainer,
   children,
+  loading,
   ...props
 }) => {
   const buttonClass = classNames('btn', {
@@ -37,7 +41,8 @@ const Button = ({
       onClick={buttonClick}
       {...props}
     >
-      {children}
+      {!loading && children}
+      {loading && <Spinner xs show style={{ marginBottom: '3px' }} color="#fff" /> }
     </button>
   )
 }
@@ -51,6 +56,7 @@ Button.defaultProps = {
   disabled: false,
   shouldFitContainer: false,
   children: '',
+  loading: false,
   onClick: () => null,
 }
 
@@ -64,6 +70,7 @@ Button.propTypes = {
   shouldFitContainer: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func,
+  loading: PropTypes.bool
 }
 
 export default Button
