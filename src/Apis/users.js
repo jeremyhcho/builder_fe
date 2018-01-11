@@ -35,3 +35,15 @@ export const updateBillingInformation = (userId, token) => (
 export const fetchBillingInformation = (userId) => (
   axios.get(`/api/v1/billing/${userId}`)
 )
+
+export const createSubscription = (plan) => (
+  axios.post('/api/v1/subscriptions', {
+    plan
+  })
+)
+
+export const updateSubscription = (userId, plan) => (
+  axios.put(`/api/v1/subscriptions/${userId}`, {
+    plan
+  })
+)

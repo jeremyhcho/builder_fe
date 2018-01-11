@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
-const AuthorizedRoute = ({ component: Component, authorized, ...rest }) => {
+const AuthorizedRoute = ({ component: Component, authorized, user, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -20,11 +20,13 @@ const AuthorizedRoute = ({ component: Component, authorized, ...rest }) => {
 
 AuthorizedRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  authorized: PropTypes.bool.isRequired
+  authorized: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
-  authorized: auth.authState.authorized
+  authorized: auth.authState.authorized,
+  user: auth.authState.user
 })
 
 export default connect(

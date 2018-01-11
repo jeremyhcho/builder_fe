@@ -28,38 +28,40 @@ import ModelsLayout from './Models'
 // Actions
 import { receivePusherNotification } from 'Actions'
 
-const MainLayout = ({ userId, receivePusherNotification }) => (
-  <main style={{ display: 'flex', overflow: 'hidden' }}>
-    <Pusher
-      channel={`builder_api_${userId}`}
-      event='notification_received'
-      onUpdate={receivePusherNotification}
-    />
+const MainLayout = ({ userId, receivePusherNotification }) => {
+  return (
+    <main style={{ display: 'flex', overflow: 'hidden' }}>
+      <Pusher
+        channel={`builder_api_${userId}`}
+        event='notification_received'
+        onUpdate={receivePusherNotification}
+      />
 
-    <SideNav />
+      <SideNav />
 
-    <div
-      style={{
-        width: '100%',
-        height: '100vh',
-        minWidth: '964px',
-        minHeight: '700px'
-      }}
-    >
-      <Header />
-      <div style={{ overflowY: 'scroll', height: 'calc(100% - 60px)' }}>
-        <Switch>
-          {/* <Route exact path='/' component={Dashboard} /> */}
-          <Route path='/games' component={GamesLayout} />
-          <Route path='/teams' component={TeamsLayout} />
-          <Route path='/models' component={ModelsLayout} />
-          <Route path='/settings' component={SettingsLayout} />
-          <Redirect from='/' to='/games' />
-        </Switch>
+      <div
+        style={{
+          width: '100%',
+          height: '100vh',
+          minWidth: '964px',
+          minHeight: '700px'
+        }}
+      >
+        <Header />
+        <div style={{ overflowY: 'scroll', height: 'calc(100% - 60px)' }}>
+          <Switch>
+            {/* <Route exact path='/' component={Dashboard} /> */}
+            <Route path='/games' component={GamesLayout} />
+            <Route path='/teams' component={TeamsLayout} />
+            <Route path='/models' component={ModelsLayout} />
+            <Route path='/settings' component={SettingsLayout} />
+            <Redirect from='/' to='/games' />
+          </Switch>
+        </div>
       </div>
-    </div>
-  </main>
-)
+    </main>
+  )
+}
 
 MainLayout.defaultProps = {
   userId: 0

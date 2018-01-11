@@ -25,7 +25,7 @@ const SECTION_NAMES = {
   '/games/:id/:sectionName': 'Game Details',
   '/teams': 'Teams',
   '/teams/:id/:sectionName': 'Team Details',
-  '/settings': 'Settings',
+  '/settings/:sectionName': 'Settings',
   '/models': 'Models'
 }
 

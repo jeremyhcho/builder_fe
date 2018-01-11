@@ -1,50 +1,80 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Elements } from 'react-stripe-elements'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 // Components
-import Account from './Account'
-import Billing from './Billing'
-import SubHeader from './SubHeader'
+import SettingsNav from './SettingsNav'
+import AccountSettings from './AccountSettings'
+import SubscriptionSettings from './SubscriptionSettings'
 
 // CSS
 import './Settings.scss'
 
-const AccountSubText = 'Manage and personalize account settings'
-const PaymentSubText = 'Choose a payment plan and fill out the payment option and information below'
+// Actions
+import { fetchBillingInformation } from 'Actions'
 
 class Settings extends React.Component {
+  componentDidMount () {
+    this.props.fetchBillingInformation(this.props.user.id)
+  }
+
   render () {
-    if (!Object.keys(this.props.user).length) {
-      return null
+    const { fetchingBilling, ...routerProps } = this.props
+
+    const headers = {
+      '/settings': { header: '', subText: '' },
+      '/settings/account': { header: 'Account Settings', subText: 'Manage and personalize your account settings' },
+      '/settings/subscription': { header: 'Subscription Settings', subText: 'Choose a subscription plan' }
     }
 
     return (
-      <div
-        style={{
-          overflowX: 'hidden',
-          maxWidth: '1600px',
-          paddingBottom: '60px'
-        }}
-      >
-        <SubHeader text="Account Info" subText={AccountSubText} />
-        <Account />
+      <div styleName="settings">
+        <SettingsNav {...routerProps} />
 
-        <SubHeader text="Payment Options" subText={PaymentSubText} />
-        <Billing />
+        <div styleName="settings-content">
+          <div styleName="settings-header">
+            <p className="semibold">{headers[this.props.location.pathname].header}</p>
+            <p className="label small">{headers[this.props.location.pathname].subText}</p>
+          </div>
+
+          {
+            fetchingBilling ? (
+              <div />
+            ) : (
+              <Elements>
+                <Switch>
+                  <Route path="/settings/account" component={AccountSettings} />
+                  <Route path="/settings/subscription" component={SubscriptionSettings} />
+                  <Redirect to="/settings/account" />
+                </Switch>
+              </Elements>
+            )
+          }
+        </div>
       </div>
     )
   }
 }
 
 Settings.propTypes = {
+  location: PropTypes.object.isRequired,
+  fetchBillingInformation: PropTypes.func.isRequired,
+  fetchingBilling: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
-  user: auth.authState.user
+  user: auth.authState.user,
+  fetchingBilling: auth.authState.fetchingBilling
 })
 
+const mapDispatchToProps = {
+  fetchBillingInformation
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Settings)

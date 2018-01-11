@@ -16,7 +16,7 @@ class Signup extends React.Component {
             Get your free Quartz account now.
           </h1>
           <p className="small label" style={{ margin: '15px 0' }}>
-            Try Quartz free for 7 days with access to standard models
+            Try Quartz free for 7 days with access to basic models
           </p>
         </div>
 

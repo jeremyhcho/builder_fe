@@ -9,7 +9,9 @@ import {
   fetchUser,
   fetchBillingInformation,
   createBillingInformation,
-  updateBillingInformation
+  updateBillingInformation,
+  createSubscription,
+  updateSubscription
 } from 'Apis'
 
 // Constants
@@ -31,13 +33,18 @@ import {
   CREATE_BILLING,
   CREATE_BILLING_SUCCESS,
   UPDATE_BILLING,
-  UPDATE_BILLING_SUCCESS
+  UPDATE_BILLING_SUCCESS,
+  CREATE_SUBSCRIPTION,
+  CREATE_SUBSCRIPTION_SUCCESS,
+  UPDATE_SUBSCRIPTION,
+  UPDATE_SUBSCRIPTION_SUCCESS
 } from 'Constants'
 
 // Actions
 import {
   authorize,
-  unauthorize
+  unauthorize,
+  createSubscriptionPlan
 } from 'Actions'
 
 // Helpers
@@ -92,10 +99,11 @@ function* callFetchBilling ({ userId }) {
   }
 }
 
-function* callCreateBilling ({ token }) {
+function* callCreateBilling ({ token, plan }) {
   try {
     const billing = yield call(createBillingInformation, token)
     yield put({ type: CREATE_BILLING_SUCCESS, billing: billing.data })
+    yield put(createSubscriptionPlan(plan))
   } catch ({ response }) {
     console.log('Failed to create billing information')
   }
@@ -107,6 +115,24 @@ function* callUpdatingBilling ({ userId, token }) {
     yield put({ type: UPDATE_BILLING_SUCCESS, billing: billing.data })
   } catch ({ response }) {
     console.log('Failed to update billing information')
+  }
+}
+
+function* callCreateSubscription ({ plan }) {
+  try {
+    const subscriptionPlan = yield call(createSubscription, plan)
+    yield put({ type: CREATE_SUBSCRIPTION_SUCCESS, subscriptionPlan: subscriptionPlan.data })
+  } catch ({ response }) {
+    console.log('Failed to create subscription')
+  }
+}
+
+function* callUpdateSubscription ({ userId, plan }) {
+  try {
+    const subscriptionPlan = yield call(updateSubscription, userId, plan)
+    yield put({ type: UPDATE_SUBSCRIPTION_SUCCESS, subscriptionPlan: subscriptionPlan.data })
+  } catch ({ response }) {
+    console.log('Failed to update subscription')
   }
 }
 
@@ -138,6 +164,14 @@ function* watchUpdateBilling () {
   yield takeLatest(UPDATE_BILLING, callUpdatingBilling)
 }
 
+function* watchCreateSubscription () {
+  yield takeLatest(CREATE_SUBSCRIPTION, callCreateSubscription)
+}
+
+function* watchUpdateSubscription () {
+  yield takeLatest(UPDATE_SUBSCRIPTION, callUpdateSubscription)
+}
+
 export default function* userSaga () {
   yield all([
     watchCreateUser(),
@@ -146,6 +180,8 @@ export default function* userSaga () {
     watchFetchUser(),
     watchFetchBilling(),
     watchCreateBilling(),
-    watchUpdateBilling()
+    watchUpdateBilling(),
+    watchCreateSubscription(),
+    watchUpdateSubscription()
   ])
 }

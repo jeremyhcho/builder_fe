@@ -39,7 +39,7 @@ const CardInformation = ({ card, toggleUpdate }) => {
         </Col>
 
         <Col xs={3}>
-          <p className="semibold" style={{ whiteSpace: 'nowrap' }}>
+          <p style={{ whiteSpace: 'nowrap' }}>
             {card.funding[0].toUpperCase() + card.funding.substr(1)} Card ending in {card.last4}
           </p>
         </Col>
@@ -48,7 +48,7 @@ const CardInformation = ({ card, toggleUpdate }) => {
           <p className="semibold" style={{ position: 'absolute', top: '-36px', left: '0' }}>
             Expires
           </p>
-          <p className="semibold">
+          <p>
             {convertToMonth(card.exp_month)}/{card.exp_year.toString().substr(2)}
           </p>
         </Col>

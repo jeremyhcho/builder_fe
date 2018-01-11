@@ -107,7 +107,7 @@ class SideNav extends React.Component {
 }
 
 SideNav.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 export default withRouter(SideNav)

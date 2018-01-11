@@ -1,0 +1,35 @@
+.subscription-plan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 15px;
+  text-align: center;
+
+  .price {
+    margin-top: 15px;
+
+    .dollar {
+      font-size: 1.6rem;
+      vertical-align: top;
+      line-height: 35px;
+    }
+
+    .amount {
+      margin: 0 4px;
+      font-size: 4.0rem;
+    }
+  }
+
+  .features {
+    margin-top: 25px;
+    line-height: 25px;
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--light-gray);
+    width: 80%;
+    margin-top: 25px;
+  }
+}

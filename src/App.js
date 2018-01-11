@@ -33,6 +33,12 @@ class App extends React.Component {
     this.props.fetchUser()
   }
 
+  componentWillReceiveProps (newProps) {
+    if (newProps.authorized && !this.props.authorized) {
+      this.props.fetchUser()
+    }
+  }
+
   render () {
     return (
       <div className='main'>
@@ -46,14 +52,19 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  fetchUser: PropTypes.func.isRequired
+  fetchUser: PropTypes.func.isRequired,
+  authorized: PropTypes.bool.isRequired
 }
+
+const mapStateToProps = ({ auth }) => ({
+  authorized: auth.authState.authorized
+})
 
 const mapDispatchToProps = {
   fetchUser
 }
 
 export default withRouter(connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App))

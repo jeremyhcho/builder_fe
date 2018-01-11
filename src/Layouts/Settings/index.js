@@ -6,7 +6,7 @@ import Settings from 'Components/Settings'
 
 const SettingsLayout = () => (
   <Switch>
-    <Route exact path='/settings' component={Settings} />
+    <Route path='/settings' component={Settings} />
   </Switch>
 )
 

@@ -1,0 +1,20 @@
+.settings {
+  display: flex;
+  height: 100%;
+  margin: 50px;
+  background-color: #fff;
+  overflow-x: hidden;
+  max-width: 1600px;
+  min-width: 960px;
+
+  .settings-content {
+    width: calc(100% - 180px);
+    padding: 50px;
+  }
+
+  .settings-header {
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 20px;
+  }
+}

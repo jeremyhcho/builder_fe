@@ -10,7 +10,9 @@ import {
   CREATE_BILLING,
   CREATE_BILLING_SUCCESS,
   UPDATE_BILLING,
-  UPDATE_BILLING_SUCCESS
+  UPDATE_BILLING_SUCCESS,
+  CREATE_SUBSCRIPTION_SUCCESS,
+  UPDATE_SUBSCRIPTION_SUCCESS
 } from 'Constants'
 
 const initialState = {
@@ -80,6 +82,24 @@ const authState = (state = initialState, action) => {
       }
 
       return { ...state, user: userInformation, updatingBilling: false }
+    }
+
+    case CREATE_SUBSCRIPTION_SUCCESS: {
+      const userInformation = {
+        ...state.user,
+        subscription_plan: action.subscriptionPlan.plan.id
+      }
+
+      return { ...state, user: userInformation }
+    }
+
+    case UPDATE_SUBSCRIPTION_SUCCESS: {
+      const userInformation = {
+        ...state.user,
+        subscription_plan: action.subscriptionPlan.plan.id
+      }
+
+      return { ...state, user: userInformation }
     }
 
     case CREATE_USER_SUCCESS:
