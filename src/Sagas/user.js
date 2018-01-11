@@ -11,7 +11,8 @@ import {
   createBillingInformation,
   updateBillingInformation,
   createSubscription,
-  updateSubscription
+  updateSubscription,
+  fetchSubscription
 } from 'Apis'
 
 // Constants
@@ -34,6 +35,9 @@ import {
   CREATE_BILLING_SUCCESS,
   UPDATE_BILLING,
   UPDATE_BILLING_SUCCESS,
+  FETCH_SUBSCRIPTION,
+  FETCH_SUBSCRIPTION_SUCCESS,
+  FETCH_SUBSCRIPTION_FAIL,
   CREATE_SUBSCRIPTION,
   CREATE_SUBSCRIPTION_SUCCESS,
   UPDATE_SUBSCRIPTION,
@@ -135,6 +139,15 @@ function* callUpdateSubscription ({ userId, plan }) {
   }
 }
 
+function* callFetchSubscription ({ userId }) {
+  try {
+    const subscriptionPlan = yield call(fetchSubscription, userId)
+    yield put({ type: FETCH_SUBSCRIPTION_SUCCESS, subscriptionPlan: subscriptionPlan.data })
+  } catch ({ response }) {
+    yield put({ type: FETCH_SUBSCRIPTION_FAIL })
+  }
+}
+
 function* watchCreateUser () {
   yield takeLatest(CREATE_USER, callCreateUser)
 }
@@ -171,6 +184,10 @@ function* watchUpdateSubscription () {
   yield takeLatest(UPDATE_SUBSCRIPTION, callUpdateSubscription)
 }
 
+function* watchFetchSubscription () {
+  yield takeLatest(FETCH_SUBSCRIPTION, callFetchSubscription)
+}
+
 export default function* userSaga () {
   yield all([
     watchCreateUser(),
@@ -181,6 +198,7 @@ export default function* userSaga () {
     watchCreateBilling(),
     watchUpdateBilling(),
     watchCreateSubscription(),
-    watchUpdateSubscription()
+    watchUpdateSubscription(),
+    watchFetchSubscription()
   ])
 }

@@ -10,6 +10,9 @@ import {
   CREATE_BILLING_SUCCESS,
   UPDATE_BILLING,
   UPDATE_BILLING_SUCCESS,
+  FETCH_SUBSCRIPTION,
+  FETCH_SUBSCRIPTION_SUCCESS,
+  FETCH_SUBSCRIPTION_FAIL,
   CREATE_SUBSCRIPTION_SUCCESS,
   UPDATE_SUBSCRIPTION_SUCCESS,
   LOGIN_SUCCESS
@@ -19,6 +22,7 @@ const initialState = {
   authorized: false,
   user: {},
   fetchingBilling: false,
+  fetchingSubscription: false,
   updatingBilling: false,
   creatingBilling: false,
   fetchingUser: true
@@ -81,10 +85,25 @@ const authState = (state = initialState, action) => {
       return { ...state, user: userInformation, updatingBilling: false }
     }
 
+    case FETCH_SUBSCRIPTION:
+      return { ...state, fetchingSubscription: true }
+
+    case FETCH_SUBSCRIPTION_FAIL:
+      return { ...state, fetchingSubscription: false }
+
+    case FETCH_SUBSCRIPTION_SUCCESS: {
+      const userInformation = {
+        ...state.user,
+        subscription_id: action.subscriptionPlan
+      }
+
+      return { ...state, user: userInformation, fetchingSubscription: false }
+    }
+
     case CREATE_SUBSCRIPTION_SUCCESS: {
       const userInformation = {
         ...state.user,
-        subscription_plan: action.subscriptionPlan.plan.id
+        subscription_id: action.subscriptionPlan
       }
 
       return { ...state, user: userInformation }
@@ -93,7 +112,7 @@ const authState = (state = initialState, action) => {
     case UPDATE_SUBSCRIPTION_SUCCESS: {
       const userInformation = {
         ...state.user,
-        subscription_plan: action.subscriptionPlan.plan.id
+        subscription_id: action.subscriptionPlan
       }
 
       return { ...state, user: userInformation }

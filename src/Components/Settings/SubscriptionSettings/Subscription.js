@@ -53,19 +53,19 @@ class Subscription extends React.Component {
 }
 
 Subscription.defaultProps = {
-  subscriptionPlan: ''
+  subscriptionPlan: null
 }
 
 Subscription.propTypes = {
   updateSubscriptionPlan: PropTypes.func.isRequired,
   createSubscriptionPlan: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
-  subscriptionPlan: PropTypes.string
+  subscriptionPlan: PropTypes.object
 }
 
 const mapStateToProps = ({ auth }) => ({
   userId: auth.authState.user.id,
-  subscriptionPlan: auth.authState.user.subscription_plan
+  subscriptionPlan: auth.authState.user.subscription_id
 })
 
 const mapDispatchToProps = {

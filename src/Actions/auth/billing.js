@@ -4,7 +4,8 @@ import {
   UPDATE_BILLING,
   CREATE_BILLING,
   CREATE_SUBSCRIPTION,
-  UPDATE_SUBSCRIPTION
+  UPDATE_SUBSCRIPTION,
+  FETCH_SUBSCRIPTION
 } from 'Constants'
 
 export const createBillingInformation = (token, plan) => ({
@@ -27,6 +28,11 @@ export const updateBillingInformation = (userId, token) => ({
 export const createSubscriptionPlan = (plan) => ({
   type: CREATE_SUBSCRIPTION,
   plan
+})
+
+export const fetchSubscriptionPlan = (userId) => ({
+  type: FETCH_SUBSCRIPTION,
+  userId
 })
 
 export const updateSubscriptionPlan = (userId, plan) => ({

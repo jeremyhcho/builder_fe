@@ -16,7 +16,7 @@ class SubscriptionPlan extends React.Component {
   renderButton () {
     const { subscriptionPlan, plan } = this.props
 
-    if (subscriptionPlan === plan) {
+    if (subscriptionPlan && subscriptionPlan.plan.id === plan) {
       return (
         <p style={{ marginTop: '34px' }} className="semibold">You are currently on this plan</p>
       )
@@ -91,17 +91,17 @@ class SubscriptionPlan extends React.Component {
 
 SubscriptionPlan.defaultProps = {
   select: () => null,
-  subscriptionPlan: ''
+  subscriptionPlan: null
 }
 
 SubscriptionPlan.propTypes = {
   plan: PropTypes.oneOf(['basic-plan', 'advanced-plan']).isRequired,
   select: PropTypes.func,
-  subscriptionPlan: PropTypes.string
+  subscriptionPlan: PropTypes.object
 }
 
 const mapStateToProps = ({ auth }) => ({
-  subscriptionPlan: auth.authState.user.subscription_plan
+  subscriptionPlan: auth.authState.user.subscription_id
 })
 
 export default connect(

@@ -13,15 +13,16 @@ import SubscriptionSettings from './SubscriptionSettings'
 import './Settings.scss'
 
 // Actions
-import { fetchBillingInformation } from 'Actions'
+import { fetchBillingInformation, fetchSubscriptionPlan } from 'Actions'
 
 class Settings extends React.Component {
   componentDidMount () {
     this.props.fetchBillingInformation(this.props.user.id)
+    this.props.fetchSubscriptionPlan(this.props.user.id)
   }
 
   render () {
-    const { fetchingBilling, ...routerProps } = this.props
+    const { fetchingBilling, fetchingSubscription, ...routerProps } = this.props
 
     const headers = {
       '/settings': { header: '', subText: '' },
@@ -62,16 +63,20 @@ Settings.propTypes = {
   location: PropTypes.object.isRequired,
   fetchBillingInformation: PropTypes.func.isRequired,
   fetchingBilling: PropTypes.bool.isRequired,
+  fetchSubscriptionPlan: PropTypes.func.isRequired,
+  fetchingSubscription: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   user: auth.authState.user,
-  fetchingBilling: auth.authState.fetchingBilling
+  fetchingBilling: auth.authState.fetchingBilling,
+  fetchingSubscription: auth.authState.fetchingSubscription
 })
 
 const mapDispatchToProps = {
-  fetchBillingInformation
+  fetchBillingInformation,
+  fetchSubscriptionPlan
 }
 
 export default connect(
