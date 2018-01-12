@@ -23,9 +23,13 @@ class NavItem extends React.Component {
       selected
     })
 
+    const iconStyle = classNames('icon', {
+      selected
+    })
+
     return (
       <div styleName={navItemStyle} onClick={this.handleClick}>
-        <Icon style={{ marginRight: '10px' }} />
+        <Icon styleName={iconStyle} />
         {name}
         {
           selected &&

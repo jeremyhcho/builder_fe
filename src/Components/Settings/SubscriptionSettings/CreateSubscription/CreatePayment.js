@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { formValueSelector } from 'redux-form'
 
 // Components
-import { Modal, Button, Spinner } from 'Components/Common'
+import { Modal, Button } from 'Components/Common'
 import PaymentForm from '../../Blocks/PaymentForm'
 
 const selector = formValueSelector('billing')
@@ -14,9 +14,7 @@ class CreatePayment extends React.Component {
     if (this.props.creatingBilling) {
       return [
         <Button key="close" disabled>Close</Button>,
-        <Button key="submitting" type="button">
-          <Spinner color="#fff" xs show style={{ margin: '0 5px 2px 0' }} /> Creating subscription
-        </Button>
+        <Button key="submitting" type="button" loading />
       ]
     }
 

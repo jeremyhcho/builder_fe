@@ -42,16 +42,11 @@ class CreateSubscription extends React.Component {
     return (
       <div styleName="create-subscription">
         <form onSubmit={this.props.handleSubmit(this.submitForm)}>
-          {
-            !this.state.planSelected ? (
-              <CreatePlan selectPlan={this.selectPlan} />
-            ) : (
-              <CreatePayment
-                planSelected={this.state.planSelected}
-                toggle={this.togglePlanSelected}
-              />
-            )
-          }
+          <CreatePlan selectPlan={this.selectPlan} />
+          <CreatePayment
+            planSelected={this.state.planSelected}
+            toggle={this.togglePlanSelected}
+          />
         </form>
       </div>
     )

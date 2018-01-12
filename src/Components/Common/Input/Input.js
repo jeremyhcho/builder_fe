@@ -27,8 +27,8 @@ const Input = ({
   })
 
   const iconStyle = classNames('icon', {
-    noLabel: isLabelHidden,
-    sm,
+    label: label && !isLabelHidden,
+    shouldFitContainer,
     error
   })
 
@@ -45,6 +45,14 @@ const Input = ({
           {required && !error && <span styleName="fa-required"><i className="fa fa-asterisk" aria-hidden="true" /></span>}
         </p>
       }
+      <input
+        styleName={inputStyle}
+        disabled={disabled}
+        type={type}
+        required={required}
+        ref={inputRef}
+        {...props}
+      />
       {
         error &&
         <span styleName={iconStyle}>
@@ -60,14 +68,6 @@ const Input = ({
           {icon}
         </span>
       }
-      <input
-        styleName={inputStyle}
-        disabled={disabled}
-        type={type}
-        required={required}
-        ref={inputRef}
-        {...props}
-      />
     </div>
   )
 }

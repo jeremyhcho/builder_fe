@@ -8,9 +8,34 @@ import { Card, Button } from 'Components/Common'
 // CSS
 import './SubscriptionPlan.scss'
 
+const initialStyle = {
+  height: '375px',
+  width: '275px',
+  position: 'relative',
+  paddingTop: '80px',
+  transition: 'all 200ms ease'
+}
+
 class SubscriptionPlan extends React.Component {
+  state = {
+    style: initialStyle
+  }
+
   selectPlan = () => {
     this.props.select(this.props.plan)
+  }
+
+  handleMouseOver = () => {
+    this.setState({
+      style: {
+        ...this.state.style,
+        boxShadow: '0px 4px 4px var(--gray)'
+      }
+    })
+  }
+
+  handleMouseOut = () => {
+    this.setState({ style: initialStyle })
   }
 
   renderButton () {
@@ -60,8 +85,10 @@ class SubscriptionPlan extends React.Component {
     return (
       <Card
         style={{ margin: '0 25px' }}
-        wrapperStyle={{ height: '375px', width: '275px', position: 'relative', paddingTop: '80px' }}
+        wrapperStyle={this.state.style}
         styleName="subscription-plan"
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
       >
         <div>
           <p className="semibold">{plan.toUpperCase()}</p>

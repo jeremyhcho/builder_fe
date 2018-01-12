@@ -30,6 +30,7 @@ class Modal extends React.Component {
       footer,
       // isOpen,
       wrapperStyle,
+      modal
       // ...props
     } = this.props
     const modalStyle = classNames('modal', {
@@ -38,7 +39,7 @@ class Modal extends React.Component {
     return (
       <div
         styleName={modalStyle}
-        onClick={this.handleOutsideClicks}
+        onClick={modal ? null : this.handleOutsideClicks}
       >
         <div styleName="modal-container" style={wrapperStyle} ref={ref => this.content = ref}>
           <div styleName="header">
@@ -77,7 +78,8 @@ Modal.defaultProps = {
   header: '',
   children: null,
   footer: [],
-  wrapperStyle: {}
+  wrapperStyle: {},
+  modal: true
 }
 
 Modal.propTypes = {
@@ -86,7 +88,10 @@ Modal.propTypes = {
   toggle: PropTypes.func.isRequired,
   children: PropTypes.node,
   footer: PropTypes.array,
-  wrapperStyle: PropTypes.object
+  wrapperStyle: PropTypes.object,
+  modal: PropTypes.bool
+  /* Forces user to use one of the actions in the modal,
+  clicking outside the modal will not trigger the state of the modal */
 }
 
 export default Modal

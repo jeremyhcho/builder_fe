@@ -23,11 +23,15 @@
     height: 50px;
     position: relative;
     transition: all 200ms ease;
-    color: var(--gray);
+    color: var(--dark-gray);
     cursor: pointer;
 
     &:hover {
       color: var(--font-color);
+
+      .icon {
+        opacity: 1;
+      }
     }
 
     &.selected {
@@ -36,6 +40,15 @@
       color: var(--font-color);
       border-top: 1px solid var(--lightest-gray);
       border-bottom: 1px solid var(--lightest-gray);
+    }
+
+    .icon {
+      margin-right: 10px;
+      opacity: .4;
+
+      &.selected {
+        opacity: 1;
+      }
     }
   }
 }
