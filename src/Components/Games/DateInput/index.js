@@ -107,6 +107,7 @@ class DateInput extends React.Component {
             required
             readOnly
             isLabelHidden
+            shouldFitContainer
             onClick={this.openDateInput}
             icon={<i className="fa fa-calendar" aria-hidden="true" onClick={this.openDateInput} />}
           />

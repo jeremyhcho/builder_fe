@@ -99,7 +99,7 @@ class PaymentSettings extends React.Component {
               />
               <form onSubmit={handleSubmit(this.updateCard)}>
                 <Modal
-                  header="Changing payment information"
+                  header="Change payment information"
                   toggle={this.toggleUpdateCard}
                   isOpen={this.state.updatingCard}
                   footer={this.renderFooter()}

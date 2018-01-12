@@ -12,7 +12,6 @@ const initialStyle = {
   height: '375px',
   width: '275px',
   position: 'relative',
-  paddingTop: '80px',
   transition: 'all 200ms ease'
 }
 
@@ -90,14 +89,14 @@ class SubscriptionPlan extends React.Component {
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
-        <div>
+        <div style={{ padding: '80px 0 25px' }}>
           <p className="semibold">{plan.toUpperCase()}</p>
-        </div>
 
-        <div styleName="price">
-          <span className="semibold" styleName="dollar">$</span>
-          <span className="semibold" styleName="amount">{planFactory[plan].price}</span>
-          <span className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
+          <div styleName="price">
+            <span className="semibold" styleName="dollar">$</span>
+            <span className="semibold" styleName="amount">{planFactory[plan].price}</span>
+            <span className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
+          </div>
         </div>
 
         <div styleName="features">
