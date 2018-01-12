@@ -64,7 +64,7 @@ class Modal extends React.Component {
           <div styleName="body">
             {children}
           </div>
-          <hr />
+
           <div styleName="footer">
             {footer}
           </div>
