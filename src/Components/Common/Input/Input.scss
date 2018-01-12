@@ -73,13 +73,13 @@
     &:focus {
       border: 1px solid var(--dark-blue);
       background-color: #FFF;
-      box-shadow: .1px .1px 1px var(--blue);
+      box-shadow: 0 .1px 1px var(--blue);
     }
     // Errored input
     &.error {
       border: 1px solid var(--red);
       background-color: #FFF;
-      // box-shadow: .1px .1px 1px var(--red);
+      box-shadow: 0 .1px 1px var(--red);
     }
 
     &.disabled {
