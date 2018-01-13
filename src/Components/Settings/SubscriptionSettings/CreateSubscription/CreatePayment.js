@@ -11,7 +11,7 @@ const selector = formValueSelector('billing')
 
 class CreatePayment extends React.Component {
   renderFooter () {
-    if (this.props.creatingBilling) {
+    if (this.props.creatingBilling && this.props.creatingSubscription) {
       return [
         <Button key="close" disabled>Close</Button>,
         <Button key="submitting" type="button" loading />
@@ -62,12 +62,14 @@ CreatePayment.propTypes = {
   userId: PropTypes.number.isRequired,
   toggle: PropTypes.func.isRequired,
   creatingBilling: PropTypes.bool.isRequired,
+  creatingSubscription: PropTypes.bool.isRequired,
   plan: PropTypes.string
 }
 
 const mapStateToProps = ({ ...state, auth }) => ({
   userId: auth.authState.user.id,
   creatingBilling: auth.authState.creatingBilling,
+  creatingSubscription: auth.authState.creatingSubscription,
   plan: selector(state, 'plan')
 })
 

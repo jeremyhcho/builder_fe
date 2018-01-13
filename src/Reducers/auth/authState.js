@@ -13,8 +13,10 @@ import {
   FETCH_SUBSCRIPTION,
   FETCH_SUBSCRIPTION_SUCCESS,
   FETCH_SUBSCRIPTION_FAIL,
+  CREATE_SUBSCRIPTION,
   CREATE_SUBSCRIPTION_SUCCESS,
   UPDATE_SUBSCRIPTION_SUCCESS,
+  DELETE_SUBSCRIPTION_SUCCESS,
   LOGIN_SUCCESS
 } from 'Constants'
 
@@ -25,6 +27,7 @@ const initialState = {
   fetchingSubscription: false,
   updatingBilling: false,
   creatingBilling: false,
+  creatingSubscription: false,
   fetchingUser: true
 }
 
@@ -94,28 +97,36 @@ const authState = (state = initialState, action) => {
     case FETCH_SUBSCRIPTION_SUCCESS: {
       const userInformation = {
         ...state.user,
-        subscription_id: action.subscriptionPlan
+        subscription: action.subscription.data.filter(plan => !plan.cancel_at_period_end)[0]
       }
 
       return { ...state, user: userInformation, fetchingSubscription: false }
     }
 
+    case CREATE_SUBSCRIPTION: {
+      return { ...state, creatingSubscription: true }
+    }
+
     case CREATE_SUBSCRIPTION_SUCCESS: {
       const userInformation = {
         ...state.user,
-        subscription_id: action.subscriptionPlan
+        subscription: action.subscription
       }
 
-      return { ...state, user: userInformation }
+      return { ...state, user: userInformation, creatingSubscription: false }
     }
 
     case UPDATE_SUBSCRIPTION_SUCCESS: {
       const userInformation = {
         ...state.user,
-        subscription_id: action.subscriptionPlan
+        subscription: action.subscription.data
       }
 
       return { ...state, user: userInformation }
+    }
+
+    case DELETE_SUBSCRIPTION_SUCCESS: {
+      return { ...state }
     }
 
     case CREATE_USER_SUCCESS:

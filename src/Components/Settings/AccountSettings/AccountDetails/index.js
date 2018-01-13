@@ -46,7 +46,7 @@ class AccountDetails extends React.Component {
               type="password"
               name="New password"
               component={FieldInput}
-              placeholder="New password"
+              placeholder="New password (Must be 8 characters)"
               shouldFitContainer
               validate={[presence, minChar8]}
             />
@@ -83,7 +83,8 @@ class AccountDetails extends React.Component {
 
         <p
           onClick={this.togglePasswordChange}
-          style={{ margin: '20px 0', cursor: 'pointer', color: 'var(--blue)' }}
+          className="link"
+          style={{ margin: '20px 0' }}
         >
           Change password
         </p>

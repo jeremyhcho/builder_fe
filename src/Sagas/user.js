@@ -12,7 +12,8 @@ import {
   updateBillingInformation,
   createSubscription,
   updateSubscription,
-  fetchSubscription
+  fetchSubscription,
+  deleteSubscription
 } from 'Apis'
 
 // Constants
@@ -41,7 +42,9 @@ import {
   CREATE_SUBSCRIPTION,
   CREATE_SUBSCRIPTION_SUCCESS,
   UPDATE_SUBSCRIPTION,
-  UPDATE_SUBSCRIPTION_SUCCESS
+  UPDATE_SUBSCRIPTION_SUCCESS,
+  DELETE_SUBSCRIPTION,
+  DELETE_SUBSCRIPTION_SUCCESS
 } from 'Constants'
 
 // Actions
@@ -123,8 +126,8 @@ function* callUpdatingBilling ({ userId, token }) {
 
 function* callCreateSubscription ({ plan }) {
   try {
-    const subscriptionPlan = yield call(createSubscription, plan)
-    yield put({ type: CREATE_SUBSCRIPTION_SUCCESS, subscriptionPlan: subscriptionPlan.data })
+    const subscription = yield call(createSubscription, plan)
+    yield put({ type: CREATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
   } catch ({ response }) {
     console.log('Failed to create subscription')
   }
@@ -132,8 +135,8 @@ function* callCreateSubscription ({ plan }) {
 
 function* callUpdateSubscription ({ userId, plan }) {
   try {
-    const subscriptionPlan = yield call(updateSubscription, userId, plan)
-    yield put({ type: UPDATE_SUBSCRIPTION_SUCCESS, subscriptionPlan: subscriptionPlan.data })
+    const subscription = yield call(updateSubscription, userId, plan)
+    yield put({ type: UPDATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
   } catch ({ response }) {
     console.log('Failed to update subscription')
   }
@@ -141,10 +144,20 @@ function* callUpdateSubscription ({ userId, plan }) {
 
 function* callFetchSubscription ({ userId }) {
   try {
-    const subscriptionPlan = yield call(fetchSubscription, userId)
-    yield put({ type: FETCH_SUBSCRIPTION_SUCCESS, subscriptionPlan: subscriptionPlan.data })
+    const subscription = yield call(fetchSubscription, userId)
+    yield put({ type: FETCH_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
   } catch ({ response }) {
     yield put({ type: FETCH_SUBSCRIPTION_FAIL })
+  }
+}
+
+function* callDeleteSubscription ({ userId }) {
+  try {
+    const subscription = yield call(deleteSubscription, userId)
+    console.log('DELETED SUBSCRIPTION: ', subscription)
+    yield put({ type: DELETE_SUBSCRIPTION_SUCCESS })
+  } catch ({ response }) {
+    console.log('Failed to delete subscription')
   }
 }
 
@@ -188,6 +201,10 @@ function* watchFetchSubscription () {
   yield takeLatest(FETCH_SUBSCRIPTION, callFetchSubscription)
 }
 
+function* watchDeleteSubscription () {
+  yield takeLatest(DELETE_SUBSCRIPTION, callDeleteSubscription)
+}
+
 export default function* userSaga () {
   yield all([
     watchCreateUser(),
@@ -199,6 +216,7 @@ export default function* userSaga () {
     watchUpdateBilling(),
     watchCreateSubscription(),
     watchUpdateSubscription(),
-    watchFetchSubscription()
+    watchFetchSubscription(),
+    watchDeleteSubscription()
   ])
 }

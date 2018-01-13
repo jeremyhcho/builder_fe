@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import SubSection from '../Blocks/Subsection'
+import SettingsSubSection from '../Blocks/SettingsSubSection'
 import PaymentSettings from './PaymentSettings'
 import AccountDetails from './AccountDetails'
 
@@ -18,21 +18,21 @@ class AccountSettings extends React.Component {
       <div styleName="account-settings">
         <Row>
           <Col xs={12}>
-            <SubSection
+            <SettingsSubSection
               label="Account details"
             >
               <AccountDetails />
-            </SubSection>
+            </SettingsSubSection>
           </Col>
         </Row>
 
         <Row>
           <Col xs={12}>
-            <SubSection
+            <SettingsSubSection
               label="Payment"
             >
               <PaymentSettings />
-            </SubSection>
+            </SettingsSubSection>
           </Col>
         </Row>
       </div>

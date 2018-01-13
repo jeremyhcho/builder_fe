@@ -3,28 +3,30 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Components
-import Subscription from './Subscription'
+import SubscriptionDetails from './SubscriptionDetails'
 import CreateSubscription from './CreateSubscription'
 
 // CSS
 import './SubscriptionSettings.scss'
 
-class SubscriptionSettings extends React.Component {
-  render () {
-    const { billing } = this.props
-
-    return (
-      <div styleName="subscription-settings">
-        {
-          !Object.keys(billing).length ? (
-            <CreateSubscription />
-          ) : (
-            <Subscription />
-          )
-        }
-      </div>
-    )
+const SubscriptionSettings = ({ billing, fetchingSubscription }) => {
+  if (fetchingSubscription) {
+    return <div />
   }
+
+  return (
+    <div styleName="subscription-settings">
+      {
+        !Object.keys(billing).length ? (
+          // Component to begin subscription process if user has not entered billing information
+          <CreateSubscription />
+        ) : (
+          // Show subscription details and handle users who are customers but have not subscribed
+          <SubscriptionDetails />
+        )
+      }
+    </div>
+  )
 }
 
 SubscriptionSettings.defaultProps = {
@@ -32,11 +34,13 @@ SubscriptionSettings.defaultProps = {
 }
 
 SubscriptionSettings.propTypes = {
-  billing: PropTypes.object
+  billing: PropTypes.object,
+  fetchingSubscription: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
-  billing: auth.authState.user.billing
+  billing: auth.authState.user.billing,
+  fetchingSubscription: auth.authState.fetchingSubscription
 })
 
 export default connect(

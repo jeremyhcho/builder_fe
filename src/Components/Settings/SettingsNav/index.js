@@ -40,7 +40,7 @@ class SettingsNav extends React.Component {
         icon={item.icon}
         route={item.route}
         select={item.select}
-        selected={this.props.location.pathname.slice(10) === item.route}
+        selected={this.props.location.pathname.slice(10).match(item.route)}
       />
     ))
   }

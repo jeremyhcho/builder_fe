@@ -52,6 +52,10 @@ export const fetchSubscription = (userId) => (
   axios.get(`/api/v1/subscriptions/${userId}`)
 )
 
+export const deleteSubscription = (userId) => (
+  axios.delete(`/api/v1/subscriptions/${userId}`)
+)
+
 export const verifyUser = (params) => (
   axios.put('/api/v1/users/verify', params)
 )

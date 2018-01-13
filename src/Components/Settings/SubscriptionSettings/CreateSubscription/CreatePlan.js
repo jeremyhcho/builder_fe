@@ -4,11 +4,8 @@ import PropTypes from 'prop-types'
 // Components
 import SubscriptionPlan from '../../Blocks/SubscriptionPlan'
 
-// CSS
-import './CreateSubscription.scss'
-
 const CreatePlan = ({ selectPlan }) => (
-  <div styleName="plans">
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
     <SubscriptionPlan
       plan="basic-plan"
       select={selectPlan}

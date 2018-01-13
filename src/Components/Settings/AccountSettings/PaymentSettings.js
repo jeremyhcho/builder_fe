@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 // Components
 import { Modal, Button } from 'Components/Common'
-import PaymentInformation from './PaymentInformation'
+import PaymentDetails from './PaymentDetails'
 import PaymentForm from '../Blocks/PaymentForm'
 
 // Icons
@@ -93,13 +93,13 @@ class PaymentSettings extends React.Component {
             this.renderUnsubscribedUser()
           ) : (
             <div>
-              <PaymentInformation
+              <PaymentDetails
                 card={billing.sources.data[0]}
                 toggleUpdate={this.toggleUpdateCard}
               />
               <form onSubmit={handleSubmit(this.updateCard)}>
                 <Modal
-                  header="Change payment information"
+                  header="Changing payment information"
                   toggle={this.toggleUpdateCard}
                   isOpen={this.state.updatingCard}
                   footer={this.renderFooter()}

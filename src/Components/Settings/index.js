@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Elements } from 'react-stripe-elements'
+import pathToRegexp from 'path-to-regexp'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 // Components
@@ -15,20 +16,31 @@ import './Settings.scss'
 // Actions
 import { fetchBillingInformation, fetchSubscriptionPlan } from 'Actions'
 
+const SETTING_SECTIONS = {
+  '/settings': { header: '', subText: '' },
+  '/settings/account': { header: 'Account Settings', subText: 'Manage and personalize your account settings' },
+  '/settings/account/:subSection': { header: 'Account Settings', subText: 'Manage and personalize your account settings' },
+  '/settings/subscription': { header: 'Subscription Settings', subText: '' },
+}
+
 class Settings extends React.Component {
   componentDidMount () {
     this.props.fetchBillingInformation(this.props.user.id)
     this.props.fetchSubscriptionPlan(this.props.user.id)
   }
 
-  render () {
-    const { fetchingBilling, fetchingSubscription, ...routerProps } = this.props
-
-    const headers = {
-      '/settings': { header: '', subText: '' },
-      '/settings/account': { header: 'Account Settings', subText: 'Manage and personalize your account settings' },
-      '/settings/subscription': { header: 'Subscription Settings', subText: 'Choose a subscription plan' }
+  getCurrentRoute () {
+    for (const regexp of Object.keys(SETTING_SECTIONS)) {
+      if (pathToRegexp(regexp).exec(this.props.location.pathname)) {
+        return SETTING_SECTIONS[regexp]
+      }
     }
+
+    return null
+  }
+
+  render () {
+    const { fetchingBilling, ...routerProps } = this.props
 
     return (
       <div styleName="settings">
@@ -36,8 +48,8 @@ class Settings extends React.Component {
 
         <div styleName="settings-content">
           <div styleName="settings-header">
-            <p className="semibold">{headers[this.props.location.pathname].header}</p>
-            <p className="label small">{headers[this.props.location.pathname].subText}</p>
+            <p className="semibold">{this.getCurrentRoute().header}</p>
+            <p className="label small">{this.getCurrentRoute().subText}</p>
           </div>
 
           {
@@ -64,14 +76,12 @@ Settings.propTypes = {
   fetchBillingInformation: PropTypes.func.isRequired,
   fetchingBilling: PropTypes.bool.isRequired,
   fetchSubscriptionPlan: PropTypes.func.isRequired,
-  fetchingSubscription: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   user: auth.authState.user,
-  fetchingBilling: auth.authState.fetchingBilling,
-  fetchingSubscription: auth.authState.fetchingSubscription
+  fetchingBilling: auth.authState.fetchingBilling
 })
 
 const mapDispatchToProps = {

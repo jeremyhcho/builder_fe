@@ -47,7 +47,7 @@ NavItem.defaultProps = {
 NavItem.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.func.isRequired,
-  selected: PropTypes.bool,
+  selected: PropTypes.array,
   select: PropTypes.func.isRequired,
   route: PropTypes.string.isRequired
 }

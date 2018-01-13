@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // Components
 import { Card, Button } from 'Components/Common'
+import planFactory from '../planFactory'
 
 // CSS
 import './SubscriptionPlan.scss'
@@ -38,11 +39,11 @@ class SubscriptionPlan extends React.Component {
   }
 
   renderButton () {
-    const { subscriptionPlan, plan } = this.props
+    const { subscription, plan } = this.props
 
-    if (subscriptionPlan && subscriptionPlan.plan.id === plan) {
+    if (subscription && subscription.plan.id === plan) {
       return (
-        <p style={{ marginTop: '34px' }} className="semibold">You are currently on this plan</p>
+        <p style={{ marginTop: '30px', cursor: 'default' }} className="semibold">You are currently on this plan</p>
       )
     }
 
@@ -70,16 +71,6 @@ class SubscriptionPlan extends React.Component {
 
   render () {
     const { plan } = this.props
-    const planFactory = {
-      'basic-plan': {
-        price: 25,
-        features: ['Access to basic models', 'Access to game details', 'Use up to 3 active models']
-      },
-      'advanced-plan': {
-        price: 50,
-        features: ['Access to all basic features', 'Unlimited active models', 'Access to advanced models']
-      }
-    }
 
     return (
       <Card
@@ -117,17 +108,17 @@ class SubscriptionPlan extends React.Component {
 
 SubscriptionPlan.defaultProps = {
   select: () => null,
-  subscriptionPlan: null
+  subscription: null
 }
 
 SubscriptionPlan.propTypes = {
   plan: PropTypes.oneOf(['basic-plan', 'advanced-plan']).isRequired,
   select: PropTypes.func,
-  subscriptionPlan: PropTypes.object
+  subscription: PropTypes.object
 }
 
 const mapStateToProps = ({ auth }) => ({
-  subscriptionPlan: auth.authState.user.subscription_id
+  subscription: auth.authState.user.subscription
 })
 
 export default connect(
