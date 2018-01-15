@@ -17,3 +17,8 @@ export const FETCH_NBA_STARTING_LINEUP_SUCCESS = 'nba/gameDetails/FETCH_NBA_STAR
 // Starting Lineup
 export const FETCH_NBA_INJURIES = 'nba/gameDetails/FETCH_NBA_INJURIES'
 export const FETCH_NBA_INJURIES_SUCCESS = 'nba/gameDetails/FETCH_NBA_INJURIES_SUCCESS'
+
+// Vegas Lines
+export const FETCH_NBA_LINES = 'nba/gameDetails/FETCH_NBA_LINES'
+export const FETCH_NBA_LINES_SUCCESS = 'nba/gameDetails/FETCH_NBA_LINES_SUCCESS'
+export const FETCH_NBA_LINES_FAIL = 'nba/gameDetails/FETCH_NBA_LINES_FAIL'

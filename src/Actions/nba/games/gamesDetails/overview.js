@@ -9,7 +9,9 @@ import {
   FETCH_NBA_STARTING_LINEUP,
   FETCH_NBA_STARTING_LINEUP_SUCCESS,
   FETCH_NBA_INJURIES,
-  FETCH_NBA_INJURIES_SUCCESS
+  FETCH_NBA_INJURIES_SUCCESS,
+  FETCH_NBA_LINES,
+  FETCH_NBA_LINES_SUCCESS
 } from 'Constants'
 
 // Summary
@@ -65,4 +67,15 @@ export const fetchNBAInjuries = (id) => ({
 export const fetchNBAInjuriesSuccess = (injuries) => ({
   type: FETCH_NBA_INJURIES_SUCCESS,
   injuries
+})
+
+// Vegas Lines
+export const fetchNBALines = (matchId) => ({
+  type: FETCH_NBA_LINES,
+  matchId
+})
+
+export const fetchNBALinesSuccess = (lines) => ({
+  type: FETCH_NBA_LINES_SUCCESS,
+  lines
 })

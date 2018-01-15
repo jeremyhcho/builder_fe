@@ -28,7 +28,7 @@ const Overview = ({ match }) => (
     </Col>
 
     <Col xs={6}>
-      <VegasLines />
+      <VegasLines idProp={match.params.id} />
     </Col>
 
     <Col xs={7}>

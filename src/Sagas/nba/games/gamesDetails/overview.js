@@ -6,7 +6,8 @@ import {
   getQuartersData,
   getRecentGamesData,
   getStartingLineupData,
-  getInjuriesData
+  getInjuriesData,
+  getNBALines
 } from 'Apis'
 
 // Constants
@@ -15,7 +16,8 @@ import {
   FETCH_NBA_QUARTERS,
   FETCH_NBA_RECENT_GAMES,
   FETCH_NBA_STARTING_LINEUP,
-  FETCH_NBA_INJURIES
+  FETCH_NBA_INJURIES,
+  FETCH_NBA_LINES
 } from 'Constants'
 
 // Actions
@@ -24,7 +26,8 @@ import {
   fetchNBAQuartersSuccess,
   fetchNBARecentGamesSuccess,
   fetchNBAStartingLineupSuccess,
-  fetchNBAInjuriesSuccess
+  fetchNBAInjuriesSuccess,
+  fetchNBALinesSuccess
 } from 'Actions'
 
 function* getSummary ({ id }) {
@@ -72,6 +75,16 @@ function* getInjuries ({ id }) {
   }
 }
 
+function* getLines ({ matchId }) {
+  try {
+    const lines = yield call(getNBALines, matchId)
+    console.log('fetched lines: ', lines)
+    yield put(fetchNBALinesSuccess(lines))
+  } catch ({ response }) {
+    console.log('no vegas lines found: ', response)
+  }
+}
+
 function* watchSummaryFetch () {
   yield takeLatest(FETCH_NBA_SUMMARY, getSummary)
 }
@@ -92,12 +105,17 @@ function* watchInjuriesFetch () {
   yield takeLatest(FETCH_NBA_INJURIES, getInjuries)
 }
 
+function* watchLinesFetch () {
+  yield takeLatest(FETCH_NBA_LINES, getLines)
+}
+
 export default function* overviewSaga () {
   yield all([
     watchSummaryFetch(),
     watchQuartersFetch(),
     watchRecentGamesFetch(),
     watchStartingLineupFetch(),
-    watchInjuriesFetch()
+    watchInjuriesFetch(),
+    watchLinesFetch()
   ])
 }

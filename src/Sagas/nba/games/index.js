@@ -21,7 +21,6 @@ function* getGames (params) {
     const nbaGames = yield call(getNBAGames, { from, to })
     yield put(fetchNBAGamesSuccess(nbaGames))
   } catch ({ response }) {
-    // HANDLE ERROR HANDLE ERROR HANDLE ERROR HANDLE ERROR @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     console.log('no matches found: ', response)
   }
 }
@@ -33,7 +32,6 @@ function* paginateGames ({ from, to, paginateType }) {
     const nbaGames = yield call(getNBAGames, { from: fromString, to: toString })
     yield put(paginateNBAGamesSuccess(nbaGames, paginateType))
   } catch ({ response }) {
-    // HANDLE ERROR HANDLE ERROR HANDLE ERROR HANDLE ERROR @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     console.log('no matches found: ', response)
   }
 }

@@ -6,7 +6,8 @@ import {
   FETCH_NBA_QUARTERS_SUCCESS,
   FETCH_NBA_RECENT_GAMES_SUCCESS,
   FETCH_NBA_STARTING_LINEUP_SUCCESS,
-  FETCH_NBA_INJURIES_SUCCESS
+  FETCH_NBA_INJURIES_SUCCESS,
+  FETCH_NBA_LINES_SUCCESS
 } from 'Constants'
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   quarters: null,
   recentGames: null,
   startingLineup: null,
-  injuries: null
+  injuries: null,
+  lines: null
 }
 
 const overview = (state = initialState, action) => {
@@ -47,6 +49,12 @@ const overview = (state = initialState, action) => {
       return {
         ...state,
         injuries: action.injuries.data
+      }
+
+    case FETCH_NBA_LINES_SUCCESS:
+      return {
+        ...state,
+        lines: action.lines.data
       }
 
     case '@@router/LOCATION_CHANGE': {

@@ -1,16 +1,16 @@
 import { axios } from 'Apis'
 
-// summary
+// Summary
 export const getSummaryData = (id) => (
   axios.get(`/api/nba/v1/matches/${id}/summary`)
 )
 
-// quarters
+// Quarters
 export const getQuartersData = (id) => (
   axios.get(`/api/nba/v1/matches/${id}/quarters`)
 )
 
-// recent games
+// Recent Games
 export const getRecentGamesData = (id) => (
   axios.get(`/api/nba/v1/matches/${id}/recent`)
 )
@@ -23,4 +23,9 @@ export const getStartingLineupData = (id) => (
 // Injuries
 export const getInjuriesData = (id) => (
   axios.get(`/api/nba/v1/matches/${id}/injuries`)
+)
+
+// Vegas Lines
+export const getNBALines = (matchId) => (
+  axios.get(`/api/nba/v1/matches/${matchId}/lines`)
 )
