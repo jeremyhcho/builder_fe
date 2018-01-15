@@ -6,13 +6,15 @@ import { routerReducer } from 'react-router-redux'
 import auth from './auth'
 import nbaReducer from './nba'
 import notificationsReducer from './notifications'
+import snackBarReducer from './snackbar'
 
 const rootReducer = combineReducers({
   auth,
   nba: nbaReducer,
   router: routerReducer,
   form: formReducer,
-  notifications: notificationsReducer
+  notifications: notificationsReducer,
+  snackbar: snackBarReducer
 })
 
 export default rootReducer

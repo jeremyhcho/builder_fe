@@ -16,6 +16,9 @@ import AppRouter from './Router'
 // Store
 import store from 'Config/Store'
 
+// Snackbar
+import { Snackbar } from 'Components/Common'
+
 const rootEl = document.getElementById('root')
 
 const pusherClient = new Pusher(process.env.PUSHER_KEY, {
@@ -28,7 +31,9 @@ ReactDOM.render(
   <AppContainer warnings={false}>
     <Provider store={store}>
       <StripeProvider apiKey={process.env.STRIPE_KEY}>
-        <AppRouter />
+        <Snackbar>
+          <AppRouter />
+        </Snackbar>
       </StripeProvider>
     </Provider>
   </AppContainer>,
