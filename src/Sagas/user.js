@@ -129,7 +129,7 @@ function* callCreateSubscription ({ plan }) {
   try {
     const subscription = yield call(createSubscription, plan)
     yield put({ type: CREATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
-    yield put(openSnackbar('Subscription created'))
+    yield put(openSnackbar('Subscription created', 3000))
   } catch ({ response }) {
     console.log('Failed to create subscription')
   }
@@ -139,7 +139,7 @@ function* callUpdateSubscription ({ userId, plan }) {
   try {
     const subscription = yield call(updateSubscription, userId, plan)
     yield put({ type: UPDATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
-    yield put(openSnackbar('Subscription updated'))
+    yield put(openSnackbar('Subscription updated', 3000))
   } catch ({ response }) {
     console.log('Failed to update subscription')
   }
@@ -160,7 +160,7 @@ function* callDeleteSubscription ({ userId }) {
     const subscription = yield call(deleteSubscription, userId)
     console.log(subscription)
     yield put({ type: DELETE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
-    yield put(openSnackbar('Subscription deleted'))
+    yield put(openSnackbar('Subscription deleted', 3000))
   } catch ({ response }) {
     console.log('Failed to delete subscription')
   }

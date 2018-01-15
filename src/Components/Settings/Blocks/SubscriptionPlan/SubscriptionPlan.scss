@@ -30,4 +30,13 @@
     background-color: var(--light-gray);
     margin: 25px 0 0;
   }
+
+  .submit-button {
+    width: 50%;
+    margin-top: 20px;
+
+    &.advanced {
+      width: auto;
+    }
+  }
 }

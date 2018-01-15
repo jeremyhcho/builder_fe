@@ -6,13 +6,13 @@ import {
 
 const initialState = {
   message: '',
-  duration: 2000
+  autoCloseDuration: null
 }
 
 const snackBarReducer = (state = initialState, action) => {
   switch (action.type) {
     case OPEN_SNACKBAR:
-      return { message: action.message, duration: action.duration }
+      return { message: action.message, autoCloseDuration: action.duration }
 
     case CLOSE_SNACKBAR:
       return initialState

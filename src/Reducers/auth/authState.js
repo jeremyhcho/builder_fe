@@ -151,11 +151,11 @@ const authState = (state = initialState, action) => {
         subscription: null
       }
 
-      return { ...state, user: userInformation, deletingSubscription: true }
+      return { ...state, user: userInformation, deletingSubscription: false }
     }
 
     case DELETE_SUBSCRIPTION_FAIL:
-      return { ...state, deletingSubscription: true }
+      return { ...state, deletingSubscription: false }
 
     case CREATE_USER_SUCCESS:
       return { ...state, user: action.user, fetchingUser: false }

@@ -9,30 +9,52 @@ import './Snackbar.scss'
 // Actions
 import { closeSnackbar } from 'Actions'
 
+/* eslint-disable react/no-unused-prop-types */
+
 class Snackbar extends React.Component {
   state = {
     show: false
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.message) {
+    if (newProps.message && !this.props.message) {
+      this.openSnackbar(newProps.autoCloseDuration)
+    }
+
+    if (newProps.message && this.props.message) {
       this.setState({
-        show: true
-      }, () => {
-        setTimeout(this.autoCloseSnackbar, newProps.duration)
+        show: false
+      }, () => this.openSnackbar(newProps.autoCloseDuration))
+    }
+  }
+
+  openSnackbar = (duration) => {
+    this.setState({
+      show: true
+    }, () => {
+      document.addEventListener('click', this.handleOutsideClicks, false)
+      if (duration) {
+        setTimeout(this.closeSnackbar, duration)
+      }
+    })
+  }
+
+  closeSnackbar = () => {
+    if (this.state.show) {
+      this.setState({ show: false }, () => {
+        document.removeEventListener('click', this.handleOutsideClicks, false)
+        this.props.closeSnackbar()
       })
     }
   }
 
-  autoCloseSnackbar = () => {
-    if (this.state.show) {
-      this.setState({ show: false }, () => this.props.closeSnackbar())
+  handleOutsideClicks = (e) => {
+    // Close snackbar on clicks outside
+    if (this.snackbar.contains(e.target)) {
+      return null
     }
-  }
 
-  closeSnackbar = () => {
-    // Add logic to close snackbar on clicks
-    console.log(this.props.duration)
+    return this.closeSnackbar()
   }
 
   render () {
@@ -49,7 +71,7 @@ class Snackbar extends React.Component {
     return (
       [
         children,
-        <div styleName={snackBarContainer} key="snackbar">
+        <div styleName={snackBarContainer} key="snackbar" ref={ref => this.snackbar = ref}>
           <div styleName="snackbar-content">
             <div styleName={snackBarText}>
               <span>{message}</span>
@@ -63,12 +85,12 @@ class Snackbar extends React.Component {
 
 Snackbar.defaultProps = {
   message: '',
-  duration: 2000
+  autoCloseDuration: null
 }
 
 Snackbar.propTypes = {
   message: PropTypes.string,
-  duration: PropTypes.number,
+  autoCloseDuration: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array
@@ -78,7 +100,7 @@ Snackbar.propTypes = {
 
 const mapStateToProps = ({ snackbar }) => ({
   message: snackbar.message,
-  duration: snackbar.duration
+  autoCloseDuration: snackbar.autoCloseDuration
 })
 
 const mapDispatchToProps = {
@@ -89,3 +111,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Snackbar)
+
+/* eslint-enable react/no-unused-prop-types */

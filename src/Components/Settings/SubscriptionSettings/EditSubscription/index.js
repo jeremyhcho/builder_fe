@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // Components
 import SubscriptionPlan from '../../Blocks/SubscriptionPlan'
+import { Spinner } from 'Components/Common'
 
 // Actions
 import { deleteSubscriptionPlan, updateSubscriptionPlan, createSubscriptionPlan } from 'Actions'
@@ -24,6 +25,8 @@ class EditSubscription extends React.Component {
   }
 
   render () {
+    const { deletingSubscription } = this.props
+
     return (
       <div>
         <div style={{ textAlign: 'center', marginBottom: '25px' }}>
@@ -43,16 +46,24 @@ class EditSubscription extends React.Component {
           />
         </div>
 
-        <p style={{ textAlign: 'center', margin: '10px 0' }}>
-          Click {' '}
-          <span
-            className="link"
-            onClick={this.cancelSubscription}
-          >
-            here
-          </span>
-          {' '} to cancel your current subscription
-        </p>
+        <div style={{ textAlign: 'center', margin: '10px 0' }}>
+          {
+            deletingSubscription ? (
+              <Spinner show xs />
+            ) : (
+              <p>
+                Click {' '}
+                <span
+                  className="link"
+                  onClick={this.cancelSubscription}
+                >
+                  here
+                </span>
+                {' '} to cancel your current subscription
+              </p>
+            )
+          }
+        </div>
       </div>
     )
   }
@@ -67,13 +78,15 @@ EditSubscription.propTypes = {
   deleteSubscriptionPlan: PropTypes.func.isRequired,
   updateSubscriptionPlan: PropTypes.func.isRequired,
   createSubscriptionPlan: PropTypes.func.isRequired,
+  deletingSubscription: PropTypes.bool.isRequired,
   subscription: PropTypes.object,
   userId: PropTypes.number.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   userId: auth.authState.user.id,
-  subscription: auth.authState.user.subscription
+  subscription: auth.authState.user.subscription,
+  deletingSubscription: auth.authState.deletingSubscription
 })
 
 const mapDispatchToProps = {

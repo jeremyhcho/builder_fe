@@ -16,10 +16,6 @@ const initialStyle = {
   transition: 'all 200ms ease'
 }
 
-const buttonStyle = {
-  marginTop: '20px'
-}
-
 class SubscriptionPlan extends React.Component {
   state = {
     style: initialStyle
@@ -43,7 +39,8 @@ class SubscriptionPlan extends React.Component {
   }
 
   renderButton () {
-    const { subscription, plan } = this.props
+    const { subscription, plan, updatingSubscription, creatingSubscription } = this.props
+    const buttonStyle = { marginTop: '20px', width: '50%' }
 
     if (subscription && subscription.plan.id === plan) {
       return (
@@ -54,11 +51,17 @@ class SubscriptionPlan extends React.Component {
     if (plan === 'advanced-plan') {
       return (
         <Button
-          style={buttonStyle}
+          style={{ marginTop: '20px' }}
           disabled
         >
           This plan is currently unavailable
         </Button>
+      )
+    }
+
+    if (updatingSubscription || creatingSubscription) {
+      return (
+        <Button style={buttonStyle} shouldFitContainer loading />
       )
     }
 
@@ -67,6 +70,7 @@ class SubscriptionPlan extends React.Component {
         style={buttonStyle}
         onClick={this.selectPlan}
         type="button"
+        shouldFitContainer
       >
         Choose this plan
       </Button>
@@ -118,11 +122,15 @@ SubscriptionPlan.defaultProps = {
 SubscriptionPlan.propTypes = {
   plan: PropTypes.oneOf(['basic-plan', 'advanced-plan']).isRequired,
   select: PropTypes.func,
-  subscription: PropTypes.object
+  subscription: PropTypes.object,
+  creatingSubscription: PropTypes.bool.isRequired,
+  updatingSubscription: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
-  subscription: auth.authState.user.subscription
+  subscription: auth.authState.user.subscription,
+  creatingSubscription: auth.authState.creatingSubscription,
+  updatingSubscription: auth.authState.updatingSubscription
 })
 
 export default connect(

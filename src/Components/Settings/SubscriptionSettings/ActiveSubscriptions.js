@@ -62,7 +62,7 @@ const ActiveSubscriptions = ({ subscription, toggleShowPlans }) => {
 
   // Customer that is not subscribed to a plan
   return (
-    <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
       <AlertIcon style={{ marginBottom: '10px', opacity: '0.7' }} />
       <p>You are not subscribed to any plans on your Quartz account.</p>
       <p>

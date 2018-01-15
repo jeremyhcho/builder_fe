@@ -11,7 +11,7 @@ const selector = formValueSelector('billing')
 
 class CreatePayment extends React.Component {
   renderFooter () {
-    if (this.props.creatingBilling && this.props.creatingSubscription) {
+    if (this.props.creatingBilling || this.props.creatingSubscription) {
       return [
         <Button key="close" disabled>Close</Button>,
         <Button key="submitting" type="button" loading />

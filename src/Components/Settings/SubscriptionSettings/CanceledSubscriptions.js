@@ -12,7 +12,7 @@ const CanceledSubscriptions = ({ canceledSubscriptions }) => {
   }
 
   return (
-    <div>
+    <div styleName="canceled-subscriptions">
       {
         canceledSubscriptions.map(subscription => {
           return (
