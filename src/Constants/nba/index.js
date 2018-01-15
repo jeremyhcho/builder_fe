@@ -8,3 +8,6 @@ export * from './teams/teamDetails'
 
 // models
 export * from './models'
+
+// lines
+export * from './lines'

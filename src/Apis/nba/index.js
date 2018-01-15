@@ -7,3 +7,6 @@ export * from './teams'
 
 // models
 export * from './models'
+
+// lines
+export * from './lines'

@@ -9,11 +9,15 @@ import teamsSaga from './teams'
 // models
 import modelsSaga from './models'
 
+// lines
+import linesSaga from './lines'
+
 export default function* nbaSaga() {
   yield all([
     gamesSaga(),
     gameDetailsSaga(),
     teamsSaga(),
-    modelsSaga()
+    modelsSaga(),
+    linesSaga()
   ])
 }

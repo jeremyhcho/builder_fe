@@ -148,7 +148,6 @@ function* callUpdateSubscription ({ userId, plan }) {
 function* callFetchSubscription ({ userId }) {
   try {
     const subscription = yield call(fetchSubscription, userId)
-    console.log('fetch: ', subscription)
     yield put({ type: FETCH_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
   } catch ({ response }) {
     yield put({ type: FETCH_SUBSCRIPTION_FAIL })
@@ -158,7 +157,6 @@ function* callFetchSubscription ({ userId }) {
 function* callDeleteSubscription ({ userId }) {
   try {
     const subscription = yield call(deleteSubscription, userId)
-    console.log(subscription)
     yield put({ type: DELETE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
     yield put(openSnackbar('Subscription deleted', 3000))
   } catch ({ response }) {
