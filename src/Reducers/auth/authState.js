@@ -15,8 +15,13 @@ import {
   FETCH_SUBSCRIPTION_FAIL,
   CREATE_SUBSCRIPTION,
   CREATE_SUBSCRIPTION_SUCCESS,
+  CREATE_SUBSCRIPTION_FAIL,
+  UPDATE_SUBSCRIPTION,
   UPDATE_SUBSCRIPTION_SUCCESS,
+  UPDATE_SUBSCRIPTION_FAIL,
+  DELETE_SUBSCRIPTION,
   DELETE_SUBSCRIPTION_SUCCESS,
+  DELETE_SUBSCRIPTION_FAIL,
   LOGIN_SUCCESS
 } from 'Constants'
 
@@ -28,6 +33,8 @@ const initialState = {
   updatingBilling: false,
   creatingBilling: false,
   creatingSubscription: false,
+  deletingSubscription: false,
+  updatingSubscription: false,
   fetchingUser: true
 }
 
@@ -97,7 +104,8 @@ const authState = (state = initialState, action) => {
     case FETCH_SUBSCRIPTION_SUCCESS: {
       const userInformation = {
         ...state.user,
-        subscription: action.subscription.data.filter(plan => !plan.cancel_at_period_end)[0]
+        subscription: action.subscription.data.filter(plan => !plan.cancel_at_period_end)[0],
+        canceledSubscriptions: action.subscription.data.filter(plan => plan.cancel_at_period_end)
       }
 
       return { ...state, user: userInformation, fetchingSubscription: false }
@@ -116,18 +124,38 @@ const authState = (state = initialState, action) => {
       return { ...state, user: userInformation, creatingSubscription: false }
     }
 
+    case CREATE_SUBSCRIPTION_FAIL:
+      return { ...state, creatingSubscription: false }
+
+    case UPDATE_SUBSCRIPTION:
+      return { ...state, updatingSubscription: true }
+
     case UPDATE_SUBSCRIPTION_SUCCESS: {
       const userInformation = {
         ...state.user,
         subscription: action.subscription.data
       }
 
-      return { ...state, user: userInformation }
+      return { ...state, user: userInformation, updatingSubscription: false }
     }
 
+    case UPDATE_SUBSCRIPTION_FAIL:
+      return { ...state, updatingSubscription: false }
+
+    case DELETE_SUBSCRIPTION:
+      return { ...state, deletingSubscription: true }
+
     case DELETE_SUBSCRIPTION_SUCCESS: {
-      return { ...state }
+      const userInformation = {
+        ...state.user,
+        subscription: null
+      }
+
+      return { ...state, user: userInformation, deletingSubscription: true }
     }
+
+    case DELETE_SUBSCRIPTION_FAIL:
+      return { ...state, deletingSubscription: true }
 
     case CREATE_USER_SUCCESS:
       return { ...state, user: action.user, fetchingUser: false }

@@ -11,11 +11,11 @@ const SettingsSubSection = ({ label, icon: Icon, children, subText }) => (
       <p className="semibold">{label} {subText && <span className="label"> - {subText}</span>}</p>
     </div>
 
+    <hr />
+
     <div styleName="section-body">
       {children}
     </div>
-
-    <hr />
   </div>
 )
 

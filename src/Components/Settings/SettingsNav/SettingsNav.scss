@@ -2,7 +2,8 @@
   background-color: #fff;
   height: 100%;
   width: 180px;
-  border-right: 1px solid var(--light-gray);
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
 
   .header {
     text-align: center;

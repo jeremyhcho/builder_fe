@@ -47,10 +47,10 @@ class Settings extends React.Component {
         <SettingsNav {...routerProps} />
 
         <div styleName="settings-content">
-          <div styleName="settings-header">
+          {/* <div styleName="settings-header">
             <p className="semibold">{this.getCurrentRoute().header}</p>
             <p className="label small">{this.getCurrentRoute().subText}</p>
-          </div>
+          </div> */}
 
           {
             fetchingBilling ? (

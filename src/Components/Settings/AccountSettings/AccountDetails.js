@@ -2,12 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { reduxForm, Field } from 'redux-form'
+import { Row } from 'react-styled-flexboxgrid'
 
 // Components
 import { Input, FieldInput, Button, Modal } from 'Components/Common'
 
 // Validators
 import { minChar, presence, equality } from 'Helpers/Validators'
+
+// CSS
+import './AccountSettings.scss'
 
 const minChar8 = minChar(8)
 const equalityPassword = equality('Current password')
@@ -79,15 +83,31 @@ class AccountDetails extends React.Component {
 
     return (
       <div>
-        <Input disabled placeholder={email} label="Email" />
+        <Row middle='xs' styleName="row">
+          <div styleName="col">
+            <p>Email:</p>
+          </div>
 
-        <p
-          onClick={this.togglePasswordChange}
-          className="link"
-          style={{ margin: '20px 0' }}
-        >
-          Change password
-        </p>
+          <div>
+            <Input disabled placeholder={email} />
+          </div>
+        </Row>
+
+        <Row middle='xs' styleName="row">
+          <div styleName="col">
+            <p>Password:</p>
+          </div>
+
+          <div>
+            <p
+              onClick={this.togglePasswordChange}
+              className="link"
+            >
+              Change password
+            </p>
+          </div>
+        </Row>
+
         {this.renderPasswordChange()}
       </div>
     )

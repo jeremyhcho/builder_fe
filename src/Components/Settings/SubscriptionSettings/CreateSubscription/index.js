@@ -7,6 +7,7 @@ import { reduxForm } from 'redux-form'
 // Components
 import CreatePlan from './CreatePlan'
 import CreatePayment from './CreatePayment'
+import SettingsSubSection from '../../Blocks/SettingsSubSection'
 
 // Actions
 import { createBillingInformation } from 'Actions'
@@ -38,12 +39,11 @@ class CreateSubscription extends React.Component {
   render () {
     return (
       <div>
-        <p style={{ textAlign: 'center', marginBottom: '25px' }}>
-          Choose a payment plan and then fill out the payment information provided below
-          to get started with our services.
-        </p>
         <form onSubmit={this.props.handleSubmit(this.submitForm)}>
-          <CreatePlan selectPlan={this.selectPlan} />
+          <SettingsSubSection label="Choose a plan">
+            <CreatePlan selectPlan={this.selectPlan} />
+          </SettingsSubSection>
+
           <CreatePayment
             planSelected={this.state.planSelected}
             toggle={this.togglePlanSelected}

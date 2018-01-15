@@ -11,7 +11,7 @@ import Styleguide from 'Components/Styleguide'
 // Global CSS
 import './Assets/Stylesheets/Main.scss'
 
-const rootEl = document.getElementById('root')
+const rootEl = document.getElementById('styleguide')
 
 ReactDOM.render(
   <AppContainer>

@@ -26,10 +26,7 @@ class EditSubscription extends React.Component {
   render () {
     return (
       <div>
-        <div style={{ textAlign: 'center', marginBottom: '25px', lineHeight: '20px' }}>
-          <p>
-            Choose a plan
-          </p>
+        <div style={{ textAlign: 'center', marginBottom: '25px' }}>
           <p onClick={this.props.toggle} className="link">
             Go back to your subscriptions
           </p>
@@ -46,7 +43,7 @@ class EditSubscription extends React.Component {
           />
         </div>
 
-        <p style={{ textAlign: 'center', marginTop: '25px' }}>
+        <p style={{ textAlign: 'center', margin: '10px 0' }}>
           Click {' '}
           <span
             className="link"
@@ -54,7 +51,7 @@ class EditSubscription extends React.Component {
           >
             here
           </span>
-          {' '}to cancel your current subscription
+          {' '} to cancel your current subscription
         </p>
       </div>
     )

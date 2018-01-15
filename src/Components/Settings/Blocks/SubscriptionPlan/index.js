@@ -16,6 +16,10 @@ const initialStyle = {
   transition: 'all 200ms ease'
 }
 
+const buttonStyle = {
+  marginTop: '20px'
+}
+
 class SubscriptionPlan extends React.Component {
   state = {
     style: initialStyle
@@ -50,7 +54,7 @@ class SubscriptionPlan extends React.Component {
     if (plan === 'advanced-plan') {
       return (
         <Button
-          style={{ marginTop: '15px' }}
+          style={buttonStyle}
           disabled
         >
           This plan is currently unavailable
@@ -60,7 +64,7 @@ class SubscriptionPlan extends React.Component {
 
     return (
       <Button
-        style={{ marginTop: '15px' }}
+        style={buttonStyle}
         onClick={this.selectPlan}
         type="button"
       >

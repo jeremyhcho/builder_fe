@@ -48,7 +48,7 @@ class PaymentSettings extends React.Component {
 
   renderUnsubscribedUser () {
     return (
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', marginBottom: '10px' }}>
         <AlertIcon style={{ marginBottom: '10px', opacity: '0.7' }} />
         <p>You are not subscribed to any plans on your Quartz account.</p>
         <p>Click <Link to="/settings/subscription" style={{ color: 'var(--blue)' }}>here</Link> to subscribe for a payment plan.</p>
@@ -87,7 +87,7 @@ class PaymentSettings extends React.Component {
     const { billing, userId, handleSubmit } = this.props
 
     return (
-      <div styleName="card-settings">
+      <div>
         {
           !Object.keys(billing).length ? (
             this.renderUnsubscribedUser()
