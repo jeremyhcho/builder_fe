@@ -51,7 +51,7 @@ class EditSubscription extends React.Component {
             deletingSubscription ? (
               <Spinner show xs />
             ) : (
-              <p>
+              <p style={{ marginTop: '15px' }}>
                 Click {' '}
                 <span
                   className="link"

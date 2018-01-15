@@ -26,7 +26,7 @@ const CanceledSubscriptions = ({ canceledSubscriptions }) => {
                 </div>
               </Row>
 
-              <Row middle='xs' style={{ margin: '0 0 10px' }}>
+              <Row middle='xs' styleName="row">
                 <div styleName="col">
                   <p>Subscription created: </p>
                 </div>
@@ -34,7 +34,10 @@ const CanceledSubscriptions = ({ canceledSubscriptions }) => {
                   {convertUnix(subscription.created)}
                 </div>
               </Row>
-              <p styleName="row" className="label">This subscription will end at {convertUnix(subscription.current_period_end)} and will not be billed</p>
+
+              <Row middle='xs' styleName="row">
+                <p className="label">This subscription will end at {convertUnix(subscription.current_period_end)} and will not be billed</p>
+              </Row>
             </div>
           )
         })

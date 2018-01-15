@@ -78,7 +78,6 @@ function* getInjuries ({ id }) {
 function* getLines ({ matchId }) {
   try {
     const lines = yield call(getNBALines, matchId)
-    console.log('fetched lines: ', lines)
     yield put(fetchNBALinesSuccess(lines))
   } catch ({ response }) {
     console.log('no vegas lines found: ', response)
