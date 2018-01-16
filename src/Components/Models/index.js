@@ -44,18 +44,20 @@ class Models extends React.Component {
 
     if (!modelList.length) {
       return (
-        <div styleName="model-overlay">
-          <div style={{ textAlign: 'center' }}>
-            <NoModelsIcon height={256} width={256} />
+        <Row style={{ position: 'relative', height: '100%' }}>
+          <div styleName="model-overlay">
+            <div style={{ textAlign: 'center' }}>
+              <NoModelsIcon height={256} width={256} />
 
-            <h1 className="bold" style={{ marginTop: '15px' }}>
-              Ready to get started?
-            </h1>
-            <p className='semibold' style={{ marginTop: '5px' }}>
-              Create your first model by clicking the 'Create Model' button
-            </p>
+              <h1 className="bold" style={{ marginTop: '15px' }}>
+                Ready to get started?
+              </h1>
+              <p className='semibold' style={{ marginTop: '5px' }}>
+                Create your first model by clicking the 'Create Model' button
+              </p>
+            </div>
           </div>
-        </div>
+        </Row>
       )
     }
 
@@ -112,9 +114,7 @@ class Models extends React.Component {
           }
         </Row>
 
-        <Row style={{ position: 'relative', height: '100%' }}>
-          {this.renderModels()}
-        </Row>
+        {this.renderModels()}
       </div>
     )
   }
