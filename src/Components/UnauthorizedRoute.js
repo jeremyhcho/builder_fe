@@ -22,7 +22,7 @@ const UnauthorizedRoute = ({
     <Route
       {...rest}
       render={componentProps => {
-        return (authorized && user.is_verified) ? (
+        return (user.is_verified || (authorized && !user.is_verified)) ? (
           <Redirect to={redirectUrl} />
         ) : (
           <Component {...componentProps} />

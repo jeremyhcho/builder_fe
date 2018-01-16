@@ -1,7 +1,6 @@
 import {
   AUTHORIZE,
   UNAUTHORIZE,
-  FETCH_USER_SUCCESS,
   CREATE_USER_SUCCESS,
   FETCH_BILLING,
   FETCH_BILLING_SUCCESS,
@@ -21,8 +20,7 @@ import {
   UPDATE_SUBSCRIPTION_FAIL,
   DELETE_SUBSCRIPTION,
   DELETE_SUBSCRIPTION_SUCCESS,
-  DELETE_SUBSCRIPTION_FAIL,
-  LOGIN_SUCCESS
+  DELETE_SUBSCRIPTION_FAIL
 } from 'Constants'
 
 const initialState = {
@@ -41,13 +39,10 @@ const initialState = {
 const authState = (state = initialState, action) => {
   switch (action.type) {
     case AUTHORIZE:
-      return { ...state, authorized: true, fetchingUser: false }
+      return { ...state, authorized: true, fetchingUser: false, user: action.user }
 
     case UNAUTHORIZE:
-      return { ...state, authorized: false, fetchingUser: false }
-
-    case FETCH_USER_SUCCESS:
-      return { ...state, user: action.user, fetchingUser: false }
+      return { ...state, authorized: false, fetchingUser: false, user: {} }
 
     // Billing Actions
     case FETCH_BILLING:
@@ -159,9 +154,6 @@ const authState = (state = initialState, action) => {
 
     case CREATE_USER_SUCCESS:
       return { ...state, user: action.user, fetchingUser: false }
-
-    case LOGIN_SUCCESS:
-      return { ...state, user: action.user.data }
 
     default:
       return state

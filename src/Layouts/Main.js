@@ -32,7 +32,8 @@ import Lock from 'Assets/Icons/auth/lock.svg'
 // Actions
 import {
   receivePusherNotification,
-  resendVerificationEmail
+  resendVerificationEmail,
+  logoutUser
 } from 'Actions'
 
 const MainLayout = ({
@@ -40,7 +41,8 @@ const MainLayout = ({
   isVerified,
   sendingEmail,
   receivePusherNotification,
-  resendVerificationEmail
+  resendVerificationEmail,
+  logoutUser
 }) => {
   const sendVerificationEmail = () => resendVerificationEmail(userId)
 
@@ -73,6 +75,14 @@ const MainLayout = ({
               Resend email verification
             </Button>
           </div>
+
+          <p
+            className='small'
+            style={{ marginTop: '15px', cursor: 'pointer' }}
+            onClick={logoutUser}
+          >
+            Login to a different user
+          </p>
         </div>
       </main>
     )
@@ -122,7 +132,8 @@ MainLayout.propTypes = {
   receivePusherNotification: PropTypes.func.isRequired,
   isVerified: PropTypes.bool.isRequired,
   resendVerificationEmail: PropTypes.func.isRequired,
-  sendingEmail: PropTypes.bool.isRequired
+  sendingEmail: PropTypes.bool.isRequired,
+  logoutUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
@@ -133,7 +144,8 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   receivePusherNotification,
-  resendVerificationEmail
+  resendVerificationEmail,
+  logoutUser
 }
 
 export default connect(
