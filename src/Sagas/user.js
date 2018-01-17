@@ -41,10 +41,13 @@ import {
   FETCH_SUBSCRIPTION_FAIL,
   CREATE_SUBSCRIPTION,
   CREATE_SUBSCRIPTION_SUCCESS,
+  CREATE_SUBSCRIPTION_FAIL,
   UPDATE_SUBSCRIPTION,
   UPDATE_SUBSCRIPTION_SUCCESS,
+  UPDATE_SUBSCRIPTION_FAIL,
   DELETE_SUBSCRIPTION,
   DELETE_SUBSCRIPTION_SUCCESS,
+  DELETE_SUBSCRIPTION_FAIL
 } from 'Constants'
 
 // Actions
@@ -131,6 +134,7 @@ function* callCreateSubscription ({ plan }) {
     yield put({ type: CREATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
     yield put(openSnackbar('Subscription created', 3000))
   } catch ({ response }) {
+    yield put({ type: CREATE_SUBSCRIPTION_FAIL })
     console.log('Failed to create subscription')
   }
 }
@@ -141,6 +145,7 @@ function* callUpdateSubscription ({ userId, plan }) {
     yield put({ type: UPDATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
     yield put(openSnackbar('Subscription updated', 3000))
   } catch ({ response }) {
+    yield put({ type: UPDATE_SUBSCRIPTION_FAIL })
     console.log('Failed to update subscription')
   }
 }
@@ -160,6 +165,7 @@ function* callDeleteSubscription ({ userId }) {
     yield put({ type: DELETE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
     yield put(openSnackbar('Subscription deleted', 3000))
   } catch ({ response }) {
+    yield put({ type: DELETE_SUBSCRIPTION_FAIL })
     console.log('Failed to delete subscription')
   }
 }

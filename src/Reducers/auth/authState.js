@@ -27,7 +27,10 @@ import {
 
 const initialState = {
   authorized: false,
-  user: {},
+  user: {
+    billing: null,
+    subscription: null
+  },
   fetchingBilling: false,
   fetchingSubscription: false,
   updatingBilling: false,

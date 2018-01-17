@@ -23,8 +23,10 @@ class PointsGraph extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchNBATeamStats, idProp } = this.props
-    fetchNBATeamStats(idProp)
+    const { fetchNBATeamStats, matchId, teamStats } = this.props
+    if (!teamStats) {
+      fetchNBATeamStats(matchId)
+    }
   }
 
   componentWillReceiveProps (newProps) {
@@ -274,7 +276,7 @@ PointsGraph.propTypes = {
   teamStats: PropTypes.object,
   summary: PropTypes.object,
   fetchNBATeamStats: PropTypes.func.isRequired,
-  idProp: PropTypes.string.isRequired
+  matchId: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({

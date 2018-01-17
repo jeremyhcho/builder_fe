@@ -17,8 +17,8 @@ import { colorComparator } from 'Helpers'
 
 class KeyStats extends React.Component {
   componentDidMount () {
-    const { fetchNBAKeyStats, idProp } = this.props
-    fetchNBAKeyStats(idProp)
+    const { fetchNBAKeyStats, matchId } = this.props
+    fetchNBAKeyStats(matchId)
   }
 
   determineColors () {
@@ -150,7 +150,7 @@ KeyStats.defaultProps = {
 KeyStats.propTypes = {
   keyStats: PropTypes.object,
   summary: PropTypes.object,
-  idProp: PropTypes.string.isRequired,
+  matchId: PropTypes.string.isRequired,
   fetchNBAKeyStats: PropTypes.func.isRequired
 }
 

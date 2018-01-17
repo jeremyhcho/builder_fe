@@ -46,7 +46,7 @@ const ActiveSubscriptions = ({ subscription, toggleShowPlans }) => {
           </div>
         </Row>
 
-        <p styleName="end-row" className="label">
+        <p styleName="row" className="label">
           Click {' '}
           <span
             className="link"

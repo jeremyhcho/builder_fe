@@ -15,7 +15,7 @@ import './Overview.scss'
 
 class VegasLines extends React.Component {
   componentDidMount () {
-    this.props.fetchNBALines(this.props.idProp)
+    this.props.fetchNBALines(this.props.matchId)
   }
 
   render () {
@@ -27,6 +27,10 @@ class VegasLines extends React.Component {
           <OverviewSpinner label='Vegas Lines' />
         </div>
       )
+    }
+
+    if (!lines.length) {
+      return 'NO VEGAS LINES'
     }
 
     return (
@@ -90,7 +94,7 @@ VegasLines.defaultProps = {
 VegasLines.propTypes = {
   fetchNBALines: PropTypes.func.isRequired,
   lines: PropTypes.array,
-  idProp: PropTypes.string.isRequired,
+  matchId: PropTypes.string.isRequired,
   summary: PropTypes.object
 }
 

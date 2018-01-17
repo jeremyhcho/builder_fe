@@ -26,11 +26,13 @@ class CompletedGameDetails extends React.Component {
       { label: 'Player Stats', key: 'players' },
       { label: 'Team Stats', key: 'teams' }
     ]
+
     const path = this.props.location.pathname.split('/')
     const route = path.slice(path.length - 1)[0]
     let routeKey
     if (!isNaN(route)) routeKey = 'overview'
     else routeKey = route
+
     return (
       <div styleName="game-details completed">
         <Row styleName="tabs">

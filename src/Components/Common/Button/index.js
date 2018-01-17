@@ -42,7 +42,15 @@ const Button = ({
       {...props}
     >
       {!loading && children}
-      {loading && <Spinner xs show style={{ marginBottom: '3px' }} color="#fff" /> }
+      {
+        loading &&
+        <Spinner
+          xs
+          show
+          style={{ marginBottom: '3px' }}
+          color={flat ? null : '#fff'}
+        />
+      }
     </button>
   )
 }

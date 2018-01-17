@@ -37,7 +37,11 @@ class SubscriptionDetails extends React.Component {
             subscription={subscription}
           />
 
-          <CanceledSubscriptions canceledSubscriptions={canceledSubscriptions} />
+          {
+            canceledSubscriptions.length ? (
+              <CanceledSubscriptions canceledSubscriptions={canceledSubscriptions} />
+            ) : null
+          }
         </SettingsSubSection>
 
         {
@@ -57,7 +61,7 @@ class SubscriptionDetails extends React.Component {
 
 SubscriptionDetails.defaultProps = {
   subscription: null,
-  canceledSubscriptions: []
+  canceledSubscriptions: null
 }
 
 SubscriptionDetails.propTypes = {

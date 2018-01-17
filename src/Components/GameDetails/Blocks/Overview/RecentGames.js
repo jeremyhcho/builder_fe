@@ -20,8 +20,8 @@ class RecentGames extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchNBARecentGames, idProp } = this.props
-    fetchNBARecentGames(idProp)
+    const { fetchNBARecentGames, matchId } = this.props
+    fetchNBARecentGames(matchId)
   }
 
   parseStreak () {
@@ -164,7 +164,7 @@ RecentGames.defaultProps = {
 }
 
 RecentGames.propTypes = {
-  idProp: PropTypes.string.isRequired,
+  matchId: PropTypes.string.isRequired,
   fetchNBARecentGames: PropTypes.func.isRequired,
   recentGames: PropTypes.object,
   summary: PropTypes.object

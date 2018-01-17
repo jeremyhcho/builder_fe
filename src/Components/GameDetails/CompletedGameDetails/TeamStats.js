@@ -13,15 +13,15 @@ const TeamStats = ({ match }) => (
   <div style={{ maxWidth: '1300px' }}>
     <Row>
       <Col xs={12}>
-        <PointsGraph idProp={match.params.id} />
+        <PointsGraph matchId={match.params.id} />
       </Col>
     </Row>
     <Row>
       <Col xs={6}>
-        <Statistics idProp={match.params.id} />
+        <Statistics matchId={match.params.id} />
       </Col>
       <Col xs={6}>
-        <KeyStats idProp={match.params.id} />
+        <KeyStats matchId={match.params.id} />
       </Col>
     </Row>
   </div>

@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Tab } from 'Components/Common'
-// import { Overview, Models } from './Sections'
+import Overview from './Overview'
+import ModelView from './ModelView'
+import Trends from './Trends'
+import Matchup from './Matchup'
 
 // CSS
 import '../GameDetails.scss'
@@ -20,13 +23,16 @@ class ScheduledGameDetails extends React.Component {
     const tabItems = [
       { label: 'Overview', key: 'overview' },
       { label: 'Models', key: 'models' },
-      { label: 'TBD', key: 'tbd' }
+      { label: 'Matchup', key: 'matchup' },
+      { label: 'Trends', key: 'trends' }
     ]
+
     const path = this.props.location.pathname.split('/')
     const route = path.slice(path.length - 1)[0]
     let routeKey
     if (!isNaN(route)) routeKey = 'overview'
     else routeKey = route
+
     return (
       <div styleName="game-details scheduled">
         <Row styleName="tabs">
@@ -40,12 +46,13 @@ class ScheduledGameDetails extends React.Component {
           </Col>
         </Row>
         <div className="matches-scroller" styleName="section">
-          Scheduled Game... Under construction
-          {/* <Switch>
+          <Switch>
             <Route exact path='/games/:id/overview' component={Overview} />
-            <Route exact path='/games:id/models' component={Models} />
+            <Route exact path='/games/:id/models' component={ModelView} />
+            <Route exact path='/games/:id/trends' component={Trends} />
+            <Route exact path='/games/:id/matchup' component={Matchup} />
             <Redirect to={`/games/${this.props.match.params.id}/overview`} />
-          </Switch> */}
+          </Switch>
         </div>
       </div>
     )

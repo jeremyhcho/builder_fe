@@ -16,7 +16,7 @@ import './Overview.scss'
 
 class StartingLineup extends React.Component {
   componentDidMount () {
-    this.props.fetchNBAStartingLineup(this.props.idProp)
+    this.props.fetchNBAStartingLineup(this.props.matchId)
   }
 
   formattedLineups () {
@@ -134,7 +134,7 @@ StartingLineup.defaultProps = {
 StartingLineup.propTypes = {
   startingLineup: PropTypes.array,
   fetchNBAStartingLineup: PropTypes.func.isRequired,
-  idProp: PropTypes.string.isRequired,
+  matchId: PropTypes.string.isRequired,
   summary: PropTypes.object
 }
 

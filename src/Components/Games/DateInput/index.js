@@ -39,7 +39,7 @@ class DateInput extends React.Component {
     const lastDateOfMonth = moment().daysInMonth()
     const dayOfLastDate = moment().date(lastDateOfMonth).day()
     const disabledDates = []
-    for (let i = moment().date() + 2; i <= lastDateOfMonth + (7 - dayOfLastDate); i++) {
+    for (let i = moment().date() + 1; i < lastDateOfMonth + (14 - dayOfLastDate); i++) {
       disabledDates.push(moment().date(i).format('YYYY-MM-DD'))
     }
     return disabledDates

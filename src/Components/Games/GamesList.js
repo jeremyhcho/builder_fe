@@ -26,11 +26,17 @@ class GamesList extends React.Component {
     // check dates when date is selected
     const { games } = this.props
 
-    if (games.length && moment(games[games.length - 1].date._i).isSame(moment().add(1, 'day'), 'days')) {
+    if (games.length && moment(games[games.length - 1].date._i).isSame(moment(), 'days')) {
       this.setState({ disableNextPagination: true })
     } else {
       this.setState({ disableNextPagination: false })
     }
+  }
+
+  componentDidMount () {
+    /* eslint-disable react/no-did-mount-set-state */
+    this.setState({ maxScrollHeight: this.scroller.scrollHeight })
+    /* eslint-enable react/no-did-mount-set-state */
   }
 
   componentWillReceiveProps (newProps) {
@@ -38,7 +44,7 @@ class GamesList extends React.Component {
     const { games } = newProps
     const lastGame = games[games.length - 1].date._i
 
-    if (moment(lastGame).startOf('day').diff(moment().add(1, 'days').startOf('day'), 'days') >= 0) {
+    if (moment(lastGame).startOf('day').diff(moment().startOf('day'), 'days') >= 0) {
       this.setState({ disableNextPagination: true })
     } else {
       this.setState({ disableNextPagination: false })

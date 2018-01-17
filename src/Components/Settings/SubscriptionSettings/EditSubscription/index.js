@@ -4,12 +4,22 @@ import { connect } from 'react-redux'
 
 // Components
 import SubscriptionPlan from '../../Blocks/SubscriptionPlan'
-import { Spinner } from 'Components/Common'
+import { Spinner, Button } from 'Components/Common'
 
 // Actions
 import { deleteSubscriptionPlan, updateSubscriptionPlan, createSubscriptionPlan } from 'Actions'
 
 class EditSubscription extends React.Component {
+  componentWillReceiveProps (newProps) {
+    if (!newProps.deletingSubscription && this.props.deletingSubscription) {
+      this.props.toggle()
+    }
+
+    if (!newProps.creatingingSubscription && this.props.creatingSubscription) {
+      this.props.toggle()
+    }
+  }
+
   cancelSubscription = () => {
     this.props.deleteSubscriptionPlan(this.props.userId)
   }
@@ -25,7 +35,7 @@ class EditSubscription extends React.Component {
   }
 
   render () {
-    const { deletingSubscription } = this.props
+    const { deletingSubscription, subscription } = this.props
 
     return (
       <div>
@@ -51,16 +61,13 @@ class EditSubscription extends React.Component {
             deletingSubscription ? (
               <Spinner show xs />
             ) : (
-              <p style={{ marginTop: '15px' }}>
-                Click {' '}
-                <span
-                  className="link"
-                  onClick={this.cancelSubscription}
-                >
-                  here
-                </span>
-                {' '} to cancel your current subscription
-              </p>
+              <Button
+                flat={subscription ? true : subscription}
+                disabled={!subscription}
+                onClick={this.cancelSubscription}
+              >
+                Cancel current subscription
+              </Button>
             )
           }
         </div>
@@ -79,6 +86,7 @@ EditSubscription.propTypes = {
   updateSubscriptionPlan: PropTypes.func.isRequired,
   createSubscriptionPlan: PropTypes.func.isRequired,
   deletingSubscription: PropTypes.bool.isRequired,
+  creatingSubscription: PropTypes.bool.isRequired,
   subscription: PropTypes.object,
   userId: PropTypes.number.isRequired
 }
@@ -86,7 +94,8 @@ EditSubscription.propTypes = {
 const mapStateToProps = ({ auth }) => ({
   userId: auth.authState.user.id,
   subscription: auth.authState.user.subscription,
-  deletingSubscription: auth.authState.deletingSubscription
+  deletingSubscription: auth.authState.deletingSubscription,
+  creatingSubscription: auth.authState.creatingSubscription
 })
 
 const mapDispatchToProps = {

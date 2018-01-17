@@ -20,7 +20,7 @@ const Overview = ({ match }) => (
     </Col>
 
     <Col xs={12}>
-      <Quarters idProp={match.params.id} />
+      <Quarters matchId={match.params.id} />
     </Col>
 
     <Col xs={6}>
@@ -28,19 +28,19 @@ const Overview = ({ match }) => (
     </Col>
 
     <Col xs={6}>
-      <VegasLines idProp={match.params.id} />
+      <VegasLines matchId={match.params.id} />
     </Col>
 
     <Col xs={7}>
-      <StartingLineup idProp={match.params.id} />
+      <StartingLineup matchId={match.params.id} />
     </Col>
 
     <Col xs={5}>
-      <RecentGames idProp={match.params.id} />
+      <RecentGames matchId={match.params.id} />
     </Col>
 
     <Col xs={7}>
-      <Injuries idProp={match.params.id} />
+      <Injuries matchId={match.params.id} />
     </Col>
   </Row>
 )

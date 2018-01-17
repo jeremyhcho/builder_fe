@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 
 // Component
 import { Card } from 'Components/Common'
@@ -26,7 +27,7 @@ const STATUS_TEXTS = {
 
 class Injuries extends React.Component {
   componentDidMount () {
-    this.props.fetchNBAInjuries(this.props.idProp)
+    this.props.fetchNBAInjuries(this.props.matchId)
   }
 
   disableBodyScroll = () => {
@@ -40,8 +41,12 @@ class Injuries extends React.Component {
   render () {
     const { injuries, summary } = this.props
 
+    const injuriesStyle = classNames('injuries', {
+      noMargin: summary.status !== 'CLOSED'
+    })
+
     return (
-      <div styleName='injuries'>
+      <div styleName={injuriesStyle}>
         {
           injuries && summary ? (
             <Card label='Injuries' wrapperStyle={{ padding: '25px 0 25px' }}>
@@ -149,7 +154,7 @@ Injuries.defaultProps = {
 }
 
 Injuries.propTypes = {
-  idProp: PropTypes.string.isRequired,
+  matchId: PropTypes.string.isRequired,
   injuries: PropTypes.object,
   fetchNBAInjuries: PropTypes.func.isRequired,
   summary: PropTypes.object

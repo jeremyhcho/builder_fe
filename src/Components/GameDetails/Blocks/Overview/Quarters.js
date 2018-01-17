@@ -25,7 +25,7 @@ class Quarters extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchNBAQuarters(this.props.idProp)
+    this.props.fetchNBAQuarters(this.props.matchId)
   }
 
   quarterStatsFactory () {
@@ -134,7 +134,7 @@ Quarters.defaultProps = {
 Quarters.propTypes = {
   quarters: PropTypes.object,
   summary: PropTypes.object,
-  idProp: PropTypes.string.isRequired,
+  matchId: PropTypes.string.isRequired,
   fetchNBAQuarters: PropTypes.func.isRequired
 }
 

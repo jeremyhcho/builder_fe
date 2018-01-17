@@ -124,6 +124,10 @@
 .injuries {
   margin-top: -75px;
 
+  &.noMargin {
+    margin-top: 0;
+  }
+
   .headers {
     display: flex;
     padding: 0 35px 25px;
