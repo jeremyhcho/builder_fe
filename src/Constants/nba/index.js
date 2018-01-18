@@ -1,6 +1,6 @@
 // games
 export * from './games'
-export * from './games/gamesDetails'
+export * from './games/gameDetails'
 
 // teams
 export * from './teams'

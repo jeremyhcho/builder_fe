@@ -1,7 +1,6 @@
 import React from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import classNames from 'classnames'
 
 // Components
 import LoginForm from './LoginForm'
@@ -37,6 +36,16 @@ class Login extends React.Component {
           </h1>
         </div>
 
+        {
+          this.state.loginError &&
+          <div styleName="error-dialog">
+            <p>Incorrect email address and / or password.</p>
+            <p>
+              Do you need help <Link className='link' to={{ pathname: '/auth/forgot' }}>logging in?</Link>
+            </p>
+          </div>
+        }
+
         <LoginForm />
 
         <div styleName="login-links">
@@ -63,22 +72,10 @@ class Login extends React.Component {
   }
 }
 
-/* <div styleName={errorDialog}>
-  <div onClick={this.closeErrorDialog}>
-    <i className="fa fa-times" aria-hidden="true" />
-  </div>
-  <p>Incorrect email address and / or password.</p>
-  <p>
-    Do you need help <Link className='link' to={{ pathname: '/auth/forgot' }}>logging in?</Link>
-  </p>
-</div> */
+const mapStateToProps = ({ auth }) => ({
+  loginError: auth.login.error
+})
 
-// const mapStateToProps = ({ auth }) => ({
-//   loginError: auth.login.error
-// })
-
-// export default connect(
-//   mapStateToProps
-// )(Login)
-
-export default Login
+export default connect(
+  mapStateToProps
+)(Login)

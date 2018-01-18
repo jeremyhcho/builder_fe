@@ -9,7 +9,7 @@ import {
   Card,
   Button
 } from 'Components/Common'
-import OverviewSpinner from './OverviewSpinner'
+import OverviewSpinner from 'Components/GameDetails/Blocks/OverviewSpinner'
 
 // CSS
 import './Overview.scss'

@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 // Component
 import { Card } from 'Components/Common'
-import OverviewSpinner from './OverviewSpinner'
+import OverviewSpinner from 'Components/GameDetails/Blocks/OverviewSpinner'
 
 // Actions
 import { fetchNBAInjuries } from 'Actions'

@@ -91,7 +91,7 @@ class Models extends React.Component {
     return (
       <div styleName="models">
         <Row>
-          <Col xsOffset={10} xs={2}>
+          <Col xs={2}>
             <Button
               onClick={this.toggleModal}
               style={{ position: 'relative' }}

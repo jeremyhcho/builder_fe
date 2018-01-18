@@ -1,5 +1,4 @@
 export { default as GameLeaders } from './GameLeaders'
-export { default as OverviewSpinner } from './OverviewSpinner'
 export { default as Quarters } from './Quarters'
 export { default as RecentGames } from './RecentGames'
 export { default as StartingLineup } from './StartingLineup'

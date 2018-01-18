@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects'
 // games
 import gamesSaga from './games'
-import gameDetailsSaga from './games/gamesDetails'
+import gameDetailsSaga from './games/gameDetails'
 
 // teams
 import teamsSaga from './teams'
