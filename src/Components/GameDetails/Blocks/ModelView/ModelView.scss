@@ -61,6 +61,17 @@
     &:last-child {
       border-bottom: 0;
     }
+
+    .spread {
+      p {
+        display: inline-block;
+        margin-right: 3px;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
   }
 }
 

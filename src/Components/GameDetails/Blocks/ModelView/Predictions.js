@@ -10,9 +10,29 @@ import { Card } from 'Components/Common'
 import './ModelView.scss'
 
 class Predictions extends React.Component {
+  convertNumber (num) {
+    if (num > 0) {
+      return (
+        <p className="semibold" style={{ color: 'var(--green)' }}>
+          (+{num})
+        </p>
+      )
+    }
+
+    return (
+      <p className="semibold" style={{ color: 'var(--red)' }}>
+        ({num})
+      </p>
+    )
+  }
+
   render () {
-    const { summary } = this.props
+    const { summary, prediction } = this.props
     const teamNamesStyle = { textAlign: 'left', display: 'inline-block' }
+
+    if (!Object.keys(prediction).length) {
+      return <div />
+    }
 
     return (
       <Card label="Prediction" styleName="prediction">
@@ -39,11 +59,27 @@ class Predictions extends React.Component {
           </Col>
 
           <Col xs={4}>
-            Spread
+            <div styleName='spread'>
+              <p className="semibold">{prediction.vegas_away_line.spread}</p>
+              {
+                this.convertNumber(
+                  Number(prediction.vegas_away_line.spread) +
+                  Number(prediction.home_points - prediction.away_points)
+                )
+              }
+            </div>
           </Col>
 
           <Col xs={4}>
-            Total
+            <div styleName='spread'>
+              <p className="semibold">O{prediction.vegas_away_line.total}</p>
+              {
+                this.convertNumber(
+                  Number(prediction.home_points + prediction.away_points) -
+                  Number(prediction.vegas_home_line.total)
+                )
+              }
+            </div>
           </Col>
         </Row>
 
@@ -56,11 +92,27 @@ class Predictions extends React.Component {
           </Col>
 
           <Col xs={4}>
-            Spread
+            <div styleName='spread'>
+              <p className="semibold">{prediction.vegas_home_line.spread}</p>
+              {
+                this.convertNumber(
+                  Number(prediction.vegas_home_line.spread) +
+                  Number(prediction.away_points - prediction.home_points)
+                )
+              }
+            </div>
           </Col>
 
           <Col xs={4}>
-            total_odds
+            <div styleName='spread'>
+              <p className="semibold">U{prediction.vegas_home_line.total}</p>
+              {
+                this.convertNumber(
+                  Number(prediction.vegas_home_line.total) -
+                  Number(prediction.home_points + prediction.away_points)
+                )
+              }
+            </div>
           </Col>
         </Row>
       </Card>
@@ -69,15 +121,20 @@ class Predictions extends React.Component {
 }
 
 Predictions.defaultProps = {
-  summary: {}
+  summary: {},
+  prediction: {}
 }
 
 Predictions.propTypes = {
-  summary: PropTypes.object
+  summary: PropTypes.object,
+  prediction: PropTypes.object
 }
 
 const mapStateToProps = ({ nba }) => ({
-  summary: nba.gameDetails.overview.summary
+  summary: nba.gameDetails.overview.summary,
+  prediction: nba.gameDetails.models.selectedModel.model.predictions.find(
+    prediction => prediction.match_id === nba.gameDetails.overview.summary.id
+  )
 })
 
 export default connect(

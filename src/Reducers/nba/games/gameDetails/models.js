@@ -3,38 +3,52 @@ import {
   FETCH_NBA_MATCHES_MODELS,
   FETCH_NBA_MATCHES_MODELS_SUCCESS,
   FETCH_NBA_MATCHES_MODELS_FAIL,
-  UPDATE_NBA_MATCHES_MODELS_SUCCESS,
-  CHANGE_SELECTED_MODEL
+  FETCH_NBA_MATCHES_MODELS_PREDICTION,
+  FETCH_NBA_MATCHES_MODELS_PREDICTION_SUCCESS,
+  FETCH_NBA_MATCHES_MODELS_PREDICTION_FAIL,
+  UPDATE_NBA_MATCHES_MODELS_SUCCESS
 } from 'Constants'
 
 const initialState = {
   selectedModel: {},
   matchesModels: [],
-  fetchingMatchesModels: false
+  fetchingMatchesModels: false,
+  fetchingPredictions: false
 }
 
 const models = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_SELECTED_MODEL:
-      return { ...state, selectedModel: action.model }
-
     case FETCH_NBA_MATCHES_MODELS:
-      return { ...state, fetchingMatchesModels: true }
+      return { ...state, fetchingMatchesModels: true, fetchingPredictions: true }
 
     case FETCH_NBA_MATCHES_MODELS_SUCCESS:
       return {
         ...state,
         matchesModels: action.matchesModels.data,
-        selectedModel: action.matchesModels.data.find(model => model.status === 'ACTIVE') || action.matchesModels.data[0],
         fetchingMatchesModels: false
       }
+
+    case FETCH_NBA_MATCHES_MODELS_PREDICTION:
+      return { ...state, fetchingPredictions: true }
+
+    case FETCH_NBA_MATCHES_MODELS_PREDICTION_SUCCESS:
+      return {
+        ...state,
+        selectedModel: action.modelPrediction.data,
+        fetchingPredictions: false
+      }
+
+    case FETCH_NBA_MATCHES_MODELS_PREDICTION_FAIL:
+      return { ...state, fetchingPredictions: false }
 
     case UPDATE_NBA_MATCHES_MODELS_SUCCESS:
       return {
         ...state,
-        matchesModels: state.matchesModels.map(model => {
-          if (model.id === action.matchesModels.data.id) return action.matchesModels.data
-          return model
+        matchesModels: state.matchesModels.map(matchModel => {
+          if (matchModel.id === action.matchesModels.data.id) {
+            return { ...matchModel, status: action.matchesModels.data.status }
+          }
+          return matchModel
         })
       }
 

@@ -24,9 +24,9 @@ class ModelView extends React.Component {
   }
 
   render () {
-    const { fetchingMatchesModels, matchesModels } = this.props
+    const { fetchingMatchesModels, matchesModels, fetchingPredictions } = this.props
 
-    if (fetchingMatchesModels) {
+    if (fetchingMatchesModels || fetchingPredictions) {
       // View when fetching models .. loader
       return <div />
     }
@@ -86,19 +86,21 @@ class ModelView extends React.Component {
 
 ModelView.defaultProps = {
   matchesModels: [],
-  summary: {}
+  summary: {},
 }
 
 ModelView.propTypes = {
   summary: PropTypes.object,
   matchesModels: PropTypes.array,
   fetchNBAMatchesModels: PropTypes.func.isRequired,
-  fetchingMatchesModels: PropTypes.bool.isRequired
+  fetchingMatchesModels: PropTypes.bool.isRequired,
+  fetchingPredictions: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
   matchesModels: nba.gameDetails.models.matchesModels,
   fetchingMatchesModels: nba.gameDetails.models.fetchingMatchesModels,
+  fetchingPredictions: nba.gameDetails.models.fetchingPredictions,
   summary: nba.gameDetails.overview.summary
 })
 

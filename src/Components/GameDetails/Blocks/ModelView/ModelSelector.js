@@ -10,7 +10,7 @@ import { Toggle } from 'Components/Common'
 import ChangeIcon from 'Assets/Icons/switch-arrows'
 
 // Actions
-import { changeSelectedModel, updateNBAMatchesModels } from 'Actions'
+import { fetchNBAMatchesModelsPrediction, updateNBAMatchesModels } from 'Actions'
 
 // CSS
 import './ModelView.scss'
@@ -21,17 +21,23 @@ class ModelSelector extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedModel.id !== this.props.selectedModel.id) {
+    if (newProps.selectedModel.id !== this.props.selectedModel.id && this.props.selectedModel.id) {
       this.openModels()
     }
   }
 
-  changeModel = (e, model) => {
-    if (this.toggleCol.contains(e.target)) {
+  componentWillUnmount () {
+    document.removeEventListener('click', this.handleOutsideClick, false)
+  }
+
+  changeModel = (e, matchModel) => {
+    const { selectedModel } = this.props
+
+    if (this.toggleCol.contains(e.target) || matchModel.id === selectedModel.id) {
       return null
     }
 
-    return this.props.changeSelectedModel(model)
+    return this.props.fetchNBAMatchesModelsPrediction(matchModel.id)
   }
 
   openModels = () => {
@@ -52,15 +58,15 @@ class ModelSelector extends React.Component {
     return this.openModels()
   }
 
-  changeModelStatus = (model) => {
+  changeModelStatus = (matchModel) => {
     let newStatus
-    if (model.status === 'ACTIVE') {
+    if (matchModel.status === 'ACTIVE') {
       newStatus = 'INACTIVE'
     } else {
       newStatus = 'ACTIVE'
     }
 
-    this.props.updateNBAMatchesModels(model.id, {
+    this.props.updateNBAMatchesModels(matchModel.id, {
       status: newStatus
     })
   }
@@ -74,29 +80,29 @@ class ModelSelector extends React.Component {
     return (
       <div styleName="model-list" ref={ref => this.modelsList = ref}>
         {
-          this.props.matchesModels.map(model => (
+          this.props.matchesModels.map(matchModel => (
             <Row
-              key={model.id}
+              key={matchModel.id}
               middle='xs'
               styleName="model-attr"
-              onClick={(e) => this.changeModel(e, model)}
+              onClick={(e) => this.changeModel(e, matchModel)}
             >
               <Col xs={6}>
                 <p className="label">Name</p>
-                <p className="semibold">{model.name}</p>
+                <p className="semibold">{matchModel.model.name}</p>
               </Col>
 
               <Col xs={4}>
                 <p className="label">Type</p>
-                <p className="semibold">{model.type[0].toUpperCase() + model.type.substr(1)}</p>
+                <p className="semibold">{matchModel.model.type[0].toUpperCase() + matchModel.model.type.substr(1)}</p>
               </Col>
 
               <Col xs={2}>
                 <div ref={ref => this.toggleCol = ref}>
                   <Toggle
-                    name={model.id}
-                    checked={this.checkModelStatus(model.status)}
-                    onChange={() => this.changeModelStatus(model)}
+                    name={matchModel.id}
+                    checked={this.checkModelStatus(matchModel.status)}
+                    onChange={() => this.changeModelStatus(matchModel)}
                   />
                 </div>
               </Col>
@@ -113,35 +119,35 @@ class ModelSelector extends React.Component {
     return (
       <div styleName="model-selector">
         <div styleName="model-name">
-          <h4 className="semibold">{selectedModel.name}</h4>
-          <ChangeIcon style={{ margin: '0 10px' }} onClick={this.openModels} />
+          <h4 className="semibold">{selectedModel.model.name}</h4>
+          <ChangeIcon style={{ margin: '0 10px', cursor: 'pointer' }} onClick={this.openModels} />
 
           {this.state.modelsOpen && this.renderModelList()}
         </div>
 
         <Row middle='xs' between='xs' styleName="model-stats">
           <div styleName="stats-card">
-            <h4 className="semibold">{selectedModel.type[0].toUpperCase() + selectedModel.type.substr(1)}</h4>
+            <h4 className="semibold">{selectedModel.model.type[0].toUpperCase() + selectedModel.model.type.substr(1)}</h4>
             <p className="label">Type</p>
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">13W - 27L</h4>
+            <h4 className="semibold">- - -</h4>
             <p className="label">Record</p>
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">100%</h4>
+            <h4 className="semibold">--%</h4>
             <p className="label">Win %</p>
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">3W</h4>
+            <h4 className="semibold">--W</h4>
             <p className="label">Streak</p>
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">3W - 2L</h4>
+            <h4 className="semibold">-W - -L</h4>
             <p className="label">Last 5</p>
           </div>
         </Row>
@@ -158,8 +164,8 @@ ModelSelector.defaultProps = {
 ModelSelector.propTypes = {
   matchesModels: PropTypes.array,
   selectedModel: PropTypes.object,
-  changeSelectedModel: PropTypes.func.isRequired,
-  updateNBAMatchesModels: PropTypes.func.isRequired
+  updateNBAMatchesModels: PropTypes.func.isRequired,
+  fetchNBAMatchesModelsPrediction: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
@@ -168,7 +174,7 @@ const mapStateToProps = ({ nba }) => ({
 })
 
 const mapDispatchToProps = {
-  changeSelectedModel,
+  fetchNBAMatchesModelsPrediction,
   updateNBAMatchesModels
 }
 
