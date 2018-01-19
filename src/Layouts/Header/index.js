@@ -12,7 +12,7 @@ import Notifications from './Notifications'
 import './Header.scss'
 
 // Assets
-import ProfileIcon from 'Assets/Icons/header/profile.svg'
+import ProfileIcon from 'Assets/Icons/profile.svg'
 import AccountSettingsIcon from 'Assets/Icons/settings/a-edit-2.svg'
 import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 

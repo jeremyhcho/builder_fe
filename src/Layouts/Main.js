@@ -17,7 +17,7 @@ import ModelsLayout from './Models'
 import { Button } from 'Components/Common'
 
 // Assets
-import Lock from 'Assets/Icons/auth/lock.svg'
+import Lock from 'Assets/Icons/lock.svg'
 
 // const CalendarContainer = Loadable({
 //   loader: () => import('../../containers/Calendar'),

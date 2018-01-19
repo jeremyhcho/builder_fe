@@ -11,7 +11,7 @@ import { Button } from 'Components/Common'
 import './Signup.scss'
 
 // Assets
-import PaperPlane from 'Assets/Icons/auth/paper-plane.svg'
+import PaperPlane from 'Assets/Icons/paper-plane.svg'
 
 // Actions
 import { resendVerificationEmail } from 'Actions'

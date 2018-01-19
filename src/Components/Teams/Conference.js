@@ -10,7 +10,7 @@ import { Card } from 'Components/Common'
 import './Teams.scss'
 
 // SVG
-import RightArrow from 'Assets/Icons/right_arrow.svg'
+import RightArrow from 'Assets/Icons/right-arrow.svg'
 
 class Conference extends React.Component {
   conferenceLabel () {

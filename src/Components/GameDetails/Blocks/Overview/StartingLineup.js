@@ -6,7 +6,7 @@ import { groupBy, sortBy } from 'lodash'
 
 // Components
 import { Card } from 'Components/Common'
-import OverviewSpinner from 'Components/GameDetails/Blocks/OverviewSpinner'
+import OverviewSpinner from './OverviewSpinner'
 
 // Actions
 import { fetchNBAStartingLineup } from 'Actions'

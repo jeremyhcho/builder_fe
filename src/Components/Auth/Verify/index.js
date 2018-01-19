@@ -11,8 +11,8 @@ import { verifyUser } from 'Actions'
 import './Verify.scss'
 
 // Assets
-import SuccessIcon from 'Assets/Icons/auth/success.svg'
-import ErrorIcon from 'Assets/Icons/auth/error.svg'
+import SuccessIcon from 'Assets/Icons/success.svg'
+import ErrorIcon from 'Assets/Icons/error.svg'
 
 class Verify extends React.Component {
   state = {

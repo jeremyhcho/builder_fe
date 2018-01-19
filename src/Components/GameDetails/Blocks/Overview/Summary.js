@@ -5,7 +5,7 @@ import { Row } from 'react-styled-flexboxgrid'
 
 // Components
 import { Card } from 'Components/Common'
-import OverviewSpinner from 'Components/GameDetails/Blocks/OverviewSpinner'
+import OverviewSpinner from './OverviewSpinner'
 
 // CSS
 import './Overview.scss'

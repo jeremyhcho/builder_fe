@@ -6,7 +6,7 @@ import { uniqueId } from 'lodash'
 
 // Components
 import { Card, ButtonGroup } from 'Components/Common'
-import OverviewSpinner from 'Components/GameDetails/Blocks/OverviewSpinner'
+import OverviewSpinner from './OverviewSpinner'
 
 // CSS
 import './Overview.scss'
