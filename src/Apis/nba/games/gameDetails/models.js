@@ -14,6 +14,14 @@ export const updateNBAMatchesModels = (modelId, params) => (
   })
 )
 
-export const getAggregateTotals = (matchId) => (
+export const getNBAAggregateTotals = (matchId) => (
   axios.get(`/api/nba/v1/matches/${matchId}/predictions/aggregate_totals`)
+)
+
+export const getNBAAggregateSpreads = (matchId, period) => (
+  axios.get(`/api/nba/v1/matches/${matchId}/predictions/aggregate_spreads`, {
+    params: {
+      recent_filter: period
+    }
+  })
 )

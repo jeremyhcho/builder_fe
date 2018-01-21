@@ -74,7 +74,7 @@ class ModelView extends React.Component {
           </Col>
         </Row>
 
-        <Row>
+        <Row style={{ marginTop: '-50px' }}>
           <Col xs={7}>
             <SpreadPrediction />
           </Col>

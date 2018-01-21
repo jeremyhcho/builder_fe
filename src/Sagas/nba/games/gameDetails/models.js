@@ -4,6 +4,8 @@ import { put, call, takeLatest, all } from 'redux-saga/effects'
 import {
   getNBAMatchesModels,
   getNBAMatchesModelsPrediction,
+  getNBAAggregateTotals,
+  getNBAAggregateSpreads,
   updateNBAMatchesModels
 } from 'Apis'
 
@@ -17,7 +19,13 @@ import {
   UPDATE_NBA_MATCHES_MODELS_FAIL,
   FETCH_NBA_MATCHES_MODELS_PREDICTION,
   FETCH_NBA_MATCHES_MODELS_PREDICTION_SUCCESS,
-  FETCH_NBA_MATCHES_MODELS_PREDICTION_FAIL
+  FETCH_NBA_MATCHES_MODELS_PREDICTION_FAIL,
+  FETCH_NBA_AGGREGATE_TOTALS,
+  FETCH_NBA_AGGREGATE_TOTALS_SUCCESS,
+  FETCH_NBA_AGGREGATE_TOTALS_FAIL,
+  FETCH_NBA_AGGREGATE_SPREADS,
+  FETCH_NBA_AGGREGATE_SPREADS_SUCCESS,
+  FETCH_NBA_AGGREGATE_SPREADS_FAIL,
 } from 'Constants'
 
 function* callFetchMatchesModels ({ matchId }) {
@@ -61,6 +69,26 @@ function* callUpdateMatchesModels ({ modelId, newStatus }) {
   }
 }
 
+function* callFetchAggregateTotals ({ matchId }) {
+  try {
+    const aggregateTotals = yield call(getNBAAggregateTotals, matchId)
+    yield put({ type: FETCH_NBA_AGGREGATE_TOTALS_SUCCESS, aggregateTotals })
+  } catch ({ response }) {
+    yield put({ type: FETCH_NBA_AGGREGATE_TOTALS_FAIL })
+    console.log('Failed to fetch aggregate totals')
+  }
+}
+
+function* callFetchAggregateSpreads ({ matchId, period }) {
+  try {
+    const aggregateSpreads = yield call(getNBAAggregateSpreads, matchId, period)
+    yield put({ type: FETCH_NBA_AGGREGATE_SPREADS_SUCCESS, aggregateSpreads })
+  } catch ({ response }) {
+    yield put({ type: FETCH_NBA_AGGREGATE_SPREADS_FAIL })
+    console.log('Failed to fetch aggregate spreads')
+  }
+}
+
 function* watchFetchMatchesModels () {
   yield takeLatest(FETCH_NBA_MATCHES_MODELS, callFetchMatchesModels)
 }
@@ -77,11 +105,21 @@ function* watchUpdateMatchesModels () {
   yield takeLatest(UPDATE_NBA_MATCHES_MODELS, callUpdateMatchesModels)
 }
 
+function* watchFetchAggregateTotals () {
+  yield takeLatest(FETCH_NBA_AGGREGATE_TOTALS, callFetchAggregateTotals)
+}
+
+function* watchFetchAggregateSpreads () {
+  yield takeLatest(FETCH_NBA_AGGREGATE_SPREADS, callFetchAggregateSpreads)
+}
+
 export default function* matchesModelsSaga () {
   yield all([
     watchFetchMatchesModels(),
     watchFetchMatchesModelsSuccess(),
     watchFetchMatchesModelsPrediction(),
-    watchUpdateMatchesModels()
+    watchUpdateMatchesModels(),
+    watchFetchAggregateTotals(),
+    watchFetchAggregateSpreads()
   ])
 }

@@ -3,7 +3,8 @@ import {
   FETCH_NBA_MATCHES_MODELS,
   UPDATE_NBA_MATCHES_MODELS,
   FETCH_NBA_MATCHES_MODELS_PREDICTION,
-  FETCH_NBA_AGGREGATE_TOTALS
+  FETCH_NBA_AGGREGATE_TOTALS,
+  FETCH_NBA_AGGREGATE_SPREADS
 } from 'Constants'
 
 export const fetchNBAMatchesModels = (matchId) => ({
@@ -25,4 +26,10 @@ export const fetchNBAMatchesModelsPrediction = (matchModelId) => ({
 export const fetchNBAAggregateTotals = (matchId) => ({
   type: FETCH_NBA_AGGREGATE_TOTALS,
   matchId
+})
+
+export const fetchNBAAggregateSpreads = (matchId, period) => ({
+  type: FETCH_NBA_AGGREGATE_SPREADS,
+  matchId,
+  period
 })
