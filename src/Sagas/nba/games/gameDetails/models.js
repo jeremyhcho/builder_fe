@@ -25,7 +25,7 @@ import {
   FETCH_NBA_AGGREGATE_TOTALS_FAIL,
   FETCH_NBA_AGGREGATE_SPREADS,
   FETCH_NBA_AGGREGATE_SPREADS_SUCCESS,
-  FETCH_NBA_AGGREGATE_SPREADS_FAIL,
+  FETCH_NBA_AGGREGATE_SPREADS_FAIL
 } from 'Constants'
 
 function* callFetchMatchesModels ({ matchId }) {
@@ -42,6 +42,7 @@ function* callFetchInitialPrediction ({ matchesModels }) {
   try {
     const selectedModel = matchesModels.data.find(model => model.status === 'ACTIVE') || matchesModels.data[0]
     const modelPrediction = yield call(getNBAMatchesModelsPrediction, selectedModel.id)
+    console.log('Match model prediction: ', modelPrediction)
     yield put({ type: FETCH_NBA_MATCHES_MODELS_PREDICTION_SUCCESS, modelPrediction })
   } catch ({ response }) {
     yield put({ type: FETCH_NBA_MATCHES_MODELS_PREDICTION_FAIL })

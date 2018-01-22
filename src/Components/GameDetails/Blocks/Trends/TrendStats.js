@@ -17,16 +17,16 @@ class TrendStats extends React.Component {
       <Card label={`${summary.away.city} ${summary.away.name}`}>
         <Row middle='xs' center='xs' styleName="trends-section">
           <Col xs={4}>
-            <p className="label">TREND</p>
+            <p className="label semibold">TREND</p>
           </Col>
 
           <Col xs={4}>
-            <p className="label">VS. SPREAD</p>
+            <p className="label semibold">VS. SPREAD</p>
             <p className="label small">(Win %)</p>
           </Col>
 
           <Col xs={4}>
-            <p className="label">AVG. PTS SCORED</p>
+            <p className="label semibold">AVG. PTS SCORED</p>
           </Col>
         </Row>
       </Card>
