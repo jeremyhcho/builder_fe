@@ -28,8 +28,7 @@ export const fetchNBAAggregateTotals = (matchId) => ({
   matchId
 })
 
-export const fetchNBAAggregateSpreads = (matchId, period) => ({
+export const fetchNBAAggregateSpreads = (matchId) => ({
   type: FETCH_NBA_AGGREGATE_SPREADS,
-  matchId,
-  period
+  matchId
 })

@@ -21,8 +21,6 @@ class VegasLines extends React.Component {
   render () {
     const { lines, summary } = this.props
 
-    const teamNamesStyle = { textAlign: 'left', display: 'inline-block' }
-
     if (!lines || !summary) {
       return (
         <div>
@@ -60,10 +58,12 @@ class VegasLines extends React.Component {
 
         <Row middle='xs' center='xs' styleName="vegas-lines-section">
           <Col xs={3}>
-            <div style={teamNamesStyle}>
-              <p className="label semibold">{summary.away.city}</p>
-              <p className="semibold">{summary.away.name}</p>
-            </div>
+            <Row start='xs'>
+              <Col xsOffset={3}>
+                <p className="label semibold">{summary.away.city}</p>
+                <p className="semibold">{summary.away.name}</p>
+              </Col>
+            </Row>
           </Col>
           <Col xs={3}>
             <p className="semibold">{lines[0].moneyline}</p>
@@ -78,10 +78,12 @@ class VegasLines extends React.Component {
 
         <Row middle='xs' center='xs' styleName="vegas-lines-section">
           <Col xs={3}>
-            <div style={teamNamesStyle}>
-              <p className="label semibold">{summary.home.city}</p>
-              <p className="semibold">{summary.home.name}</p>
-            </div>
+            <Row start='xs'>
+              <Col xsOffset={3}>
+                <p className="label semibold">{summary.home.city}</p>
+                <p className="semibold">{summary.home.name}</p>
+              </Col>
+            </Row>
           </Col>
           <Col xs={3}>
             <p className="semibold">{lines[1].moneyline}</p>

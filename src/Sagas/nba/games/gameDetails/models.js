@@ -79,9 +79,9 @@ function* callFetchAggregateTotals ({ matchId }) {
   }
 }
 
-function* callFetchAggregateSpreads ({ matchId, period }) {
+function* callFetchAggregateSpreads ({ matchId }) {
   try {
-    const aggregateSpreads = yield call(getNBAAggregateSpreads, matchId, period)
+    const aggregateSpreads = yield call(getNBAAggregateSpreads, matchId)
     yield put({ type: FETCH_NBA_AGGREGATE_SPREADS_SUCCESS, aggregateSpreads })
   } catch ({ response }) {
     yield put({ type: FETCH_NBA_AGGREGATE_SPREADS_FAIL })

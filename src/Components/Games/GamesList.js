@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import groupBy from 'lodash/groupBy'
+import { groupBy } from 'lodash'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import classNames from 'classnames'

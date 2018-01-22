@@ -28,7 +28,6 @@ class Predictions extends React.Component {
 
   render () {
     const { summary, prediction } = this.props
-    const teamNamesStyle = { textAlign: 'left', display: 'inline-block' }
 
     if (!Object.keys(prediction).length) {
       return <div />
@@ -52,10 +51,12 @@ class Predictions extends React.Component {
 
         <Row middle='xs' center='xs' styleName="prediction-section">
           <Col xs={4}>
-            <div style={teamNamesStyle}>
-              <p className="semibold label">{summary.away.city}</p>
-              <p className="semibold">{summary.away.name}</p>
-            </div>
+            <Row start='xs'>
+              <Col xsOffset={4}>
+                <p className="semibold label">{summary.away.city}</p>
+                <p className="semibold">{summary.away.name}</p>
+              </Col>
+            </Row>
           </Col>
 
           <Col xs={4}>
@@ -85,10 +86,12 @@ class Predictions extends React.Component {
 
         <Row middle='xs' center='xs' styleName="prediction-section">
           <Col xs={4}>
-            <div style={teamNamesStyle}>
-              <p className="semibold label">{summary.home.city}</p>
-              <p className="semibold">{summary.home.name}</p>
-            </div>
+            <Row start='xs'>
+              <Col xsOffset={4}>
+                <p className="semibold label">{summary.home.city}</p>
+                <p className="semibold">{summary.home.name}</p>
+              </Col>
+            </Row>
           </Col>
 
           <Col xs={4}>

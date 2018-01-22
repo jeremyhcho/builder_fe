@@ -2,9 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
+import regression from 'regression'
+import { uniqBy } from 'lodash'
 
 // Components
-import { Card, ButtonGroup, Button } from 'Components/Common'
+import {
+  Card,
+  ButtonGroup,
+  Button,
+  Spinner
+} from 'Components/Common'
 
 // CSS
 import './ModelView.scss'
@@ -12,65 +19,121 @@ import './ModelView.scss'
 // Actions
 import { fetchNBAAggregateSpreads } from 'Actions'
 
-const periodFilter = [
-  { key: 'season', label: 'Season' },
-  { key: 'last_5', label: 'Last 5' },
-  { key: 'last_10', label: 'Last 10' }
-]
+// Helpers
+import { colorComparator } from 'Helpers'
 
 class SpreadPrediction extends React.Component {
   state = {
-    selectedPeriod: 'season',
+    period: 'season',
     selected: 'away'
   }
 
   componentDidMount () {
-    this.props.fetchNBAAggregateSpreads(this.props.summary.id, this.state.selectedPeriod)
+    this.props.fetchNBAAggregateSpreads(this.props.summary.id)
+  }
+
+  fitData () {
+    const { aggregateSpreads } = this.props
+    const { selected, period } = this.state
+
+    const groupedPredictions = aggregateSpreads[period][selected].predictions.map(prediction => (
+      [prediction.win_percent || 0, prediction.spread]
+    ))
+
+    return uniqBy(
+      regression.linear(groupedPredictions).points,
+      data => data[0]
+    ).sort((a, b) => a[0] - b[0])
+  }
+
+  determineColors () {
+    const { summary } = this.props
+    const homeColor = summary.home.colors.primary.slice(1)
+    const awayColor = summary.away.colors.primary.slice(1)
+    const secondaryAwayColor = summary.away.colors.secondary.slice(1)
+
+    const ratio1 = colorComparator(homeColor, awayColor)
+    const ratio2 = colorComparator(homeColor, secondaryAwayColor)
+
+    const finalAwayColor = ratio1 > ratio2 ? secondaryAwayColor : awayColor
+
+    return ({
+      awayColor: `#${finalAwayColor}`,
+      homeColor: `#${homeColor}`
+    })
   }
 
   dataFactory () {
     const { aggregateSpreads } = this.props
-    const { selected } = this.state
+    const { selected, period } = this.state
 
-    console.log(aggregateSpreads)
+    const colors = this.determineColors()
 
-    aggregateSpreads[selected].predictions.sort((a, b) => (
-      a.win_percent - b.win_percent
-    ))
+    const datasets = [
+      {
+        type: 'line',
+        label: 'Fit data points',
+        fill: false,
+        data: this.fitData().map(data => (
+          { x: data[0], y: data[1] }
+        )),
+        lineTension: 0,
+        cubicInterpolationMode: 'linear',
+        spanGaps: true,
+        pointRadius: 0,
+        backgroundColor: 'transparent',
+        borderColor: selected === 'away' ? colors.awayColor : colors.homeColor
+      },
+      {
+        type: 'scatter',
+        label: 'Data points',
+        fill: false,
+        data: aggregateSpreads[period][selected].predictions.map(prediction => (
+          { x: prediction.win_percent || 0, y: prediction.spread }
+        )),
+        backgroundColor: 'transparent',
+        borderColor: '#3C90DF',
+        pointRadius: 1,
+        pointBackgroundColor: '#3C90DF',
+        lineTension: 0,
+        showLine: false
+      },
+      {
+        type: 'line',
+        label: 'Vegas line spread',
+        fill: false,
+        data: uniqBy(
+          aggregateSpreads[period][selected].predictions, prediction => prediction.win_percent)
+          .sort((a, b) => a.win_percent - b.win_percent)
+          .map(prediction => (
+            {
+              x: prediction.win_percent || 0,
+              y: parseInt(aggregateSpreads[period][selected].vegas_spread, 10)
+            }
+          )),
+        lineTension: 0,
+        pointRadius: 0,
+        backgroundColor: 'transparent',
+        borderDash: [10, 5]
+      }
+    ]
 
-    const labels = []
-    const data = []
-
-    aggregateSpreads[selected].predictions
-      .sort((a, b) => a.win_percent - b.win_percent)
-      .forEach(prediction => {
-        labels.push(prediction.win_percent || 0)
-        data.push(prediction.spread)
-      })
-
-    const datasets = [{
-      data,
-      backgroundColor: 'transparent',
-      borderColor: '#3C90DF',
-      pointRadius: 0,
-      lineTension: 0
-    }]
-
-    return { labels, datasets }
+    return { datasets }
   }
 
   render () {
     const { summary, fetchingAggregateSpreads, aggregateSpreads } = this.props
-    const { selectedPeriod } = this.state
 
     const buttons = [
       { label: summary.away.name, key: 'away' },
       { label: summary.home.name, key: 'home' }
     ]
 
-    if (fetchingAggregateSpreads || !Object.keys(aggregateSpreads).length) {
-      return <div />
-    }
+    const periodFilter = [
+      { key: 'season', label: 'Season' },
+      { key: 'last_5', label: 'Last 5' },
+      { key: 'last_10', label: 'Last 10' }
+    ]
 
     return (
       <Card
@@ -84,11 +147,11 @@ class SpreadPrediction extends React.Component {
           <div>
             {
               periodFilter.map(period => {
-                return period.key !== selectedPeriod ? (
+                return period.key !== this.state.period ? (
                   <Button
                     flat
                     key={period.key}
-                    onClick={() => this.setState({ selectedPeriod: period.key })}
+                    onClick={() => this.setState({ period: period.key })}
                     style={{ marginLeft: '5px' }}
                   >
                     {period.label}
@@ -112,39 +175,56 @@ class SpreadPrediction extends React.Component {
             defaultKey="away"
           />
         </div>
-        <Line
-          data={this.dataFactory()}
-          options={{
-            maintainAspectRatio: false,
-            legend: {
-              display: false
-            },
-            scales: {
-              yAxes: [{
-                // ticks: { display: false },
-                gridLines: {
+        {
+          fetchingAggregateSpreads || !Object.keys(aggregateSpreads).length ? (
+            <div style={{ textAlign: 'center', padding: '65px' }}>
+              <Spinner lg show />
+            </div>
+          ) : (
+            <Line
+              data={this.dataFactory()}
+              options={{
+                linear: true,
+                legend: {
                   display: false
                 },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Model Predictions'
-                }
-              }],
-              xAxes: [{
-                ticks: {
-                  stacked: false
+                animation: {
+                  easing: 'linear',
+                  duration: 500
                 },
-                gridLines: {
-                  display: false
-                },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Model Win %'
+                scales: {
+                  yAxes: [{
+                    type: 'linear',
+                    ticks: {
+                      stepSize: 2,
+                    },
+                    gridLines: {
+                      display: false
+                    },
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Model Predictions'
+                    }
+                  }],
+                  xAxes: [{
+                    type: 'linear',
+                    ticks: {
+                      stacked: false,
+                      maxTicksLimit: 3,
+                    },
+                    gridLines: {
+                      display: false
+                    },
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Model Win %'
+                    }
+                  }]
                 }
-              }]
-            }
-          }}
-        />
+              }}
+            />
+          )
+        }
       </Card>
     )
   }
