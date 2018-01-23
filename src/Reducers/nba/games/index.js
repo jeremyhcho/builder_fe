@@ -3,15 +3,12 @@ import moment from 'moment'
 // Constants
 import {
   FETCH_NBA_GAMES_SUCCESS,
-  PAGINATE_NBA_GAMES_SUCCESS,
   FETCH_NBA_GAMES,
-  PAGINATE_NBA_GAMES
 } from 'Constants'
 
 const initialState = {
   gamesList: [],
   fetchingGames: false,
-  paginatingGames: false,
   dates: {
     now: moment(moment().format('YYYY-MM-DD')),
     from: {},
@@ -30,9 +27,6 @@ const games = (state = initialState, action) => {
       }
     }
 
-    case PAGINATE_NBA_GAMES:
-      return { ...state, paginatingGames: true }
-
     case FETCH_NBA_GAMES_SUCCESS:
       return {
         ...state,
@@ -41,22 +35,6 @@ const games = (state = initialState, action) => {
           ...match, date: moment(new Date(match.date))
         }))
       }
-    case PAGINATE_NBA_GAMES_SUCCESS: {
-      let newGames
-
-      if (action.paginateType === 'previous') {
-        newGames = action.games.data.concat(state.gamesList)
-      } else {
-        newGames = state.gamesList.concat(action.games.data)
-      }
-      return {
-        ...state,
-        paginatingGames: false,
-        gamesList: newGames.map(game => ({
-          ...game, date: moment(new Date(game.date))
-        }))
-      }
-    }
 
     default:
       return state
