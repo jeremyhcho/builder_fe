@@ -28,7 +28,6 @@ import {
   SEND_RECOVERY_EMAIL_FAIL,
   SEND_RECOVERY_EMAIL_SUCCESS,
   FETCH_USER,
-  FETCH_USER_SUCCESS,
   FETCH_BILLING,
   FETCH_BILLING_SUCCESS,
   FETCH_BILLING_FAIL,
@@ -92,9 +91,8 @@ function* callSendRecoveryEmail ({ email }) {
 
 function* callFetchUser () {
   try {
-    const user = yield call(fetchUser)
-    yield put(authorize())
-    yield put({ type: FETCH_USER_SUCCESS, user: user.data })
+    const { data } = yield call(fetchUser)
+    yield put(authorize(data))
   } catch ({ response }) {
     yield put(unauthorize())
   }

@@ -11,8 +11,9 @@ export const clearLoginError = () => ({
   type: CLEAR_LOGIN_ERROR
 })
 
-export const authorize = () => ({
-  type: AUTHORIZE
+export const authorize = (user) => ({
+  type: AUTHORIZE,
+  user
 })
 
 export const unauthorize = () => ({

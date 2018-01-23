@@ -10,9 +10,7 @@ import {
 import {
   LOGIN,
   LOGIN_FAILED,
-  LOGIN_SUCCESS,
-  LOGOUT,
-  LOGOUT_SUCCESS
+  LOGOUT
 } from 'Constants'
 
 // Actions
@@ -23,9 +21,8 @@ import errorMessage from 'Helpers/errorMessage'
 
 function* callLogin ({ params }) {
   try {
-    const user = yield call(login, params)
-    yield put(authorize())
-    yield put({ type: LOGIN_SUCCESS, user })
+    const { data } = yield call(login, params)
+    yield put(authorize(data))
   } catch ({ response }) {
     yield put(unauthorize())
     yield put({ type: LOGIN_FAILED, error: errorMessage(response) })
@@ -36,7 +33,6 @@ function* callLogout ({ params }) {
   try {
     yield call(logout, params)
     yield put(unauthorize())
-    yield put({ type: LOGOUT_SUCCESS })
   } catch ({ response }) {
     console.log('Failed to log out')
   }
