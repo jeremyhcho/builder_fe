@@ -30,12 +30,18 @@ class VegasLines extends React.Component {
     }
 
     if (!lines.length) {
-      return 'NO VEGAS LINES'
+      return (
+        <Card label="Vegas Lines" wrapperStyle={{ padding: '50px 25px', textAlign: 'center' }}>
+          <h4 className="label semibold">
+            Vegas lines is currently not available for this game
+          </h4>
+        </Card>
+      )
     }
 
     return (
       <Card label="Vegas Lines" styleName="vegas-lines">
-        <Row middle='xs' center='xs' styleName="vegas-lines-header">
+        <Row middle='xs' center='xs' styleName="vegas-lines-section">
           <Col xs={3}>
             <p className="label semibold">TEAM</p>
           </Col>
@@ -50,10 +56,14 @@ class VegasLines extends React.Component {
           </Col>
         </Row>
 
-        <Row middle='xs' center='xs' styleName="vegas-lines-header">
-          <Col xs={3} style={{ textAlign: 'left', padding: '0 30px' }}>
-            <p className="label semibold">{summary.away.city}</p>
-            <p className="semibold">{summary.away.name}</p>
+        <Row middle='xs' center='xs' styleName="vegas-lines-section">
+          <Col xs={3}>
+            <Row start='xs'>
+              <Col xsOffset={3}>
+                <p className="label semibold">{summary.away.city}</p>
+                <p className="semibold">{summary.away.name}</p>
+              </Col>
+            </Row>
           </Col>
           <Col xs={3}>
             <p className="semibold">{lines[0].moneyline}</p>
@@ -66,10 +76,14 @@ class VegasLines extends React.Component {
           </Col>
         </Row>
 
-        <Row middle='xs' center='xs' styleName="vegas-lines-header">
-          <Col xs={3} style={{ textAlign: 'left', padding: '0 30px' }}>
-            <p className="label semibold">{summary.home.city}</p>
-            <p className="semibold">{summary.home.name}</p>
+        <Row middle='xs' center='xs' styleName="vegas-lines-section">
+          <Col xs={3}>
+            <Row start='xs'>
+              <Col xsOffset={3}>
+                <p className="label semibold">{summary.home.city}</p>
+                <p className="semibold">{summary.home.name}</p>
+              </Col>
+            </Row>
           </Col>
           <Col xs={3}>
             <p className="semibold">{lines[1].moneyline}</p>

@@ -7,7 +7,7 @@ import NotificationDropdown from './NotificationDropdown'
 import { Tooltip } from 'Components/Common'
 
 // Assets
-import NotificationIcon from 'Assets/Icons/header/notification.svg'
+import NotificationIcon from 'Assets/Icons/notification.svg'
 
 // CSS
 import './NotificationDropdown.scss'

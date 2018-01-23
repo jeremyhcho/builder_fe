@@ -23,8 +23,8 @@ class ScheduledGameDetails extends React.Component {
     const tabItems = [
       { label: 'Overview', key: 'overview' },
       { label: 'Models', key: 'models' },
-      { label: 'Matchup', key: 'matchup' },
-      { label: 'Trends', key: 'trends' }
+      { label: 'Trends', key: 'trends' },
+      { label: 'Matchup', key: 'matchup' }
     ]
 
     const path = this.props.location.pathname.split('/')

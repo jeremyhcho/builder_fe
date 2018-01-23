@@ -15,28 +15,10 @@
   }
 
   .error-dialog {
-    border: 1px solid #e0b4b4;
-    color: #9f3a38;
-    background-color: #fff6f6;
-    font-size: 11px;
+    padding: 20px;
     text-align: center;
-    padding: 12px;
-    position: absolute;
-    top: -200px;
-    left: 5vw;
-    // box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
-    transition: all 200ms ease;
-    &.open {
-      top: -106px;
-    }
-
-    div {
-      opacity: .6;
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      cursor: pointer;
-    }
+    box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
+    font-size: 11px;
   }
 
   .login-container {

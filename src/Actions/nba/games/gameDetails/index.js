@@ -1,3 +1,5 @@
 export * from './overview'
 export * from './teamstats'
 export * from './playerstats'
+export * from './models'
+export * from './trends'

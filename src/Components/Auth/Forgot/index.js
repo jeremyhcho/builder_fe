@@ -7,7 +7,7 @@ import ForgotForm from './ForgotForm'
 import { Link } from 'react-router-dom'
 
 // Icons
-import PaperPlane from 'Assets/Icons/auth/paper-plane.svg'
+import PaperPlane from 'Assets/Icons/paper-plane.svg'
 
 // CSS
 import './Forgot.scss'

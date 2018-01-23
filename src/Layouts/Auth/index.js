@@ -10,8 +10,8 @@ import './Auth.scss'
 import { Login, Signup, Forgot, Reset, Verify } from 'Components/Auth'
 
 // Icons
-import AnalyticsIcon from 'Assets/Icons/auth/analytics-89.svg'
-import PodiumIcon from 'Assets/Icons/auth/podium.svg'
+import AnalyticsIcon from 'Assets/Icons/placeholder-logo.svg'
+import PodiumIcon from 'Assets/Icons/podium.svg'
 
 // const LoginContainer = Loadable({
 //   loader: () => import('../../containers/Session/Login'),
