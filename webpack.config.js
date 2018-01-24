@@ -152,7 +152,8 @@ const config = {
       Apis: path.resolve(__dirname, 'src/Apis'),
       Assets: path.resolve(__dirname, 'src/Assets'),
       Config: path.resolve(__dirname, 'src/Config'),
-      Layouts: path.resolve(__dirname, 'src/Layouts')
+      Layouts: path.resolve(__dirname, 'src/Layouts'),
+      Routines: path.resolve(__dirname, 'src/Routines')
     },
     extensions: ['.js', '.scss', '.svg']
   }

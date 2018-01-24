@@ -7,6 +7,7 @@ import auth from './auth'
 import nbaReducer from './nba'
 import notificationsReducer from './notifications'
 import snackBarReducer from './snackbar'
+import routines from './routines'
 
 const rootReducer = combineReducers({
   auth,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   router: routerReducer,
   form: formReducer,
   notifications: notificationsReducer,
-  snackbar: snackBarReducer
+  snackbar: snackBarReducer,
+  routines
 })
 
 export default rootReducer

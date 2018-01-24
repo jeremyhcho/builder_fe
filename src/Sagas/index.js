@@ -8,6 +8,7 @@ import {
 } from './auth'
 
 import nbaSaga from './nba'
+import routineSaga from './routine'
 import { notificationsSaga } from './global'
 
 export default function* rootSaga() {
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     resetSaga(),
     nbaSaga(),
     notificationsSaga(),
-    verifySaga()
+    verifySaga(),
+    routineSaga()
   ])
 }

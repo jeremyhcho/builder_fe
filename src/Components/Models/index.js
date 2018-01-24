@@ -12,8 +12,15 @@ import NoModelsIcon from 'Assets/Icons/models/no-models.svg'
 // CSS
 import './Models.scss'
 
-// Actions
-import { fetchNBAModels } from 'Actions'
+import createRoutine from 'Routines'
+
+// Apis
+import { getNBAModels } from 'Apis'
+
+const fetchNBAModels = createRoutine('FETCH_MODELS', getNBAModels, {
+  reducerKey: 'models',
+  action: 'replace'
+})
 
 class Models extends React.Component {
   state = {
@@ -21,6 +28,7 @@ class Models extends React.Component {
   }
 
   componentDidMount () {
+    // this.props.fetchNBAModels()
     this.props.fetchNBAModels()
   }
 
@@ -130,12 +138,13 @@ Models.propTypes = {
   fetchingModels: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  modelList: nba.models.modelList,
+const mapStateToProps = ({ nba, routines }) => ({
+  modelList: routines.models,
   fetchingModels: nba.models.fetchingModels
 })
 
 const mapDispatchToProps = {
+  // fetchNBAModels
   fetchNBAModels
 }
 

@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-// 
+//
 const dotEnv = new webpack.DefinePlugin({
   'process.env': {
     'NODE_ENV': JSON.stringify('development'),
@@ -129,7 +129,8 @@ const config = {
       Apis: path.resolve(__dirname, 'src/Apis'),
       Assets: path.resolve(__dirname, 'src/Assets'),
       Config: path.resolve(__dirname, 'src/Config'),
-      Layouts: path.resolve(__dirname, 'src/Layouts')
+      Layouts: path.resolve(__dirname, 'src/Layouts'),
+      Routines: path.resolve(__dirname, 'src/Routines')
     },
     extensions: ['.js', '.scss', '.css']
   }
