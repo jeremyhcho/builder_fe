@@ -23,7 +23,7 @@ class DateInput extends React.Component {
 
   componentWillMount() {
     // sets input date to current date
-    this.props.fetchNBAGames(this.props.dates.now._i)
+    this.props.fetchNBAGames(this.getFromAndto(this.props.dates.now._i))
   }
 
   componentDidMount() {
@@ -33,6 +33,16 @@ class DateInput extends React.Component {
 
   componentWillUnmount() {
     this.dateInput.removeEventListener('select', this.preventDateSelection(), false)
+  }
+
+  getFromAndTo (date) {
+    const now = moment(date)
+    // beginning of current date in EST
+    const from = moment(`${date} 21:00:00`).subtract(1, 'day')
+    // end of specified date
+    const to = moment(`${date} 20:59:59`)
+
+    return { now, from, to }
   }
 
   getDisabledDates () {

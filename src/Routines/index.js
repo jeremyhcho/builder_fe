@@ -9,14 +9,14 @@ const createRoutine = (prefix, api, routineOpts) => {
     FAIL: `${prefix}/FAIL`
   }
 
-  return (payload) => {
+  return (...payload) => {
     console.log('Creating routine with payload.. ', payload)
     return ({
       type: ROUTINE_INIT,
       actionTypes,
       api,
       routineOpts,
-      payload
+      ...payload
     })
   }
 }
@@ -35,6 +35,6 @@ ie. const fetchTodos = createRoutine('FETCH_TODOS', axios.get('/api/fetch_todos'
 
 routineOpts keys: {
   reducerKey: String.isRequired ~ state to store in reducer,
-  action: String.isRequired ~ action to perform on a successful response
+  action: String.isRequired ~ action to perform on a successful response,
 }
 */
