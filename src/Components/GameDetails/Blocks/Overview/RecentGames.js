@@ -159,8 +159,8 @@ class RecentGames extends React.Component {
 }
 
 RecentGames.defaultProps = {
-  recentGames: {},
-  summary: {}
+  recentGames: null,
+  summary: null
 }
 
 RecentGames.propTypes = {
@@ -170,9 +170,9 @@ RecentGames.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  summary: nba.gameDetails.overview.summary,
-  recentGames: nba.gameDetails.overview.recentGames
+const mapStateToProps = ({ routines }) => ({
+  summary: routines.nba.summary,
+  recentGames: routines.nba.recentGames
 })
 
 const mapDispatchToProps = {

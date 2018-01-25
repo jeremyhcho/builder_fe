@@ -24,14 +24,14 @@ class ModelView extends React.Component {
   }
 
   render () {
-    const { fetchingMatchesModels, matchesModels, fetchingPredictions } = this.props
+    const { fetchingMatchesModels, predictions, matchesModels, fetchingPredictions } = this.props
 
-    if (fetchingMatchesModels || fetchingPredictions) {
+    if (fetchingMatchesModels || fetchingPredictions || !predictions) {
       // View when fetching models .. loader
       return <div />
     }
 
-    if (!fetchingMatchesModels && !matchesModels.length) {
+    if (!matchesModels.length) {
       // View when user has no models .. link to models route
       return (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -86,22 +86,27 @@ class ModelView extends React.Component {
 
 ModelView.defaultProps = {
   matchesModels: [],
+  predictions: null,
   summary: {},
+  fetchingMatchesModels: false,
+  fetchingPredictions: false
 }
 
 ModelView.propTypes = {
   summary: PropTypes.object,
   matchesModels: PropTypes.array,
+  predictions: PropTypes.object,
   fetchNBAMatchesModels: PropTypes.func.isRequired,
-  fetchingMatchesModels: PropTypes.bool.isRequired,
-  fetchingPredictions: PropTypes.bool.isRequired
+  fetchingMatchesModels: PropTypes.bool,
+  fetchingPredictions: PropTypes.bool
 }
 
-const mapStateToProps = ({ nba }) => ({
-  matchesModels: nba.gameDetails.models.matchesModels,
-  fetchingMatchesModels: nba.gameDetails.models.fetchingMatchesModels,
-  fetchingPredictions: nba.gameDetails.models.fetchingPredictions,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  matchesModels: routines.nba.matchesModels,
+  predictions: routines.nba.predictions,
+  fetchingMatchesModels: routines.callingApi.getNBAMatchesModels,
+  fetchingPredictions: routines.callingApi.getNBAPredictions,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {

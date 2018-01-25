@@ -16,7 +16,7 @@ import Delete from 'Assets/Icons/models/trash.svg'
 import './Models.scss'
 
 // Actions
-import { deleteNBAModel, updateNBAModel } from 'Actions'
+import { removeNBAModel, updateNBAModel } from 'Actions'
 
 const fakeLabel = []
 for (let i = 0; i < 31; i++) {
@@ -75,7 +75,7 @@ class ModelCard extends React.Component {
   }
 
   deleteModel = () => {
-    this.props.deleteNBAModel(this.props.model.id)
+    this.props.removeNBAModel(this.props.model.id)
   }
 
   checkModelStatus () {
@@ -208,13 +208,13 @@ class ModelCard extends React.Component {
 
 ModelCard.propTypes = {
   model: PropTypes.object.isRequired,
-  deleteNBAModel: PropTypes.func.isRequired,
+  removeNBAModel: PropTypes.func.isRequired,
   updateNBAModel: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired
 }
 
 const mapDispatchToProps = {
-  deleteNBAModel,
+  removeNBAModel,
   updateNBAModel
 }
 

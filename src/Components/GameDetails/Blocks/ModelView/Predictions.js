@@ -133,10 +133,10 @@ Predictions.propTypes = {
   prediction: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  summary: nba.gameDetails.overview.summary,
-  prediction: nba.gameDetails.models.selectedModel.model.predictions.find(
-    prediction => prediction.match_id === nba.gameDetails.overview.summary.id
+const mapStateToProps = ({ routines }) => ({
+  summary: routines.nba.summary,
+  prediction: routines.nba.predictions.find(
+    prediction => prediction.match_id === routines.nba.summary.id
   )
 })
 

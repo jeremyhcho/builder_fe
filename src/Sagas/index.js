@@ -7,18 +7,18 @@ import {
   verifySaga
 } from './auth'
 
-import nbaSaga from './nba'
 import routineSaga from './routine'
 import { notificationsSaga } from './global'
+import nbaSaga from './nba'
 
 export default function* rootSaga() {
   yield all([
     loginSaga(),
     userSaga(),
     resetSaga(),
-    nbaSaga(),
     notificationsSaga(),
     verifySaga(),
-    routineSaga()
+    routineSaga(),
+    nbaSaga()
   ])
 }

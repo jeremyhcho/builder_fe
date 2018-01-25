@@ -92,18 +92,17 @@ const Statistics = ({ teamStats }) => {
 }
 
 Statistics.defaultProps = {
-  teamStats: {}
+  teamStats: null
 }
 
 Statistics.propTypes = {
   teamStats: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  teamStats: nba.gameDetails.teamStats.stats,
+const mapStateToProps = ({ routines }) => ({
+  teamStats: routines.nba.teamStats,
 })
 
 export default connect(
-  mapStateToProps,
-  null
+  mapStateToProps
 )(Statistics)

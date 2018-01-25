@@ -215,15 +215,19 @@ class CreateModel extends React.Component {
   }
 }
 
+CreateModel.defaultProps = {
+  creatingModel: false
+}
+
 CreateModel.propTypes = {
   toggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   createNBAModel: PropTypes.func.isRequired,
-  creatingModel: PropTypes.bool.isRequired,
+  creatingModel: PropTypes.bool
 }
 
-const mapStateToProps = ({ nba }) => ({
-  creatingModel: nba.models.creatingModel
+const mapStateToProps = ({ routines }) => ({
+  creatingModel: routines.callingApi.postNBAModel
 })
 
 const mapDispatchToProps = {

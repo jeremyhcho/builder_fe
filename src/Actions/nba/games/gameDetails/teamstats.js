@@ -1,27 +1,37 @@
+import createRoutine from 'Routines'
+
+// Apis
+import {
+  getNBATeamStats,
+  getNBAKeyStats
+} from 'Apis'
+
 // Constants
 import {
   FETCH_NBA_TEAM_STATS,
-  FETCH_NBA_TEAM_STATS_SUCCESS,
-  FETCH_NBA_KEY_STATS,
-  FETCH_NBA_KEY_STATS_SUCCESS
+  FETCH_NBA_KEY_STATS
 } from 'Constants'
 
-export const fetchNBATeamStats = (id) => ({
-  type: FETCH_NBA_TEAM_STATS,
-  id
-})
+export const fetchNBATeamStats = createRoutine(
+  FETCH_NBA_TEAM_STATS,
+  getNBATeamStats,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'teamStats'
+    },
+    transform: 'replace'
+  }
+)
 
-export const fetchNBATeamStatsSuccess = (teamStats) => ({
-  type: FETCH_NBA_TEAM_STATS_SUCCESS,
-  teamStats
-})
-
-export const fetchNBAKeyStats = (id) => ({
-  type: FETCH_NBA_KEY_STATS,
-  id
-})
-
-export const fetchNBAKeyStatsSuccess = (keyStats) => ({
-  type: FETCH_NBA_KEY_STATS_SUCCESS,
-  keyStats
-})
+export const fetchNBAKeyStats = createRoutine(
+  FETCH_NBA_KEY_STATS,
+  getNBAKeyStats,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'keyStats'
+    },
+    transform: 'replace'
+  }
+)

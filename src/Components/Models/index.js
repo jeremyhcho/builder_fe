@@ -12,15 +12,8 @@ import NoModelsIcon from 'Assets/Icons/models/no-models.svg'
 // CSS
 import './Models.scss'
 
-import createRoutine from 'Routines'
-
-// Apis
-import { getNBAModels } from 'Apis'
-
-const fetchNBAModels = createRoutine('FETCH_MODELS', getNBAModels, {
-  reducerKey: 'models',
-  action: 'replace'
-})
+// Actions
+import { fetchNBAModels } from 'Actions'
 
 class Models extends React.Component {
   state = {
@@ -28,7 +21,6 @@ class Models extends React.Component {
   }
 
   componentDidMount () {
-    // this.props.fetchNBAModels()
     this.props.fetchNBAModels()
   }
 
@@ -86,15 +78,15 @@ class Models extends React.Component {
 
   render () {
     const { modalOpen } = this.state
-    const { fetchingModels } = this.props
-    if (fetchingModels) {
+    const { fetchingModels, modelList } = this.props
+
+    if (fetchingModels || !modelList) {
       return (
         <div className="loader">
           <Spinner lg show />
         </div>
       )
     }
-
 
     return (
       <div styleName="models">
@@ -129,22 +121,22 @@ class Models extends React.Component {
 }
 
 Models.defaultProps = {
-  modelList: []
+  modelList: null,
+  fetchingModels: false
 }
 
 Models.propTypes = {
   modelList: PropTypes.array,
   fetchNBAModels: PropTypes.func.isRequired,
-  fetchingModels: PropTypes.bool.isRequired
+  fetchingModels: PropTypes.bool,
 }
 
-const mapStateToProps = ({ nba, routines }) => ({
-  modelList: routines.models,
-  fetchingModels: nba.models.fetchingModels
+const mapStateToProps = ({ routines }) => ({
+  modelList: routines.nba.models,
+  fetchingModels: routines.callingApi.getNBAModels
 })
 
 const mapDispatchToProps = {
-  // fetchNBAModels
   fetchNBAModels
 }
 

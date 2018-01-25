@@ -57,9 +57,9 @@ PlayerStats.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  playerStats: nba.gameDetails.playerStats.stats,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  playerStats: routines.nba.playerStats,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {

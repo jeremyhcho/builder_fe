@@ -154,9 +154,9 @@ KeyStats.propTypes = {
   fetchNBAKeyStats: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  keyStats: nba.gameDetails.teamStats.keyStats,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  keyStats: routines.nba.keyStats,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {

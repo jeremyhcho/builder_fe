@@ -10,7 +10,7 @@ import { Toggle } from 'Components/Common'
 import ChangeIcon from 'Assets/Icons/switch-arrows'
 
 // Actions
-import { fetchNBAMatchesModelsPrediction, updateNBAMatchesModels } from 'Actions'
+import { fetchNBAPredictions, updateNBAMatchesModels } from 'Actions'
 
 // CSS
 import './ModelView.scss'
@@ -37,7 +37,7 @@ class ModelSelector extends React.Component {
       return null
     }
 
-    return this.props.fetchNBAMatchesModelsPrediction(matchModel.id)
+    return this.props.fetchNBAPredictions(matchModel.id)
   }
 
   openModels = () => {
@@ -165,16 +165,16 @@ ModelSelector.propTypes = {
   matchesModels: PropTypes.array,
   selectedModel: PropTypes.object,
   updateNBAMatchesModels: PropTypes.func.isRequired,
-  fetchNBAMatchesModelsPrediction: PropTypes.func.isRequired
+  fetchNBAPredictions: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  matchesModels: nba.gameDetails.models.matchesModels,
-  selectedModel: nba.gameDetails.models.selectedModel
+const mapStateToProps = ({ routines }) => ({
+  matchesModels: routines.nba.matchesModels,
+  selectedModel: routines.nba.predictions
 })
 
 const mapDispatchToProps = {
-  fetchNBAMatchesModelsPrediction,
+  fetchNBAPredictions,
   updateNBAMatchesModels
 }
 

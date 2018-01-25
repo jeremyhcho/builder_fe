@@ -68,20 +68,21 @@ class Predictability extends React.Component {
 
 Predictability.defaultProps = {
   summary: {},
-  predictability: {}
+  predictability: {},
+  fetchingPredictability: false,
 }
 
 Predictability.propTypes = {
   summary: PropTypes.object,
   predictability: PropTypes.object,
-  fetchingPredictability: PropTypes.bool.isRequired,
+  fetchingPredictability: PropTypes.bool,
   fetchNBAPredictability: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  summary: nba.gameDetails.overview.summary,
-  fetchingPredictability: nba.gameDetails.trends.fetchingPredictability,
-  predictability: nba.gameDetails.trends.predictability
+const mapStateToProps = ({ routines }) => ({
+  summary: routines.nba.summary,
+  fetchingPredictability: routines.callingApi.getNBAPredictability,
+  predictability: routines.nba.predictability
 })
 
 const mapDispatchToProps = {

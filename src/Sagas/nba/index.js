@@ -1,19 +1,29 @@
-import { all } from 'redux-saga/effects'
-// games
-import gamesSaga from './games'
-import gameDetailsSaga from './games/gameDetails'
+import { put, takeLatest, all } from 'redux-saga/effects'
 
-// teams
-import teamsSaga from './teams'
+// Actions
+import {
+  fetchNBAPredictions
+} from 'Actions'
 
-// models
-import modelsSaga from './models'
+import {
+  FETCH_NBA_MATCHES_MODELS
+} from 'Constants'
 
-export default function* nbaSaga() {
+function* fetchInitialPredictions ({ response }) {
+  try {
+    const selectedModel = response.find(model => model.status === 'ACTIVE') || response[0]
+    yield put(fetchNBAPredictions(selectedModel.id))
+  } catch (error) {
+    console.log('Failed to fetch initial predictions, saga error', error)
+  }
+}
+
+function* watchFetchMatchModels () {
+  yield takeLatest(`${FETCH_NBA_MATCHES_MODELS}/SUCCESS`, fetchInitialPredictions)
+}
+
+export default function* nbaSaga () {
   yield all([
-    gamesSaga(),
-    gameDetailsSaga(),
-    teamsSaga(),
-    modelsSaga()
+    watchFetchMatchModels()
   ])
 }

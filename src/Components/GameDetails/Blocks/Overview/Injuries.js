@@ -149,8 +149,8 @@ class Injuries extends React.Component {
 }
 
 Injuries.defaultProps = {
-  injuries: {},
-  summary: {}
+  injuries: null,
+  summary: null
 }
 
 Injuries.propTypes = {
@@ -160,9 +160,9 @@ Injuries.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  injuries: nba.gameDetails.overview.injuries,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  injuries: routines.nba.injuries,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {

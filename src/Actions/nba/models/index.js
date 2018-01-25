@@ -1,58 +1,65 @@
+import createRoutine from 'Routines'
+
+// Apis
+import {
+  getNBAModels,
+  postNBAModel,
+  deleteNBAModel,
+  putNBAModel
+} from 'Apis'
+
 // Constants
 import {
   CREATE_NBA_MODEL,
-  CREATE_NBA_MODEL_SUCCESS,
   FETCH_NBA_MODELS,
-  FETCH_NBA_MODELS_SUCCESS,
   DELETE_NBA_MODEL,
-  DELETE_NBA_MODEL_SUCCESS,
-  UPDATE_NBA_MODEL,
-  UPDATE_NBA_MODEL_SUCCESS,
-  UPDATE_NBA_MODEL_STATUS
+  UPDATE_NBA_MODEL
 } from 'Constants'
 
-export const createNBAModel = (model) => ({
-  type: CREATE_NBA_MODEL,
-  model
-})
+export const fetchNBAModels = createRoutine(
+  FETCH_NBA_MODELS,
+  getNBAModels,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'models'
+    },
+    transform: 'replace'
+  }
+)
 
-export const createNBAModelSuccess = (model) => ({
-  type: CREATE_NBA_MODEL_SUCCESS,
-  model
-})
+export const createNBAModel = createRoutine(
+  CREATE_NBA_MODEL,
+  postNBAModel,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'models'
+    },
+    transform: 'concat'
+  }
+)
 
-export const fetchNBAModels = () => ({
-  type: FETCH_NBA_MODELS
-})
+export const removeNBAModel = createRoutine(
+  DELETE_NBA_MODEL,
+  deleteNBAModel,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'models'
+    },
+    transform: 'removeById'
+  }
+)
 
-export const fetchNBAModelsSuccess = (models) => ({
-  type: FETCH_NBA_MODELS_SUCCESS,
-  models
-})
-
-export const deleteNBAModel = (id) => ({
-  type: DELETE_NBA_MODEL,
-  id
-})
-
-export const deleteNBAModelSuccess = (id) => ({
-  type: DELETE_NBA_MODEL_SUCCESS,
-  id
-})
-
-export const updateNBAModel = (id, model) => ({
-  type: UPDATE_NBA_MODEL,
-  id,
-  model
-})
-
-export const updateNBAModelSuccess = (newModel) => ({
-  type: UPDATE_NBA_MODEL_SUCCESS,
-  newModel
-})
-
-export const updateNBAModelStatus = (id, model) => ({
-  type: UPDATE_NBA_MODEL_STATUS,
-  id,
-  model
-})
+export const updateNBAModel = createRoutine(
+  UPDATE_NBA_MODEL,
+  putNBAModel,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'models'
+    },
+    transform: 'updateById'
+  }
+)

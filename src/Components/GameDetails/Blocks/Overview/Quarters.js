@@ -127,8 +127,8 @@ class Quarters extends React.Component {
 }
 
 Quarters.defaultProps = {
-  quarters: {},
-  summary: {}
+  quarters: null,
+  summary: null
 }
 
 Quarters.propTypes = {
@@ -138,9 +138,9 @@ Quarters.propTypes = {
   fetchNBAQuarters: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  quarters: nba.gameDetails.overview.quarters,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  quarters: routines.nba.quarters,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {

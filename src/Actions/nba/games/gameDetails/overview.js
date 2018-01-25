@@ -1,81 +1,99 @@
+import createRoutine from 'Routines'
+
+// Apis
+import {
+  getNBASummary,
+  getNBAQuarters,
+  getNBARecentGames,
+  getNBAStartingLineup,
+  getNBAInjuries,
+  getNBALines
+} from 'Apis'
+
 // Constants
 import {
   FETCH_NBA_SUMMARY,
-  FETCH_NBA_SUMMARY_SUCCESS,
   FETCH_NBA_QUARTERS,
-  FETCH_NBA_QUARTERS_SUCCESS,
   FETCH_NBA_RECENT_GAMES,
-  FETCH_NBA_RECENT_GAMES_SUCCESS,
   FETCH_NBA_STARTING_LINEUP,
-  FETCH_NBA_STARTING_LINEUP_SUCCESS,
   FETCH_NBA_INJURIES,
-  FETCH_NBA_INJURIES_SUCCESS,
-  FETCH_NBA_LINES,
-  FETCH_NBA_LINES_SUCCESS
+  FETCH_NBA_LINES
 } from 'Constants'
 
 // Summary
-export const fetchNBASummary = (id) => ({
-  type: FETCH_NBA_SUMMARY,
-  id
-})
-
-export const fetchNBASummarySuccess = (summary) => ({
-  type: FETCH_NBA_SUMMARY_SUCCESS,
-  summary
-})
+export const fetchNBASummary = createRoutine(
+  FETCH_NBA_SUMMARY,
+  getNBASummary,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'summary'
+    },
+    transform: 'replace'
+  }
+)
 
 // Quarters
-export const fetchNBAQuarters = (id) => ({
-  type: FETCH_NBA_QUARTERS,
-  id
-})
-
-export const fetchNBAQuartersSuccess = (quarters) => ({
-  type: FETCH_NBA_QUARTERS_SUCCESS,
-  quarters
-})
+export const fetchNBAQuarters = createRoutine(
+  FETCH_NBA_QUARTERS,
+  getNBAQuarters,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'quarters'
+    },
+    transform: 'replace'
+  }
+)
 
 // Recent Games
-export const fetchNBARecentGames = (id) => ({
-  type: FETCH_NBA_RECENT_GAMES,
-  id
-})
-
-export const fetchNBARecentGamesSuccess = (recentGames) => ({
-  type: FETCH_NBA_RECENT_GAMES_SUCCESS,
-  recentGames
-})
+export const fetchNBARecentGames = createRoutine(
+  FETCH_NBA_RECENT_GAMES,
+  getNBARecentGames,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'recentGames'
+    },
+    transform: 'replace'
+  }
+)
 
 // Starting Lineup
-export const fetchNBAStartingLineup = (id) => ({
-  type: FETCH_NBA_STARTING_LINEUP,
-  id
-})
-
-export const fetchNBAStartingLineupSuccess = (startingLineup) => ({
-  type: FETCH_NBA_STARTING_LINEUP_SUCCESS,
-  startingLineup
-})
+export const fetchNBAStartingLineup = createRoutine(
+  FETCH_NBA_STARTING_LINEUP,
+  getNBAStartingLineup,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'startingLineup'
+    },
+    transform: 'replace'
+  }
+)
 
 // Injuries
-export const fetchNBAInjuries = (id) => ({
-  type: FETCH_NBA_INJURIES,
-  id
-})
-
-export const fetchNBAInjuriesSuccess = (injuries) => ({
-  type: FETCH_NBA_INJURIES_SUCCESS,
-  injuries
-})
+export const fetchNBAInjuries = createRoutine(
+  FETCH_NBA_INJURIES,
+  getNBAInjuries,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'injuries'
+    },
+    transform: 'replace'
+  }
+)
 
 // Vegas Lines
-export const fetchNBALines = (matchId) => ({
-  type: FETCH_NBA_LINES,
-  matchId
-})
-
-export const fetchNBALinesSuccess = (lines) => ({
-  type: FETCH_NBA_LINES_SUCCESS,
-  lines
-})
+export const fetchNBALines = createRoutine(
+  FETCH_NBA_LINES,
+  getNBALines,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'lines'
+    },
+    transform: 'replace'
+  }
+)

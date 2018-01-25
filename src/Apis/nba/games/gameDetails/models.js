@@ -4,11 +4,11 @@ export const getNBAMatchesModels = (matchId) => (
   axios.get(`/api/nba/v1/matches/${matchId}/matches_models`)
 )
 
-export const getNBAMatchesModelsPrediction = (matchModelId) => (
+export const getNBAPredictions = (matchModelId) => (
   axios.get(`/api/nba/v1/matches_models/${matchModelId}`)
 )
 
-export const updateNBAMatchesModels = (modelId, params) => (
+export const putNBAMatchesModels = (modelId, params) => (
   axios.put(`/api/nba/v1/matches_models/${modelId}`, {
     matches_model: params
   })

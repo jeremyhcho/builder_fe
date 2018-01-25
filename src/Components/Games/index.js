@@ -29,17 +29,18 @@ const Games = ({ games, fetchingGames }) => (
 )
 
 Games.defaultProps = {
-  games: []
+  games: [],
+  fetchingGames: false
 }
 
 Games.propTypes = {
   games: PropTypes.array,
-  fetchingGames: PropTypes.bool.isRequired
+  fetchingGames: PropTypes.bool
 }
 
-const mapStateToProps = ({ nba }) => ({
-  fetchingGames: nba.games.fetchingGames,
-  games: nba.games.gamesList
+const mapStateToProps = ({ routines }) => ({
+  games: routines.nba.games,
+  fetchingGames: routines.callingApi.getNBAGames
 })
 
 export default connect(

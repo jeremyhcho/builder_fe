@@ -242,10 +242,10 @@ SpreadPrediction.propTypes = {
   fetchNBAAggregateSpreads: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  summary: nba.gameDetails.overview.summary,
-  aggregateSpreads: nba.gameDetails.models.aggregateSpreads,
-  fetchingAggregateSpreads: nba.gameDetails.models.fetchingAggregateSpreads
+const mapStateToProps = ({ routines }) => ({
+  summary: routines.nba.summary,
+  aggregateSpreads: routines.nba.aggregateSpreads,
+  fetchingAggregateSpreads: routines.callingApi.getNBAAggregateSpreads
 })
 
 const mapDispatchToProps = {

@@ -81,16 +81,20 @@ class EditModel extends React.Component {
   }
 }
 
+EditModel.defaultProps = {
+  updatingModel: false
+}
+
 EditModel.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   model: PropTypes.object.isRequired,
   updateNBAModel: PropTypes.func.isRequired,
-  updatingModel: PropTypes.bool.isRequired
+  updatingModel: PropTypes.bool
 }
 
-const mapStateToProps = ({ nba }) => ({
-  updatingModel: nba.models.updatingModel
+const mapStateToProps = ({ routines }) => ({
+  updatingModel: routines.callingApi.putNBAModel
 })
 
 const mapDispatchToProps = {

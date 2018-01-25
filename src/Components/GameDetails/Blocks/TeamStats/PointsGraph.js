@@ -259,8 +259,8 @@ class PointsGraph extends React.Component {
 }
 
 PointsGraph.defaultProps = {
-  teamStats: {},
-  summary: {}
+  teamStats: null,
+  summary: null
 }
 
 PointsGraph.propTypes = {
@@ -270,9 +270,9 @@ PointsGraph.propTypes = {
   matchId: PropTypes.string.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  teamStats: nba.gameDetails.teamStats.stats,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  teamStats: routines.nba.teamStats,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {

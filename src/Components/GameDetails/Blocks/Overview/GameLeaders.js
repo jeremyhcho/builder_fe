@@ -137,15 +137,15 @@ class GameLeaders extends React.Component {
 }
 
 GameLeaders.defaultProps = {
-  summary: {}
+  summary: null,
 }
 
 GameLeaders.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {}

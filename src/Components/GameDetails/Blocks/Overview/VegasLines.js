@@ -112,9 +112,9 @@ VegasLines.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  lines: nba.gameDetails.overview.lines,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  lines: routines.nba.lines,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {

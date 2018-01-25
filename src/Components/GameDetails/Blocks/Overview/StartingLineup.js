@@ -117,9 +117,9 @@ class StartingLineup extends React.Component {
   }
 }
 
-const mapStateToProps = ({ nba }) => ({
-  startingLineup: nba.gameDetails.overview.startingLineup,
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  startingLineup: routines.nba.startingLineup,
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {
@@ -127,8 +127,8 @@ const mapDispatchToProps = {
 }
 
 StartingLineup.defaultProps = {
-  startingLineup: {},
-  summary: {}
+  startingLineup: null,
+  summary: null
 }
 
 StartingLineup.propTypes = {

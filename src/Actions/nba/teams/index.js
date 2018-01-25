@@ -1,14 +1,22 @@
+import createRoutine from 'Routines'
+import { sortBy } from 'lodash'
+
 // Constants
-import {
+import { FETCH_NBA_TEAMS } from 'Constants'
+
+// Apis
+import { getNBATeams } from 'Apis'
+
+export const fetchNBATeams = createRoutine(
   FETCH_NBA_TEAMS,
-  FETCH_NBA_TEAMS_SUCCESS
-} from 'Constants'
-
-export const fetchNBATeams = () => ({
-  type: FETCH_NBA_TEAMS
-})
-
-export const fetchNBATeamsSuccess = (teams) => ({
-  type: FETCH_NBA_TEAMS_SUCCESS,
-  teams
-})
+  getNBATeams,
+  {
+    reducerKey: {
+      sport: 'nba',
+      type: 'teams'
+    },
+    transform: (response) => (
+      sortBy(response, (team) => team.wins / team.losses).reverse()
+    )
+  }
+)

@@ -100,12 +100,12 @@ TotalPrediction.propTypes = {
   fetchingAggregateTotals: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = ({ nba }) => ({
-  aggregateTotals: nba.gameDetails.models.aggregateTotals,
-  fetchingAggregateTotals: nba.gameDetails.models.fetchingAggregateTotals,
-  summary: nba.gameDetails.overview.summary,
-  prediction: nba.gameDetails.models.selectedModel.model.predictions.find(
-    prediction => prediction.match_id === nba.gameDetails.overview.summary.id
+const mapStateToProps = ({ routines }) => ({
+  aggregateTotals: routines.nba.aggregateTotals,
+  fetchingAggregateTotals: routines.callingApi.getNBAAggregateTotals,
+  summary: routines.nba.summary,
+  prediction: routines.nba.predictions.find(
+    prediction => prediction.match_id === routines.nba.summary.id
   )
 })
 

@@ -24,7 +24,7 @@ class Teams extends React.Component {
   }
 
   render () {
-    if (!this.props.teams.length) {
+    if (!this.props.teams.length || this.props.fetchingNBATeams) {
       return (
         <div className="loader">
           <Spinner show lg />
@@ -49,13 +49,20 @@ class Teams extends React.Component {
   }
 }
 
-Teams.propTypes = {
-  fetchNBATeams: PropTypes.func.isRequired,
-  teams: PropTypes.array.isRequired
+Teams.defaultProps = {
+  teams: [],
+  fetchingNBATeams: false
 }
 
-const mapStateToProps = ({ nba }) => ({
-  teams: nba.teams.teamsList
+Teams.propTypes = {
+  fetchNBATeams: PropTypes.func.isRequired,
+  fetchingNBATeams: PropTypes.bool,
+  teams: PropTypes.array
+}
+
+const mapStateToProps = ({ routines }) => ({
+  teams: routines.nba.teams,
+  fetchingNBATeams: routines.callingApi.getNBATeams
 })
 
 const mapDispatchToProps = {

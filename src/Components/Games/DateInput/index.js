@@ -23,7 +23,7 @@ class DateInput extends React.Component {
 
   componentWillMount() {
     // sets input date to current date
-    this.props.fetchNBAGames(this.getFromAndto(this.props.dates.now._i))
+    this.props.fetchNBAGames(this.getFromAndTo(this.props.dates.now._i))
   }
 
   componentDidMount() {
@@ -83,7 +83,7 @@ class DateInput extends React.Component {
   handleSelect = (e) => {
     // sets date when selected from calendar
     if (e.iso !== this.props.dates.now._i) {
-      this.props.fetchNBAGames(e.iso)
+      this.props.fetchNBAGames(this.getFromAndTo(e.iso))
     }
     this.closeCalendar()
   }
