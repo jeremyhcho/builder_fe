@@ -42,8 +42,8 @@ TrendStats.propTypes = {
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ nba }) => ({
-  summary: nba.gameDetails.overview.summary
+const mapStateToProps = ({ routines }) => ({
+  summary: routines.nba.summary
 })
 
 export default connect(

@@ -24,9 +24,9 @@ class ModelView extends React.Component {
   }
 
   render () {
-    const { fetchingMatchesModels, predictions, matchesModels, fetchingPredictions } = this.props
+    const { fetchingMatchesModels, selectedModel, matchesModels, fetchingPredictions } = this.props
 
-    if (fetchingMatchesModels || fetchingPredictions || !predictions) {
+    if (fetchingMatchesModels || fetchingPredictions || !selectedModel) {
       // View when fetching models .. loader
       return <div />
     }
@@ -86,7 +86,7 @@ class ModelView extends React.Component {
 
 ModelView.defaultProps = {
   matchesModels: [],
-  predictions: null,
+  selectedModel: null,
   summary: {},
   fetchingMatchesModels: false,
   fetchingPredictions: false
@@ -95,7 +95,7 @@ ModelView.defaultProps = {
 ModelView.propTypes = {
   summary: PropTypes.object,
   matchesModels: PropTypes.array,
-  predictions: PropTypes.object,
+  selectedModel: PropTypes.object,
   fetchNBAMatchesModels: PropTypes.func.isRequired,
   fetchingMatchesModels: PropTypes.bool,
   fetchingPredictions: PropTypes.bool
@@ -103,7 +103,7 @@ ModelView.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   matchesModels: routines.nba.matchesModels,
-  predictions: routines.nba.predictions,
+  selectedModel: routines.nba.predictions,
   fetchingMatchesModels: routines.callingApi.getNBAMatchesModels,
   fetchingPredictions: routines.callingApi.getNBAPredictions,
   summary: routines.nba.summary

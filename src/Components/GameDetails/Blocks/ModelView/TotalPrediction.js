@@ -12,6 +12,9 @@ import { Card } from 'Components/Common'
 // CSS
 import './ModelView.scss'
 
+// Selectors
+import { makeFindGamePredictions } from 'Helpers/Selectors'
+
 class TotalPrediction extends React.Component {
   componentDidMount () {
     this.props.fetchNBAAggregateTotals(this.props.summary.id)
@@ -40,9 +43,9 @@ class TotalPrediction extends React.Component {
   }
 
   render () {
-    const { fetchingAggregateTotals } = this.props
+    const { fetchingAggregateTotals, aggregateTotals } = this.props
 
-    if (fetchingAggregateTotals) {
+    if (fetchingAggregateTotals || !aggregateTotals) {
       return (
         <Card label="Prediction Distribution (Total)" styleName="total-prediction">
           <Doughnut data={{}} />
@@ -88,8 +91,9 @@ class TotalPrediction extends React.Component {
 
 TotalPrediction.defaultProps = {
   summary: {},
-  aggregateTotals: {},
-  prediction: {}
+  aggregateTotals: null,
+  prediction: {},
+  fetchingAggregateTotals: false
 }
 
 TotalPrediction.propTypes = {
@@ -97,23 +101,26 @@ TotalPrediction.propTypes = {
   prediction: PropTypes.object,
   summary: PropTypes.object,
   fetchNBAAggregateTotals: PropTypes.func.isRequired,
-  fetchingAggregateTotals: PropTypes.bool.isRequired
+  fetchingAggregateTotals: PropTypes.bool
 }
 
-const mapStateToProps = ({ routines }) => ({
-  aggregateTotals: routines.nba.aggregateTotals,
-  fetchingAggregateTotals: routines.callingApi.getNBAAggregateTotals,
-  summary: routines.nba.summary,
-  prediction: routines.nba.predictions.find(
-    prediction => prediction.match_id === routines.nba.summary.id
-  )
-})
+const makeMapStateToProps = () => {
+  const getPredictions = makeFindGamePredictions()
+  const mapStateToProps = ({ routines }) => ({
+    aggregateTotals: routines.nba.aggregateTotals,
+    fetchingAggregateTotals: routines.callingApi.getNBAAggregateTotals,
+    summary: routines.nba.summary,
+    prediction: getPredictions(routines.nba.predictions, routines.nba.summary)
+  })
+
+  return mapStateToProps
+}
 
 const mapDispatchToProps = {
   fetchNBAAggregateTotals
 }
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(TotalPrediction)

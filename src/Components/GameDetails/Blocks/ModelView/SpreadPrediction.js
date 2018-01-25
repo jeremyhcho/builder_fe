@@ -232,13 +232,14 @@ class SpreadPrediction extends React.Component {
 
 SpreadPrediction.defaultProps = {
   summary: {},
-  aggregateSpreads: {}
+  aggregateSpreads: {},
+  fetchingAggregateSpreads: false
 }
 
 SpreadPrediction.propTypes = {
   summary: PropTypes.object,
   aggregateSpreads: PropTypes.object,
-  fetchingAggregateSpreads: PropTypes.bool.isRequired,
+  fetchingAggregateSpreads: PropTypes.bool,
   fetchNBAAggregateSpreads: PropTypes.func.isRequired
 }
 
