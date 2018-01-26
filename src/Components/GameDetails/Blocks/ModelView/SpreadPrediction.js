@@ -77,7 +77,7 @@ class SpreadPrediction extends React.Component {
 
     const dataPoints = aggregateSpreads[period][selected].predictions.map(prediction => (
       { x: prediction.win_percent, y: prediction.spread }
-    )).sort((a, b) => a.x - b.x).filter(data => data.x)
+    )).sort((a, b) => a.x - b.x)
 
     const datasets = [
       {
