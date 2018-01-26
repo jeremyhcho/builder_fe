@@ -71,7 +71,8 @@ class TotalPrediction extends React.Component {
       },
       layout: {
         padding: {
-          right: 30
+          right: 30,
+          left: 15
         }
       }
     }

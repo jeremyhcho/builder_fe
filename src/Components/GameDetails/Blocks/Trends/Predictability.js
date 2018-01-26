@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
-// import Chart from 'chart.js'
 
 // Components
 import {
@@ -20,7 +19,7 @@ import './Trends.scss'
 import { fetchNBAPredictability } from 'Actions'
 
 // Helpers
-import { colorComparator } from 'Helpers'
+import { colorComparator, createDoubleFillChart } from 'Helpers'
 
 class Predictability extends React.Component {
   state = {
@@ -59,15 +58,18 @@ class Predictability extends React.Component {
       return moment(a.x).diff(moment(b.x))
     })
 
+    // Create DoubleFillLine Chart
+    createDoubleFillChart()
+
     const colors = this.determineColors()
 
     const datasets = [
       {
-        type: 'line',
+        type: 'DoubleFillLine',
+        yAxisId: 'y-axis-0',
         label: 'Predictability line',
         fill: true,
         data,
-        // backgroundColor: 'yellow',
         borderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
         pointBorderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
         pointBackgroundColor: '#D1D8DB',
@@ -107,6 +109,10 @@ class Predictability extends React.Component {
 
     if (fetchingPredictability || !Object.keys(predictability).length) {
       return <div />
+    }
+
+    const data = (canvas) => {
+      return this.dataFactory(canvas)
     }
 
     return (
@@ -151,7 +157,7 @@ class Predictability extends React.Component {
         </div>
         <div>
           <Line
-            data={this.dataFactory()}
+            data={data}
             height={300}
             options={{
               maintainAspectRatio: false,
