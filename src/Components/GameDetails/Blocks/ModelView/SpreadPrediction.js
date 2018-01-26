@@ -9,7 +9,6 @@ import { uniqBy } from 'lodash'
 import {
   Card,
   ButtonGroup,
-  Button,
   Spinner
 } from 'Components/Common'
 
@@ -24,7 +23,6 @@ import { colorComparator } from 'Helpers'
 
 class SpreadPrediction extends React.Component {
   state = {
-    period: 'season',
     selected: 'away'
   }
 
@@ -43,9 +41,9 @@ class SpreadPrediction extends React.Component {
 
   regressionModel () {
     const { aggregateSpreads } = this.props
-    const { selected, period } = this.state
+    const { selected } = this.state
 
-    const groupedPredictions = aggregateSpreads[period][selected].predictions.map(prediction => (
+    const groupedPredictions = aggregateSpreads[selected].predictions.map(prediction => (
       [prediction.win_percent || 0, prediction.spread]
     ))
 
@@ -71,11 +69,11 @@ class SpreadPrediction extends React.Component {
 
   dataFactory () {
     const { aggregateSpreads } = this.props
-    const { selected, period } = this.state
+    const { selected } = this.state
 
     const colors = this.determineColors()
 
-    const dataPoints = aggregateSpreads[period][selected].predictions.map(prediction => (
+    const dataPoints = aggregateSpreads[selected].predictions.map(prediction => (
       { x: prediction.win_percent, y: prediction.spread }
     )).sort((a, b) => a.x - b.x)
 
@@ -120,7 +118,7 @@ class SpreadPrediction extends React.Component {
         label: 'Vegas line spread',
         fill: false,
         data: uniqBy(dataPoints, points => points.x).map(points => (
-          { x: points.x, y: aggregateSpreads[period][selected].vegas_spread }
+          { x: points.x, y: aggregateSpreads[selected].vegas_spread }
         )),
         lineTension: 0,
         pointRadius: 0,
@@ -140,12 +138,6 @@ class SpreadPrediction extends React.Component {
       { label: summary.home.name, key: 'home' }
     ]
 
-    const periodFilter = [
-      { key: 'season', label: 'Season' },
-      { key: 'last_5', label: 'Last 5' },
-      { key: 'last_10', label: 'Last 10' }
-    ]
-
     return (
       <Card
         label="Prediction Distribution (Spread)"
@@ -155,31 +147,6 @@ class SpreadPrediction extends React.Component {
         }}
       >
         <div styleName='button-headers'>
-          <div>
-            {
-              periodFilter.map(period => {
-                return period.key !== this.state.period ? (
-                  <Button
-                    flat
-                    key={period.key}
-                    onClick={() => this.setState({ period: period.key })}
-                    style={{ marginLeft: '5px' }}
-                  >
-                    {period.label}
-                  </Button>
-                ) : (
-                  <Button
-                    disabled
-                    style={{ cursor: 'default', marginLeft: '5px' }}
-                    key={period.key}
-                  >
-                    {period.label}
-                  </Button>
-                )
-              })
-            }
-          </div>
-
           <ButtonGroup
             buttons={buttons}
             onChange={(e, button) => this.setState({ selected: button.key })}

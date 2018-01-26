@@ -41,7 +41,7 @@ class CompletedGameDetails extends React.Component {
               tabs={tabItems}
               selectedKey={routeKey}
               onChange={this.handleNavigation}
-              listStyle={{ maxWidth: '560px' }}
+              listStyle={{ maxWidth: '560px', marginTop: '30px' }}
             />
           </Col>
         </Row>

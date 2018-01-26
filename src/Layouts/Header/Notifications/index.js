@@ -78,7 +78,7 @@ class Notifications extends React.Component {
                   position: 'absolute',
                   width: '8px',
                   height: '8px',
-                  backgroundColor: 'var(--blue)',
+                  backgroundColor: 'var(--red)',
                   borderRadius: '50%',
                   bottom: '6px',
                   right: '6px'

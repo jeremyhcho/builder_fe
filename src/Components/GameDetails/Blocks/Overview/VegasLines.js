@@ -43,16 +43,16 @@ class VegasLines extends React.Component {
       <Card label="Vegas Lines" styleName="vegas-lines">
         <Row middle='xs' center='xs' styleName="vegas-lines-section">
           <Col xs={3}>
-            <p className="label semibold">TEAM</p>
+            <p className="label small semibold">TEAM</p>
           </Col>
           <Col xs={3}>
-            <p className="label semibold">MONEY LINE</p>
+            <p className="label small semibold">MONEY LINE</p>
           </Col>
           <Col xs={3}>
-            <p className="label semibold">SPREAD</p>
+            <p className="label small semibold">SPREAD</p>
           </Col>
           <Col xs={3}>
-            <p className="label semibold">TOTAL</p>
+            <p className="label small semibold">TOTAL</p>
           </Col>
         </Row>
 
