@@ -1,4 +1,5 @@
 import * as transform from './stateTransformers'
+import pathToRegexp from 'path-to-regexp'
 
 const initialState = {
   nba: {},
@@ -7,6 +8,23 @@ const initialState = {
 }
 
 const routines = (state = initialState, action) => {
+  if (action.type === '@@router/LOCATION_CHANGE') {
+    const route = '/games/:id/:section'
+
+    if (pathToRegexp(route).exec(action.payload.pathname)) {
+      return state
+    }
+
+    return {
+      ...state,
+      nba: {
+        models: state.nba.models,
+        teams: state.nba.teams,
+        games: state.nba.games
+      }
+    }
+  }
+
   const type = action.type.slice(action.type.lastIndexOf('/') + 1)
   switch (type) {
     case 'REQUEST': {

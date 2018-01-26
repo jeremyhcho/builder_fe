@@ -9,7 +9,14 @@ import { Card } from 'Components/Common'
 // CSS
 import './Trends.scss'
 
+// Actions
+import { fetchNBATrends } from 'Actions'
+
 class TrendStats extends React.Component {
+  componentDidMount () {
+    this.props.fetchNBATrends(this.props.summary.id)
+  }
+
   render () {
     const { summary } = this.props
 
@@ -39,13 +46,19 @@ TrendStats.defaultProps = {
 }
 
 TrendStats.propTypes = {
-  summary: PropTypes.object
+  summary: PropTypes.object,
+  fetchNBATrends: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
   summary: routines.nba.summary
 })
 
+const mapDispatchToProps = {
+  fetchNBATrends
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(TrendStats)

@@ -139,7 +139,7 @@ Predictions.propTypes = {
 const makeMapStateToProps = () => {
   const getPredictions = makeFindGamePredictions()
   const mapStateToProps = ({ routines }) => ({
-    prediction: getPredictions(routines.nba.predictions, routines.nba.summary),
+    prediction: getPredictions(routines),
     summary: routines.nba.summary
   })
 

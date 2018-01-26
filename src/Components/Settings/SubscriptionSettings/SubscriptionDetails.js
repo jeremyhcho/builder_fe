@@ -61,7 +61,7 @@ class SubscriptionDetails extends React.Component {
 
 SubscriptionDetails.defaultProps = {
   subscription: null,
-  canceledSubscriptions: null
+  canceledSubscriptions: []
 }
 
 SubscriptionDetails.propTypes = {

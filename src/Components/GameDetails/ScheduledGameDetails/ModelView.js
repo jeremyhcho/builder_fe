@@ -26,12 +26,12 @@ class ModelView extends React.Component {
   render () {
     const { fetchingMatchesModels, selectedModel, matchesModels, fetchingPredictions } = this.props
 
-    if (fetchingMatchesModels || fetchingPredictions || !selectedModel) {
+    if (fetchingMatchesModels || fetchingPredictions) {
       // View when fetching models .. loader
       return <div />
     }
 
-    if (!matchesModels.length) {
+    if (!matchesModels.length || !selectedModel) {
       // View when user has no models .. link to models route
       return (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -64,7 +64,7 @@ class ModelView extends React.Component {
           <ModelSelector />
         </Row>
 
-        <Row>
+        <Row style={{ marginBottom: '-50px' }}>
           <Col xs={7}>
             <Predictions />
           </Col>
@@ -74,7 +74,7 @@ class ModelView extends React.Component {
           </Col>
         </Row>
 
-        <Row style={{ marginTop: '-50px' }}>
+        <Row>
           <Col xs={7}>
             <SpreadPrediction />
           </Col>

@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect'
 
-const getPredictions = (selectedModel) => (
-  selectedModel.model.predictions
-)
+const getPredictions = (routines) => {
+  return routines.nba.predictions.model.predictions
+}
 
-const getGameId = (summary) => summary.id
+const getGameId = (routines) => routines.nba.summary.id
 
 const makeFindGamePredictions = () => {
   return createSelector(

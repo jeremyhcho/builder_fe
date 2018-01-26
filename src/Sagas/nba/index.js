@@ -14,7 +14,7 @@ function* fetchInitialPredictions ({ response }) {
     const selectedModel = response.find(model => model.status === 'ACTIVE') || response[0]
     yield put(fetchNBAPredictions(selectedModel.id))
   } catch (error) {
-    console.log('Failed to fetch initial predictions, saga error', error)
+    console.error('Failed to fetch initial predictions', error)
   }
 }
 

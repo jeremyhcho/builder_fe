@@ -151,7 +151,7 @@ DateInput.propTypes = {
 }
 
 const mapStateToProps = ({ nba }) => ({
-  dates: nba.games.dates
+  dates: nba.dates
 })
 
 const mapDispatchToProps = {

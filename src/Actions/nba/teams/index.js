@@ -12,7 +12,7 @@ export const fetchNBATeams = createRoutine(
   getNBATeams,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'teams'
     },
     transform: (response) => (

@@ -1,7 +1,7 @@
 export const replace = (state, key, response, loaderKey) => ({
   ...state,
-  [key.sport]: {
-    ...state[key.sport],
+  [key.primaryKey]: {
+    ...state[key.primaryKey],
     [key.type]: response
   },
   callingApi: {
@@ -12,9 +12,9 @@ export const replace = (state, key, response, loaderKey) => ({
 
 export const concat = (state, key, response, loaderKey) => ({
   ...state,
-  [key.sport]: {
-    ...state[key.sport],
-    [key.type]: [...state[key.sport][key.type], response]
+  [key.primaryKey]: {
+    ...state[key.primaryKey],
+    [key.type]: [...state[key.primaryKey][key.type], response]
   },
   callingApi: {
     ...state.callingApi,
@@ -24,9 +24,9 @@ export const concat = (state, key, response, loaderKey) => ({
 
 export const removeById = (state, key, response, loaderKey) => ({
   ...state,
-  [key.sport]: {
-    ...state[key.sport],
-    [key.type]: state[key.sport][key.type].filter(data => data.id !== response.id)
+  [key.primaryKey]: {
+    ...state[key.primaryKey],
+    [key.type]: state[key.primaryKey][key.type].filter(data => data.id !== response.id)
   },
   callingApi: {
     ...state.callingApi,
@@ -36,9 +36,9 @@ export const removeById = (state, key, response, loaderKey) => ({
 
 export const updateById = (state, key, response, loaderKey) => ({
   ...state,
-  [key.sport]: {
-    ...state[key.sport],
-    [key.type]: state[key.sport][key.type].map(data => {
+  [key.primaryKey]: {
+    ...state[key.primaryKey],
+    [key.type]: state[key.primaryKey][key.type].map(data => {
       if (data.id !== response.id) return data
       return response
     })
@@ -52,7 +52,7 @@ export const updateById = (state, key, response, loaderKey) => ({
 export const customTransform = (state, key, response, loaderKey) => {
   return ({
     ...state,
-    [key.sport]: { ...state[key.sport], [key.type]: response },
+    [key.primaryKey]: { ...state[key.primaryKey], [key.type]: response },
     callingApi: {
       ...state.callingApi,
       [loaderKey]: false

@@ -21,7 +21,19 @@ class TotalPrediction extends React.Component {
   }
 
   dataFactory () {
-    const { prediction, aggregateTotals } = this.props
+    const { prediction, aggregateTotals, fetchingAggregateTotals } = this.props
+
+    if (fetchingAggregateTotals || !Object.keys(aggregateTotals).length) {
+      const labels = ['O', 'U', 'EVEN']
+
+      const datasets = [{
+        data: [1, 0, 0],
+        backgroundColor: ['#9EB1BC', '#9EB1BC', '#9EB1BC'],
+        borderColor: '#3B454D'
+      }]
+
+      return { labels, datasets }
+    }
 
     const labels = [
       `O${prediction.vegas_away_line.total}`,
@@ -43,47 +55,43 @@ class TotalPrediction extends React.Component {
   }
 
   render () {
-    const { fetchingAggregateTotals, aggregateTotals } = this.props
-
-    if (fetchingAggregateTotals || !aggregateTotals) {
-      return (
-        <Card label="Prediction Distribution (Total)" styleName="total-prediction">
-          <Doughnut data={{}} />
-        </Card>
-      )
+    const doughnutOptions = {
+      maintainAspectRatio: false,
+      animation: {
+        easing: 'linear',
+        duration: 200
+      },
+      legend: {
+        onClick: () => null,
+        position: 'right',
+        labels: {
+          boxWidth: 14,
+          fontColor: '#48545D',
+          fontFamily: '"proxima-nova", "sans-serif"',
+          fontStyle: 'bold',
+          fontSize: 14,
+          padding: 25
+        }
+      },
+      layout: {
+        padding: {
+          right: 30
+        }
+      }
     }
 
     return (
       <Card
         label="Prediction Distribution (Total)"
         styleName="total-prediction"
-        wrapperStyle={{ padding: '25px' }}
+        wrapperStyle={{ padding: '28px 20px' }}
       >
-        <div style={{ width: '100%', height: '200px' }}>
-          <Doughnut
-            data={this.dataFactory()}
-            options={{
-              maintainAspectRatio: false,
-              legend: {
-                onClick: () => null,
-                position: 'right',
-                labels: {
-                  boxWidth: 14,
-                  fontColor: '#48545D',
-                  fontFamily: '"proxima-nova", "sans-serif"',
-                  fontStyle: 'bold',
-                  fontSize: 14,
-                  padding: 25
-                }
-              },
-              layout: {
-                padding: {
-                  right: 20
-                }
-              }
-            }}
-          />
-        </div>
+        <Doughnut
+          width={200}
+          height={200}
+          data={this.dataFactory()}
+          options={doughnutOptions}
+        />
       </Card>
     )
   }
@@ -91,8 +99,8 @@ class TotalPrediction extends React.Component {
 
 TotalPrediction.defaultProps = {
   summary: {},
-  aggregateTotals: null,
-  prediction: {},
+  aggregateTotals: {},
+  prediction: null,
   fetchingAggregateTotals: false
 }
 
@@ -110,7 +118,7 @@ const makeMapStateToProps = () => {
     aggregateTotals: routines.nba.aggregateTotals,
     fetchingAggregateTotals: routines.callingApi.getNBAAggregateTotals,
     summary: routines.nba.summary,
-    prediction: getPredictions(routines.nba.predictions, routines.nba.summary)
+    prediction: getPredictions(routines)
   })
 
   return mapStateToProps

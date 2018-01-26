@@ -21,7 +21,7 @@ export const fetchNBAModels = createRoutine(
   getNBAModels,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'models'
     },
     transform: 'replace'
@@ -33,7 +33,7 @@ export const createNBAModel = createRoutine(
   postNBAModel,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'models'
     },
     transform: 'concat'
@@ -45,7 +45,7 @@ export const removeNBAModel = createRoutine(
   deleteNBAModel,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'models'
     },
     transform: 'removeById'
@@ -57,7 +57,7 @@ export const updateNBAModel = createRoutine(
   putNBAModel,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'models'
     },
     transform: 'updateById'

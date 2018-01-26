@@ -23,7 +23,7 @@ export const fetchNBAMatchesModels = createRoutine(
   getNBAMatchesModels,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'matchesModels'
     },
     transform: 'replace'
@@ -35,7 +35,7 @@ export const updateNBAMatchesModels = createRoutine(
   putNBAMatchesModels,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'matchesModels'
     },
     transform: 'updateById'
@@ -47,7 +47,7 @@ export const fetchNBAPredictions = createRoutine(
   getNBAPredictions,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'predictions'
     },
     transform: 'replace'
@@ -59,7 +59,7 @@ export const fetchNBAAggregateTotals = createRoutine(
   getNBAAggregateTotals,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'aggregateTotals'
     },
     transform: 'replace'
@@ -71,7 +71,7 @@ export const fetchNBAAggregateSpreads = createRoutine(
   getNBAAggregateSpreads,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'aggregateSpreads'
     },
     transform: 'replace'

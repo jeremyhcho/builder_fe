@@ -39,7 +39,7 @@ function* initializeRoutine ({ actionTypes, api, routineOpts, payload }) {
       loaderKey,
       error
     })
-    console.log(error)
+    console.error(`${loaderKey} failed: `, error)
   }
 }
 function* watchRoutineInit () {

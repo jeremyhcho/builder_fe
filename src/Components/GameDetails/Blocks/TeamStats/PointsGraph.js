@@ -87,16 +87,12 @@ class PointsGraph extends React.Component {
         cubicInterpolationMode: 'linear',
         backgroundColor: colors.awayColor,
         borderColor: colors.awayColor,
-        borderCapStyle: 'butt',
-        borderJoinStyle: 'bevel',
         pointBorderColor: colors.awayColor,
         pointBackgroundColor: colors.awayColor,
         pointBorderWidth: 1,
         pointHoverRadius: 5,
         pointHoverBackgroundColor: colors.awayColor,
-        pointHoverBorderWidth: 2,
         pointRadius: 4,
-        pointHitRadius: 15,
         data: teamPoints.away.points
       }
       const awayAvgPoints = {
@@ -106,18 +102,10 @@ class PointsGraph extends React.Component {
         cubicInterpolationMode: 'linear',
         backgroundColor: 'transparent',
         borderColor: colors.awayColor,
-        borderCapStyle: 'butt',
         borderDash: [5, 5],
         borderDashOffset: 0.0,
-        borderJoinStyle: 'bevel',
-        pointBorderColor: 'transparent',
-        pointBackgroundColor: 'transparent',
-        pointBorderWidth: 0,
-        pointHoverRadius: 0,
         pointHoverBackgroundColor: colors.awayColor,
-        pointHoverBorderWidth: 0,
-        pointRadius: 1,
-        pointHitRadius: 15,
+        pointRadius: 0,
         data: teamPoints.away.avg_points
       }
 
@@ -128,15 +116,12 @@ class PointsGraph extends React.Component {
         cubicInterpolationMode: 'linear',
         backgroundColor: colors.homeColor,
         borderColor: colors.homeColor,
-        borderCapStyle: 'butt',
-        borderJoinStyle: 'bevel',
         pointBorderColor: colors.homeColor,
+        pointBackgroundColor: colors.homeColor,
         pointBorderWidth: 1,
         pointHoverRadius: 5,
         pointHoverBackgroundColor: colors.homeColor,
-        pointHoverBorderWidth: 2,
         pointRadius: 4,
-        pointHitRadius: 15,
         data: teamPoints.home.points
       }
       const homeAvgPoints = {
@@ -146,18 +131,10 @@ class PointsGraph extends React.Component {
         cubicInterpolationMode: 'linear',
         backgroundColor: 'transparent',
         borderColor: colors.homeColor,
-        borderCapStyle: 'butt',
         borderDash: [5, 5],
         borderDashOffset: 0.0,
-        borderJoinStyle: 'bevel',
-        pointBorderColor: 'transparent',
-        pointBackgroundColor: 'transparent',
-        pointBorderWidth: 0,
-        pointHoverRadius: 0,
         pointHoverBackgroundColor: colors.homeColor,
-        pointHoverBorderWidth: 0,
-        pointRadius: 1,
-        pointHitRadius: 15,
+        pointRadius: 0,
         data: teamPoints.home.avg_points
       }
       const pointsDatasets = { awayPoints, awayAvgPoints, homePoints, homeAvgPoints }
@@ -227,6 +204,18 @@ class PointsGraph extends React.Component {
                       yAxes: [{
                         ticks: {
                           stepSize: 2
+                        },
+                        scaleLabel: {
+                          display: true,
+                          labelString: 'Points',
+                          fontStyle: 'bold'
+                        }
+                      }],
+                      xAxes: [{
+                        scaleLabel: {
+                          display: true,
+                          labelString: 'Quarters',
+                          fontStyle: 'bold'
                         }
                       }]
                     },

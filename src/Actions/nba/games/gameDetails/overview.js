@@ -26,7 +26,7 @@ export const fetchNBASummary = createRoutine(
   getNBASummary,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'summary'
     },
     transform: 'replace'
@@ -39,7 +39,7 @@ export const fetchNBAQuarters = createRoutine(
   getNBAQuarters,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'quarters'
     },
     transform: 'replace'
@@ -52,7 +52,7 @@ export const fetchNBARecentGames = createRoutine(
   getNBARecentGames,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'recentGames'
     },
     transform: 'replace'
@@ -65,7 +65,7 @@ export const fetchNBAStartingLineup = createRoutine(
   getNBAStartingLineup,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'startingLineup'
     },
     transform: 'replace'
@@ -78,7 +78,7 @@ export const fetchNBAInjuries = createRoutine(
   getNBAInjuries,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'injuries'
     },
     transform: 'replace'
@@ -91,7 +91,7 @@ export const fetchNBALines = createRoutine(
   getNBALines,
   {
     reducerKey: {
-      sport: 'nba',
+      primaryKey: 'nba',
       type: 'lines'
     },
     transform: 'replace'

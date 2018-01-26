@@ -32,7 +32,16 @@ class SpreadPrediction extends React.Component {
     this.props.fetchNBAAggregateSpreads(this.props.summary.id)
   }
 
-  fitData () {
+  getRegressionPoint (plot) {
+    const equation = this.regressionModel().equation
+
+    const slope = equation[0]
+    const yIntercept = equation[1]
+
+    return (plot * slope) + yIntercept
+  }
+
+  regressionModel () {
     const { aggregateSpreads } = this.props
     const { selected, period } = this.state
 
@@ -40,10 +49,7 @@ class SpreadPrediction extends React.Component {
       [prediction.win_percent || 0, prediction.spread]
     ))
 
-    return uniqBy(
-      regression.linear(groupedPredictions).points,
-      data => data[0]
-    ).sort((a, b) => a[0] - b[0])
+    return regression.linear(groupedPredictions)
   }
 
   determineColors () {
@@ -69,14 +75,39 @@ class SpreadPrediction extends React.Component {
 
     const colors = this.determineColors()
 
+    const dataPoints = aggregateSpreads[period][selected].predictions.map(prediction => (
+      { x: prediction.win_percent, y: prediction.spread }
+    )).sort((a, b) => a.x - b.x).filter(data => data.x)
+
     const datasets = [
       {
-        type: 'line',
-        label: 'Fit data points',
+        type: 'scatter',
+        label: 'Data points',
         fill: false,
-        data: this.fitData().map(data => (
-          { x: data[0], y: data[1] }
-        )),
+        data: dataPoints,
+        backgroundColor: 'transparent',
+        borderColor: '#3C90DF',
+        pointRadius: 3,
+        pointBorderColor: '#3C90DF',
+        pointBackgroundColor: '#3C90DF',
+        lineTension: 0,
+        showLine: false
+      },
+      {
+        type: 'line',
+        label: 'Fit data line',
+        fill: false,
+        function: this.getRegressionPoint,
+        data: [
+          {
+            x: dataPoints[0].x,
+            y: this.getRegressionPoint(dataPoints[0].x)
+          },
+          {
+            x: dataPoints[dataPoints.length - 1].x,
+            y: this.getRegressionPoint(dataPoints[dataPoints.length - 1].x)
+          }
+        ],
         lineTension: 0,
         cubicInterpolationMode: 'linear',
         spanGaps: true,
@@ -85,32 +116,12 @@ class SpreadPrediction extends React.Component {
         borderColor: selected === 'away' ? colors.awayColor : colors.homeColor
       },
       {
-        type: 'scatter',
-        label: 'Data points',
-        fill: false,
-        data: aggregateSpreads[period][selected].predictions.map(prediction => (
-          { x: prediction.win_percent || 0, y: prediction.spread }
-        )),
-        backgroundColor: 'transparent',
-        borderColor: '#3C90DF',
-        pointRadius: 1,
-        pointBackgroundColor: '#3C90DF',
-        lineTension: 0,
-        showLine: false
-      },
-      {
         type: 'line',
         label: 'Vegas line spread',
         fill: false,
-        data: uniqBy(
-          aggregateSpreads[period][selected].predictions, prediction => prediction.win_percent)
-          .sort((a, b) => a.win_percent - b.win_percent)
-          .map(prediction => (
-            {
-              x: prediction.win_percent || 0,
-              y: parseInt(aggregateSpreads[period][selected].vegas_spread, 10)
-            }
-          )),
+        data: uniqBy(dataPoints, points => points.x).map(points => (
+          { x: points.x, y: aggregateSpreads[period][selected].vegas_spread }
+        )),
         lineTension: 0,
         pointRadius: 0,
         backgroundColor: 'transparent',
@@ -190,7 +201,7 @@ class SpreadPrediction extends React.Component {
                 },
                 animation: {
                   easing: 'linear',
-                  duration: 500
+                  duration: 200
                 },
                 scales: {
                   yAxes: [{
@@ -203,21 +214,21 @@ class SpreadPrediction extends React.Component {
                     },
                     scaleLabel: {
                       display: true,
-                      labelString: 'Model Predictions'
+                      labelString: 'Model Predictions',
+                      fontStyle: 'bold'
                     }
                   }],
                   xAxes: [{
                     type: 'linear',
                     ticks: {
-                      stacked: false,
-                      maxTicksLimit: 3,
                     },
                     gridLines: {
                       display: false
                     },
                     scaleLabel: {
                       display: true,
-                      labelString: 'Model Win %'
+                      labelString: 'Model Win %',
+                      fontStyle: 'bold'
                     }
                   }]
                 }

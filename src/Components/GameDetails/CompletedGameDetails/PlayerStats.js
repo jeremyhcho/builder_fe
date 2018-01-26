@@ -46,8 +46,8 @@ class PlayerStats extends React.Component {
 }
 
 PlayerStats.defaultProps = {
-  playerStats: {},
-  summary: {}
+  playerStats: null,
+  summary: null
 }
 
 PlayerStats.propTypes = {
