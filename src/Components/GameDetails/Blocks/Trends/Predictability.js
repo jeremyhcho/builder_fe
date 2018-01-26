@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
+// import Chart from 'chart.js'
 
 // Components
 import {
@@ -58,58 +59,15 @@ class Predictability extends React.Component {
       return moment(a.x).diff(moment(b.x))
     })
 
-    const labels = data.map(plot => plot.x)
-
-    const positiveData = []
-    const negativeData = []
-    data.forEach(plot => {
-      if (plot.y >= 0) {
-        positiveData.push(plot.y)
-        negativeData.push(null)
-      } else {
-        positiveData.push(null)
-        negativeData.push(plot.y)
-      }
-    })
-
-    const joinedPosData = positiveData.map((point, i) => {
-      if (point === null && negativeData[i - 1] === null) {
-        return negativeData[i]
-      }
-
-      return point
-    })
-
-    const joinedNegData = negativeData.map((point, i) => {
-      if (point === null && positiveData[i - 1] === null) {
-        return positiveData[i]
-      }
-
-      return point
-    })
-
     const colors = this.determineColors()
 
     const datasets = [
       {
         type: 'line',
-        label: 'Positive Outcome Data',
+        label: 'Predictability line',
         fill: true,
-        data: joinedPosData,
-        backgroundColor: 'yellow',
-        borderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
-        pointBorderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
-        pointBackgroundColor: '#D1D8DB',
-        pointRadius: 3,
-        pointBorderWidth: 2,
-        lineTension: 0.1,
-      },
-      {
-        type: 'line',
-        label: 'Negative Outcome Data',
-        fill: 'origin',
-        data: joinedNegData,
-        backgroundColor: 'transparent',
+        data,
+        // backgroundColor: 'yellow',
         borderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
         pointBorderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
         pointBackgroundColor: '#D1D8DB',
@@ -131,7 +89,7 @@ class Predictability extends React.Component {
       }
     ]
 
-    return { labels, datasets }
+    return { datasets }
   }
 
   render () {

@@ -57,10 +57,6 @@ class TotalPrediction extends React.Component {
   render () {
     const doughnutOptions = {
       maintainAspectRatio: false,
-      animation: {
-        easing: 'linear',
-        duration: 200
-      },
       legend: {
         onClick: () => null,
         position: 'right',

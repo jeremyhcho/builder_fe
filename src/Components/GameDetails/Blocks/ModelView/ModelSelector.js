@@ -7,7 +7,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { Toggle } from 'Components/Common'
 
 // Icons
-import ChangeIcon from 'Assets/Icons/switch-arrows'
+import ChangeIcon from 'Assets/Icons/switch-arrows.svg'
 
 // Actions
 import { fetchNBAPredictions, updateNBAMatchesModels } from 'Actions'
