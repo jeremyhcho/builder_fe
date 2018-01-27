@@ -7,33 +7,28 @@ import { Doughnut } from 'react-chartjs-2'
 import { fetchNBAAggregateTotals } from 'Actions'
 
 // Components
-import { Card } from 'Components/Common'
+import { Card, Spinner } from 'Components/Common'
 
 // CSS
 import './ModelView.scss'
 
-// Selectors
+// Helpers & Selectors
 import { makeFindGamePredictions } from 'Helpers/Selectors'
+import { precisionRound } from 'Helpers'
+
+const roundHundredths = precisionRound(2)
 
 class TotalPrediction extends React.Component {
   componentDidMount () {
     this.props.fetchNBAAggregateTotals(this.props.summary.id)
   }
 
+  roundNumber (num) {
+    return Number.parseFloat(num).toFixed(2)
+  }
+
   dataFactory () {
-    const { prediction, aggregateTotals, fetchingAggregateTotals } = this.props
-
-    if (fetchingAggregateTotals || !Object.keys(aggregateTotals).length) {
-      const labels = ['O', 'U', 'EVEN']
-
-      const datasets = [{
-        data: [1, 0, 0],
-        backgroundColor: ['#9EB1BC', '#9EB1BC', '#9EB1BC'],
-        borderColor: '#3B454D'
-      }]
-
-      return { labels, datasets }
-    }
+    const { prediction, aggregateTotals } = this.props
 
     const labels = [
       `O${prediction.vegas_away_line.total}`,
@@ -42,11 +37,9 @@ class TotalPrediction extends React.Component {
     ]
 
     const datasets = [{
-      data: [
-        aggregateTotals.over || 0,
-        aggregateTotals.under || 0,
-        aggregateTotals.ties || 0
-      ],
+      data: Object.keys(aggregateTotals).map(stat => (
+        roundHundredths(aggregateTotals[stat])
+      )),
       backgroundColor: ['#D03D3C', '#2E7BC4', '#0AA958'],
       borderColor: '#3B454D'
     }]
@@ -55,6 +48,8 @@ class TotalPrediction extends React.Component {
   }
 
   render () {
+    const { aggregateTotals } = this.props
+
     const doughnutOptions = {
       maintainAspectRatio: false,
       legend: {
@@ -83,12 +78,20 @@ class TotalPrediction extends React.Component {
         styleName="total-prediction"
         wrapperStyle={{ padding: '28px 20px' }}
       >
-        <Doughnut
-          width={200}
-          height={200}
-          data={this.dataFactory()}
-          options={doughnutOptions}
-        />
+        {
+          !Object.keys(aggregateTotals).length ? (
+            <div style={{ textAlign: 'center', padding: '65px' }}>
+              <Spinner lg show />
+            </div>
+          ) : (
+            <Doughnut
+              width={200}
+              height={200}
+              data={this.dataFactory()}
+              options={doughnutOptions}
+            />
+          )
+        }
       </Card>
     )
   }
@@ -97,23 +100,20 @@ class TotalPrediction extends React.Component {
 TotalPrediction.defaultProps = {
   summary: {},
   aggregateTotals: {},
-  prediction: null,
-  fetchingAggregateTotals: false
+  prediction: null
 }
 
 TotalPrediction.propTypes = {
   aggregateTotals: PropTypes.object,
   prediction: PropTypes.object,
   summary: PropTypes.object,
-  fetchNBAAggregateTotals: PropTypes.func.isRequired,
-  fetchingAggregateTotals: PropTypes.bool
+  fetchNBAAggregateTotals: PropTypes.func.isRequired
 }
 
 const makeMapStateToProps = () => {
   const getPredictions = makeFindGamePredictions()
   const mapStateToProps = ({ routines }) => ({
     aggregateTotals: routines.nba.aggregateTotals,
-    fetchingAggregateTotals: routines.callingApi.getNBAAggregateTotals,
     summary: routines.nba.summary,
     prediction: getPredictions(routines)
   })

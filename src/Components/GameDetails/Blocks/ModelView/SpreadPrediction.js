@@ -77,6 +77,10 @@ class SpreadPrediction extends React.Component {
       { x: prediction.win_percent, y: prediction.spread }
     )).sort((a, b) => a.x - b.x)
 
+    if (!dataPoints.length) {
+      return {}
+    }
+
     const datasets = [
       {
         type: 'scatter',

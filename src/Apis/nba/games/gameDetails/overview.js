@@ -29,3 +29,8 @@ export const getNBAInjuries = (id) => (
 export const getNBALines = (matchId) => (
   axios.get(`/api/nba/v1/matches/${matchId}/lines`)
 )
+
+// Team Stats
+export const getNBACompletedTeamStats = () => (
+  axios.get('/api/nba/v1/teams/stats')
+)

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Spinner } from 'Components/Common'
@@ -12,15 +11,15 @@ import { fetchNBAPlayerStats } from 'Actions'
 
 class PlayerStats extends React.Component {
   componentDidMount () {
-    const { fetchNBAPlayerStats, match } = this.props
-    fetchNBAPlayerStats(match.params.id)
+    this.props.fetchNBAPlayerStats(this.props.match.params.id)
   }
 
   render () {
     const { playerStats, summary } = this.props
+
     if (playerStats && summary) {
       return (
-        <div style={{ maxWidth: '1300px' }}>
+        <div style={{ maxWidth: '1300px', width: '100%' }}>
           {
             Object.keys(playerStats).map(team => (
               <TeamPlayers
@@ -34,12 +33,15 @@ class PlayerStats extends React.Component {
       )
     }
     return (
-      <div>
-        <Row center='xs' className="loader">
-          <Col xs={12}>
-            <Spinner lg show />
-          </Col>
-        </Row>
+      <div
+        style={{
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <Spinner lg show />
       </div>
     )
   }

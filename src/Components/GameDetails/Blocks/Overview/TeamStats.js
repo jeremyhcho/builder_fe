@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // Actions
-import { fetchNBATeamStats } from 'Actions'
+import { fetchNBACompletedTeamStats } from 'Actions'
 
 class TeamStats extends React.Component {
   componentDidMount () {
-    this.props.fetchNBATeamStats(this.props.summary.id)
+    this.props.fetchNBACompletedTeamStats()
   }
 
   render () {
-    console.log(this.props.teamStats)
+    console.log(this.props.teamStats, this.props.summary)
     return (
       <div />
     )
@@ -26,7 +26,7 @@ TeamStats.defaultProps = {
 TeamStats.propTypes = {
   teamStats: PropTypes.object,
   summary: PropTypes.object,
-  fetchNBATeamStats: PropTypes.func.isRequired
+  fetchNBACompletedTeamStats: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
@@ -35,7 +35,7 @@ const mapStateToProps = ({ routines }) => ({
 })
 
 const mapDispatchToProps = {
-  fetchNBATeamStats
+  fetchNBACompletedTeamStats
 }
 
 export default connect(

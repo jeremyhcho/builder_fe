@@ -60,6 +60,6 @@ export const updateNBAModel = createRoutine(
       primaryKey: 'nba',
       type: 'models'
     },
-    transform: 'updateById'
+    transform: 'updateByIdAndReplace'
   }
 )

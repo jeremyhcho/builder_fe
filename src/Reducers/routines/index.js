@@ -38,28 +38,17 @@ const routines = (state = initialState, action) => {
     }
 
     case 'SUCCESS': {
-      if (action.transform === 'replace') {
-        return transform.replace(state, action.key, action.response, action.loaderKey)
-      }
-
-      if (action.transform === 'concat') {
-        return transform.concat(state, action.key, action.response, action.loaderKey)
-      }
-
-      if (action.transform === 'removeById') {
-        return transform.removeById(state, action.key, action.response, action.loaderKey)
-      }
-
-      if (action.transform === 'updateById') {
-        return transform.updateById(state, action.key, action.response, action.loaderKey)
-      }
-
       if (typeof action.transform === 'function') {
-        return transform.customTransform(state,
-          action.key, action.transform(action.response), action.loaderKey)
+        return transform.customTransform(
+          state, action.key, action.transform(action.response), action.loaderKey)
       }
 
-      return console.log('Api was successful but an action was not specified for the reducer')
+      try {
+        return transform[action.transform](state, action.key, action.response, action.loaderKey)
+      } catch ({ response }) {
+        console.error(`${action.transform} does not have valid transform action`, response)
+        return { ...state }
+      }
     }
 
     case 'FAIL': {

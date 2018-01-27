@@ -34,13 +34,28 @@ export const removeById = (state, key, response, loaderKey) => ({
   }
 })
 
-export const updateById = (state, key, response, loaderKey) => ({
+export const updateByIdAndReplace = (state, key, response, loaderKey) => ({
   ...state,
   [key.primaryKey]: {
     ...state[key.primaryKey],
     [key.type]: state[key.primaryKey][key.type].map(data => {
       if (data.id !== response.id) return data
       return response
+    })
+  },
+  callingApi: {
+    ...state.callingApi,
+    [loaderKey]: false
+  }
+})
+
+export const updateByIdAndChange = (state, key, response, loaderKey) => ({
+  ...state,
+  [key.primaryKey]: {
+    ...state[key.primaryKey],
+    [key.type]: state[key.primaryKey][key.type].map(data => {
+      if (data.id !== response.id) return data
+      return { ...data, ...response }
     })
   },
   callingApi: {

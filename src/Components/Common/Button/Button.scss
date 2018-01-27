@@ -34,7 +34,7 @@
 
   // flat button
   &.flat {
-    border: none;
+    border: 1px solid #FFF;
     background-color: #FFF;
     color: var(--font-color);
     &:not(.disabled):hover {

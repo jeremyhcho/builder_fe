@@ -1,3 +1,5 @@
 export { default as colorComparator } from './colorComparator'
 export { default as states } from './states'
 export { default as createDoubleFillChart } from './createDoubleFillChart'
+export { default as nbaFlatStat } from './nbaFlatStat'
+export { default as precisionRound } from './precisionRound'

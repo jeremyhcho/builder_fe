@@ -38,7 +38,7 @@ export const updateNBAMatchesModels = createRoutine(
       primaryKey: 'nba',
       type: 'matchesModels'
     },
-    transform: 'updateById'
+    transform: 'updateByIdAndChange'
   }
 )
 

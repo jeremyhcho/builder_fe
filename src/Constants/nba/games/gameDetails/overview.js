@@ -15,3 +15,6 @@ export const FETCH_NBA_INJURIES = 'nba/gameDetails/FETCH_NBA_INJURIES'
 
 // Vegas Lines
 export const FETCH_NBA_LINES = 'nba/gameDetails/FETCH_NBA_LINES'
+
+// Team Stats
+export const FETCH_NBA_COMPLETED_TEAM_STATS = 'nba/gameDetails/FETCH_NBA_COMPLETED_TEAM_STATS'

@@ -67,7 +67,7 @@ class Predictability extends React.Component {
       {
         type: 'DoubleFillLine',
         yAxisId: 'y-axis-0',
-        label: 'Predictability line',
+        label: 'Prediction difference',
         fill: true,
         data,
         borderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
@@ -165,9 +165,15 @@ class Predictability extends React.Component {
               legend: {
                 display: false
               },
-              animation: {
-                easing: 'linear',
-                duration: 200
+              tooltips: {
+                callbacks: {
+                  title: (tooltips, data) => {
+                    console.log(moment.locale())
+                    const tooltipIndex = tooltips[0].index
+                    const dataset = data.datasets[0].data
+                    return moment(dataset[tooltipIndex].x).format('ddd, MMM D, YYYY')
+                  }
+                }
               },
               scales: {
                 yAxes: [{
