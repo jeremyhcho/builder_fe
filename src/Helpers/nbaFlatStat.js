@@ -10,7 +10,7 @@ const nbaFlatStat = (stat) => {
       return 'FGA'
 
     case 'field_goals_pct':
-      return 'FT%'
+      return 'FG%'
 
     case 'three_points_made':
       return '3PM'

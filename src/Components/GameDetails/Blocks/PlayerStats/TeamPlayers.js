@@ -43,7 +43,7 @@ const TeamPlayers = ({ teamName, players }) => {
               if (!nbaFlatStat(stat)) return null
 
               return (
-                <div key={stat} style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+                <div key={stat} styleName="statKey">
                   <p className="semibold label" styleName="players-label">
                     {nbaFlatStat(stat)}
                   </p>
@@ -89,7 +89,7 @@ const TeamPlayers = ({ teamName, players }) => {
               if (!nbaFlatStat(stat)) return null
 
               return (
-                <div key={stat} style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+                <div key={stat} styleName="statKey">
                   <p className="semibold label" styleName="players-label">
                     {nbaFlatStat(stat)}
                   </p>

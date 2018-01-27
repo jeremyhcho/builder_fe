@@ -19,7 +19,7 @@ class TeamStats extends React.Component {
 }
 
 TeamStats.defaultProps = {
-  teamStats: {},
+  teamStats: [],
   summary: {}
 }
 
@@ -31,7 +31,7 @@ TeamStats.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   summary: routines.nba.summary,
-  teamStats: routines.nba.teamStats
+  teamStats: routines.nba.completedTeamStats
 })
 
 const mapDispatchToProps = {

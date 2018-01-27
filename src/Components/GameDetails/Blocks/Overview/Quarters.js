@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row } from 'react-styled-flexboxgrid'
 import { uniqueId } from 'lodash'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 
 // Components
 import { Card, Button } from 'Components/Common'
@@ -32,7 +32,7 @@ class Quarters extends React.Component {
   }
 
   highlightStat = (stat) => {
-    this.setState({ highlightStat: stat })
+    this.setState({ highlightedStat: stat })
   }
 
   quarterStatsFactory () {
@@ -56,7 +56,7 @@ class Quarters extends React.Component {
 
   render () {
     const { quarters, summary } = this.props
-    const { selected } = this.state
+    const { selected, highlightedStat } = this.state
 
     return (
       <div>
@@ -102,12 +102,17 @@ class Quarters extends React.Component {
                         return null
                       }
 
+                      const quartersStats = classNames('quarters-stat', {
+                        hovered: stats.statKey === highlightedStat
+                      })
+
                       return (
-                        <div key={uniqueId('stat_')} styleName="quarters-stat">
+                        <div key={uniqueId('stat_')} styleName={quartersStats}>
                           <p
                             styleName="quarters-label"
                             className="label semibold small"
-                            onMouseOver={() => this.highlightStat(stats.statKey)}
+                            onMouseEnter={() => this.highlightStat(stats.statKey)}
+                            onMouseLeave={() => this.setState({ highlightedStat: '' })}
                           >
                             {stats.statKey}
                           </p>

@@ -11,11 +11,16 @@
       flex: 1;
     }
 
-    .players-label {
-      margin: 15px;
-    }
-    .players-value {
-      margin-bottom: 15px;
+    .statKey {
+      text-align: center;
+      white-space: nowrap;
+
+      .players-label {
+        margin: 15px;
+      }
+      .players-value {
+        margin-bottom: 15px;
+      }
     }
   }
 }
