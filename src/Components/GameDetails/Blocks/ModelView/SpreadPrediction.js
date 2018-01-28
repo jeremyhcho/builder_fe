@@ -19,7 +19,10 @@ import './ModelView.scss'
 import { fetchNBAAggregateSpreads } from 'Actions'
 
 // Helpers
-import { colorComparator } from 'Helpers'
+import { colorComparator, precisionRound } from 'Helpers'
+
+const ones = precisionRound(0)
+const tenths = precisionRound(1)
 
 class SpreadPrediction extends React.Component {
   state = {
@@ -84,7 +87,7 @@ class SpreadPrediction extends React.Component {
     const datasets = [
       {
         type: 'scatter',
-        label: 'Data points',
+        label: 'Model spread prediction',
         fill: false,
         data: dataPoints,
         backgroundColor: 'transparent',
@@ -170,6 +173,14 @@ class SpreadPrediction extends React.Component {
                 legend: {
                   display: false
                 },
+                tooltips: {
+                  callbacks: {
+                    title: (tooltips, { datasets }) => {
+                      console.log(datasets)
+                      return `Model win rate: ${tenths(tooltips[0].xLabel * 100)}%`
+                    }
+                  }
+                },
                 animation: {
                   easing: 'linear',
                   duration: 200
@@ -192,6 +203,10 @@ class SpreadPrediction extends React.Component {
                   xAxes: [{
                     type: 'linear',
                     ticks: {
+                      callback: (currValue, index, values) => {
+                        console.log(currValue, values)
+                        return `${ones(currValue * 100)}%`
+                      }
                     },
                     gridLines: {
                       display: false

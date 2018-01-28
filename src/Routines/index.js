@@ -1,7 +1,22 @@
 // Constants
 import { ROUTINE_INIT } from 'Constants'
 
-const createRoutine = (prefix, api, routineOpts) => {
+const typeErrorMessage = (input, inputType, expectedType) => {
+  return `Invalid type of ${typeof input} supplied to ${input}, expected ${expectedType}`
+}
+
+const routineErrors = (prefix, api, reducerKey, transform) => {
+  if (typeof prefix !== 'string') throw new TypeError(typeErrorMessage('prefix', prefix, 'string'))
+  if (typeof api !== 'function') throw new TypeError(typeErrorMessage('api', api, 'function'))
+  if (typeof reducerKey !== 'object') throw new TypeError(typeErrorMessage('reducerKey', reducerKey, 'object'))
+  if (!['string', 'function'].includes(typeof transform)) {
+    throw new TypeError(typeErrorMessage('transform', transform, 'string or function'))
+  }
+}
+
+const createRoutine = ({ prefix, api, reducerKey, transform }) => {
+  routineErrors(prefix, api, reducerKey, transform)
+
   const actionTypes = {
     TRIGGER: prefix,
     REQUEST: `${prefix}/REQUEST`,
@@ -14,7 +29,8 @@ const createRoutine = (prefix, api, routineOpts) => {
       type: ROUTINE_INIT,
       actionTypes,
       api,
-      routineOpts,
+      reducerKey,
+      transform,
       payload
     })
   }

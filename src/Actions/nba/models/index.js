@@ -16,50 +16,42 @@ import {
   UPDATE_NBA_MODEL
 } from 'Constants'
 
-export const fetchNBAModels = createRoutine(
-  FETCH_NBA_MODELS,
-  getNBAModels,
-  {
-    reducerKey: {
-      primaryKey: 'nba',
-      type: 'models'
-    },
-    transform: 'replace'
-  }
-)
+export const fetchNBAModels = createRoutine({
+  prefix: FETCH_NBA_MODELS,
+  api: getNBAModels,
+  reducerKey: {
+    primaryKey: 'nba',
+    type: 'models'
+  },
+  transform: 'replace'
+})
 
-export const createNBAModel = createRoutine(
-  CREATE_NBA_MODEL,
-  postNBAModel,
-  {
-    reducerKey: {
-      primaryKey: 'nba',
-      type: 'models'
-    },
-    transform: 'concat'
-  }
-)
+export const createNBAModel = createRoutine({
+  prefix: CREATE_NBA_MODEL,
+  api: postNBAModel,
+  reducerKey: {
+    primaryKey: 'nba',
+    type: 'models'
+  },
+  transform: 'concat'
+})
 
-export const removeNBAModel = createRoutine(
-  DELETE_NBA_MODEL,
-  deleteNBAModel,
-  {
-    reducerKey: {
-      primaryKey: 'nba',
-      type: 'models'
-    },
-    transform: 'removeById'
-  }
-)
+export const removeNBAModel = createRoutine({
+  prefix: DELETE_NBA_MODEL,
+  api: deleteNBAModel,
+  reducerKey: {
+    primaryKey: 'nba',
+    type: 'models'
+  },
+  transform: 'removeById'
+})
 
-export const updateNBAModel = createRoutine(
-  UPDATE_NBA_MODEL,
-  putNBAModel,
-  {
-    reducerKey: {
-      primaryKey: 'nba',
-      type: 'models'
-    },
-    transform: 'updateByIdAndReplace'
-  }
-)
+export const updateNBAModel = createRoutine({
+  prefix: UPDATE_NBA_MODEL,
+  api: putNBAModel,
+  reducerKey: {
+    primaryKey: 'nba',
+    type: 'models'
+  },
+  transform: 'updateByIdAndReplace'
+})

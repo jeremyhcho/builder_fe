@@ -10,14 +10,12 @@ import {
   FETCH_NBA_PLAYER_STATS,
 } from 'Constants'
 
-export const fetchNBAPlayerStats = createRoutine(
-  FETCH_NBA_PLAYER_STATS,
-  getNBAPlayerStats,
-  {
-    reducerKey: {
-      primaryKey: 'nba',
-      type: 'playerStats'
-    },
-    transform: 'replace'
-  }
-)
+export const fetchNBAPlayerStats = createRoutine({
+  prefix: FETCH_NBA_PLAYER_STATS,
+  api: getNBAPlayerStats,
+  reducerKey: {
+    primaryKey: 'nba',
+    type: 'playerStats'
+  },
+  transform: 'replace'
+})

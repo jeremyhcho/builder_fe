@@ -16,4 +16,15 @@
   &:last-child {
     border-bottom: 0;
   }
+
+  .spread {
+    p {
+      display: inline-block;
+      margin: 0 10px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
 }

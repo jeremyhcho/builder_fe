@@ -47,27 +47,33 @@
   margin-bottom: 15px;
 }
 
-.quarters-container {
+.stats-list-container {
   display: flex;
   justify-content: space-between;
 
   &.stats {
     overflow-x: scroll
   }
-  .quarters-stat {
+
+  .stat-key {
     text-align: center;
     white-space: nowrap;
     transition: all 500ms ease;
     background-color: #fff;
 
+    &.teams {
+      margin-right: 20px;
+    }
+
     &.hovered {
       background-color: var(--lightest-gray);
     }
   }
-  .quarters-label {
+  .stats-label {
     margin: 15px;
+    cursor: default;
   }
-  .quarters-value {
+  .stats-value {
     margin-bottom: 15px;
   }
 }

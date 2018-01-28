@@ -17,12 +17,8 @@ class Trends extends React.Component {
             <Predictability />
           </Col>
 
-          <Col xs={6}>
-            <TrendStats team="away" />
-          </Col>
-
-          <Col xs={6}>
-            <TrendStats team="home" />
+          <Col xs={12}>
+            <TrendStats />
           </Col>
         </Row>
       </div>

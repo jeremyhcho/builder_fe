@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import {
   Card,
   ButtonGroup,
   Button,
-  // Spinner
+  Spinner
 } from 'Components/Common'
 
 // CSS
@@ -29,6 +30,20 @@ class Predictability extends React.Component {
 
   componentDidMount () {
     this.props.fetchNBAPredictability(this.props.summary.id)
+  }
+
+  getPeriodizedPredictions (data) {
+    const { period } = this.state
+    switch (period) {
+      case 'last_10':
+        return data.slice(-10)
+
+      case 'last_5':
+        return data.slice(-5)
+
+      default:
+        return data
+    }
   }
 
   determineColors () {
@@ -58,6 +73,8 @@ class Predictability extends React.Component {
       return moment(a.x).diff(moment(b.x))
     })
 
+    const periodizedData = this.getPeriodizedPredictions(data)
+
     // Create DoubleFillLine Chart
     createDoubleFillChart()
 
@@ -69,7 +86,7 @@ class Predictability extends React.Component {
         yAxisId: 'y-axis-0',
         label: 'Prediction difference',
         fill: true,
-        data,
+        data: periodizedData,
         borderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
         pointBorderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
         pointBackgroundColor: '#D1D8DB',
@@ -81,8 +98,8 @@ class Predictability extends React.Component {
         label: 'line break',
         fill: false,
         data: [
-          { x: data[0].x, y: 0 },
-          { x: data[data.length - 1].x, y: 0 }
+          { x: periodizedData[0].x, y: 0 },
+          { x: periodizedData[periodizedData.length - 1].x, y: 0 }
         ],
         borderDash: [5],
         lineTension: 0,
@@ -103,17 +120,23 @@ class Predictability extends React.Component {
     ]
     const periodFilter = [
       { key: 'season', label: 'Season' },
-      { key: 'last_5', label: 'Last 5' },
-      { key: 'last_10', label: 'Last 10' }
+      { key: 'last_10', label: 'Last 10' },
+      { key: 'last_5', label: 'Last 5' }
     ]
 
     if (fetchingPredictability || !Object.keys(predictability).length) {
-      return <div />
+      return (
+        <Card label="Predictability">
+          <Row style={{ height: '408px' }} middle='xs' center='xs'>
+            <Col xs={12}>
+              <Spinner lg show />
+            </Col>
+          </Row>
+        </Card>
+      )
     }
 
-    const data = (canvas) => {
-      return this.dataFactory(canvas)
-    }
+    const data = (canvas) => this.dataFactory(canvas)
 
     return (
       <Card
@@ -165,10 +188,12 @@ class Predictability extends React.Component {
               legend: {
                 display: false
               },
+              animation: {
+                duration: 500
+              },
               tooltips: {
                 callbacks: {
                   title: (tooltips, data) => {
-                    console.log(moment.locale())
                     const tooltipIndex = tooltips[0].index
                     const dataset = data.datasets[0].data
                     return moment(dataset[tooltipIndex].x).format('ddd, MMM D, YYYY')

@@ -88,28 +88,38 @@ class Quarters extends React.Component {
                 }
               </Row>
 
-              <div styleName="quarters-container">
-                <div styleName="quarters-stat">
-                  <p styleName="quarters-label" className="label semibold small">TEAM</p>
-                  <p styleName="quarters-value" className="semibold">{summary.away.name}</p>
-                  <p styleName="quarters-value" className="semibold">{summary.home.name}</p>
+              <div styleName="stats-list-container">
+                <div styleName="stat-key teams">
+                  <p styleName="stats-label" className="label semibold small">TEAM</p>
+                  <p
+                    styleName="stats-value"
+                    className="semibold"
+                  >
+                    {summary.away.name}
+                  </p>
+                  <p
+                    styleName="stats-value"
+                    className="semibold"
+                  >
+                    {summary.home.name}
+                  </p>
                 </div>
 
-                <div styleName="quarters-container stats">
+                <div styleName="stats-list-container stats">
                   {
                     this.quarterStatsFactory('away').map(stats => {
                       if (!stats.statKey) {
                         return null
                       }
 
-                      const quartersStats = classNames('quarters-stat', {
+                      const quartersStats = classNames('stat-key', {
                         hovered: stats.statKey === highlightedStat
                       })
 
                       return (
                         <div key={uniqueId('stat_')} styleName={quartersStats}>
                           <p
-                            styleName="quarters-label"
+                            styleName="stats-label"
                             className="label semibold small"
                             onMouseEnter={() => this.highlightStat(stats.statKey)}
                             onMouseLeave={() => this.setState({ highlightedStat: '' })}
@@ -118,13 +128,13 @@ class Quarters extends React.Component {
                           </p>
 
                           <p
-                            styleName="quarters-value"
+                            styleName="stats-value"
                           >
                             {stats.value.away}
                           </p>
 
                           <p
-                            styleName="quarters-value"
+                            styleName="stats-value"
                           >
                             {stats.value.home}
                           </p>
