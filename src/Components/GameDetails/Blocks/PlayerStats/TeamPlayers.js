@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 // Components
@@ -10,6 +11,9 @@ import './PlayerStats.scss'
 
 // Helpers
 import { nbaFlatStat, precisionRound } from 'Helpers'
+
+// Actions
+import { changeSortStatsKey } from 'Actions'
 
 const tenths = precisionRound(1)
 
@@ -31,13 +35,20 @@ class TeamPlayers extends React.Component {
     this.setState({ highlightedRow: row + (primaryIndex * 5) })
   }
 
+  sortStats = (stat, starter, teamType) => {
+    let playerType
+    if (starter) {
+      playerType = 'starter'
+    } else {
+      playerType = 'bench'
+    }
+    this.props.changeSortStatsKey(stat, playerType, teamType)
+  }
+
   render () {
-    const { players, teamName } = this.props
+    const { players, teamName, teamType } = this.props
 
-    const starterPlayers = players.filter(player => player.starter)
-    const benchPlayers = players.filter(player => !player.starter)
-
-    const teamPlayers = [starterPlayers, benchPlayers]
+    const teamPlayers = [players.starter, players.bench]
 
     return (
       <Card label={teamName} wrapperStyle={{ padding: '40px' }} styleName="player-stats">
@@ -46,12 +57,12 @@ class TeamPlayers extends React.Component {
             <div className="flex" key={this.getPlayerType(index)}>
               <div styleName="players-container">
                 <div style={{ width: '100%' }}>
-                  <p className="semibold label" style={{ margin: '15px 0' }}>
+                  <p className="semibold label" styleName="label players">
                     {this.getPlayerType(index)}
                   </p>
                   {
                     playerType.map((player, playerIndex) => {
-                      const playersValueStyle = classNames('players-value', {
+                      const playersValueStyle = classNames('value players', {
                         hovered: this.state.highlightedRow === playerIndex + (index * 5)
                       })
 
@@ -59,8 +70,8 @@ class TeamPlayers extends React.Component {
                         <div
                           key={player.id}
                           styleName={playersValueStyle}
-                          onMouseEnter={() => this.highlightRow(playerIndex, index)}
-                          onMouseLeave={() => this.setState({ highlightedRow: null })}
+                          onMouseOver={() => this.highlightRow(playerIndex, index)}
+                          onMouseOut={() => this.setState({ highlightedRow: null })}
                         >
                           <p className="semibold">
                             {player.first_name.slice(0, 1)}. {player.last_name}
@@ -76,28 +87,29 @@ class TeamPlayers extends React.Component {
                 {
                   Object.keys(playerType[0].statistics).map(stat => {
                     if (!nbaFlatStat(stat)) return null
-                    const statKeyStyle = classNames('statKey', {
-                      hovered: this.state.highlightedStat === stat
-                    })
 
                     return (
-                      <div key={stat} styleName={statKeyStyle}>
+                      <div key={stat} styleName='stat-column'>
                         <p
                           className="semibold label"
-                          styleName="players-label"
-                          onMouseEnter={() => this.highlightStat(stat)}
-                          onMouseLeave={() => this.setState({ highlightedStat: null })}
+                          styleName="label stats"
+                          onClick={() => this.sortStats(stat, playerType[0].starter, teamType)}
                         >
                           {nbaFlatStat(stat)}
                         </p>
                         {
                           playerType.map((player, statIndex) => {
-                            const playersValueStyle = classNames('players-value stat', {
+                            const playersValueStyle = classNames('value stat', {
                               hovered: this.state.highlightedRow === statIndex + (index * 5)
                             })
 
                             return (
-                              <div key={player.id} styleName={playersValueStyle}>
+                              <div
+                                key={player.id}
+                                styleName={playersValueStyle}
+                                onMouseOver={() => this.highlightRow(statIndex, index)}
+                                onMouseOut={() => this.setState({ highlightedRow: null })}
+                              >
                                 <p>
                                   {tenths(player.statistics[stat])}
                                 </p>
@@ -120,7 +132,16 @@ class TeamPlayers extends React.Component {
 
 TeamPlayers.propTypes = {
   teamName: PropTypes.string.isRequired,
-  players: PropTypes.array.isRequired
+  teamType: PropTypes.string.isRequired,
+  players: PropTypes.object.isRequired,
+  changeSortStatsKey: PropTypes.func.isRequired
 }
 
-export default TeamPlayers
+const mapDispatchToProps = {
+  changeSortStatsKey
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TeamPlayers)

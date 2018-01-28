@@ -42,10 +42,18 @@ class TeamStats extends React.Component {
       )
     }
 
+    const awayStatsStyle = classNames('stats-value', {
+      hovered: this.state.highlightedRow === 'away'
+    })
+
+    const homeStatsStyle = classNames('stats-value', {
+      hovered: this.state.highlightedRow === 'home'
+    })
+
     return (
       <Card label="Team Stats" wrapperStyle={{ padding: '35px' }}>
         <div styleName="stats-list-container">
-          <div styleName="stat-key teams">
+          <div styleName="key-column teams">
             <p
               styleName="stats-label"
               className="label semibold small"
@@ -53,14 +61,18 @@ class TeamStats extends React.Component {
               TEAM
             </p>
             <p
-              styleName="stats-value"
+              styleName={awayStatsStyle}
               className="semibold"
+              onMouseOver={() => this.setState({ highlightedRow: 'away' })}
+              onMouseOut={() => this.setState({ highlightedRow: null })}
             >
               {summary.away.name}
             </p>
             <p
-              styleName="stats-value"
+              styleName={homeStatsStyle}
               className="semibold"
+              onMouseOver={() => this.setState({ highlightedRow: 'home' })}
+              onMouseOut={() => this.setState({ highlightedRow: null })}
             >
               {summary.home.name}
             </p>
@@ -71,29 +83,27 @@ class TeamStats extends React.Component {
               Object.keys(teamStats[0]).map(stat => {
                 if (!nbaFlatStat(stat)) return null
 
-                const statKeyStyle = classNames('stat-key', {
-                  hovered: this.state.highlightedStat === stat
-                })
-
                 return (
-                  <div styleName={statKeyStyle} key={stat}>
+                  <div styleName="key-column stats" key={stat}>
                     <p
                       styleName="stats-label"
                       className="label semibold small"
-                      onMouseEnter={() => this.highlightStat(stat)}
-                      onMouseLeave={() => this.setState({ highlightedStat: '' })}
                     >
                       {nbaFlatStat(stat)}
                     </p>
 
                     <p
-                      styleName="stats-value"
+                      styleName={awayStatsStyle}
+                      onMouseOver={() => this.setState({ highlightedRow: 'away' })}
+                      onMouseOut={() => this.setState({ highlightedRow: null })}
                     >
                       {tenths(teamStats[0][stat])}
                     </p>
 
                     <p
-                      styleName="stats-value"
+                      styleName={homeStatsStyle}
+                      onMouseOver={() => this.setState({ highlightedRow: 'home' })}
+                      onMouseOut={() => this.setState({ highlightedRow: null })}
                     >
                       {tenths(teamStats[1][stat])}
                     </p>

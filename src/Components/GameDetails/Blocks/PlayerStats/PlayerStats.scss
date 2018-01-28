@@ -11,24 +11,33 @@
       flex: 1;
     }
 
-    .statKey {
+    .stat-column {
       text-align: center;
       white-space: nowrap;
       background-color: #fff;
+      transition: all 500ms ease;
+    }
 
-      &.hovered {
-        background-color: var(--lightest-gray);
+    .label {
+      padding: 15px 15px 7.5px;
+      border-bottom: 1px solid var(--lightest-gray);
+
+      &.players {
+        cursor: default;
+      }
+
+      &.stats {
+        cursor: pointer;
       }
     }
 
-    .players-label {
-      margin: 15px;
-    }
-    .players-value {
-      // margin-bottom: 15px;
-      height: 30px;
-      display: flex;
-      align-items: center;
+    .value {
+      padding: 15px 0 15px;
+      cursor: default;
+
+      &.players {
+        padding-left: 15px;
+      }
 
       &.stat {
         justify-content: center;

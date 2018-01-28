@@ -9,22 +9,26 @@ import { TeamPlayers } from 'Components/GameDetails/Blocks'
 // Actions
 import { fetchNBAPlayerStats } from 'Actions'
 
+// Selectors
+import { makeSortPlayerStats } from 'Helpers/Selectors'
+
 class PlayerStats extends React.Component {
   componentDidMount () {
     this.props.fetchNBAPlayerStats(this.props.match.params.id)
   }
 
   render () {
-    const { playerStats, summary } = this.props
+    const { sortedPlayerStats, summary } = this.props
 
-    if (playerStats && summary) {
+    if (sortedPlayerStats && summary) {
       return (
         <div style={{ maxWidth: '1300px', width: '100%' }}>
           {
-            Object.keys(playerStats).map(team => (
+            Object.keys(sortedPlayerStats).map(team => (
               <TeamPlayers
                 key={team}
-                players={playerStats[team]}
+                teamType={team}
+                players={sortedPlayerStats[team]}
                 teamName={summary[team].name}
               />
             ))
@@ -48,27 +52,32 @@ class PlayerStats extends React.Component {
 }
 
 PlayerStats.defaultProps = {
-  playerStats: null,
+  sortedPlayerStats: null,
   summary: null
 }
 
 PlayerStats.propTypes = {
-  playerStats: PropTypes.object,
+  sortedPlayerStats: PropTypes.object,
   fetchNBAPlayerStats: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   summary: PropTypes.object
 }
 
-const mapStateToProps = ({ routines }) => ({
-  playerStats: routines.nba.playerStats,
-  summary: routines.nba.summary
-})
+const makeMapStateToProps = () => {
+  const getSortedPlayerStats = makeSortPlayerStats()
+  const mapStateToProps = ({ routines, nba }) => ({
+    sortedPlayerStats: getSortedPlayerStats({ routines, nba }),
+    summary: routines.nba.summary
+  })
+
+  return mapStateToProps
+}
 
 const mapDispatchToProps = {
   fetchNBAPlayerStats
 }
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(PlayerStats)

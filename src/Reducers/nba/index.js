@@ -2,7 +2,8 @@ import moment from 'moment'
 
 // Constants
 import {
-  FETCH_NBA_GAMES
+  FETCH_NBA_GAMES,
+  CHANGE_SORT_STATS_KEY
 } from 'Constants'
 
 const initialState = {
@@ -10,6 +11,16 @@ const initialState = {
     now: moment(moment().format('YYYY-MM-DD')),
     from: {},
     to: {}
+  },
+  sortStatsKey: {
+    away: {
+      starter: 'minutes',
+      bench: 'minutes'
+    },
+    home: {
+      starter: 'minutes',
+      bench: 'minutes'
+    }
   }
 }
 
@@ -23,6 +34,33 @@ const nbaReducer = (state = initialState, action) => {
         dates: { now, from, to }
       }
     }
+
+    case CHANGE_SORT_STATS_KEY:
+      return {
+        ...state,
+        sortStatsKey: {
+          ...state.sortStatsKey,
+          [action.teamType]: {
+            ...state.sortStatsKey[action.teamType],
+            [action.playerType]: action.stat
+          }
+        }
+      }
+
+    case '@@router/LOCATION_CHANGE':
+      return {
+        ...state,
+        sortStatsKey: {
+          away: {
+            starter: 'minutes',
+            bench: 'minutes'
+          },
+          home: {
+            starter: 'minutes',
+            bench: 'minutes'
+          }
+        }
+      }
 
     default:
       return state

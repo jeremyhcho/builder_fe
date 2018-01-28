@@ -55,26 +55,32 @@
     overflow-x: scroll
   }
 
-  .stat-key {
+  .key-column {
     text-align: center;
     white-space: nowrap;
     transition: all 500ms ease;
     background-color: #fff;
 
     &.teams {
-      margin-right: 20px;
+      min-width: 120px;
     }
 
-    &.hovered {
-      background-color: var(--lightest-gray);
+    &.stats {
     }
-  }
-  .stats-label {
-    margin: 15px;
-    cursor: default;
-  }
-  .stats-value {
-    margin-bottom: 15px;
+
+    .stats-label {
+      padding: 15px 15px 7.5px;
+      cursor: default;
+      border-bottom: 1px solid var(--lightest-gray);
+    }
+
+    .stats-value {
+      padding: 15px 0;
+
+      &.hovered {
+        background-color: var(--lightest-gray);
+      }
+    }
   }
 }
 

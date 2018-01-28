@@ -8,6 +8,7 @@ import {
 // Constants
 import {
   FETCH_NBA_PLAYER_STATS,
+  CHANGE_SORT_STATS_KEY
 } from 'Constants'
 
 export const fetchNBAPlayerStats = createRoutine({
@@ -18,4 +19,11 @@ export const fetchNBAPlayerStats = createRoutine({
     type: 'playerStats'
   },
   transform: 'replace'
+})
+
+export const changeSortStatsKey = (stat, playerType, teamType) => ({
+  type: CHANGE_SORT_STATS_KEY,
+  stat,
+  playerType,
+  teamType
 })

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row } from 'react-styled-flexboxgrid'
-import { uniqueId } from 'lodash'
 import classNames from 'classnames'
 
 // Components
@@ -31,10 +30,6 @@ class Quarters extends React.Component {
     this.props.fetchNBAQuarters(this.props.matchId)
   }
 
-  highlightStat = (stat) => {
-    this.setState({ highlightedStat: stat })
-  }
-
   quarterStatsFactory () {
     const { quarters } = this.props
     const { selected } = this.state
@@ -56,7 +51,15 @@ class Quarters extends React.Component {
 
   render () {
     const { quarters, summary } = this.props
-    const { selected, highlightedStat } = this.state
+    const { selected } = this.state
+
+    const awayStatsStyle = classNames('stats-value', {
+      hovered: this.state.highlightedRow === 'away'
+    })
+
+    const homeStatsStyle = classNames('stats-value', {
+      hovered: this.state.highlightedRow === 'home'
+    })
 
     return (
       <div>
@@ -89,17 +92,21 @@ class Quarters extends React.Component {
               </Row>
 
               <div styleName="stats-list-container">
-                <div styleName="stat-key teams">
+                <div styleName="key-column teams">
                   <p styleName="stats-label" className="label semibold small">TEAM</p>
                   <p
-                    styleName="stats-value"
+                    styleName={awayStatsStyle}
                     className="semibold"
+                    onMouseOver={() => this.setState({ highlightedRow: 'away' })}
+                    onMouseOut={() => this.setState({ highlightedRow: null })}
                   >
                     {summary.away.name}
                   </p>
                   <p
-                    styleName="stats-value"
+                    styleName={homeStatsStyle}
                     className="semibold"
+                    onMouseOver={() => this.setState({ highlightedRow: 'home' })}
+                    onMouseOut={() => this.setState({ highlightedRow: null })}
                   >
                     {summary.home.name}
                   </p>
@@ -107,34 +114,32 @@ class Quarters extends React.Component {
 
                 <div styleName="stats-list-container stats">
                   {
-                    this.quarterStatsFactory('away').map(stats => {
+                    this.quarterStatsFactory('away').map((stats) => {
                       if (!stats.statKey) {
                         return null
                       }
 
-                      const quartersStats = classNames('stat-key', {
-                        hovered: stats.statKey === highlightedStat
-                      })
-
                       return (
-                        <div key={uniqueId('stat_')} styleName={quartersStats}>
+                        <div key={stats.statKey} styleName="key-column stats">
                           <p
                             styleName="stats-label"
                             className="label semibold small"
-                            onMouseEnter={() => this.highlightStat(stats.statKey)}
-                            onMouseLeave={() => this.setState({ highlightedStat: '' })}
                           >
                             {stats.statKey}
                           </p>
 
                           <p
-                            styleName="stats-value"
+                            styleName={awayStatsStyle}
+                            onMouseOver={() => this.setState({ highlightedRow: 'away' })}
+                            onMouseOut={() => this.setState({ highlightedRow: null })}
                           >
                             {stats.value.away}
                           </p>
 
                           <p
-                            styleName="stats-value"
+                            styleName={homeStatsStyle}
+                            onMouseOver={() => this.setState({ highlightedRow: 'home' })}
+                            onMouseOut={() => this.setState({ highlightedRow: null })}
                           >
                             {stats.value.home}
                           </p>
