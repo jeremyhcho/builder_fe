@@ -16,7 +16,7 @@ import './ModelView.scss'
 import { makeFindGamePredictions } from 'Helpers/Selectors'
 import { precisionRound } from 'Helpers'
 
-const roundHundredths = precisionRound(2)
+const tenths = precisionRound(1)
 
 class TotalPrediction extends React.Component {
   componentDidMount () {
@@ -37,9 +37,7 @@ class TotalPrediction extends React.Component {
     ]
 
     const datasets = [{
-      data: Object.keys(aggregateTotals).map(stat => (
-        roundHundredths(aggregateTotals[stat])
-      )),
+      data: Object.keys(aggregateTotals).map(stat => aggregateTotals[stat]),
       backgroundColor: ['#D03D3C', '#2E7BC4', '#0AA958'],
       borderColor: '#3B454D'
     }]
@@ -52,6 +50,18 @@ class TotalPrediction extends React.Component {
 
     const doughnutOptions = {
       maintainAspectRatio: false,
+      tooltips: {
+        callbacks: {
+          // title: (tooltip, { datasets }) => {
+          //   return datasets[0].data[tooltip[0].index]
+          // },
+          label: (tooltip, { datasets, labels }) => {
+            const label = labels[tooltip.index]
+            const data = datasets[0].data[tooltip.index]
+            return `${label} ${tenths(data * 100)}%`
+          }
+        }
+      },
       legend: {
         onClick: () => null,
         position: 'right',

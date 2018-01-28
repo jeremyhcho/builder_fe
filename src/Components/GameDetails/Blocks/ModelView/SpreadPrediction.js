@@ -90,10 +90,9 @@ class SpreadPrediction extends React.Component {
         label: 'Model spread prediction',
         fill: false,
         data: dataPoints,
-        backgroundColor: 'transparent',
+        backgroundColor: '#3C90DF',
         borderColor: '#3C90DF',
-        pointRadius: 3,
-        pointBorderColor: '#3C90DF',
+        pointRadius: 1,
         pointBackgroundColor: '#3C90DF',
         lineTension: 0,
         showLine: false
@@ -117,8 +116,8 @@ class SpreadPrediction extends React.Component {
         cubicInterpolationMode: 'linear',
         spanGaps: true,
         pointRadius: 0,
-        backgroundColor: 'transparent',
-        borderColor: selected === 'away' ? colors.awayColor : colors.homeColor
+        borderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
+        backgroundColor: selected === 'away' ? colors.awayColor : colors.homeColor
       },
       {
         type: 'line',
@@ -129,8 +128,8 @@ class SpreadPrediction extends React.Component {
         )),
         lineTension: 0,
         pointRadius: 0,
-        backgroundColor: 'transparent',
-        borderDash: [10, 5]
+        borderDash: [10, 5],
+        backgroundColor: 'transparent'
       }
     ]
 
@@ -171,12 +170,16 @@ class SpreadPrediction extends React.Component {
               options={{
                 linear: true,
                 legend: {
-                  display: false
+                  onClick: () => null,
+                  labels: {
+                    filter: (legendItem) => {
+                      return legendItem.text !== 'Fit data line'
+                    }
+                  }
                 },
                 tooltips: {
                   callbacks: {
-                    title: (tooltips, { datasets }) => {
-                      console.log(datasets)
+                    title: (tooltips) => {
                       return `Model win rate: ${tenths(tooltips[0].xLabel * 100)}%`
                     }
                   }
@@ -203,8 +206,7 @@ class SpreadPrediction extends React.Component {
                   xAxes: [{
                     type: 'linear',
                     ticks: {
-                      callback: (currValue, index, values) => {
-                        console.log(currValue, values)
+                      callback: (currValue) => {
                         return `${ones(currValue * 100)}%`
                       }
                     },
