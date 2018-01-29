@@ -1,0 +1,73 @@
+.matchup {
+  display: flex;
+
+  &.away {
+    text-align: right;
+  }
+
+  &.home {
+    text-align: left;
+    flex-direction: row-reverse;
+  }
+
+  .points {
+    line-height: 42px;
+
+    &.away {
+      margin-left: 25px;
+    }
+    &.home {
+      margin-right: 25px;
+    }
+  }
+}
+
+.vegas-lines {
+  .vegas-lines-section {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    margin: 0;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+.key-stats {
+  .legend {
+    margin: 20px 60px;
+
+    .legend-team {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .team-color {
+        width: 20px;
+        height: 10px;
+        background-color: #FFF;
+        margin-right: 10px;
+        border-radius: var(--border-radius);
+      }
+    }
+  }
+  .team-wrapper {
+    margin-top: 25px;
+
+    .team-rows {
+      margin: 10px 0;
+      overflow-x: scroll;
+
+      .stat-display {
+        height: 20px;
+        border-radius: var(--border-radius);
+      }
+    }
+  }
+}
+
+.points-graph {
+  padding: 45px 0;
+}

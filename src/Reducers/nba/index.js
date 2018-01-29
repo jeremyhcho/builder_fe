@@ -26,6 +26,7 @@ const initialState = {
 
 const nbaReducer = (state = initialState, action) => {
   switch (action.type) {
+    // DateInput
     case FETCH_NBA_GAMES: {
       const { now, from, to } = action.payload[0]
 
@@ -35,6 +36,7 @@ const nbaReducer = (state = initialState, action) => {
       }
     }
 
+    // playersStats => teamPlayers
     case CHANGE_SORT_STATS_KEY:
       return {
         ...state,

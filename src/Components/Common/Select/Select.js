@@ -336,12 +336,18 @@ Select.defaultProps = {
 }
 
 Select.propTypes = {
-  defaultText: PropTypes.string.isRequired,
+  defaultText: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
   verticalReverse: PropTypes.bool,
   horizontalReverse: PropTypes.bool,
   wrapperStyle: PropTypes.object,
   options: PropTypes.array.isRequired,
-  selectedVal: PropTypes.string,
+  selectedVal: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   selectedVals: PropTypes.array,
   onChange: PropTypes.func.isRequired,
   search: PropTypes.bool,
