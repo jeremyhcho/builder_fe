@@ -11,7 +11,9 @@ import { fetchNBAPreviousMeetings, fetchNBAMatchup } from 'Actions'
 
 class MatchupSelector extends React.Component {
   componentDidMount () {
-    this.props.fetchNBAPreviousMeetings(this.props.summary.id)
+    if (!Object.keys(this.props.previousMeetings).length) {
+      this.props.fetchNBAPreviousMeetings(this.props.summary.id)
+    }
   }
 
   findMatchType (matchup) {

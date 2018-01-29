@@ -14,14 +14,18 @@ import { fetchNBASummary } from 'Actions'
 
 class GameDetails extends React.Component {
   componentDidMount () {
+    console.log('GAMEDETAILS MOUNTED FETCHING SUMMARY')
     this.props.fetchNBASummary(this.props.match.params.id)
   }
 
   gameDetailsStatus () {
     const { summary, ...routerProps } = this.props
+    console.log('rendering game: ', summary)
     if (summary.status === 'SCHEDULED' || summary.status === 'IN PROGRESS') {
+      console.log('RENDERING A SCHEDULED GAME')
       return <ScheduledGameDetails {...routerProps} />
     } else if (summary.status === 'CLOSED') {
+      console.log('RENDERING A COMPLETED GAME')
       return <CompletedGameDetails {...routerProps} />
     }
     return null
@@ -29,9 +33,10 @@ class GameDetails extends React.Component {
 
   render () {
     const { summary } = this.props
-    if (!summary) {
+    if (!Object.keys(summary).length) {
       return null
     }
+
     return this.gameDetailsStatus()
   }
 }

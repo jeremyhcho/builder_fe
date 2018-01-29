@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Row } from 'react-styled-flexboxgrid'
+import { withRouter } from 'react-router'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Component
-import { Card } from 'Components/Common'
+import { Card, Button } from 'Components/Common'
 import { OverviewSpinner } from 'Components/GameDetails/Blocks'
 
 // CSS
@@ -16,6 +17,10 @@ const wrapperStyle = {
 }
 
 class MatchupDetails extends React.Component {
+  routeToMatch = () => {
+    this.props.history.push(`/games/${this.props.matchup.id}/overview`)
+  }
+
   render () {
     const { matchup } = this.props
 
@@ -24,54 +29,47 @@ class MatchupDetails extends React.Component {
     }
 
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
+        <Button
+          style={{ position: 'absolute', top: '-15px', right: '0' }}
+          secondary
+          onClick={this.routeToMatch}
+        >
+          View
+        </Button>
         <Card label="Match Details" wrapperStyle={wrapperStyle}>
-          <Row middle='xs' center='xs' style={{ height: '100%', position: 'relative' }}>
-            <div
-              styleName='matchup away'
-              style={{
-                position: 'absolute',
-                top: '50%',
-                right: '50%',
-                transform: 'translateY(-50%) translateX(-78px)'
-              }}
-            >
-              <div>
+          <Row middle='xs' style={{ height: '100%', position: 'relative' }}>
+            <Col xs={4}>
+              <div style={{ textAlign: 'right' }}>
                 <p className="label small">{matchup.away.city}</p>
                 <h2 className="semibold">{matchup.away.name.toUpperCase()}</h2>
                 <p className="label small">{matchup.away.wins}-{matchup.away.losses}</p>
               </div>
-              <h1 styleName="points away" className="bold">{matchup.away.points}</h1>
-            </div>
+            </Col>
 
-            <h1
-              className='semibold'
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)'
-              }}
-            >
-              @
-            </h1>
+            <Col xs={4}>
+              <Row center='xs' between='xs'>
+                <Col xs={4}>
+                  <h1 styleName="points away" className="bold">{matchup.away.points}</h1>
+                </Col>
 
-            <div
-              styleName='matchup home'
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translateY(-50%) translateX(78px)'
-              }}
-            >
+                <Col xs={4}>
+                  <h1 className='semibold'>@</h1>
+                </Col>
+
+                <Col xs={4}>
+                  <h1 styleName='points home' className="bold">{matchup.home.points}</h1>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col xs={4}>
               <div>
                 <p className="label small">{matchup.home.city}</p>
                 <h2 className="semibold">{matchup.home.name.toUpperCase()}</h2>
                 <p className="label small">{matchup.home.wins}-{matchup.home.losses}</p>
               </div>
-              <h1 styleName='points home' className="bold">{matchup.home.points}</h1>
-            </div>
+            </Col>
           </Row>
         </Card>
       </div>
@@ -84,13 +82,14 @@ MatchupDetails.defaultProps = {
 }
 
 MatchupDetails.propTypes = {
-  matchup: PropTypes.object
+  matchup: PropTypes.object,
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
   matchup: routines.nba.matchup
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps
-)(MatchupDetails)
+)(MatchupDetails))

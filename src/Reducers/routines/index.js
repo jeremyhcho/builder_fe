@@ -1,6 +1,10 @@
 import * as transform from './stateTransformers'
 import pathToRegexp from 'path-to-regexp'
 
+import {
+  CLEAR_NBA_SUMMARY
+} from 'Constants'
+
 const initialState = {
   nba: {},
   callingApi: {},
@@ -22,6 +26,13 @@ const routines = (state = initialState, action) => {
         teams: state.nba.teams,
         games: state.nba.games
       }
+    }
+  }
+
+  if (action.type === CLEAR_NBA_SUMMARY) {
+    return {
+      ...state,
+      nba: { ...state.nba, summary: {} }
     }
   }
 

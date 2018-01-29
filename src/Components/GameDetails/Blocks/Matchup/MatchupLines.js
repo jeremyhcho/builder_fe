@@ -28,11 +28,7 @@ class MatchupLines extends React.Component {
     const { lines, matchup } = this.props
 
     if (!lines || !matchup) {
-      return (
-        <div>
-          <OverviewSpinner label='Vegas Lines' />
-        </div>
-      )
+      return <OverviewSpinner label='Vegas Lines' />
     }
 
     if (!lines.length) {
