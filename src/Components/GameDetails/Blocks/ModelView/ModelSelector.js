@@ -52,7 +52,7 @@ class ModelSelector extends React.Component {
 
     let streak = 0
     const recentPrediction = predictions[predictions.length - 1]
-    const lastGameResult =  recentPrediction ? recentPrediction.result : null
+    const lastGameResult = recentPrediction ? recentPrediction.result : null
     for (let i = predictions.length - 1; i >= 0; i--) {
       if (predictions[i].result === lastGameResult) streak++
       else break;
