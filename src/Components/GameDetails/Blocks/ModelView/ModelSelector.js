@@ -45,10 +45,10 @@ class ModelSelector extends React.Component {
       return prediction.result
     })
 
-    const wins = predictionResults.win.length
-    const losses = predictionResults.loss.length
-    const ties = predictionResults.tie.length
-    const winRate = tenths((wins / (wins + losses + ties)) * 100)
+    const wins = predictionResults.win ? predictionResults.win.length : 0
+    const losses = predictionResults.loss ? predictionResults.loss.length : 0
+    const ties = predictionResults.tie ? predictionResults.tie.length : 0
+    const winRate = wins + losses + ties > 0 ? tenths((wins / (wins + losses + ties)) * 100) : 100
 
     let streak = 0
     const lastGameResult = predictions[predictions.length - 1].result
