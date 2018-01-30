@@ -37,6 +37,7 @@ class StartingLineup extends React.Component {
   render () {
     const { startingLineup, summary } = this.props
     const groupedLineups = this.formattedLineups()
+    const positions = ['PG', 'SG', 'SF', 'PF', 'C']
 
     return (
       <div styleName='starting-lineup'>
@@ -56,7 +57,7 @@ class StartingLineup extends React.Component {
                     {summary.away.name}
                   </h4>
                   {
-                    groupedLineups.away.map(starter => (
+                    groupedLineups.away.map((starter, index) => (
                       <p styleName='starter' style={{ textAlign: 'right' }} key={starter.id}>
                         <span className='semibold'>
                           {starter.first_name.slice(0, 1)}. {starter.last_name}
@@ -66,7 +67,7 @@ class StartingLineup extends React.Component {
                           style={{ marginLeft: '10px' }}
                           className='small label semibold'
                         >
-                          {starter.primary_position}
+                          {starter.primary_position || positions[index]}
                         </span>
                       </p>
                     ))
@@ -90,13 +91,13 @@ class StartingLineup extends React.Component {
                     {summary.home.name}
                   </h4>
                   {
-                    groupedLineups.home.map(starter => (
+                    groupedLineups.home.map((starter, index) => (
                       <p styleName='starter' key={starter.id}>
                         <span
                           style={{ marginRight: '10px' }}
                           className='small label semibold'
                         >
-                          {starter.primary_position}
+                          {starter.primary_position || positions[index]}
                         </span>
 
                         <span className='semibold'>
