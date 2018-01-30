@@ -31,7 +31,7 @@ class VegasLines extends React.Component {
 
   renderTotals (line) {
     if (line.total) {
-      `${line.total} (${line.total_odds})`
+      return `${line.total} (${line.total_odds})`
     }
 
     return 'N/A'
