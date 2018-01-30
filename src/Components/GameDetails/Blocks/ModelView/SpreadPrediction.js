@@ -245,7 +245,7 @@ SpreadPrediction.propTypes = {
 const mapStateToProps = ({ routines }) => ({
   summary: routines.nba.summary,
   aggregateSpreads: routines.nba.aggregateSpreads,
-  fetchingAggregateSpreads: routines.callingApi.getNBAAggregateSpreads
+  fetchingAggregateSpreads: routines.callingApi.FETCH_NBA_AGGREGATE_SPREADS
 })
 
 const mapDispatchToProps = {

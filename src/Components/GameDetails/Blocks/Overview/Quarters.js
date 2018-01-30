@@ -38,8 +38,8 @@ class Quarters extends React.Component {
       return {
         statKey: nbaFlatStat(stat),
         value: {
-          away: tenths(quarter.away[stat]),
-          home: tenths(quarter.home[stat])
+          away: tenths(quarter.away[stat]) === undefined ? '-' : tenths(quarter.away[stat]),
+          home: tenths(quarter.home[stat]) === undefined ? '-' : tenths(quarter.away[stat])
         }
       }
     })

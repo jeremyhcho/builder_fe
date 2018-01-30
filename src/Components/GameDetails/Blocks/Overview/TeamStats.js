@@ -83,6 +83,9 @@ class TeamStats extends React.Component {
               Object.keys(teamStats[0]).map(stat => {
                 if (!nbaFlatStat(stat)) return null
 
+                const awayRoundedStat = tenths(teamStats[0][stat])
+                const homeRoundedStat = tenths(teamStats[1][stat])
+
                 return (
                   <div styleName="key-column stats" key={stat}>
                     <p
@@ -97,7 +100,7 @@ class TeamStats extends React.Component {
                       onMouseOver={() => this.setState({ highlightedRow: 'away' })}
                       onMouseOut={() => this.setState({ highlightedRow: null })}
                     >
-                      {tenths(teamStats[0][stat])}
+                      {awayRoundedStat === undefined ? '-' : awayRoundedStat}
                     </p>
 
                     <p
@@ -105,7 +108,7 @@ class TeamStats extends React.Component {
                       onMouseOver={() => this.setState({ highlightedRow: 'home' })}
                       onMouseOut={() => this.setState({ highlightedRow: null })}
                     >
-                      {tenths(teamStats[1][stat])}
+                      {homeRoundedStat === undefined ? '-' : homeRoundedStat}
                     </p>
                   </div>
                 )

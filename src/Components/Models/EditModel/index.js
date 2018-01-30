@@ -94,7 +94,7 @@ EditModel.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  updatingModel: routines.callingApi.putNBAModel
+  updatingModel: routines.callingApi.UPDATE_NBA_MODEL
 })
 
 const mapDispatchToProps = {

@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
 
 // Components
+import { Spinner } from 'Components/Common'
 import CompletedGameDetails from './CompletedGameDetails'
 import ScheduledGameDetails from './ScheduledGameDetails'
 
@@ -13,31 +15,47 @@ import './GameDetails.scss'
 import { fetchNBASummary } from 'Actions'
 
 class GameDetails extends React.Component {
+  state = {
+    fetchingNewSummary: false
+  }
+
   componentDidMount () {
-    console.log('GAMEDETAILS MOUNTED FETCHING SUMMARY')
     this.props.fetchNBASummary(this.props.match.params.id)
   }
 
-  gameDetailsStatus () {
-    const { summary, ...routerProps } = this.props
-    console.log('rendering game: ', summary)
-    if (summary.status === 'SCHEDULED' || summary.status === 'IN PROGRESS') {
-      console.log('RENDERING A SCHEDULED GAME')
-      return <ScheduledGameDetails {...routerProps} />
-    } else if (summary.status === 'CLOSED') {
-      console.log('RENDERING A COMPLETED GAME')
-      return <CompletedGameDetails {...routerProps} />
+  componentWillReceiveProps (newProps) {
+    if (newProps.match.params.id !== this.props.match.params.id) {
+      this.setState({
+        fetchingNewSummary: true
+      }, () => {
+        newProps.fetchNBASummary(newProps.match.params.id)
+      })
     }
-    return null
+
+    if (newProps.summary.id !== this.props.summary.id) {
+      this.setState({ fetchingNewSummary: false })
+    }
   }
 
   render () {
     const { summary } = this.props
-    if (!Object.keys(summary).length) {
-      return null
+    const { fetchingNewSummary } = this.state
+
+    if (!Object.keys(summary).length || fetchingNewSummary) {
+      return <div className="loader"><Spinner lg show /></div>
     }
 
-    return this.gameDetailsStatus()
+    return (
+      <Switch>
+        {
+          summary.status === 'SCHEDULED' || summary.status === 'IN PROGRESS' ? (
+            <Route path='/games/:id' component={ScheduledGameDetails} />
+          ) : (
+            <Route path='/games/:id' component={CompletedGameDetails} />
+          )
+        }
+      </Switch>
+    )
   }
 }
 
@@ -46,9 +64,7 @@ GameDetails.defaultProps = {
 }
 
 GameDetails.propTypes = {
-  location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   fetchNBASummary: PropTypes.func.isRequired,
   summary: PropTypes.object
 }

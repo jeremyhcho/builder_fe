@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import { groupBy } from 'lodash'
 
 // Components
 import { Toggle } from 'Components/Common'
@@ -14,6 +15,11 @@ import { fetchNBAPredictions, updateNBAMatchesModels } from 'Actions'
 
 // CSS
 import './ModelView.scss'
+
+// Helpers
+import { precisionRound } from 'Helpers'
+
+const tenths = precisionRound(1)
 
 class ModelSelector extends React.Component {
   state = {
@@ -28,6 +34,44 @@ class ModelSelector extends React.Component {
 
   componentWillUnmount () {
     document.removeEventListener('click', this.handleOutsideClick, false)
+  }
+
+  getModelRecords () {
+    const { selectedModel } = this.props
+
+    const predictions = selectedModel.model.predictions.filter(prediction => prediction.result)
+    const predictionResults = groupBy(predictions, prediction => {
+      if (!prediction.result) return 'TBD'
+      return prediction.result
+    })
+
+    const wins = predictionResults.win.length
+    const losses = predictionResults.loss.length
+    const ties = predictionResults.tie.length
+    const winRate = tenths((wins / (wins + losses + ties)) * 100)
+
+    let streak = 0
+    const lastGameResult = predictions[predictions.length - 1].result
+    for (let i = predictions.length - 1; i >= 0; i--) {
+      if (predictions[i].result === lastGameResult) streak++
+      else break;
+    }
+
+    const last5Games = groupBy(predictions.slice(-5), prediction => prediction.result)
+    const last5Wins = last5Games.win ? `W${last5Games.win.length}` : null
+    const last5Losses = last5Games.loss ? `L${last5Games.loss.length}` : null
+    const last5Ties = last5Games.tie ? `T${last5Games.tie.length}` : null
+
+    const last5 = [last5Wins, last5Losses, last5Ties].filter(result => result)
+
+    return {
+      wins,
+      losses,
+      ties,
+      winRate,
+      streak: `${lastGameResult[0].toUpperCase()}${streak}`,
+      last5
+    }
   }
 
   changeModel = (e, matchModel) => {
@@ -116,6 +160,8 @@ class ModelSelector extends React.Component {
   render () {
     const { selectedModel } = this.props
 
+    const modelRecords = this.getModelRecords()
+
     return (
       <div styleName="model-selector">
         <div styleName="model-name">
@@ -132,22 +178,30 @@ class ModelSelector extends React.Component {
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">- - -</h4>
+            <h4 className="semibold">
+              {modelRecords.wins}W - {modelRecords.losses}L
+            </h4>
             <p className="label">Record</p>
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">--%</h4>
+            <h4 className="semibold">
+              {modelRecords.winRate}%
+            </h4>
             <p className="label">Win %</p>
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">--W</h4>
+            <h4 className="semibold">
+              {modelRecords.streak}
+            </h4>
             <p className="label">Streak</p>
           </div>
 
           <div styleName="stats-card">
-            <h4 className="semibold">-W - -L</h4>
+            <h4 className="semibold">
+              {modelRecords.last5.join(' - ')}
+            </h4>
             <p className="label">Last 5</p>
           </div>
         </Row>

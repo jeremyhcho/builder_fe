@@ -86,6 +86,12 @@
 
 // Recent Games
 .recent-games {
+  margin-bottom: -75px;
+
+  &.noMargin {
+    margin: 0;
+  }
+
   .recent-games-header {
     margin-bottom: 25px;
   }

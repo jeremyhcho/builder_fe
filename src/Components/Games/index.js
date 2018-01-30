@@ -40,7 +40,7 @@ Games.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   games: routines.nba.games,
-  fetchingGames: routines.callingApi.getNBAGames
+  fetchingGames: routines.callingApi.FETCH_NBA_GAMES
 })
 
 export default connect(

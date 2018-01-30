@@ -1,6 +1,5 @@
 // Summary
 export const FETCH_NBA_SUMMARY = 'nba/gameDetails/FETCH_NBA_SUMMARY'
-export const CLEAR_NBA_SUMMARY = 'nba/gameDetails/CLEAR_NBA_SUMMARY'
 
 // Quarters
 export const FETCH_NBA_QUARTERS = 'nba/gameDetails/FETCH_NBA_QUARTERS'

@@ -7,6 +7,9 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { Card } from 'Components/Common'
 import OverviewSpinner from './OverviewSpinner'
 
+// Icons
+import BanIcon from 'Assets/Icons/ban.svg'
+
 // Actions
 import { fetchNBALines } from 'Actions'
 
@@ -32,9 +35,12 @@ class VegasLines extends React.Component {
     if (!lines.length) {
       return (
         <Card label="Vegas Lines" wrapperStyle={{ padding: '50px 25px', textAlign: 'center' }}>
-          <h4 className="label semibold">
-            Vegas lines is currently not available for this game
-          </h4>
+          <div style={{ textAlign: 'center', lineHeight: '30px' }}>
+            <BanIcon />
+            <h4 className="semibold label">
+              Vegas lines are currently not available for this game
+            </h4>
+          </div>
         </Card>
       )
     }

@@ -1,26 +1,52 @@
-.matchup {
-  display: flex;
+.match-details {
+  position: relative;
 
-  &.away {
-    text-align: right;
+  .view-button {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      .arrow-icon {
+        transition: opacity 200ms ease-in;
+        opacity: 1;
+      }
+    }
+
+    .arrow-icon {
+      margin-left: 5px;
+      opacity: 0;
+    }
   }
 
-  &.home {
-    text-align: left;
-    flex-direction: row-reverse;
-  }
-
-  .points {
-    line-height: 42px;
+  .matchup {
+    display: flex;
 
     &.away {
-      margin-left: 25px;
+      text-align: right;
     }
+
     &.home {
-      margin-right: 25px;
+      text-align: left;
+      flex-direction: row-reverse;
+    }
+
+    .points {
+      line-height: 42px;
+
+      &.away {
+        margin-left: 25px;
+      }
+      &.home {
+        margin-right: 25px;
+      }
     }
   }
 }
+
 
 .vegas-lines {
   .vegas-lines-section {

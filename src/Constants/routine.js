@@ -1,1 +1,2 @@
 export const ROUTINE_INIT = 'ROUTINE_INIT'
+export const CLEAR_NBA_ROUTINES = 'CLEAR_NBA_ROUTINES'

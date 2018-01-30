@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
 
 // Component
 import { Card } from 'Components/Common'
@@ -41,12 +40,8 @@ class Injuries extends React.Component {
   render () {
     const { injuries, summary } = this.props
 
-    const injuriesStyle = classNames('injuries', {
-      noMargin: summary.status !== 'CLOSED'
-    })
-
     return (
-      <div styleName={injuriesStyle}>
+      <div>
         {
           injuries && summary ? (
             <Card label='Injuries' wrapperStyle={{ padding: '25px 0 25px' }}>

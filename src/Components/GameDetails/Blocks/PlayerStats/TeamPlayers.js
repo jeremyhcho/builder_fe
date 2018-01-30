@@ -103,6 +103,8 @@ class TeamPlayers extends React.Component {
                               hovered: this.state.highlightedRow === statIndex + (index * 5)
                             })
 
+                            const roundedStat = tenths(player.statistics[stat])
+
                             return (
                               <div
                                 key={player.id}
@@ -111,7 +113,7 @@ class TeamPlayers extends React.Component {
                                 onMouseOut={() => this.setState({ highlightedRow: null })}
                               >
                                 <p>
-                                  {tenths(player.statistics[stat])}
+                                  {roundedStat === undefined ? '-' : roundedStat}
                                 </p>
                               </div>
                             )

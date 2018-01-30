@@ -164,7 +164,7 @@ class PointsGraph extends React.Component {
         <Card label='Points by quarter'>
           <div styleName="points-graph">
             <Row center='xs'>
-              <div style={{ width: '220px', margin: '10px 50px' }}>
+              <div style={{ width: '220px', margin: '10px 30px' }}>
                 <Select
                   defaultText="Line 1"
                   options={this.teamOptions()}
@@ -180,7 +180,7 @@ class PointsGraph extends React.Component {
                 vs.
               </span>
 
-              <div style={{ width: '220px', margin: '10px 50px' }}>
+              <div style={{ width: '220px', margin: '10px 30px' }}>
                 <Select
                   defaultText="Line 2"
                   options={this.teamOptions()}
@@ -193,8 +193,8 @@ class PointsGraph extends React.Component {
             <Row center='xs'>
               <div style={{ width: '800px', marginTop: '15px' }}>
                 <Line
-                  width={800}
-                  height={400}
+                  width={600}
+                  height={300}
                   data={this.teamStatsData()}
                   options={{
                     maintainAspectRatio: false,

@@ -227,7 +227,7 @@ CreateModel.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  creatingModel: routines.callingApi.postNBAModel
+  creatingModel: routines.callingApi.CREATE_NBA_MODEL
 })
 
 const mapDispatchToProps = {

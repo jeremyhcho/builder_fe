@@ -62,7 +62,7 @@ Teams.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   teams: routines.nba.teams,
-  fetchingNBATeams: routines.callingApi.getNBATeams
+  fetchingNBATeams: routines.callingApi.UPDATE_NBA_TEAMS
 })
 
 const mapDispatchToProps = {

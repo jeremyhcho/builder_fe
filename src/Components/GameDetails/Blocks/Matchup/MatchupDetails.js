@@ -5,8 +5,11 @@ import { withRouter } from 'react-router'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Component
-import { Card, Button } from 'Components/Common'
+import { Card } from 'Components/Common'
 import { OverviewSpinner } from 'Components/GameDetails/Blocks'
+
+// Icons
+import RightArrowIcon from 'Assets/Icons/right-arrow.svg'
 
 // CSS
 import './Matchup.scss'
@@ -14,6 +17,12 @@ import './Matchup.scss'
 const wrapperStyle = {
   padding: '50px 25px',
   height: '140px'
+}
+
+const teamNameStyle = {
+  textOverflow: 'clip',
+  overflowX: 'scroll',
+  whiteSpace: 'nowrap'
 }
 
 class MatchupDetails extends React.Component {
@@ -29,44 +38,37 @@ class MatchupDetails extends React.Component {
     }
 
     return (
-      <div style={{ position: 'relative' }}>
-        <Button
-          style={{ position: 'absolute', top: '-15px', right: '0' }}
-          secondary
+      <div styleName="match-details">
+        <div
+          className="semibold"
+          styleName="view-button"
           onClick={this.routeToMatch}
         >
           View
-        </Button>
+          <RightArrowIcon styleName="arrow-icon" />
+        </div>
         <Card label="Match Details" wrapperStyle={wrapperStyle}>
           <Row middle='xs' style={{ height: '100%', position: 'relative' }}>
             <Col xs={4}>
               <div style={{ textAlign: 'right' }}>
                 <p className="label small">{matchup.away.city}</p>
-                <h2 className="semibold">{matchup.away.name.toUpperCase()}</h2>
+                <h4 className="semibold" style={teamNameStyle}>{matchup.away.name.toUpperCase()}</h4>
                 <p className="label small">{matchup.away.wins}-{matchup.away.losses}</p>
               </div>
             </Col>
 
             <Col xs={4}>
-              <Row center='xs' between='xs'>
-                <Col xs={4}>
-                  <h1 styleName="points away" className="bold">{matchup.away.points}</h1>
-                </Col>
-
-                <Col xs={4}>
-                  <h1 className='semibold'>@</h1>
-                </Col>
-
-                <Col xs={4}>
-                  <h1 styleName='points home' className="bold">{matchup.home.points}</h1>
-                </Col>
+              <Row center='xs' around='xs'>
+                <h2 styleName="points away" className="bold">{matchup.away.points}</h2>
+                <h2 className='semibold'>@</h2>
+                <h2 styleName='points home' className="bold">{matchup.home.points}</h2>
               </Row>
             </Col>
 
             <Col xs={4}>
               <div>
                 <p className="label small">{matchup.home.city}</p>
-                <h2 className="semibold">{matchup.home.name.toUpperCase()}</h2>
+                <h4 className="semibold" style={teamNameStyle}>{matchup.home.name.toUpperCase()}</h4>
                 <p className="label small">{matchup.home.wins}-{matchup.home.losses}</p>
               </div>
             </Col>

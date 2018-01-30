@@ -14,7 +14,6 @@ import {
 // Constants
 import {
   FETCH_NBA_SUMMARY,
-  CLEAR_NBA_SUMMARY,
   FETCH_NBA_QUARTERS,
   FETCH_NBA_RECENT_GAMES,
   FETCH_NBA_STARTING_LINEUP,
@@ -32,10 +31,6 @@ export const fetchNBASummary = createRoutine({
     type: 'summary'
   },
   transform: 'replace'
-})
-
-export const clearNBASummary = () => ({
-  type: CLEAR_NBA_SUMMARY
 })
 
 // Quarters

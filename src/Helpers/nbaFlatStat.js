@@ -99,8 +99,28 @@ const nbaFlatStat = (stat) => {
     case 'opponent_possessions':
       return 'OPP POSS'
 
+    case 'assists_turnover_ratio':
+      return 'AST/TO'
+
+    case 'bench_points':
+      return 'BENCH'
+
+    case 'efficiency':
+      return 'EFF'
+
+    case 'defensive_points_per_possession':
+      return 'DPPP'
+
+    case 'offensive_points_per_possession':
+      return 'OPPP'
+
+    case 'second_chance_pct':
+      return '2nd%'
+
+    case 'fast_break_pct':
+      return 'FB%'
+
     default: {
-      // console.log('Missing stat in flatten method: ', stat)
       return null
     }
   }

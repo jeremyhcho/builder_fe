@@ -1,9 +1,6 @@
 import * as transform from './stateTransformers'
 import pathToRegexp from 'path-to-regexp'
-
-import {
-  CLEAR_NBA_SUMMARY
-} from 'Constants'
+import gameDetails from './gameDetails'
 
 const initialState = {
   nba: {},
@@ -19,20 +16,18 @@ const routines = (state = initialState, action) => {
       return state
     }
 
+    const newState = {}
+    const gameDetailKeys = Object.keys(gameDetails)
+    Object.keys(state.nba).filter(key => !gameDetailKeys.includes(key))
+      .forEach(key => Object.assign(newState, {
+        [key]: state.nba[key]
+      }))
+
     return {
       ...state,
       nba: {
-        models: state.nba.models,
-        teams: state.nba.teams,
-        games: state.nba.games
+        ...newState
       }
-    }
-  }
-
-  if (action.type === CLEAR_NBA_SUMMARY) {
-    return {
-      ...state,
-      nba: { ...state.nba, summary: {} }
     }
   }
 
