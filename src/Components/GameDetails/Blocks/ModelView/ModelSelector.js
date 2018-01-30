@@ -187,7 +187,7 @@ class ModelSelector extends React.Component {
 
           <div styleName="stats-card">
             <h4 className="semibold">
-              {modelRecords.winRate}%
+              {modelRecords.winRate}
             </h4>
             <p className="label">Win %</p>
           </div>
