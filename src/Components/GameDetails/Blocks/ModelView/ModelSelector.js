@@ -51,7 +51,8 @@ class ModelSelector extends React.Component {
     const winRate = wins + losses + ties > 0 ? tenths((wins / (wins + losses + ties)) * 100) : 100
 
     let streak = 0
-    const lastGameResult = predictions[predictions.length - 1] ? predictions[predictions.length - 1].result : null
+    const recentPrediction = predictions[predictions.length - 1]
+    const lastGameResult =  recentPrediction ? recentPrediction.result : null
     for (let i = predictions.length - 1; i >= 0; i--) {
       if (predictions[i].result === lastGameResult) streak++
       else break;
