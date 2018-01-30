@@ -69,9 +69,9 @@ class ModelSelector extends React.Component {
       wins,
       losses,
       ties,
-      winRate: winRate ? winRate : 'N/A',
+      winRate: winRate || 'N/A',
       streak: lastGameResult ? `${lastGameResult[0].toUpperCase()}${streak}` : 'N/A',
-      last5: last5 ? last5 : 'N/A'
+      last5: last5 || 'N/A'
     }
   }
 
