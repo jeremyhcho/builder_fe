@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
 // Components
-import { Spinner } from 'Components/Common'
+// import { Spinner } from 'Components/Common'
 import CompletedGameDetails from './CompletedGameDetails'
 import ScheduledGameDetails from './ScheduledGameDetails'
 
@@ -42,7 +42,8 @@ class GameDetails extends React.Component {
     const { fetchingNewSummary } = this.state
 
     if (!Object.keys(summary).length || fetchingNewSummary) {
-      return <div className="loader"><Spinner lg show /></div>
+      // return <div className="loader"><Spinner lg show /></div>
+      return <div />
     }
 
     return (

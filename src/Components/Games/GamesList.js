@@ -37,7 +37,7 @@ class GamesList extends React.Component {
           style={{
             height: 'calc(100vh - 150px)',
             padding: '0 0 25px 65px',
-            overflowY: 'scroll'
+            overflowY: 'auto'
           }}
           styleName="matches-container"
           ref={ref => {

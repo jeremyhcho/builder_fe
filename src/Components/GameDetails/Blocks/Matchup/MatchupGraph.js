@@ -24,11 +24,14 @@ class MatchupGraph extends React.Component {
 
   componentDidMount() {
     const { fetchNBATeamStats, matchup } = this.props
-    fetchNBATeamStats(matchup.id)
+    if (matchup) {
+      fetchNBATeamStats(matchup.id)
+    }
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.matchup.id !== this.props.matchup.id) {
+    if (newProps.matchup.id && !this.props.matchup
+      || newProps.matchup.id !== this.props.matchup.id) {
       this.props.fetchNBATeamStats(newProps.matchup.id)
     }
 

@@ -196,7 +196,7 @@ class Select extends React.Component {
 
   renderInnerSelect () {
     const { vertReversed, displayText, open, searchVal } = this.state
-    const { search, defaultText, disabled, multi } = this.props
+    const { search, defaultText, disabled, multi, style } = this.props
     const dropdownClass = classNames('dropdown', { open, disabled })
     const chevronClass = classNames('chevron-down', { open })
 
@@ -220,7 +220,8 @@ class Select extends React.Component {
           styleName={dropdownClass}
           onClick={this.toggleDropdown}
           style={{
-            height: multi ? 'auto' : '36px'
+            height: multi ? 'auto' : '36px',
+            ...style
           }}
         >
           {multi ? this.renderPills() : ''}
@@ -262,7 +263,8 @@ class Select extends React.Component {
         onClick={this.toggleDropdown}
         style={{
           height: multi ? 'auto' : '36px',
-          padding: multi ? '0 22px 0 0' : '0 12px 9px'
+          padding: multi ? '0 22px 0 0' : '0 12px 9px',
+          ...style
         }}
       >
         {
@@ -332,7 +334,8 @@ Select.defaultProps = {
   search: false,
   disabled: false,
   multi: false,
-  selectedVals: []
+  selectedVals: [],
+  style: {}
 }
 
 Select.propTypes = {
@@ -352,7 +355,8 @@ Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   search: PropTypes.bool,
   disabled: PropTypes.bool,
-  multi: PropTypes.bool
+  multi: PropTypes.bool,
+  style: PropTypes.object,
 }
 
 export default Select

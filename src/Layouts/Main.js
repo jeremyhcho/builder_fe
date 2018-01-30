@@ -107,7 +107,7 @@ const MainLayout = ({
         }}
       >
         <Header />
-        <div style={{ overflowY: 'scroll', height: 'calc(100% - 60px)' }}>
+        <div style={{ height: 'calc(100% - 60px)' }}>
           <Switch>
             {/* <Route exact path='/' component={Dashboard} /> */}
             <Route path='/games' component={GamesLayout} />

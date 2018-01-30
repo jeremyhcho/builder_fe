@@ -34,7 +34,7 @@ class Injuries extends React.Component {
   }
 
   enableBodyScroll = () => {
-    document.querySelector('.matches-scroller').style.overflowY = 'scroll'
+    document.querySelector('.matches-scroller').style.overflowY = 'auto'
   }
 
   render () {

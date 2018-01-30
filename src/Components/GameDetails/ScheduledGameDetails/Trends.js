@@ -11,17 +11,15 @@ import {
 class Trends extends React.Component {
   render () {
     return (
-      <div>
-        <Row>
-          <Col xs={12}>
-            <Predictability />
-          </Col>
+      <Row style={{ maxWidth: '1300px', width: '100%', paddingBottom: '100px' }}>
+        <Col xs={12}>
+          <Predictability />
+        </Col>
 
-          <Col xs={12}>
-            <TrendStats />
-          </Col>
-        </Row>
-      </div>
+        <Col xs={12}>
+          <TrendStats />
+        </Col>
+      </Row>
     )
   }
 }

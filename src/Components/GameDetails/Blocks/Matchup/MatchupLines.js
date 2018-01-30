@@ -15,11 +15,14 @@ import './Matchup.scss'
 
 class MatchupLines extends React.Component {
   componentDidMount () {
-    this.props.fetchNBALines(this.props.matchup.id)
+    if (this.props.matchup) {
+      this.props.fetchNBALines(this.props.matchup.id)
+    }
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.matchup.id !== this.props.matchup.id) {
+    if (newProps.matchup.id && !this.props.matchup
+      || newProps.matchup.id !== this.props.matchup.id) {
       this.props.fetchNBALines(newProps.matchup.id)
     }
   }

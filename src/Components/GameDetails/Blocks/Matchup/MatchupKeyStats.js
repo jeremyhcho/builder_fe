@@ -22,7 +22,8 @@ class MatchupKeyStats extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.matchup.id !== this.props.matchup.id) {
+    if (newProps.matchup.id && !this.props.matchup
+      || newProps.matchup.id !== this.props.matchup.id) {
       this.props.fetchNBAKeyStats(newProps.matchup.id)
     }
   }
@@ -47,101 +48,101 @@ class MatchupKeyStats extends React.Component {
   render () {
     const { keyStats, matchup } = this.props
 
-    if (keyStats && matchup) {
-      const colors = this.determineColors()
-
+    if (!Object.keys(keyStats).length || !Object.keys(matchup).length) {
       return (
         <div styleName="key-stats">
           <Card label="Key Differences" wrapperStyle={{ padding: '25px' }}>
-            <Row styleName="legend" center='xs' around='xs'>
+            <Row styleName="legend" center='xs' between='xs'>
               <div styleName="legend-team">
                 <div
                   styleName="team-color"
-                  style={{ backgroundColor: colors.awayColor }}
+                  style={{ backgroundColor: 'var(--light-gray)' }}
                 />
-                <p className="semibold">{matchup.away.name}</p>
+                <p className="bold">Away</p>
               </div>
               <div styleName="legend-team">
                 <div
                   styleName="team-color"
-                  style={{ backgroundColor: colors.homeColor }}
+                  style={{ backgroundColor: 'var(--light-gray)' }}
                 />
-                <p className="semibold">{matchup.home.name}</p>
+                <p className="bold">Home</p>
               </div>
             </Row>
-            {
-              Object.keys(keyStats).map(stat => {
-                const keyStat = stat.split('_').map(string => string[0].toUpperCase() + string.substr(1)).join(' ')
-                const totalValue = keyStats[stat].away + keyStats[stat].home
-                const awayWidth = keyStats[stat].away === 0 ? (
-                  0.01 * 90
-                ) : (
-                  (keyStats[stat].away / totalValue) * 90
-                )
-
-                const homeWidth = keyStats[stat].home === 0 ? (
-                  0.01 * 90
-                ) : (
-                  (keyStats[stat].home / totalValue) * 90
-                )
-
-                return (
-                  <div key={stat} styleName="team-wrapper">
-                    <Row style={{ margin: '0' }}>
-                      <p className="semibold">{keyStat}</p>
-                    </Row>
-                    <Row styleName="team-rows">
-                      <div
-                        styleName="stat-display"
-                        style={{ backgroundColor: `${colors.awayColor}`, width: `${awayWidth}%` }}
-                      />
-                      <p
-                        className="semibold"
-                        style={{ marginLeft: '15px' }}
-                      >
-                        {keyStats[stat].away}
-                      </p>
-                    </Row>
-                    <Row styleName="team-rows">
-                      <div
-                        styleName="stat-display"
-                        style={{ backgroundColor: `${colors.homeColor}`, width: `${homeWidth}%` }}
-                      />
-                      <p
-                        className="semibold"
-                        style={{ marginLeft: '15px' }}
-                      >
-                        {keyStats[stat].home}
-                      </p>
-                    </Row>
-                  </div>
-                )
-              })
-            }
           </Card>
         </div>
       )
     }
 
+    const colors = this.determineColors()
+
     return (
       <div styleName="key-stats">
         <Card label="Key Differences" wrapperStyle={{ padding: '25px' }}>
-          <Row styleName="legend" center='xs' between='xs'>
+          <Row styleName="legend" center='xs' around='xs'>
             <div styleName="legend-team">
               <div
                 styleName="team-color"
-                style={{ backgroundColor: 'var(--light-gray)' }}
+                style={{ backgroundColor: colors.awayColor }}
               />
-              <p className="bold">Away</p>
+              <p className="semibold">{matchup.away.name}</p>
             </div>
             <div styleName="legend-team">
               <div
                 styleName="team-color"
-                style={{ backgroundColor: 'var(--light-gray)' }}
+                style={{ backgroundColor: colors.homeColor }}
               />
-              <p className="bold">Home</p>
+              <p className="semibold">{matchup.home.name}</p>
             </div>
           </Row>
+          {
+            Object.keys(keyStats).map(stat => {
+              const keyStat = stat.split('_').map(string => string[0].toUpperCase() + string.substr(1)).join(' ')
+              const totalValue = keyStats[stat].away + keyStats[stat].home
+              const awayWidth = keyStats[stat].away === 0 ? (
+                0.01 * 90
+              ) : (
+                (keyStats[stat].away / totalValue) * 90
+              )
+
+              const homeWidth = keyStats[stat].home === 0 ? (
+                0.01 * 90
+              ) : (
+                (keyStats[stat].home / totalValue) * 90
+              )
+
+              return (
+                <div key={stat} styleName="team-wrapper">
+                  <Row style={{ margin: '0' }}>
+                    <p className="semibold">{keyStat}</p>
+                  </Row>
+                  <Row styleName="team-rows">
+                    <div
+                      styleName="stat-display"
+                      style={{ backgroundColor: `${colors.awayColor}`, width: `${awayWidth}%` }}
+                    />
+                    <p
+                      className="semibold"
+                      style={{ marginLeft: '15px' }}
+                    >
+                      {keyStats[stat].away}
+                    </p>
+                  </Row>
+                  <Row styleName="team-rows">
+                    <div
+                      styleName="stat-display"
+                      style={{ backgroundColor: `${colors.homeColor}`, width: `${homeWidth}%` }}
+                    />
+                    <p
+                      className="semibold"
+                      style={{ marginLeft: '15px' }}
+                    >
+                      {keyStats[stat].home}
+                    </p>
+                  </Row>
+                </div>
+              )
+            })
+          }
         </Card>
       </div>
     )

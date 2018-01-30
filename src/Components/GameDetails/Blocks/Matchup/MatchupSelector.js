@@ -39,6 +39,7 @@ class MatchupSelector extends React.Component {
     return (
       <div>
         <Select
+          style={{ backgroundColor: '#fff' }}
           defaultText="Select Matchup"
           wrapperStyle={{ marginTop: '15px' }}
           options={options}

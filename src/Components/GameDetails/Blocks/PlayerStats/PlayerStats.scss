@@ -6,7 +6,7 @@
     min-width: 165px;
 
     &.stats {
-      overflow-x: scroll;
+      overflow-x: auto;
       margin: 0;
       flex: 1;
     }

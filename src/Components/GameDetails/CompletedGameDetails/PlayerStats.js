@@ -22,7 +22,7 @@ class PlayerStats extends React.Component {
 
     if (sortedPlayerStats && summary) {
       return (
-        <div style={{ maxWidth: '1300px', width: '100%' }}>
+        <div style={{ maxWidth: '1300px', width: '100%', paddingBottom: '100px' }}>
           {
             Object.keys(sortedPlayerStats).map(team => (
               <TeamPlayers

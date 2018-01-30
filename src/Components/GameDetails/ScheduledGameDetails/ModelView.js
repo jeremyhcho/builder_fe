@@ -59,7 +59,7 @@ class ModelView extends React.Component {
     }
 
     return (
-      <div style={{ maxWidth: '1300px', width: '100%' }}>
+      <div style={{ maxWidth: '1300px', width: '100%', paddingBottom: '100px' }}>
         <Row>
           <ModelSelector />
         </Row>

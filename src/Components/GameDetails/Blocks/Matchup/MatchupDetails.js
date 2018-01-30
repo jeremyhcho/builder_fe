@@ -21,7 +21,7 @@ const wrapperStyle = {
 
 const teamNameStyle = {
   textOverflow: 'clip',
-  overflowX: 'scroll',
+  overflowX: 'auto',
   whiteSpace: 'nowrap'
 }
 
