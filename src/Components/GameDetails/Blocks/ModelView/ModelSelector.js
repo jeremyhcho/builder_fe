@@ -71,7 +71,7 @@ class ModelSelector extends React.Component {
       ties,
       winRate: winRate || 'N/A',
       streak: lastGameResult ? `${lastGameResult[0].toUpperCase()}${streak}` : 'N/A',
-      last5: last5.length ? last5 : 'N/A'
+      last5: last5.length ? last5.join(' - ') : 'N/A'
     }
   }
 
@@ -201,7 +201,7 @@ class ModelSelector extends React.Component {
 
           <div styleName="stats-card">
             <h4 className="semibold">
-              {modelRecords.last5.join(' - ')}
+              {modelRecords.last5}
             </h4>
             <p className="label">Last 5</p>
           </div>
