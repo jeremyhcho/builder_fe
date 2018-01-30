@@ -53,9 +53,9 @@ class VegasLines extends React.Component {
         <Card label="Vegas Lines" wrapperStyle={{ padding: '50px 25px', textAlign: 'center' }}>
           <div style={{ textAlign: 'center', lineHeight: '30px' }}>
             <BanIcon />
-            <h4 className="semibold label">
+            <p className="label">
               Vegas lines are currently not available for this game
-            </h4>
+            </p>
           </div>
         </Card>
       )
