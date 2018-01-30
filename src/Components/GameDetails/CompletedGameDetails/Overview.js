@@ -14,7 +14,7 @@ import {
 } from 'Components/GameDetails/Blocks'
 
 const Overview = ({ match }) => (
-  <Row style={{ maxWidth: '1300px', width: '100%', paddingBottom: '100px' }}>
+  <Row style={{ maxWidth: '1300px', width: '100%' }}>
     <Col xs={12}>
       <Summary />
     </Col>

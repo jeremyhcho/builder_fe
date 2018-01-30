@@ -12,7 +12,7 @@ import {
 
 const Matchup = () => {
   return (
-    <div style={{ maxWidth: '1300px', width: '100%', paddingBottom: '100px' }}>
+    <div style={{ maxWidth: '1300px', width: '100%' }}>
       <Row>
         <MatchupSelector />
       </Row>
