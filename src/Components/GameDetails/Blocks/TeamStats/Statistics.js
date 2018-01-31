@@ -9,71 +9,58 @@ import { Card, Spinner } from 'Components/Common'
 // CSS
 import './TeamStats.scss'
 
+// Helpers
+import { nbaFlatStat, precisionRound } from 'Helpers'
+
+const tenths = precisionRound(1)
+
 const Statistics = ({ teamStats }) => {
   if (teamStats) {
     const stats = teamStats.totals
     return (
       <Card label="Statistics" wrapperStyle={{ padding: '40px' }} styleName="statistics">
         <Row center='xs'>
-          <Row style={{ width: '100%' }}>
-            <Col xs={3} style={{ textAlign: 'right' }}>
+          <Row style={{ width: '100%' }} around='xs'>
+            <Col style={{ textAlign: 'right' }}>
               <p className="small label">{stats.away.city}</p>
               <p className="semibold">{stats.away.name}</p>
             </Col>
-            <Col xs={6} />
-            <Col xs={3} style={{ textAlign: 'left' }}>
+
+            <Col style={{ textAlign: 'left' }}>
               <p className="small label">{stats.home.city}</p>
               <p className="semibold">{stats.home.name}</p>
             </Col>
           </Row>
           <hr style={{ width: '100%', border: 0, height: '1px', backgroundColor: 'var(--gray)', margin: '15px 0' }} />
-          <Row styleName="totals">
-            <Col xs={3}>
-              {
-                Object.keys(stats.away.statistics).map(stat => {
-                  const value = stats.away.statistics[stat]
-                  return (
-                    <p
-                      key={stat}
-                      styleName="stat-value"
-                      style={{ textAlign: 'right' }}
-                    >
-                      {typeof value === 'string' ? value : Math.round(value * 100) / 100}
-                    </p>
-                  )
-                })
-              }
-            </Col>
-            <Col xs={6}>
-              {
-                Object.keys(stats.away.statistics).map(stat => (
-                  <p
-                    key={stat}
-                    styleName="stat-value"
-                    className="semibold label"
-                  >
-                    {stat}
-                  </p>
-                ))
-              }
-            </Col>
-            <Col xs={3}>
-              {
-                Object.keys(stats.home.statistics).map(stat => {
-                  const value = stats.home.statistics[stat]
-                  return (
-                    <p
-                      key={stat}
-                      styleName="stat-value"
-                      style={{ textAlign: 'left' }}
-                    >
-                      {typeof value === 'string' ? value : Math.round(value * 100) / 100}
-                    </p>
-                  )
-                })
-              }
-            </Col>
-          </Row>
+
+          <div styleName="totals">
+            {
+              Object.keys(stats.away.statistics).map(stat => {
+                if (!nbaFlatStat(stat).full) return null
+                const awayValue = stats.away.statistics[stat]
+                const homeValue = stats.home.statistics[stat]
+                return (
+                  <Col xs={12} key={stat} styleName="total-row">
+                    <Row middle='xs'>
+                      <Col xs={3}>
+                        {tenths((awayValue * 100) / 100)}
+                      </Col>
+
+                      <Col xs={6}>
+                        <p className="semibold label">
+                          {nbaFlatStat(stat).full}
+                        </p>
+                      </Col>
+
+                      <Col xs={3}>
+                        {tenths((homeValue * 100) / 100)}
+                      </Col>
+                    </Row>
+                  </Col>
+                )
+              })
+            }
+          </div>
         </Row>
       </Card>
     )

@@ -81,7 +81,7 @@ class TeamStats extends React.Component {
           <div styleName="stats-list-container stats">
             {
               Object.keys(teamStats[0]).map((stat, index, list) => {
-                if (!nbaFlatStat(stat)) return null
+                if (!nbaFlatStat(stat).short) return null
 
                 const awayStatsStyle = classNames('stats-value', {
                   hovered: this.state.highlightedRow === 'away',
@@ -102,7 +102,7 @@ class TeamStats extends React.Component {
                       styleName="stats-label"
                       className="label semibold small"
                     >
-                      {nbaFlatStat(stat)}
+                      {nbaFlatStat(stat).short}
                     </p>
 
                     <p

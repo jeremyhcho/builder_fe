@@ -36,7 +36,7 @@ class Quarters extends React.Component {
     const quarter = quarters[selected]
     return Object.keys(quarter.away).map(stat => {
       return {
-        statKey: nbaFlatStat(stat),
+        statKey: nbaFlatStat(stat).short,
         value: {
           away: tenths(quarter.away[stat]) === undefined ? '-' : tenths(quarter.away[stat]),
           home: tenths(quarter.home[stat]) === undefined ? '-' : tenths(quarter.home[stat])
