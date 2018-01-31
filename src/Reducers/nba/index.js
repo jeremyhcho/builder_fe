@@ -14,12 +14,12 @@ const initialState = {
   },
   sortStatsKey: {
     away: {
-      starter: 'minutes',
-      bench: 'minutes'
+      starter: { stat: 'minutes', ascending: true },
+      bench: { stat: 'minutes', ascending: true }
     },
     home: {
-      starter: 'minutes',
-      bench: 'minutes'
+      starter: { stat: 'minutes', ascending: true },
+      bench: { stat: 'minutes', ascending: true },
     }
   }
 }
@@ -37,31 +37,34 @@ const nbaReducer = (state = initialState, action) => {
     }
 
     // playersStats => teamPlayers
-    case CHANGE_SORT_STATS_KEY:
+    case CHANGE_SORT_STATS_KEY: {
+      const { playerType, teamType, stat } = action
+
+      let sortBy = state.sortStatsKey[teamType][playerType].ascending
+      if (state.sortStatsKey[teamType][playerType].stat === stat) {
+        sortBy = !state.sortStatsKey[teamType][playerType].ascending
+      }
+
       return {
         ...state,
         sortStatsKey: {
           ...state.sortStatsKey,
-          [action.teamType]: {
-            ...state.sortStatsKey[action.teamType],
-            [action.playerType]: action.stat
+          [teamType]: {
+            ...state.sortStatsKey[teamType],
+            [playerType]: {
+              stat,
+              ascending: sortBy
+            }
           }
         }
       }
+    }
+
 
     case '@@router/LOCATION_CHANGE':
       return {
         ...state,
-        sortStatsKey: {
-          away: {
-            starter: 'minutes',
-            bench: 'minutes'
-          },
-          home: {
-            starter: 'minutes',
-            bench: 'minutes'
-          }
-        }
+        sortStatsKey: initialState.sortStatsKey
       }
 
     default:

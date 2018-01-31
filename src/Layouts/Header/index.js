@@ -8,6 +8,9 @@ import pathToRegexp from 'path-to-regexp'
 import { IconMenuItem, IconDropdown } from 'Components/Common'
 import Notifications from './Notifications'
 
+// Icons
+import LeftArrowIcon from 'Assets/Icons/left-arrow.svg'
+
 // CSS
 import './Header.scss'
 
@@ -48,11 +51,21 @@ class Header extends React.Component {
     this.props.history.push('/settings')
   }
 
+  navigateBack = () => {
+    console.log(this.props.history, this.props.history.length)
+    if (this.props.history.action === 'PUSH') {
+      this.props.history.goBack();
+    } else {
+      this.props.history.push('/games');
+    }
+  }
+
   render () {
     return (
       <div styleName='header'>
         <div styleName='header-content'>
           <div styleName='title'>
+            <LeftArrowIcon styleName="back-icon" onClick={this.navigateBack} />
             <h1 className="semibold">{this.getCurrentRoute()}</h1>
           </div>
 

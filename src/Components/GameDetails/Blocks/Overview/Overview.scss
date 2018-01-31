@@ -72,10 +72,23 @@
       padding: 15px 15px 7.5px;
       cursor: default;
       border-bottom: 1px solid var(--lightest-gray);
+      transition: all 200ms ease;
+
+      &:hover {
+        border-bottom: 1px solid var(--dark-gray);
+      }
     }
 
     .stats-value {
       padding: 15px 0;
+
+      &.first {
+        border-radius: 3px 0 0 3px;
+      }
+
+      &.last {
+        border-radius: 0 3px 3px 0;
+      }
 
       &.hovered {
         background-color: var(--lightest-gray);

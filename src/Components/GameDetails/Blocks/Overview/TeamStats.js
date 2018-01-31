@@ -42,11 +42,11 @@ class TeamStats extends React.Component {
       )
     }
 
-    const awayStatsStyle = classNames('stats-value', {
+    const awayTeamValue = classNames('stats-value first', {
       hovered: this.state.highlightedRow === 'away'
     })
 
-    const homeStatsStyle = classNames('stats-value', {
+    const homeTeamValue = classNames('stats-value first', {
       hovered: this.state.highlightedRow === 'home'
     })
 
@@ -61,7 +61,7 @@ class TeamStats extends React.Component {
               TEAM
             </p>
             <p
-              styleName={awayStatsStyle}
+              styleName={awayTeamValue}
               className="semibold"
               onMouseOver={() => this.setState({ highlightedRow: 'away' })}
               onMouseOut={() => this.setState({ highlightedRow: null })}
@@ -69,7 +69,7 @@ class TeamStats extends React.Component {
               {summary.away.name}
             </p>
             <p
-              styleName={homeStatsStyle}
+              styleName={homeTeamValue}
               className="semibold"
               onMouseOver={() => this.setState({ highlightedRow: 'home' })}
               onMouseOut={() => this.setState({ highlightedRow: null })}
@@ -80,8 +80,18 @@ class TeamStats extends React.Component {
 
           <div styleName="stats-list-container stats">
             {
-              Object.keys(teamStats[0]).map(stat => {
+              Object.keys(teamStats[0]).map((stat, index, list) => {
                 if (!nbaFlatStat(stat)) return null
+
+                const awayStatsStyle = classNames('stats-value', {
+                  hovered: this.state.highlightedRow === 'away',
+                  last: index === list.length - 1
+                })
+
+                const homeStatsStyle = classNames('stats-value', {
+                  hovered: this.state.highlightedRow === 'home',
+                  last: index === list.length - 1
+                })
 
                 const awayRoundedStat = tenths(teamStats[0][stat])
                 const homeRoundedStat = tenths(teamStats[1][stat])

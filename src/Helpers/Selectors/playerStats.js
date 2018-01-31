@@ -10,11 +10,22 @@ const getSeconds = (duration) => {
 }
 
 const sortTeam = (playersList, sortingKey) => {
+  const { stat, ascending } = sortingKey
+  if (ascending) {
+    return playersList.slice().sort((a, b) => {
+      if (stat === 'minutes') {
+        return getSeconds(b.statistics[stat]) - getSeconds(a.statistics[stat])
+      }
+      return b.statistics[stat] - a.statistics[stat]
+    })
+  }
+
   return playersList.slice().sort((a, b) => {
-    if (sortingKey === 'minutes') {
-      return getSeconds(b.statistics[sortingKey]) - getSeconds(a.statistics[sortingKey])
+    if (stat === 'minutes') {
+      return getSeconds(a.statistics[stat]) - getSeconds(b.statistics[stat])
     }
-    return b.statistics[sortingKey] - a.statistics[sortingKey]
+
+    return a.statistics[stat] - b.statistics[stat]
   })
 }
 

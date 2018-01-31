@@ -21,6 +21,7 @@
     .label {
       padding: 15px 15px 7.5px;
       border-bottom: 1px solid var(--lightest-gray);
+      position: relative;
 
       &.players {
         cursor: default;
@@ -28,6 +29,27 @@
 
       &.stats {
         cursor: pointer;
+        transition: all 400ms ease;
+
+        &:hover {
+          border-bottom: 1px solid var(--dark-gray);
+        }
+
+        &.selected {
+          border-bottom: 1px solid var(--blue);
+          padding: 15px 15px 7.5px 5px;
+        }
+      }
+
+      .carat {
+        transition: transform 400ms ease;
+        position: absolute;
+        top: 46%;
+        right: 2px;
+
+        &.descending {
+          transform: rotate(180deg);
+        }
       }
     }
 
@@ -43,8 +65,16 @@
         justify-content: center;
       }
 
+      &.first {
+        border-radius: 3px 0 0 3px;
+      }
+
+      &.last {
+        border-radius: 0 3px 3px 0;
+      }
+
       &.hovered {
-        background-color: var(--lightest-gray)
+        background-color: var(--lightest-gray);
       }
     }
   }

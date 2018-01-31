@@ -7,6 +7,18 @@
     position: relative;
     margin-left: 20px;
 
+    .back-icon {
+      position: absolute;
+      left: -25px;
+      top: 6.5px;
+      cursor: pointer;
+
+      &:hover {
+        transition: all 200ms ease;
+        stroke: var(--blue);
+      }
+    }
+
     .title {
       position: absolute;
       top: 30px;

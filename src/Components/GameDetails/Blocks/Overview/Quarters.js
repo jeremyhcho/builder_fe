@@ -39,7 +39,7 @@ class Quarters extends React.Component {
         statKey: nbaFlatStat(stat),
         value: {
           away: tenths(quarter.away[stat]) === undefined ? '-' : tenths(quarter.away[stat]),
-          home: tenths(quarter.home[stat]) === undefined ? '-' : tenths(quarter.away[stat])
+          home: tenths(quarter.home[stat]) === undefined ? '-' : tenths(quarter.home[stat])
         }
       }
     })
@@ -53,11 +53,11 @@ class Quarters extends React.Component {
     const { quarters, summary } = this.props
     const { selected } = this.state
 
-    const awayStatsStyle = classNames('stats-value', {
-      hovered: this.state.highlightedRow === 'away'
+    const awayTeamValue = classNames('stats-value first', {
+      hovered: this.state.highlightedRow === 'away',
     })
 
-    const homeStatsStyle = classNames('stats-value', {
+    const homeTeamValue = classNames('stats-value first', {
       hovered: this.state.highlightedRow === 'home'
     })
 
@@ -68,7 +68,7 @@ class Quarters extends React.Component {
             <Card label="Quarterly Stats" wrapperStyle={{ padding: '25px' }}>
               <Row styleName="quarters-buttons">
                 {
-                  quartersList.map(quarter => {
+                  quartersList.map((quarter) => {
                     return quarter !== selected ? (
                       <Button
                         flat
@@ -95,7 +95,7 @@ class Quarters extends React.Component {
                 <div styleName="key-column teams">
                   <p styleName="stats-label" className="label semibold small">TEAM</p>
                   <p
-                    styleName={awayStatsStyle}
+                    styleName={awayTeamValue}
                     className="semibold"
                     onMouseOver={() => this.setState({ highlightedRow: 'away' })}
                     onMouseOut={() => this.setState({ highlightedRow: null })}
@@ -103,7 +103,7 @@ class Quarters extends React.Component {
                     {summary.away.name}
                   </p>
                   <p
-                    styleName={homeStatsStyle}
+                    styleName={homeTeamValue}
                     className="semibold"
                     onMouseOver={() => this.setState({ highlightedRow: 'home' })}
                     onMouseOut={() => this.setState({ highlightedRow: null })}
@@ -114,10 +114,20 @@ class Quarters extends React.Component {
 
                 <div styleName="stats-list-container stats">
                   {
-                    this.quarterStatsFactory('away').map((stats) => {
+                    this.quarterStatsFactory('away').map((stats, index, list) => {
                       if (!stats.statKey) {
                         return null
                       }
+
+                      const awayStatsStyle = classNames('stats-value', {
+                        hovered: this.state.highlightedRow === 'away',
+                        last: index === list.length - 1
+                      })
+
+                      const homeStatsStyle = classNames('stats-value', {
+                        hovered: this.state.highlightedRow === 'home',
+                        last: index === list.length - 1
+                      })
 
                       return (
                         <div key={stats.statKey} styleName="key-column stats">
