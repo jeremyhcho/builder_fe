@@ -111,7 +111,8 @@ class TrendStats extends React.Component {
                           <div styleName="spread">
                             <p className="semibold">
                               {trendStat.record.wins}-
-                              {trendStat.record.losses}
+                              {trendStat.record.losses}-
+                              {trendStat.record.ties}
                             </p>
                             {this.calculateWinRate(trendStat.record)}
                           </div>

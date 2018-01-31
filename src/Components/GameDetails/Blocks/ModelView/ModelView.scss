@@ -42,7 +42,7 @@
       transition: all 200ms ease;
 
       &:hover {
-        background-color: var(--lightest-gray);
+        background-color: lighten(#F4F5F7, 2%);
       }
 
       &:last-child {
