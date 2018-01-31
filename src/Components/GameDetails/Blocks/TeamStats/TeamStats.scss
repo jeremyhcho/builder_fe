@@ -18,6 +18,20 @@
     overflow-y: auto;
     overflow-wrap: word-break;
 
+    .total-row {
+      padding: 7px 0;
+      cursor: default;
+      border-radius: var(--border-radius);
+
+      &:hover {
+        transition: all 200ms ease;
+        background-color: var(--lightest-gray);
+      }
+
+      &:last-child {
+        margin: 0;
+      }
+    }
     .stat-value {
       margin: 13px 0;
     }

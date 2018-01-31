@@ -1,127 +1,127 @@
 const nbaFlatStat = (stat) => {
   switch (stat) {
     case 'minutes':
-      return 'Played'
+      return { short: 'Played', full: 'Played' }
 
     case 'field_goals_made':
-      return 'FGM'
+      return { short: 'FGM', full: 'Field goals made' }
 
     case 'field_goals_att':
-      return 'FGA'
+      return { short: 'FGA', full: 'Field goals attempted' }
 
     case 'field_goals_pct':
-      return 'FG%'
+      return { short: 'FG%', full: 'Field goal percentage' }
 
     case 'three_points_made':
-      return '3PM'
+      return { short: '3PM', full: 'Three point field goals made' }
 
     case 'three_points_att':
-      return '3PA'
+      return { short: '3PA', full: 'Three point field goals attempted' }
 
     case 'three_points_pct':
-      return '3P%'
+      return { short: '3P%', full: 'Three point field goal percentage' }
 
     case 'two_points_made':
-      return '2FGM'
+      return { short: '2FGM', full: 'Two point field goals made' }
 
     case 'two_points_att':
-      return '2FGA'
+      return { short: '2FGA', full: 'Two point field goals attempted' }
 
     case 'two_points_pct':
-      return '2FG%'
+      return { short: '2FG%', full: 'Two point field goal percentage' }
 
     case 'free_throws_made':
-      return 'FTM'
+      return { short: 'FTM', full: 'Free throws made' }
 
     case 'free_throws_att':
-      return 'FTA'
+      return { short: 'FTA', full: 'Free throws attempted' }
 
     case 'free_throws_pct':
-      return 'FT%'
+      return { short: 'FT%', full: 'Free throw percentage' }
 
     case 'offensive_rebounds':
-      return 'OREB'
+      return { short: 'OREB', full: 'Offensive rebounds' }
 
     case 'defensive_rebounds':
-      return 'DREB'
+      return { short: 'DREB', full: 'Defensive rebounds' }
 
     case 'rebounds':
-      return 'REB'
+      return { short: 'REB', full: 'Rebounds' }
 
     case 'assists':
-      return 'AST'
+      return { short: 'AST', full: 'Assists' }
 
     case 'turnovers':
-      return 'TOV'
+      return { short: 'TOV', full: 'Turnovers' }
 
     case 'steals':
-      return 'STL'
+      return { short: 'STL', full: 'Steals' }
 
     case 'blocks':
-      return 'BLK'
+      return { short: 'BLK', full: 'Blocks' }
 
     case 'personal_fouls':
-      return 'PF'
+      return { short: 'PF', full: 'Personal fouls' }
 
     case 'points':
-      return 'PTS'
+      return { short: 'PTS', full: 'Points' }
 
     case 'fast_break_pts':
-      return 'FBPS'
+      return { short: 'FBPS', full: 'Fast break points' }
 
     case 'second_chance_pts':
-      return '2ND PTS'
+      return { short: '2ND PTS', full: 'Second chance points' }
 
     case 'points_off_turnovers':
-      return 'PTS OFF TO'
+      return { short: 'PTS OFF TO', full: 'Points off turnovers' }
 
     case 'effective_fg_pct':
-      return 'eFG%'
+      return { short: 'eFG%', full: 'Effective field goal percentage' }
 
     case 'points_in_paint':
-      return 'PITP'
+      return { short: 'PITP', full: 'Points in the paint' }
 
     case 'points_in_paint_pct':
-      return 'PITP%'
+      return { short: 'PITP%', full: 'Points in paint percentage' }
 
     case 'true_shooting_pct':
-      return 'TS%'
+      return { short: 'TS%', full: 'True shooting percentage' }
 
     case 'defensive_rating':
-      return 'DEFRTG'
+      return { short: 'DEFRTG', full: 'Defensive rating' }
 
     case 'offensive_rating':
-      return 'OFFRTG'
+      return { short: 'OFFRTG', full: 'Offensive rating' }
 
     case 'possessions':
-      return 'POSS'
+      return { short: 'POSS', full: 'Possessions' }
 
     case 'opponent_possessions':
-      return 'OPP POSS'
+      return { short: 'OPP POSS', full: 'Opponent possessions' }
 
     case 'assists_turnover_ratio':
-      return 'AST/TO'
+      return { short: 'AST/TO', full: 'Assist to turnover ratio' }
 
     case 'bench_points':
-      return 'BENCH'
+      return { short: 'BENCH', full: 'Bench points' }
 
     case 'efficiency':
-      return 'EFF'
+      return { short: 'EFF', full: 'Efficiency' }
 
     case 'defensive_points_per_possession':
-      return 'DPPP'
+      return { short: 'DPPP', full: 'Defensive points per posession' }
 
     case 'offensive_points_per_possession':
-      return 'OPPP'
+      return { short: 'OPPP', full: 'Offensive points per possession' }
 
     case 'second_chance_pct':
-      return '2ND%'
+      return { short: '2ND%', full: '2nd Chance point percentage' }
 
     case 'fast_break_pct':
-      return 'FB%'
+      return { short: 'FB%', full: 'Fast break percentage' }
 
     default: {
-      return null
+      return { short: null, full: null }
     }
   }
 }

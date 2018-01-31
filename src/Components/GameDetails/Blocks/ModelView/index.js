@@ -1,4 +1,6 @@
-export { default as ModelSelector } from './ModelSelector'
+export { default as CompletedModelSelector } from './CompletedModelSelector'
+export { default as ScheduledModelSelector } from './ScheduledModelSelector'
 export { default as Predictions } from './Predictions'
 export { default as TotalPrediction } from './TotalPrediction'
 export { default as SpreadPrediction } from './SpreadPrediction'
+export { default as ModelDetails } from './ModelDetails'

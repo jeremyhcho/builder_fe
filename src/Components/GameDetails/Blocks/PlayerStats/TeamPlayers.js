@@ -93,7 +93,7 @@ class TeamPlayers extends React.Component {
               <div styleName="players-container stats">
                 {
                   Object.keys(playerType[0].statistics).map(statKey => {
-                    if (!nbaFlatStat(statKey)) return null
+                    if (!nbaFlatStat(statKey).short) return null
 
                     const currentSortStatsKey = sortStatsKey[teamType][this.getPlayerType(index)]
 
@@ -116,7 +116,7 @@ class TeamPlayers extends React.Component {
                                 () => this.sortStats(statKey, playerType[0].starter, teamType)
                               }
                             >
-                              {nbaFlatStat(statKey)}
+                              {nbaFlatStat(statKey).short}
                               {<CaratUpIcon styleName={caratStyle} width={10} height={10} />}
                             </p>
                           ) : (
@@ -127,7 +127,7 @@ class TeamPlayers extends React.Component {
                                 () => this.sortStats(statKey, playerType[0].starter, teamType)
                               }
                             >
-                              {nbaFlatStat(statKey)}
+                              {nbaFlatStat(statKey).short}
                             </p>
                           )
                         }

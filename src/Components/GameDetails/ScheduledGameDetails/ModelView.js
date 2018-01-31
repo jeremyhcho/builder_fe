@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom'
 
 // Components
 import {
-  ModelSelector,
+  ScheduledModelSelector,
+  ModelDetails,
   Predictions,
   TotalPrediction,
   SpreadPrediction
@@ -26,7 +27,7 @@ class ModelView extends React.Component {
   render () {
     const { fetchingMatchesModels, selectedModel, matchesModels, fetchingPredictions } = this.props
 
-    if (fetchingMatchesModels || fetchingPredictions || !matchesModels || !selectedModel) {
+    if (fetchingMatchesModels || fetchingPredictions || !matchesModels) {
       // View when fetching models .. loader
       return <div />
     }
@@ -58,10 +59,20 @@ class ModelView extends React.Component {
       )
     }
 
+    if (matchesModels.length && !selectedModel) {
+      return <div />
+    }
+
     return (
       <div style={{ maxWidth: '1300px', width: '100%' }}>
         <Row>
-          <ModelSelector />
+          <Col xs={12}>
+            <ScheduledModelSelector />
+          </Col>
+
+          <div>
+            <ModelDetails />
+          </div>
         </Row>
 
         <Row style={{ marginBottom: '-50px' }}>
