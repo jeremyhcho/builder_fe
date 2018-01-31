@@ -214,7 +214,14 @@ class Predictability extends React.Component {
                 }],
                 xAxes: [{
                   type: 'time',
+                  distribution: 'series',
                   ticks: {
+                    source: 'data',
+                    callback: (value, index) => {
+                      if (index % 2 === 0) return value
+                      return ''
+                    },
+                    // stepSize: 2,
                     maxRotation: 60,
                     minRotation: 60
                   },
@@ -222,7 +229,7 @@ class Predictability extends React.Component {
                     unit: 'day',
                     displayFormats: {
                       day: 'MMM DD'
-                    }
+                    },
                   },
                   gridLines: {
                     display: false
