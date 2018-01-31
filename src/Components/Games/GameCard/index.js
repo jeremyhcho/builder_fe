@@ -5,7 +5,8 @@ import { withRouter } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
 import { get } from 'lodash'
 
-// Components
+// Icons
+import AtSign from 'Assets/Icons/at-sign.svg'
 
 // CSS
 import './GameCard.scss'
@@ -54,7 +55,7 @@ class GameCard extends React.Component {
           <p className="bold">{game.away.points}</p>
         </Col>
         <Col xs={1} styleName="col-direction">
-          <h1 className="semibold">@</h1>
+          <h1 className="semibold"><AtSign width={16} height={16} /></h1>
           <p className="small semibold" style={{ marginTop: '5px' }}>
             {this.renderGameStatus()}
           </p>

@@ -11,6 +11,7 @@ import { OverviewSpinner } from 'Components/GameDetails/Blocks'
 // Icons
 import RightArrowIcon from 'Assets/Icons/right-arrow.svg'
 import BlueRightArrowIcon from 'Assets/Icons/blue-right-arrow.svg'
+import AtSign from 'Assets/Icons/at-sign.svg'
 
 // CSS
 import './Matchup.scss'
@@ -70,7 +71,7 @@ class MatchupDetails extends React.Component {
             <Col xs={4}>
               <Row center='xs' around='xs'>
                 <h2 styleName="points away" className="bold">{matchup.away.points}</h2>
-                <h2 className='semibold'>@</h2>
+                <h2 className='semibold'><AtSign width={16} height={16} /></h2>
                 <h2 styleName='points home' className="bold">{matchup.home.points}</h2>
               </Row>
             </Col>

@@ -11,6 +11,7 @@ import OverviewSpinner from './OverviewSpinner'
 
 // Icons
 import BanIcon from 'Assets/Icons/ban.svg'
+import AtSign from 'Assets/Icons/at-sign.svg'
 
 // CSS
 import './Overview.scss'
@@ -92,7 +93,7 @@ class RecentGames extends React.Component {
                       teamType === 'home' ? (
                         <p className="semibold">vs</p>
                       ) : (
-                        <p className="semibold">@</p>
+                        <p className="semibold"><AtSign width={10} height={10} /></p>
                       )
                     }
                   </div>

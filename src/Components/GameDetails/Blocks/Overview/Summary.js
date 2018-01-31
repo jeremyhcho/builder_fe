@@ -10,6 +10,9 @@ import OverviewSpinner from './OverviewSpinner'
 // CSS
 import './Overview.scss'
 
+// Icons
+import AtSign from 'Assets/Icons/at-sign.svg'
+
 const wrapperStyle = {
   padding: '50px 25px',
   height: '212px'
@@ -47,7 +50,7 @@ const Summary = ({ summary }) => (
                 transform: 'translate(-50%, -50%)'
               }}
             >
-              @
+              <AtSign width={16} height={16} />
             </h1>
 
             <div

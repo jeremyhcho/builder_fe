@@ -39,7 +39,7 @@ class ModelSelector extends React.Component {
   getModelRecords () {
     const { selectedModel } = this.props
 
-    const predictions = selectedModel.model.predictions.filter(prediction => prediction.result)
+    const predictions = selectedModel.predictions.filter(prediction => prediction.result)
     const predictionResults = groupBy(predictions, prediction => {
       if (!prediction.result) return 'TBD'
       return prediction.result
@@ -166,7 +166,7 @@ class ModelSelector extends React.Component {
     return (
       <div styleName="model-selector">
         <div styleName="model-name">
-          <h4 className="semibold">{selectedModel.model.name}</h4>
+          <h4 className="semibold">{selectedModel.name}</h4>
           <ChangeIcon style={{ margin: '0 10px', cursor: 'pointer' }} onClick={this.openModels} />
 
           {this.state.modelsOpen && this.renderModelList()}
@@ -174,7 +174,7 @@ class ModelSelector extends React.Component {
 
         <Row middle='xs' between='xs' styleName="model-stats">
           <div styleName="stats-card">
-            <h4 className="semibold">{selectedModel.model.type[0].toUpperCase() + selectedModel.model.type.substr(1)}</h4>
+            <h4 className="semibold">{selectedModel.type[0].toUpperCase() + selectedModel.type.substr(1)}</h4>
             <p className="label">Type</p>
           </div>
 

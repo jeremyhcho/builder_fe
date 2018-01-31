@@ -29,9 +29,9 @@ class VegasLines extends React.Component {
     return 'N/A'
   }
 
-  renderTotals (line) {
+  renderTotals (line, type) {
     if (line.total) {
-      return `${line.total} (${line.total_odds})`
+      return `${line.total}${type} (${line.total_odds})`
     }
 
     return 'N/A'
@@ -65,16 +65,16 @@ class VegasLines extends React.Component {
       <Card label="Vegas Lines" styleName="vegas-lines">
         <Row middle='xs' center='xs' styleName="vegas-lines-section">
           <Col xs={3}>
-            <p className="label small semibold">TEAM</p>
+            <p className="label small">TEAM</p>
           </Col>
           <Col xs={3}>
-            <p className="label small semibold">MONEY LINE</p>
+            <p className="label small">MONEY LINE</p>
           </Col>
           <Col xs={3}>
-            <p className="label small semibold">SPREAD</p>
+            <p className="label small">SPREAD</p>
           </Col>
           <Col xs={3}>
-            <p className="label small semibold">TOTAL</p>
+            <p className="label small">TOTAL</p>
           </Col>
         </Row>
 
@@ -82,7 +82,7 @@ class VegasLines extends React.Component {
           <Col xs={3}>
             <Row start='xs'>
               <Col xsOffset={3}>
-                <p className="label semibold">{summary.away.city}</p>
+                <p className="label small">{summary.away.city}</p>
                 <p className="semibold">{summary.away.name}</p>
               </Col>
             </Row>
@@ -97,7 +97,7 @@ class VegasLines extends React.Component {
           </Col>
           <Col xs={3}>
             <p className="semibold">
-              {this.renderTotals(lines[0])}
+              {this.renderTotals(lines[0], 'O')}
             </p>
           </Col>
         </Row>
@@ -106,7 +106,7 @@ class VegasLines extends React.Component {
           <Col xs={3}>
             <Row start='xs'>
               <Col xsOffset={3}>
-                <p className="label semibold">{summary.home.city}</p>
+                <p className="label small">{summary.home.city}</p>
                 <p className="semibold">{summary.home.name}</p>
               </Col>
             </Row>
@@ -118,7 +118,7 @@ class VegasLines extends React.Component {
             <p className="semibold">{this.renderSpread(lines[1])}</p>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{this.renderTotals(lines[1])}</p>
+            <p className="semibold">{this.renderTotals(lines[1], 'U')}</p>
           </Col>
         </Row>
       </Card>
