@@ -9,9 +9,12 @@ import { Select } from 'Components/Common'
 // Actions
 import { fetchNBAPreviousMeetings, fetchNBAMatchup } from 'Actions'
 
+// CSS
+import './Matchup.scss'
+
 class MatchupSelector extends React.Component {
   componentDidMount () {
-    if (!Object.keys(this.props.previousMeetings).length) {
+    if (!this.props.previousMeetings) {
       this.props.fetchNBAPreviousMeetings(this.props.summary.id)
     }
   }
@@ -25,9 +28,9 @@ class MatchupSelector extends React.Component {
   }
 
   render () {
-    const { previousMeetings, fetchNBAMatchup } = this.props
+    const { previousMeetings, fetchNBAMatchup, summary } = this.props
 
-    if (!previousMeetings.length) {
+    if (!previousMeetings || !Object.keys(summary).length) {
       return <div />
     }
 
@@ -37,7 +40,7 @@ class MatchupSelector extends React.Component {
     }))
 
     return (
-      <div>
+      <div styleName="matchup-selector">
         <Select
           style={{ backgroundColor: '#fff' }}
           defaultText="Select Matchup"
@@ -53,7 +56,7 @@ class MatchupSelector extends React.Component {
 
 MatchupSelector.defaultProps = {
   summary: {},
-  previousMeetings: [],
+  previousMeetings: null,
   matchup: {}
 }
 

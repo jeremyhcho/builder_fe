@@ -39,6 +39,10 @@ const routines = (state = initialState, action) => {
         callingApi: {
           ...state.callingApi,
           [action.loaderKey]: true
+        },
+        error: {
+          ...state.error,
+          [action.key.type]: false
         }
       }
     }
@@ -63,6 +67,10 @@ const routines = (state = initialState, action) => {
         callingApi: {
           ...state.callingApi,
           [action.loaderKey]: false
+        },
+        error: {
+          ...state.error,
+          [action.key.type]: true
         }
       }
     }

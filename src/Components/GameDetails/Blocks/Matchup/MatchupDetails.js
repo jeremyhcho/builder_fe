@@ -10,6 +10,7 @@ import { OverviewSpinner } from 'Components/GameDetails/Blocks'
 
 // Icons
 import RightArrowIcon from 'Assets/Icons/right-arrow.svg'
+import BlueRightArrowIcon from 'Assets/Icons/blue-right-arrow.svg'
 
 // CSS
 import './Matchup.scss'
@@ -26,8 +27,12 @@ const teamNameStyle = {
 }
 
 class MatchupDetails extends React.Component {
-  routeToMatch = () => {
-    this.props.history.push(`/games/${this.props.matchup.id}/overview`)
+  state = {
+    viewHover: false
+  }
+
+  routeToMatch = (matchId) => {
+    this.props.history.push(`/games/${matchId}/overview`)
   }
 
   render () {
@@ -38,14 +43,19 @@ class MatchupDetails extends React.Component {
     }
 
     return (
-      <div styleName="match-details">
+      <div styleName="matchup-details">
         <div
           className="semibold"
           styleName="view-button"
-          onClick={this.routeToMatch}
+          onMouseEnter={() => this.setState({ viewHover: true })}
+          onMouseLeave={() => this.setState({ viewHover: false })}
+          onClick={() => this.routeToMatch(matchup.id)}
         >
           View
-          <RightArrowIcon styleName="arrow-icon" />
+          {
+            this.state.viewHover ? <BlueRightArrowIcon styleName="arrow-icon" />
+              : <RightArrowIcon styleName="arrow-icon" />
+          }
         </div>
         <Card label="Match Details" wrapperStyle={wrapperStyle}>
           <Row middle='xs' style={{ height: '100%', position: 'relative' }}>

@@ -7,7 +7,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { Button, Spinner } from 'Components/Common'
 import CreateModel from './CreateModel'
 import ModelCard from './ModelCard'
-import NoModelsIcon from 'Assets/Icons/models/no-models.svg'
+import NoModelsIcon from 'Assets/Icons/missing-content.svg'
 
 // CSS
 import './Models.scss'

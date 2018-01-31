@@ -18,7 +18,9 @@ import { colorComparator } from 'Helpers'
 class MatchupKeyStats extends React.Component {
   componentDidMount () {
     const { fetchNBAKeyStats, matchup } = this.props
-    fetchNBAKeyStats(matchup.id)
+    if (Object.keys(matchup).length) {
+      fetchNBAKeyStats(matchup.id)
+    }
   }
 
   componentWillReceiveProps (newProps) {

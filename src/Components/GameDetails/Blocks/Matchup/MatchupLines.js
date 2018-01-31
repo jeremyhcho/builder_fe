@@ -15,7 +15,8 @@ import './Matchup.scss'
 
 class MatchupLines extends React.Component {
   componentDidMount () {
-    if (this.props.matchup) {
+    const { matchup } = this.props
+    if (Object.keys(matchup).length) {
       this.props.fetchNBALines(this.props.matchup.id)
     }
   }
@@ -30,7 +31,7 @@ class MatchupLines extends React.Component {
   render () {
     const { lines, matchup } = this.props
 
-    if (!lines || !matchup) {
+    if (!lines) {
       return <OverviewSpinner label='Vegas Lines' />
     }
 
@@ -107,7 +108,7 @@ class MatchupLines extends React.Component {
 
 MatchupLines.defaultProps = {
   lines: null,
-  matchup: null
+  matchup: {}
 }
 
 MatchupLines.propTypes = {

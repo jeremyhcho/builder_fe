@@ -13,7 +13,7 @@ import {
 } from 'Components/GameDetails/Blocks'
 
 // Icons
-import NoModelsIcon from 'Assets/Icons/models/no-models.svg'
+import NoModelsIcon from 'Assets/Icons/missing-content.svg'
 
 // Actions
 import { fetchNBAMatchesModels } from 'Actions'

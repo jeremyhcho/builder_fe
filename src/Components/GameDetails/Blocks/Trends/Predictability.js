@@ -68,13 +68,12 @@ class Predictability extends React.Component {
     const { selected } = this.state
 
     const data = predictability[selected].map(data => (
-      { x: new Date(data.date), y: data.difference }
+      { x: moment(new Date(data.date)).format('YYYY-MM-DD'), y: data.difference }
     )).sort((a, b) => {
       return moment(a.x).diff(moment(b.x))
     })
 
     const periodizedData = this.getPeriodizedPredictions(data)
-
     // Create DoubleFillLine Chart
     createDoubleFillChart()
 

@@ -8,6 +8,7 @@ import {
 
 import {
   FETCH_NBA_MATCHES_MODELS,
+  FETCH_NBA_MATCHUP,
   FETCH_NBA_PREVIOUS_MEETINGS
 } from 'Constants'
 
@@ -22,9 +23,18 @@ function* callFetchInitialPredictions ({ response }) {
 
 function* callFetchMatchup ({ response }) {
   try {
-    yield put(fetchNBAMatchup(response[0].id))
+    const initialMatchupId = response[0].id
+    yield put(fetchNBAMatchup(initialMatchupId))
   } catch (error) {
-    console.error('Failed to fetch nba matchup')
+    yield put({
+      type: `${FETCH_NBA_MATCHUP}/FAIL`,
+      key: {
+        primaryKey: 'nba',
+        type: 'matchup'
+      },
+      error
+    })
+    console.error('Failed to fetch nba matchup..no previous meetings found')
   }
 }
 

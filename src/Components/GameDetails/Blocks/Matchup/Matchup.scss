@@ -1,4 +1,4 @@
-.match-details {
+.matchup-details {
   position: relative;
 
   .view-button {
@@ -10,15 +10,11 @@
     align-items: center;
 
     &:hover {
-      .arrow-icon {
-        transition: opacity 200ms ease-in;
-        opacity: 1;
-      }
+      color: var(--blue);
     }
 
     .arrow-icon {
       margin-left: 5px;
-      opacity: 0;
     }
   }
 
