@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import moment from 'moment'
 
 // Component
 import { Card } from 'Components/Common'
@@ -58,7 +59,10 @@ class MatchupDetails extends React.Component {
               : <RightArrowIcon styleName="arrow-icon" />
           }
         </div>
-        <Card label="Match Details" wrapperStyle={wrapperStyle}>
+        <Card
+          label={`Match Details - ${moment(matchup.date, 'YYYY-MM-DD').format('ddd, MMM D, YYYY')}`}
+          wrapperStyle={wrapperStyle}
+        >
           <Row middle='xs' style={{ height: '100%', position: 'relative' }}>
             <Col xs={4}>
               <div style={{ textAlign: 'right' }}>
