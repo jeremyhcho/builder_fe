@@ -54,6 +54,11 @@ class ModelDetails extends React.Component {
 
   render () {
     const { selectedModel } = this.props
+
+    if (!Object.keys(selectedModel).length) {
+      return <div />
+    }
+
     const modelRecords = this.getModelRecords()
 
     return (

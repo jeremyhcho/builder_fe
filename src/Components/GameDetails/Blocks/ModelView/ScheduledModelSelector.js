@@ -15,7 +15,7 @@ import { fetchNBAPredictions, updateNBAMatchesModels } from 'Actions'
 // CSS
 import './ModelView.scss'
 
-class ModelSelector extends React.Component {
+class ScheduledModelSelector extends React.Component {
   state = {
     modelsOpen: false
   }
@@ -84,12 +84,12 @@ class ModelSelector extends React.Component {
             <Row
               key={matchModel.id}
               middle='xs'
-              styleName="model-attr"
+              styleName="match-model"
               onClick={(e) => this.changeModel(e, matchModel)}
             >
               <Col xs={6}>
                 <p className="label">Name</p>
-                <p className="semibold">{matchModel.model.name}</p>
+                <p className="semibold clip">{matchModel.model.name}</p>
               </Col>
 
               <Col xs={4}>
@@ -129,12 +129,12 @@ class ModelSelector extends React.Component {
   }
 }
 
-ModelSelector.defaultProps = {
+ScheduledModelSelector.defaultProps = {
   matchesModels: [],
   selectedModel: {}
 }
 
-ModelSelector.propTypes = {
+ScheduledModelSelector.propTypes = {
   matchesModels: PropTypes.array,
   selectedModel: PropTypes.object,
   updateNBAMatchesModels: PropTypes.func.isRequired,
@@ -154,4 +154,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ModelSelector)
+)(ScheduledModelSelector)
