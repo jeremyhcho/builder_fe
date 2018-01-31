@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import { Link } from 'react-router-dom'
 
 // Components
 import {
@@ -48,12 +47,10 @@ class ModelView extends React.Component {
             <div style={{ opacity: '0.2' }}>
               <NoModelsIcon height={256} width={256} />
 
-              <h1 className="bold" style={{ marginTop: '15px' }}>You have not created any models</h1>
+              <h1 className="bold" style={{ marginTop: '15px' }}>
+                Your account doesn't have any predictions made for this game
+              </h1>
             </div>
-
-            <p className="semibold label" style={{ marginTop: '5px' }}>
-              Click <Link to='/models' className="link">here</Link> to create your first model.
-            </p>
           </div>
         </div>
       )
