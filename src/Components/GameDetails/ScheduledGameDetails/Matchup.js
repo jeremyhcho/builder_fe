@@ -68,7 +68,7 @@ const Matchup = ({ previousMeetings, summary }) => {
 
             <p className="semibold">
               This is the first match between {summary.away.city} {summary.away.name}
-              {' '} and {summary.home.city} {summary.away.name} this season
+              {' '} and {summary.home.city} {summary.home.name} this season
             </p>
           </div>
         </div>

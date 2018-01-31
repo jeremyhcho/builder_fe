@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 // Components
 import {
   ModelSelector,
+  ModelDetails,
   Predictions,
   TotalPrediction,
   SpreadPrediction
@@ -61,7 +62,13 @@ class ModelView extends React.Component {
     return (
       <div style={{ maxWidth: '1300px', width: '100%' }}>
         <Row>
-          <ModelSelector />
+          <Col xs={12}>
+            <ModelSelector />
+          </Col>
+
+          <div>
+            <ModelDetails />
+          </div>
         </Row>
 
         <Row style={{ marginBottom: '-50px' }}>
