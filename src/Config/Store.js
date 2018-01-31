@@ -12,14 +12,10 @@ import rootSaga from 'Sagas'
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [sagaMiddleware, routerMiddleware(history)]
 
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(...middleware))
+  compose(applyMiddleware(...middleware))
 )
-/* eslint-enable */
 
 sagaMiddleware.run(rootSaga)
 

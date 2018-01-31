@@ -41,7 +41,7 @@ class Injuries extends React.Component {
     const { injuries, summary } = this.props
 
     return (
-      <div>
+      <div styleName='injuries'>
         {
           injuries && summary ? (
             <Card label='Injuries' wrapperStyle={{ padding: '25px 0 25px' }}>

@@ -20,5 +20,9 @@
       opacity: 0.4;
       cursor: not-allowed;
     }
+
+    &:not(.disabled):hover {
+      color: var(--blue);
+    }
   }
 }

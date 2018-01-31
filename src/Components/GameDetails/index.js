@@ -49,7 +49,7 @@ class GameDetails extends React.Component {
     return (
       <Switch>
         {
-          summary.status === 'SCHEDULED' || summary.status === 'IN PROGRESS' ? (
+          summary.status === 'SCHEDULED' || summary.status === 'INPROGRESS' ? (
             <Route path='/games/:id' component={ScheduledGameDetails} />
           ) : (
             <Route path='/games/:id' component={CompletedGameDetails} />

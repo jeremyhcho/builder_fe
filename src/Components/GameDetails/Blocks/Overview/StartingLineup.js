@@ -11,6 +11,9 @@ import OverviewSpinner from './OverviewSpinner'
 // Actions
 import { fetchNBAStartingLineup } from 'Actions'
 
+// Icons
+import BanIcon from 'Assets/Icons/ban.svg'
+
 // CSS
 import './Overview.scss'
 
@@ -34,80 +37,101 @@ class StartingLineup extends React.Component {
     return groupedLineups
   }
 
-  render () {
+  renderStartingLineup () {
     const { startingLineup, summary } = this.props
     const groupedLineups = this.formattedLineups()
+    const positions = ['PG', 'SG', 'SF', 'PF', 'C']
+
+    if (!startingLineup.length) {
+      return (
+        <Card
+          label='Starting Lineups'
+          wrapperStyle={{ padding: '50px 0', textAlign: 'center', lineHeight: '30px' }}
+        >
+          <BanIcon />
+          <p className='label'>Lineups are not yet available for this game</p>
+        </Card>
+      )
+    }
+
+    return (
+      <Card label='Starting Lineups' wrapperStyle={{ padding: '40px 0' }}>
+        <Row style={{ width: '100%' }}>
+          <Col xs={5}>
+            <p
+              className='label small'
+              style={{ textAlign: 'right' }}
+            >
+              {summary.away.city}
+            </p>
+
+            <h4 className='semibold' style={{ textAlign: 'right', marginBottom: '30px' }}>
+              {summary.away.name}
+            </h4>
+            {
+              groupedLineups.away.map((starter, index) => (
+                <p styleName='starter' style={{ textAlign: 'right' }} key={starter.id}>
+                  <span className='semibold'>
+                    {starter.first_name.slice(0, 1)}. {starter.last_name}
+                  </span>
+
+                  <span
+                    style={{ marginLeft: '10px' }}
+                    className='small label semibold'
+                  >
+                    {starter.primary_position || positions[index]}
+                  </span>
+                </p>
+              ))
+            }
+          </Col>
+
+          <Col xs={2}>
+            <hr
+              style={{
+                height: '100%',
+                width: '1px',
+                border: '0',
+                backgroundColor: 'var(--light-gray)'
+              }}
+            />
+          </Col>
+
+          <Col xs={5}>
+            <p className='label small'>{summary.home.city}</p>
+            <h4 className='semibold' style={{ marginBottom: '30px' }}>
+              {summary.home.name}
+            </h4>
+            {
+              groupedLineups.home.map((starter, index) => (
+                <p styleName='starter' key={starter.id}>
+                  <span
+                    style={{ marginRight: '10px' }}
+                    className='small label semibold'
+                  >
+                    {starter.primary_position || positions[index]}
+                  </span>
+
+                  <span className='semibold'>
+                    {starter.first_name.slice(0, 1)}. {starter.last_name}
+                  </span>
+                </p>
+              ))
+            }
+          </Col>
+        </Row>
+      </Card>
+    )
+  }
+
+  render () {
+    const { startingLineup, summary } = this.props
 
     return (
       <div styleName='starting-lineup'>
         {
           startingLineup && summary ? (
-            <Card label='Starting Lineups' wrapperStyle={{ padding: '40px 0' }}>
-              <Row style={{ width: '100%' }}>
-                <Col xs={5}>
-                  <p
-                    className='label small'
-                    style={{ textAlign: 'right' }}
-                  >
-                    {summary.away.city}
-                  </p>
-
-                  <h4 className='semibold' style={{ textAlign: 'right', marginBottom: '30px' }}>
-                    {summary.away.name}
-                  </h4>
-                  {
-                    groupedLineups.away.map(starter => (
-                      <p styleName='starter' style={{ textAlign: 'right' }} key={starter.id}>
-                        <span className='semibold'>
-                          {starter.first_name.slice(0, 1)}. {starter.last_name}
-                        </span>
-
-                        <span
-                          style={{ marginLeft: '10px' }}
-                          className='small label semibold'
-                        >
-                          {starter.primary_position}
-                        </span>
-                      </p>
-                    ))
-                  }
-                </Col>
-
-                <Col xs={2}>
-                  <hr
-                    style={{
-                      height: '100%',
-                      width: '1px',
-                      border: '0',
-                      backgroundColor: 'var(--light-gray)'
-                    }}
-                  />
-                </Col>
-
-                <Col xs={5}>
-                  <p className='label small'>{summary.home.city}</p>
-                  <h4 className='semibold' style={{ marginBottom: '30px' }}>
-                    {summary.home.name}
-                  </h4>
-                  {
-                    groupedLineups.home.map(starter => (
-                      <p styleName='starter' key={starter.id}>
-                        <span
-                          style={{ marginRight: '10px' }}
-                          className='small label semibold'
-                        >
-                          {starter.primary_position}
-                        </span>
-
-                        <span className='semibold'>
-                          {starter.first_name.slice(0, 1)}. {starter.last_name}
-                        </span>
-                      </p>
-                    ))
-                  }
-                </Col>
-              </Row>
-            </Card>
+            this.renderStartingLineup()
           ) : (
             <OverviewSpinner style={{ height: '313px' }} label="Starting Lineups" />
           )

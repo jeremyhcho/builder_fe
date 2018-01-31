@@ -45,13 +45,14 @@ class ModelSelector extends React.Component {
       return prediction.result
     })
 
-    const wins = predictionResults.win.length
-    const losses = predictionResults.loss.length
-    const ties = predictionResults.tie.length
-    const winRate = tenths((wins / (wins + losses + ties)) * 100)
+    const wins = predictionResults.win ? predictionResults.win.length : 0
+    const losses = predictionResults.loss ? predictionResults.loss.length : 0
+    const ties = predictionResults.tie ? predictionResults.tie.length : 0
+    const winRate = wins + losses + ties > 0 ? tenths((wins / (wins + losses + ties)) * 100) : null
 
     let streak = 0
-    const lastGameResult = predictions[predictions.length - 1].result
+    const recentPrediction = predictions[predictions.length - 1]
+    const lastGameResult = recentPrediction ? recentPrediction.result : null
     for (let i = predictions.length - 1; i >= 0; i--) {
       if (predictions[i].result === lastGameResult) streak++
       else break;
@@ -68,9 +69,9 @@ class ModelSelector extends React.Component {
       wins,
       losses,
       ties,
-      winRate,
-      streak: `${lastGameResult[0].toUpperCase()}${streak}`,
-      last5
+      winRate: winRate ? `${winRate}%` : 'N/A',
+      streak: lastGameResult ? `${lastGameResult[0].toUpperCase()}${streak}` : 'N/A',
+      last5: last5.length ? last5.join(' - ') : 'N/A'
     }
   }
 
@@ -186,7 +187,7 @@ class ModelSelector extends React.Component {
 
           <div styleName="stats-card">
             <h4 className="semibold">
-              {modelRecords.winRate}%
+              {modelRecords.winRate}
             </h4>
             <p className="label">Win %</p>
           </div>
@@ -200,7 +201,7 @@ class ModelSelector extends React.Component {
 
           <div styleName="stats-card">
             <h4 className="semibold">
-              {modelRecords.last5.join(' - ')}
+              {modelRecords.last5}
             </h4>
             <p className="label">Last 5</p>
           </div>

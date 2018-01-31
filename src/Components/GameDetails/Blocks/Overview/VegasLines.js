@@ -21,6 +21,22 @@ class VegasLines extends React.Component {
     this.props.fetchNBALines(this.props.matchId)
   }
 
+  renderSpread (line) {
+    if (line.spread) {
+      return `${line.spread} (${line.spread_odds})`
+    }
+
+    return 'N/A'
+  }
+
+  renderTotals (line) {
+    if (line.total) {
+      return `${line.total} (${line.total_odds})`
+    }
+
+    return 'N/A'
+  }
+
   render () {
     const { lines, summary } = this.props
 
@@ -37,9 +53,9 @@ class VegasLines extends React.Component {
         <Card label="Vegas Lines" wrapperStyle={{ padding: '50px 25px', textAlign: 'center' }}>
           <div style={{ textAlign: 'center', lineHeight: '30px' }}>
             <BanIcon />
-            <h4 className="semibold label">
+            <p className="label">
               Vegas lines are currently not available for this game
-            </h4>
+            </p>
           </div>
         </Card>
       )
@@ -72,13 +88,17 @@ class VegasLines extends React.Component {
             </Row>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[0].moneyline}</p>
+            <p className="semibold">{lines[0].moneyline || 'N/A'}</p>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[0].spread} ({lines[0].spread_odds})</p>
+            <p className="semibold">
+              {this.renderSpread(lines[0])}
+            </p>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[0].total} ({lines[0].total_odds})</p>
+            <p className="semibold">
+              {this.renderTotals(lines[0])}
+            </p>
           </Col>
         </Row>
 
@@ -92,13 +112,13 @@ class VegasLines extends React.Component {
             </Row>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[1].moneyline}</p>
+            <p className="semibold">{lines[1].moneyline || 'N/A'}</p>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[1].spread} ({lines[1].spread_odds})</p>
+            <p className="semibold">{this.renderSpread(lines[1])}</p>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[1].total} ({lines[1].total_odds})</p>
+            <p className="semibold">{this.renderTotals(lines[1])}</p>
           </Col>
         </Row>
       </Card>
