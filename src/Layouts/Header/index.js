@@ -40,24 +40,25 @@ class Header extends React.Component {
   getCurrentRoute() {
     for (const regexp of Object.keys(SECTION_NAMES)) {
       if (pathToRegexp(regexp).exec(this.props.location.pathname)) {
-        return SECTION_NAMES[regexp]
+        return regexp
       }
     }
 
-    return null
+    return ''
   }
 
   navigateSettings = () => {
-    this.props.history.push('/settings')
+    this.props.history.push({ pathname: '/settings' })
   }
 
   navigateBack = () => {
-    console.log(this.props.history, this.props.history.length)
-    if (this.props.history.action === 'PUSH') {
-      this.props.history.goBack();
-    } else {
-      this.props.history.push('/games');
-    }
+    const indexOfId = this.getCurrentRoute().indexOf(':id')
+    const parentRoute = this.getCurrentRoute().slice(0, indexOfId - 1)
+    this.props.history.push({ pathname: parentRoute })
+  }
+
+  shouldRenderBack () {
+    return this.getCurrentRoute().includes(':id')
   }
 
   render () {
@@ -65,8 +66,12 @@ class Header extends React.Component {
       <div styleName='header'>
         <div styleName='header-content'>
           <div styleName='title'>
-            <LeftArrowIcon styleName="back-icon" onClick={this.navigateBack} />
-            <h1 className="semibold">{this.getCurrentRoute()}</h1>
+            {
+              this.shouldRenderBack() && (
+                <LeftArrowIcon styleName="back-icon" onClick={this.navigateBack} />
+              )
+            }
+            <h1 className="semibold">{SECTION_NAMES[this.getCurrentRoute()]}</h1>
           </div>
 
           <ul styleName='header-items'>

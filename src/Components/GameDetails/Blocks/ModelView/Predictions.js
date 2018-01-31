@@ -40,15 +40,15 @@ class Predictions extends React.Component {
       <Card label="Prediction" styleName="prediction">
         <Row middle='xs' center='xs' styleName="prediction-section">
           <Col xs={4}>
-            <p className="semibold label">TEAM</p>
+            <p className="label small">TEAM</p>
           </Col>
 
           <Col xs={4}>
-            <p className="semibold label">SPREAD</p>
+            <p className="label small">SPREAD</p>
           </Col>
 
           <Col xs={4}>
-            <p className="semibold label">TOTAL</p>
+            <p className="label small">TOTAL</p>
           </Col>
         </Row>
 
@@ -56,7 +56,7 @@ class Predictions extends React.Component {
           <Col xs={4}>
             <Row start='xs'>
               <Col xsOffset={4}>
-                <p className="semibold label">{summary.away.city}</p>
+                <p className="small label">{summary.away.city}</p>
                 <p className="semibold">{summary.away.name}</p>
               </Col>
             </Row>
@@ -91,7 +91,7 @@ class Predictions extends React.Component {
           <Col xs={4}>
             <Row start='xs'>
               <Col xsOffset={4}>
-                <p className="semibold label">{summary.home.city}</p>
+                <p className="small label">{summary.home.city}</p>
                 <p className="semibold">{summary.home.name}</p>
               </Col>
             </Row>

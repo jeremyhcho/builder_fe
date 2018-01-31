@@ -15,7 +15,10 @@
 
       &:hover {
         transition: all 200ms ease;
-        stroke: var(--blue);
+
+        path {
+          fill: var(--blue);
+        }
       }
     }
 

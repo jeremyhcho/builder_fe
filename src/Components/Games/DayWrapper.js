@@ -12,8 +12,9 @@ import './Games.scss'
 class DayWrapper extends React.Component {
   render () {
     const { games, date } = this.props
-    const day = date.split(' ').slice(0, 1)
-    const month = date.split(' ')[1].slice(0, 3).toUpperCase()
+    const day = date.split(' ')[0]
+    const dayofWeek = date.split(' ')[1].toUpperCase()
+    const month = date.split(' ')[2].slice(0, 3).toUpperCase()
     const gamesLengthLabel = classNames('gamesLength', {
       oneGame: games.length === 1
     })
@@ -22,21 +23,10 @@ class DayWrapper extends React.Component {
     })
     return (
       <Row styleName="day-wrapper" style={{ position: 'relative' }}>
-        <p
-          className='small'
-          style={{
-            position: 'absolute',
-            top: '-18px',
-            right: '20px'
-          }}
-        >
-          All times displayed in EST
-        </p>
-
         <Col xs={2} styleName="day-card">
           <div styleName={cardInfoStyle}>
-            <h1 className="bold" style={{ textAlign: 'center' }}>{day}</h1>
-            <h2 className="semibold" style={{ textAlign: 'center' }}>{month}</h2>
+            <h4 className='semibold' style={{ textAlign: 'center' }}>{dayofWeek}</h4>
+            <h1 className="bold" style={{ textAlign: 'center' }}>{month} {day}</h1>
             <p
               className="semibold label"
               styleName={gamesLengthLabel}

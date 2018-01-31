@@ -19,10 +19,13 @@ class GameCard extends React.Component {
 
   renderGameStatus () {
     const { game } = this.props
-    const time = game.date.tz('America/New_York').format('hA')
+    const time = game.date.tz('America/New_York')
+
     switch (game.status) {
       case 'SCHEDULED':
-        return time
+        if (time.minutes() === 0) return time.format('hA')
+
+        return time.format('h:mmA')
       case 'INPROGRESS':
         return 'IN PROGRESS'
       case 'CLOSED':

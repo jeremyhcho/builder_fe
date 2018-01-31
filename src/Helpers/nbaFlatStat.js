@@ -70,7 +70,7 @@ const nbaFlatStat = (stat) => {
       return 'FBPS'
 
     case 'second_chance_pts':
-      return '2nd PTS'
+      return '2ND PTS'
 
     case 'points_off_turnovers':
       return 'PTS OFF TO'
@@ -115,7 +115,7 @@ const nbaFlatStat = (stat) => {
       return 'OPPP'
 
     case 'second_chance_pct':
-      return '2nd%'
+      return '2ND%'
 
     case 'fast_break_pct':
       return 'FB%'

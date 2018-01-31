@@ -49,16 +49,16 @@ class MatchupLines extends React.Component {
       <Card label="Vegas Lines" styleName="vegas-lines">
         <Row middle='xs' center='xs' styleName="vegas-lines-section">
           <Col xs={3}>
-            <p className="label small semibold">TEAM</p>
+            <p className="label small">TEAM</p>
           </Col>
           <Col xs={3}>
-            <p className="label small semibold">MONEY LINE</p>
+            <p className="label small">MONEY LINE</p>
           </Col>
           <Col xs={3}>
-            <p className="label small semibold">SPREAD</p>
+            <p className="label small">SPREAD</p>
           </Col>
           <Col xs={3}>
-            <p className="label small semibold">TOTAL</p>
+            <p className="label small">TOTAL</p>
           </Col>
         </Row>
 
@@ -66,7 +66,7 @@ class MatchupLines extends React.Component {
           <Col xs={3}>
             <Row start='xs'>
               <Col xsOffset={3}>
-                <p className="label semibold">{matchup.away.city}</p>
+                <p className="label small">{matchup.away.city}</p>
                 <p className="semibold">{matchup.away.name}</p>
               </Col>
             </Row>
@@ -86,7 +86,7 @@ class MatchupLines extends React.Component {
           <Col xs={3}>
             <Row start='xs'>
               <Col xsOffset={3}>
-                <p className="label semibold">{matchup.home.city}</p>
+                <p className="label small">{matchup.home.city}</p>
                 <p className="semibold">{matchup.home.name}</p>
               </Col>
             </Row>

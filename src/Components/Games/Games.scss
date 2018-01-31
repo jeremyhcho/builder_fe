@@ -44,6 +44,7 @@
 
   .day-wrapper {
     margin: 60px 0;
+    box-shadow: 0 6px 8px -6px var(--dark-gray);
 
     &:first-child {
       margin-top: 0;
@@ -59,6 +60,7 @@
       color: #FFF;
       background-color: var(--navy-blue);
       position: relative;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
 
       .card-info {
         padding-top: 20px;
