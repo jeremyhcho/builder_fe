@@ -73,10 +73,6 @@
       cursor: default;
       border-bottom: 1px solid var(--lightest-gray);
       transition: all 200ms ease;
-
-      &:hover {
-        border-bottom: 1px solid var(--dark-gray);
-      }
     }
 
     .stats-value {

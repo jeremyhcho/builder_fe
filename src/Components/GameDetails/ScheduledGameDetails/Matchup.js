@@ -52,7 +52,7 @@ const Matchup = ({ previousMeetings, summary }) => {
           <MatchupKeyStats />
         </Col>
 
-        <Col xs={12}>
+        <Col xs={12} style={{ marginBottom: '50px' }}>
           <MatchupGraph />
         </Col>
       </Row>

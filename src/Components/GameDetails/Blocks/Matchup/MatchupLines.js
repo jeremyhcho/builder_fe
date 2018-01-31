@@ -31,7 +31,7 @@ class MatchupLines extends React.Component {
   render () {
     const { lines, matchup } = this.props
 
-    if (!lines) {
+    if (!lines || !Object.keys(matchup).length) {
       return <OverviewSpinner label='Vegas Lines' />
     }
 

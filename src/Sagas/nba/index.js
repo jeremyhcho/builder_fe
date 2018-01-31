@@ -15,7 +15,8 @@ import {
 function* callFetchInitialPredictions ({ response }) {
   try {
     const selectedModel = response.find(model => model.status === 'ACTIVE') || response[0]
-    yield put(fetchNBAPredictions(selectedModel.id))
+    console.log('FETCHING INITLA PREDICTION WITH, ', selectedModel)
+    yield put(fetchNBAPredictions(selectedModel.model.id))
   } catch (error) {
     console.error('Failed to fetch nba initial predictions', error)
   }
