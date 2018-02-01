@@ -19,7 +19,7 @@ const ModelInfo = ({ changeInput, name, status, changeStatus }) => {
     <div styleName="model-info-container">
       <Row middle='xs' styleName="model-info">
         <Col xs={2}>
-          <p className="semibold">Model Name</p>
+          <p>Model Name</p>
         </Col>
         <Col>
           <Input
@@ -34,7 +34,7 @@ const ModelInfo = ({ changeInput, name, status, changeStatus }) => {
 
       <Row middle='xs' styleName="model-info">
         <Col xs={2}>
-          <p className="semibold">Status</p>
+          <p>Status</p>
         </Col>
         <Col>
           <Toggle checked={checked} onChange={changeStatus} />

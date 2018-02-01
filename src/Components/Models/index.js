@@ -17,7 +17,7 @@ import { fetchNBAModels } from 'Actions'
 
 class Models extends React.Component {
   state = {
-    modalOpen: false
+    modalOpen: true
   }
 
   componentDidMount () {

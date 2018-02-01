@@ -21,7 +21,7 @@ class Specs extends React.Component {
           Object.keys(specs).map(stat => (
             <Row key={stat} styleName="slider-container" middle='xs'>
               <Col xs={3}>
-                <p className="semibold">{this.nameToLabel(stat)}</p>
+                <p>{this.nameToLabel(stat)}</p>
               </Col>
               <Col xs={9} style={{ paddingRight: '35px' }}>
                 <Slider

@@ -3,11 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Components
-import ModalStep from './ModalStep'
 import ModelType from './ModelType'
 import ModelInfo from './ModelInfo'
 import Specs from './Specs'
-import { Button, Modal, Spinner } from 'Components/Common'
+import {
+  Button,
+  Modal,
+  Spinner,
+  Stepper
+} from 'Components/Common'
 
 // CSS
 import './CreateModel.scss'
@@ -15,7 +19,7 @@ import './CreateModel.scss'
 // Actions
 import { createNBAModel } from 'Actions'
 
-const stepList = ['Model type', 'Model information', 'Model specs']
+const stepList = ['Type', 'Details', 'Specs']
 
 class CreateModel extends React.Component {
   state = {
@@ -96,8 +100,6 @@ class CreateModel extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-
-  // model view change handlers
   handleNext = () => {
     this.setState({ step: this.state.step + 1 })
   }
@@ -123,17 +125,10 @@ class CreateModel extends React.Component {
     }
     if (step === 0) {
       return [
-        <Button
-          key="close"
-          onClick={toggle}
-          flat
-        >
+        <Button key="close" onClick={toggle} flat>
           Close
         </Button>,
-        <Button
-          onClick={this.handleNext}
-          key="next"
-        >
+        <Button onClick={this.handleNext} key="next">
           Next
         </Button>
       ]
@@ -141,17 +136,10 @@ class CreateModel extends React.Component {
     if (step === stepList.length - 1) {
       return [
         [
-          <Button
-            onClick={this.handleBack}
-            key="back"
-            flat
-          >
+          <Button onClick={this.handleBack} key="back" flat>
             Back
           </Button>,
-          <Button
-            onClick={this.createModel}
-            key="create"
-          >
+          <Button onClick={this.createModel}key="create">
             Create
           </Button>
         ]
@@ -159,21 +147,24 @@ class CreateModel extends React.Component {
     }
     return [
       [
-        <Button
-          onClick={this.handleBack}
-          key="back"
-          flat
-        >
+        <Button onClick={this.handleBack} key="back" flat>
           Back
         </Button>,
-        <Button
-          onClick={this.handleNext}
-          key="next"
-        >
+        <Button onClick={this.handleNext} key="next">
           Next
         </Button>
       ]
     ]
+  }
+
+  renderStepDescription () {
+    const stepDescriptions = [
+      'Select the type of model you want to create',
+      'Choose a name and the current status for this model',
+      'Use the sliders to customize your model specs'
+    ]
+
+    return stepDescriptions[this.state.step]
   }
 
   renderModalView () {
@@ -194,6 +185,7 @@ class CreateModel extends React.Component {
   render () {
     const { toggle, isOpen } = this.props
     const { step } = this.state
+
     return (
       <Modal
         header="Create Model"
@@ -203,11 +195,18 @@ class CreateModel extends React.Component {
         wrapperStyle={{ minWidth: '800px' }}
       >
         <div styleName="modal-body">
-          <ModalStep
-            changeStep={this.changeStep}
-            currentStep={step}
-            steps={stepList}
-          />
+          <div style={{ textAlign: 'center' }}>
+            <Stepper
+              steps={stepList}
+              activeStep={step}
+              onClick={this.changeStep}
+            />
+
+            <p className="label" style={{ marginTop: '10px' }}>
+              {this.renderStepDescription()}
+            </p>
+          </div>
+
           {this.renderModalView()}
         </div>
       </Modal>

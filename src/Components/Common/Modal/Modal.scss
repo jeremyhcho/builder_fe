@@ -29,6 +29,7 @@
     box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.1);
     min-height: 335px;
     min-width: 335px;
+    border-radius: var(--border-radius);
 
     hr {
       // ignore padding on parent div
@@ -47,6 +48,7 @@
       background-color: #fff;
       color: var(--font-color);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 3px 3px 0 0;
 
       .title {
         word-wrap: break-word;
