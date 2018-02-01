@@ -44,7 +44,7 @@ class Stepper extends React.Component {
                 <div
                   styleName={stepContainer}
                   key={step}
-                  onClick={() => onClick(i)}
+                  onClick={onClick ? () => onClick(i) : null}
                 >
                   <div styleName={stepStyle}>
                     <p className="small">{i + 1}</p>

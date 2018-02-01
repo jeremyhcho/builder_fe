@@ -45,7 +45,9 @@ class CreatePayment extends React.Component {
         wrapperStyle={{ width: '600px' }}
       >
         <div>
-          <p style={{ textAlign: 'center', margin: '25px 0' }}>Create a payment method subscribed for the {this.props.plan}</p>
+          <p style={{ textAlign: 'center', margin: '25px 0' }}>
+            Create a payment method subscribed for the {this.props.plan}
+          </p>
           <PaymentForm userId={this.props.userId} />
         </div>
       </Modal>

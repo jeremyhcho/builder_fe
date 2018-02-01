@@ -1,54 +1,71 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import { reduxForm, Field } from 'redux-form'
 
 // Components
-import { Input, Toggle } from 'Components/Common'
+import { FieldInput, FieldToggle, Button } from 'Components/Common'
 
 // CSS
 import './CreateModel.scss'
 
-const ModelInfo = ({ changeInput, name, status, changeStatus }) => {
-  let checked
-  if (status === 'ACTIVE') {
-    checked = true
-  } else {
-    checked = false
-  }
+// Helpers
+import { presence, maxChar } from 'Helpers/Validators'
+
+const maxChar20 = maxChar(20)
+
+const ModelInfo = ({ handleNext, handleSubmit, handleBack }) => {
   return (
     <div styleName="model-info-container">
-      <Row middle='xs' styleName="model-info">
-        <Col xs={2}>
-          <p>Model Name</p>
-        </Col>
-        <Col>
-          <Input
-            type="text"
-            placeholder="Enter Model Name"
-            value={name}
-            name="name"
-            onChange={changeInput}
-          />
-        </Col>
-      </Row>
+      <form onSubmit={handleSubmit(handleNext)}>
+        <Row styleName="model-info">
+          <Col xs={2}>
+            <p style={{ padding: '30px 0' }}>Model Name</p>
+          </Col>
+          <Col>
+            <Field
+              name="Model name"
+              type="text"
+              component={FieldInput}
+              placeholder="Enter Model Name"
+              validate={[presence, maxChar20]}
+            />
+          </Col>
+        </Row>
 
-      <Row middle='xs' styleName="model-info">
-        <Col xs={2}>
-          <p>Status</p>
-        </Col>
-        <Col>
-          <Toggle checked={checked} onChange={changeStatus} />
-        </Col>
-      </Row>
+        <Row styleName="model-info">
+          <Col xs={2}>
+            <p style={{ padding: '23px 0' }}>Status</p>
+          </Col>
+          <Col style={{ marginTop: '20px' }}>
+            <Field
+              name="status"
+              component={FieldToggle}
+            />
+          </Col>
+        </Row>
+
+        <div styleName="buttons">
+          <Button onClick={handleBack} flat>
+            Back
+          </Button>
+          <Button type="submit">
+            Next
+          </Button>
+        </div>
+      </form>
     </div>
   )
 }
 
 ModelInfo.propTypes = {
-  name: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-  changeInput: PropTypes.func.isRequired,
-  changeStatus: PropTypes.func.isRequired
+  handleBack: PropTypes.func.isRequired,
+  handleNext: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
-export default ModelInfo
+export default reduxForm({
+  form: 'model',
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true,
+})(ModelInfo)

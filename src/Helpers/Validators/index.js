@@ -6,6 +6,10 @@ export const minChar = (length) => (value, form, input, name) => {
   return value && value.length < length ? `${name} must be ${length} characters or more` : null
 }
 
+export const maxChar = (length) => (value, form, input, name) => {
+  return value && value.length > length ? `${name} cannot be greater than ${length} characters` : null
+}
+
 export const email = (value) => {
   const emailRe = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   if (emailRe.test(value)) return null

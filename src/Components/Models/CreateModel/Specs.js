@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import { reduxForm } from 'redux-form'
 
 // Components
 import { Slider } from 'Components/Common'
@@ -46,4 +47,8 @@ Specs.propTypes = {
   changeSpecs: PropTypes.func.isRequired
 }
 
-export default Specs
+export default reduxForm({
+  form: 'model',
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true
+})(Specs)
