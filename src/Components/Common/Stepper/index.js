@@ -22,29 +22,40 @@ class Stepper extends React.Component {
 
   render () {
     const { currentStep } = this.state
-    const { steps, wrapperStyle } = this.props
+    const { steps, wrapperStyle, onClick } = this.props
     return (
       <div styleName="stepper" style={wrapperStyle}>
         <div styleName="stepper-container">
           {
             steps.map((step, i) => {
+              const stepContainer = classNames('step-container', {
+                clickable: onClick !== null
+              })
+
               const stepStyle = classNames('step', {
                 selected: i === currentStep
               })
 
               const labelStyle = classNames('step-label', {
-                selected: i === currentStep,
-                last: i === steps.length - 1
+                selected: i === currentStep
               })
 
               return (
-                <div className='flex' style={{ paddingRight: '48px' }} key={step}>
+                <div
+                  styleName={stepContainer}
+                  key={step}
+                  onClick={() => onClick(i)}
+                >
                   <div styleName={stepStyle}>
                     <p className="small">{i + 1}</p>
                   </div>
                   <div styleName={labelStyle}>
                     <p>{step}</p>
                   </div>
+                  {
+                    i !== steps.length - 1 &&
+                    <div styleName="line" />
+                  }
                 </div>
               )
             })
@@ -57,12 +68,14 @@ class Stepper extends React.Component {
 
 Stepper.defaultProps = {
   wrapperStyle: {},
+  onClick: null
 }
 
 Stepper.propTypes = {
   steps: PropTypes.array.isRequired,
   activeStep: PropTypes.number.isRequired,
-  wrapperStyle: PropTypes.object
+  wrapperStyle: PropTypes.object,
+  onClick: PropTypes.func
 }
 
 export default Stepper
