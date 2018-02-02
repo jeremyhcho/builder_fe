@@ -1,0 +1,28 @@
+.view-model {
+  .model-summary {
+    .summary-block {
+      width: 100px;
+      height: 100px;
+      background-color: var(--light-gray);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: var(--border-radius);
+    }
+  }
+
+  .model-history {
+    .checkboxes {
+
+    }
+
+    .predictions {
+      
+    }
+  }
+
+  .view-label {
+    margin: 10px 0 10px 5px;
+  }
+}

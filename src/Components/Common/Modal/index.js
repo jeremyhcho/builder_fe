@@ -30,6 +30,7 @@ class Modal extends React.Component {
       footer,
       // isOpen,
       modal,
+      headerIcon: HeaderIcon,
       wrapperStyle,
       bodyStyle,
       footerStyle
@@ -45,7 +46,14 @@ class Modal extends React.Component {
       >
         <div styleName="modal-container" style={wrapperStyle} ref={ref => this.content = ref}>
           <div styleName="header">
-            <h1 className='semibold' styleName="title">{header}</h1>
+            <div className="flex">
+              {
+                HeaderIcon ? (
+                  <HeaderIcon width={30} height={30} style={{ marginRight: '10px' }} />
+                ) : null
+              }
+              <h1 className='semibold' styleName="title">{header}</h1>
+            </div>
             <button
               type="button"
               styleName="exit-button"
@@ -82,6 +90,7 @@ class Modal extends React.Component {
 
 Modal.defaultProps = {
   header: '',
+  headerIcon: null,
   children: null,
   footer: [],
   modal: true,
@@ -92,6 +101,7 @@ Modal.defaultProps = {
 
 Modal.propTypes = {
   header: PropTypes.string,
+  headerIcon: PropTypes.func,
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.node,

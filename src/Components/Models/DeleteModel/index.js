@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 // Components
 import { Modal, Button } from 'Components/Common'
 
+// Icons
+import ErrorIcon from 'Assets/Icons/error.svg'
+
 // Actions
 import { removeNBAModel } from 'Actions'
 
@@ -60,7 +63,8 @@ class DeleteModel extends React.Component {
 
     return (
       <Modal
-        header="Delete model"
+        header="Delete Model"
+        headerIcon={ErrorIcon}
         isOpen={isOpen}
         toggle={toggle}
         footer={this.renderFooter()}
@@ -70,7 +74,10 @@ class DeleteModel extends React.Component {
           <p>
             Deleting {model.type} model: <span className="semibold">{model.name}</span>
           </p>
-          <p className="small">Warning: A deleted model cannot be restored and all its predictions will be lost.</p>
+          <p className="small">
+            <span style={{ color: 'var(--red)' }}>Warning</span>
+            : A deleted model cannot be restored and all its predictions will be lost.
+          </p>
         </div>
       </Modal>
     )

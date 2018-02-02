@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import { Card, Toggle, Tooltip } from 'Components/Common'
 import CreateModel from './CreateModel'
 import DeleteModel from './DeleteModel'
+import ViewModel from './ViewModel'
 import View from 'Assets/Icons/models/eye-17.svg'
 import Edit from 'Assets/Icons/models/pen-01.svg'
 import Delete from 'Assets/Icons/models/trash.svg'
@@ -44,7 +45,8 @@ class ModelCard extends React.Component {
   state = {
     hovered: false,
     editModel: false,
-    deleteModel: false
+    deleteModel: false,
+    viewModel: false
   }
 
   handleEnter = () => {
@@ -80,6 +82,10 @@ class ModelCard extends React.Component {
     this.setState({ deleteModel: !this.state.deleteModel })
   }
 
+  toggleViewModal = () => {
+    this.setState({ viewModel: !this.state.viewModel })
+  }
+
   checkModelStatus () {
     if (this.props.model.status === 'ACTIVE') {
       return true
@@ -92,7 +98,7 @@ class ModelCard extends React.Component {
       show: this.state.hovered
     })
     const { model } = this.props
-    const { editModel, deleteModel } = this.state
+    const { editModel, deleteModel, viewModel } = this.state
 
     return (
       <div styleName={overlayStyles}>
@@ -104,10 +110,18 @@ class ModelCard extends React.Component {
               onChange={this.toggleStatus}
             />
           </div>
-          <div styleName="buttons" onClick={this.viewModel} data-tip-for={`view-${model.id}`}>
+          <div styleName="buttons" onClick={this.toggleViewModal} data-tip-for={`view-${model.id}`}>
             <View />
             <Tooltip id={`view-${model.id}`} pos='top'>View</Tooltip>
           </div>
+          {
+            viewModel &&
+            <ViewModel
+              isOpen
+              toggle={this.toggleViewModal}
+              model={model}
+            />
+          }
           <div styleName="buttons" onClick={this.toggleModal} data-tip-for={`edit-${model.id}`}>
             <Edit />
             <Tooltip id={`edit-${model.id}`} pos='top'>Edit</Tooltip>
