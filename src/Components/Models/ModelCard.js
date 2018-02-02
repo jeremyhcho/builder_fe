@@ -7,7 +7,7 @@ import classNames from 'classnames'
 
 // Components
 import { Card, Toggle, Tooltip } from 'Components/Common'
-import EditModel from './EditModel'
+import CreateModel from './CreateModel'
 import View from 'Assets/Icons/models/eye-17.svg'
 import Edit from 'Assets/Icons/models/pen-01.svg'
 import Delete from 'Assets/Icons/models/trash.svg'
@@ -112,7 +112,7 @@ class ModelCard extends React.Component {
           </div>
           {
             modalOpen &&
-            <EditModel
+            <CreateModel
               isOpen
               toggle={this.toggleModal}
               model={model}
@@ -139,6 +139,7 @@ class ModelCard extends React.Component {
     const upperStyle = classNames('upper', {
       disabled: !this.checkModelStatus()
     })
+
     return (
       <div styleName="model-card" onMouseOver={this.handleEnter} onMouseLeave={this.handleLeave}>
         <Card

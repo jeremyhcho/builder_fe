@@ -65,20 +65,24 @@ class ModelType extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.props.handleSubmit}>
-        <div styleName="model-type-container">
-          {this.renderModelIcons()}
-
-          <div styleName="buttons">
-            <Button onClick={this.props.handleClose} flat>
-              Close
-            </Button>
-            <Button type="submit">
-              Next
-            </Button>
+      <div styleName="model-type-container">
+        <form onSubmit={this.props.handleSubmit}>
+          <div styleName="model-types">
+            {this.renderModelIcons()}
           </div>
-        </div>
-      </form>
+
+          <div styleName="footer">
+            <div styleName="buttons">
+              <Button onClick={this.props.handleClose} flat>
+                Close
+              </Button>
+              <Button type="submit">
+                Next
+              </Button>
+            </div>
+          </div>
+        </form>
+      </div>
     )
   }
 }

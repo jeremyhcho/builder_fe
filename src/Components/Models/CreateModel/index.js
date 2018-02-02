@@ -16,7 +16,7 @@ import {
 import './CreateModel.scss'
 
 // Actions
-import { createNBAModel } from 'Actions'
+import { createNBAModel, updateNBAModel } from 'Actions'
 
 // Helpers
 import modelValidate from './modelValidate'
@@ -28,8 +28,42 @@ class CreateModel extends React.Component {
     step: 0,
   }
 
+  componentWillMount () {
+    const { model, initialize } = this.props
+
+    if (model) {
+      initialize({
+        type: model.type,
+        specs: model.specs,
+        Name: model.name,
+        status: model.status === 'ACTIVE'
+      })
+    } else {
+      initialize({
+        type: 'standard',
+        status: true,
+        specs: {
+          field_goals_made: 5,
+          three_points_made: 5,
+          field_goals_pct: 5,
+          offensive_rebounds: 5,
+          assists: 5,
+          turnovers: 5,
+          offensive_points_per_possession: 5,
+          defensive_points_per_possession: 5,
+          offensive_rating: 5,
+          defensive_rating: 5
+        }
+      })
+    }
+  }
+
   componentWillReceiveProps (newProps) {
     if (!newProps.creatingModel && this.props.creatingModel) {
+      this.props.toggle()
+    }
+
+    if (!newProps.updatingModel && this.props.updatingModel) {
       this.props.toggle()
     }
   }
@@ -44,6 +78,16 @@ class CreateModel extends React.Component {
       name: Name,
       specs,
       status: this.getModelStatus(status)
+    })
+  }
+
+  editModel = ({ Name, specs, status }) => {
+    this.props.updateNBAModel(this.props.model.id, {
+      model: {
+        name: Name,
+        specs,
+        status: this.getModelStatus(status)
+      }
     })
   }
 
@@ -80,23 +124,24 @@ class CreateModel extends React.Component {
         handleBack={this.handleBack}
       />,
       <Specs
+        model={this.props.model}
         handleBack={this.handleBack}
-        onSubmit={this.createModel}
+        onSubmit={this.props.model ? this.editModel : this.createModel}
       />
     ]
     return modelViews[this.state.step]
   }
 
   render () {
-    const { toggle, isOpen } = this.props
+    const { toggle, isOpen, model } = this.props
     const { step } = this.state
 
     return (
       <Modal
-        header="Create Model"
+        header={model ? 'Edit Model' : 'Create Model'}
         toggle={toggle}
         isOpen={isOpen}
-        bodyStyle={{ height: '350px', marginBottom: '40px' }}
+        bodyStyle={{ height: '420px', paddingBottom: '60px', overflow: 'hidden' }}
         wrapperStyle={{ minWidth: '800px' }}
       >
         <div styleName="modal-body">
@@ -119,22 +164,30 @@ class CreateModel extends React.Component {
 }
 
 CreateModel.defaultProps = {
-  creatingModel: false
+  creatingModel: false,
+  updatingModel: false,
+  model: null
 }
 
 CreateModel.propTypes = {
   toggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   createNBAModel: PropTypes.func.isRequired,
-  creatingModel: PropTypes.bool
+  updateNBAModel: PropTypes.func.isRequired,
+  creatingModel: PropTypes.bool,
+  updatingModel: PropTypes.bool,
+  model: PropTypes.object,
+  initialize: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
   creatingModel: routines.callingApi.CREATE_NBA_MODEL,
+  updatingModel: routines.callingApi.UPDATE_NBA_MODEL
 })
 
 const mapDispatchToProps = {
-  createNBAModel
+  createNBAModel,
+  updateNBAModel
 }
 
 export default connect(
@@ -142,21 +195,5 @@ export default connect(
   mapDispatchToProps
 )(reduxForm({
   form: 'model',
-  initialValues: {
-    type: 'standard',
-    status: true,
-    specs: {
-      field_goals_made: 5,
-      three_points_made: 5,
-      field_goals_pct: 5,
-      offensive_rebounds: 5,
-      assists: 5,
-      turnovers: 5,
-      offensive_points_per_possession: 5,
-      defensive_points_per_possession: 5,
-      offensive_rating: 5,
-      defensive_rating: 5
-    }
-  },
   validate: modelValidate
 })(CreateModel))

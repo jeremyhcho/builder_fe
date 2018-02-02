@@ -49,48 +49,71 @@ class Specs extends React.Component {
     return null
   }
 
+  renderButtons () {
+    if (this.props.creatingModel || this.props.updatingModel) {
+      return (
+        [
+          <Button disabled key="back">
+            Back
+          </Button>,
+          <Button key="loading" type="button" loading />
+        ]
+      )
+    }
+
+    return (
+      [
+        <Button key="back" onClick={this.props.handleBack} flat>
+          Back
+        </Button>,
+        <Button key="submit" type="submit">
+          Submit
+        </Button>
+      ]
+    )
+  }
+
   render () {
-    const { handleBack, handleSubmit, specs } = this.props
+    const { handleSubmit, specs } = this.props
 
     const specsTotal = Object.values(specs)
       .reduce((total, value) => parseInt(total, 10) + parseInt(value, 10))
 
     return (
-      <div styleName="specs">
+      <div styleName="specs-container">
         <form onSubmit={handleSubmit}>
-          {
-            specsKeys.map(stat => (
-              <Row key={stat} styleName="slider-container" middle='xs'>
-                <Col xs={3}>
-                  <p>{nbaFlatStat(stat).full}</p>
-                </Col>
-                <Col xs={9} style={{ paddingRight: '35px' }}>
-                  <Field
-                    name={`specs.${stat}`}
-                    component={FieldSlider}
-                    min={0}
-                    max={10}
-                    showInputControl
-                  />
-                </Col>
-              </Row>
-            ))
-          }
-
-          <div styleName="total-specs">
-            <p>
-              Your model has a spread of <span className="semibold">{specsTotal}</span> total points
-            </p>
-            {this.getSpecsDifference(specsTotal)}
+          <div styleName="specs">
+            {
+              specsKeys.map(stat => (
+                <Row key={stat} styleName="slider-container" middle='xs'>
+                  <Col xs={3}>
+                    <p>{nbaFlatStat(stat).full}</p>
+                  </Col>
+                  <Col xs={9} style={{ paddingRight: '35px' }}>
+                    <Field
+                      name={`specs.${stat}`}
+                      component={FieldSlider}
+                      min={0}
+                      max={10}
+                      showInputControl
+                    />
+                  </Col>
+                </Row>
+              ))
+            }
           </div>
 
-          <div styleName="buttons">
-            <Button onClick={handleBack} flat>
-              Back
-            </Button>
-            <Button type="submit">
-              Submit
-            </Button>
+          <div styleName="footer">
+            <div styleName="buttons">
+              {this.renderButtons()}
+            </div>
+
+            <div styleName="total-specs">
+              <p>
+                Your model has a spread of <span className="semibold">{specsTotal}</span> total points
+              </p>
+              {this.getSpecsDifference(specsTotal)}
+            </div>
           </div>
         </form>
       </div>
@@ -99,17 +122,23 @@ class Specs extends React.Component {
 }
 
 Specs.defaultProps = {
-  specs: {}
+  specs: {},
+  creatingModel: false,
+  updatingModel: false
 }
 
 Specs.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleBack: PropTypes.func.isRequired,
-  specs: PropTypes.object
+  specs: PropTypes.object,
+  creatingModel: PropTypes.bool,
+  updatingModel: PropTypes.bool
 }
 
-const mapStateToProps = ({ ...state }) => ({
-  specs: selector(state, 'specs')
+const mapStateToProps = ({ ...state, routines }) => ({
+  specs: selector(state, 'specs'),
+  creatingModel: routines.callingApi.CREATE_NBA_MODEL,
+  updatingModel: routines.callingApi.UPDATE_NBA_MODEL
 })
 
 export default connect(

@@ -19,40 +19,44 @@ const ModelInfo = ({ handleSubmit, handleBack }) => {
   return (
     <div styleName="model-info-container">
       <form onSubmit={handleSubmit}>
-        <Row styleName="model-info">
-          <Col xs={2}>
-            <p style={{ padding: '30px 0' }}>Model Name</p>
-          </Col>
-          <Col>
-            <Field
-              name="Name"
-              type="text"
-              component={FieldInput}
-              placeholder="Enter Model Name"
-              validate={[presence, maxChar20]}
-            />
-          </Col>
-        </Row>
+        <div styleName="model-info">
+          <Row styleName="info-row">
+            <Col xs={2}>
+              <p style={{ padding: '30px 0' }}>Model Name</p>
+            </Col>
+            <Col>
+              <Field
+                name="Name"
+                type="text"
+                component={FieldInput}
+                placeholder="Enter Model Name"
+                validate={[presence, maxChar20]}
+              />
+            </Col>
+          </Row>
 
-        <Row styleName="model-info">
-          <Col xs={2}>
-            <p style={{ padding: '23px 0' }}>Status</p>
-          </Col>
-          <Col style={{ marginTop: '20px' }}>
-            <Field
-              name="status"
-              component={FieldToggle}
-            />
-          </Col>
-        </Row>
+          <Row styleName="info-row">
+            <Col xs={2}>
+              <p style={{ padding: '23px 0' }}>Status</p>
+            </Col>
+            <Col style={{ marginTop: '20px' }}>
+              <Field
+                name="status"
+                component={FieldToggle}
+              />
+            </Col>
+          </Row>
+        </div>
 
-        <div styleName="buttons">
-          <Button onClick={handleBack} flat>
-            Back
-          </Button>
-          <Button type="submit">
-            Next
-          </Button>
+        <div styleName="footer">
+          <div styleName="buttons">
+            <Button onClick={handleBack} flat>
+              Back
+            </Button>
+            <Button type="submit">
+              Next
+            </Button>
+          </div>
         </div>
       </form>
     </div>

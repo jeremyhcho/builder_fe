@@ -17,7 +17,7 @@ import { fetchNBAModels } from 'Actions'
 
 class Models extends React.Component {
   state = {
-    modalOpen: true
+    modalOpen: false
   }
 
   componentDidMount () {
@@ -40,9 +40,9 @@ class Models extends React.Component {
   }
 
   renderModels () {
-    const { modelList } = this.props
+    const { models } = this.props
 
-    if (!modelList.length) {
+    if (!models.length) {
       return (
         <Row style={{ position: 'relative', height: '100%' }}>
           <div styleName="model-overlay">
@@ -64,7 +64,7 @@ class Models extends React.Component {
     return (
       <div styleName="model-list">
         {
-          modelList.map((model, index) => (
+          models.reverse().map((model, index) => (
             <ModelCard
               key={model.id}
               model={model}
@@ -78,9 +78,9 @@ class Models extends React.Component {
 
   render () {
     const { modalOpen } = this.state
-    const { fetchingModels, modelList } = this.props
+    const { fetchingModels, models } = this.props
 
-    if (fetchingModels || !modelList) {
+    if (fetchingModels || !models) {
       return (
         <div className="loader">
           <Spinner lg show />
@@ -121,18 +121,18 @@ class Models extends React.Component {
 }
 
 Models.defaultProps = {
-  modelList: null,
+  models: null,
   fetchingModels: false
 }
 
 Models.propTypes = {
-  modelList: PropTypes.array,
+  models: PropTypes.array,
   fetchNBAModels: PropTypes.func.isRequired,
   fetchingModels: PropTypes.bool,
 }
 
 const mapStateToProps = ({ routines }) => ({
-  modelList: routines.nba.models,
+  models: routines.nba.models,
   fetchingModels: routines.callingApi.FETCH_NBA_MODELS
 })
 

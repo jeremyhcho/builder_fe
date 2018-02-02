@@ -29,9 +29,10 @@ class Modal extends React.Component {
       children,
       footer,
       // isOpen,
-      wrapperStyle,
       modal,
-      bodyStyle
+      wrapperStyle,
+      bodyStyle,
+      footerStyle
       // ...props
     } = this.props
     const modalStyle = classNames('modal', {
@@ -66,9 +67,13 @@ class Modal extends React.Component {
             {children}
           </div>
 
-          <div styleName="footer">
-            {footer}
-          </div>
+          {
+            footer.length ? (
+              <div styleName="footer" style={{ ...footerStyle }}>
+                {footer}
+              </div>
+            ) : null
+          }
         </div>
       </div>
     )
@@ -79,9 +84,10 @@ Modal.defaultProps = {
   header: '',
   children: null,
   footer: [],
-  wrapperStyle: {},
   modal: true,
-  bodyStyle: {}
+  wrapperStyle: {},
+  bodyStyle: {},
+  footerStyle: {}
 }
 
 Modal.propTypes = {
@@ -90,9 +96,10 @@ Modal.propTypes = {
   toggle: PropTypes.func.isRequired,
   children: PropTypes.node,
   footer: PropTypes.array,
-  wrapperStyle: PropTypes.object,
   modal: PropTypes.bool,
-  bodyStyle: PropTypes.object
+  wrapperStyle: PropTypes.object,
+  bodyStyle: PropTypes.object,
+  footerStyle: PropTypes.object
   /* Forces user to use one of the actions in the modal,
   clicking outside the modal will not trigger the state of the modal */
 }
