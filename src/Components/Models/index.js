@@ -64,7 +64,7 @@ class Models extends React.Component {
     return (
       <div styleName="model-list">
         {
-          models.reverse().map((model, index) => (
+          models.sort((a, b) => a.id - b.id).map((model, index) => (
             <ModelCard
               key={model.id}
               model={model}

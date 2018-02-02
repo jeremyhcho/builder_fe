@@ -8,6 +8,7 @@ import classNames from 'classnames'
 // Components
 import { Card, Toggle, Tooltip } from 'Components/Common'
 import CreateModel from './CreateModel'
+import DeleteModel from './DeleteModel'
 import View from 'Assets/Icons/models/eye-17.svg'
 import Edit from 'Assets/Icons/models/pen-01.svg'
 import Delete from 'Assets/Icons/models/trash.svg'
@@ -16,7 +17,7 @@ import Delete from 'Assets/Icons/models/trash.svg'
 import './Models.scss'
 
 // Actions
-import { removeNBAModel, updateNBAModel } from 'Actions'
+import { updateNBAModel } from 'Actions'
 
 const fakeLabel = []
 for (let i = 0; i < 31; i++) {
@@ -42,7 +43,8 @@ const fakeData = {
 class ModelCard extends React.Component {
   state = {
     hovered: false,
-    modalOpen: false
+    editModel: false,
+    deleteModel: false
   }
 
   handleEnter = () => {
@@ -71,11 +73,11 @@ class ModelCard extends React.Component {
   }
 
   toggleModal = () => {
-    this.setState({ modalOpen: !this.state.modalOpen })
+    this.setState({ editModel: !this.state.editModel })
   }
 
-  deleteModel = () => {
-    this.props.removeNBAModel(this.props.model.id)
+  toggleDeleteModal = () => {
+    this.setState({ deleteModel: !this.state.deleteModel })
   }
 
   checkModelStatus () {
@@ -90,7 +92,7 @@ class ModelCard extends React.Component {
       show: this.state.hovered
     })
     const { model } = this.props
-    const { modalOpen } = this.state
+    const { editModel, deleteModel } = this.state
 
     return (
       <div styleName={overlayStyles}>
@@ -111,17 +113,25 @@ class ModelCard extends React.Component {
             <Tooltip id={`edit-${model.id}`} pos='top'>Edit</Tooltip>
           </div>
           {
-            modalOpen &&
+            editModel &&
             <CreateModel
               isOpen
               toggle={this.toggleModal}
               model={model}
             />
           }
-          <div styleName="buttons" onClick={this.deleteModel} data-tip-for={`delete-${model.id}`}>
+          <div styleName="buttons" onClick={this.toggleDeleteModal} data-tip-for={`delete-${model.id}`}>
             <Delete />
             <Tooltip id={`delete-${model.id}`} pos='top'>Delete</Tooltip>
           </div>
+          {
+            deleteModel &&
+            <DeleteModel
+              isOpen
+              toggle={this.toggleDeleteModal}
+              model={model}
+            />
+          }
         </div>
       </div>
     )
@@ -209,13 +219,11 @@ class ModelCard extends React.Component {
 
 ModelCard.propTypes = {
   model: PropTypes.object.isRequired,
-  removeNBAModel: PropTypes.func.isRequired,
   updateNBAModel: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired
 }
 
 const mapDispatchToProps = {
-  removeNBAModel,
   updateNBAModel
 }
 
