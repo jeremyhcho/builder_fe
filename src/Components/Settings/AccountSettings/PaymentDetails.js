@@ -38,7 +38,7 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
         </div>
 
         <div>
-          <p className="semibold">{card.name}</p>
+          <p>{card.name}</p>
         </div>
       </Row>
 
@@ -48,7 +48,7 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
         </div>
 
         <div>
-          <p className="semibold">{card.brand} ending in {card.last4}</p>
+          <p>{card.brand} ending in {card.last4}</p>
         </div>
       </Row>
 
@@ -58,7 +58,7 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
         </div>
 
         <div>
-          <p className="semibold">{convertToMonth(card.exp_month)}/{card.exp_year.toString().substr(2)}</p>
+          <p>{convertToMonth(card.exp_month)}/{card.exp_year.toString().substr(2)}</p>
         </div>
       </Row>
 
@@ -68,7 +68,7 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
         </div>
 
         <div styleName="col">
-          <p className="semibold">{renderPaymentDate()}</p>
+          <p>{renderPaymentDate()}</p>
         </div>
 
         <div style={{ marginLeft: 'auto', paddingRight: '25px' }}>
