@@ -1,20 +1,22 @@
 // Constants
 import { ROUTINE_INIT } from 'Constants'
 
-const typeErrorMessage = (input, inputType, expectedType) => {
-  return `Invalid type of ${typeof input} supplied to ${input}, expected ${expectedType}`
+const typeErrorMessage = (input, inputType, expectedType, prefix) => {
+  return `Invalid type of ${typeof input} supplied to ${input}, expected ${expectedType} in ${prefix}`
 }
 
-const routineErrors = (prefix, api, reducerKey, transform) => {
-  if (typeof prefix !== 'string') throw new TypeError(typeErrorMessage('prefix', prefix, 'string'))
-  if (typeof api !== 'function') throw new TypeError(typeErrorMessage('api', api, 'function'))
-  if (typeof reducerKey !== 'object') throw new TypeError(typeErrorMessage('reducerKey', reducerKey, 'object'))
+const routineErrors = (prefix, api, reducerKey, transform, onSuccess, onFail) => {
+  if (typeof prefix !== 'string') throw new TypeError(typeErrorMessage('prefix', prefix, 'string', prefix))
+  if (typeof api !== 'function') throw new TypeError(typeErrorMessage('api', api, 'function', prefix))
+  if (typeof reducerKey !== 'object') throw new TypeError(typeErrorMessage('reducerKey', reducerKey, 'object', prefix))
   if (!['string', 'function'].includes(typeof transform)) {
-    throw new TypeError(typeErrorMessage('transform', transform, 'string or function'))
+    throw new TypeError(typeErrorMessage('transform', transform, 'string or function', prefix))
   }
+  if (onSuccess && typeof onSucess !== 'object') throw new TypeError(typeErrorMessage('onSuccess', onSuccess, 'object', prefix))
+  if (onFail && typeof onFail !== 'object') throw new TypeError(typeErrorMessage('onFail', onFail, 'object', prefix))
 }
 
-const createRoutine = ({ prefix, api, reducerKey, transform }) => {
+const createRoutine = ({ prefix, api, reducerKey, transform, onSuccess, onFail }) => {
   routineErrors(prefix, api, reducerKey, transform)
 
   const actionTypes = {
@@ -31,7 +33,9 @@ const createRoutine = ({ prefix, api, reducerKey, transform }) => {
       api,
       reducerKey,
       transform,
-      payload
+      onSuccess,
+      onFail,
+      payload,
     })
   }
 }

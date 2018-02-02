@@ -3,6 +3,7 @@ import pathToRegexp from 'path-to-regexp'
 import gameDetails from './gameDetails'
 
 const initialState = {
+  auth: {},
   nba: {},
   callingApi: {},
   error: {}
@@ -42,7 +43,7 @@ const routines = (state = initialState, action) => {
         },
         error: {
           ...state.error,
-          [action.key.type]: false
+          [action.loaderKey]: false
         }
       }
     }
@@ -70,7 +71,7 @@ const routines = (state = initialState, action) => {
         },
         error: {
           ...state.error,
-          [action.key.type]: true
+          [action.loaderKey]: true
         }
       }
     }

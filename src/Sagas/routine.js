@@ -3,8 +3,15 @@ import { put, call, takeEvery, all } from 'redux-saga/effects'
 // Constants
 import { ROUTINE_INIT } from 'Constants'
 
-function* initializeRoutine ({ actionTypes, api, reducerKey, transform, payload }) {
-  // const loaderKey = `${api}`.slice(9, `${api}`.indexOf('('))
+function* initializeRoutine ({
+  actionTypes,
+  api,
+  reducerKey,
+  transform,
+  onSuccess,
+  onFail,
+  payload
+}) {
   const loaderKey = actionTypes.TRIGGER.slice(
     actionTypes.TRIGGER.lastIndexOf('/') + 1
   )
@@ -33,14 +40,22 @@ function* initializeRoutine ({ actionTypes, api, reducerKey, transform, payload 
       response: response.data,
       payload
     })
-  } catch ({ response }) {
+
+    if (onSuccess) {
+      yield put(onSuccess())
+    }
+  } catch (error) {
     yield put({
       type: actionTypes.FAIL,
       key: reducerKey,
       loaderKey,
-      response
+      error
     })
-    console.error(`${loaderKey} api call failed`, response)
+
+    if (onFail) {
+      yield put(onFail())
+    }
+    console.error(`${loaderKey} api call failed`, error)
   }
 }
 function* watchRoutineInit () {

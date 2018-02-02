@@ -7,6 +7,9 @@ import { Row } from 'react-styled-flexboxgrid'
 // Components
 import { Input, FieldInput, Button, Modal } from 'Components/Common'
 
+// Action
+import { changePassword } from 'Actions'
+
 // Validators
 import { minChar, presence, equality } from 'Helpers/Validators'
 
@@ -14,7 +17,7 @@ import { minChar, presence, equality } from 'Helpers/Validators'
 import './AccountSettings.scss'
 
 const minChar8 = minChar(8)
-const equalityPassword = equality('Current password')
+const equalityPassword = equality('New password')
 
 class AccountDetails extends React.Component {
   state = {
@@ -26,7 +29,14 @@ class AccountDetails extends React.Component {
   }
 
   submitPasswordChange = (form) => {
-    console.log(form)
+    const formFields = Object.keys(form)
+    const newPassword = form[formFields[1]]
+    const currentPassword = form[formFields[0]]
+
+    this.props.changePassword({
+      currentPassword,
+      newPassword
+    })
   }
 
   renderPasswordChange () {
@@ -48,15 +58,6 @@ class AccountDetails extends React.Component {
           <div style={{ padding: '25px 50px' }}>
             <Field
               type="password"
-              name="New password"
-              component={FieldInput}
-              placeholder="New password (Must be 8 characters)"
-              shouldFitContainer
-              validate={[presence, minChar8]}
-            />
-
-            <Field
-              type="password"
               name="Current password"
               component={FieldInput}
               placeholder="Current password"
@@ -66,10 +67,19 @@ class AccountDetails extends React.Component {
 
             <Field
               type="password"
+              name="New password"
+              component={FieldInput}
+              placeholder="New password (Must be 8 characters)"
+              shouldFitContainer
+              validate={[presence, minChar8]}
+            />
+
+            <Field
+              type="password"
               name="Password confirmation"
               component={FieldInput}
               shouldFitContainer
-              placeholder="Retype current password"
+              placeholder="Retype new password"
               validate={[presence, minChar8, equalityPassword]}
             />
           </div>
@@ -116,15 +126,21 @@ class AccountDetails extends React.Component {
 
 AccountDetails.propTypes = {
   email: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  changePassword: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   email: auth.authState.user.email
 })
 
+const mapDispatchToProps = {
+  changePassword
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(reduxForm({
   form: 'changePassword'
 })(AccountDetails))

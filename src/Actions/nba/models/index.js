@@ -1,5 +1,8 @@
 import createRoutine from 'Routines'
 
+// Actions
+import { openSnackbar } from 'Actions'
+
 // Apis
 import {
   getNBAModels,
@@ -33,7 +36,8 @@ export const createNBAModel = createRoutine({
     primaryKey: 'nba',
     type: 'models'
   },
-  transform: 'concat'
+  transform: 'concat',
+  onSuccess: () => openSnackbar('Model created', 3000)
 })
 
 export const removeNBAModel = createRoutine({
@@ -43,7 +47,8 @@ export const removeNBAModel = createRoutine({
     primaryKey: 'nba',
     type: 'models'
   },
-  transform: 'removeById'
+  transform: 'removeById',
+  onSuccess: () => openSnackbar('Model deleted', 3000)
 })
 
 export const updateNBAModel = createRoutine({
@@ -53,5 +58,6 @@ export const updateNBAModel = createRoutine({
     primaryKey: 'nba',
     type: 'models'
   },
-  transform: 'updateByIdAndReplace'
+  transform: 'updateByIdAndReplace',
+  onSuccess: () => openSnackbar('Model updated', 3000)
 })

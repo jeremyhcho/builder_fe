@@ -4,16 +4,12 @@ import { put, takeLatest, all } from 'redux-saga/effects'
 import {
   fetchNBAPredictions,
   fetchNBAMatchup,
-  openSnackbar
 } from 'Actions'
 
 import {
   FETCH_NBA_MATCHES_MODELS,
   FETCH_NBA_MATCHUP,
-  FETCH_NBA_PREVIOUS_MEETINGS,
-  DELETE_NBA_MODEL,
-  CREATE_NBA_MODEL,
-  UPDATE_NBA_MODEL
+  FETCH_NBA_PREVIOUS_MEETINGS
 } from 'Constants'
 
 function* callFetchInitialPredictions ({ response }) {
@@ -42,18 +38,6 @@ function* callFetchMatchup ({ response }) {
   }
 }
 
-function* callDeleteModelSnackbar () {
-  yield put(openSnackbar('Model deleted', 3000))
-}
-
-function* callCreateModelSnackbar () {
-  yield put(openSnackbar('Model created', 3000))
-}
-
-function* callUpdateModelSnackbar () {
-  yield put(openSnackbar('Model updated', 3000))
-}
-
 function* watchFetchMatchModels () {
   yield takeLatest(`${FETCH_NBA_MATCHES_MODELS}/SUCCESS`, callFetchInitialPredictions)
 }
@@ -62,24 +46,9 @@ function* watchFetchPreviousMeetings () {
   yield takeLatest(`${FETCH_NBA_PREVIOUS_MEETINGS}/SUCCESS`, callFetchMatchup)
 }
 
-function* watchDeleteModel () {
-  yield takeLatest(`${DELETE_NBA_MODEL}/SUCCESS`, callDeleteModelSnackbar)
-}
-
-function* watchCreateModel () {
-  yield takeLatest(`${CREATE_NBA_MODEL}/SUCCESS`, callCreateModelSnackbar)
-}
-
-function* watchUpdateModel () {
-  yield takeLatest(`${UPDATE_NBA_MODEL}/SUCCESS`, callUpdateModelSnackbar)
-}
-
 export default function* nbaSaga () {
   yield all([
     watchFetchMatchModels(),
-    watchFetchPreviousMeetings(),
-    watchDeleteModel(),
-    watchCreateModel(),
-    watchUpdateModel()
+    watchFetchPreviousMeetings()
   ])
 }

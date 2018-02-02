@@ -8,6 +8,13 @@ export const updateUser = (userId, params) => (
   axios.put(`/api/v1/users/${userId}`, params)
 )
 
+export const updatePassword = ({ currentPassword, newPassword }) => (
+  axios.post('/api/v1/users/change_password', {
+    current_password: currentPassword,
+    password: newPassword
+  })
+)
+
 export const sendRecoveryEmail = (email) => (
   axios.post('/api/v1/users/recover', { email })
 )
