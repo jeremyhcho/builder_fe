@@ -33,7 +33,7 @@ class ModelSummary extends React.Component {
           </div>
 
           <div styleName="summary-block">
-            <h4 className="semibold">4W-1L</h4>
+            <h4 className="semibold">4W - 1L</h4>
             <p className="label">Last 5</p>
           </div>
         </Row>

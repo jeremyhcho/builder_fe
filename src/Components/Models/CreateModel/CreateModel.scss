@@ -94,6 +94,7 @@
     .specs {
       height: calc(100% - 110px);
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .title {
