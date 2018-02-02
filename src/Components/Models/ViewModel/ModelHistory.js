@@ -5,9 +5,9 @@ import { Row } from 'react-styled-flexboxgrid'
 
 // Components
 import { Checkbox } from 'Components/Common'
+import ViewPredictions from './ViewPredictions'
 
 // Actions
-
 
 // CSS
 import './ViewModel.scss'
@@ -57,9 +57,7 @@ class ModelHistory extends React.Component {
           </Checkbox>
         </Row>
 
-        <Row styleName="predictions">
-          <div />
-        </Row>
+        <ViewPredictions />
       </div>
     )
   }

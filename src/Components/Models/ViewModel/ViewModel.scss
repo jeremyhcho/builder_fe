@@ -1,9 +1,12 @@
 .view-model {
+  width: 100%;
+
   .model-summary {
     .summary-block {
       width: 100px;
+      margin-right: 40px;
       height: 100px;
-      background-color: var(--light-gray);
+      background-color: var(--lightest-gray);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,8 +20,29 @@
 
     }
 
-    .predictions {
-      
+    .view-predictions {
+      margin-top: 20px;
+
+      .predictions {
+        height: 245px;
+        overflow-y: auto;
+        margin-top: 10px;
+
+        .prediction-label {
+
+        }
+
+        .prediction-values {
+          background-color: var(--lightest-gray);
+          border-radius: var(--border-radius);
+          padding: 10px 0;
+          margin: 10px 0;
+
+          &:first-child {
+            margin-top: 0px;
+          }
+        }
+      }
     }
   }
 

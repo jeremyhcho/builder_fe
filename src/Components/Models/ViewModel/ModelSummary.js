@@ -16,7 +16,7 @@ class ModelSummary extends React.Component {
           Summary
         </p>
 
-        <Row between='xs'>
+        <Row first='xs'>
           <div styleName="summary-block">
             <h4 className="semibold">20</h4>
             <p className="label">Wins</p>
