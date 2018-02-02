@@ -9,7 +9,7 @@ import notificationsReducer from './notifications'
 import snackBarReducer from './snackbar'
 import routines from './routines'
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth,
   nba: nbaReducer,
   router: routerReducer,
@@ -18,5 +18,15 @@ const rootReducer = combineReducers({
   snackbar: snackBarReducer,
   routines
 })
+
+const rootReducer = (state, action) => {
+  if (action.type === 'auth/LOGOUT') {
+    /* eslint-disable no-param-reassign */
+    state = undefined
+    /* eslint-enable no-param-reassign */
+  }
+
+  return appReducer(state, action)
+}
 
 export default rootReducer
