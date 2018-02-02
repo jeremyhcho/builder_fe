@@ -8,9 +8,7 @@ import ModelType from './ModelType'
 import ModelInfo from './ModelInfo'
 import Specs from './Specs'
 import {
-  // Button,
   Modal,
-  // Spinner,
   Stepper
 } from 'Components/Common'
 
@@ -20,85 +18,33 @@ import './CreateModel.scss'
 // Actions
 import { createNBAModel } from 'Actions'
 
+// Helpers
+import modelValidate from './modelValidate'
+
 const stepList = ['Type', 'Details', 'Specs']
 
 class CreateModel extends React.Component {
   state = {
     step: 0,
-    modelType: 'standard',
-    name: `Model_${Date.now().toString().slice(9)}`,
-    specs: {
-      field_goals_made: 10,
-      three_points_made: 10,
-      field_goals_pct: 10,
-      offensive_rebounds: 10,
-      assists: 10,
-      turnovers: 10,
-      fast_break_made: 10,
-      second_chance_made: 10,
-      offensive_points_per_possession: 10,
-      defensive_points_per_possession: 10,
-      offensive_rating: 10,
-      defensive_rating: 10
-    },
-    status: 'ACTIVE'
   }
 
   componentWillReceiveProps (newProps) {
-    if (!newProps.isOpen && this.props.isOpen) {
-      this.setState({
-        name: `Model_${Date.now().toString().slice(9)}`,
-        specs: {
-          field_goals_made: 10,
-          three_points_made: 10,
-          field_goals_pct: 10,
-          offensive_rebounds: 10,
-          assists: 10,
-          turnovers: 10,
-          fast_break_made: 10,
-          second_chance_made: 10,
-          offensive_points_per_possession: 10,
-          defensive_points_per_possession: 10,
-          offensive_rating: 10,
-          defensive_rating: 10
-        },
-        status: 'ACTIVE'
-      })
-    }
     if (!newProps.creatingModel && this.props.creatingModel) {
       this.props.toggle()
     }
   }
 
-  createModel = () => {
-    const name = this.state.name || `Model_${Date.now().toString().slice(9)}`
+  getModelStatus (status) {
+    if (status) return 'ACTIVE'
+    return 'INACTIVE'
+  }
+
+  createModel = ({ Name, specs, status }) => {
     this.props.createNBAModel({
-      model: {
-        name,
-        specs: this.state.specs,
-        status: this.state.status
-      }
+      name: Name,
+      specs,
+      status: this.getModelStatus(status)
     })
-  }
-
-  changeStatus = () => {
-    const { status } = this.state
-    if (status === 'ACTIVE') {
-      this.setState({ status: 'INACTIVE' })
-    } else {
-      this.setState({ status: 'ACTIVE' })
-    }
-  }
-
-  changeSpecs = (e) => {
-    const newSpecs = this.state.specs
-    newSpecs[e.target.name] = e.target.value
-
-    this.setState({ specs: newSpecs })
-  }
-
-  changeInput = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
   }
 
   handleNext = () => {
@@ -113,51 +59,6 @@ class CreateModel extends React.Component {
     this.setState({ step: stepIndex })
   }
 
-  // renderFooter () {
-  //   const { creatingModel, toggle } = this.props
-  //   const { step } = this.state
-  //   if (creatingModel) {
-  //     return [
-  //       <Button key="disabled" disabled>Back</Button>,
-  //       <Button key="spinner" style={{ padding: '0 20.3px' }}>
-  //         <Spinner xs show color="#fff" style={{ marginBottom: '3px' }} />
-  //       </Button>
-  //     ]
-  //   }
-  //   if (step === 0) {
-  //     return [
-  //       <Button key="close" onClick={toggle} flat>
-  //         Close
-  //       </Button>,
-  //       <Button key="next" onClick={this.handleNext}>
-  //         Next
-  //       </Button>
-  //     ]
-  //   }
-  //   if (step === stepList.length - 1) {
-  //     return [
-  //       [
-  //         <Button onClick={this.handleBack} key="back" flat>
-  //           Back
-  //         </Button>,
-  //         <Button onClick={this.createModel} key="create">
-  //           Create
-  //         </Button>
-  //       ]
-  //     ]
-  //   }
-  //   return [
-  //     [
-  //       <Button onClick={this.handleBack} key="back" flat>
-  //         Back
-  //       </Button>,
-  //       <Button onClick={this.handleNext} key="next">
-  //         Next
-  //       </Button>
-  //     ]
-  //   ]
-  // }
-
   renderStepDescription () {
     const stepDescriptions = [
       'Select the type of model you want to create',
@@ -169,25 +70,18 @@ class CreateModel extends React.Component {
   }
 
   renderModalView () {
-    const { specs, status, name } = this.state
     const modelViews = [
       <ModelType
-        handleNext={this.handleNext}
+        onSubmit={this.handleNext}
         handleClose={this.props.toggle}
       />,
       <ModelInfo
-        name={name}
-        changeInput={this.changeInput}
-        changeStatus={this.changeStatus}
-        status={status}
-        handleNext={this.handleNext}
+        onSubmit={this.handleNext}
         handleBack={this.handleBack}
       />,
       <Specs
         handleBack={this.handleBack}
-        createModel={this.createModel}
-        specs={specs}
-        changeSpecs={this.changeSpecs}
+        onSubmit={this.createModel}
       />
     ]
     return modelViews[this.state.step]
@@ -202,7 +96,7 @@ class CreateModel extends React.Component {
         header="Create Model"
         toggle={toggle}
         isOpen={isOpen}
-        height={350}
+        bodyStyle={{ height: '350px', marginBottom: '40px' }}
         wrapperStyle={{ minWidth: '800px' }}
       >
         <div styleName="modal-body">
@@ -236,7 +130,7 @@ CreateModel.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  creatingModel: routines.callingApi.CREATE_NBA_MODEL
+  creatingModel: routines.callingApi.CREATE_NBA_MODEL,
 })
 
 const mapDispatchToProps = {
@@ -258,12 +152,11 @@ export default connect(
       offensive_rebounds: 5,
       assists: 5,
       turnovers: 5,
-      fast_break_made: 5,
-      second_chance_made: 5,
       offensive_points_per_possession: 5,
       defensive_points_per_possession: 5,
       offensive_rating: 5,
       defensive_rating: 5
     }
-  }
+  },
+  validate: modelValidate
 })(CreateModel))

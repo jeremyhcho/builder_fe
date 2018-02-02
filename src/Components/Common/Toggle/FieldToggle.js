@@ -3,17 +3,14 @@ import PropTypes from 'prop-types'
 
 import Toggle from './Toggle'
 
-class FieldToggle extends React.Component {
-  render () {
-    const { input } = this.props
-
-    return (
-      <Toggle checked={input.value} onChange={input.onChange} />
-    )
-  }
+const FieldToggle = ({ input: { value, onChange, ...rest } }) => {
+  return (
+    <Toggle checked={value} onChange={onChange} {...rest} />
+  )
 }
 
 FieldToggle.propTypes = {
+  meta: PropTypes.object.isRequired,
   input: PropTypes.object.isRequired
 }
 

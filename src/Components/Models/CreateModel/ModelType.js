@@ -15,7 +15,7 @@ import AdvancedIcon from 'Assets/Icons/models/chart-bars.svg'
 import './CreateModel.scss'
 
 // Helpers
-import validateModel from './validateModel'
+import modelValidate from './modelValidate'
 
 const iconStyle = {
   width: '120px',
@@ -65,7 +65,7 @@ class ModelType extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.props.handleSubmit(this.props.handleNext)}>
+      <form onSubmit={this.props.handleSubmit}>
         <div styleName="model-type-container">
           {this.renderModelIcons()}
 
@@ -91,7 +91,6 @@ ModelType.propTypes = {
   type: PropTypes.string,
   change: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  handleNext: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired
 }
 
@@ -105,5 +104,5 @@ export default connect(
   form: 'model',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate: validateModel
+  validate: modelValidate
 })(ModelType))

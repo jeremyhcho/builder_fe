@@ -31,7 +31,7 @@ class Modal extends React.Component {
       // isOpen,
       wrapperStyle,
       modal,
-      height
+      bodyStyle
       // ...props
     } = this.props
     const modalStyle = classNames('modal', {
@@ -62,7 +62,7 @@ class Modal extends React.Component {
               />
             </button>
           </div>
-          <div styleName="body" style={{ height }}>
+          <div styleName="body" style={{ ...bodyStyle }}>
             {children}
           </div>
 
@@ -81,7 +81,7 @@ Modal.defaultProps = {
   footer: [],
   wrapperStyle: {},
   modal: true,
-  height: null
+  bodyStyle: {}
 }
 
 Modal.propTypes = {
@@ -92,7 +92,7 @@ Modal.propTypes = {
   footer: PropTypes.array,
   wrapperStyle: PropTypes.object,
   modal: PropTypes.bool,
-  height: PropTypes.number
+  bodyStyle: PropTypes.object
   /* Forces user to use one of the actions in the modal,
   clicking outside the modal will not trigger the state of the modal */
 }

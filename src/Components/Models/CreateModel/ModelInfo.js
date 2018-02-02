@@ -11,20 +11,21 @@ import './CreateModel.scss'
 
 // Helpers
 import { presence, maxChar } from 'Helpers/Validators'
+import modelValidate from './modelValidate'
 
 const maxChar20 = maxChar(20)
 
-const ModelInfo = ({ handleNext, handleSubmit, handleBack }) => {
+const ModelInfo = ({ handleSubmit, handleBack }) => {
   return (
     <div styleName="model-info-container">
-      <form onSubmit={handleSubmit(handleNext)}>
+      <form onSubmit={handleSubmit}>
         <Row styleName="model-info">
           <Col xs={2}>
             <p style={{ padding: '30px 0' }}>Model Name</p>
           </Col>
           <Col>
             <Field
-              name="Model name"
+              name="Name"
               type="text"
               component={FieldInput}
               placeholder="Enter Model Name"
@@ -60,7 +61,7 @@ const ModelInfo = ({ handleNext, handleSubmit, handleBack }) => {
 
 ModelInfo.propTypes = {
   handleBack: PropTypes.func.isRequired,
-  handleNext: PropTypes.func.isRequired,
+  // handleNext: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired
 }
 
@@ -68,4 +69,5 @@ export default reduxForm({
   form: 'model',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
+  validate: modelValidate
 })(ModelInfo)
