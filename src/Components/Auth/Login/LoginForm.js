@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { Field, reduxForm, reset, initialize } from 'redux-form'
 import randomstring from 'randomstring'
 
@@ -42,17 +41,6 @@ class LoginForm extends Component {
     // initializes reset value of Password to '' and keeps forms pristine
     this.props.dispatch(initialize('login', { Email, Password: '', }, false))
     this.props.dispatch(reset('login'))
-  }
-
-  renderError () {
-    return (
-      <div styleName='error-dialog'>
-        <p>Incorrect email address and / or password.</p>
-        <p>
-          Do you need help <Link className='link' to={{ pathname: '/auth/forgot' }}>logging in?</Link>
-        </p>
-      </div>
-    )
   }
 
   render () {
