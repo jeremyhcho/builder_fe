@@ -99,9 +99,9 @@ class CreateModel extends React.Component {
     this.setState({ step: this.state.step - 1 })
   }
 
-  changeStep = (stepIndex) => {
-    this.setState({ step: stepIndex })
-  }
+  // changeStep = (stepIndex) => {
+  //   this.setState({ step: stepIndex })
+  // }
 
   renderStepDescription () {
     const stepDescriptions = [

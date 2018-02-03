@@ -63,10 +63,15 @@ class Specs extends React.Component {
 
     return (
       [
-        <Button key="back" onClick={this.props.handleBack} flat>
+        <Button
+          type="button"
+          key="back"
+          onClick={this.props.handleBack}
+          flat
+        >
           Back
         </Button>,
-        <Button key="submit" type="submit">
+        <Button key="submit">
           Submit
         </Button>
       ]

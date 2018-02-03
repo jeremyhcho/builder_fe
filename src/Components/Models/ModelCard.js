@@ -46,7 +46,7 @@ class ModelCard extends React.Component {
     hovered: false,
     editModel: false,
     deleteModel: false,
-    viewModel: false
+    viewModel: true
   }
 
   handleEnter = () => {

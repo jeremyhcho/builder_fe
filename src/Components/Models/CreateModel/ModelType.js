@@ -73,7 +73,11 @@ class ModelType extends React.Component {
 
           <div styleName="footer">
             <div styleName="buttons">
-              <Button onClick={this.props.handleClose} flat>
+              <Button
+                type="button"
+                onClick={this.props.handleClose}
+                flat
+              >
                 Close
               </Button>
               <Button type="submit">

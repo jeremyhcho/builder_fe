@@ -50,7 +50,11 @@ const ModelInfo = ({ handleSubmit, handleBack }) => {
 
         <div styleName="footer">
           <div styleName="buttons">
-            <Button onClick={handleBack} flat>
+            <Button
+              type="button"
+              onClick={handleBack}
+              flat
+            >
               Back
             </Button>
             <Button type="submit">
