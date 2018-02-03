@@ -14,9 +14,15 @@ import './Signup.scss'
 import PaperPlane from 'Assets/Icons/paper-plane.svg'
 
 // Actions
-import { resendVerificationEmail } from 'Actions'
+import { resendVerificationEmail, openSnackbar } from 'Actions'
 
 class Signup extends React.Component {
+  componentWillReceiveProps (newProps) {
+    if (!newProps.sendingEmail && this.props.sendingEmail) {
+      this.props.openSnackbar('Email verification sent', 3000)
+    }
+  }
+
   resendVerificationEmail = () => {
     this.props.resendVerificationEmail(this.props.user.id)
   }
@@ -81,7 +87,8 @@ Signup.propTypes = {
   userCreated: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
   resendVerificationEmail: PropTypes.func.isRequired,
-  sendingEmail: PropTypes.bool.isRequired
+  sendingEmail: PropTypes.bool.isRequired,
+  openSnackbar: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
@@ -91,7 +98,8 @@ const mapStateToProps = ({ auth }) => ({
 })
 
 const mapDispatchToProps = {
-  resendVerificationEmail
+  resendVerificationEmail,
+  openSnackbar
 }
 
 export default connect(
