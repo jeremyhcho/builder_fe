@@ -30,17 +30,18 @@ const SubscriptionSettings = ({ billing, fetchingSubscription }) => {
 }
 
 SubscriptionSettings.defaultProps = {
-  billing: {}
+  billing: {},
+  fetchingSubscription: false
 }
 
 SubscriptionSettings.propTypes = {
   billing: PropTypes.object,
-  fetchingSubscription: PropTypes.bool.isRequired
+  fetchingSubscription: PropTypes.bool
 }
 
-const mapStateToProps = ({ auth }) => ({
-  billing: auth.authState.user.billing,
-  fetchingSubscription: auth.authState.fetchingSubscription
+const mapStateToProps = ({ routines }) => ({
+  billing: routines.auth.billing,
+  fetchingSubscription: routines.callingApi.FETCH_SUBSCRIPTION
 })
 
 export default connect(

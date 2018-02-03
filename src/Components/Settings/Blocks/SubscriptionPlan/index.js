@@ -9,6 +9,9 @@ import planFactory from '../planFactory'
 // CSS
 import './SubscriptionPlan.scss'
 
+// Helpers
+import { makeFilterSubscriptions } from 'Helpers/Selectors'
+
 const initialStyle = {
   height: '375px',
   width: '275px',
@@ -116,23 +119,28 @@ class SubscriptionPlan extends React.Component {
 
 SubscriptionPlan.defaultProps = {
   select: () => null,
-  subscription: null
+  subscription: null,
+  creatingSubscription: false,
+  updatingSubscription: false
 }
 
 SubscriptionPlan.propTypes = {
   plan: PropTypes.oneOf(['basic-plan', 'advanced-plan']).isRequired,
   select: PropTypes.func,
   subscription: PropTypes.object,
-  creatingSubscription: PropTypes.bool.isRequired,
-  updatingSubscription: PropTypes.bool.isRequired
+  creatingSubscription: PropTypes.bool,
+  updatingSubscription: PropTypes.bool
 }
 
-const mapStateToProps = ({ auth }) => ({
-  subscription: auth.authState.user.subscription,
-  creatingSubscription: auth.authState.creatingSubscription,
-  updatingSubscription: auth.authState.updatingSubscription
-})
+const makeMapStateToProps = () => {
+  const getSubscription = makeFilterSubscriptions()
+  return ({ routines }) => ({
+    subscription: getSubscription(routines).subscription,
+    creatingSubscription: routines.callingApi.CREATE_SUBSCRIPTION,
+    updatingSubscription: routines.callingApi.UPDATE_SUBSCRIPTION
+  })
+}
 
 export default connect(
-  mapStateToProps
+  makeMapStateToProps
 )(SubscriptionPlan)

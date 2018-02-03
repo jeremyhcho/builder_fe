@@ -24,10 +24,6 @@ class Login extends React.Component {
   }
 
   render () {
-    // const errorDialog = classNames('error-dialog', {
-    //   open: this.state.loginError
-    // })
-
     return (
       <div styleName="login">
         <div styleName="login-header">

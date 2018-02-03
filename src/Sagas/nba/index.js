@@ -4,13 +4,16 @@ import { put, takeLatest, all } from 'redux-saga/effects'
 import {
   fetchNBAPrediction,
   fetchNBAMatchup,
-  fetchNBAModel
+  fetchNBAModel,
+  createInitialSubscriptionPlan
 } from 'Actions'
 
 import {
   FETCH_NBA_PREDICTIONS,
   FETCH_NBA_MATCHUP,
-  FETCH_NBA_PREVIOUS_MEETINGS
+  FETCH_NBA_PREVIOUS_MEETINGS,
+  CREATE_BILLING,
+  CREATE_SUBSCRIPTION
 } from 'Constants'
 
 function* callFetchInitialPredictions ({ response }) {
@@ -44,13 +47,36 @@ function* watchFetchPredictions () {
   yield takeLatest(`${FETCH_NBA_PREDICTIONS}/SUCCESS`, callFetchInitialPredictions)
 }
 
+function* callCreateSubscription ({ payload }) {
+  // payload from REQUEST Routines
+  try {
+    const plan = payload[1]
+    yield put(createInitialSubscriptionPlan(plan))
+  } catch (error) {
+    yield put({
+      type: `${CREATE_SUBSCRIPTION}/FAIL`,
+      key: {
+        primaryKey: 'auth',
+        type: 'subscription'
+      },
+      error
+    })
+    console.error('Failed to create subscription during billing creation')
+  }
+}
+
 function* watchFetchPreviousMeetings () {
   yield takeLatest(`${FETCH_NBA_PREVIOUS_MEETINGS}/SUCCESS`, callFetchMatchup)
+}
+
+function* watchCreateBillingInformation () {
+  yield takeLatest(`${CREATE_BILLING}/SUCCESS`, callCreateSubscription)
 }
 
 export default function* nbaSaga () {
   yield all([
     watchFetchPredictions(),
-    watchFetchPreviousMeetings()
+    watchFetchPreviousMeetings(),
+    watchCreateBillingInformation()
   ])
 }

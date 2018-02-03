@@ -9,6 +9,9 @@ import SettingsSubSection from '../Blocks/SettingsSubSection'
 import ActiveSubscriptions from './ActiveSubscriptions'
 import PlanDetails from './PlanDetails'
 
+// Selectors
+import { makeFilterSubscriptions } from 'Helpers/Selectors'
+
 class SubscriptionDetails extends React.Component {
   state = {
     showPlans: false
@@ -69,11 +72,17 @@ SubscriptionDetails.propTypes = {
   canceledSubscriptions: PropTypes.array
 }
 
-const mapStateToProps = ({ auth }) => ({
-  subscription: auth.authState.user.subscription,
-  canceledSubscriptions: auth.authState.user.canceledSubscriptions
-})
+const makeMapStateToProps = () => {
+  const getSubscriptions = makeFilterSubscriptions()
+
+  const mapStateToProps = ({ routines }) => ({
+    subscription: getSubscriptions(routines).subscription,
+    canceledSubscriptions: getSubscriptions(routines).canceledSubscriptions
+  })
+
+  return mapStateToProps
+}
 
 export default connect(
-  mapStateToProps
+  makeMapStateToProps
 )(SubscriptionDetails)

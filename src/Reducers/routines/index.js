@@ -57,7 +57,8 @@ const routines = (state = initialState, action) => {
       try {
         return transform[action.transform](state, action.key, action.response, action.loaderKey)
       } catch ({ response }) {
-        console.error(`${action.transform} does not have valid transform action`, response)
+        console.error(`${action.loaderKey} succeeded but failed to update.
+          You most likely provided an invalid or incorrect transform key: ${action.transform}`)
         return { ...state }
       }
     }

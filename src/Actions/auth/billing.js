@@ -1,48 +1,110 @@
+import createRoutine from 'Routines'
+
+import { openSnackbar } from 'Actions'
+
+// Apis
+import {
+  postBillingInformation,
+  getBillingInformation,
+  putBillingInformation,
+  postSubscription,
+  getSubscription,
+  putSubscription,
+  deleteSubscription
+} from 'Apis'
+
 // Constants
 import {
   FETCH_BILLING,
   UPDATE_BILLING,
   CREATE_BILLING,
   CREATE_SUBSCRIPTION,
+  CREATE_INITIAL_SUBSCRIPTION,
   UPDATE_SUBSCRIPTION,
   FETCH_SUBSCRIPTION,
   DELETE_SUBSCRIPTION
 } from 'Constants'
 
-export const createBillingInformation = (token, plan) => ({
-  type: CREATE_BILLING,
-  token,
-  plan
+export const createBillingInformation = createRoutine({
+  prefix: CREATE_BILLING,
+  api: postBillingInformation,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'billing'
+  },
+  transform: 'replace'
 })
 
-export const fetchBillingInformation = (userId) => ({
-  type: FETCH_BILLING,
-  userId
+export const fetchBillingInformation = createRoutine({
+  prefix: FETCH_BILLING,
+  api: getBillingInformation,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'billing'
+  },
+  transform: 'replace'
 })
 
-export const updateBillingInformation = (userId, token) => ({
-  type: UPDATE_BILLING,
-  userId,
-  token
+export const updateBillingInformation = createRoutine({
+  prefix: UPDATE_BILLING,
+  api: putBillingInformation,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'billing'
+  },
+  transform: 'replace'
 })
 
-export const createSubscriptionPlan = (plan) => ({
-  type: CREATE_SUBSCRIPTION,
-  plan
+export const fetchSubscriptionPlan = createRoutine({
+  prefix: FETCH_SUBSCRIPTION,
+  api: getSubscription,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'subscription'
+  },
+  transform: 'replace'
 })
 
-export const fetchSubscriptionPlan = (userId) => ({
-  type: FETCH_SUBSCRIPTION,
-  userId
+export const createInitialSubscriptionPlan = createRoutine({
+  prefix: CREATE_INITIAL_SUBSCRIPTION,
+  api: postSubscription,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'subscription'
+  },
+  transform: (response) => [response],
+  onSuccess: () => openSnackbar('Subscription created', 3000)
 })
 
-export const updateSubscriptionPlan = (userId, plan) => ({
-  type: UPDATE_SUBSCRIPTION,
-  userId,
-  plan
+export const createSubscriptionPlan = createRoutine({
+  prefix: CREATE_SUBSCRIPTION,
+  api: postSubscription,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'subscription'
+  },
+  transform: 'concat',
+  onSuccess: () => openSnackbar('Subscription created', 3000)
 })
 
-export const deleteSubscriptionPlan = (userId) => ({
-  type: DELETE_SUBSCRIPTION,
-  userId
+export const updateSubscriptionPlan = createRoutine({
+  prefix: UPDATE_SUBSCRIPTION,
+  api: putSubscription,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'subscription'
+  },
+  transform: 'updateByIdAndReplace',
+  onSuccess: () => openSnackbar('Subscription updated', 3000)
+})
+
+export const deleteSubscriptionPlan = createRoutine({
+  prefix: DELETE_SUBSCRIPTION,
+  api: deleteSubscription,
+  reducerKey: {
+    primaryKey: 'auth',
+    type: 'subscription'
+  },
+  transform: 'removeById',
+  onSuccess: () => openSnackbar('Subscription canceled', 3000)
 })
