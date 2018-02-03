@@ -8,7 +8,8 @@ import {
   getNBAModels,
   postNBAModel,
   deleteNBAModel,
-  putNBAModel
+  putNBAModel,
+  getNBAModel
 } from 'Apis'
 
 // Constants
@@ -16,7 +17,8 @@ import {
   CREATE_NBA_MODEL,
   FETCH_NBA_MODELS,
   DELETE_NBA_MODEL,
-  UPDATE_NBA_MODEL
+  UPDATE_NBA_MODEL,
+  FETCH_NBA_MODEL
 } from 'Constants'
 
 export const fetchNBAModels = createRoutine({
@@ -25,6 +27,16 @@ export const fetchNBAModels = createRoutine({
   reducerKey: {
     primaryKey: 'nba',
     type: 'models'
+  },
+  transform: 'replace'
+})
+
+export const fetchNBAModel = createRoutine({
+  prefix: FETCH_NBA_MODEL,
+  api: getNBAModel,
+  reducerKey: {
+    primaryKey: 'nba',
+    type: 'model'
   },
   transform: 'replace'
 })

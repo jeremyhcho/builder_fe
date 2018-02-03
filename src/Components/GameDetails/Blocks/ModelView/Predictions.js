@@ -9,9 +9,6 @@ import { Card } from 'Components/Common'
 // CSS
 import './ModelView.scss'
 
-// Selectors
-import { makeFindGamePredictions } from 'Helpers/Selectors'
-
 class Predictions extends React.Component {
   convertNumber (num) {
     if (num > 0) {
@@ -136,16 +133,11 @@ Predictions.propTypes = {
   prediction: PropTypes.object
 }
 
-const makeMapStateToProps = () => {
-  const getPredictions = makeFindGamePredictions()
-  const mapStateToProps = ({ routines }) => ({
-    prediction: getPredictions(routines),
-    summary: routines.nba.summary
-  })
-
-  return mapStateToProps
-}
+const mapStateToProps = ({ routines }) => ({
+  prediction: routines.nba.prediction,
+  summary: routines.nba.summary
+})
 
 export default connect(
-  makeMapStateToProps
+  mapStateToProps
 )(Predictions)

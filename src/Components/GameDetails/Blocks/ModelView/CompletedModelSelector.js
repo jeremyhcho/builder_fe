@@ -10,7 +10,7 @@ import { Toggle } from 'Components/Common'
 import ChangeIcon from 'Assets/Icons/switch-arrows.svg'
 
 // Actions
-import { fetchNBAPredictions } from 'Actions'
+import { fetchNBAPrediction } from 'Actions'
 
 // CSS
 import './ModelView.scss'
@@ -21,7 +21,8 @@ class CompletedModelSelector extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedModel.id !== this.props.selectedModel.id && this.props.selectedModel.id) {
+    if (newProps.selectedPrediction.id !== this.props.selectedPrediction.id &&
+        this.props.selectedPrediction.id) {
       this.openModels()
     }
   }
@@ -39,13 +40,13 @@ class CompletedModelSelector extends React.Component {
   }
 
   changeModel = (e, matchModel) => {
-    const { selectedModel } = this.props
+    const { selectedPrediction } = this.props
 
-    if (this.toggleCol.contains(e.target) || matchModel.id === selectedModel.id) {
+    if (this.toggleCol.contains(e.target) || matchModel.id === selectedPrediction.id) {
       return null
     }
 
-    return this.props.fetchNBAPredictions(matchModel.id)
+    return this.props.fetchNBAPrediction(matchModel.id)
   }
 
   openModels = () => {
@@ -75,7 +76,7 @@ class CompletedModelSelector extends React.Component {
     return (
       <div styleName="model-list" ref={ref => this.modelsList = ref}>
         {
-          this.props.matchesModels.map(matchModel => (
+          this.props.predictions.map(matchModel => (
             <Row
               key={matchModel.id}
               middle='xs'
@@ -115,12 +116,12 @@ class CompletedModelSelector extends React.Component {
   }
 
   render () {
-    const { selectedModel } = this.props
+    const { selectedPrediction } = this.props
 
     return (
       <div styleName="model-selector">
         <div styleName="model-name">
-          <h4 className="semibold">{selectedModel.name}</h4>
+          <h4 className="semibold">{selectedPrediction.name}</h4>
           <ChangeIcon style={{ margin: '0 10px', cursor: 'pointer' }} onClick={this.openModels} />
 
           {this.state.modelsOpen && this.renderModelList()}
@@ -131,23 +132,23 @@ class CompletedModelSelector extends React.Component {
 }
 
 CompletedModelSelector.defaultProps = {
-  matchesModels: [],
-  selectedModel: {}
+  predictions: [],
+  selectedPrediction: {}
 }
 
 CompletedModelSelector.propTypes = {
-  matchesModels: PropTypes.array,
-  selectedModel: PropTypes.object,
-  fetchNBAPredictions: PropTypes.func.isRequired
+  predictions: PropTypes.array,
+  selectedPrediction: PropTypes.object,
+  fetchNBAPrediction: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
-  matchesModels: routines.nba.matchesModels,
-  selectedModel: routines.nba.predictions
+  predictions: routines.nba.predictions,
+  selectedPrediction: routines.nba.prediction
 })
 
 const mapDispatchToProps = {
-  fetchNBAPredictions
+  fetchNBAPrediction
 }
 
 export default connect(

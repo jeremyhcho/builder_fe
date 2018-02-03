@@ -13,7 +13,6 @@ import { Card, Spinner } from 'Components/Common'
 import './ModelView.scss'
 
 // Helpers & Selectors
-import { makeFindGamePredictions } from 'Helpers/Selectors'
 import { precisionRound } from 'Helpers'
 
 const tenths = precisionRound(1)
@@ -120,22 +119,17 @@ TotalPrediction.propTypes = {
   fetchNBAAggregateTotals: PropTypes.func.isRequired
 }
 
-const makeMapStateToProps = () => {
-  const getPredictions = makeFindGamePredictions()
-  const mapStateToProps = ({ routines }) => ({
-    aggregateTotals: routines.nba.aggregateTotals,
-    summary: routines.nba.summary,
-    prediction: getPredictions(routines)
-  })
-
-  return mapStateToProps
-}
+const mapStateToProps = ({ routines }) => ({
+  aggregateTotals: routines.nba.aggregateTotals,
+  summary: routines.nba.summary,
+  prediction: routines.nba.prediction
+})
 
 const mapDispatchToProps = {
   fetchNBAAggregateTotals
 }
 
 export default connect(
-  makeMapStateToProps,
+  mapStateToProps,
   mapDispatchToProps
 )(TotalPrediction)

@@ -17,22 +17,22 @@ import {
 import NoModelsIcon from 'Assets/Icons/missing-content.svg'
 
 // Actions
-import { fetchNBAMatchesModels } from 'Actions'
+import { fetchNBAPredictions } from 'Actions'
 
 class ModelView extends React.Component {
   componentDidMount () {
-    this.props.fetchNBAMatchesModels(this.props.summary.id)
+    this.props.fetchNBAPredictions(this.props.summary.id)
   }
 
   render () {
-    const { fetchingMatchesModels, selectedModel, matchesModels, fetchingPredictions } = this.props
+    const { fetchingPredictions, prediction, predictions, fetchingPrediction } = this.props
 
-    if (fetchingMatchesModels || fetchingPredictions || !matchesModels) {
+    if (fetchingPredictions || fetchingPrediction || !predictions) {
       // View when fetching models .. loader
       return <div />
     }
 
-    if (!matchesModels.length) {
+    if (!predictions.length) {
       // View when user has no models .. link to models route
       return (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -59,7 +59,7 @@ class ModelView extends React.Component {
       )
     }
 
-    if (matchesModels.length && !selectedModel) {
+    if (predictions.length && !prediction) {
       return <div />
     }
 
@@ -96,32 +96,32 @@ class ModelView extends React.Component {
 }
 
 ModelView.defaultProps = {
-  matchesModels: null,
-  selectedModel: null,
+  predictions: null,
+  prediction: null,
   summary: {},
-  fetchingMatchesModels: false,
-  fetchingPredictions: false
+  fetchingPredictions: false,
+  fetchingPrediction: false
 }
 
 ModelView.propTypes = {
   summary: PropTypes.object,
-  matchesModels: PropTypes.array,
-  selectedModel: PropTypes.object,
-  fetchNBAMatchesModels: PropTypes.func.isRequired,
-  fetchingMatchesModels: PropTypes.bool,
-  fetchingPredictions: PropTypes.bool
+  predictions: PropTypes.array,
+  prediction: PropTypes.object,
+  fetchNBAPredictions: PropTypes.func.isRequired,
+  fetchingPredictions: PropTypes.bool,
+  fetchingPrediction: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
-  matchesModels: routines.nba.matchesModels,
-  selectedModel: routines.nba.predictions,
-  fetchingMatchesModels: routines.callingApi.FETCH_NBA_MATCHES_MODELS,
+  predictions: routines.nba.predictions,
+  prediction: routines.nba.prediction,
   fetchingPredictions: routines.callingApi.FETCH_NBA_PREDICTIONS,
+  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION,
   summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {
-  fetchNBAMatchesModels
+  fetchNBAPredictions
 }
 
 export default connect(

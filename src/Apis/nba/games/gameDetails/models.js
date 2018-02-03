@@ -1,11 +1,11 @@
 import { axios } from 'Apis'
 
-export const getNBAMatchesModels = (matchId) => (
-  axios.get(`/api/nba/v1/matches/${matchId}/matches_models`)
+export const getPredictions = (matchId) => (
+  axios.get(`/api/nba/v1/matches/${matchId}/predictions`)
 )
 
-export const getNBAPredictions = (matchModelId) => (
-  axios.get(`/api/nba/v1/matches_models/${matchModelId}`)
+export const getPrediction = (predictionId) => (
+  axios.get(`/api/nba/v1/predictions/${predictionId}`)
 )
 
 export const putNBAMatchesModels = (modelId, params) => (

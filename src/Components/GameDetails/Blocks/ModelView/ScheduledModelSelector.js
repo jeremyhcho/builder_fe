@@ -10,7 +10,7 @@ import { Toggle } from 'Components/Common'
 import ChangeIcon from 'Assets/Icons/switch-arrows.svg'
 
 // Actions
-import { fetchNBAPredictions, updateNBAMatchesModels } from 'Actions'
+import { fetchNBAPrediction, updateNBAMatchesModels } from 'Actions'
 
 // CSS
 import './ModelView.scss'
@@ -21,7 +21,8 @@ class ScheduledModelSelector extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedModel.id !== this.props.selectedModel.id && this.props.selectedModel.id) {
+    if (newProps.selectedPrediction.id !== this.props.selectedPrediction.id &&
+        this.props.selectedPrediction.id) {
       this.openModels()
     }
   }
@@ -31,13 +32,13 @@ class ScheduledModelSelector extends React.Component {
   }
 
   changeModel = (e, matchModel) => {
-    const { selectedModel } = this.props
+    const { selectedPrediction } = this.props
 
-    if (this.toggleCol.contains(e.target) || matchModel.id === selectedModel.id) {
+    if (this.toggleCol.contains(e.target) || matchModel.id === selectedPrediction.id) {
       return null
     }
 
-    return this.props.fetchNBAPredictions(matchModel.id)
+    return this.props.fetchNBAPrediction(matchModel.id)
   }
 
   openModels = () => {
@@ -80,7 +81,7 @@ class ScheduledModelSelector extends React.Component {
     return (
       <div styleName="model-list" ref={ref => this.modelsList = ref}>
         {
-          this.props.matchesModels.map(matchModel => (
+          this.props.predictions.map(matchModel => (
             <Row
               key={matchModel.id}
               middle='xs'
@@ -114,12 +115,12 @@ class ScheduledModelSelector extends React.Component {
   }
 
   render () {
-    const { selectedModel } = this.props
+    const { selectedPrediction } = this.props
 
     return (
       <div styleName="model-selector">
         <div styleName="model-name">
-          <h4 className="semibold">{selectedModel.name}</h4>
+          <h4 className="semibold">{selectedPrediction.name}</h4>
           <ChangeIcon style={{ margin: '0 10px', cursor: 'pointer' }} onClick={this.openModels} />
 
           {this.state.modelsOpen && this.renderModelList()}
@@ -130,24 +131,24 @@ class ScheduledModelSelector extends React.Component {
 }
 
 ScheduledModelSelector.defaultProps = {
-  matchesModels: [],
-  selectedModel: {}
+  predictions: [],
+  selectedPrediction: {}
 }
 
 ScheduledModelSelector.propTypes = {
-  matchesModels: PropTypes.array,
-  selectedModel: PropTypes.object,
+  predictions: PropTypes.array,
+  selectedPrediction: PropTypes.object,
   updateNBAMatchesModels: PropTypes.func.isRequired,
-  fetchNBAPredictions: PropTypes.func.isRequired
+  fetchNBAPrediction: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
-  matchesModels: routines.nba.matchesModels,
-  selectedModel: routines.nba.predictions
+  predictions: routines.nba.predictions,
+  selectedPrediction: routines.nba.prediction
 })
 
 const mapDispatchToProps = {
-  fetchNBAPredictions,
+  fetchNBAPrediction,
   updateNBAMatchesModels
 }
 

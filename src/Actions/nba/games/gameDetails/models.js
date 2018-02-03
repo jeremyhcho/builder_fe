@@ -2,28 +2,28 @@ import createRoutine from 'Routines'
 
 // Apis
 import {
-  getNBAMatchesModels,
+  getPredictions,
   putNBAMatchesModels,
-  getNBAPredictions,
+  getPrediction,
   getNBAAggregateTotals,
   getNBAAggregateSpreads
 } from 'Apis'
 
 // Constants
 import {
-  FETCH_NBA_MATCHES_MODELS,
+  FETCH_NBA_PREDICTIONS,
   UPDATE_NBA_MATCHES_MODELS,
-  FETCH_NBA_MATCHES_MODELS_PREDICTION,
+  FETCH_NBA_PREDICTION,
   FETCH_NBA_AGGREGATE_TOTALS,
   FETCH_NBA_AGGREGATE_SPREADS
 } from 'Constants'
 
-export const fetchNBAMatchesModels = createRoutine({
-  prefix: FETCH_NBA_MATCHES_MODELS,
-  api: getNBAMatchesModels,
+export const fetchNBAPredictions = createRoutine({
+  prefix: FETCH_NBA_PREDICTIONS,
+  api: getPredictions,
   reducerKey: {
     primaryKey: 'nba',
-    type: 'matchesModels'
+    type: 'predictions'
   },
   transform: 'replace'
 })
@@ -38,12 +38,12 @@ export const updateNBAMatchesModels = createRoutine({
   transform: 'updateByIdAndChange'
 })
 
-export const fetchNBAPredictions = createRoutine({
-  prefix: FETCH_NBA_MATCHES_MODELS_PREDICTION,
-  api: getNBAPredictions,
+export const fetchNBAPrediction = createRoutine({
+  prefix: FETCH_NBA_PREDICTION,
+  api: getPrediction,
   reducerKey: {
     primaryKey: 'nba',
-    type: 'predictions'
+    type: 'prediction'
   },
   transform: 'replace'
 })

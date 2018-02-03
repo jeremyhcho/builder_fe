@@ -109,7 +109,7 @@ ModelDetails.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  selectedModel: routines.nba.predictions
+  selectedModel: routines.nba.model
 })
 
 export default connect(

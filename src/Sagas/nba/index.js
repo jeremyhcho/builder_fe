@@ -2,12 +2,13 @@ import { put, takeLatest, all } from 'redux-saga/effects'
 
 // Actions
 import {
-  fetchNBAPredictions,
+  fetchNBAPrediction,
   fetchNBAMatchup,
+  fetchNBAModel
 } from 'Actions'
 
 import {
-  FETCH_NBA_MATCHES_MODELS,
+  FETCH_NBA_PREDICTIONS,
   FETCH_NBA_MATCHUP,
   FETCH_NBA_PREVIOUS_MEETINGS
 } from 'Constants'
@@ -15,7 +16,8 @@ import {
 function* callFetchInitialPredictions ({ response }) {
   try {
     const selectedModel = response.find(model => model.status === 'ACTIVE') || response[0]
-    yield put(fetchNBAPredictions(selectedModel.id))
+    yield put(fetchNBAModel(selectedModel.model_id))
+    yield put(fetchNBAPrediction(selectedModel.id))
   } catch (error) {
     console.error('Failed to fetch nba initial predictions', error)
   }
@@ -38,8 +40,8 @@ function* callFetchMatchup ({ response }) {
   }
 }
 
-function* watchFetchMatchModels () {
-  yield takeLatest(`${FETCH_NBA_MATCHES_MODELS}/SUCCESS`, callFetchInitialPredictions)
+function* watchFetchPredictions () {
+  yield takeLatest(`${FETCH_NBA_PREDICTIONS}/SUCCESS`, callFetchInitialPredictions)
 }
 
 function* watchFetchPreviousMeetings () {
@@ -48,7 +50,7 @@ function* watchFetchPreviousMeetings () {
 
 export default function* nbaSaga () {
   yield all([
-    watchFetchMatchModels(),
+    watchFetchPredictions(),
     watchFetchPreviousMeetings()
   ])
 }
