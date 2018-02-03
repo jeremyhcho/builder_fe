@@ -1,0 +1,42 @@
+.announcements-container {
+  padding: 45px 65px;
+  position: relative;
+
+  .title {
+    display: flex;
+    flex: 8;
+    line-height: 30px;
+  }
+
+  .actions {
+    display: flex;
+    flex: 1;
+
+    > li {
+      display: flex;
+      flex: 1;
+
+      .icon-wrapper {
+        border-radius: 50%;
+        cursor: pointer;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        transition: background-color 200ms;
+
+        &:hover {
+          background-color: var(--lightest-gray);
+        }
+
+        svg {
+          margin-top: 7px;
+        }
+      }
+    }
+  }
+}
+
+.create-announcements-container {
+  padding: 10px 60px;
+}

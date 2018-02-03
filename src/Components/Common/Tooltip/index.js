@@ -26,27 +26,29 @@ class Tooltip extends React.Component {
       return null
     }
 
-    let x = 0;
-    let y = 0;
-    let currentElement = this.target
+    // let x = 0;
+    // let y = 0;
+    // let currentElement = this.target
+    const targetDimensions = this.target.getBoundingClientRect()
+    const tooltipDimensions = this.tooltip.getBoundingClientRect()
 
-    while (currentElement) {
-      x += (currentElement.offsetLeft - currentElement.scrollLeft + currentElement.clientLeft)
-      y += (currentElement.offsetTop - currentElement.scrollTop + currentElement.clientTop)
-      currentElement = currentElement.offsetParent
-    }
+    // while (currentElement) {
+    //   x += (currentElement.offsetLeft - currentElement.scrollLeft + currentElement.clientLeft)
+    //   y += (currentElement.offsetTop - currentElement.scrollTop + currentElement.clientTop)
+    //   currentElement = currentElement.parentNode
+    // }
 
     switch (this.props.pos) {
       case 'top':
-        return this.topPos(x, y)
+        return this.topPos(targetDimensions, tooltipDimensions)
       case 'left':
-        return this.leftPos(x, y)
+        return this.leftPos(targetDimensions, tooltipDimensions)
       case 'right':
-        return this.rightPos(x, y)
+        return this.rightPos(targetDimensions, tooltipDimensions)
       case 'bottom':
-        return this.bottomPos(x, y)
+        return this.bottomPos(targetDimensions, tooltipDimensions)
       default:
-        return this.topPos(x, y)
+        return this.topPos(targetDimensions, tooltipDimensions)
     }
   }
 
@@ -58,31 +60,31 @@ class Tooltip extends React.Component {
     this.setState({ hovered: false })
   }
 
-  topPos (x, y) {
+  topPos ({ width: targetWidth, x, y }, { height: tooltipHeight, width: tooltipWidth }) {
     return ({
-      top: y - this.tooltip.offsetHeight - 8,
-      left: x - (this.tooltip.offsetWidth / 2) + (this.target.offsetWidth / 2)
+      top: y - tooltipHeight - 8,
+      left: x - (tooltipWidth / 2) + (targetWidth / 2)
     })
   }
 
-  leftPos (x, y) {
+  leftPos ({ height: targetHeight, x, y }, { height: tooltipHeight, width: tooltipWidth }) {
     return ({
-      top: y + (this.target.offsetHeight / 2) - (this.tooltip.offsetHeight / 2),
-      left: x - this.tooltip.offsetWidth - 8
+      top: y + (targetHeight / 2) - (tooltipHeight / 2),
+      left: x - tooltipWidth - 8
     })
   }
 
-  rightPos (x, y) {
+  rightPos ({ height: targetHeight, width: targetWidth, x, y }, { height: tooltipHeight }) {
     return ({
-      top: y + (this.target.offsetHeight / 2) - (this.tooltip.offsetHeight / 2),
-      left: x + this.target.offsetWidth + 8
+      top: y + (targetHeight / 2) - (tooltipHeight / 2),
+      left: x + targetWidth + 8
     })
   }
 
-  bottomPos (x, y) {
+  bottomPos ({ height: targetHeight, width: targetWidth, x, y }, { width: tooltipWidth }) {
     return ({
-      top: y + this.target.offsetHeight + 8,
-      left: x - (this.tooltip.offsetWidth / 2) + (this.target.offsetWidth / 2)
+      top: y + targetHeight + 8,
+      left: x - (tooltipWidth / 2) + (targetWidth / 2)
     })
   }
 

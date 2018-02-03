@@ -72,7 +72,7 @@ class DeleteModel extends React.Component {
       >
         <div style={{ padding: '25px 25px 10px', lineHeight: '25px' }}>
           <p>
-            Deleting {model.type} model: <span className="semibold">{model.name}</span>
+            Deleting model: <span className="semibold">{model.name}</span>
           </p>
           <p className="small">
             <span style={{ color: 'var(--red)' }}>Warning</span>

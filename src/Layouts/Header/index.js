@@ -2,7 +2,6 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import pathToRegexp from 'path-to-regexp'
 
 // Components
 import { IconMenuItem, IconDropdown } from 'Components/Common'
@@ -22,29 +21,9 @@ import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 // Actions
 import { logoutUser, fetchNotifications } from 'Actions'
 
-const SECTION_NAMES = {
-  '/': 'Dashboard',
-  '/games': 'Games',
-  '/games/:id/:sectionName': 'Game Details',
-  '/teams': 'Teams',
-  '/teams/:id/:sectionName': 'Team Details',
-  '/settings/:sectionName': 'Settings',
-  '/models': 'Models'
-}
-
 class Header extends React.Component {
   componentDidMount () {
     this.props.fetchNotifications()
-  }
-
-  getCurrentRoute() {
-    for (const regexp of Object.keys(SECTION_NAMES)) {
-      if (pathToRegexp(regexp).exec(this.props.location.pathname)) {
-        return regexp
-      }
-    }
-
-    return ''
   }
 
   navigateSettings = () => {
@@ -52,13 +31,8 @@ class Header extends React.Component {
   }
 
   navigateBack = () => {
-    const indexOfId = this.getCurrentRoute().indexOf(':id')
-    const parentRoute = this.getCurrentRoute().slice(0, indexOfId - 1)
-    this.props.history.push({ pathname: parentRoute })
-  }
-
-  shouldRenderBack () {
-    return this.getCurrentRoute().includes(':id')
+    const { history, backUrl } = this.props
+    history.push({ pathname: backUrl })
   }
 
   render () {
@@ -67,11 +41,11 @@ class Header extends React.Component {
         <div styleName='header-content'>
           <div styleName='title'>
             {
-              this.shouldRenderBack() && (
+              this.props.backUrl && (
                 <LeftArrowIcon styleName="back-icon" onClick={this.navigateBack} />
               )
             }
-            <h1 className="semibold">{SECTION_NAMES[this.getCurrentRoute()]}</h1>
+            <h1 className="semibold">{this.props.header}</h1>
           </div>
 
           <ul styleName='header-items'>
@@ -106,11 +80,17 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  fetchNotifications: PropTypes.func.isRequired
+  fetchNotifications: PropTypes.func.isRequired,
+  header: PropTypes.string.isRequired,
+  backUrl: PropTypes.string.isRequired
 }
+
+const mapStateToProps = ({ globalInfo }) => ({
+  header: globalInfo.header,
+  backUrl: globalInfo.backUrl
+})
 
 const mapDispatchToProps = {
   logoutUser,
@@ -118,6 +98,6 @@ const mapDispatchToProps = {
 }
 
 export default withRouter(connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Header))

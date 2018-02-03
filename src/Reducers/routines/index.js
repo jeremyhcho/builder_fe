@@ -6,7 +6,8 @@ const initialState = {
   auth: {},
   nba: {},
   callingApi: {},
-  error: {}
+  error: {},
+  admin: {}
 }
 
 const routines = (state = initialState, action) => {

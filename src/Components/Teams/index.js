@@ -8,7 +8,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import './Teams.scss'
 
 // Components
-import { Spinner } from 'Components/Common'
+import { Spinner, DocumentTitle } from 'Components/Common'
 import Conference from './Conference'
 
 // Actions
@@ -37,14 +37,16 @@ class Teams extends React.Component {
     const eastTeams = teamsGroupedByConference.EAST
 
     return (
-      <Row>
-        <Col xs={12}>
-          <Row styleName='teams-container'>
-            <Conference teams={westTeams} />
-            <Conference teams={eastTeams} />
-          </Row>
-        </Col>
-      </Row>
+      <DocumentTitle title='Quartz - NBA Teams' header='Teams'>
+        <Row>
+          <Col xs={12}>
+            <Row styleName='teams-container'>
+              <Conference teams={westTeams} />
+              <Conference teams={eastTeams} />
+            </Row>
+          </Col>
+        </Row>
+      </DocumentTitle>
     )
   }
 }

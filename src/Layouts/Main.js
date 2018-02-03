@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 // import Loadable from 'react-loadable'
@@ -9,11 +9,12 @@ import PropTypes from 'prop-types'
 import Header from './Header'
 import SideNav from './SideNav'
 import Pusher from 'Components/Pusher'
-// import Dashboard from 'Components/Dashboard'
+import Dashboard from 'Components/Dashboard'
 import GamesLayout from './Games'
 import TeamsLayout from './Teams'
 import SettingsLayout from './Settings'
 import ModelsLayout from './Models'
+import AdminLayout from './Admin'
 import { Button } from 'Components/Common'
 
 // Assets
@@ -109,12 +110,12 @@ const MainLayout = ({
         <Header />
         <div style={{ height: 'calc(100% - 60px)' }}>
           <Switch>
-            {/* <Route exact path='/' component={Dashboard} /> */}
+            <Route exact path='/' component={Dashboard} />
+            <Route path='/admin' component={AdminLayout} />
             <Route path='/games' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />
             <Route path='/models' component={ModelsLayout} />
             <Route path='/settings' component={SettingsLayout} />
-            <Redirect from='/' to='/games' />
           </Switch>
         </div>
       </div>

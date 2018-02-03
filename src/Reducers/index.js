@@ -8,6 +8,8 @@ import nbaReducer from './nba'
 import notificationsReducer from './notifications'
 import snackBarReducer from './snackbar'
 import routines from './routines'
+import adminReducer from './admin'
+import globalInfoReducer from './globalInfo'
 
 const appReducer = combineReducers({
   auth,
@@ -16,6 +18,8 @@ const appReducer = combineReducers({
   form: formReducer,
   notifications: notificationsReducer,
   snackbar: snackBarReducer,
+  admin: adminReducer,
+  globalInfo: globalInfoReducer,
   routines
 })
 

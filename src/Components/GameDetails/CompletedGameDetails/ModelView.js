@@ -113,7 +113,7 @@ const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
   fetchPredictions: routines.callingApi.FETCH_NBA_PREDICTIONS,
-  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTIONS,
+  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION,
   summary: routines.nba.summary
 })
 

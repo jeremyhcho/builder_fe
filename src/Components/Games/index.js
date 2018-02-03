@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Row } from 'react-styled-flexboxgrid'
 
 // Components
-import { Spinner } from 'Components/Common'
+import { Spinner, DocumentTitle } from 'Components/Common'
 import DateInput from './DateInput'
 import GamesList from './GamesList'
 
@@ -12,20 +12,22 @@ import GamesList from './GamesList'
 import './Games.scss'
 
 const Games = ({ games, fetchingGames }) => (
-  <div>
-    <Row style={{ padding: '0 65px' }}>
-      <DateInput />
-    </Row>
-    {
-      fetchingGames ? (
-        <div className="loader">
-          <Spinner lg show />
-        </div>
-      ) : (
-        <GamesList games={games} />
-      )
-    }
-  </div>
+  <DocumentTitle title='Quartz - NBA Schedule' header='Games'>
+    <div>
+      <Row style={{ padding: '0 65px' }}>
+        <DateInput />
+      </Row>
+      {
+        fetchingGames ? (
+          <div className="loader">
+            <Spinner lg show />
+          </div>
+        ) : (
+          <GamesList games={games} />
+        )
+      }
+    </div>
+  </DocumentTitle>
 )
 
 Games.defaultProps = {

@@ -4,13 +4,16 @@ import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { Button, Spinner } from 'Components/Common'
+import { Button, Spinner, DocumentTitle } from 'Components/Common'
 import CreateModel from './CreateModel'
 import ModelCard from './ModelCard'
 import NoModelsIcon from 'Assets/Icons/missing-content.svg'
 
 // CSS
 import './Models.scss'
+
+// Icons
+import PlusIcon from 'Assets/Icons/plus.svg'
 
 // Actions
 import { fetchNBAModels } from 'Actions'
@@ -89,33 +92,35 @@ class Models extends React.Component {
     }
 
     return (
-      <div styleName="models">
-        <Row>
-          <Col xs={2}>
-            <Button
-              onClick={this.toggleModal}
-              style={{ position: 'relative' }}
-            >
-              <span style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }}>
-                <i
-                  className="fa fa-plus"
-                  aria-hidden="true"
-                  style={{ color: '#fff', fontSize: '9px' }}
+      <DocumentTitle title='Quartz - NBA Models' header='Models'>
+        <div styleName="models">
+          <Row>
+            <Col xs={2}>
+              <Button
+                onClick={this.toggleModal}
+                style={{ position: 'relative' }}
+              >
+                <PlusIcon
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                  }}
                 />
-              </span>
 
-              <span style={{ marginLeft: '15px' }}>Create Model</span>
-            </Button>
-          </Col>
+                <span style={{ marginLeft: '20px' }}>Create Model</span>
+              </Button>
+            </Col>
 
-          {
-            modalOpen &&
-            <CreateModel toggle={this.toggleModal} isOpen />
-          }
-        </Row>
+            {
+              modalOpen &&
+              <CreateModel toggle={this.toggleModal} isOpen />
+            }
+          </Row>
 
-        {this.renderModels()}
-      </div>
+          {this.renderModels()}
+        </div>
+      </DocumentTitle>
     )
   }
 }

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { fetchNBATeamDetails } from 'Actions'
 
 // Components
-import { Tab } from 'Components/Common'
+import { Tab, DocumentTitle } from 'Components/Common'
 
 // CSS
 import './TeamDetails.scss'
@@ -30,14 +30,16 @@ class TeamDetails extends React.Component {
     else routeKey = route
 
     return (
-      <div styleName='team-container'>
-        <Tab
-          tabs={tabItems}
-          onChange={(menuItem) => this.setState({ selected: menuItem.key })}
-          selectedKey={routeKey}
-          listStyle={{ maxWidth: '560px' }}
-        />
-      </div>
+      <DocumentTitle title='Quartz - NBA Team Details' header='Team Details' backUrl='/teams'>
+        <div styleName='team-container'>
+          <Tab
+            tabs={tabItems}
+            onChange={(menuItem) => this.setState({ selected: menuItem.key })}
+            selectedKey={routeKey}
+            listStyle={{ maxWidth: '560px' }}
+          />
+        </div>
+      </DocumentTitle>
     )
   }
 }

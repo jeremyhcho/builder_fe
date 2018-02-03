@@ -1,6 +1,7 @@
 import React from 'react'
 
 // Components
+import { DocumentTitle } from 'Components/Common'
 
 // CSS
 import './Dashboard.scss'
@@ -8,7 +9,9 @@ import './Dashboard.scss'
 class Dashboard extends React.Component {
   render () {
     return (
-      <div className='dashboard' />
+      <DocumentTitle title='Quartz - Dashboard' header='Dashboard'>
+        <div className='dashboard' />
+      </DocumentTitle>
     )
   }
 }

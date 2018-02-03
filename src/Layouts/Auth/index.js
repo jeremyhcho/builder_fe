@@ -10,7 +10,7 @@ import './Auth.scss'
 import { Login, Signup, Forgot, Reset, Verify } from 'Components/Auth'
 
 // Icons
-import AnalyticsIcon from 'Assets/Icons/placeholder-logo.svg'
+import PlaceholderIcon from 'Assets/Icons/blue-q-1.svg'
 import PodiumIcon from 'Assets/Icons/podium.svg'
 
 // const LoginContainer = Loadable({
@@ -37,8 +37,7 @@ const AuthLayout = () => (
   <div styleName='auth-wrapper'>
     <Row styleName='auth-card'>
       <Row middle='xs' styleName='branding-logo'>
-        <h4 className="bold">Quartz</h4>
-        <AnalyticsIcon style={{ marginLeft: '5px', width: '17px', height: '17px' }} />
+        <PlaceholderIcon style={{ marginLeft: '5px', width: '40px', height: '40px' }} />
       </Row>
 
       <Col

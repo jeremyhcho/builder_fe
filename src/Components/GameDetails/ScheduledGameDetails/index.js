@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { Tab } from 'Components/Common'
+import { Tab, DocumentTitle } from 'Components/Common'
 import Overview from './Overview'
 import ModelView from './ModelView'
 import Trends from './Trends'
@@ -34,27 +34,29 @@ class ScheduledGameDetails extends React.Component {
     else routeKey = route
 
     return (
-      <div styleName="game-details scheduled">
-        <Row styleName="tabs">
-          <Col xs={6}>
-            <Tab
-              tabs={tabItems}
-              selectedKey={routeKey}
-              onChange={this.handleNavigation}
-              listStyle={{ maxWidth: '560px' }}
-            />
-          </Col>
-        </Row>
-        <div className="matches-scroller" styleName="section">
-          <Switch>
-            <Route exact path='/games/:id/overview' component={Overview} />
-            <Route exact path='/games/:id/models' component={ModelView} />
-            <Route exact path='/games/:id/trends' component={Trends} />
-            <Route exact path='/games/:id/matchup' component={Matchup} />
-            <Redirect to={`/games/${this.props.match.params.id}/overview`} />
-          </Switch>
+      <DocumentTitle title='Quartz - NBA Game Details' header='Game Details' backUrl='/games'>
+        <div styleName="game-details scheduled">
+          <Row styleName="tabs">
+            <Col xs={6}>
+              <Tab
+                tabs={tabItems}
+                selectedKey={routeKey}
+                onChange={this.handleNavigation}
+                listStyle={{ maxWidth: '560px' }}
+              />
+            </Col>
+          </Row>
+          <div className="matches-scroller" styleName="section">
+            <Switch>
+              <Route exact path='/games/:id/overview' component={Overview} />
+              <Route exact path='/games/:id/models' component={ModelView} />
+              <Route exact path='/games/:id/trends' component={Trends} />
+              <Route exact path='/games/:id/matchup' component={Matchup} />
+              <Redirect to={`/games/${this.props.match.params.id}/overview`} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </DocumentTitle>
     )
   }
 }

@@ -1,1 +1,1 @@
-export { default as Announcements } from './Announcements'
+export * from './Announcements'
