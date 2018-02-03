@@ -76,6 +76,14 @@ const config = {
         ]
       },
       {
+        test: /\.css$/,
+        include: /node_modules/,
+        loaders: [
+          'style-loader?sourceMap',
+          'css-loader?sourceMap'
+        ]
+      },
+      {
         test: /\.(jpe?g|png|gif)$/,
         use: [
           'file-loader',
