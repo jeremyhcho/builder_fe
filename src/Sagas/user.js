@@ -6,14 +6,7 @@ import {
   createUser,
   updateUser,
   sendRecoveryEmail,
-  fetchUser,
-  fetchBillingInformation,
-  createBillingInformation,
-  updateBillingInformation,
-  createSubscription,
-  updateSubscription,
-  fetchSubscription,
-  deleteSubscription
+  fetchUser
 } from 'Apis'
 
 // Constants
@@ -27,33 +20,13 @@ import {
   SEND_RECOVERY_EMAIL,
   SEND_RECOVERY_EMAIL_FAIL,
   SEND_RECOVERY_EMAIL_SUCCESS,
-  FETCH_USER,
-  FETCH_BILLING,
-  FETCH_BILLING_SUCCESS,
-  FETCH_BILLING_FAIL,
-  CREATE_BILLING,
-  CREATE_BILLING_SUCCESS,
-  UPDATE_BILLING,
-  UPDATE_BILLING_SUCCESS,
-  FETCH_SUBSCRIPTION,
-  FETCH_SUBSCRIPTION_SUCCESS,
-  FETCH_SUBSCRIPTION_FAIL,
-  CREATE_SUBSCRIPTION,
-  CREATE_SUBSCRIPTION_SUCCESS,
-  CREATE_SUBSCRIPTION_FAIL,
-  UPDATE_SUBSCRIPTION,
-  UPDATE_SUBSCRIPTION_SUCCESS,
-  UPDATE_SUBSCRIPTION_FAIL,
-  DELETE_SUBSCRIPTION,
-  DELETE_SUBSCRIPTION_SUCCESS,
-  DELETE_SUBSCRIPTION_FAIL
+  FETCH_USER
 } from 'Constants'
 
 // Actions
 import {
   authorize,
-  unauthorize,
-  createSubscriptionPlan
+  unauthorize
 } from 'Actions'
 
 // Helpers
@@ -97,72 +70,6 @@ function* callFetchUser () {
   }
 }
 
-function* callFetchBilling ({ userId }) {
-  try {
-    const billing = yield call(fetchBillingInformation, userId)
-    yield put({ type: FETCH_BILLING_SUCCESS, billing: billing.data })
-  } catch ({ response }) {
-    yield put({ type: FETCH_BILLING_FAIL })
-  }
-}
-
-function* callCreateBilling ({ token, plan }) {
-  try {
-    const billing = yield call(createBillingInformation, token)
-    yield put({ type: CREATE_BILLING_SUCCESS, billing: billing.data })
-    yield put(createSubscriptionPlan(plan))
-  } catch ({ response }) {
-    console.log('Failed to create billing information')
-  }
-}
-
-function* callUpdatingBilling ({ userId, token }) {
-  try {
-    const billing = yield call(updateBillingInformation, userId, token)
-    yield put({ type: UPDATE_BILLING_SUCCESS, billing: billing.data })
-  } catch ({ response }) {
-    console.log('Failed to update billing information')
-  }
-}
-
-function* callCreateSubscription ({ plan }) {
-  try {
-    const subscription = yield call(createSubscription, plan)
-    yield put({ type: CREATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
-  } catch ({ response }) {
-    yield put({ type: CREATE_SUBSCRIPTION_FAIL })
-    console.log('Failed to create subscription')
-  }
-}
-
-function* callUpdateSubscription ({ userId, plan }) {
-  try {
-    const subscription = yield call(updateSubscription, userId, plan)
-    yield put({ type: UPDATE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
-  } catch ({ response }) {
-    yield put({ type: UPDATE_SUBSCRIPTION_FAIL })
-    console.log('Failed to update subscription')
-  }
-}
-
-function* callFetchSubscription ({ userId }) {
-  try {
-    const subscription = yield call(fetchSubscription, userId)
-    yield put({ type: FETCH_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
-  } catch ({ response }) {
-    yield put({ type: FETCH_SUBSCRIPTION_FAIL })
-  }
-}
-
-function* callDeleteSubscription ({ userId }) {
-  try {
-    const subscription = yield call(deleteSubscription, userId)
-    yield put({ type: DELETE_SUBSCRIPTION_SUCCESS, subscription: subscription.data })
-  } catch ({ response }) {
-    yield put({ type: DELETE_SUBSCRIPTION_FAIL })
-    console.log('Failed to delete subscription')
-  }
-}
 
 function* watchCreateUser () {
   yield takeLatest(CREATE_USER, callCreateUser)
@@ -180,46 +87,11 @@ function* watchFetchUser () {
   yield takeLatest(FETCH_USER, callFetchUser)
 }
 
-function* watchFetchBilling () {
-  yield takeLatest(FETCH_BILLING, callFetchBilling)
-}
-
-function* watchCreateBilling () {
-  yield takeLatest(CREATE_BILLING, callCreateBilling)
-}
-
-function* watchUpdateBilling () {
-  yield takeLatest(UPDATE_BILLING, callUpdatingBilling)
-}
-
-function* watchCreateSubscription () {
-  yield takeLatest(CREATE_SUBSCRIPTION, callCreateSubscription)
-}
-
-function* watchUpdateSubscription () {
-  yield takeLatest(UPDATE_SUBSCRIPTION, callUpdateSubscription)
-}
-
-function* watchFetchSubscription () {
-  yield takeLatest(FETCH_SUBSCRIPTION, callFetchSubscription)
-}
-
-function* watchDeleteSubscription () {
-  yield takeLatest(DELETE_SUBSCRIPTION, callDeleteSubscription)
-}
-
 export default function* userSaga () {
   yield all([
     watchCreateUser(),
     watchUpdateUserPassword(),
     watchSendRecoveryEmail(),
-    watchFetchUser(),
-    watchFetchBilling(),
-    watchCreateBilling(),
-    watchUpdateBilling(),
-    watchCreateSubscription(),
-    watchUpdateSubscription(),
-    watchFetchSubscription(),
-    watchDeleteSubscription()
+    watchFetchUser()
   ])
 }

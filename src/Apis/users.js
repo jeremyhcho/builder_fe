@@ -27,35 +27,36 @@ export const fetchUser = () => (
   axios.get('/api/v1/users/current')
 )
 
-export const createBillingInformation = (token) => (
+// Billing and Subscription
+export const postBillingInformation = (token) => (
   axios.post('/api/v1/billing', {
     source: token
   })
 )
 
-export const updateBillingInformation = (userId, token) => (
+export const putBillingInformation = (userId, token) => (
   axios.put(`/api/v1/billing/${userId}`, {
     source: token
   })
 )
 
-export const fetchBillingInformation = (userId) => (
+export const getBillingInformation = (userId) => (
   axios.get(`/api/v1/billing/${userId}`)
 )
 
-export const createSubscription = (plan) => (
+export const postSubscription = (plan) => (
   axios.post('/api/v1/subscriptions', {
     plan
   })
 )
 
-export const updateSubscription = (userId, plan) => (
+export const putSubscription = (userId, plan) => (
   axios.put(`/api/v1/subscriptions/${userId}`, {
     plan
   })
 )
 
-export const fetchSubscription = (userId) => (
+export const getSubscription = (userId) => (
   axios.get(`/api/v1/subscriptions/${userId}`)
 )
 

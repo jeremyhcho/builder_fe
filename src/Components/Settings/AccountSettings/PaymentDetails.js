@@ -13,6 +13,9 @@ import CardEditIcon from 'Assets/Icons/settings/card_edit_white.svg'
 // CSS
 import './AccountSettings.scss'
 
+// Helpers
+import { makeFilterSubscriptions } from 'Helpers/Selectors'
+
 const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
   const convertToMonth = (month) => {
     if (month.toString().length === 1) {
@@ -94,10 +97,13 @@ PaymentDetails.propTypes = {
   subscription: PropTypes.object
 }
 
-const mapStateToProps = ({ auth }) => ({
-  subscription: auth.authState.user.subscription
-})
+const makeMapStateToProps = () => {
+  const getSubscription = makeFilterSubscriptions()
+  return ({ routines }) => ({
+    subscription: getSubscription(routines).subscription
+  })
+}
 
 export default connect(
-  mapStateToProps
+  makeMapStateToProps
 )(PaymentDetails)

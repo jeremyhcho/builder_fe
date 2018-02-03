@@ -9,6 +9,9 @@ import { Spinner, Button } from 'Components/Common'
 // Actions
 import { deleteSubscriptionPlan, updateSubscriptionPlan, createSubscriptionPlan } from 'Actions'
 
+// Helpers
+import { makeFilterSubscriptions } from 'Helpers/Selectors'
+
 class EditSubscription extends React.Component {
   componentWillReceiveProps (newProps) {
     if (!newProps.deletingSubscription && this.props.deletingSubscription) {
@@ -77,7 +80,9 @@ class EditSubscription extends React.Component {
 }
 
 EditSubscription.defaultProps = {
-  subscription: null
+  subscription: null,
+  deletingSubscription: false,
+  creatingSubscription: false
 }
 
 EditSubscription.propTypes = {
@@ -85,18 +90,21 @@ EditSubscription.propTypes = {
   deleteSubscriptionPlan: PropTypes.func.isRequired,
   updateSubscriptionPlan: PropTypes.func.isRequired,
   createSubscriptionPlan: PropTypes.func.isRequired,
-  deletingSubscription: PropTypes.bool.isRequired,
-  creatingSubscription: PropTypes.bool.isRequired,
+  deletingSubscription: PropTypes.bool,
+  creatingSubscription: PropTypes.bool,
   subscription: PropTypes.object,
   userId: PropTypes.number.isRequired
 }
 
-const mapStateToProps = ({ auth }) => ({
-  userId: auth.authState.user.id,
-  subscription: auth.authState.user.subscription,
-  deletingSubscription: auth.authState.deletingSubscription,
-  creatingSubscription: auth.authState.creatingSubscription
-})
+const makeMapStateToProps = () => {
+  const getSubscription = makeFilterSubscriptions()
+  return ({ routines, auth }) => ({
+    userId: auth.authState.user.id,
+    subscription: getSubscription(routines).subscription,
+    deletingSubscription: routines.callingApi.DELETE_SUBSCRIPTION,
+    creatingSubscription: routines.callingApi.CREATE_SUBSCRIPTION
+  })
+}
 
 const mapDispatchToProps = {
   deleteSubscriptionPlan,
@@ -105,6 +113,6 @@ const mapDispatchToProps = {
 }
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(EditSubscription)

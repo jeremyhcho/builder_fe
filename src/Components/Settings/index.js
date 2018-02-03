@@ -49,17 +49,21 @@ class Settings extends React.Component {
   }
 }
 
+Settings.defaultProps = {
+  fetchingBilling: false
+}
+
 Settings.propTypes = {
   location: PropTypes.object.isRequired,
   fetchBillingInformation: PropTypes.func.isRequired,
-  fetchingBilling: PropTypes.bool.isRequired,
+  fetchingBilling: PropTypes.bool,
   fetchSubscriptionPlan: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
 }
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, routines }) => ({
   user: auth.authState.user,
-  fetchingBilling: auth.authState.fetchingBilling
+  fetchingBilling: routines.callingApi.FETCH_BILLING
 })
 
 const mapDispatchToProps = {

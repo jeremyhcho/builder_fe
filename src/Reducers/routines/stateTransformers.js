@@ -22,6 +22,18 @@ export const concat = (state, key, response, loaderKey) => ({
   }
 })
 
+export const remove = (state, key, response, loaderKey) => ({
+  ...state,
+  [key.primaryKey]: {
+    ...state[key.primaryKey],
+    [key.type]: null
+  },
+  callingApi: {
+    ...state.callingApi,
+    [loaderKey]: false
+  }
+})
+
 export const removeById = (state, key, response, loaderKey) => ({
   ...state,
   [key.primaryKey]: {

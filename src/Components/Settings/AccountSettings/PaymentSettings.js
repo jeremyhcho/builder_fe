@@ -123,22 +123,23 @@ class PaymentSettings extends React.Component {
 }
 
 PaymentSettings.defaultProps = {
-  billing: {}
+  billing: {},
+  updatingBilling: false
 }
 
 PaymentSettings.propTypes = {
   billing: PropTypes.object,
   updateBillingInformation: PropTypes.func.isRequired,
   stripe: PropTypes.object.isRequired,
-  updatingBilling: PropTypes.bool.isRequired,
+  updatingBilling: PropTypes.bool,
   userId: PropTypes.number.isRequired,
   handleSubmit: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, routines }) => ({
   userId: auth.authState.user.id,
-  billing: auth.authState.user.billing,
-  updatingBilling: auth.authState.updatingBilling,
+  billing: routines.auth.billing,
+  updatingBilling: routines.callingApi.UPDATE_BILLING,
 })
 
 const mapDispatchToProps = {

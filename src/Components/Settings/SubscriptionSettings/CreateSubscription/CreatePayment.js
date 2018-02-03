@@ -56,22 +56,24 @@ class CreatePayment extends React.Component {
 }
 
 CreatePayment.defaultProps = {
-  plan: ''
+  plan: '',
+  creatingBilling: false,
+  creatingSubscription: false
 }
 
 CreatePayment.propTypes = {
   planSelected: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
   toggle: PropTypes.func.isRequired,
-  creatingBilling: PropTypes.bool.isRequired,
-  creatingSubscription: PropTypes.bool.isRequired,
+  creatingBilling: PropTypes.bool,
+  creatingSubscription: PropTypes.bool,
   plan: PropTypes.string
 }
 
-const mapStateToProps = ({ ...state, auth }) => ({
+const mapStateToProps = ({ ...state, auth, routines }) => ({
   userId: auth.authState.user.id,
-  creatingBilling: auth.authState.creatingBilling,
-  creatingSubscription: auth.authState.creatingSubscription,
+  creatingBilling: routines.callingApi.CREATE_BILLING,
+  creatingSubscription: routines.callingApi.CREATE_SUBSCRIPTION,
   plan: selector(state, 'plan')
 })
 

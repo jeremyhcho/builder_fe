@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect'
 
-const getPredictions = (routines) => {
-  return routines.nba.predictions.predictions
-}
+const getPredictions = (routines) => routines.nba.predictions.prediction
 
 const getGameId = (routines) => routines.nba.summary.id
 
