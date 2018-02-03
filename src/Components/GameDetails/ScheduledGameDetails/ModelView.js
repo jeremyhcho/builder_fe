@@ -48,12 +48,23 @@ class ModelView extends React.Component {
             <div style={{ opacity: '0.2' }}>
               <NoModelsIcon height={256} width={256} />
 
-              <h1 className="bold" style={{ marginTop: '15px' }}>You have not created any models</h1>
+              <h1 className="bold" style={{ marginTop: '15px' }}>
+                {
+                  this.props.summary.status === 'INPROGRESS' ? (
+                    'None of your models created predictions for this game'
+                  ) : (
+                    'You have not created any models'
+                  )
+                }
+              </h1>
             </div>
 
-            <p className="semibold label" style={{ marginTop: '5px' }}>
-              Click <Link to='/models' className="link">here</Link> to create your first model.
-            </p>
+            {
+              this.props.summary.status === 'SCHEDULED' &&
+              <p className="semibold label" style={{ marginTop: '5px' }}>
+                Click <Link to='/models' className="link">here</Link> to create your first model.
+              </p>
+            }
           </div>
         </div>
       )

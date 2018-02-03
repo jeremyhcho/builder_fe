@@ -42,7 +42,6 @@ class GameDetails extends React.Component {
     const { fetchingNewSummary } = this.state
 
     if (!Object.keys(summary).length || fetchingNewSummary) {
-      // return <div className="loader"><Spinner lg show /></div>
       return <div />
     }
 
