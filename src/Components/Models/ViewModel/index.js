@@ -29,7 +29,7 @@ class ViewModel extends React.Component {
         header={model.name}
         toggle={toggle}
         isOpen={isOpen}
-        wrapperStyle={{ width: '800px', maxWidth: '100%' }}
+        wrapperStyle={{ width: '800px', maxWidth: '100%', height: '600px' }}
       >
         <div styleName="view-model">
           {
@@ -39,7 +39,9 @@ class ViewModel extends React.Component {
                 <ModelHistory key="history" predictions={predictions} />
               ]
             ) : (
-              <Spinner lg show />
+              <div style={{ textAlign: 'center', padding: '200px 0' }}>
+                <Spinner lg show />
+              </div>
             )
           }
         </div>
