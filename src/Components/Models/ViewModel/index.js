@@ -1,17 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 // Components
-import { Modal } from 'Components/Common'
+import { Modal, Spinner } from 'Components/Common'
 import ModelSummary from './ModelSummary'
 import ModelHistory from './ModelHistory'
 
 // CSS
 import './ViewModel.scss'
 
+// Actions
+import { fetchNBAModel } from 'Actions'
+
+// Helpers
+import { makeGetModelPredictions } from 'Helpers/Selectors'
+
 class ViewModel extends React.Component {
+  componentDidMount () {
+    this.props.fetchNBAModel(this.props.model.id)
+  }
+
   render () {
-    const { model, toggle, isOpen } = this.props
+    const { model, toggle, isOpen, predictions } = this.props
 
     return (
       <Modal
@@ -21,18 +32,46 @@ class ViewModel extends React.Component {
         wrapperStyle={{ width: '800px', maxWidth: '100%' }}
       >
         <div styleName="view-model">
-          <ModelSummary model={model} />
-          <ModelHistory model={model} />
+          {
+            predictions ? (
+              [
+                <ModelSummary key="summary" predictions={predictions} />,
+                <ModelHistory key="history" predictions={predictions} />
+              ]
+            ) : (
+              <Spinner lg show />
+            )
+          }
         </div>
       </Modal>
     )
   }
 }
 
-ViewModel.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  model: PropTypes.object.isRequired,
-  toggle: PropTypes.func.isRequired
+ViewModel.defaultProps = {
+  predictions: null
 }
 
-export default ViewModel
+ViewModel.propTypes = {
+  predictions: PropTypes.array,
+  isOpen: PropTypes.bool.isRequired,
+  model: PropTypes.object.isRequired,
+  toggle: PropTypes.func.isRequired,
+  fetchNBAModel: PropTypes.func.isRequired
+}
+
+const makeMapStateToProps = () => {
+  const getPredictions = makeGetModelPredictions()
+  return ({ routines }) => ({
+    predictions: getPredictions(routines)
+  })
+}
+
+const mapDispatchToProps = {
+  fetchNBAModel
+}
+
+export default connect(
+  makeMapStateToProps,
+  mapDispatchToProps
+)(ViewModel)

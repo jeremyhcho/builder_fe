@@ -1,5 +1,5 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { Row } from 'react-styled-flexboxgrid'
 
 // CSS
@@ -7,6 +7,7 @@ import './ViewModel.scss'
 
 class ModelSummary extends React.Component {
   render () {
+    console.log(this.props.predictions)
     return (
       <div styleName="model-summary">
         <p
@@ -40,6 +41,10 @@ class ModelSummary extends React.Component {
       </div>
     )
   }
+}
+
+ModelSummary.propTypes = {
+  predictions: PropTypes.array.isRequired
 }
 
 export default ModelSummary
