@@ -1,9 +1,9 @@
 .settings-nav {
-  background-color: #fff;
+  background-color: var(--lightest-gray);
   height: 100%;
   width: 180px;
-  border: 1px solid var(--light-gray);
   border-radius: var(--border-radius);
+  padding: 5px 0;
 
   .header {
     text-align: center;
@@ -20,32 +20,32 @@
   .nav-item {
     display: flex;
     align-items: center;
-    padding: 20px;
-    height: 50px;
+    padding: 10px 20px;
     position: relative;
     transition: all 200ms ease;
-    color: var(--dark-gray);
+    color: var(--font-color);
     cursor: pointer;
+    font-weight: 600;
 
     &:hover {
-      color: var(--font-color);
-
       .icon {
-        opacity: 1;
+        opacity: 0.9;
       }
     }
 
     &.selected {
       cursor: default;
-      color: var(--font-color);
-      border-top: 1px solid var(--lightest-gray);
-      border-bottom: 1px solid var(--lightest-gray);
-      border-left: 5px solid var(--red);
+      color: var(--blue);
+      // cursor: default;
+      // color: var(--font-color);
+      // border-top: 1px solid var(--lightest-gray);
+      // border-bottom: 1px solid var(--lightest-gray);
+      // border-left: 5px solid var(--red);
     }
 
     .icon {
       margin-right: 10px;
-      opacity: .4;
+      opacity: .5;
 
       &.selected {
         opacity: 1;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 // Icons
-import RightArrow from 'Assets/Icons/settings/right_arrow.svg'
+// import RightArrow from 'Assets/Icons/settings/right_arrow.svg'
 
 // CSS
 import './SettingsNav.scss'
@@ -18,7 +18,7 @@ class NavItem extends React.Component {
   }
 
   render () {
-    const { name, icon: Icon, selected } = this.props
+    const { name, selected, icon: Icon } = this.props
     const navItemStyle = classNames('nav-item', {
       selected
     })
@@ -29,12 +29,12 @@ class NavItem extends React.Component {
 
     return (
       <div styleName={navItemStyle} onClick={this.handleClick}>
-        <Icon styleName={iconStyle} />
-        {name}
-        {
+        <Icon styleName={iconStyle} width={14} height={14} />
+        <p>{name}</p>
+        {/* {
           selected &&
           <RightArrow style={{ position: 'absolute', right: '5px' }} />
-        }
+        } */}
       </div>
     )
   }
