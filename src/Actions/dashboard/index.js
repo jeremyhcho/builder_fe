@@ -9,6 +9,6 @@ import { apiFetchPublishedAnnouncements } from 'Apis'
 export const fetchDashboardAnnouncements = createRoutine({
   prefix: FETCH_DASHBOARD_ANNOUNCEMENTS,
   api: apiFetchPublishedAnnouncements,
-  reducerKey: { primaryKey: 'dashboard', type: 'fetchDashboardAnnouncements' },
+  reducerKey: ['dashboard', 'fetchDashboardAnnouncements'],
   transform: 'replace'
 })

@@ -81,29 +81,29 @@ class ScheduledModelSelector extends React.Component {
     return (
       <div styleName="model-list" ref={ref => this.modelsList = ref}>
         {
-          this.props.predictions.map(matchModel => (
+          this.props.predictions.map(prediction => (
             <Row
-              key={matchModel.id}
+              key={prediction.id}
               middle='xs'
               styleName="match-model"
-              onClick={(e) => this.changeModel(e, matchModel)}
+              onClick={(e) => this.changeModel(e, prediction)}
             >
               <Col xs={6}>
                 <p className="label">Name</p>
-                <p className="semibold clip">{matchModel.model.name}</p>
+                <p className="semibold clip">{prediction.name}</p>
               </Col>
 
               <Col xs={4}>
                 <p className="label">Type</p>
-                <p className="semibold">{matchModel.model.type[0].toUpperCase() + matchModel.model.type.substr(1)}</p>
+                <p className="semibold">{prediction.type[0].toUpperCase() + prediction.type.substr(1)}</p>
               </Col>
 
               <Col xs={2}>
                 <div ref={ref => this.toggleCol = ref}>
                   <Toggle
-                    name={matchModel.id}
-                    checked={this.checkModelStatus(matchModel.status)}
-                    onChange={() => this.changeModelStatus(matchModel)}
+                    name={prediction.id}
+                    checked={this.checkModelStatus(prediction.status)}
+                    onChange={() => this.changeModelStatus(prediction)}
                   />
                 </div>
               </Col>
