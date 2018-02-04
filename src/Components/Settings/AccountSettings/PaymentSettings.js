@@ -138,7 +138,7 @@ PaymentSettings.propTypes = {
 
 const mapStateToProps = ({ auth, routines }) => ({
   userId: auth.authState.user.id,
-  billing: routines.auth.billing,
+  billing: routines.billing,
   updatingBilling: routines.callingApi.UPDATE_BILLING,
 })
 

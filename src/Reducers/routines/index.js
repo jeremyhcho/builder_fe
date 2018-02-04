@@ -1,4 +1,5 @@
-import * as transform from './stateTransformers'
+// import * as transform from './stateTransformers'
+import transform from './stateTransformers'
 import pathToRegexp from 'path-to-regexp'
 import gameDetails from './gameDetails'
 
@@ -49,20 +50,8 @@ const routines = (state = initialState, action) => {
       }
     }
 
-    case 'SUCCESS': {
-      if (typeof action.transform === 'function') {
-        return transform.customTransform(
-          state, action.key, action.transform(action.response), action.loaderKey)
-      }
-
-      try {
-        return transform[action.transform](state, action.key, action.response, action.loaderKey)
-      } catch ({ response }) {
-        console.error(`${action.loaderKey} succeeded but failed to update.
-          You most likely provided an invalid or incorrect transform key: ${action.transform}`)
-        return { ...state }
-      }
-    }
+    case 'SUCCESS':
+      return transform(state, action.key, action.loaderKey, action.transform, action.response)
 
     case 'FAIL': {
       return {

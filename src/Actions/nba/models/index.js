@@ -24,30 +24,21 @@ import {
 export const fetchNBAModels = createRoutine({
   prefix: FETCH_NBA_MODELS,
   api: getNBAModels,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'models'
-  },
+  reducerKey: ['nba', 'models'],
   transform: 'replace'
 })
 
 export const fetchNBAModel = createRoutine({
   prefix: FETCH_NBA_MODEL,
   api: getNBAModel,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'model'
-  },
+  reducerKey: ['nba', 'model'],
   transform: 'replace'
 })
 
 export const createNBAModel = createRoutine({
   prefix: CREATE_NBA_MODEL,
   api: postNBAModel,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'models'
-  },
+  reducerKey: ['nba', 'models'],
   transform: 'concat',
   onSuccess: () => openSnackbar('Model created', 3000)
 })
@@ -55,10 +46,7 @@ export const createNBAModel = createRoutine({
 export const removeNBAModel = createRoutine({
   prefix: DELETE_NBA_MODEL,
   api: deleteNBAModel,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'models'
-  },
+  reducerKey: ['nba', 'models'],
   transform: 'removeById',
   onSuccess: () => openSnackbar('Model deleted', 3000)
 })
@@ -66,10 +54,7 @@ export const removeNBAModel = createRoutine({
 export const updateNBAModel = createRoutine({
   prefix: UPDATE_NBA_MODEL,
   api: putNBAModel,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'models'
-  },
+  reducerKey: ['nba', 'models'],
   transform: 'updateByIdAndReplace',
   onSuccess: () => openSnackbar('Model updated', 3000)
 })

@@ -15,19 +15,13 @@ import {
 export const fetchNBAPreviousMeetings = createRoutine({
   prefix: FETCH_NBA_PREVIOUS_MEETINGS,
   api: getNBAPreviousMeetings,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'previousMeetings'
-  },
+  reducerKey: ['nba', 'previousMeetings'],
   transform: 'replace'
 })
 
 export const fetchNBAMatchup = createRoutine({
   prefix: FETCH_NBA_MATCHUP,
   api: getNBASummary,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'matchup'
-  },
+  reducerKey: ['nba', 'matchup'],
   transform: 'replace'
 })

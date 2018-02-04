@@ -10,7 +10,7 @@ import { getNBAGames } from 'Apis'
 export const fetchNBAGames = createRoutine({
   prefix: FETCH_NBA_GAMES,
   api: getNBAGames,
-  reducerKey: { primaryKey: 'nba', type: 'games' },
+  reducerKey: ['nba', 'games'],
   transform: (response) => (
     response.map(game => ({
       ...game, date: moment(new Date(game.date))

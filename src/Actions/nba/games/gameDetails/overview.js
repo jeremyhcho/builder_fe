@@ -26,10 +26,7 @@ import {
 export const fetchNBASummary = createRoutine({
   prefix: FETCH_NBA_SUMMARY,
   api: getNBASummary,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'summary'
-  },
+  reducerKey: ['nba', 'summary'],
   transform: 'replace'
 })
 
@@ -37,10 +34,7 @@ export const fetchNBASummary = createRoutine({
 export const fetchNBAQuarters = createRoutine({
   prefix: FETCH_NBA_QUARTERS,
   api: getNBAQuarters,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'quarters'
-  },
+  reducerKey: ['nba', 'quarters'],
   transform: 'replace'
 })
 
@@ -48,10 +42,7 @@ export const fetchNBAQuarters = createRoutine({
 export const fetchNBARecentGames = createRoutine({
   prefix: FETCH_NBA_RECENT_GAMES,
   api: getNBARecentGames,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'recentGames'
-  },
+  reducerKey: ['nba', 'recentGames'],
   transform: 'replace'
 })
 
@@ -59,10 +50,7 @@ export const fetchNBARecentGames = createRoutine({
 export const fetchNBAStartingLineup = createRoutine({
   prefix: FETCH_NBA_STARTING_LINEUP,
   api: getNBAStartingLineup,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'startingLineup'
-  },
+  reducerKey: ['nba', 'startingLineup'],
   transform: 'replace'
 })
 
@@ -70,10 +58,7 @@ export const fetchNBAStartingLineup = createRoutine({
 export const fetchNBAInjuries = createRoutine({
   prefix: FETCH_NBA_INJURIES,
   api: getNBAInjuries,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'injuries'
-  },
+  reducerKey: ['nba', 'injuries'],
   transform: 'replace'
 })
 
@@ -81,10 +66,7 @@ export const fetchNBAInjuries = createRoutine({
 export const fetchNBALines = createRoutine({
   prefix: FETCH_NBA_LINES,
   api: getNBALines,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'lines'
-  },
+  reducerKey: ['nba', 'lines'],
   transform: 'replace'
 })
 
@@ -92,9 +74,6 @@ export const fetchNBALines = createRoutine({
 export const fetchNBACompletedTeamStats = createRoutine({
   prefix: FETCH_NBA_COMPLETED_TEAM_STATS,
   api: getNBACompletedTeamStats,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'completedTeamStats'
-  },
+  reducerKey: ['nba', 'completedTeamStats'],
   transform: 'replace'
 })

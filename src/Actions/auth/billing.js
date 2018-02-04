@@ -28,50 +28,35 @@ import {
 export const createBillingInformation = createRoutine({
   prefix: CREATE_BILLING,
   api: postBillingInformation,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'billing'
-  },
+  reducerKey: ['billing'],
   transform: 'replace'
 })
 
 export const fetchBillingInformation = createRoutine({
   prefix: FETCH_BILLING,
   api: getBillingInformation,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'billing'
-  },
+  reducerKey: ['billing'],
   transform: 'replace'
 })
 
 export const updateBillingInformation = createRoutine({
   prefix: UPDATE_BILLING,
   api: putBillingInformation,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'billing'
-  },
+  reducerKey: ['billing'],
   transform: 'replace'
 })
 
 export const fetchSubscriptionPlan = createRoutine({
   prefix: FETCH_SUBSCRIPTION,
   api: getSubscription,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'subscription'
-  },
+  reducerKey: ['subscription'],
   transform: 'replace'
 })
 
 export const createInitialSubscriptionPlan = createRoutine({
   prefix: CREATE_INITIAL_SUBSCRIPTION,
   api: postSubscription,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'subscription'
-  },
+  reducerKey: ['subscription'],
   transform: (response) => [response],
   onSuccess: () => openSnackbar('Subscription created', 3000)
 })
@@ -79,10 +64,7 @@ export const createInitialSubscriptionPlan = createRoutine({
 export const createSubscriptionPlan = createRoutine({
   prefix: CREATE_SUBSCRIPTION,
   api: postSubscription,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'subscription'
-  },
+  reducerKey: ['subscription'],
   transform: 'concat',
   onSuccess: () => openSnackbar('Subscription created', 3000)
 })
@@ -90,10 +72,7 @@ export const createSubscriptionPlan = createRoutine({
 export const updateSubscriptionPlan = createRoutine({
   prefix: UPDATE_SUBSCRIPTION,
   api: putSubscription,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'subscription'
-  },
+  reducerKey: ['subscription'],
   transform: 'updateByIdAndReplace',
   onSuccess: () => openSnackbar('Subscription updated', 3000)
 })
@@ -101,10 +80,7 @@ export const updateSubscriptionPlan = createRoutine({
 export const deleteSubscriptionPlan = createRoutine({
   prefix: DELETE_SUBSCRIPTION,
   api: deleteSubscription,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'subscription'
-  },
+  reducerKey: ['subscription'],
   transform: 'removeById',
   onSuccess: () => openSnackbar('Subscription canceled', 3000)
 })

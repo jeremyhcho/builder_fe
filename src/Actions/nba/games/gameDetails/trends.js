@@ -15,19 +15,13 @@ import {
 export const fetchNBAPredictability = createRoutine({
   prefix: FETCH_NBA_PREDICTABILITY,
   api: getNBAPredictability,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'predictability'
-  },
+  reducerKey: ['nba', 'predictability'],
   transform: 'replace'
 })
 
 export const fetchNBATrends = createRoutine({
   prefix: FETCH_NBA_TRENDS,
   api: getNBATrends,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'trends'
-  },
+  reducerKey: ['nba', 'trends'],
   transform: 'replace'
 })
