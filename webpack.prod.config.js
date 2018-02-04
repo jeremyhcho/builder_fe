@@ -4,6 +4,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 //
 const dotEnv = new webpack.DefinePlugin({
@@ -115,15 +116,18 @@ const config = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      chunks: ['bundle', 'vendor', 'manifest']
+      chunks: ['bundle', 'vendor', 'manifest'],
+      favicon: 'favicon.png'
     }),
     new HtmlWebpackPlugin({
       filename: 'styleguide.html',
       template: 'src/styleguide.html',
-      chunks: ['styleguide', 'vendor', 'manifest']
+      chunks: ['styleguide', 'vendor', 'manifest'],
+      favicon: 'favicon.png'
     }),
     dotEnv,
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new UglifyJsPlugin()
   ],
   resolve: {
     alias: {

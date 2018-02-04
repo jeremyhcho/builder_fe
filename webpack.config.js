@@ -138,12 +138,14 @@ const config = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      chunks: ['bundle', 'vendor', 'manifest']
+      chunks: ['bundle', 'vendor', 'manifest'],
+      favicon: 'favicon.png'
     }),
     new HtmlWebpackPlugin({
       filename: 'styleguide.html',
       template: 'src/styleguide.html',
-      chunks: ['styleguide', 'vendor', 'manifest']
+      chunks: ['styleguide', 'vendor', 'manifest'],
+      favicon: 'favicon.png'
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

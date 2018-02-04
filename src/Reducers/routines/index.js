@@ -8,7 +8,8 @@ const initialState = {
   nba: {},
   callingApi: {},
   error: {},
-  admin: {}
+  admin: {},
+  dashboard: {}
 }
 
 const routines = (state = initialState, action) => {
