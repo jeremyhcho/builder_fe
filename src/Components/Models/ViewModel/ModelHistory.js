@@ -1,10 +1,13 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import moment from 'moment'
 
 // Components
 import { Checkbox } from 'Components/Common'
+
+// Icons
+import BanIcon from 'Assets/Icons/ban.svg'
 
 // Actions
 
@@ -13,14 +16,47 @@ import './ViewModel.scss'
 
 class ModelHistory extends React.Component {
   state = {
-    checkAll: false
+    checkAll: true,
+    checkScheduled: false,
+    checkClosed: false
   }
 
   handleChange = (field) => {
-    return () => this.setState({ [field]: !this.state[field] })
+    return () => {
+      const defaultState = {
+        checkAll: false,
+        checkScheduled: false,
+        checkClosed: false
+      }
+      if (this.state[field]) {
+        return null
+      }
+
+      return this.setState({
+        ...defaultState,
+        [field]: !this.state[field]
+      })
+    }
+  }
+
+  filteredPredictions () {
+    const { checkScheduled, checkClosed } = this.state
+    const { predictions } = this.props
+
+    if (checkClosed) {
+      return predictions.filter(prediction => prediction.match.status === 'CLOSED')
+    }
+
+    if (checkScheduled) {
+      return predictions.filter(
+        prediction => prediction.match.status === 'SCHEDULED' || prediction.match.status === 'INPROGRESS')
+    }
+
+    return predictions
   }
 
   render () {
+    const filteredPredictions = this.filteredPredictions()
     return (
       <div styleName="model-history">
         <p
@@ -77,32 +113,53 @@ class ModelHistory extends React.Component {
 
           <div styleName="predictions">
             {
-              [1, 2, 3, 4, 5, 6, 7].map(prediction => (
-                <Row center='xs' styleName="prediction-values" key={prediction}>
-                  <Col xs={3}>
-                    <Row around='xs'>
-                      <p className="label">12/18/17</p>
-                      <p className="semibold">WAS @ MIN</p>
-                    </Row>
-                  </Col>
+              filteredPredictions.length ? (
+                this.filteredPredictions().map(prediction => (
+                  <Row center='xs' styleName="prediction-values" key={prediction.id}>
+                    <Col xs={3}>
+                      <Row around='xs'>
+                        <p className="label">
+                          {moment(new Date(prediction.match.date)).format('MM/DD/YY')}
+                        </p>
+                        <p className="semibold">
+                          {prediction.match.away.short_name} @ {prediction.match.home.short_name}
+                        </p>
+                      </Row>
+                    </Col>
 
-                  <Col xsOffset={1} xs={2}>
-                    <p className="semibold">128-114</p>
-                  </Col>
+                    <Col xsOffset={1} xs={2}>
+                      <p className="semibold">
+                        {prediction.away_points}-{prediction.home_points}
+                      </p>
+                    </Col>
 
-                  <Col xs={2}>
-                    <p className="semibold">110-110</p>
-                  </Col>
+                    <Col xs={2}>
+                      <p className="semibold">
+                        {prediction.match.away.points}-{prediction.match.home.points}
+                      </p>
+                    </Col>
 
-                  <Col xs={2}>
-                    <p className="semibold">MIN -4 (+6.1)</p>
-                  </Col>
+                    <Col xs={2}>
+                      <p className="semibold">
+                        Vegas Line Pick
+                      </p>
+                    </Col>
 
-                  <Col xs={2}>
-                    <p className="semibold">LOSS</p>
-                  </Col>
-                </Row>
-              ))
+                    <Col xs={2}>
+                      <p className="semibold">
+                        {prediction.result || '-'}
+                      </p>
+                    </Col>
+                  </Row>
+                ))
+              ) : (
+                <div styleName="missing-predictions">
+                  <BanIcon />
+                  <h4 className="semibold label">
+                    No predictions were found for this model
+                  </h4>
+                </div>
+              )
             }
           </div>
         </div>
@@ -111,4 +168,8 @@ class ModelHistory extends React.Component {
   }
 }
 
-export default connect()(ModelHistory)
+ModelHistory.propTypes = {
+  predictions: PropTypes.array.isRequired
+}
+
+export default ModelHistory
