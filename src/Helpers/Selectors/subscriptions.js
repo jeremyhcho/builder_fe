@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const getSubscriptions = (routines) => routines.auth.subscription
+const getSubscriptions = (routines) => routines.subscription
 
 const makeFilterSubscriptions = () => {
   return createSelector(

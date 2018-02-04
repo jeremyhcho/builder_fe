@@ -40,7 +40,7 @@ SubscriptionSettings.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  billing: routines.auth.billing,
+  billing: routines.billing,
   fetchingSubscription: routines.callingApi.FETCH_SUBSCRIPTION
 })
 
