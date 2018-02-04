@@ -1,20 +1,34 @@
 import { createSelector } from 'reselect'
 
-const getPredictions = (routines) => {
-  return routines.nba.predictions
-}
+// const getPredictions = (routines) => {
+//   return routines.nba.predictions
+// }
+//
+// const getGameId = (routines) => routines.nba.summary.id
+//
+// const makeFindGamePredictions = () => {
+//   return createSelector(
+//     [getPredictions, getGameId],
+//     (predictions, gameId) => (
+//       predictions.find(prediction => (
+//         prediction.match_id === gameId
+//       ))
+//     )
+//   )
+// }
+//
+// export default makeFindGamePredictions
 
-const getGameId = (routines) => routines.nba.summary.id
+const getModel = (routines) => routines.nba.model
 
-const makeFindGamePredictions = () => {
+const makeGetModelPredictions = () => {
   return createSelector(
-    [getPredictions, getGameId],
-    (predictions, gameId) => (
-      predictions.find(prediction => (
-        prediction.match_id === gameId
-      ))
-    )
+    getModel,
+    (model) => {
+      if (!model) return null
+      return model.predictions
+    }
   )
 }
 
-export default makeFindGamePredictions
+export default makeGetModelPredictions
