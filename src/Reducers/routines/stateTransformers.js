@@ -1,88 +1,77 @@
-export const replace = (state, key, response, loaderKey) => ({
-  ...state,
-  [key.primaryKey]: {
-    ...state[key.primaryKey],
-    [key.type]: response
-  },
-  callingApi: {
-    ...state.callingApi,
-    [loaderKey]: false
-  }
-})
-
-export const concat = (state, key, response, loaderKey) => ({
-  ...state,
-  [key.primaryKey]: {
-    ...state[key.primaryKey],
-    [key.type]: [...state[key.primaryKey][key.type], response]
-  },
-  callingApi: {
-    ...state.callingApi,
-    [loaderKey]: false
-  }
-})
-
-export const remove = (state, key, response, loaderKey) => ({
-  ...state,
-  [key.primaryKey]: {
-    ...state[key.primaryKey],
-    [key.type]: null
-  },
-  callingApi: {
-    ...state.callingApi,
-    [loaderKey]: false
-  }
-})
-
-export const removeById = (state, key, response, loaderKey) => ({
-  ...state,
-  [key.primaryKey]: {
-    ...state[key.primaryKey],
-    [key.type]: state[key.primaryKey][key.type].filter(data => data.id !== response.id)
-  },
-  callingApi: {
-    ...state.callingApi,
-    [loaderKey]: false
-  }
-})
-
-export const updateByIdAndReplace = (state, key, response, loaderKey) => ({
-  ...state,
-  [key.primaryKey]: {
-    ...state[key.primaryKey],
-    [key.type]: state[key.primaryKey][key.type].map(data => {
-      if (data.id !== response.id) return data
+const mutate = (response, transformAction, stateKey) => {
+  switch (transformAction) {
+    case 'replace':
       return response
-    })
-  },
-  callingApi: {
-    ...state.callingApi,
-    [loaderKey]: false
-  }
-})
 
-export const updateByIdAndChange = (state, key, response, loaderKey) => ({
-  ...state,
-  [key.primaryKey]: {
-    ...state[key.primaryKey],
-    [key.type]: state[key.primaryKey][key.type].map(data => {
-      if (data.id !== response.id) return data
-      return { ...data, ...response }
-    })
-  },
-  callingApi: {
-    ...state.callingApi,
-    [loaderKey]: false
-  }
-})
+    case 'concat':
+      return [...stateKey, response]
 
-export const customTransform = (state, key, response, loaderKey) => {
-  return ({
-    ...state,
-    [key.primaryKey]: { ...state[key.primaryKey], [key.type]: response },
+    case 'remove':
+      return null
+
+    case 'removeById':
+      return stateKey.filter(data => data.id !== response.id)
+
+    case 'updateByIdAndReplace':
+      return stateKey.map(data => {
+        if (data.id !== response.id) return data
+        return response
+      })
+
+    case 'updateByIdAndChange':
+      return stateKey.map(data => {
+        if (data.id !== response.id) return data
+        return { ...data, ...response }
+      })
+
+    default: {
+      const customTransform = transformAction(response)
+      return { ...stateKey, customTransform }
+    }
+  }
+}
+
+const transform = (state, reducerKey, loaderKey, transformAction, response) => {
+  const oldState = {
+    ...state
+  }
+  console.log(state)
+  console.log('oldState WTF: ', oldState)
+  let newState
+  reducerKey.forEach((key, index, keyList) => {
+    const previousKey = keyList[index - 1]
+    if (!previousKey) {
+      newState = oldState
+      console.log('FIRST KEY IN REDUCERKEY', newState)
+    } else {
+      console.log('The previous key: ', previousKey)
+      newState = newState[previousKey]
+      console.log('NOT FIRST KEY', newState)
+    }
+
+    if (index === keyList.length - 1) {
+      Object.assign(newState, {
+        ...newState,
+        [key]: mutate(response, transformAction, newState)
+      })
+      console.log('MUTATING ON LAST KEY', newState)
+    } else {
+      Object.assign(newState, {
+        ...newState,
+        [key]: {}
+      })
+      console.log('TRAVELING THRU STATE', newState)
+    }
+    console.log('current new State: ', newState)
+  })
+
+  return {
+    ...newState,
     callingApi: {
       ...state.callingApi,
       [loaderKey]: false
     }
-  })
+  }
 }
+
+export default transform

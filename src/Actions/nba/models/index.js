@@ -24,10 +24,11 @@ import {
 export const fetchNBAModels = createRoutine({
   prefix: FETCH_NBA_MODELS,
   api: getNBAModels,
-  reducerKey: {
-    primaryKey: 'nba',
-    type: 'models'
-  },
+  reducerKey: ['nba', 'models'],
+  // reducerKey: {
+  //   primaryKey: 'nba',
+  //   type: 'models'
+  // },
   transform: 'replace'
 })
 
