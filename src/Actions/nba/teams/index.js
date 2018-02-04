@@ -11,10 +11,6 @@ export const fetchNBATeams = createRoutine({
   prefix: FETCH_NBA_TEAMS,
   api: getNBATeams,
   reducerKey: ['nba', 'teams'],
-  // reducerKey: {
-  //   primaryKey: 'nba',
-  //   type: 'teams'
-  // },
   transform: (response) => (
     sortBy(response, (team) => team.wins / team.losses).reverse()
   )
