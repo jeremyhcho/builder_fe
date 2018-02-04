@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const mutate = (response, transformAction, stateKey) => {
   switch (transformAction) {
     case 'replace':
@@ -26,52 +27,61 @@ const mutate = (response, transformAction, stateKey) => {
 
     default: {
       const customTransform = transformAction(response)
-      return { ...stateKey, customTransform }
+      return customTransform
     }
   }
 }
 
 const transform = (state, reducerKey, loaderKey, transformAction, response) => {
-  const oldState = {
-    ...state
+  if (reducerKey.length === 1) {
+    const data = mutate(response, transformAction, state[reducerKey[0]])
+    return {
+      ...state,
+      [reducerKey[0]]: data,
+      callingApi: {
+        ...state.callingApi,
+        [loaderKey]: false
+      }
+    }
   }
-  console.log(state)
-  console.log('oldState WTF: ', oldState)
-  let newState
-  reducerKey.forEach((key, index, keyList) => {
-    const previousKey = keyList[index - 1]
-    if (!previousKey) {
-      newState = oldState
-      console.log('FIRST KEY IN REDUCERKEY', newState)
-    } else {
-      console.log('The previous key: ', previousKey)
-      newState = newState[previousKey]
-      console.log('NOT FIRST KEY', newState)
+
+  let stackedKeys = state
+  for (let i = 0; i < reducerKey.length; i++) {
+    if (i !== 0) {
+      stackedKeys = stackedKeys[reducerKey[i - 1]]
     }
 
-    if (index === keyList.length - 1) {
-      Object.assign(newState, {
-        ...newState,
-        [key]: mutate(response, transformAction, newState)
-      })
-      console.log('MUTATING ON LAST KEY', newState)
-    } else {
-      Object.assign(newState, {
-        ...newState,
-        [key]: {}
-      })
-      console.log('TRAVELING THRU STATE', newState)
-    }
-    console.log('current new State: ', newState)
-  })
+    const currentKey = reducerKey[i]
 
-  return {
-    ...newState,
+    if (i === 0) {
+      Object.assign(state, {
+        ...state,
+        [currentKey]: { ...state[currentKey] }
+      })
+    } else if (i === reducerKey.length - 1) {
+      const data = mutate(response, transformAction, stackedKeys[currentKey])
+
+      Object.assign(stackedKeys, {
+        ...stackedKeys,
+        [currentKey]: data
+      })
+    } else {
+      Object.assign(stackedKeys, {
+        ...stackedKeys,
+        [currentKey]: { ...stackedKeys[currentKey] }
+      })
+    }
+  }
+
+  const RETURNSTATE = {
+    ...state,
     callingApi: {
       ...state.callingApi,
       [loaderKey]: false
     }
   }
+
+  return RETURNSTATE
 }
 
 export default transform
