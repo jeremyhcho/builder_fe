@@ -23,7 +23,7 @@ const Summary = ({ summary }) => {
   if (!summary) return <OverviewSpinner label="Summary" />
   return (
     <Card
-      label={`Summary - ${moment(summary.date, 'YYYY-MM-DD').format('ddd, MMM D, YYYY')}`}
+      label={`Summary - ${moment.tz(new Date(summary.date), 'America/New_York').format('ddd, MMM D, YYYY')}`}
       wrapperStyle={wrapperStyle}
     >
       <Row middle='xs' center='xs' style={{ height: '100%', position: 'relative' }}>

@@ -78,7 +78,7 @@ class MatchupLines extends React.Component {
             <p className="semibold">{lines[0].spread} ({lines[0].spread_odds})</p>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[0].total} ({lines[0].total_odds})</p>
+            <p className="semibold">{lines[0].total}O ({lines[0].total_odds})</p>
           </Col>
         </Row>
 
@@ -98,7 +98,7 @@ class MatchupLines extends React.Component {
             <p className="semibold">{lines[1].spread} ({lines[1].spread_odds})</p>
           </Col>
           <Col xs={3}>
-            <p className="semibold">{lines[1].total} ({lines[1].total_odds})</p>
+            <p className="semibold">{lines[1].total}U ({lines[1].total_odds})</p>
           </Col>
         </Row>
       </Card>

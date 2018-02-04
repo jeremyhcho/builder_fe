@@ -60,7 +60,7 @@ class MatchupDetails extends React.Component {
           }
         </div>
         <Card
-          label={`Match Details - ${moment(matchup.date, 'YYYY-MM-DD').format('ddd, MMM D, YYYY')}`}
+          label={`Match Details - ${moment.tz(new Date(matchup.date), 'America/New_York').format('ddd, MMM D, YYYY')}`}
           wrapperStyle={wrapperStyle}
         >
           <Row middle='xs' style={{ height: '100%', position: 'relative' }}>
