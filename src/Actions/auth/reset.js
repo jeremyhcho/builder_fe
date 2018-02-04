@@ -27,10 +27,7 @@ export const validateResetToken = (params) => ({
 export const changePassword = createRoutine({
   prefix: UPDATE_PASSWORD,
   api: updatePassword,
-  reducerKey: {
-    primaryKey: 'auth',
-    type: 'passwordChanged'
-  },
+  reducerKey: ['passwordChanged']
   transform: 'replace',
   onSuccess: () => openSnackbar('Password changed', 3000)
 })

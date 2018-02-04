@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const mutate = (response, transformAction, stateKey) => {
   switch (transformAction) {
     case 'replace':
@@ -26,8 +25,7 @@ const mutate = (response, transformAction, stateKey) => {
       })
 
     default: {
-      const customTransform = transformAction(response)
-      return customTransform
+      return transformAction(response)
     }
   }
 }
@@ -44,7 +42,7 @@ const transform = (state, reducerKey, loaderKey, transformAction, response) => {
       }
     }
   }
-
+  // Stackedkeys keeps track of the keys in STATE as it loops through the reducerKey array
   let stackedKeys = state
   for (let i = 0; i < reducerKey.length; i++) {
     if (i !== 0) {
