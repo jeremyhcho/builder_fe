@@ -24,7 +24,7 @@ class Announcements extends React.Component {
     return (
       <Card
         label='Announcements'
-        style={{ width: '100%' }}
+        style={{ width: '100%', marginTop: 0 }}
         wrapperStyle={{ padding: '45px 30px', maxHeight: '500px', overflow: 'auto' }}
       >
         <Row styleName='announcements'>

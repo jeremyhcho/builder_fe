@@ -108,7 +108,14 @@ const MainLayout = ({
         }}
       >
         <Header />
-        <div style={{ height: 'calc(100% - 60px)' }}>
+        <div
+          style={{
+            height: 'calc(100% - 95px)',
+            marginTop: '35px',
+            overflowY: 'auto',
+            paddingBottom: '35px'
+          }}
+        >
           <Switch>
             <Route exact path='/' component={Dashboard} />
             <Route path='/admin' component={AdminLayout} />

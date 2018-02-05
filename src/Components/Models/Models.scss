@@ -1,5 +1,5 @@
 .models {
-  padding: 65px;
+  padding-left: 65px;
   height: calc(100% - 60px);
 
   .model-overlay {
@@ -17,8 +17,6 @@
     margin-top: 35px;
     position: relative;
     overflow-x: hidden;
-    height: calc(100vh - 150px);
-    padding-bottom: 45px;
 
     .model-card {
       height: 450px;

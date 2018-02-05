@@ -1,0 +1,66 @@
+.recent-predictions {
+  max-height: 500px;
+  overflow-y: auto;
+
+  .prediction-header {
+    display: flex;
+    padding: 0 25px;
+    margin-bottom: 5px;
+
+    > span {
+      flex: 2;
+    }
+  }
+
+  .prediction {
+    display: flex;
+    position: relative;
+    padding: 20px 25px;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    svg {
+      visibility: hidden;
+      position: absolute;
+      right: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:hover {
+      box-shadow: 0 6px 8px -6px var(--gray);
+
+      svg {
+        visibility: visible;
+      }
+    }
+
+    .result {
+      color: #fff;
+      padding: 2px 3px;
+      border-radius: var(--border-radius);
+      width: 40px;
+
+      &.win {
+        background-color: var(--dark-green);
+      }
+
+      &.tie {
+        background-color: var(--gold);
+      }
+
+      &.loss {
+        background-color: var(--dark-red);
+      }
+    }
+
+    > span {
+      display: flex;
+      flex: 2;
+      text-align: center;
+    }
+  }
+}
