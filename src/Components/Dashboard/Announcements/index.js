@@ -25,7 +25,11 @@ class Announcements extends React.Component {
       <Card
         label='Announcements'
         style={{ width: '100%', marginTop: 0 }}
-        wrapperStyle={{ padding: '45px 30px', maxHeight: '500px', overflow: 'auto' }}
+        wrapperStyle={{
+          padding: '45px 30px',
+          overflowY: 'auto',
+          height: '500px'
+        }}
       >
         <Row styleName='announcements'>
           <Col xs={12}>
