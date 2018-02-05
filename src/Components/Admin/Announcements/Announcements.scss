@@ -1,6 +1,7 @@
 .announcements-container {
   padding: 45px 65px;
   position: relative;
+  max-width: 1300px;
 
   .title {
     display: flex;
@@ -39,4 +40,21 @@
 
 .create-announcements-container {
   padding: 10px 60px;
+  max-width: 1300px;
+
+  .preview {
+    a {
+      color: var(--dark-blue);
+      text-decoration: underline;
+    }
+
+    ol, ul {
+      list-style-position: inside;
+    }
+
+    li {
+      list-style-type: inherit;
+      margin-bottom: 5px;
+    }
+  }
 }

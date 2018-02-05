@@ -104,6 +104,7 @@ class EditAnnouncement extends React.Component {
         <p className='label small'>{moment().format('dddd, MMMM Mo')}</p>
         <h3 className='semibold' style={{ marginTop: '8px' }}>{title}</h3>
         <div
+          styleName='preview'
           style={{ marginTop: '30px' }}
           dangerouslySetInnerHTML={{ __html: body }}
         />
