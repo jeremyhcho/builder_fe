@@ -59,9 +59,25 @@
     }
   }
 
-  .team-ats {
-    .ats-row {
-      
+  .team-ats-container {
+    .ats-row-label {
+      padding: 10px 0;
+      margin: 10px 0;
+    }
+
+    .team-ats {
+      overflow-y: auto;
+      height: 350px;
+
+      .ats-row {
+        background-color: var(--lightest-gray);
+        padding: 10px 0;
+        margin: 10px 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
     }
   }
 }

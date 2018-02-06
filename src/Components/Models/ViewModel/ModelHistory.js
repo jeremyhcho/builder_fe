@@ -21,6 +21,12 @@ class ModelHistory extends React.Component {
     checkClosed: false
   }
 
+  getResult (result) {
+    if (!result) return '-'
+
+    return result[0].toUpperCase() + result.substr(1)
+  }
+
   handleChange = (field) => {
     return () => {
       const defaultState = {
@@ -147,7 +153,7 @@ class ModelHistory extends React.Component {
 
                     <Col xs={2}>
                       <p className="semibold">
-                        {prediction.result || '-'}
+                        {this.getResult(prediction.result)}
                       </p>
                     </Col>
                   </Row>

@@ -47,28 +47,59 @@ class TeamAts extends React.Component {
         label="Results ATS"
         wrapperStyle={{ padding: '25px' }}
       >
-        <div styleName="team-ats">
-          {
-            teamAts.map(ats => (
-              <Row center='xs' styleName="ats-row">
-                <Col xs={3}>
-                  <p>{ats.opposing_team.name}</p>
-                </Col>
+        <div styleName="team-ats-container">
+          <Row center='xs' styleName='ats-row-label'>
+            <Col xs={3}>
+              <p className="semibold label">OPPONENT</p>
+            </Col>
 
-                <Col xs={3}>
-                  <p>{ats.vegas_spread}</p>
-                </Col>
+            <Col xs={3}>
+              <p className="semibold label">VEGAS SPREAD</p>
+            </Col>
 
-                <Col xs={3}>
-                  <p>{ats.actual_spread}</p>
-                </Col>
+            <Col xs={3}>
+              <p className="semibold label">RESULT</p>
+            </Col>
 
-                <Col xs={3}>
-                  <p>{ats.result[0].toUpperCase() + ats.result.substr(1)}</p>
-                </Col>
-              </Row>
-            ))
-          }
+            <Col xs={3}>
+              <p className="semibold label">ATS</p>
+            </Col>
+          </Row>
+          <div styleName="team-ats">
+            {
+              teamAts.map(ats => (
+                <Row
+                  center='xs'
+                  styleName="ats-row"
+                  key={ats.actual_spread + ats.vegas_spread}
+                >
+                  <Col xs={3}>
+                    <p className="semibold">
+                      {ats.opposing_team.name}
+                    </p>
+                  </Col>
+
+                  <Col xs={3}>
+                    <p className="semibold">
+                      {ats.vegas_spread}
+                    </p>
+                  </Col>
+
+                  <Col xs={3}>
+                    <p className="semibold">
+                      {ats.actual_spread}
+                    </p>
+                  </Col>
+
+                  <Col xs={3}>
+                    <p className="semibold">
+                      {ats.result[0].toUpperCase() + ats.result.substr(1)}
+                    </p>
+                  </Col>
+                </Row>
+              ))
+            }
+          </div>
         </div>
       </Card>
     )
