@@ -43,7 +43,10 @@ const TeamDetails = ({ teamDetails }) => {
         </div>
 
         <div styleName="details-card">
-          <h4 className="semibold">{teamDetails.streak.substr(1)}{teamDetails.streak[0].toUpperCase()}</h4>
+          <h4 className="semibold">
+            {teamDetails.streak.substr(1)}
+            {teamDetails.streak[0].toUpperCase()}
+          </h4>
           <p className="semibold label">Streak</p>
         </div>
 

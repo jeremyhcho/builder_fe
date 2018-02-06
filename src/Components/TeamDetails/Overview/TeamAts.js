@@ -71,7 +71,7 @@ class TeamAts extends React.Component {
                 <Row
                   center='xs'
                   styleName="ats-row"
-                  key={ats.actual_spread + ats.vegas_spread}
+                  key={ats.actual_spread}
                 >
                   <Col xs={3}>
                     <p className="semibold">
