@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -67,11 +68,11 @@ class TeamAts extends React.Component {
           </Row>
           <div styleName="team-ats">
             {
-              teamAts.map(ats => (
+              teamAts.map((ats, i) => (
                 <Row
                   center='xs'
                   styleName="ats-row"
-                  key={ats.actual_spread}
+                  key={i}
                 >
                   <Col xs={3}>
                     <p className="semibold">
