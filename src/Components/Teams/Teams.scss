@@ -1,7 +1,8 @@
 .teams-container {
   padding: 60px 65px 30px;
   max-width: 1200px;
-  height: 100%;
+  height: calc(100% - 25px);
+  overflow-y: auto;
 
   .conference {
     .team-item {

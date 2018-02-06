@@ -41,6 +41,9 @@
 
 .matches-container {
   width: 100%;
+  height: calc(100vh - 150px);
+  padding: 0 0 65px 65px;
+  overflow-y: auto;
 
   .day-wrapper {
     margin: 60px 0;

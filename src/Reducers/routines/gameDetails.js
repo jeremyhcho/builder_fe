@@ -11,9 +11,9 @@ const gameDetails = {
   startingLineup: null,
   injuries: null,
   lines: null,
-  completedTeamStats: null,
-  playerStats: null,
   teamStats: null,
+  playerStats: null,
+  teamMatchStats: null,
   keyStats: null,
   trends: null,
   predictability: null

@@ -2,7 +2,7 @@
 import { ROUTINE_INIT } from 'Constants'
 
 const typeErrorMessage = (input, inputType, expectedType, prefix) => {
-  return `Invalid type of ${typeof input} supplied to ${input}, expected ${expectedType} in ${prefix}`
+  return `Invalid type of ${typeof input} supplied to ${input}, expected ${expectedType} in ${prefix}. Got ${inputType}`
 }
 
 const routineErrors = (prefix, api, reducerKey, transform, onSuccess, onFail) => {

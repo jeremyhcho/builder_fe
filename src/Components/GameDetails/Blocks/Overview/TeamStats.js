@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { Card, Spinner } from 'Components/Common'
 
 // Actions
-import { fetchNBACompletedTeamStats } from 'Actions'
+import { fetchNBATeamStats } from 'Actions'
 
 // Helpers
 import { precisionRound, nbaFlatStat } from 'Helpers'
@@ -23,8 +23,8 @@ class TeamStats extends React.Component {
   }
 
   componentDidMount () {
-    const { summary, fetchNBACompletedTeamStats } = this.props
-    fetchNBACompletedTeamStats(summary.away.team_id, summary.home.team_id)
+    const { summary, fetchNBATeamStats } = this.props
+    fetchNBATeamStats(summary.away.team_id, summary.home.team_id)
   }
 
   highlightStat (stat) {
@@ -36,7 +36,7 @@ class TeamStats extends React.Component {
 
     if (!teamStats.length) {
       return (
-        <Card label="Team Stats" wrapperStyle={{ padding: '35px', textAlign: 'center' }}>
+        <Card label="Team Stats" wrapperStyle={{ padding: '65px', textAlign: 'center' }}>
           <Spinner lg show />
         </Card>
       )
@@ -139,16 +139,16 @@ TeamStats.defaultProps = {
 TeamStats.propTypes = {
   teamStats: PropTypes.array,
   summary: PropTypes.object,
-  fetchNBACompletedTeamStats: PropTypes.func.isRequired
+  fetchNBATeamStats: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
   summary: routines.nba.summary,
-  teamStats: routines.nba.completedTeamStats
+  teamStats: routines.nba.teamStats
 })
 
 const mapDispatchToProps = {
-  fetchNBACompletedTeamStats
+  fetchNBATeamStats
 }
 
 export default connect(

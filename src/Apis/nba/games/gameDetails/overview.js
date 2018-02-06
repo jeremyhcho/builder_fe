@@ -31,10 +31,18 @@ export const getNBALines = (matchId) => (
 )
 
 // Team Stats
-export const getNBACompletedTeamStats = (awayTeamId, homeTeamId) => (
-  axios.get('/api/nba/v1/teams/stats', {
+export const getNBATeamStats = (awayTeamId, homeTeamId) => {
+  if (!homeTeamId) {
+    return axios.get('/api/nba/v1/teams/stats', {
+      params: {
+        team_ids: awayTeamId
+      }
+    })
+  }
+
+  return axios.get('/api/nba/v1/teams/stats', {
     params: {
       team_ids: [awayTeamId, homeTeamId]
     }
   })
-)
+}

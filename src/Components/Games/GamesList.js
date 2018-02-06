@@ -50,11 +50,6 @@ class GamesList extends React.Component {
         </p>
 
         <div
-          style={{
-            height: 'calc(100vh - 150px)',
-            padding: '0 0 25px 65px',
-            overflowY: 'auto'
-          }}
           styleName="matches-container"
           ref={ref => {
             this.scroller = ref

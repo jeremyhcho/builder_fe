@@ -1,25 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
-// Actions
-import { fetchNBATeamDetails } from 'Actions'
+import { Row, Col } from 'react-styled-flexboxgrid'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 // Components
 import { Tab, DocumentTitle } from 'Components/Common'
+import Overview from './Overview'
+import Schedule from './Schedule'
+import Roster from './Roster'
+
+// Actions
+import { fetchNBATeamDetails } from 'Actions'
 
 // CSS
 import './TeamDetails.scss'
 
 const tabItems = [
   { label: 'Overview', key: 'overview' },
-  { label: 'Statistics', key: 'stats' },
-  { label: 'Trends', key: 'trends' }
+  { label: 'Schedule', key: 'schedule' },
+  { label: 'Roster', key: 'roster' }
 ]
 
 class TeamDetails extends React.Component {
   componentDidMount () {
     this.props.fetchNBATeamDetails(this.props.match.params.id)
+  }
+
+  handleNavigation = (e, menuItem) => {
+    this.setState({ selected: menuItem.key })
+    this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
   }
 
   render () {
@@ -31,30 +41,57 @@ class TeamDetails extends React.Component {
 
     return (
       <DocumentTitle title='Quartz - NBA Team Details' header='Team Details' backUrl='/teams'>
-        <div styleName='team-container'>
-          <Tab
-            tabs={tabItems}
-            onChange={(menuItem) => this.setState({ selected: menuItem.key })}
-            selectedKey={routeKey}
-            listStyle={{ maxWidth: '560px' }}
-          />
+        <div styleName='team-details'>
+          <Row styleName="tabs">
+            <Col xs={6}>
+              <Tab
+                tabs={tabItems}
+                onChange={this.handleNavigation}
+                selectedKey={routeKey}
+                listStyle={{ maxWidth: '560px' }}
+              />
+            </Col>
+          </Row>
+
+          <div className='matches-scroller' styleName="section">
+            {
+              Object.keys(this.props.teamDetails).length ? (
+                <Switch>
+                  <Route exact path='/teams/:id/overview' component={Overview} />
+                  <Route exact path='/teams/:id/schedule' component={Schedule} />
+                  <Route exact path='/teams/:id/roster' component={Roster} />
+                  <Redirect to={`/teams/${this.props.match.params.id}/overview`} />
+                </Switch>
+              ) : <div />
+            }
+          </div>
         </div>
       </DocumentTitle>
     )
   }
 }
 
+TeamDetails.defaultProps = {
+  teamDetails: {}
+}
+
 TeamDetails.propTypes = {
+  teamDetails: PropTypes.object,
   location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   fetchNBATeamDetails: PropTypes.func.isRequired
 }
+
+const mapStateToProps = ({ routines }) => ({
+  teamDetails: routines.nba.teamDetails
+})
 
 const mapDispatchToProps = {
   fetchNBATeamDetails
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(TeamDetails)

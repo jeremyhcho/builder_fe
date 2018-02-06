@@ -38,7 +38,7 @@ class Teams extends React.Component {
 
     return (
       <DocumentTitle title='Quartz - NBA Teams' header='Teams'>
-        <Row>
+        <Row style={{ height: '100%' }}>
           <Col xs={12}>
             <Row styleName='teams-container'>
               <Conference teams={westTeams} />

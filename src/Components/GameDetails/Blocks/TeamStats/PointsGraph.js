@@ -11,7 +11,7 @@ import { Select, Card, Spinner } from 'Components/Common'
 import './TeamStats.scss'
 
 // Actions
-import { fetchNBATeamStats } from 'Actions'
+import { fetchNBATeamMatchStats } from 'Actions'
 
 // Helpers
 import { colorComparator } from 'Helpers'
@@ -23,12 +23,12 @@ class PointsGraph extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchNBATeamStats, matchId } = this.props
-    fetchNBATeamStats(matchId)
+    const { fetchNBATeamMatchStats, matchId } = this.props
+    fetchNBATeamMatchStats(matchId)
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.summary && newProps.teamStats) {
+    if (newProps.summary && newProps.teamMatchStats) {
       const teamOptions = this.teamOptions(newProps.summary)
 
       this.setState({
@@ -59,11 +59,11 @@ class PointsGraph extends React.Component {
     })
   }
 
-  teamStatsData () {
-    const { teamStats, summary } = this.props
+  teamMatchStatsData () {
+    const { teamMatchStats, summary } = this.props
     const labels = ['Q1', 'Q2', 'Q3', 'Q4']
     const datasets = []
-    if (teamStats && summary) {
+    if (teamMatchStats && summary) {
       const teamPoints = {
         away: { points: [], avg_points: [] },
         home: { points: [], avg_points: [] }
@@ -71,11 +71,11 @@ class PointsGraph extends React.Component {
 
       const colors = this.determineColors()
 
-      Object.keys(teamStats.away).forEach(quarter => {
-        teamPoints.away.points.push(teamStats.away[quarter].points)
-        teamPoints.away.avg_points.push(teamStats.away[quarter].avg_points)
-        teamPoints.home.points.push(teamStats.home[quarter].points)
-        teamPoints.home.avg_points.push(teamStats.home[quarter].avg_points)
+      Object.keys(teamMatchStats.away).forEach(quarter => {
+        teamPoints.away.points.push(teamMatchStats.away[quarter].points)
+        teamPoints.away.avg_points.push(teamMatchStats.away[quarter].avg_points)
+        teamPoints.home.points.push(teamMatchStats.home[quarter].points)
+        teamPoints.home.avg_points.push(teamMatchStats.home[quarter].avg_points)
       })
 
       const awayPoints = {
@@ -157,9 +157,9 @@ class PointsGraph extends React.Component {
   }
 
   render () {
-    const { teamStats, summary } = this.props
+    const { teamMatchStats, summary } = this.props
 
-    if (teamStats && summary) {
+    if (teamMatchStats && summary) {
       return (
         <Card label='Points by quarter'>
           <div styleName="points-graph">
@@ -195,7 +195,7 @@ class PointsGraph extends React.Component {
                 <Line
                   width={600}
                   height={300}
-                  data={this.teamStatsData()}
+                  data={this.teamMatchStatsData()}
                   options={{
                     maintainAspectRatio: false,
                     scales: {
@@ -246,24 +246,24 @@ class PointsGraph extends React.Component {
 }
 
 PointsGraph.defaultProps = {
-  teamStats: null,
+  teamMatchStats: null,
   summary: null
 }
 
 PointsGraph.propTypes = {
-  teamStats: PropTypes.object,
+  teamMatchStats: PropTypes.object,
   summary: PropTypes.object,
-  fetchNBATeamStats: PropTypes.func.isRequired,
+  fetchNBATeamMatchStats: PropTypes.func.isRequired,
   matchId: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
-  teamStats: routines.nba.teamStats,
+  teamMatchStats: routines.nba.teamMatchStats,
   summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {
-  fetchNBATeamStats
+  fetchNBATeamMatchStats
 }
 
 export default connect(

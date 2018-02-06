@@ -9,12 +9,11 @@ import {
   GameLeaders,
   RecentGames,
   StartingLineup,
-  VegasLines,
-  Injuries
+  VegasLines
 } from 'Components/GameDetails/Blocks'
 
 const Overview = ({ match }) => (
-  <Row style={{ maxWidth: '1300px', width: '100%' }}>
+  <Row style={{ maxWidth: '1300px', width: '100%', paddingBottom: '65px' }}>
     <Col xs={12}>
       <Summary />
     </Col>
@@ -37,10 +36,6 @@ const Overview = ({ match }) => (
 
     <Col xs={5}>
       <RecentGames matchId={match.params.id} />
-    </Col>
-
-    <Col xs={7}>
-      <Injuries matchId={match.params.id} />
     </Col>
   </Row>
 )

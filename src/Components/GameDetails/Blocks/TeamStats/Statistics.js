@@ -14,9 +14,9 @@ import { nbaFlatStat, precisionRound } from 'Helpers'
 
 const tenths = precisionRound(1)
 
-const Statistics = ({ teamStats }) => {
-  if (teamStats) {
-    const stats = teamStats.totals
+const Statistics = ({ teamMatchStats }) => {
+  if (teamMatchStats) {
+    const stats = teamMatchStats.totals
     return (
       <Card label="Statistics" wrapperStyle={{ padding: '40px' }} styleName="statistics">
         <Row center='xs'>
@@ -79,15 +79,15 @@ const Statistics = ({ teamStats }) => {
 }
 
 Statistics.defaultProps = {
-  teamStats: null
+  teamMatchStats: null
 }
 
 Statistics.propTypes = {
-  teamStats: PropTypes.object
+  teamMatchStats: PropTypes.object
 }
 
 const mapStateToProps = ({ routines }) => ({
-  teamStats: routines.nba.teamStats,
+  teamMatchStats: routines.nba.teamMatchStats,
 })
 
 export default connect(

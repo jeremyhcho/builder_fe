@@ -1,7 +1,7 @@
 import { axios } from 'Apis'
 
 // team stats
-export const getNBATeamStats = (id) => (
+export const getNBATeamMatchStats = (id) => (
   axios.get(`/api/nba/v1/matches/${id}/team_stats`)
 )
 

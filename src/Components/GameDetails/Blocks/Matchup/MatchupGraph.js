@@ -11,7 +11,7 @@ import { Select, Card, Spinner } from 'Components/Common'
 import './Matchup.scss'
 
 // Actions
-import { fetchNBATeamStats } from 'Actions'
+import { fetchNBATeamMatchStats } from 'Actions'
 
 // Helpers
 import { colorComparator } from 'Helpers'
@@ -23,19 +23,19 @@ class MatchupGraph extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchNBATeamStats, matchup } = this.props
+    const { fetchNBATeamMatchStats, matchup } = this.props
     if (matchup) {
-      fetchNBATeamStats(matchup.id)
+      fetchNBATeamMatchStats(matchup.id)
     }
   }
 
   componentWillReceiveProps (newProps) {
     if (newProps.matchup.id && !this.props.matchup
       || newProps.matchup.id !== this.props.matchup.id) {
-      this.props.fetchNBATeamStats(newProps.matchup.id)
+      this.props.fetchNBATeamMatchStats(newProps.matchup.id)
     }
 
-    if (newProps.matchup && newProps.teamStats) {
+    if (newProps.matchup && newProps.teamMatchStats) {
       const teamOptions = this.teamOptions(newProps.matchup)
 
       this.setState({
@@ -66,11 +66,11 @@ class MatchupGraph extends React.Component {
     })
   }
 
-  teamStatsData () {
-    const { teamStats, matchup } = this.props
+  teamMatchStatsData () {
+    const { teamMatchStats, matchup } = this.props
     const labels = ['Q1', 'Q2', 'Q3', 'Q4']
     const datasets = []
-    if (teamStats && matchup) {
+    if (teamMatchStats && matchup) {
       const teamPoints = {
         away: { points: [], avg_points: [] },
         home: { points: [], avg_points: [] }
@@ -78,11 +78,11 @@ class MatchupGraph extends React.Component {
 
       const colors = this.determineColors()
 
-      Object.keys(teamStats.away).forEach(quarter => {
-        teamPoints.away.points.push(teamStats.away[quarter].points)
-        teamPoints.away.avg_points.push(teamStats.away[quarter].avg_points)
-        teamPoints.home.points.push(teamStats.home[quarter].points)
-        teamPoints.home.avg_points.push(teamStats.home[quarter].avg_points)
+      Object.keys(teamMatchStats.away).forEach(quarter => {
+        teamPoints.away.points.push(teamMatchStats.away[quarter].points)
+        teamPoints.away.avg_points.push(teamMatchStats.away[quarter].avg_points)
+        teamPoints.home.points.push(teamMatchStats.home[quarter].points)
+        teamPoints.home.avg_points.push(teamMatchStats.home[quarter].avg_points)
       })
 
       const awayPoints = {
@@ -164,9 +164,9 @@ class MatchupGraph extends React.Component {
   }
 
   render () {
-    const { teamStats, matchup, fetchingTeamStats } = this.props
+    const { teamMatchStats, matchup, fetchingTeamStats } = this.props
 
-    if (teamStats && matchup && !fetchingTeamStats) {
+    if (teamMatchStats && matchup && !fetchingTeamStats) {
       return (
         <Card label='Points by quarter'>
           <div styleName="points-graph">
@@ -202,7 +202,7 @@ class MatchupGraph extends React.Component {
                 <Line
                   width={600}
                   height={300}
-                  data={this.teamStatsData()}
+                  data={this.teamMatchStatsData()}
                   options={{
                     maintainAspectRatio: false,
                     scales: {
@@ -253,26 +253,26 @@ class MatchupGraph extends React.Component {
 }
 
 MatchupGraph.defaultProps = {
-  teamStats: null,
+  teamMatchStats: null,
   matchup: null,
   fetchingTeamStats: false
 }
 
 MatchupGraph.propTypes = {
-  teamStats: PropTypes.object,
+  teamMatchStats: PropTypes.object,
   matchup: PropTypes.object,
-  fetchNBATeamStats: PropTypes.func.isRequired,
+  fetchNBATeamMatchStats: PropTypes.func.isRequired,
   fetchingTeamStats: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
-  teamStats: routines.nba.teamStats,
+  teamMatchStats: routines.nba.teamMatchStats,
   matchup: routines.nba.matchup,
-  fetchingTeamStats: routines.callingApi.FETCH_NBA_TEAM_STATS
+  fetchingTeamStats: routines.callingApi.FETCH_NBA_TEAM_MATCH_STATS
 })
 
 const mapDispatchToProps = {
-  fetchNBATeamStats
+  fetchNBATeamMatchStats
 }
 
 export default connect(
