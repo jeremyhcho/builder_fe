@@ -30,7 +30,7 @@ class Conference extends React.Component {
     const { teams } = this.props
 
     return (
-      <Col xs={6} styleName='conference'>
+      <Col xs={12} styleName='conference'>
         <p className='semibold'>
           {this.conferenceLabel()}
         </p>

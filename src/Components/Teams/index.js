@@ -38,10 +38,13 @@ class Teams extends React.Component {
 
     return (
       <DocumentTitle title='Quartz - NBA Teams' header='Teams'>
-        <Row>
+        <Row style={{ height: '100%', overflowY: 'auto' }}>
           <Col xs={12}>
-            <Row styleName='teams-container'>
+            <Row styleName='teams-container' style={{ paddingBottom: '35px' }}>
               <Conference teams={westTeams} />
+            </Row>
+
+            <Row styleName='teams-container'>
               <Conference teams={eastTeams} />
             </Row>
           </Col>

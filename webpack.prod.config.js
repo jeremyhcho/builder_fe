@@ -5,8 +5,8 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
-//
 const dotEnv = new webpack.DefinePlugin({
   'process.env': {
     'NODE_ENV': JSON.stringify('production'),
@@ -21,7 +21,7 @@ const VENDOR_LIBS = [
 ]
 
 const config = {
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
     bundle: [
       'babel-polyfill',
@@ -127,7 +127,27 @@ const config = {
     }),
     dotEnv,
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new UglifyJsPlugin()
+    new UglifyJsPlugin({
+      mangle: true,
+      compress: {
+        warnings: false, // Suppress uglification warnings
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true
+      },
+      output: {
+        comments: false,
+      },
+      exclude: [/\.min\.js$/gi] // skip pre-minified libs
+    }),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0
+    })
   ],
   resolve: {
     alias: {

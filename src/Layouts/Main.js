@@ -112,7 +112,6 @@ const MainLayout = ({
           style={{
             height: 'calc(100% - 95px)',
             marginTop: '35px',
-            overflowY: 'auto',
             paddingBottom: '35px'
           }}
         >
