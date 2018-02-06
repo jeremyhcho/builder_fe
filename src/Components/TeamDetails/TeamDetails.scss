@@ -1,1 +1,15 @@
-.team-container {}
+.team-details {
+  padding: 60px 0 30px;
+
+  .tabs {
+    margin-top: 15px;
+    padding: 0 65px;
+  }
+
+  .section {
+    margin-top: 15px;
+    overflow-y: auto;
+    height: calc(100vh - 150px);
+    padding: 0 65px 100px 65px;
+  }
+}

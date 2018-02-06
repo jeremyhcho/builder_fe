@@ -2,20 +2,20 @@ import createRoutine from 'Routines'
 
 // Apis
 import {
-  getNBATeamStats,
+  getNBATeamMatchStats,
   getNBAKeyStats
 } from 'Apis'
 
 // Constants
 import {
-  FETCH_NBA_TEAM_STATS,
+  FETCH_NBA_TEAM_MATCH_STATS,
   FETCH_NBA_KEY_STATS
 } from 'Constants'
 
-export const fetchNBATeamStats = createRoutine({
-  prefix: FETCH_NBA_TEAM_STATS,
-  api: getNBATeamStats,
-  reducerKey: ['nba', 'teamStats'],
+export const fetchNBATeamMatchStats = createRoutine({
+  prefix: FETCH_NBA_TEAM_MATCH_STATS,
+  api: getNBATeamMatchStats,
+  reducerKey: ['nba', 'teamMatchStats'],
   transform: 'replace'
 })
 

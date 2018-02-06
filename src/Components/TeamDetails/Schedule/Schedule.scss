@@ -1,0 +1,44 @@
+.schedule {
+
+  h1 {
+    padding: 25px 0;
+  }
+
+  .header {
+    margin: 20px 0;
+    h4 {
+      color: var(--blue);
+    }
+  }
+
+  .schedule-month {
+    // width: 60%;
+    border-radius: var(--border-radius);
+    margin: 10px 0 20px;
+    padding: 0 10px;
+
+    .row {
+      padding: 10px 10px;
+      margin: 0;
+      // background-color: var(--lightest-gray);
+
+      &.label {
+        border-bottom: 1px solid var(--lightest-gray);
+      }
+
+      &.values {
+        cursor: pointer;
+        background-color: var(--lightest-gray);
+
+        &:hover {
+          transition: all 200ms ease;
+          color: var(--blue);
+        }
+
+        &:nth-child(2n) {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

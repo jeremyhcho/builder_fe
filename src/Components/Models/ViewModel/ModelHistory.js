@@ -21,6 +21,12 @@ class ModelHistory extends React.Component {
     checkClosed: false
   }
 
+  getResult (result) {
+    if (!result) return '-'
+
+    return result[0].toUpperCase() + result.substr(1)
+  }
+
   handleChange = (field) => {
     return () => {
       const defaultState = {
@@ -116,7 +122,7 @@ class ModelHistory extends React.Component {
               filteredPredictions.length ? (
                 this.filteredPredictions().map(prediction => (
                   <Row center='xs' styleName="prediction-values" key={prediction.id}>
-                    <Col xs={3}>
+                    <Col xs={4}>
                       <Row around='xs'>
                         <p className="label">
                           {moment(new Date(prediction.match.date)).format('MM/DD/YY')}
@@ -127,7 +133,7 @@ class ModelHistory extends React.Component {
                       </Row>
                     </Col>
 
-                    <Col xsOffset={1} xs={2}>
+                    <Col xs={2}>
                       <p className="semibold">
                         {prediction.away_points}-{prediction.home_points}
                       </p>
@@ -147,7 +153,7 @@ class ModelHistory extends React.Component {
 
                     <Col xs={2}>
                       <p className="semibold">
-                        {prediction.result || '-'}
+                        {this.getResult(prediction.result)}
                       </p>
                     </Col>
                   </Row>

@@ -8,7 +8,7 @@ import {
   getNBAStartingLineup,
   getNBAInjuries,
   getNBALines,
-  getNBACompletedTeamStats
+  getNBATeamStats
 } from 'Apis'
 
 // Constants
@@ -19,7 +19,7 @@ import {
   FETCH_NBA_STARTING_LINEUP,
   FETCH_NBA_INJURIES,
   FETCH_NBA_LINES,
-  FETCH_NBA_COMPLETED_TEAM_STATS
+  FETCH_NBA_TEAM_STATS
 } from 'Constants'
 
 // Summary
@@ -71,9 +71,9 @@ export const fetchNBALines = createRoutine({
 })
 
 // Team Stats
-export const fetchNBACompletedTeamStats = createRoutine({
-  prefix: FETCH_NBA_COMPLETED_TEAM_STATS,
-  api: getNBACompletedTeamStats,
-  reducerKey: ['nba', 'completedTeamStats'],
+export const fetchNBATeamStats = createRoutine({
+  prefix: FETCH_NBA_TEAM_STATS,
+  api: getNBATeamStats,
+  reducerKey: ['nba', 'teamStats'],
   transform: 'replace'
 })
