@@ -17,9 +17,25 @@
     position: relative;
     padding: 20px 25px;
     cursor: pointer;
+    flex-wrap: wrap;
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    .headers, .cells {
+      width: 100%;
+      display: flex;
+
+      > div {
+        display: flex;
+        flex: 1;
+        margin-left: 10px;
+
+        &:first-child {
+          margin: 0;
+        }
+      }
     }
 
     svg {
@@ -55,12 +71,6 @@
       &.loss {
         background-color: var(--dark-red);
       }
-    }
-
-    > span {
-      display: flex;
-      flex: 2;
-      text-align: center;
     }
   }
 }
