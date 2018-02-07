@@ -36,42 +36,49 @@ class Predictions extends React.Component {
     return (
       <Card label="Prediction" styleName="prediction">
         <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={4}>
+          <Col xs={3}>
             <p className="label small">TEAM</p>
           </Col>
 
-          <Col xs={4}>
+          <Col xs={3}>
             <p className="label small">SPREAD</p>
           </Col>
 
-          <Col xs={4}>
+          <Col xs={3}>
+            <p className="label small">VALUE</p>
+          </Col>
+
+          <Col xs={3}>
             <p className="label small">TOTAL</p>
           </Col>
         </Row>
 
         <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={4}>
+          <Col xs={3}>
             <Row start='xs'>
-              <Col xsOffset={4}>
+              <Col xsOffset={3}>
                 <p className="small label">{summary.away.city}</p>
                 <p className="semibold">{summary.away.name}</p>
               </Col>
             </Row>
           </Col>
 
-          <Col xs={4}>
+          <Col xs={3}>
             <div styleName='spread'>
               <p className="semibold">{prediction.home_points - prediction.away_points}</p>
-              {
-                this.convertNumber(
-                  Number(prediction.vegas_away_line.spread) +
-                  Number(prediction.home_points - prediction.away_points)
-                )
-              }
             </div>
           </Col>
 
-          <Col xs={4}>
+          <Col xs={3}>
+            {
+              this.convertNumber(
+                Number(prediction.vegas_away_line.spread) -
+                Number(prediction.home_points - prediction.away_points)
+              )
+            }
+          </Col>
+
+          <Col xs={3}>
             <div styleName='spread'>
               <p className="semibold">O{prediction.home_points + prediction.away_points}</p>
               {
@@ -85,28 +92,31 @@ class Predictions extends React.Component {
         </Row>
 
         <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={4}>
+          <Col xs={3}>
             <Row start='xs'>
-              <Col xsOffset={4}>
+              <Col xsOffset={3}>
                 <p className="small label">{summary.home.city}</p>
                 <p className="semibold">{summary.home.name}</p>
               </Col>
             </Row>
           </Col>
 
-          <Col xs={4}>
+          <Col xs={3}>
             <div styleName='spread'>
               <p className="semibold">{prediction.away_points - prediction.home_points}</p>
-              {
-                this.convertNumber(
-                  Number(prediction.vegas_home_line.spread) +
-                  Number(prediction.away_points - prediction.home_points)
-                )
-              }
             </div>
           </Col>
 
-          <Col xs={4}>
+          <Col xs={3}>
+            {
+              this.convertNumber(
+                Number(prediction.vegas_home_line.spread) -
+                Number(prediction.away_points - prediction.home_points)
+              )
+            }
+          </Col>
+
+          <Col xs={3}>
             <div styleName='spread'>
               <p className="semibold">U{prediction.home_points + prediction.away_points}</p>
               {
