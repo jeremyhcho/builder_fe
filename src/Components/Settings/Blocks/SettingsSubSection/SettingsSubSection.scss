@@ -1,5 +1,4 @@
 .settings-subsection {
-  padding: 25px;
   background-color: #fff;
   border: 1px solid var(--light-gray);
   border-radius: var(--border-radius);
@@ -8,17 +7,18 @@
 
   .section-header {
     display: flex;
-    margin-bottom: 25px;
+    padding: 25px;
     align-items: center;
   }
 
   .section-body {
+    padding: 25px;
   }
 
   hr {
     border: none;
     height: 1px;
     background-color: var(--lightest-gray);
-    margin: 25px -25px;
+    margin: 0 -25px;
   }
 }

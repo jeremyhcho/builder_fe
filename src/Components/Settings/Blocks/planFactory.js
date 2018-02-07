@@ -1,6 +1,6 @@
 const planFactory = {
   'basic-plan': {
-    price: 25,
+    price: 30,
     features: ['Access to basic models', 'Access to game details', 'Use up to 3 active models']
   },
   'advanced-plan': {
