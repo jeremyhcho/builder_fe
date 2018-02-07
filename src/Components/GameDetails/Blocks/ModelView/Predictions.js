@@ -13,15 +13,15 @@ class Predictions extends React.Component {
   convertNumber (num) {
     if (num > 0) {
       return (
-        <p className="semibold" style={{ color: 'var(--green)' }}>
-          (+{num})
+        <p className="semibold">
+          +{num}
         </p>
       )
     }
 
     return (
-      <p className="semibold" style={{ color: 'var(--red)' }}>
-        ({num})
+      <p className="semibold">
+        {num}
       </p>
     )
   }
@@ -36,40 +36,42 @@ class Predictions extends React.Component {
     return (
       <Card label="Prediction" styleName="prediction">
         <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={3}>
+          <Col xs={4}>
             <p className="label small">TEAM</p>
           </Col>
 
-          <Col xs={3}>
-            <p className="label small">SPREAD</p>
+          <Col xs={4}>
+            <p className="label small">PREDICTED SPREAD</p>
           </Col>
 
-          <Col xs={3}>
-            <p className="label small">VALUE</p>
+          <Col xs={4}>
+            <p className="label small">PREDICTIONVALUE</p>
           </Col>
 
-          <Col xs={3}>
+          {/* <Col xs={4}>
             <p className="label small">TOTAL</p>
-          </Col>
+          </Col> */}
         </Row>
 
         <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={3}>
+          <Col xs={4}>
             <Row start='xs'>
-              <Col xsOffset={3}>
+              <Col xsOffset={4}>
                 <p className="small label">{summary.away.city}</p>
                 <p className="semibold">{summary.away.name}</p>
               </Col>
             </Row>
           </Col>
 
-          <Col xs={3}>
+          <Col xs={4}>
             <div styleName='spread'>
-              <p className="semibold">{prediction.home_points - prediction.away_points}</p>
+              <p className="semibold">
+                {this.convertNumber(prediction.home_points - prediction.away_points)}
+              </p>
             </div>
           </Col>
 
-          <Col xs={3}>
+          <Col xs={4}>
             {
               this.convertNumber(
                 Number(prediction.vegas_away_line.spread) -
@@ -78,7 +80,7 @@ class Predictions extends React.Component {
             }
           </Col>
 
-          <Col xs={3}>
+          {/* <Col xs={4}>
             <div styleName='spread'>
               <p className="semibold">O{prediction.home_points + prediction.away_points}</p>
               {
@@ -88,26 +90,28 @@ class Predictions extends React.Component {
                 )
               }
             </div>
-          </Col>
+          </Col> */}
         </Row>
 
         <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={3}>
+          <Col xs={4}>
             <Row start='xs'>
-              <Col xsOffset={3}>
+              <Col xsOffset={4}>
                 <p className="small label">{summary.home.city}</p>
                 <p className="semibold">{summary.home.name}</p>
               </Col>
             </Row>
           </Col>
 
-          <Col xs={3}>
+          <Col xs={4}>
             <div styleName='spread'>
-              <p className="semibold">{prediction.away_points - prediction.home_points}</p>
+              <p className="semibold">
+                {this.convertNumber(prediction.away_points - prediction.home_points)}
+              </p>
             </div>
           </Col>
 
-          <Col xs={3}>
+          <Col xs={4}>
             {
               this.convertNumber(
                 Number(prediction.vegas_home_line.spread) -
@@ -116,7 +120,7 @@ class Predictions extends React.Component {
             }
           </Col>
 
-          <Col xs={3}>
+          {/* <Col xs={4}>
             <div styleName='spread'>
               <p className="semibold">U{prediction.home_points + prediction.away_points}</p>
               {
@@ -126,7 +130,7 @@ class Predictions extends React.Component {
                 )
               }
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Card>
     )

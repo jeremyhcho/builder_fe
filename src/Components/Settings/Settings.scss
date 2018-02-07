@@ -2,7 +2,6 @@
   display: flex;
   height: 100%;
   margin: 50px;
-  overflow-x: hidden;
   max-width: 1600px;
   min-width: 960px;
 
@@ -10,6 +9,7 @@
     width: calc(100% - 180px);
     padding: 0 10px;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .settings-header {
