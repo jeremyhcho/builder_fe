@@ -9,6 +9,7 @@
   .settings-content {
     width: calc(100% - 180px);
     padding: 0 10px;
+    overflow-y: auto;
   }
 
   .settings-header {

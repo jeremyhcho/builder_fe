@@ -5,6 +5,7 @@ import { Elements } from 'react-stripe-elements'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 // Components
+import { DocumentTitle } from 'Components/Common'
 import SettingsNav from './SettingsNav'
 import AccountSettings from './AccountSettings'
 import SubscriptionSettings from './SubscriptionSettings'
@@ -25,26 +26,28 @@ class Settings extends React.Component {
     const { fetchingBilling, ...routerProps } = this.props
 
     return (
-      <div styleName="settings">
-        <SettingsNav {...routerProps} />
+      <DocumentTitle title='Quartz - Settings' header='Settings' backUrl='/'>
+        <div styleName="settings">
+          <SettingsNav {...routerProps} />
 
-        <div styleName="settings-content">
+          <div styleName="settings-content">
 
-          {
-            fetchingBilling ? (
-              <div />
-            ) : (
-              <Elements>
-                <Switch>
-                  <Route path="/settings/account" component={AccountSettings} />
-                  <Route path="/settings/subscription" component={SubscriptionSettings} />
-                  <Redirect to="/settings/account" />
-                </Switch>
-              </Elements>
-            )
-          }
+            {
+              fetchingBilling ? (
+                <div />
+              ) : (
+                <Elements>
+                  <Switch>
+                    <Route path="/settings/account" component={AccountSettings} />
+                    <Route path="/settings/subscription" component={SubscriptionSettings} />
+                    <Redirect to="/settings/account" />
+                  </Switch>
+                </Elements>
+              )
+            }
+          </div>
         </div>
-      </div>
+      </DocumentTitle>
     )
   }
 }
