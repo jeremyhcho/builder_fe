@@ -2,6 +2,7 @@
 import transform from './stateTransformers'
 import pathToRegexp from 'path-to-regexp'
 import gameDetails from './gameDetails'
+import teamDetails from './teamDetails'
 
 const initialState = {
   auth: {},
@@ -12,17 +13,34 @@ const initialState = {
   dashboard: {}
 }
 
+const filterKeys = (sections, pathname) => {
+  let filterKeys = []
+  sections.forEach(section => {
+    if (!pathToRegexp(section.route).exec(pathname)) {
+      filterKeys = filterKeys.concat(section.keys)
+    }
+  })
+
+  console.log('filteredKeys: ', filterKeys)
+
+  return filterKeys
+}
+
 const routines = (state = initialState, action) => {
   if (action.type === '@@router/LOCATION_CHANGE') {
-    const route = '/games/:id/:section'
+    const gameDetailsRoute = '/games/:id/:section'
+    const teamDetailsRoute = '/teams/:id/:section'
 
-    if (pathToRegexp(route).exec(action.payload.pathname)) {
-      return state
-    }
+    const filteredKeys = filterKeys(
+      [
+        { route: gameDetailsRoute, keys: gameDetails },
+        { route: teamDetailsRoute, keys: teamDetails }
+      ],
+      action.payload.pathname
+    )
 
     const newState = {}
-    const gameDetailKeys = Object.keys(gameDetails)
-    Object.keys(state.nba).filter(key => !gameDetailKeys.includes(key))
+    Object.keys(state.nba).filter(key => !filteredKeys.includes(key))
       .forEach(key => Object.assign(newState, {
         [key]: state.nba[key]
       }))

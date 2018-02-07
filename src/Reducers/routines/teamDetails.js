@@ -1,9 +1,9 @@
-const teamDetails = {
-  teamDetails: null,
-  teamRoster: null,
-  teamStats: null,
-  teamAts: null,
-  teamSchedule: null
-}
+const teamDetails = [
+  'teamDetails',
+  'teamRoster',
+  'teamStats',
+  'teamAts',
+  'teamSchedule'
+]
 
 export default teamDetails
