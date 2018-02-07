@@ -15,13 +15,12 @@ const initialState = {
 
 const filterKeys = (sections, pathname) => {
   let filterKeys = []
+
   sections.forEach(section => {
     if (!pathToRegexp(section.route).exec(pathname)) {
       filterKeys = filterKeys.concat(section.keys)
     }
   })
-
-  console.log('filteredKeys: ', filterKeys)
 
   return filterKeys
 }
