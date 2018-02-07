@@ -1,10 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Card, Button } from 'Components/Common'
 import planFactory from '../planFactory'
+
+// Icons
+import CheckIcon from 'Assets/Icons/green-check.svg'
+// import NewsLetterIcon from 'Assets/Icons/settings/newsletter.svg'
 
 // CSS
 import './SubscriptionPlan.scss'
@@ -13,8 +18,9 @@ import './SubscriptionPlan.scss'
 import { makeFilterSubscriptions } from 'Helpers/Selectors'
 
 const initialStyle = {
-  height: '375px',
-  width: '275px',
+  height: '220px',
+  width: '400px',
+  padding: '30px',
   position: 'relative',
   transition: 'all 200ms ease'
 }
@@ -43,19 +49,31 @@ class SubscriptionPlan extends React.Component {
 
   renderButton () {
     const { subscription, plan, updatingSubscription, creatingSubscription } = this.props
-    const buttonStyle = { marginTop: '20px', width: '50%' }
+    const buttonStyle = {
+      position: 'absolute',
+      bottom: '20px',
+      left: '50%',
+      transform: 'translate(-50%, 0)',
+      width: '85%'
+    }
 
     if (subscription && subscription.plan.id === plan) {
       return (
-        <p style={{ marginTop: '30px', cursor: 'default' }} className="semibold">You are currently on this plan</p>
+        <p
+          style={{ ...buttonStyle, cursor: 'default' }}
+          className="semibold"
+        >
+          You are currently on this plan
+        </p>
       )
     }
 
     if (plan === 'advanced-plan') {
       return (
         <Button
-          style={{ marginTop: '20px' }}
+          style={buttonStyle}
           disabled
+          shouldFitContainer
         >
           This plan is currently unavailable
         </Button>
@@ -70,8 +88,8 @@ class SubscriptionPlan extends React.Component {
 
     return (
       <Button
-        style={buttonStyle}
         onClick={this.selectPlan}
+        style={buttonStyle}
         type="button"
         shouldFitContainer
       >
@@ -83,35 +101,58 @@ class SubscriptionPlan extends React.Component {
   render () {
     const { plan } = this.props
 
+    const PlanIcon = planFactory[plan].icon
+
     return (
       <Card
-        style={{ margin: '0 25px' }}
+        style={{ display: 'inline-block', margin: '10px 20px' }}
         wrapperStyle={this.state.style}
-        styleName="subscription-plan"
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
-        <div style={{ padding: '80px 0 25px' }}>
-          <p className="semibold">{plan.toUpperCase()}</p>
+        <div styleName="subscription-plan">
+          <Row styleName="plan-details" middle='xs' start='xs'>
+            <Col xs={5}>
+              <div styleName="icon-row">
+                <PlanIcon width={35} height={35} />
+              </div>
 
-          <div styleName="price">
-            <span className="semibold" styleName="dollar">$</span>
-            <span className="semibold" styleName="amount">{planFactory[plan].price}</span>
-            <span className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
-          </div>
+              <div>
+                <p className="semibold">{plan.toUpperCase()}</p>
+
+                <div styleName="price">
+                  <span className="semibold" styleName="dollar">$</span>
+                  <span className="semibold" styleName="amount">{planFactory[plan].price}</span>
+                  <span className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
+                </div>
+              </div>
+            </Col>
+
+            <Col xs={7}>
+              <div styleName="features">
+                {
+                  planFactory[plan].features.map(feature => (
+                    <div
+                      key={feature}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '5px'
+                      }}
+                    >
+                      <CheckIcon height={10} width={10} style={{ marginRight: '10px' }} />
+                      <p style={{ textAlign: 'left' }}>{feature}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            {this.renderButton()}
+          </Row>
         </div>
-
-        <div styleName="features">
-          {
-            planFactory[plan].features.map(feature => (
-              <p key={feature} className="small label">{feature}</p>
-            ))
-          }
-        </div>
-
-        <hr />
-
-        {this.renderButton()}
       </Card>
     )
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import SubscriptionPlan from '../../Blocks/SubscriptionPlan'
@@ -48,16 +49,21 @@ class EditSubscription extends React.Component {
           </p>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <SubscriptionPlan
-            plan="basic-plan"
-            select={this.selectPlan}
-          />
-          <SubscriptionPlan
-            plan="advanced-plan"
-            select={this.selectPlan}
-          />
-        </div>
+        <Row center='xs'>
+          <Col>
+            <SubscriptionPlan
+              plan="basic-plan"
+              select={this.selectPlan}
+            />
+          </Col>
+
+          <Col>
+            <SubscriptionPlan
+              plan="advanced-plan"
+              select={this.selectPlan}
+            />
+          </Col>
+        </Row>
 
         <div style={{ textAlign: 'center', margin: '10px 0' }}>
           {

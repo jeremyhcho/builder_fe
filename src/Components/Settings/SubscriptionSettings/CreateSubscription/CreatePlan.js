@@ -1,20 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import SubscriptionPlan from '../../Blocks/SubscriptionPlan'
 
 const CreatePlan = ({ selectPlan }) => (
-  <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <SubscriptionPlan
-      plan="basic-plan"
-      select={selectPlan}
-    />
-    <SubscriptionPlan
-      plan="advanced-plan"
-      select={selectPlan}
-    />
-  </div>
+  <Row center='xs'>
+    <Col>
+      <SubscriptionPlan
+        plan="basic-plan"
+        select={selectPlan}
+      />
+    </Col>
+
+    <Col>
+      <SubscriptionPlan
+        plan="advanced-plan"
+        select={selectPlan}
+      />
+    </Col>
+  </Row>
 )
 
 

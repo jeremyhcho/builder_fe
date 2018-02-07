@@ -1,11 +1,15 @@
+import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
+
 const planFactory = {
   'basic-plan': {
     price: 30,
-    features: ['Access to basic models', 'Access to game details', 'Use up to 3 active models']
+    features: ['Access to basic models', 'Access to predictions', 'Use up to 1 active model'],
+    icon: QuartzIcon
   },
   'advanced-plan': {
     price: 50,
-    features: ['Access to all basic features', 'Unlimited active models', 'Access to advanced models']
+    features: ['Access to all basic features', 'Unlimited active models', 'Access to advanced models'],
+    icon: QuartzIcon
   }
 }
 
