@@ -71,7 +71,7 @@ class EditSubscription extends React.Component {
               <Spinner show xs />
             ) : (
               <Button
-                flat={subscription ? true : subscription}
+                secondary={subscription ? true : subscription}
                 disabled={!subscription}
                 onClick={this.cancelSubscription}
               >
