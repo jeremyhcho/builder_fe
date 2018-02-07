@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 import NavItem from './NavItem'
 
 // Icons
-import AccountEditIcon from 'Assets/Icons/settings/account_edit.svg'
-import SpaceshipIcon from 'Assets/Icons/settings/spaceship.svg'
+import AccountEditIcon from 'Assets/Icons/settings/account-edit.svg'
+import ListIcon from 'Assets/Icons/settings/list.svg'
 
 // CSS
 import './SettingsNav.scss'
@@ -27,7 +27,7 @@ class SettingsNav extends React.Component {
       },
       {
         name: 'Subscription',
-        icon: SpaceshipIcon,
+        icon: ListIcon,
         select: this.select,
         route: 'subscription'
       }
