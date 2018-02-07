@@ -61,7 +61,7 @@ class Predictions extends React.Component {
 
           <Col xs={4}>
             <div styleName='spread'>
-              <p className="semibold">{prediction.away_points - prediction.home_points}</p>
+              <p className="semibold">{prediction.home_points - prediction.away_points}</p>
               {
                 this.convertNumber(
                   Number(prediction.vegas_away_line.spread) +
@@ -96,7 +96,7 @@ class Predictions extends React.Component {
 
           <Col xs={4}>
             <div styleName='spread'>
-              <p className="semibold">{prediction.home_points - prediction.away_points}</p>
+              <p className="semibold">{prediction.away_points - prediction.home_points}</p>
               {
                 this.convertNumber(
                   Number(prediction.vegas_home_line.spread) +
