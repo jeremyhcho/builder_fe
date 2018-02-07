@@ -45,7 +45,7 @@ class Predictions extends React.Component {
           </Col>
 
           <Col xs={4}>
-            <p className="label small">PREDICTIONVALUE</p>
+            <p className="label small">PREDICTION VALUE</p>
           </Col>
 
           {/* <Col xs={4}>
