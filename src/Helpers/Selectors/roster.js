@@ -3,7 +3,7 @@ import { createSelector } from 'reselect'
 
 const getRoster = (routines) => routines.nba.teamRoster
 
-const makeGetModelPredictions = () => {
+const makeSortedRoster = () => {
   return createSelector(
     getRoster,
     (roster) => {
@@ -30,4 +30,4 @@ const makeGetModelPredictions = () => {
   )
 }
 
-export default makeGetModelPredictions
+export default makeSortedRoster

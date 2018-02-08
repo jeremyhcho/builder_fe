@@ -23,6 +23,7 @@ class ViewModel extends React.Component {
 
   render () {
     const { model, toggle, isOpen, predictions } = this.props
+    console.log(predictions)
 
     return (
       <Modal
