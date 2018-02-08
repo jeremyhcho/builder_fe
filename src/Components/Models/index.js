@@ -65,17 +65,18 @@ class Models extends React.Component {
     }
 
     return (
-      <div styleName="model-list">
+      <Row styleName="model-list">
         {
           models.sort((a, b) => a.id - b.id).map((model, index) => (
-            <ModelCard
-              key={model.id}
-              model={model}
-              color={this.renderModelColor(index)}
-            />
+            <Col key={model.id}>
+              <ModelCard
+                model={model}
+                color={this.renderModelColor(index)}
+              />
+            </Col>
           ))
         }
-      </div>
+      </Row>
     )
   }
 

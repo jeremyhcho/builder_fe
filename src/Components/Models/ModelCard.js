@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Line } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 
 // Components
 import { Card, Toggle, Tooltip } from 'Components/Common'
@@ -20,26 +20,8 @@ import './Models.scss'
 // Actions
 import { updateNBAModel } from 'Actions'
 
-const fakeLabel = []
-for (let i = 0; i < 31; i++) {
-  fakeLabel.push(i)
-}
-
-const fakeData = {
-  label: 'fake',
-  fill: true,
-  lineTension: 0.1,
-  cubicInterpolationMode: 'linear',
-  backgroundColor: '#e4e7f2',
-  borderColor: '#6F7CBA',
-  borderWidth: '0.6px',
-  pointBorderColor: '#9EB1BC',
-  pointBackgroundColor: '#9EB1BC',
-  pointBorderWidth: 1,
-  pointHoverRadius: 2,
-  pointRadius: 0,
-  data: fakeLabel.map(num => Math.random() * num)
-}
+// Helpers
+import { nbaFlatStat } from 'Helpers'
 
 class ModelCard extends React.Component {
   state = {
@@ -60,11 +42,13 @@ class ModelCard extends React.Component {
   toggleStatus = () => {
     const { updateNBAModel, model } = this.props
     let newStatus
+
     if (model.status === 'ACTIVE') {
       newStatus = 'INACTIVE'
     } else {
       newStatus = 'ACTIVE'
     }
+
     updateNBAModel(model.id, {
       model: {
         name: model.name,
@@ -93,62 +77,24 @@ class ModelCard extends React.Component {
     return false
   }
 
-  renderOverlayActions () {
-    const overlayStyles = classNames('overlay', {
-      show: this.state.hovered
-    })
+  renderData () {
     const { model } = this.props
-    const { editModel, deleteModel, viewModel } = this.state
+    console.log('model: ', model)
 
-    return (
-      <div styleName={overlayStyles}>
-        <div styleName="overlay-content">
-          <div styleName="toggle">
-            <p className="label">Status</p>
-            <Toggle
-              checked={this.checkModelStatus()}
-              onChange={this.toggleStatus}
-            />
-          </div>
-          <div styleName="buttons" onClick={this.toggleViewModal} data-tip-for={`view-${model.id}`}>
-            <View />
-            <Tooltip id={`view-${model.id}`} pos='top'>View</Tooltip>
-          </div>
-          {
-            viewModel &&
-            <ViewModel
-              isOpen
-              toggle={this.toggleViewModal}
-              model={model}
-            />
-          }
-          <div styleName="buttons" onClick={this.toggleModal} data-tip-for={`edit-${model.id}`}>
-            <Edit />
-            <Tooltip id={`edit-${model.id}`} pos='top'>Edit</Tooltip>
-          </div>
-          {
-            editModel &&
-            <CreateModel
-              isOpen
-              toggle={this.toggleModal}
-              model={model}
-            />
-          }
-          <div styleName="buttons" onClick={this.toggleDeleteModal} data-tip-for={`delete-${model.id}`}>
-            <Delete />
-            <Tooltip id={`delete-${model.id}`} pos='top'>Delete</Tooltip>
-          </div>
-          {
-            deleteModel &&
-            <DeleteModel
-              isOpen
-              toggle={this.toggleDeleteModal}
-              model={model}
-            />
-          }
-        </div>
-      </div>
-    )
+    const labels = Object.keys(model.specs).map(spec => nbaFlatStat(spec))
+    const datasets = [
+      {
+        backgroundColor: 'rgba(60, 144, 223, 0.4)',
+        borderColor: 'rgba(60, 144, 223, 1)',
+        borderWidth: 1,
+        data: Object.values(model.specs).map(specValue => {
+          if (specValue === '0') return '0.1'
+          return specValue
+        })
+      }
+    ]
+
+    return { labels, datasets }
   }
 
   renderColor () {
@@ -160,73 +106,130 @@ class ModelCard extends React.Component {
 
   render () {
     const { model } = this.props
-    const upperStyle = classNames('upper', {
-      disabled: !this.checkModelStatus()
-    })
+    const { editModel, deleteModel, viewModel } = this.state
+
+    const options = {
+      legend: {
+        display: false
+      },
+      animation: {
+        duration: 0
+      },
+      tooltips: {
+        callbacks: {
+          title: (tooltips, chartData) => {
+            const index = tooltips[0].index
+            return `${chartData.labels[index].full}: `
+          },
+          label: (tooltips, chartData) => {
+            const index = tooltips.index
+            const selectedData = chartData.datasets[0].data[index]
+            if (selectedData === '0.1') return '0'
+            return selectedData
+          }
+        }
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontSize: 10,
+            min: 0,
+            max: 10
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontSize: 9,
+            callback: (label) => label.short
+          },
+          gridLines: {
+            display: false
+          }
+        }]
+      }
+    }
 
     return (
-      <div styleName="model-card" onMouseOver={this.handleEnter} onMouseLeave={this.handleLeave}>
-        <Card
-          wrapperStyle={{
-            height: '100%',
-            width: '100%',
-            position: 'relative'
-          }}
-          style={{ marginTop: '0' }}
-        >
-          <Row style={{ backgroundColor: this.renderColor() }} styleName={upperStyle}>
-            <div>
-              <p className="semibold">Standard</p>
-              <h2 className="semibold">{model.name}</h2>
-            </div>
+      <Card
+        style={{
+          margin: '0 15px 15px 0',
+          display: 'inline-block'
+        }}
+      >
+        <div styleName="model-card">
+          <Row
+            styleName="header"
+            style={{
+              backgroundColor: this.renderColor()
+            }}
+          >
+            <Col>
+              <p>{model.type[0].toUpperCase() + model.type.substr(1)}</p>
+              <h4 className="semibold">{model.name}</h4>
+            </Col>
           </Row>
-
-          <div styleName="graph-wrapper" style={{ position: 'absolute' }}>
-            <Line
-              data={{ labels: fakeLabel, datasets: [fakeData] }}
-              options={{
-                maintainAspectRatio: false,
-                legend: {
-                  display: false
-                },
-                scales: {
-                  xAxes: [{
-                    ticks: {
-                      fontSize: 9,
-                      autoSkip: true,
-                      maxTicksLimit: 2
-                    }
-                  }],
-                  yAxes: [{
-                    ticks: {
-                      fontSize: 9
-                    }
-                  }]
-                }
-              }}
+          <Row center='xs' styleName="bar-graph">
+            <Bar
+              data={this.renderData()}
+              options={options}
             />
-          </div>
-
-          <Row styleName='lower'>
-            <Col xs={4}>
-              <p className="semibold label">SEASON</p>
-              <h3 className="semibold">42W - 27L</h3>
-            </Col>
-            <Col xs={4} style={{ marginLeft: '19px' }}>
-              <p className="semibold label">
-                WIN RATE <span style={{ color: 'var(--green)' }}>+3%</span>
-              </p>
-              <h3 className="semibold">60.5%</h3>
-            </Col>
-            <Col xs={3} style={{ marginLeft: '10px' }}>
-              <p className="semibold label">LAST 5</p>
-              <h3 className="semibold">W3 - L2</h3>
-            </Col>
           </Row>
 
-          {this.renderOverlayActions()}
-        </Card>
-      </div>
+          <Row styleName="actions" middle='xs'>
+            <Col xs={6}>
+              <Toggle
+                checked={this.checkModelStatus()}
+                onChange={this.toggleStatus}
+              />
+            </Col>
+
+            <Col xs={2}>
+              <div styleName="buttons" onClick={this.toggleViewModal} data-tip-for={`view-${model.id}`}>
+                <View />
+                <Tooltip id={`view-${model.id}`} pos='top'>View</Tooltip>
+              </div>
+              {
+                viewModel &&
+                <ViewModel
+                  isOpen
+                  toggle={this.toggleViewModal}
+                  model={model}
+                />
+              }
+            </Col>
+
+            <Col xs={2}>
+              <div styleName="buttons" onClick={this.toggleModal} data-tip-for={`edit-${model.id}`}>
+                <Edit />
+                <Tooltip id={`edit-${model.id}`} pos='top'>Edit</Tooltip>
+              </div>
+              {
+                editModel &&
+                <CreateModel
+                  isOpen
+                  toggle={this.toggleModal}
+                  model={model}
+                />
+              }
+            </Col>
+
+            <Col xs={2}>
+              <div styleName="buttons" onClick={this.toggleDeleteModal} data-tip-for={`delete-${model.id}`}>
+                <Delete />
+                <Tooltip id={`delete-${model.id}`} pos='top'>Delete</Tooltip>
+              </div>
+              {
+                deleteModel &&
+                <DeleteModel
+                  isOpen
+                  toggle={this.toggleDeleteModal}
+                  model={model}
+                />
+              }
+            </Col>
+          </Row>
+        </div>
+      </Card>
     )
   }
 }
