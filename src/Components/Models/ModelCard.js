@@ -79,13 +79,12 @@ class ModelCard extends React.Component {
 
   renderData () {
     const { model } = this.props
-    console.log('model: ', model)
 
     const labels = Object.keys(model.specs).map(spec => nbaFlatStat(spec))
     const datasets = [
       {
-        backgroundColor: 'rgba(60, 144, 223, 0.4)',
-        borderColor: 'rgba(60, 144, 223, 1)',
+        backgroundColor: this.renderColor().secondary,
+        borderColor: this.renderColor().primary,
         borderWidth: 1,
         data: Object.values(model.specs).map(specValue => {
           if (specValue === '0') return '0.1'
@@ -99,7 +98,10 @@ class ModelCard extends React.Component {
 
   renderColor () {
     if (this.props.model.status === 'INACTIVE') {
-      return 'var(--gray)'
+      return {
+        primary: '#D1D8DB',
+        secondary: 'rgba(209, 216, 219, 0.4)'
+      }
     }
     return this.props.color
   }
@@ -160,7 +162,7 @@ class ModelCard extends React.Component {
           <Row
             styleName="header"
             style={{
-              backgroundColor: this.renderColor()
+              backgroundColor: this.renderColor().primary
             }}
           >
             <Col>
@@ -237,7 +239,7 @@ class ModelCard extends React.Component {
 ModelCard.propTypes = {
   model: PropTypes.object.isRequired,
   updateNBAModel: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired
+  color: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {
