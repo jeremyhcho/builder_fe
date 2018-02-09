@@ -1,20 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { submit } from 'redux-form'
+import classNames from 'classnames'
 
 // Components
 import { Modal, Button } from 'Components/Common'
+import DeleteForm from './DeleteForm'
 
 // Icons
 import ErrorIcon from 'Assets/Icons/error.svg'
 
-// Actions
-import { removeNBAModel } from 'Actions'
+// CSS
+import './DeleteModel.scss'
 
 class DeleteModel extends React.Component {
-  deleteModel = () => {
-    const { model, removeNBAModel } = this.props
-    removeNBAModel(model.id)
+  state = {
+    renderDeleteField: false
   }
 
   renderFooter () {
@@ -30,11 +32,33 @@ class DeleteModel extends React.Component {
           Cancel
         </Button>,
         <Button
+          type="button"
           danger
           shouldFitContainer
           loading
           key="delete"
         />
+      ]
+    }
+
+    if (this.state.renderDeleteField) {
+      return [
+        <Button
+          flat
+          shouldFitContainer
+          onClick={toggle}
+          key="cancel"
+        >
+          Cancel
+        </Button>,
+        <Button
+          danger
+          onClick={() => this.props.dispatch(submit('deleteModel'))}
+          shouldFitContainer
+          key="delete2"
+        >
+          Delete model
+        </Button>
       ]
     }
 
@@ -49,9 +73,10 @@ class DeleteModel extends React.Component {
       </Button>,
       <Button
         danger
+        type="button"
         shouldFitContainer
-        onClick={this.deleteModel}
-        key="delete"
+        onClick={() => this.setState({ renderDeleteField: true })}
+        key="delete1"
       >
         Delete model
       </Button>
@@ -60,6 +85,10 @@ class DeleteModel extends React.Component {
 
   render () {
     const { isOpen, toggle, model } = this.props
+
+    const formStyle = classNames('delete-form', {
+      show: this.state.renderDeleteField
+    })
 
     return (
       <Modal
@@ -78,6 +107,10 @@ class DeleteModel extends React.Component {
             <span style={{ color: 'var(--red)' }}>Warning</span>
             : A deleted model cannot be restored and all its predictions will be lost.
           </p>
+
+          <div styleName={formStyle}>
+            <DeleteForm model={model} />
+          </div>
         </div>
       </Modal>
     )
@@ -92,19 +125,14 @@ DeleteModel.propTypes = {
   model: PropTypes.object.isRequired,
   toggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  removeNBAModel: PropTypes.func.isRequired,
-  deletingModel: PropTypes.bool
+  deletingModel: PropTypes.bool,
+  dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
   deletingModel: routines.callingApi.DELETE_NBA_MODEL
 })
 
-const mapDispatchToProps = {
-  removeNBAModel
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(DeleteModel)

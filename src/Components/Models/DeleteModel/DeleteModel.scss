@@ -1,0 +1,7 @@
+.delete-form {
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}

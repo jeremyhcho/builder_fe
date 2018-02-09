@@ -22,6 +22,13 @@ export const equality = (inputName) => (value, form) => {
   return `${inputName}s do not match`
 }
 
+export const match = (matchValue) => (value, form, input, name) => {
+  if (matchValue === value) {
+    return null
+  }
+  return `${name}s do not match`
+}
+
 export const minWord = (length) => (value, form, input, name) => {
   const words = value.split(' ')
   if (words.length >= length && words.every(word => word.length)) return null
