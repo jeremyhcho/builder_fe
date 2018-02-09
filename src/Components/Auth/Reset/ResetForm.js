@@ -35,7 +35,7 @@ class ResetForm extends React.Component {
           <Field
             name="Password"
             label="Password"
-            type="Password"
+            type="password"
             isLabelHidden
             component={FieldInput}
             shouldFitContainer
