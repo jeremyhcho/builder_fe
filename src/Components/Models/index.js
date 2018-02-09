@@ -36,7 +36,7 @@ class Models extends React.Component {
       { primary: '#4DA1A9', secondary: 'rgba(77, 161, 169, 0.4)' },
       { primary: '#944654', secondary: 'rgba(148, 70, 84, 0.4)' },
       { primary: '#3A4040', secondary: 'rgba(58, 64, 64, 0.4)' },
-      { primary: '#3C90DF', secondary: 'rgba(60, 144, 223, 1)' }
+      { primary: '#3C90DF', secondary: 'rgba(60, 144, 223, 0.4)' }
     ]
     if (index < 4) return colors[index]
     return colors[index % 4]
