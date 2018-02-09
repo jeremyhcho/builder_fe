@@ -31,6 +31,7 @@ const DeleteForm = ({ model, handleSubmit, error }) => {
         component={FieldInput}
         type="text"
         placeholder="Enter model name"
+        autoComplete="off"
         validate={[presence, matchModelName]}
       />
       {
