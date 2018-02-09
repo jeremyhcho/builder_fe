@@ -121,7 +121,7 @@ class ModelCard extends React.Component {
         callbacks: {
           title: (tooltips, chartData) => {
             const index = tooltips[0].index
-            return `${chartData.labels[index].full}: `
+            return `${chartData.labels[index].full}`
           },
           label: (tooltips, chartData) => {
             const index = tooltips.index
