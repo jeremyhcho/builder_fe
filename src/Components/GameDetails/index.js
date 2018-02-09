@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import moment from 'moment'
 
 // Components
 // import { Spinner } from 'Components/Common'
@@ -43,6 +44,10 @@ class GameDetails extends React.Component {
 
     if (!Object.keys(summary).length || fetchingNewSummary) {
       return <div />
+    }
+
+    if (moment(new Date(summary.date)).diff(moment(), 'days') > 0) {
+      return <Redirect to={{ pathname: '/games' }} />
     }
 
     return (
