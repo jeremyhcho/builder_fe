@@ -3,15 +3,18 @@ import PropTypes from 'prop-types'
 
 import './Card.scss'
 
-const Card = ({ wrapperStyle, label, children, style, ...props }) => (
+const Card = ({ wrapperStyle, label, subText, children, style, ...props }) => (
   <div {...props} style={{ height: '100%', marginTop: '35px', ...style }}>
-    {
-      label && (
-        <p className="semibold" style={{ marginBottom: '5px', marginLeft: '15px' }}>
-          {label}
-        </p>
-      )
-    }
+    <div className="flex" style={{ alignItems: 'center' }}>
+      {
+        label && (
+          <p className="semibold" style={{ marginBottom: '5px', marginLeft: '15px' }}>
+            {label}
+          </p>
+        )
+      }
+      {subText}
+    </div>
     <div styleName="card" style={wrapperStyle}>
       {children}
     </div>
@@ -21,6 +24,7 @@ const Card = ({ wrapperStyle, label, children, style, ...props }) => (
 Card.defaultProps = {
   wrapperStyle: {},
   label: '',
+  subText: null,
   children: null,
   style: {}
 }
@@ -28,6 +32,7 @@ Card.defaultProps = {
 Card.propTypes = {
   wrapperStyle: PropTypes.object,
   label: PropTypes.string,
+  subText: PropTypes.node,
   children: PropTypes.node,
   style: PropTypes.object
 }
