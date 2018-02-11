@@ -50,8 +50,10 @@
 
         .label {
           padding: 15px 15px 7.5px;
+          cursor: default;
           border-bottom: 1px solid var(--lightest-gray);
         }
+
         .value {
           padding: 15px;
         }

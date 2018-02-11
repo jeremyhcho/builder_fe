@@ -39,7 +39,7 @@ class TeamStats extends React.Component {
           label="Team Stats"
           wrapperStyle={{
             textAlign: 'center',
-            padding: '65px'
+            padding: '45px'
           }}
         >
           <Spinner lg show />
@@ -53,7 +53,7 @@ class TeamStats extends React.Component {
       <Card
         label="Team Stats"
         wrapperStyle={{
-          padding: '35px'
+          padding: '15px 25px'
         }}
       >
         <div styleName="team-stats">
