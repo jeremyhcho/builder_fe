@@ -60,7 +60,22 @@ class MatchupDetails extends React.Component {
           }
         </div>
         <Card
-          label={`Match Details - ${moment.tz(new Date(matchup.date), 'America/New_York').format('ddd, MMM D, YYYY')}`}
+          label='Match Details'
+          subText={
+            <p
+              style={{
+                padding: '4px 8px',
+                backgroundColor: 'var(--blue)',
+                color: '#fff',
+                borderRadius: 'var(--border-radius)',
+                fontWeight: '600',
+                margin: '0 0 4px 12px',
+                opacity: '0.7'
+              }}
+            >
+              {moment.tz(new Date(matchup.date), 'America/New_York').format('ddd, MMM D, YYYY')}
+            </p>
+          }
           wrapperStyle={wrapperStyle}
         >
           <Row middle='xs' style={{ height: '100%', position: 'relative' }}>

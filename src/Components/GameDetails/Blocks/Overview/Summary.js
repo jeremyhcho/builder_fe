@@ -21,9 +21,25 @@ const wrapperStyle = {
 
 const Summary = ({ summary }) => {
   if (!summary) return <OverviewSpinner label="Summary" />
+
   return (
     <Card
-      label={`Summary - ${moment.tz(new Date(summary.date), 'America/New_York').format('ddd, MMM D, YYYY')}`}
+      label='Summary'
+      subText={
+        <p
+          style={{
+            padding: '4px 8px',
+            backgroundColor: 'var(--blue)',
+            color: '#fff',
+            borderRadius: 'var(--border-radius)',
+            fontWeight: '600',
+            margin: '0 0 4px 12px',
+            opacity: '0.7'
+          }}
+        >
+          {moment.tz(new Date(summary.date), 'America/New_York').format('ddd, MMM D, YYYY')}
+        </p>
+      }
       wrapperStyle={wrapperStyle}
     >
       <Row middle='xs' center='xs' style={{ height: '100%', position: 'relative' }}>
