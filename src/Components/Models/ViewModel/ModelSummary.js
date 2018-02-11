@@ -18,7 +18,7 @@ class ModelSummary extends React.Component {
 
     const wins = predictions.filter(prediction => prediction.result === 'win').length
     const losses = predictions.filter(prediction => prediction.result === 'loss').length
-    const winrate = tenths((wins / predictions.length) * 100)
+    const winrate = tenths((wins / wins + losses) * 100) || 0
 
     predictions.sort((a, b) => {
       return moment(a.match.date, 'DD MMM YYYY').diff(b.match.date, 'DD MMM YYYY')

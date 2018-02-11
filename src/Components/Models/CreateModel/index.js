@@ -43,16 +43,16 @@ class CreateModel extends React.Component {
         type: 'standard',
         status: true,
         specs: {
-          field_goals_made: 5,
-          three_points_made: 5,
-          field_goals_pct: 5,
-          offensive_rebounds: 5,
-          assists: 5,
-          turnovers: 5,
-          offensive_points_per_possession: 5,
-          defensive_points_per_possession: 5,
-          offensive_rating: 5,
-          defensive_rating: 5
+          field_goals_made: 0,
+          three_points_made: 0,
+          field_goals_pct: 0,
+          offensive_rebounds: 0,
+          assists: 0,
+          turnovers: 0,
+          offensive_points_per_possession: 0,
+          defensive_points_per_possession: 0,
+          offensive_rating: 0,
+          defensive_rating: 0
         }
       })
     }

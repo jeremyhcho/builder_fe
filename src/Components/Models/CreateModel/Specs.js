@@ -33,17 +33,9 @@ class Specs extends React.Component {
     const requiredDifference = specsTotal - 50
 
     if (requiredDifference > 0) {
-      return (
-        <p style={{ color: 'var(--red)' }}>
-          You need to drop {Math.abs(requiredDifference)} points to create your model
-        </p>
-      )
+      return `${Math.abs(requiredDifference)} points exceeded`
     } else if (requiredDifference < 0) {
-      return (
-        <p style={{ color: 'var(--red)' }}>
-          You need to add {Math.abs(requiredDifference)} points to create your model
-        </p>
-      )
+      return `${Math.abs(requiredDifference)} points available`
     }
 
     return null
@@ -114,10 +106,9 @@ class Specs extends React.Component {
             </div>
 
             <div styleName="total-specs">
-              <p>
-                Your model has a spread of <span className="semibold">{specsTotal}</span> total points
+              <p style={{ color: 'var(--red)' }}>
+                {this.getSpecsDifference(specsTotal)}
               </p>
-              {this.getSpecsDifference(specsTotal)}
             </div>
           </div>
         </form>

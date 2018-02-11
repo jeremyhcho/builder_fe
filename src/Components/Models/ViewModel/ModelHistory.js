@@ -135,13 +135,13 @@ class ModelHistory extends React.Component {
 
                     <Col xs={2}>
                       <p className="semibold">
-                        {prediction.away_points}-{prediction.home_points}
+                        {prediction.away_points} - {prediction.home_points}
                       </p>
                     </Col>
 
                     <Col xs={2}>
                       <p className="semibold">
-                        {prediction.match.away.points}-{prediction.match.home.points}
+                        {prediction.match.away.points} - {prediction.match.home.points}
                       </p>
                     </Col>
 
