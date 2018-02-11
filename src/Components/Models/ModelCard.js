@@ -118,31 +118,21 @@ class ModelCard extends React.Component {
         duration: 0
       },
       tooltips: {
-        callbacks: {
-          title: (tooltips, chartData) => {
-            const index = tooltips[0].index
-            return `${chartData.labels[index].full}`
-          },
-          label: (tooltips, chartData) => {
-            const index = tooltips.index
-            const selectedData = chartData.datasets[0].data[index]
-            if (selectedData === '0.1') return '0'
-            return selectedData
-          }
-        }
+        enabled: false,
       },
       scales: {
         yAxes: [{
           ticks: {
             fontSize: 10,
+            padding: 4,
             min: 0,
             max: 10
           }
         }],
         xAxes: [{
           ticks: {
-            fontSize: 9,
-            callback: (label) => label.short
+            fontSize: 7,
+            callback: (label) => label.short,
           },
           gridLines: {
             display: false
@@ -166,10 +156,14 @@ class ModelCard extends React.Component {
             }}
           >
             <Col>
-              <p>{model.type[0].toUpperCase() + model.type.substr(1)}</p>
+              <p>
+                {model.type[0].toUpperCase() + model.type.substr(1)}
+                {!this.checkModelStatus() && ' - Inactive'}
+              </p>
               <h4 className="semibold">{model.name}</h4>
             </Col>
           </Row>
+
           <Row center='xs' styleName="bar-graph">
             <Bar
               data={this.renderData()}
