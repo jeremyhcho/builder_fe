@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Components
-import { Card, Spinner } from 'Components/Common'
+import { Card, Spinner, Tooltip } from 'Components/Common'
 
 // Actions
 import { fetchNBATeamStats } from 'Actions'
@@ -72,13 +72,23 @@ class TeamStats extends React.Component {
           <div styleName="team-stats-row stats">
             {
               Object.keys(awayTeam).map(stat => {
-                if (!nbaFlatStat(stat).short) return null
+                const flatStat = nbaFlatStat(stat)
+                if (!flatStat.short) return null
 
                 return (
                   <div key={stat} styleName="team-stats-column">
-                    <p className="label semibold" styleName="label">
-                      {nbaFlatStat(stat).short}
-                    </p>
+                    <div>
+                      <p
+                        className="label semibold"
+                        data-tip-for={flatStat.short}
+                        styleName="label"
+                      >
+                        {flatStat.short}
+                      </p>
+                      <Tooltip id={flatStat.short} pos="top">
+                        {flatStat.full}
+                      </Tooltip>
+                    </div>
 
                     <p styleName="value">
                       {this.convertStat(stat, awayTeam[stat])}

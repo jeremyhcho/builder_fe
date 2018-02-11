@@ -11,7 +11,7 @@ class Tooltip extends React.Component {
   }
 
   componentDidMount () {
-    this.target = document.querySelector(`[data-tip-for=${this.props.id}]`)
+    this.target = document.querySelector(`[data-tip-for='${this.props.id}']`)
     this.target.addEventListener('mouseenter', this.mouseEnter)
     this.target.addEventListener('mouseleave', this.mouseLeave)
   }

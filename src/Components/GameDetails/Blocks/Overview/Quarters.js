@@ -5,7 +5,7 @@ import { Row } from 'react-styled-flexboxgrid'
 import classNames from 'classnames'
 
 // Components
-import { Card, Button } from 'Components/Common'
+import { Card, Button, Tooltip } from 'Components/Common'
 import OverviewSpinner from './OverviewSpinner'
 
 // CSS
@@ -45,7 +45,7 @@ class Quarters extends React.Component {
     const quarter = quarters[selected]
     return Object.keys(quarter.away).map(stat => {
       return {
-        statKey: nbaFlatStat(stat).short,
+        statKey: nbaFlatStat(stat),
         value: {
           away: this.convertStat(stat, quarter.away[stat]),
           home: this.convertStat(stat, quarter.home[stat])
@@ -124,7 +124,7 @@ class Quarters extends React.Component {
                 <div styleName="stats-list-container stats">
                   {
                     this.quarterStatsFactory('away').map((stats, index, list) => {
-                      if (!stats.statKey) {
+                      if (!stats.statKey.short) {
                         return null
                       }
 
@@ -139,13 +139,19 @@ class Quarters extends React.Component {
                       })
 
                       return (
-                        <div key={stats.statKey} styleName="key-column stats">
-                          <p
-                            styleName="stats-label"
-                            className="label semibold small"
-                          >
-                            {stats.statKey}
-                          </p>
+                        <div key={stats.statKey.short} styleName="key-column stats">
+                          <div className="flex">
+                            <p
+                              data-tip-for={stats.statKey.short}
+                              styleName="stats-label"
+                              className="label semibold small"
+                            >
+                              {stats.statKey.short}
+                            </p>
+                            <Tooltip id={stats.statKey.short} pos="top">
+                              {stats.statKey.full}
+                            </Tooltip>
+                          </div>
 
                           <p
                             styleName={awayStatsStyle}

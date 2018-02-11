@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 // Components
-import { Card } from 'Components/Common'
+import { Card, Tooltip } from 'Components/Common'
 
 // Icons
 import CaratUpIcon from 'Assets/Icons/carat-up.svg'
@@ -102,7 +102,8 @@ class TeamPlayers extends React.Component {
               <div styleName="players-container stats">
                 {
                   Object.keys(playerType[0].statistics).map(statKey => {
-                    if (!nbaFlatStat(statKey).short) return null
+                    const flatStat = nbaFlatStat(statKey)
+                    if (!flatStat.short) return null
 
                     const currentSortStatsKey = sortStatsKey[teamType][this.getPlayerType(index)]
 
@@ -116,30 +117,36 @@ class TeamPlayers extends React.Component {
 
                     return (
                       <div key={statKey} styleName='stat-column'>
-                        {
-                          currentSortStatsKey.stat === statKey ? (
-                            <p
-                              className="semibold label"
-                              styleName={labelStatsStyle}
-                              onClick={
-                                () => this.sortStats(statKey, playerType[0].starter, teamType)
-                              }
-                            >
-                              {nbaFlatStat(statKey).short}
-                              {<CaratUpIcon styleName={caratStyle} width={10} height={10} />}
-                            </p>
-                          ) : (
-                            <p
-                              className="semibold label"
-                              styleName={labelStatsStyle}
-                              onClick={
-                                () => this.sortStats(statKey, playerType[0].starter, teamType)
-                              }
-                            >
-                              {nbaFlatStat(statKey).short}
-                            </p>
-                          )
-                        }
+                        <div className="flex" style={{ transition: 'none' }}>
+                          {
+                            currentSortStatsKey.stat === statKey ? (
+                              <p
+                                className="semibold label"
+                                data-tip-for={`${flatStat.short}-${teamName}-${index}`}
+                                styleName={labelStatsStyle}
+                                onClick={
+                                  () => this.sortStats(statKey, playerType[0].starter, teamType)
+                                }
+                              >
+                                {flatStat.short}
+                                {<CaratUpIcon styleName={caratStyle} width={10} height={10} />}
+                              </p>
+                            ) : (
+                              <p
+                                className="semibold label"
+                                data-tip-for={`${flatStat.short}-${teamName}-${index}`}
+                                styleName={labelStatsStyle}
+                                onClick={
+                                  () => this.sortStats(statKey, playerType[0].starter, teamType)
+                                }
+                              >
+                                {flatStat.short}
+                              </p>
+                            )
+                          }
+                          <Tooltip id={`${flatStat.short}-${teamName}-${index}`} pos="top">{flatStat.full}</Tooltip>
+                        </div>
+
                         {
                           playerType.map((player, statIndex) => {
                             const playersValueStyle = classNames('value stat', {
