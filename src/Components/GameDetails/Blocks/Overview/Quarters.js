@@ -30,6 +30,15 @@ class Quarters extends React.Component {
     this.props.fetchNBAQuarters(this.props.matchId)
   }
 
+  convertStat (stat, value) {
+    if (value === undefined || value === null) return '-'
+
+    let roundedStat = tenths(value)
+    if (stat.includes('pct')) roundedStat = `${roundedStat}%`
+
+    return roundedStat
+  }
+
   quarterStatsFactory () {
     const { quarters } = this.props
     const { selected } = this.state
@@ -38,8 +47,8 @@ class Quarters extends React.Component {
       return {
         statKey: nbaFlatStat(stat).short,
         value: {
-          away: tenths(quarter.away[stat]) === undefined ? '-' : tenths(quarter.away[stat]),
-          home: tenths(quarter.home[stat]) === undefined ? '-' : tenths(quarter.home[stat])
+          away: this.convertStat(stat, quarter.away[stat]),
+          home: this.convertStat(stat, quarter.home[stat])
         }
       }
     })

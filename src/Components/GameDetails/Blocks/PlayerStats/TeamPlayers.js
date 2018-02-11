@@ -48,6 +48,15 @@ class TeamPlayers extends React.Component {
     this.props.changeSortStatsKey(stat, playerType, teamType)
   }
 
+  convertStat (stat, value) {
+    if (value === undefined || value === null) return '-'
+
+    let roundedStat = tenths(value)
+    if (stat.includes('pct')) roundedStat = `${roundedStat}%`
+
+    return roundedStat
+  }
+
   render () {
     const { players, teamName, teamType, sortStatsKey } = this.props
 
@@ -138,8 +147,6 @@ class TeamPlayers extends React.Component {
                               last: statIndex === playerType.length - 1
                             })
 
-                            const roundedStat = tenths(player.statistics[statKey])
-
                             return (
                               <div
                                 key={player.id}
@@ -148,7 +155,7 @@ class TeamPlayers extends React.Component {
                                 onMouseOut={() => this.setState({ highlightedRow: null })}
                               >
                                 <p>
-                                  {roundedStat === undefined ? '-' : roundedStat}
+                                  {this.convertStat(statKey, player.statistics[statKey])}
                                 </p>
                               </div>
                             )

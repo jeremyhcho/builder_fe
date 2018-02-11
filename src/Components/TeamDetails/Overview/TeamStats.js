@@ -21,6 +21,15 @@ class TeamStats extends React.Component {
     this.props.fetchNBATeamStats(this.props.teamId)
   }
 
+  convertStat (stat, value) {
+    if (value === undefined || value === null) return '-'
+
+    let roundedStat = tenths(value)
+    if (stat.includes('pct')) roundedStat = `${roundedStat}%`
+
+    return roundedStat
+  }
+
   render () {
     const { teamStats, teamDetails } = this.props
 
@@ -72,7 +81,7 @@ class TeamStats extends React.Component {
                     </p>
 
                     <p styleName="value">
-                      {tenths(awayTeam[stat])}
+                      {this.convertStat(stat, awayTeam[stat])}
                     </p>
                   </div>
                 )

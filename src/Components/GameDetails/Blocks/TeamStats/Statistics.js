@@ -15,8 +15,18 @@ import { nbaFlatStat, precisionRound } from 'Helpers'
 const tenths = precisionRound(1)
 
 const Statistics = ({ teamMatchStats }) => {
+  const convertStat = (stat, value) => {
+    if (value === undefined || value === null) return '-'
+
+    let roundedStat = tenths(value)
+    if (stat.includes('pct')) roundedStat = `${roundedStat}%`
+
+    return roundedStat
+  }
+
   if (teamMatchStats) {
     const stats = teamMatchStats.totals
+
     return (
       <Card label="Statistics" wrapperStyle={{ padding: '40px' }} styleName="statistics">
         <Row center='xs'>
@@ -43,7 +53,7 @@ const Statistics = ({ teamMatchStats }) => {
                   <Col xs={12} key={stat} styleName="total-row">
                     <Row middle='xs'>
                       <Col xs={3}>
-                        {tenths((awayValue * 100) / 100)}
+                        {convertStat(stat, awayValue)}
                       </Col>
 
                       <Col xs={6}>
@@ -53,7 +63,7 @@ const Statistics = ({ teamMatchStats }) => {
                       </Col>
 
                       <Col xs={3}>
-                        {tenths((homeValue * 100) / 100)}
+                        {convertStat(stat, homeValue)}
                       </Col>
                     </Row>
                   </Col>

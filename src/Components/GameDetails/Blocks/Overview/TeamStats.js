@@ -93,8 +93,13 @@ class TeamStats extends React.Component {
                   last: index === list.length - 1
                 })
 
-                const awayRoundedStat = tenths(teamStats[0][stat])
-                const homeRoundedStat = tenths(teamStats[1][stat])
+                let awayRoundedStat = tenths(teamStats[0][stat])
+                let homeRoundedStat = tenths(teamStats[1][stat])
+
+                if (stat.includes('pct')) {
+                  awayRoundedStat = `${awayRoundedStat}%`
+                  homeRoundedStat = `${homeRoundedStat}%`
+                }
 
                 return (
                   <div styleName="key-column stats" key={stat}>
