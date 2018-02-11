@@ -37,7 +37,7 @@ class CompletedGameDetails extends React.Component {
       <DocumentTitle title='Quartz - NBA Game Details' header='Game Details' backUrl='/games'>
         <div styleName="game-details completed">
           <Row styleName="tabs">
-            <Col xs={6}>
+            <Col xs={12}>
               <Tab
                 tabs={tabItems}
                 selectedKey={routeKey}
@@ -46,6 +46,7 @@ class CompletedGameDetails extends React.Component {
               />
             </Col>
           </Row>
+
           <div className='matches-scroller' styleName="section">
             <Switch>
               <Route exact path='/games/:id/overview' component={Overview} />

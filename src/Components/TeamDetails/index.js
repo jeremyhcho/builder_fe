@@ -43,12 +43,12 @@ class TeamDetails extends React.Component {
       <DocumentTitle title='Quartz - NBA Team Details' header='Team Details' backUrl='/teams'>
         <div styleName='team-details'>
           <Row styleName="tabs">
-            <Col xs={6}>
+            <Col xs={12}>
               <Tab
                 tabs={tabItems}
                 onChange={this.handleNavigation}
                 selectedKey={routeKey}
-                listStyle={{ maxWidth: '560px' }}
+                listStyle={{ maxWidth: '420px', marginTop: '30px' }}
               />
             </Col>
           </Row>

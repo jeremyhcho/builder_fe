@@ -37,12 +37,12 @@ class ScheduledGameDetails extends React.Component {
       <DocumentTitle title='Quartz - NBA Game Details' header='Game Details' backUrl='/games'>
         <div styleName="game-details scheduled">
           <Row styleName="tabs">
-            <Col xs={6}>
+            <Col xs={12}>
               <Tab
                 tabs={tabItems}
                 selectedKey={routeKey}
                 onChange={this.handleNavigation}
-                listStyle={{ maxWidth: '560px' }}
+                listStyle={{ maxWidth: '560px', marginTop: '30px' }}
               />
             </Col>
           </Row>
