@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 // Components
-import { Card, Spinner } from 'Components/Common'
+import { Card, Spinner, Tooltip } from 'Components/Common'
 
 // Actions
 import { fetchNBATeamStats } from 'Actions'
@@ -81,7 +81,8 @@ class TeamStats extends React.Component {
           <div styleName="stats-list-container stats">
             {
               Object.keys(teamStats[0]).map((stat, index, list) => {
-                if (!nbaFlatStat(stat).short) return null
+                const flatStat = nbaFlatStat(stat)
+                if (!flatStat.short) return null
 
                 const awayStatsStyle = classNames('stats-value', {
                   hovered: this.state.highlightedRow === 'away',
@@ -103,12 +104,18 @@ class TeamStats extends React.Component {
 
                 return (
                   <div styleName="key-column stats" key={stat}>
-                    <p
-                      styleName="stats-label"
-                      className="label semibold small"
-                    >
-                      {nbaFlatStat(stat).short}
-                    </p>
+                    <div>
+                      <p
+                        styleName="stats-label"
+                        data-tip-for={flatStat.short}
+                        className="label semibold small"
+                      >
+                        {flatStat.short}
+                      </p>
+                      <Tooltip id={flatStat.short} pos="top">
+                        {flatStat.full}
+                      </Tooltip>
+                    </div>
 
                     <p
                       styleName={awayStatsStyle}
