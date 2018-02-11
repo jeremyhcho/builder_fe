@@ -24,7 +24,6 @@ const Summary = ({ summary }) => {
 
   return (
     <Card
-      label='Summary'
       subText={
         <p
           style={{
@@ -33,8 +32,7 @@ const Summary = ({ summary }) => {
             color: '#fff',
             borderRadius: 'var(--border-radius)',
             fontWeight: '600',
-            margin: '0 0 4px 12px',
-            opacity: '0.7'
+            margin: '0 0 4px 12px'
           }}
         >
           {moment.tz(new Date(summary.date), 'America/New_York').format('ddd, MMM D, YYYY')}

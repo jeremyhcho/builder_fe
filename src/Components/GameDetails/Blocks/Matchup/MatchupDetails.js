@@ -60,7 +60,6 @@ class MatchupDetails extends React.Component {
           }
         </div>
         <Card
-          label='Match Details'
           subText={
             <p
               style={{
@@ -69,8 +68,7 @@ class MatchupDetails extends React.Component {
                 color: '#fff',
                 borderRadius: 'var(--border-radius)',
                 fontWeight: '600',
-                margin: '0 0 4px 12px',
-                opacity: '0.7'
+                margin: '0 0 4px 12px'
               }}
             >
               {moment.tz(new Date(matchup.date), 'America/New_York').format('ddd, MMM D, YYYY')}
