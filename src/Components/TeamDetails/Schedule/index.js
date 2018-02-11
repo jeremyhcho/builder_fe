@@ -27,7 +27,7 @@ class Schedule extends React.Component {
     const lastGameYear = moment(new Date(schedule[months[months.length - 1]][0].date)).format('YYYY')
     return firstGameYear === lastGameYear ?
       firstGameYear :
-      `${firstGameYear}-${lastGameYear}`
+      `${firstGameYear} - ${lastGameYear}`
   }
 
   getMatchType (game) {
@@ -95,7 +95,7 @@ class Schedule extends React.Component {
               <Row styleName="header">
                 <div>
                   <h4 className="semibold">
-                    {month}, {moment(new Date(schedule[month][0].date)).format('YYYY')}
+                    {month} {moment(new Date(schedule[month][0].date)).format('YYYY')}
                   </h4>
                   <p className="label">
                     {schedule[month].length} Games
@@ -144,7 +144,7 @@ class Schedule extends React.Component {
                       </Col>
 
                       <Col xs={2}>
-                        <p>{moment(new Date(game.date)).format('h:mm a')}</p>
+                        <p>{moment(new Date(game.date)).format('h:mm')} EST</p>
                       </Col>
                     </Row>
                   ))

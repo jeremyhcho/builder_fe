@@ -5,22 +5,25 @@
   }
 
   .header {
-    margin: 20px 0;
+    margin: 25px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
     h4 {
       color: var(--blue);
     }
   }
 
   .schedule-month {
-    // width: 60%;
     border-radius: var(--border-radius);
-    margin: 10px 0 20px;
+    margin-bottom: 50px;
     padding: 0 10px;
 
     .row {
       padding: 10px 10px;
       margin: 0;
-      // background-color: var(--lightest-gray);
 
       &.label {
         border-bottom: 1px solid var(--lightest-gray);
