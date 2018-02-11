@@ -1,4 +1,6 @@
-// import * as transform from './stateTransformers'
+// Constants
+import { CLEAR_ROUTINE } from 'Constants'
+
 import transform from './stateTransformers'
 import pathToRegexp from 'path-to-regexp'
 import gameDetails from './gameDetails'
@@ -52,6 +54,10 @@ const routines = (state = initialState, action) => {
     }
   }
 
+  if (action.type === CLEAR_ROUTINE) {
+    return transform(state, action.key, 'clear')
+  }
+
   const type = action.type.slice(action.type.lastIndexOf('/') + 1)
   switch (type) {
     case 'REQUEST': {
@@ -69,7 +75,7 @@ const routines = (state = initialState, action) => {
     }
 
     case 'SUCCESS':
-      return transform(state, action.key, action.loaderKey, action.transform, action.response)
+      return transform(state, action.key, action.transform, action.loaderKey, action.response)
 
     case 'FAIL': {
       return {

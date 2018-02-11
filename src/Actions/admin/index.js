@@ -1,4 +1,4 @@
-import createRoutine from 'Routines'
+import { createRoutine } from 'Routines'
 import { push } from 'react-router-redux'
 
 // Constants

@@ -12,6 +12,7 @@ import './ViewModel.scss'
 
 // Actions
 import { fetchNBAModel } from 'Actions'
+import { clearRoutine } from 'Routines'
 
 // Helpers
 import { makeGetModelPredictions } from 'Helpers/Selectors'
@@ -21,13 +22,19 @@ class ViewModel extends React.Component {
     this.props.fetchNBAModel(this.props.model.id)
   }
 
+  toggleAndClearState () {
+    this.props.clearRoutine(['nba', 'model'])
+
+    this.props.toggle()
+  }
+
   render () {
-    const { model, toggle, isOpen, predictions } = this.props
+    const { model, isOpen, predictions } = this.props
 
     return (
       <Modal
         header={model.name}
-        toggle={toggle}
+        toggle={() => this.toggleAndClearState()}
         isOpen={isOpen}
         wrapperStyle={{ width: '800px', maxWidth: '100%', height: '600px' }}
       >
@@ -59,7 +66,8 @@ ViewModel.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   model: PropTypes.object.isRequired,
   toggle: PropTypes.func.isRequired,
-  fetchNBAModel: PropTypes.func.isRequired
+  fetchNBAModel: PropTypes.func.isRequired,
+  clearRoutine: PropTypes.func.isRequired
 }
 
 const makeMapStateToProps = () => {
@@ -70,7 +78,8 @@ const makeMapStateToProps = () => {
 }
 
 const mapDispatchToProps = {
-  fetchNBAModel
+  fetchNBAModel,
+  clearRoutine
 }
 
 export default connect(

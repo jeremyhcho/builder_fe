@@ -3,6 +3,9 @@ const mutate = (response, transformAction, stateKey) => {
     case 'replace':
       return response
 
+    case 'clear':
+      return null
+
     case 'concat':
       return [...stateKey, response]
 
@@ -30,7 +33,7 @@ const mutate = (response, transformAction, stateKey) => {
   }
 }
 
-const transform = (state, reducerKey, loaderKey, transformAction, response) => {
+const transform = (state, reducerKey, transformAction, loaderKey, response) => {
   if (reducerKey.length === 1) {
     const data = mutate(response, transformAction, state[reducerKey[0]])
     return {
@@ -69,6 +72,10 @@ const transform = (state, reducerKey, loaderKey, transformAction, response) => {
         [currentKey]: { ...stackedKeys[currentKey] }
       })
     }
+  }
+
+  if (transformAction === 'clear') {
+    return { ...state }
   }
 
   const RETURNSTATE = {
