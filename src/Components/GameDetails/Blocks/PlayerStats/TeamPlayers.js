@@ -164,7 +164,7 @@ class TeamPlayers extends React.Component {
                                 <p>
                                   {
                                     player.statistics.minutes === '00:00' ?
-                                      '-' : this.convertStat(statKey, player.statistics[statKey])
+                                      '- -' : this.convertStat(statKey, player.statistics[statKey])
                                   }
                                 </p>
                               </div>
