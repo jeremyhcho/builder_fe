@@ -12,12 +12,11 @@ import { precisionRound } from 'Helpers'
 
 const tenths = precisionRound(1)
 
-class ModelSummary extends React.Component {
-  getRecords () {
-    const { predictions } = this.props
-
+const ModelSummary = ({ predictions }) => {
+  const getRecords = () => {
     const wins = predictions.filter(prediction => prediction.result === 'win').length
     const losses = predictions.filter(prediction => prediction.result === 'loss').length
+    const ties = predictions.filter(prediction => prediction.result === 'tie').length
     const winrate = tenths((wins / wins + losses) * 100) || 0
 
     predictions.sort((a, b) => {
@@ -30,58 +29,39 @@ class ModelSummary extends React.Component {
     const last5Ties = last5Games.tie ? `T${last5Games.tie.length}` : null
 
     const last5 = [last5Wins, last5Losses, last5Ties].filter(result => result)
-
-    return {
-      wins,
-      losses,
-      winrate,
-      last5: last5.length ? last5.join(' - ') : '-'
-    }
+    console.log(last5)
+    return [
+      { label: 'Wins', value: wins },
+      { label: 'Losses', value: losses },
+      { label: 'Ties', value: ties },
+      { label: 'Win Rate', value: `${winrate}%` },
+      { label: 'Last 5', value: last5.length ? last5.join(' - ') : '-' }
+    ]
   }
 
-  render () {
-    const predictionRecords = this.getRecords()
-    return (
-      <div styleName="model-summary">
-        <p
-          className="semibold"
-          styleName="view-label"
-        >
-          Summary
-        </p>
+  return (
+    <div styleName="model-summary">
+      <p
+        className="semibold"
+        styleName="view-label"
+      >
+        Summary
+      </p>
 
-        <Row first='xs'>
-          <div styleName="summary-block">
-            <h4 className="semibold">
-              {predictionRecords.wins}
-            </h4>
-            <p className="label">Wins</p>
-          </div>
-
-          <div styleName="summary-block">
-            <h4 className="semibold">
-              {predictionRecords.losses}
-            </h4>
-            <p className="label">Losses</p>
-          </div>
-
-          <div styleName="summary-block">
-            <h4 className="semibold">
-              {predictionRecords.winrate}%
-            </h4>
-            <p className="label">Win Rate</p>
-          </div>
-
-          <div styleName="summary-block">
-            <h4 className="semibold">
-              {predictionRecords.last5}
-            </h4>
-            <p className="label">Last 5</p>
-          </div>
-        </Row>
-      </div>
-    )
-  }
+      <Row first='xs'>
+        {
+          getRecords().map(block => (
+            <div styleName="summary-block" key={block.label}>
+              <h4 className="semibold">
+                {block.value}
+              </h4>
+              <p className="label">{block.label}</p>
+            </div>
+          ))
+        }
+      </Row>
+    </div>
+  )
 }
 
 ModelSummary.propTypes = {

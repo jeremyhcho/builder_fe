@@ -10,7 +10,7 @@ const nbaFlatStat = (stat) => {
       return { short: 'FGA', full: 'Field goals attempted' }
 
     case 'field_goals_pct':
-      return { short: 'FG%', full: 'Field goal percentage' }
+      return { short: 'FG%', full: 'Field goal %' }
 
     case 'three_points_made':
       return { short: '3PM', full: 'Three point field goals made' }
@@ -19,7 +19,7 @@ const nbaFlatStat = (stat) => {
       return { short: '3PA', full: 'Three point field goals attempted' }
 
     case 'three_points_pct':
-      return { short: '3P%', full: 'Three point field goal percentage' }
+      return { short: '3P%', full: 'Three point field goal %' }
 
     case 'two_points_made':
       return { short: '2FGM', full: 'Two point field goals made' }
@@ -28,7 +28,7 @@ const nbaFlatStat = (stat) => {
       return { short: '2FGA', full: 'Two point field goals attempted' }
 
     case 'two_points_pct':
-      return { short: '2FG%', full: 'Two point field goal percentage' }
+      return { short: '2FG%', full: 'Two point field goal %' }
 
     case 'free_throws_made':
       return { short: 'FTM', full: 'Free throws made' }
@@ -37,7 +37,7 @@ const nbaFlatStat = (stat) => {
       return { short: 'FTA', full: 'Free throws attempted' }
 
     case 'free_throws_pct':
-      return { short: 'FT%', full: 'Free throw percentage' }
+      return { short: 'FT%', full: 'Free throw %' }
 
     case 'offensive_rebounds':
       return { short: 'OREB', full: 'Offensive rebounds' }
@@ -76,16 +76,16 @@ const nbaFlatStat = (stat) => {
       return { short: 'PTS OFF TO', full: 'Points off turnovers' }
 
     case 'effective_fg_pct':
-      return { short: 'eFG%', full: 'Effective field goal percentage' }
+      return { short: 'eFG%', full: 'Effective field goal %' }
 
     case 'points_in_paint':
       return { short: 'PITP', full: 'Points in the paint' }
 
     case 'points_in_paint_pct':
-      return { short: 'PITP%', full: 'Points in paint percentage' }
+      return { short: 'PITP%', full: 'Points in paint %' }
 
     case 'true_shooting_pct':
-      return { short: 'TS%', full: 'True shooting percentage' }
+      return { short: 'TS%', full: 'True shooting %' }
 
     case 'defensive_rating':
       return { short: 'DEFRTG', full: 'Defensive rating' }
@@ -115,10 +115,10 @@ const nbaFlatStat = (stat) => {
       return { short: 'OPPP', full: 'Offensive points per possession' }
 
     case 'second_chance_pct':
-      return { short: '2ND%', full: '2nd Chance point percentage' }
+      return { short: '2ND%', full: '2nd Chance point %' }
 
     case 'fast_break_pct':
-      return { short: 'FB%', full: 'Fast break percentage' }
+      return { short: 'FB%', full: 'Fast break %' }
 
     default: {
       return { short: null, full: null }

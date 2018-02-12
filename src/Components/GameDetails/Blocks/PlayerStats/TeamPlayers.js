@@ -162,7 +162,10 @@ class TeamPlayers extends React.Component {
                                 onMouseOut={() => this.setState({ highlightedRow: null })}
                               >
                                 <p>
-                                  {this.convertStat(statKey, player.statistics[statKey])}
+                                  {
+                                    player.statistics.minutes === '00:00' ?
+                                      '-' : this.convertStat(statKey, player.statistics[statKey])
+                                  }
                                 </p>
                               </div>
                             )

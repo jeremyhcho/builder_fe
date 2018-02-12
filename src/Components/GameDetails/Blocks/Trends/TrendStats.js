@@ -27,8 +27,8 @@ class TrendStats extends React.Component {
     return splitTrend.map(word => word[0].toUpperCase() + word.substr(1)).join(' ')
   }
 
-  calculateWinRate ({ wins, losses, ties }) {
-    const totalGames = wins + losses + ties
+  calculateWinRate ({ wins, losses }) {
+    const totalGames = wins + losses
     const winrate = tenths((wins / totalGames) * 100)
     if (winrate < 50) {
       return (
