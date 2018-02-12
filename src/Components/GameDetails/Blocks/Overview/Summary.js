@@ -47,14 +47,16 @@ const Summary = ({ summary }) => {
             position: 'absolute',
             top: '50%',
             right: '50%',
-            transform: 'translateY(-50%) translateX(-78px)'
+            transform: 'translateY(-50%) translateX(-78px)',
+            display: 'flex',
+            alignItems: 'center'
           }}
         >
           <img
             src={summary.away.image}
             style={{
-              width: '50px',
-              height: '50px',
+              width: '35px',
+              height: '35px',
               marginRight: '15px'
             }}
           />
@@ -86,14 +88,16 @@ const Summary = ({ summary }) => {
             position: 'absolute',
             top: '50%',
             left: '50%',
-            transform: 'translateY(-50%) translateX(78px)'
+            transform: 'translateY(-50%) translateX(78px)',
+            display: 'flex',
+            alignItems: 'center'
           }}
         >
           <img
             src={summary.home.image}
             style={{
-              width: '50px',
-              height: '50px',
+              width: '35px',
+              height: '35px',
               marginLeft: '15px'
             }}
           />
