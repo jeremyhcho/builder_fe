@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { Card } from 'Components/Common'
+import { Card, Spinner } from 'Components/Common'
 
 // CSS
 import './ModelView.scss'
 
-class Predictions extends React.Component {
-  convertNumber (num) {
+const Predictions = ({ prediction, summary }) => {
+  const convertNumber = (num) => {
     if (num > 0) {
       return `+${num}`
     }
@@ -18,115 +18,86 @@ class Predictions extends React.Component {
     return num
   }
 
-  render () {
-    const { summary, prediction } = this.props
-
-    if (!Object.keys(prediction).length) {
-      return <div />
-    }
-
+  if (!Object.keys(prediction).length) {
     return (
-      <Card label="Prediction" styleName="prediction">
-        <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={4}>
-            <p className="label small">TEAM</p>
-          </Col>
-
-          <Col xs={4}>
-            <p className="label small">PREDICTED SPREAD</p>
-          </Col>
-
-          <Col xs={4}>
-            <p className="label small">PREDICTION VALUE</p>
-          </Col>
-
-          {/* <Col xs={4}>
-            <p className="label small">TOTAL</p>
-          </Col> */}
-        </Row>
-
-        <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={4}>
-            <Row start='xs'>
-              <Col xsOffset={4}>
-                <p className="small label">{summary.away.city}</p>
-                <p className="semibold">{summary.away.name}</p>
-              </Col>
-            </Row>
-          </Col>
-
-          <Col xs={4}>
-            <div styleName='spread'>
-              <p className="semibold">
-                {this.convertNumber(prediction.home_points - prediction.away_points)}
-              </p>
-            </div>
-          </Col>
-
-          <Col xs={4}>
-            {
-              this.convertNumber(
-                Number(prediction.vegas_away_line.spread) -
-                Number(prediction.home_points - prediction.away_points)
-              )
-            }
-          </Col>
-
-          {/* <Col xs={4}>
-            <div styleName='spread'>
-              <p className="semibold">O{prediction.home_points + prediction.away_points}</p>
-              {
-                this.convertNumber(
-                  Number(prediction.home_points + prediction.away_points) -
-                  Number(prediction.vegas_home_line.total)
-                )
-              }
-            </div>
-          </Col> */}
-        </Row>
-
-        <Row middle='xs' center='xs' styleName="prediction-section">
-          <Col xs={4}>
-            <Row start='xs'>
-              <Col xsOffset={4}>
-                <p className="small label">{summary.home.city}</p>
-                <p className="semibold">{summary.home.name}</p>
-              </Col>
-            </Row>
-          </Col>
-
-          <Col xs={4}>
-            <div styleName='spread'>
-              <p className="semibold">
-                {this.convertNumber(prediction.away_points - prediction.home_points)}
-              </p>
-            </div>
-          </Col>
-
-          <Col xs={4}>
-            {
-              this.convertNumber(
-                Number(prediction.vegas_home_line.spread) -
-                Number(prediction.away_points - prediction.home_points)
-              )
-            }
-          </Col>
-
-          {/* <Col xs={4}>
-            <div styleName='spread'>
-              <p className="semibold">U{prediction.home_points + prediction.away_points}</p>
-              {
-                this.convertNumber(
-                  Number(prediction.vegas_home_line.total) -
-                  Number(prediction.home_points + prediction.away_points)
-                )
-              }
-            </div>
-          </Col> */}
-        </Row>
+      <Card label="Prediction">
+        <div
+          style={{
+            textAlign: 'center',
+            padding: '35px',
+          }}
+        >
+          <Spinner lg show />
+        </div>
       </Card>
     )
   }
+
+  const predictions = [
+    {
+      city: summary.away.city,
+      name: summary.away.name,
+      predictedSpread: convertNumber(prediction.home_points - prediction.away_points),
+      predictionValue: convertNumber(
+        Number(prediction.vegas_away_line.spread) -
+        Number(prediction.home_points - prediction.away_points)
+      )
+    },
+    {
+      city: summary.home.city,
+      name: summary.home.name,
+      predictedSpread: convertNumber(prediction.away_points - prediction.home_points),
+      predictionValue: convertNumber(
+        Number(prediction.vegas_home_line.spread) -
+        Number(prediction.away_points - prediction.home_points)
+      )
+    }
+  ]
+
+  return (
+    <Card label="Prediction" styleName="prediction">
+      <Row middle='xs' center='xs' styleName="prediction-section">
+        <Col xs={4}>
+          <p className="label small">TEAM</p>
+        </Col>
+
+        <Col xs={4}>
+          <p className="label small">PREDICTED SPREAD</p>
+        </Col>
+
+        <Col xs={4}>
+          <p className="label small">PREDICTION VALUE</p>
+        </Col>
+      </Row>
+
+      {
+        predictions.map(team => (
+          <Row middle='xs' center='xs' styleName="prediction-section" key={team.name}>
+            <Col xs={4}>
+              <Row start='xs'>
+                <Col xsOffset={4}>
+                  <p className="small label">{team.city}</p>
+                  <p className="semibold">{team.name}</p>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col xs={4}>
+              <p className="semibold">
+                {team.predictedSpread}
+              </p>
+            </Col>
+
+            <Col xs={4}>
+              <p className="semibold">
+                {team.predictionValue}
+              </p>
+            </Col>
+          </Row>
+        ))
+      }
+    </Card>
+  )
 }
 
 Predictions.defaultProps = {
