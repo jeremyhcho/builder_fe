@@ -93,6 +93,7 @@ class SpreadPrediction extends React.Component {
         backgroundColor: '#3C90DF',
         borderColor: '#3C90DF',
         pointRadius: 1,
+        pointHitRadius: 2,
         pointBackgroundColor: '#3C90DF',
         lineTension: 0,
         showLine: false
@@ -116,6 +117,7 @@ class SpreadPrediction extends React.Component {
         cubicInterpolationMode: 'linear',
         spanGaps: true,
         pointRadius: 0,
+        pointHitRadius: 0,
         borderColor: selected === 'away' ? colors.awayColor : colors.homeColor,
         backgroundColor: selected === 'away' ? colors.awayColor : colors.homeColor
       },
@@ -128,6 +130,7 @@ class SpreadPrediction extends React.Component {
         )),
         lineTension: 0,
         pointRadius: 0,
+        pointHitRadius: 0,
         borderDash: [10, 5],
         backgroundColor: 'transparent'
       }
