@@ -46,7 +46,7 @@ const Matchup = ({ previousMeetings, summary }) => {
           <MatchupLines />
         </Col>
 
-        <Col xs={6} style={{ paddingBottom: '50px' }}>
+        <Col xs={6} style={{ paddingBottom: '35px' }}>
           <MatchupKeyStats />
         </Col>
       </Row>
