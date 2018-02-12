@@ -53,7 +53,7 @@ const Predictions = ({ prediction, summary }) => {
     {
       city: summary.home.city,
       name: summary.home.name,
-      predictedSpread: convertNumber(prediction.away_points - prediction.home_points),
+      predictedSpread: convertNumber(prediction.away_points - prediction.home_points) || 'EVEN',
       predictionValue: convertNumber(
         Number(prediction.vegas_home_line.spread) -
         Number(prediction.away_points - prediction.home_points)

@@ -12,10 +12,8 @@ import { precisionRound } from 'Helpers'
 
 const tenths = precisionRound(1)
 
-class ModelDetails extends React.Component {
-  getModelRecords () {
-    const { selectedModel } = this.props
-
+const ModelDetails = ({ selectedModel }) => {
+  const getModelRecords = () => {
     const predictions = selectedModel.predictions.filter(prediction => prediction.result)
     const predictionResults = groupBy(predictions, prediction => {
       if (!prediction.result) return 'TBD'
@@ -25,7 +23,7 @@ class ModelDetails extends React.Component {
     const wins = predictionResults.win ? predictionResults.win.length : 0
     const losses = predictionResults.loss ? predictionResults.loss.length : 0
     const ties = predictionResults.tie ? predictionResults.tie.length : 0
-    const winRate = wins + losses + ties > 0 ? tenths((wins / (wins + losses + ties)) * 100) : null
+    const winRate = wins + losses > 0 ? tenths((wins / (wins + losses)) * 100) : null
 
     let streak = 0
     const recentPrediction = predictions[predictions.length - 1]
@@ -52,52 +50,58 @@ class ModelDetails extends React.Component {
     }
   }
 
-  render () {
-    const { selectedModel } = this.props
+  const getStreakColor = (streak) => {
+    if (streak[0] === 'W') return 'var(--green)'
+    else if (streak[0] === 'L') return 'var(--red)'
 
-    if (!Object.keys(selectedModel).length) {
-      return <div />
-    }
-
-    const modelRecords = this.getModelRecords()
-
-    return (
-      <Row middle='xs' between='xs' styleName="model-stats">
-        <div styleName="stats-card">
-          <h4 className="semibold">{selectedModel.type[0].toUpperCase() + selectedModel.type.substr(1)}</h4>
-          <p className="label">Type</p>
-        </div>
-
-        <div styleName="stats-card">
-          <h4 className="semibold">
-            {modelRecords.wins}W - {modelRecords.losses}L
-          </h4>
-          <p className="label">Record</p>
-        </div>
-
-        <div styleName="stats-card">
-          <h4 className="semibold">
-            {modelRecords.winRate}
-          </h4>
-          <p className="label">Win %</p>
-        </div>
-
-        <div styleName="stats-card">
-          <h4 className="semibold">
-            {modelRecords.streak}
-          </h4>
-          <p className="label">Streak</p>
-        </div>
-
-        <div styleName="stats-card">
-          <h4 className="semibold">
-            {modelRecords.last5}
-          </h4>
-          <p className="label">Last 5</p>
-        </div>
-      </Row>
-    )
+    return 'var(--font-color)'
   }
+
+  if (!Object.keys(selectedModel).length) {
+    return <div />
+  }
+
+  const modelRecords = getModelRecords()
+
+  return (
+    <Row middle='xs' between='xs' styleName="model-stats">
+      <div styleName="stats-card">
+        <h4 className="semibold">{selectedModel.type[0].toUpperCase() + selectedModel.type.substr(1)}</h4>
+        <p className="label">Type</p>
+      </div>
+
+      <div styleName="stats-card">
+        <h4 className="semibold">
+          {modelRecords.wins}W - {modelRecords.losses}L
+        </h4>
+        <p className="label">Record</p>
+      </div>
+
+      <div styleName="stats-card">
+        <h4 className="semibold">
+          {modelRecords.winRate}
+        </h4>
+        <p className="label">Win %</p>
+      </div>
+
+      <div styleName="stats-card">
+        <h4
+          className="semibold"
+          style={{ color: getStreakColor(modelRecords.streak) }}
+        >
+          {modelRecords.streak}
+        </h4>
+        <p className="label">Streak</p>
+      </div>
+
+      <div styleName="stats-card">
+        <h4 className="semibold">
+          {modelRecords.last5}
+        </h4>
+        <p className="label">Last 5</p>
+      </div>
+    </Row>
+  )
 }
 
 ModelDetails.defaultProps = {
