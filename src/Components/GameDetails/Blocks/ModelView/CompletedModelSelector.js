@@ -85,12 +85,12 @@ class CompletedModelSelector extends React.Component {
             >
               <Col xs={5}>
                 <p className="label">Name</p>
-                <p className="semibold clip">{matchModel.model.name}</p>
+                <p className="semibold clip">{matchModel.name}</p>
               </Col>
 
               <Col xs={3}>
                 <p className="label">Type</p>
-                <p className="semibold">{matchModel.model.type[0].toUpperCase() + matchModel.model.type.substr(1)}</p>
+                <p className="semibold">{matchModel.type[0].toUpperCase() + matchModel.type.substr(1)}</p>
               </Col>
 
               <Col xs={3}>
