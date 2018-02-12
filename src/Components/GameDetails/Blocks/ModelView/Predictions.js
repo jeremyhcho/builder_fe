@@ -18,6 +18,13 @@ const Predictions = ({ prediction, summary }) => {
     return num
   }
 
+  const getColor = (value) => {
+    if (value > 0) return 'var(--green)'
+    else if (value < 0) return 'var(--red)'
+
+    return null
+  }
+
   if (!Object.keys(prediction).length) {
     return (
       <Card label="Prediction">
@@ -89,7 +96,10 @@ const Predictions = ({ prediction, summary }) => {
             </Col>
 
             <Col xs={4}>
-              <p className="semibold">
+              <p
+                className="semibold"
+                style={{ color: getColor(team.predictionValue) }}
+              >
                 {team.predictionValue}
               </p>
             </Col>
