@@ -50,11 +50,21 @@ const Summary = ({ summary }) => {
             transform: 'translateY(-50%) translateX(-78px)'
           }}
         >
+          <img
+            src={summary.away.image}
+            style={{
+              width: '50px',
+              height: '50px',
+              marginRight: '15px'
+            }}
+          />
+
           <div>
             <p className="label small">{summary.away.city}</p>
             <h2 className="semibold">{summary.away.name.toUpperCase()}</h2>
             <p className="label small">{summary.away.wins}-{summary.away.losses}</p>
           </div>
+
           <h1 styleName="points away" className="bold">{summary.away.points}</h1>
         </div>
 
@@ -79,11 +89,21 @@ const Summary = ({ summary }) => {
             transform: 'translateY(-50%) translateX(78px)'
           }}
         >
+          <img
+            src={summary.home.image}
+            style={{
+              width: '50px',
+              height: '50px',
+              marginLeft: '15px'
+            }}
+          />
+
           <div>
             <p className="label small">{summary.home.city}</p>
             <h2 className="semibold">{summary.home.name.toUpperCase()}</h2>
             <p className="label small">{summary.home.wins}-{summary.home.losses}</p>
           </div>
+
           <h1 styleName='points home' className="bold">{summary.home.points}</h1>
         </div>
       </Row>

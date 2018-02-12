@@ -44,7 +44,7 @@ class GameCard extends React.Component {
 
     return (
       <Row styleName="game-container" middle='xs' onClick={this.viewMatch}>
-        <Col xs={4} style={{ textAlign: 'right', paddingRight: '45px', position: 'relative' }}>
+        <Col xs={4} style={{ textAlign: 'right', paddingRight: '50px', position: 'relative' }}>
           <div style={{ display: 'inline-block' }}>
             <p className="small label">{awayCity}</p>
             <h1 className="bold">{awayTeam}</h1>
@@ -79,7 +79,7 @@ class GameCard extends React.Component {
           <p className="bold">{game.home.points}</p>
         </Col>
 
-        <Col xs={4} style={{ paddingLeft: '45px', position: 'relative' }}>
+        <Col xs={4} style={{ paddingLeft: '50px', position: 'relative' }}>
           <img
             src={game.home.image}
             style={{
