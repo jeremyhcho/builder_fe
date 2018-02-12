@@ -21,8 +21,6 @@ import { createNBAModel, updateNBAModel } from 'Actions'
 // Helpers
 import modelValidate from './modelValidate'
 
-const stepList = ['Type', 'Details', 'Specs']
-
 class CreateModel extends React.Component {
   state = {
     step: 0,
@@ -68,6 +66,14 @@ class CreateModel extends React.Component {
     }
   }
 
+  getStepList () {
+    if (this.props.model) {
+      return ['Details', 'Specs']
+    }
+
+    return ['Type', 'Details', 'Specs']
+  }
+
   getModelStatus (status) {
     if (status) return 'ACTIVE'
     return 'INACTIVE'
@@ -99,11 +105,16 @@ class CreateModel extends React.Component {
     this.setState({ step: this.state.step - 1 })
   }
 
-  // changeStep = (stepIndex) => {
-  //   this.setState({ step: stepIndex })
-  // }
-
   renderStepDescription () {
+    if (this.props.model) {
+      const stepDescriptions = [
+        'Choose a name and the current status for this model',
+        'Use the sliders to customize your model specs'
+      ]
+
+      return stepDescriptions[this.state.step]
+    }
+
     const stepDescriptions = [
       'Select the type of model you want to create',
       'Choose a name and the current status for this model',
@@ -114,6 +125,24 @@ class CreateModel extends React.Component {
   }
 
   renderModalView () {
+    const { model } = this.props
+
+    if (model) {
+      const modelViews = [
+        <ModelInfo
+          onSubmit={this.handleNext}
+          handleBack={this.handleBack}
+        />,
+        <Specs
+          model={this.props.model}
+          handleBack={this.handleBack}
+          onSubmit={this.props.model ? this.editModel : this.createModel}
+        />
+      ]
+
+      return modelViews[this.state.step]
+    }
+
     const modelViews = [
       <ModelType
         onSubmit={this.handleNext}
@@ -129,6 +158,7 @@ class CreateModel extends React.Component {
         onSubmit={this.props.model ? this.editModel : this.createModel}
       />
     ]
+
     return modelViews[this.state.step]
   }
 
@@ -147,7 +177,7 @@ class CreateModel extends React.Component {
         <div styleName="modal-body">
           <div style={{ textAlign: 'center' }}>
             <Stepper
-              steps={stepList}
+              steps={this.getStepList()}
               activeStep={step}
             />
 
