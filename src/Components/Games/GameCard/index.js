@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import 'moment-timezone'
 import { withRouter } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import { get } from 'lodash'
 
 // Icons
 import AtSign from 'Assets/Icons/at-sign.svg'
@@ -39,51 +38,66 @@ class GameCard extends React.Component {
     const { game } = this.props
     const awayTeam = game.away.name.toUpperCase()
     const awayCity = game.away.city
-    const awaySpread = get(game, 'away.odds.spread')
-    const awayOdds = get(game, 'away.odds.spread_odds')
 
     const homeTeam = game.home.name.toUpperCase()
     const homeCity = game.home.city
-    const homeSpread = get(game, 'home.odds.spread')
-    const homeOdds = get(game, 'home.odds.spread_odds')
 
     return (
       <Row styleName="game-container" middle='xs' onClick={this.viewMatch}>
-        <Col xs={3} style={{ textAlign: 'right' }}>
-          <p className="small label">{awayCity}</p>
-          <h1 className="bold">{awayTeam}</h1>
-          <p className='small'>{game.away.wins}-{game.away.losses}</p>
+        <Col xs={4} style={{ textAlign: 'right', paddingRight: '45px', position: 'relative' }}>
+          <div style={{ display: 'inline-block' }}>
+            <p className="small label">{awayCity}</p>
+            <h1 className="bold">{awayTeam}</h1>
+            <p className='small'>{game.away.wins}-{game.away.losses}</p>
+          </div>
+
+          <img
+            src={game.away.image}
+            style={{
+              width: '35px',
+              height: '35px',
+              position: 'absolute',
+              top: '50%',
+              right: 0,
+              transform: 'translateY(-50%)'
+            }}
+          />
         </Col>
+
         <Col xs={1} style={{ textAlign: 'center' }}>
           <p className="bold">{game.away.points}</p>
         </Col>
-        <Col xs={1} styleName="col-direction">
+
+        <Col xs={2} styleName="col-direction">
           <h1 className="semibold"><AtSign width={16} height={16} /></h1>
           <p className="small semibold" style={{ marginTop: '5px' }}>
             {this.renderGameStatus()}
           </p>
         </Col>
+
         <Col xs={1} style={{ textAlign: 'center' }}>
           <p className="bold">{game.home.points}</p>
         </Col>
-        <Col xs={3}>
-          <p className="small label">{homeCity}</p>
-          <h1 className="bold">{homeTeam}</h1>
-          <p className='small'>{game.home.wins}-{game.home.losses}</p>
+
+        <Col xs={4} style={{ paddingLeft: '45px', position: 'relative' }}>
+          <img
+            src={game.home.image}
+            style={{
+              width: '35px',
+              height: '35px',
+              position: 'absolute',
+              left: 0,
+              top: '50%',
+              transform: 'translateY(-50%)'
+            }}
+          />
+
+          <div style={{ display: 'inline-block' }}>
+            <p className="small label">{homeCity}</p>
+            <h1 className="bold">{homeTeam}</h1>
+            <p className='small'>{game.home.wins}-{game.home.losses}</p>
+          </div>
         </Col>
-        {
-          awaySpread && (
-            <Col xs={3}>
-              <p className="small label">Spread</p>
-              <p className="semibold">
-                {awaySpread} {game.away.name} ({awayOdds})
-              </p>
-              <p className="semibold">
-                {homeSpread} {game.home.name} ({homeOdds})
-              </p>
-            </Col>
-          )
-        }
       </Row>
     )
   }

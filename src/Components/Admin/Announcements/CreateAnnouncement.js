@@ -62,16 +62,20 @@ class CreateAnnouncement extends React.Component {
         />
 
         <p style={{ marginTop: '30px', marginBottom: '5px' }}>Body</p>
-        <ReactQuill
-          value={body}
-          onChange={this.handleBodyChange}
-        />
+
+        <div style={{ height: '500px' }}>
+          <ReactQuill
+            value={body}
+            onChange={this.handleBodyChange}
+            style={{ height: '100%' }}
+          />
+        </div>
 
         <Button
           primary
           onClick={this.togglePreview}
           shouldFitContainer
-          style={{ marginTop: '30px' }}
+          style={{ marginTop: '70px' }}
         >
           Preview announcement
         </Button>
@@ -100,7 +104,7 @@ class CreateAnnouncement extends React.Component {
           primary
           shouldFitContainer
           onClick={this.createAnnouncement}
-          style={{ marginTop: '30px' }}
+          style={{ marginTop: '70px' }}
           loading={this.props.creatingAnnouncement}
         >
           Create announcement
