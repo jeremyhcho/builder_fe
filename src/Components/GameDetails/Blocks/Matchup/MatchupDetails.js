@@ -77,11 +77,22 @@ class MatchupDetails extends React.Component {
           wrapperStyle={wrapperStyle}
         >
           <Row middle='xs' style={{ height: '100%', position: 'relative' }}>
-            <Col xs={4}>
-              <div style={{ textAlign: 'right' }}>
-                <p className="label small">{matchup.away.city}</p>
-                <h4 className="semibold" style={teamNameStyle}>{matchup.away.name.toUpperCase()}</h4>
-                <p className="label small">{matchup.away.wins}-{matchup.away.losses}</p>
+            <Col xs={4} style={{ position: 'relative' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <img
+                  src={matchup.away.image}
+                  style={{
+                    width: '35px',
+                    height: '35px',
+                    marginRight: '15px'
+                  }}
+                />
+
+                <div style={{ display: 'inline-block' }}>
+                  <p className="label small">{matchup.away.city}</p>
+                  <h2 className="semibold" style={teamNameStyle}>{matchup.away.name.toUpperCase()}</h2>
+                  <p className="label small">{matchup.away.wins}-{matchup.away.losses}</p>
+                </div>
               </div>
             </Col>
 
@@ -94,10 +105,21 @@ class MatchupDetails extends React.Component {
             </Col>
 
             <Col xs={4}>
-              <div>
-                <p className="label small">{matchup.home.city}</p>
-                <h4 className="semibold" style={teamNameStyle}>{matchup.home.name.toUpperCase()}</h4>
-                <p className="label small">{matchup.home.wins}-{matchup.home.losses}</p>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'inline-block' }}>
+                  <p className="label small">{matchup.home.city}</p>
+                  <h2 className="semibold" style={teamNameStyle}>{matchup.home.name.toUpperCase()}</h2>
+                  <p className="label small">{matchup.home.wins}-{matchup.home.losses}</p>
+                </div>
+
+                <img
+                  src={matchup.home.image}
+                  style={{
+                    width: '35px',
+                    height: '35px',
+                    marginLeft: '15px'
+                  }}
+                />
               </div>
             </Col>
           </Row>

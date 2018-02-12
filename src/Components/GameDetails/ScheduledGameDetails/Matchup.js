@@ -34,26 +34,20 @@ const Matchup = ({ previousMeetings, summary }) => {
 
     return previousMeetings.length ? (
       <Row>
-        <Col xs={6}>
-          <Row>
-            <Col xs={12}>
-              <MatchupDetails />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs={12}>
-              <MatchupLines />
-            </Col>
-          </Row>
-        </Col>
-
-        <Col xs={6}>
-          <MatchupKeyStats />
+        <Col xs={12}>
+          <MatchupDetails />
         </Col>
 
         <Col xs={12}>
           <MatchupGraph />
+        </Col>
+
+        <Col xs={6}>
+          <MatchupLines />
+        </Col>
+
+        <Col xs={6}>
+          <MatchupKeyStats />
         </Col>
       </Row>
     ) : (
