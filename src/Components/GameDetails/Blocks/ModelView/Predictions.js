@@ -12,18 +12,10 @@ import './ModelView.scss'
 class Predictions extends React.Component {
   convertNumber (num) {
     if (num > 0) {
-      return (
-        <p className="semibold">
-          +{num}
-        </p>
-      )
+      return `+${num}`
     }
 
-    return (
-      <p className="semibold">
-        {num}
-      </p>
-    )
+    return num
   }
 
   render () {
