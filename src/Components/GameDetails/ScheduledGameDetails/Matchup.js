@@ -46,7 +46,7 @@ const Matchup = ({ previousMeetings, summary }) => {
           <MatchupLines />
         </Col>
 
-        <Col xs={6}>
+        <Col xs={6} style={{ paddingBottom: '50px' }}>
           <MatchupKeyStats />
         </Col>
       </Row>
@@ -71,7 +71,7 @@ const Matchup = ({ previousMeetings, summary }) => {
   }
 
   return (
-    <div style={{ maxWidth: '1300px', width: '100%', height: '100%' }}>
+    <div style={{ maxWidth: '1300px', width: '100%', height: '100%', paddingBottom: '65px' }}>
       <Row>
         <MatchupSelector />
       </Row>
