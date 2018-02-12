@@ -8,6 +8,7 @@ const makeGetModelPredictions = () => {
     getModel,
     (model) => {
       if (!model) return null
+
       return model.predictions.sort(
         (a, b) => moment(new Date(a.match.date)).diff(moment(new Date(b.match.date))))
     }

@@ -17,7 +17,9 @@ const ModelSummary = ({ predictions }) => {
     const wins = predictions.filter(prediction => prediction.result === 'win').length
     const losses = predictions.filter(prediction => prediction.result === 'loss').length
     const ties = predictions.filter(prediction => prediction.result === 'tie').length
-    const winrate = tenths((wins / wins + losses) * 100) || 0
+    const winrate = tenths((wins / (wins + losses)) * 100) || 0
+    console.log(wins, losses)
+    console.log(winrate, wins + losses)
 
     predictions.sort((a, b) => {
       return moment(a.match.date, 'DD MMM YYYY').diff(b.match.date, 'DD MMM YYYY')
@@ -29,7 +31,7 @@ const ModelSummary = ({ predictions }) => {
     const last5Ties = last5Games.tie ? `T${last5Games.tie.length}` : null
 
     const last5 = [last5Wins, last5Losses, last5Ties].filter(result => result)
-    console.log(last5)
+
     return [
       { label: 'Wins', value: wins },
       { label: 'Losses', value: losses },
