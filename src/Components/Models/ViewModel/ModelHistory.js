@@ -27,6 +27,15 @@ class ModelHistory extends React.Component {
     return result[0].toUpperCase() + result.substr(1)
   }
 
+  getPick (prediction) {
+    const teamPick = prediction.match[prediction.pick.match_type].short_name
+
+    let vegasSpread = prediction.pick.vegas_spread
+    if (vegasSpread > 0) vegasSpread = `+${vegasSpread}`
+
+    return `${teamPick} ${vegasSpread}`
+  }
+
   handleChange = (field) => {
     return () => {
       const defaultState = {
@@ -147,7 +156,7 @@ class ModelHistory extends React.Component {
 
                     <Col xs={2}>
                       <p className="semibold">
-                        Vegas Line Pick
+                        {this.getPick(prediction)}
                       </p>
                     </Col>
 
