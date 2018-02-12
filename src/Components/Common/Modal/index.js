@@ -71,6 +71,7 @@ class Modal extends React.Component {
               />
             </button>
           </div>
+
           <div styleName="body" style={{ ...bodyStyle }}>
             {children}
           </div>
