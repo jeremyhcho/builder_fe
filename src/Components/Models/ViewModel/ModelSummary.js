@@ -33,7 +33,7 @@ const ModelSummary = ({ predictions }) => {
       { label: 'Losses', value: losses },
       { label: 'Ties', value: ties },
       { label: 'Win Rate', value: `${winrate}%` },
-      { label: 'Last 5', value: last5.length ? last5.join(' - ') : '-' }
+      { label: 'Last 5', value: last5.length ? last5.join('-') : '-' }
     ]
   }
 
