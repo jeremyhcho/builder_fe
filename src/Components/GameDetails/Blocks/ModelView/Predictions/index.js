@@ -7,7 +7,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { Card, Spinner } from 'Components/Common'
 
 // CSS
-import './ModelView.scss'
+import './Predictions.scss'
 
 const Predictions = ({ prediction, summary }) => {
   const convertNumber = (num) => {

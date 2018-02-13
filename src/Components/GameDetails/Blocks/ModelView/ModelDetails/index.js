@@ -5,7 +5,7 @@ import { groupBy } from 'lodash'
 import { Row } from 'react-styled-flexboxgrid'
 
 // CSS
-import './ModelView.scss'
+import './ModelDetails.scss'
 
 // Helpers
 import { precisionRound } from 'Helpers'

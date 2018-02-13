@@ -1,0 +1,23 @@
+.prediction {
+  .prediction-section {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    margin: 0;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    .spread {
+      p {
+        display: inline-block;
+        margin-right: 3px;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

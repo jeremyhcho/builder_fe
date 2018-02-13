@@ -9,20 +9,19 @@ import { uniqBy } from 'lodash'
 import {
   Card,
   ButtonGroup,
-  Spinner
+  Spinner,
+  InfoBubble
 } from 'Components/Common'
 
 // CSS
-import './ModelView.scss'
+import './SpreadPrediction.scss'
 
 // Actions
 import { fetchNBAAggregateSpreads } from 'Actions'
 
 // Helpers
-import { colorComparator, precisionRound } from 'Helpers'
-
-const ones = precisionRound(0)
-const tenths = precisionRound(1)
+import { colorComparator } from 'Helpers'
+import options from './options'
 
 class SpreadPrediction extends React.Component {
   state = {
@@ -150,6 +149,13 @@ class SpreadPrediction extends React.Component {
     return (
       <Card
         label="Prediction Distribution (Spread)"
+        subText={
+          <InfoBubble pos="bottom" width={400}>
+            This graph is really cool and as you can see
+            there is a 100% winrate model somewhere in the world.
+            That was created by me. I made it Im the best!
+          </InfoBubble>
+        }
         styleName="spread-prediction"
         wrapperStyle={{
           padding: '25px'
@@ -170,60 +176,7 @@ class SpreadPrediction extends React.Component {
           ) : (
             <Line
               data={this.dataFactory()}
-              options={{
-                linear: true,
-                legend: {
-                  onClick: () => null,
-                  labels: {
-                    filter: (legendItem) => {
-                      return legendItem.text !== 'Fit data line'
-                    }
-                  }
-                },
-                tooltips: {
-                  callbacks: {
-                    title: (tooltips) => {
-                      return `Model win rate: ${tenths(tooltips[0].xLabel * 100)}%`
-                    }
-                  }
-                },
-                animation: {
-                  easing: 'linear',
-                  duration: 200
-                },
-                scales: {
-                  yAxes: [{
-                    type: 'linear',
-                    ticks: {
-                      stepSize: 2,
-                    },
-                    gridLines: {
-                      display: false
-                    },
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Model Predictions',
-                      fontStyle: 'bold'
-                    }
-                  }],
-                  xAxes: [{
-                    type: 'linear',
-                    ticks: {
-                      callback: (currValue) => {
-                        return `${ones(currValue * 100)}%`
-                      }
-                    },
-                    gridLines: {
-                      display: false
-                    },
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Model Win %',
-                      fontStyle: 'bold'
-                    }
-                  }]
-                }
-              }}
+              options={options}
             />
           )
         }

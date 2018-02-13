@@ -9,13 +9,8 @@ import { fetchNBAAggregateTotals } from 'Actions'
 // Components
 import { Card, Spinner } from 'Components/Common'
 
-// CSS
-import './ModelView.scss'
-
-// Helpers & Selectors
-import { precisionRound } from 'Helpers'
-
-const tenths = precisionRound(1)
+// Helpers
+import options from './options'
 
 class TotalPrediction extends React.Component {
   componentDidMount () {
@@ -47,44 +42,9 @@ class TotalPrediction extends React.Component {
   render () {
     const { aggregateTotals } = this.props
 
-    const doughnutOptions = {
-      maintainAspectRatio: false,
-      tooltips: {
-        callbacks: {
-          // title: (tooltip, { datasets }) => {
-          //   return datasets[0].data[tooltip[0].index]
-          // },
-          label: (tooltip, { datasets, labels }) => {
-            const label = labels[tooltip.index]
-            const data = datasets[0].data[tooltip.index]
-            return `${label} ${tenths(data * 100)}%`
-          }
-        }
-      },
-      legend: {
-        onClick: () => null,
-        position: 'right',
-        labels: {
-          boxWidth: 14,
-          fontColor: '#48545D',
-          fontFamily: '"proxima-nova", "sans-serif"',
-          fontStyle: 'bold',
-          fontSize: 14,
-          padding: 25
-        }
-      },
-      layout: {
-        padding: {
-          right: 30,
-          left: 15
-        }
-      }
-    }
-
     return (
       <Card
         label="Prediction Distribution (Total)"
-        styleName="total-prediction"
         wrapperStyle={{ padding: '28px 20px' }}
       >
         {
@@ -97,7 +57,7 @@ class TotalPrediction extends React.Component {
               width={200}
               height={200}
               data={this.dataFactory()}
-              options={doughnutOptions}
+              options={options}
             />
           )
         }

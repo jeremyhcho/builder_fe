@@ -13,7 +13,7 @@ import ChangeIcon from 'Assets/Icons/switch-arrows.svg'
 import { fetchNBAPrediction, updateNBAMatchesModels } from 'Actions'
 
 // CSS
-import './ModelView.scss'
+import './ModelSelector.scss'
 
 class ScheduledModelSelector extends React.Component {
   state = {

@@ -1,0 +1,17 @@
+.model-stats {
+  margin-top: 20px;
+  margin: 20px 0.5rem 0;
+
+  .stats-card {
+    width: 140px;
+    height: 110px;
+    background-color: #fff;
+    border: 1px solid var(--light-gray);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-direction: column;
+  }
+}

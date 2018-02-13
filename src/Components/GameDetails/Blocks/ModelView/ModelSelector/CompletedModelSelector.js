@@ -15,7 +15,7 @@ import BlueRightIcon from 'Assets/Icons/blue-right-arrow.svg'
 import { fetchNBAPrediction } from 'Actions'
 
 // CSS
-import './ModelView.scss'
+import './ModelSelector.scss'
 
 class CompletedModelSelector extends React.Component {
   state = {
