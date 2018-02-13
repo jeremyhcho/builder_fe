@@ -32,6 +32,7 @@ class ModelHistory extends React.Component {
 
     let vegasSpread = prediction.pick.vegas_spread
     if (vegasSpread > 0) vegasSpread = `+${vegasSpread}`
+    if (vegasSpread === 0) vegasSpread = 'PICK'
 
     return `${teamPick} ${vegasSpread}`
   }
