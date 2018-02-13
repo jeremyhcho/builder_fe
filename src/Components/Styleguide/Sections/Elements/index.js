@@ -18,6 +18,7 @@ import Selects from './Selects'
 import Modals from './Modals'
 import ButtonGroups from './ButtonGroups'
 import Steppers from './Steppers'
+import InfoBubbles from './InfoBubbles'
 
 // CSS
 import './Elements.scss'
@@ -69,6 +70,9 @@ const Elements = () => (
 
     <SubHeader subHeaderText='Steppers' />
     <Steppers />
+
+    <SubHeader subHeaderText='InfoBubbles' />
+    <InfoBubbles />
   </div>
 )
 
