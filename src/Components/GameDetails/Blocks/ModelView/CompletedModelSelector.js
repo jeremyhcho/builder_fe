@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import classNames from 'classnames'
 
 // Components
 import { Toggle } from 'Components/Common'
 
 // Icons
-import ChangeIcon from 'Assets/Icons/switch-arrows.svg'
+import RightIcon from 'Assets/Icons/right-arrow.svg'
+import BlueRightIcon from 'Assets/Icons/blue-right-arrow.svg'
 
 // Actions
 import { fetchNBAPrediction } from 'Actions'
@@ -17,7 +19,8 @@ import './ModelView.scss'
 
 class CompletedModelSelector extends React.Component {
   state = {
-    modelsOpen: false
+    modelsOpen: false,
+    hovered: false
   }
 
   componentWillReceiveProps (newProps) {
@@ -73,8 +76,12 @@ class CompletedModelSelector extends React.Component {
   }
 
   renderModelList () {
+    const modelListStyle = classNames('model-list', {
+      show: this.state.modelsOpen
+    })
+
     return (
-      <div styleName="model-list" ref={ref => this.modelsList = ref}>
+      <div styleName={modelListStyle} ref={ref => this.modelsList = ref}>
         {
           this.props.predictions.map(matchModel => (
             <Row
@@ -120,12 +127,19 @@ class CompletedModelSelector extends React.Component {
 
     return (
       <div styleName="model-selector">
-        <div styleName="model-name">
+        <div
+          styleName="model-name"
+          onClick={this.openModels}
+          onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
+          onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
+        >
           <h4 className="semibold">{selectedPrediction.name}</h4>
-          <ChangeIcon style={{ margin: '0 10px', cursor: 'pointer' }} onClick={this.openModels} />
-
-          {this.state.modelsOpen && this.renderModelList()}
+          <div style={{ margin: '5px 10px 0' }}>
+            {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
+          </div>
         </div>
+
+        {this.renderModelList()}
       </div>
     )
   }
