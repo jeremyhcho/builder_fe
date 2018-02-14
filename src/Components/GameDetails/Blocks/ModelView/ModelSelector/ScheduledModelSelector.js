@@ -39,7 +39,7 @@ class ScheduledModelSelector extends React.Component {
     if (this.toggleCol.contains(e.target) || matchModel.id === selectedPrediction.id) {
       return null
     }
-
+    console.log('changing models: ', matchModel)
     return this.props.fetchNBAPrediction(matchModel.id)
   }
 

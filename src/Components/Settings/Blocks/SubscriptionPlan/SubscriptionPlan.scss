@@ -1,11 +1,13 @@
 .subscription-plan {
-
-  .icon-row {
-    margin-bottom: 15px;
-  }
+  height: 80%;
 
   .plan-details {
     padding: 0 10px;
+    height: 100%;
+
+    .icon-row {
+      margin-bottom: 15px;
+    }
 
     .price {
 

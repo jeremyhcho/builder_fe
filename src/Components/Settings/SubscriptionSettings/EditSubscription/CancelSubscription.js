@@ -36,15 +36,15 @@ class CancelSubscription extends React.Component {
     return [
       <Button
         flat
-        key='cancel'
+        key='back'
         onClick={this.props.toggle}
         shouldFitContainer
       >
-        Cancel
+        Back
       </Button>,
       <Button
         danger
-        key='delete'
+        key='cancelSubscription'
         onClick={this.cancelSubscription}
         shouldFitContainer
       >

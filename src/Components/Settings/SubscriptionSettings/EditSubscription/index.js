@@ -43,9 +43,37 @@ class EditSubscription extends React.Component {
     }
   }
 
-  render () {
-    const { deletingSubscription, subscription } = this.props
+  renderCancelSubscription () {
+    const { subscription, deletingSubscription } = this.props
 
+    if (!subscription) {
+      return null
+    }
+
+    return (
+      <div style={{ textAlign: 'center', margin: '10px 0' }}>
+        {
+          deletingSubscription ? (
+            <Spinner show xs />
+          ) : (
+            <Button
+              secondary={subscription ? true : subscription}
+              disabled={!subscription}
+              onClick={this.toggleModal}
+            >
+              Cancel current subscription
+            </Button>
+          )
+        }
+        <CancelSubscription
+          isOpen={this.state.openModal}
+          toggle={this.toggleModal}
+        />
+      </div>
+    )
+  }
+
+  render () {
     return (
       <div>
         <div style={{ textAlign: 'center', marginBottom: '25px' }}>
@@ -70,25 +98,7 @@ class EditSubscription extends React.Component {
           </Col>
         </Row>
 
-        <div style={{ textAlign: 'center', margin: '10px 0' }}>
-          {
-            deletingSubscription ? (
-              <Spinner show xs />
-            ) : (
-              <Button
-                secondary={subscription ? true : subscription}
-                disabled={!subscription}
-                onClick={this.toggleModal}
-              >
-                Cancel current subscription
-              </Button>
-            )
-          }
-        </div>
-        <CancelSubscription
-          isOpen={this.state.openModal}
-          toggle={this.toggleModal}
-        />
+        {this.renderCancelSubscription()}
       </div>
     )
   }
