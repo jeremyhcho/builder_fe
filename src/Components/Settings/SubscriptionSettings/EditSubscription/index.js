@@ -5,15 +5,20 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import SubscriptionPlan from '../../Blocks/SubscriptionPlan'
+import CancelSubscription from './CancelSubscription'
 import { Spinner, Button } from 'Components/Common'
 
 // Actions
-import { deleteSubscriptionPlan, updateSubscriptionPlan, createSubscriptionPlan } from 'Actions'
+import { updateSubscriptionPlan, createSubscriptionPlan } from 'Actions'
 
 // Helpers
 import { makeFilterSubscriptions } from 'Helpers/Selectors'
 
 class EditSubscription extends React.Component {
+  state = {
+    openModal: false
+  }
+
   componentWillReceiveProps (newProps) {
     if (!newProps.deletingSubscription && this.props.deletingSubscription) {
       this.props.toggle()
@@ -24,8 +29,8 @@ class EditSubscription extends React.Component {
     }
   }
 
-  cancelSubscription = () => {
-    this.props.deleteSubscriptionPlan(this.props.userId)
+  toggleModal = () => {
+    this.setState({ openModal: !this.state.openModal })
   }
 
   selectPlan = (planType) => {
@@ -73,13 +78,17 @@ class EditSubscription extends React.Component {
               <Button
                 secondary={subscription ? true : subscription}
                 disabled={!subscription}
-                onClick={this.cancelSubscription}
+                onClick={this.toggleModal}
               >
                 Cancel current subscription
               </Button>
             )
           }
         </div>
+        <CancelSubscription
+          isOpen={this.state.openModal}
+          toggle={this.toggleModal}
+        />
       </div>
     )
   }
@@ -93,7 +102,6 @@ EditSubscription.defaultProps = {
 
 EditSubscription.propTypes = {
   toggle: PropTypes.func.isRequired,
-  deleteSubscriptionPlan: PropTypes.func.isRequired,
   updateSubscriptionPlan: PropTypes.func.isRequired,
   createSubscriptionPlan: PropTypes.func.isRequired,
   deletingSubscription: PropTypes.bool,
@@ -113,7 +121,6 @@ const makeMapStateToProps = () => {
 }
 
 const mapDispatchToProps = {
-  deleteSubscriptionPlan,
   updateSubscriptionPlan,
   createSubscriptionPlan
 }

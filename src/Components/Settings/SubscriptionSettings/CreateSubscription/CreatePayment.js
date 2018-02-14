@@ -38,7 +38,7 @@ class CreatePayment extends React.Component {
   render () {
     return (
       <Modal
-        header="Creating payment method"
+        header="Add payment method"
         toggle={this.props.toggle}
         isOpen={this.props.planSelected}
         footer={this.renderFooter()}
