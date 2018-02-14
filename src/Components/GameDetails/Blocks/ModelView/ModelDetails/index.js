@@ -13,6 +13,7 @@ import { precisionRound } from 'Helpers'
 const tenths = precisionRound(1)
 
 const ModelDetails = ({ selectedModel }) => {
+  console.log('selectedModel: ', selectedModel)
   const getModelRecords = () => {
     const predictions = selectedModel.predictions.filter(prediction => prediction.result)
     const predictionResults = groupBy(predictions, prediction => {
