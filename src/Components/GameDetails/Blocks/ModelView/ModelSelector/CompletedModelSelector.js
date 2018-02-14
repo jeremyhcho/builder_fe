@@ -50,7 +50,7 @@ class CompletedModelSelector extends React.Component {
       return null
     }
     console.log('CHANGING MODEL FETCHING NEW PREDICTION: ', matchModel)
-    return this.props.fetchNBAPrediction(matchModel.id)
+    return this.props.fetchNBAPrediction(matchModel.model_id)
   }
 
   openModels = () => {
