@@ -7,7 +7,7 @@ import { Doughnut } from 'react-chartjs-2'
 import { fetchNBAAggregateTotals } from 'Actions'
 
 // Components
-import { Card, Spinner } from 'Components/Common'
+import { Card, Spinner, InfoBubble } from 'Components/Common'
 
 // Helpers
 import options from './options'
@@ -46,6 +46,14 @@ class TotalPrediction extends React.Component {
       <Card
         label="Prediction Distribution (Total)"
         wrapperStyle={{ padding: '28px 20px' }}
+        subText={
+          <InfoBubble
+            width={400}
+            pos="bottom"
+          >
+            This is a doughnut graph
+          </InfoBubble>
+        }
       >
         {
           !Object.keys(aggregateTotals).length ? (

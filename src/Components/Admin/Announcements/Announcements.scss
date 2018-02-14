@@ -2,6 +2,8 @@
   padding: 45px 65px;
   position: relative;
   max-width: 1300px;
+  height: 100%;
+  overflow-y: auto;
 
   .title {
     display: flex;
@@ -41,6 +43,8 @@
 .create-announcements-container {
   padding: 10px 60px;
   max-width: 1300px;
+  height: 100%;
+  overflow-y: auto;
 
   .preview {
     a {

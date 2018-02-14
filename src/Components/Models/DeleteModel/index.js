@@ -97,7 +97,7 @@ class DeleteModel extends React.Component {
         isOpen={isOpen}
         toggle={toggle}
         footer={this.renderFooter()}
-        bodyStyle={{ width: '400px' }}
+        wrapperStyle={{ width: '500px' }}
       >
         <div style={{ padding: '25px 25px 10px', lineHeight: '25px' }}>
           <p>

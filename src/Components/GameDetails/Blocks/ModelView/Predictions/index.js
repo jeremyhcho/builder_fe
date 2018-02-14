@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { Card, Spinner } from 'Components/Common'
+import { Card, Spinner, InfoBubble } from 'Components/Common'
 
 // CSS
 import './Predictions.scss'
@@ -62,7 +62,15 @@ const Predictions = ({ prediction, summary }) => {
   ]
 
   return (
-    <Card label="Prediction" styleName="prediction">
+    <Card
+      label="Prediction"
+      styleName="prediction"
+      subText={
+        <InfoBubble pos="right" width={400}>
+          This is some sort of prediction thing
+        </InfoBubble>
+      }
+    >
       <Row middle='xs' center='xs' styleName="prediction-section">
         <Col xs={4}>
           <p className="label small">TEAM</p>
