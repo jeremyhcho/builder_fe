@@ -12,7 +12,7 @@ import RightIcon from 'Assets/Icons/right-arrow.svg'
 import BlueRightIcon from 'Assets/Icons/blue-right-arrow.svg'
 
 // Actions
-import { fetchNBAPrediction } from 'Actions'
+import { fetchNBAModel } from 'Actions'
 
 // CSS
 import './ModelSelector.scss'
@@ -51,7 +51,7 @@ class CompletedModelSelector extends React.Component {
       return null
     }
     console.log('CHANGING MODEL FETCHING NEW PREDICTION: ', matchModel)
-    return this.props.fetchNBAPrediction(matchModel.model_id)
+    return this.props.fetchNBAModel(matchModel.model_id)
   }
 
   openModels = () => {
@@ -155,7 +155,7 @@ CompletedModelSelector.defaultProps = {
 CompletedModelSelector.propTypes = {
   predictions: PropTypes.array,
   selectedPrediction: PropTypes.object,
-  fetchNBAPrediction: PropTypes.func.isRequired
+  fetchNBAModel: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
@@ -164,7 +164,7 @@ const mapStateToProps = ({ routines }) => ({
 })
 
 const mapDispatchToProps = {
-  fetchNBAPrediction
+  fetchNBAModel
 }
 
 export default connect(
