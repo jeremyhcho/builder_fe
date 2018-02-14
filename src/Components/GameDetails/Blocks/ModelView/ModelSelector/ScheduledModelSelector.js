@@ -40,7 +40,7 @@ class ScheduledModelSelector extends React.Component {
       return null
     }
 
-    return this.props.fetchNBAModel(matchModel.id)
+    return this.props.fetchNBAModel(matchModel.model_id)
   }
 
   openModels = () => {
