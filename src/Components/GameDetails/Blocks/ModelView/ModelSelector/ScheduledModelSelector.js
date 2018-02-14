@@ -12,7 +12,7 @@ import RightIcon from 'Assets/Icons/right-arrow.svg'
 import BlueRightIcon from 'Assets/Icons/blue-right-arrow.svg'
 
 // Actions
-import { fetchNBAModel, updateNBAMatchesModels } from 'Actions'
+import { fetchNBAModel, fetchNBAPrediction, updateNBAMatchesModels } from 'Actions'
 
 // CSS
 import './ModelSelector.scss'
@@ -40,7 +40,10 @@ class ScheduledModelSelector extends React.Component {
       return null
     }
 
-    return this.props.fetchNBAModel(matchModel.model_id)
+    return () => {
+      this.props.fetchNBAModel(matchModel.model_id)
+      this.props.fetchNBAPrediction(matchModel.id)
+    }
   }
 
   openModels = () => {
@@ -152,7 +155,8 @@ ScheduledModelSelector.propTypes = {
   predictions: PropTypes.array,
   selectedPrediction: PropTypes.object,
   updateNBAMatchesModels: PropTypes.func.isRequired,
-  fetchNBAModel: PropTypes.func.isRequired
+  fetchNBAModel: PropTypes.func.isRequired,
+  fetchNBAPrediction: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
@@ -162,6 +166,7 @@ const mapStateToProps = ({ routines }) => ({
 
 const mapDispatchToProps = {
   fetchNBAModel,
+  fetchNBAPrediction,
   updateNBAMatchesModels
 }
 
