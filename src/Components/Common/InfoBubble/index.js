@@ -53,6 +53,8 @@ class InfoBubble extends React.Component {
     return (
       <div styleName="info-bubble-container" style={{ ...style }} key="icon">
         <InformationIcon
+          width={14}
+          height={14}
           styleName="icon"
           onClick={this.toggleClick}
         />
