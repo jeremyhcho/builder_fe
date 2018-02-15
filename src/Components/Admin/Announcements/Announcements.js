@@ -21,6 +21,7 @@ class Announcements extends React.Component {
   }
 
   navigateToCreate = () => {
+    // console.log('this.props is: ', this.props)
     this.props.history.push({ pathname: '/admin/announcements/new' })
   }
 
