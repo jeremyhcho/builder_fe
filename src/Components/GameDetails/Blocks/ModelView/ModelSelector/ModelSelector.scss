@@ -7,6 +7,17 @@
   .model-name {
     display: flex;
     align-items: center;
+
+    .arrow-icon {
+      transition: all 200ms ease;
+      position: absolute;
+      right: -25px;
+      height: 16px;
+
+      &.clicked {
+        transform: rotate(90deg);
+      }
+    }
   }
 
   .model-list {

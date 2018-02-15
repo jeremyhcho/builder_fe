@@ -152,6 +152,10 @@ class CompletedModelSelector extends React.Component {
       return <div />
     }
 
+    const arrowIconStyle = classNames('arrow-icon', {
+      clicked: this.state.modelsOpen
+    })
+
     return (
       <div styleName="model-selector">
         <div
@@ -162,7 +166,7 @@ class CompletedModelSelector extends React.Component {
           onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
         >
           <h4 className="semibold">{prediction.name}</h4>
-          <div style={{ margin: '5px 10px 0' }}>
+          <div styleName={arrowIconStyle}>
             {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
           </div>
         </div>
