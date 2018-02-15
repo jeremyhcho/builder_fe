@@ -7,8 +7,8 @@
     box-shadow: 0 0 0 transparent;
 
     &:hover {
-      transition: box-shadow 400ms ease;
-      box-shadow: 0 0 0 4px var(--gray);
+      transition: box-shadow 300ms ease;
+      box-shadow: 0 0 0 3px var(--gray);
     }
   }
 
