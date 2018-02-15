@@ -9,9 +9,9 @@ import { uniqBy } from 'lodash'
 import {
   Card,
   ButtonGroup,
-  Spinner,
-  InfoBubble
+  Spinner
 } from 'Components/Common'
+import SpreadPredictionInfo from './SpreadPredictionInfo'
 
 // CSS
 import './SpreadPrediction.scss'
@@ -149,13 +149,7 @@ class SpreadPrediction extends React.Component {
     return (
       <Card
         label="Prediction Distribution (Spread)"
-        subText={
-          <InfoBubble pos="bottom" width={400}>
-            This graph is really cool and as you can see
-            there is a 100% winrate model somewhere in the world.
-            That was created by me. I made it Im the best!
-          </InfoBubble>
-        }
+        subText={<SpreadPredictionInfo />}
         styleName="spread-prediction"
         wrapperStyle={{
           padding: '25px'

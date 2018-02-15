@@ -7,7 +7,8 @@ import { Doughnut } from 'react-chartjs-2'
 import { fetchNBAAggregateTotals } from 'Actions'
 
 // Components
-import { Card, Spinner, InfoBubble } from 'Components/Common'
+import { Card, Spinner } from 'Components/Common'
+import TotalPredictionInfo from './TotalPredictionInfo'
 
 // Helpers
 import options from './options'
@@ -40,23 +41,16 @@ class TotalPrediction extends React.Component {
   }
 
   render () {
-    const { aggregateTotals } = this.props
+    const { aggregateTotals, prediction } = this.props
 
     return (
       <Card
         label="Prediction Distribution (Total)"
         wrapperStyle={{ padding: '28px 20px' }}
-        subText={
-          <InfoBubble
-            width={400}
-            pos="bottom"
-          >
-            This is a doughnut graph
-          </InfoBubble>
-        }
+        subText={<TotalPredictionInfo />}
       >
         {
-          !Object.keys(aggregateTotals).length ? (
+          !Object.keys(aggregateTotals).length || !prediction ? (
             <div style={{ textAlign: 'center', padding: '65px' }}>
               <Spinner lg show />
             </div>

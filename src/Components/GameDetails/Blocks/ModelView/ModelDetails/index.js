@@ -13,7 +13,10 @@ import { precisionRound } from 'Helpers'
 const tenths = precisionRound(1)
 
 const ModelDetails = ({ model }) => {
-  console.log('model: ', model)
+  if (!Object.keys(model).length) {
+    return <div />
+  }
+
   const getModelRecords = () => {
     const predictions = model.predictions.filter(prediction => prediction.result)
     const predictionResults = groupBy(predictions, prediction => {
@@ -56,10 +59,6 @@ const ModelDetails = ({ model }) => {
     else if (streak[0] === 'L') return 'var(--red)'
 
     return 'var(--font-color)'
-  }
-
-  if (!Object.keys(model).length) {
-    return <div />
   }
 
   const modelRecords = getModelRecords()

@@ -5,7 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import classNames from 'classnames'
 
 // Components
-import { Toggle } from 'Components/Common'
+import { Toggle, Spinner } from 'Components/Common'
 
 // Icons
 import RightIcon from 'Assets/Icons/right-arrow.svg'
@@ -20,12 +20,13 @@ import './ModelSelector.scss'
 class CompletedModelSelector extends React.Component {
   state = {
     modelsOpen: false,
-    hovered: false
+    hovered: false,
+    changingModel: {}
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedPrediction.id !== this.props.selectedPrediction.id &&
-        this.props.selectedPrediction.id) {
+    if (newProps.prediction.id !== this.props.prediction.id &&
+        this.props.prediction.id) {
       this.openModels()
     }
   }
@@ -42,19 +43,25 @@ class CompletedModelSelector extends React.Component {
     return result.toUpperCase()
   }
 
-  changeModel = (e, matchModel) => {
-    const { selectedPrediction } = this.props
-    console.log('changing model..selectedPrediction: ', selectedPrediction)
-    console.log('current predictions: ', this.props.predictions)
+  fetchModelAndPrediction (modelId, predictionId) {
+    this.props.fetchNBAModel(modelId)
+    this.props.fetchNBAPrediction(predictionId)
+  }
 
-    if (this.toggleCol.contains(e.target) || matchModel.id === selectedPrediction.id) {
+  changeModel = (e, matchModel) => {
+    const { prediction, fetchingModel } = this.props
+
+    if (fetchingModel) {
       return null
     }
-    console.log('CHANGING MODEL FETCHING NEW PREDICTION: ', matchModel)
-    return () => {
-      this.props.fetchNBAModel(matchModel.model_id)
-      this.props.fetchNBAPrediction(matchModel.id)
+
+    if (this.toggleCol.contains(e.target) || matchModel.id === prediction.id) {
+      return null
     }
+
+    return this.setState({
+      changingModel: matchModel
+    }, () => this.fetchModelAndPrediction(matchModel.model_id, matchModel.id))
   }
 
   openModels = () => {
@@ -86,7 +93,11 @@ class CompletedModelSelector extends React.Component {
     })
 
     return (
-      <div styleName={modelListStyle} ref={ref => this.modelsList = ref}>
+      <div
+        key="model-list"
+        styleName={modelListStyle}
+        ref={ref => this.modelsList = ref}
+      >
         {
           this.props.predictions.map(matchModel => (
             <Row
@@ -111,14 +122,21 @@ class CompletedModelSelector extends React.Component {
               </Col>
 
               <Col xs={1}>
-                <div ref={ref => this.toggleCol = ref}>
-                  <Toggle
-                    name={matchModel.id}
-                    disabled
-                    checked={this.checkModelStatus(matchModel.status)}
-                    onChange={() => null}
-                  />
-                </div>
+                {
+                  this.props.fetchingModel
+                    && matchModel.id === this.state.changingModel.id ? (
+                      <Spinner sm show style={{ marginLeft: '10px' }} />
+                    ) : (
+                      <div ref={ref => this.toggleCol = ref}>
+                        <Toggle
+                          name={matchModel.id}
+                          disabled
+                          checked={this.checkModelStatus(matchModel.status)}
+                          onChange={() => null}
+                        />
+                      </div>
+                    )
+                }
               </Col>
             </Row>
           ))
@@ -128,22 +146,26 @@ class CompletedModelSelector extends React.Component {
   }
 
   render () {
-    const { selectedPrediction } = this.props
+    const { prediction } = this.props
+
+    if (!Object.keys(prediction).length) {
+      return <div />
+    }
 
     return (
       <div styleName="model-selector">
         <div
+          key="model-name"
           styleName="model-name"
           onClick={this.openModels}
           onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
           onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
         >
-          <h4 className="semibold">{selectedPrediction.name}</h4>
+          <h4 className="semibold">{prediction.name}</h4>
           <div style={{ margin: '5px 10px 0' }}>
             {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
           </div>
         </div>
-
         {this.renderModelList()}
       </div>
     )
@@ -152,19 +174,22 @@ class CompletedModelSelector extends React.Component {
 
 CompletedModelSelector.defaultProps = {
   predictions: [],
-  selectedPrediction: {}
+  prediction: {},
+  fetchingModel: false
 }
 
 CompletedModelSelector.propTypes = {
   predictions: PropTypes.array,
-  selectedPrediction: PropTypes.object,
+  prediction: PropTypes.object,
   fetchNBAModel: PropTypes.func.isRequired,
-  fetchNBAPrediction: PropTypes.func.isRequired
+  fetchNBAPrediction: PropTypes.func.isRequired,
+  fetchingModel: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
-  selectedPrediction: routines.nba.prediction
+  prediction: routines.nba.prediction,
+  fetchingModel: routines.callingApi.FETCH_NBA_MODEL
 })
 
 const mapDispatchToProps = {

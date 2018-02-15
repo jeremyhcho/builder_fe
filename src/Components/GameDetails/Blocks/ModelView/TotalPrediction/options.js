@@ -4,6 +4,9 @@ const tenths = precisionRound(1)
 
 const options = {
   maintainAspectRatio: false,
+  animation: {
+    duration: 0
+  },
   tooltips: {
     callbacks: {
       label: (tooltip, { datasets, labels }) => {
