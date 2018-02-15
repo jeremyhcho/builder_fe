@@ -29,6 +29,7 @@ class AdminLayout extends React.Component {
     if (!isAdmin && !confirmed) {
       return <div />
     }
+
     return (
       <Switch>
         <Route path='/admin/announcements' component={AnnouncementLayout} />

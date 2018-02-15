@@ -40,7 +40,7 @@ class InfoBubble extends React.Component {
   }
 
   render () {
-    const { pos } = this.props
+    const { pos, style } = this.props
 
     const bubbleStyle = classNames('bubble', {
       show: this.state.clicked,
@@ -51,8 +51,10 @@ class InfoBubble extends React.Component {
     })
 
     return (
-      <div styleName="info-bubble-container" key="icon">
+      <div styleName="info-bubble-container" style={{ ...style }} key="icon">
         <InformationIcon
+          width={14}
+          height={14}
           styleName="icon"
           onClick={this.toggleClick}
         />
@@ -73,11 +75,13 @@ class InfoBubble extends React.Component {
 }
 
 InfoBubble.defaultProps = {
-  width: null
+  width: null,
+  style: {}
 }
 
 InfoBubble.propTypes = {
   width: PropTypes.number,
+  style: PropTypes.object,
   pos: PropTypes.oneOf([
     'top',
     'right',

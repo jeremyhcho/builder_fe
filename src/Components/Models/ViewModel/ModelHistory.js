@@ -28,10 +28,13 @@ class ModelHistory extends React.Component {
   }
 
   getPick (prediction) {
+    if (!prediction.pick) return '-'
+
     const teamPick = prediction.match[prediction.pick.match_type].short_name
 
     let vegasSpread = prediction.pick.vegas_spread
     if (vegasSpread > 0) vegasSpread = `+${vegasSpread}`
+    if (vegasSpread === 0) vegasSpread = 'PICK'
 
     return `${teamPick} ${vegasSpread}`
   }
@@ -43,6 +46,7 @@ class ModelHistory extends React.Component {
         checkScheduled: false,
         checkClosed: false
       }
+
       if (this.state[field]) {
         return null
       }

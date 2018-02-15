@@ -25,9 +25,9 @@ class ModelView extends React.Component {
   }
 
   render () {
-    const { fetchingPredictions, prediction, predictions, fetchingPrediction } = this.props
+    const { fetchingPredictions, predictions } = this.props
 
-    if (fetchingPredictions || fetchingPrediction || !predictions) {
+    if (fetchingPredictions || !predictions) {
       // View when fetching models .. loader
       return <div />
     }
@@ -70,10 +70,6 @@ class ModelView extends React.Component {
       )
     }
 
-    if (predictions.length && !prediction) {
-      return <div />
-    }
-
     return (
       <div style={{ maxWidth: '1300px', width: '100%' }}>
         <Row>
@@ -108,26 +104,20 @@ class ModelView extends React.Component {
 
 ModelView.defaultProps = {
   predictions: null,
-  prediction: null,
   summary: {},
-  fetchingPredictions: false,
-  fetchingPrediction: false
+  fetchingPredictions: false
 }
 
 ModelView.propTypes = {
   summary: PropTypes.object,
   predictions: PropTypes.array,
-  prediction: PropTypes.object,
   fetchNBAPredictions: PropTypes.func.isRequired,
-  fetchingPredictions: PropTypes.bool,
-  fetchingPrediction: PropTypes.bool
+  fetchingPredictions: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
-  prediction: routines.nba.prediction,
   fetchingPredictions: routines.callingApi.FETCH_NBA_PREDICTIONS,
-  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION,
   summary: routines.nba.summary
 })
 

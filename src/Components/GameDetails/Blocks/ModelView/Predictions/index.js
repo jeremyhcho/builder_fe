@@ -5,11 +5,12 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Card, Spinner } from 'Components/Common'
+import PredictionsInfo from './PredictionsInfo'
 
 // CSS
-import './ModelView.scss'
+import './Predictions.scss'
 
-const Predictions = ({ prediction, summary }) => {
+const Predictions = ({ prediction, summary, fetchingPrediction }) => {
   const convertNumber = (num) => {
     if (num > 0) {
       return `+${num}`
@@ -25,13 +26,13 @@ const Predictions = ({ prediction, summary }) => {
     return null
   }
 
-  if (!Object.keys(prediction).length) {
+  if (!Object.keys(prediction).length || fetchingPrediction) {
     return (
-      <Card label="Prediction">
+      <Card label="Prediction" subText={<PredictionsInfo />}>
         <div
           style={{
             textAlign: 'center',
-            padding: '35px',
+            padding: '65px',
           }}
         >
           <Spinner lg show />
@@ -62,7 +63,11 @@ const Predictions = ({ prediction, summary }) => {
   ]
 
   return (
-    <Card label="Prediction" styleName="prediction">
+    <Card
+      label="Prediction"
+      styleName="prediction"
+      subText={<PredictionsInfo />}
+    >
       <Row middle='xs' center='xs' styleName="prediction-section">
         <Col xs={4}>
           <p className="label small">TEAM</p>
@@ -112,17 +117,20 @@ const Predictions = ({ prediction, summary }) => {
 
 Predictions.defaultProps = {
   summary: {},
-  prediction: {}
+  prediction: {},
+  fetchingPrediction: false
 }
 
 Predictions.propTypes = {
   summary: PropTypes.object,
-  prediction: PropTypes.object
+  prediction: PropTypes.object,
+  fetchingPrediction: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
   prediction: routines.nba.prediction,
-  summary: routines.nba.summary
+  summary: routines.nba.summary,
+  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION
 })
 
 export default connect(

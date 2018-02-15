@@ -49,7 +49,7 @@ class Modal extends React.Component {
             <div className="flex">
               {
                 HeaderIcon ? (
-                  <HeaderIcon width={30} height={30} style={{ marginRight: '10px' }} />
+                  <HeaderIcon width={25} height={25} style={{ marginRight: '15px' }} />
                 ) : null
               }
               <h1 className='semibold' styleName="title">{header}</h1>

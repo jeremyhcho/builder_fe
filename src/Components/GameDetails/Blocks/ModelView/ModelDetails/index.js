@@ -5,16 +5,20 @@ import { groupBy } from 'lodash'
 import { Row } from 'react-styled-flexboxgrid'
 
 // CSS
-import './ModelView.scss'
+import './ModelDetails.scss'
 
 // Helpers
 import { precisionRound } from 'Helpers'
 
 const tenths = precisionRound(1)
 
-const ModelDetails = ({ selectedModel }) => {
+const ModelDetails = ({ model }) => {
+  if (!Object.keys(model).length) {
+    return <div />
+  }
+
   const getModelRecords = () => {
-    const predictions = selectedModel.predictions.filter(prediction => prediction.result)
+    const predictions = model.predictions.filter(prediction => prediction.result)
     const predictionResults = groupBy(predictions, prediction => {
       if (!prediction.result) return 'TBD'
       return prediction.result
@@ -57,16 +61,12 @@ const ModelDetails = ({ selectedModel }) => {
     return 'var(--font-color)'
   }
 
-  if (!Object.keys(selectedModel).length) {
-    return <div />
-  }
-
   const modelRecords = getModelRecords()
 
   return (
     <Row middle='xs' between='xs' styleName="model-stats">
       <div styleName="stats-card">
-        <h4 className="semibold">{selectedModel.type[0].toUpperCase() + selectedModel.type.substr(1)}</h4>
+        <h4 className="semibold">{model.type[0].toUpperCase() + model.type.substr(1)}</h4>
         <p className="label">Type</p>
       </div>
 
@@ -105,15 +105,15 @@ const ModelDetails = ({ selectedModel }) => {
 }
 
 ModelDetails.defaultProps = {
-  selectedModel: {}
+  model: {}
 }
 
 ModelDetails.propTypes = {
-  selectedModel: PropTypes.object
+  model: PropTypes.object
 }
 
 const mapStateToProps = ({ routines }) => ({
-  selectedModel: routines.nba.model
+  model: routines.nba.model
 })
 
 export default connect(

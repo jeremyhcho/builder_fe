@@ -9,7 +9,6 @@ import planFactory from '../planFactory'
 
 // Icons
 import CheckIcon from 'Assets/Icons/green-check.svg'
-// import NewsLetterIcon from 'Assets/Icons/settings/newsletter.svg'
 
 // CSS
 import './SubscriptionPlan.scss'
@@ -101,7 +100,7 @@ class SubscriptionPlan extends React.Component {
   render () {
     const { plan } = this.props
 
-    const PlanIcon = planFactory[plan].icon
+    // const PlanIcon = planFactory[plan].icon
 
     return (
       <Card
@@ -113,9 +112,9 @@ class SubscriptionPlan extends React.Component {
         <div styleName="subscription-plan">
           <Row styleName="plan-details" middle='xs' start='xs'>
             <Col xs={5}>
-              <div styleName="icon-row">
+              {/* <div styleName="icon-row">
                 <PlanIcon width={35} height={35} />
-              </div>
+              </div> */}
 
               <div>
                 <p className="semibold">{plan.toUpperCase()}</p>

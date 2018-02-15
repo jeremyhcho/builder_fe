@@ -8,7 +8,7 @@ const Card = ({ wrapperStyle, label, subText, children, style, ...props }) => (
     <div className="flex" style={{ alignItems: 'center' }}>
       {
         label && (
-          <p className="semibold" style={{ marginBottom: '5px', marginLeft: '15px' }}>
+          <p className="semibold" style={{ margin: '0 10px 5px' }}>
             {label}
           </p>
         )

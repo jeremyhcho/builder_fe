@@ -24,9 +24,9 @@ class ModelView extends React.Component {
   }
 
   render () {
-    const { fetchPredictions, prediction, predictions, fetchingPrediction } = this.props
+    const { fetchingPredictions, predictions } = this.props
 
-    if (fetchPredictions || fetchingPrediction || !predictions) {
+    if (fetchingPredictions || !predictions) {
       // View when fetching models .. loader
       return <div />
     }
@@ -54,10 +54,6 @@ class ModelView extends React.Component {
           </div>
         </div>
       )
-    }
-
-    if (predictions.length && !prediction) {
-      return <div />
     }
 
     return (
@@ -94,26 +90,20 @@ class ModelView extends React.Component {
 
 ModelView.defaultProps = {
   predictions: null,
-  prediction: null,
   summary: {},
-  fetchPredictions: false,
-  fetchingPrediction: false
+  fetchingPredictions: false,
 }
 
 ModelView.propTypes = {
   summary: PropTypes.object,
   predictions: PropTypes.array,
-  prediction: PropTypes.object,
   fetchNBAPredictions: PropTypes.func.isRequired,
-  fetchPredictions: PropTypes.bool,
-  fetchingPrediction: PropTypes.bool
+  fetchingPredictions: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
-  prediction: routines.nba.prediction,
-  fetchPredictions: routines.callingApi.FETCH_NBA_PREDICTIONS,
-  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION,
+  fetchingPredictions: routines.callingApi.FETCH_NBA_PREDICTIONS,
   summary: routines.nba.summary
 })
 

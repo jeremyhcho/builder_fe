@@ -5,15 +5,20 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import SubscriptionPlan from '../../Blocks/SubscriptionPlan'
+import CancelSubscription from './CancelSubscription'
 import { Spinner, Button } from 'Components/Common'
 
 // Actions
-import { deleteSubscriptionPlan, updateSubscriptionPlan, createSubscriptionPlan } from 'Actions'
+import { updateSubscriptionPlan, createSubscriptionPlan } from 'Actions'
 
 // Helpers
 import { makeFilterSubscriptions } from 'Helpers/Selectors'
 
 class EditSubscription extends React.Component {
+  state = {
+    openModal: false
+  }
+
   componentWillReceiveProps (newProps) {
     if (!newProps.deletingSubscription && this.props.deletingSubscription) {
       this.props.toggle()
@@ -24,8 +29,8 @@ class EditSubscription extends React.Component {
     }
   }
 
-  cancelSubscription = () => {
-    this.props.deleteSubscriptionPlan(this.props.userId)
+  toggleModal = () => {
+    this.setState({ openModal: !this.state.openModal })
   }
 
   selectPlan = (planType) => {
@@ -38,9 +43,37 @@ class EditSubscription extends React.Component {
     }
   }
 
-  render () {
-    const { deletingSubscription, subscription } = this.props
+  renderCancelSubscription () {
+    const { subscription, deletingSubscription } = this.props
 
+    if (!subscription) {
+      return null
+    }
+
+    return (
+      <div style={{ textAlign: 'center', margin: '10px 0' }}>
+        {
+          deletingSubscription ? (
+            <Spinner show xs />
+          ) : (
+            <Button
+              secondary={subscription ? true : subscription}
+              disabled={!subscription}
+              onClick={this.toggleModal}
+            >
+              Cancel current subscription
+            </Button>
+          )
+        }
+        <CancelSubscription
+          isOpen={this.state.openModal}
+          toggle={this.toggleModal}
+        />
+      </div>
+    )
+  }
+
+  render () {
     return (
       <div>
         <div style={{ textAlign: 'center', marginBottom: '25px' }}>
@@ -65,21 +98,7 @@ class EditSubscription extends React.Component {
           </Col>
         </Row>
 
-        <div style={{ textAlign: 'center', margin: '10px 0' }}>
-          {
-            deletingSubscription ? (
-              <Spinner show xs />
-            ) : (
-              <Button
-                secondary={subscription ? true : subscription}
-                disabled={!subscription}
-                onClick={this.cancelSubscription}
-              >
-                Cancel current subscription
-              </Button>
-            )
-          }
-        </div>
+        {this.renderCancelSubscription()}
       </div>
     )
   }
@@ -93,7 +112,6 @@ EditSubscription.defaultProps = {
 
 EditSubscription.propTypes = {
   toggle: PropTypes.func.isRequired,
-  deleteSubscriptionPlan: PropTypes.func.isRequired,
   updateSubscriptionPlan: PropTypes.func.isRequired,
   createSubscriptionPlan: PropTypes.func.isRequired,
   deletingSubscription: PropTypes.bool,
@@ -113,7 +131,6 @@ const makeMapStateToProps = () => {
 }
 
 const mapDispatchToProps = {
-  deleteSubscriptionPlan,
   updateSubscriptionPlan,
   createSubscriptionPlan
 }
