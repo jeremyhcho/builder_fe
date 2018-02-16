@@ -53,7 +53,11 @@ class RecentPredictions extends React.Component {
   renderPredictions () {
     if (!this.props.predictions.length) {
       return (
-        <Card style={{ marginTop: 0 }} wrapperStyle={{ height: '500px', position: 'relative' }}>
+        <Card
+          label="Yesterday's Predictions"
+          style={{ marginTop: 0 }}
+          wrapperStyle={{ height: '500px', position: 'relative' }}
+        >
           <div
             style={{
               position: 'absolute',
