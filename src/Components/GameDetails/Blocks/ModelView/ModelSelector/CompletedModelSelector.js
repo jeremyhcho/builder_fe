@@ -25,8 +25,7 @@ class CompletedModelSelector extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.prediction.id !== this.props.prediction.id &&
-        this.props.prediction.id) {
+    if (!newProps.fetchingModel && this.props.fetchingModel && this.props.prediction.id) {
       this.openModels()
     }
   }

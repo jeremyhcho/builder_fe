@@ -71,7 +71,7 @@ class PublishAnnouncement extends React.Component {
         isOpen={this.props.isOpen}
         toggle={this.props.toggle}
         footer={this.renderFooter()}
-        bodyStyle={{ width: '500px' }}
+        wrapperStyle={{ width: '500px' }}
       >
         {this.renderBody()}
       </Modal>
