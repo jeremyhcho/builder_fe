@@ -9,7 +9,7 @@ import { Select, Card, Spinner } from 'Components/Common'
 import MatchupGraphInfo from './MatchupGraphInfo'
 
 // CSS
-import './Matchup.scss'
+import './MatchupGraph.scss'
 
 // Actions
 import { fetchNBATeamMatchStats } from 'Actions'

@@ -9,7 +9,7 @@ import { Select, Card, Spinner } from 'Components/Common'
 import PointsGraphInfo from './PointsGraphInfo'
 
 // CSS
-import './TeamStats.scss'
+import './PointsGraph.scss'
 
 // Actions
 import { fetchNBATeamMatchStats } from 'Actions'
@@ -163,7 +163,7 @@ class PointsGraph extends React.Component {
 
     if (teamMatchStats && summary) {
       return (
-        <Card label='Points by quarter'>
+        <Card label='Points by quarter' subText={<PointsGraphInfo />}>
           <div styleName="points-graph">
             <Row center='xs'>
               <div style={{ width: '220px', margin: '10px 30px' }}>
@@ -207,7 +207,7 @@ class PointsGraph extends React.Component {
       )
     }
     return (
-      <Card label="Points by quarter">
+      <Card label="Points by quarter" subText={<PointsGraphInfo />}>
         <Row center='xs' middle='xs' style={{ height: '567px' }}>
           <Col xs={12}>
             <Spinner lg show />
