@@ -71,11 +71,15 @@ class SideNav extends React.Component {
   render () {
     return (
       <div styleName="sidenav">
-        <PlaceholderIcon
-          width={25}
-          height={25}
-          style={{ marginBottom: '85px' }}
-        />
+        <div
+          styleName="logo"
+          onClick={() => this.props.history.push('/')}
+        >
+          <PlaceholderIcon
+            width={25}
+            height={25}
+          />
+        </div>
 
         {
           navItems.map(({ icon: Icon, selectedIcon: SelectedIcon, route, key, sectionName }) => {
