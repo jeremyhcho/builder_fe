@@ -39,7 +39,7 @@ class GameDetails extends React.Component {
   }
 
   render () {
-    const { summary } = this.props
+    const { summary, isTrial } = this.props
     const { fetchingNewSummary } = this.state
 
     if (!Object.keys(summary).length || fetchingNewSummary) {
@@ -48,6 +48,17 @@ class GameDetails extends React.Component {
 
     if (moment(new Date(summary.date)).diff(moment(), 'days') > 0) {
       return <Redirect to={{ pathname: '/games' }} />
+    }
+
+    if (isTrial && !summary.trial) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/games',
+            state: { isTrial }
+          }}
+        />
+      )
     }
 
     return (
@@ -71,11 +82,13 @@ GameDetails.defaultProps = {
 GameDetails.propTypes = {
   match: PropTypes.object.isRequired,
   fetchNBASummary: PropTypes.func.isRequired,
-  summary: PropTypes.object
+  summary: PropTypes.object,
+  isTrial: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = ({ routines }) => ({
-  summary: routines.nba.summary
+const mapStateToProps = ({ routines, auth }) => ({
+  summary: routines.nba.summary,
+  isTrial: auth.authState.user.trial
 })
 
 const mapDispatchToProps = {

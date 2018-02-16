@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import { Link } from 'react-router-dom'
 import { groupBy } from 'lodash'
 
 // CSS
@@ -31,10 +32,22 @@ class GamesList extends React.Component {
   }
 
   render () {
+    const { locationState } = this.props
     const groupedMatches = this.groupedMatches()
 
     return (
       <Row style={{ position: 'relative' }}>
+        {locationState && locationState.isTrial && (
+          <div className="small" styleName="trial-warning">
+            <p>
+              Trial accounts only have access to free games
+            </p>
+            <p>
+              Click <Link styleName="link" to={{ pathname: '/settings/subscription' }}>here</Link> to subscribe
+            </p>
+          </div>
+        )}
+
         <p
           className='small'
           style={{
@@ -74,8 +87,13 @@ class GamesList extends React.Component {
   }
 }
 
+GamesList.defaultProps = {
+  locationState: null
+}
+
 GamesList.propTypes = {
-  games: PropTypes.array.isRequired
+  games: PropTypes.array.isRequired,
+  locationState: PropTypes.object
 }
 
 export default GamesList
