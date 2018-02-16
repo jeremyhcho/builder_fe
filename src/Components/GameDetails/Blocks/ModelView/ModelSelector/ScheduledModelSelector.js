@@ -20,12 +20,17 @@ import './ModelSelector.scss'
 class ScheduledModelSelector extends React.Component {
   state = {
     modelsOpen: false,
+    hovered: false,
     changingModel: {}
   }
 
   componentWillReceiveProps (newProps) {
     if (newProps.model.id !== this.props.model.id && this.props.model.id) {
-      this.openModels()
+      this.setState({
+        modelsOpen: false
+      }, () => {
+        document.removeEventListener('click', this.handleOutsideClick, false)
+      })
     }
   }
 

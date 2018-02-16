@@ -26,7 +26,11 @@ class CompletedModelSelector extends React.Component {
 
   componentWillReceiveProps (newProps) {
     if (newProps.model.id !== this.props.model.id && this.props.model.id) {
-      this.openModels()
+      this.setState({
+        modelsOpen: false
+      }, () => {
+        document.removeEventListener('click', this.handleOutsideClick, false)
+      })
     }
   }
 
