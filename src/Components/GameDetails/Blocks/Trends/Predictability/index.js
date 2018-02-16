@@ -10,9 +10,9 @@ import {
   Card,
   ButtonGroup,
   Button,
-  Spinner,
-  InfoBubble
+  Spinner
 } from 'Components/Common'
+import PredictabilityInfo from './PredictabilityInfo'
 
 // CSS
 import './Predictability.scss'
@@ -127,7 +127,7 @@ class Predictability extends React.Component {
 
     if (fetchingPredictability || !Object.keys(predictability).length) {
       return (
-        <Card label="Predictability">
+        <Card label="Predictability" subText={<PredictabilityInfo />}>
           <Row style={{ height: '408px' }} middle='xs' center='xs'>
             <Col xs={12}>
               <Spinner lg show />
@@ -146,11 +146,7 @@ class Predictability extends React.Component {
         wrapperStyle={{
           padding: '25px'
         }}
-        subText={
-          <InfoBubble pos="bottom" width={400}>
-            This is a predictability graph.
-          </InfoBubble>
-        }
+        subText={<PredictabilityInfo />}
       >
         <div styleName='button-headers'>
           <div>

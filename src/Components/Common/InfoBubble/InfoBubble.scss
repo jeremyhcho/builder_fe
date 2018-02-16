@@ -142,6 +142,30 @@
         background-color: #fff;
       }
     }
+
+    &.bottomRight {
+      bottom: -16px;
+      left: -36px;
+      transform: translateY(100%);
+
+      &:before {
+        transform: rotate(225deg);
+        top: -4px;
+        width: 8px;
+        height: 8px;
+        background-color: #fff;
+        box-shadow: 1px 1px 6px 0.5px rgba(9, 30, 66, .28);
+      }
+
+      &:after {
+        left: 36px;
+        transform: rotate(225deg);
+        top: -4px;
+        width: 15px;
+        height: 15px;
+        background-color: #fff;
+      }
+    }
   }
 
 }

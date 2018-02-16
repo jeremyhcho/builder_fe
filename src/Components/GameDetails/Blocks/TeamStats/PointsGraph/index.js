@@ -6,37 +6,32 @@ import { Line } from 'react-chartjs-2'
 
 // Components
 import { Select, Card, Spinner } from 'Components/Common'
+import PointsGraphInfo from './PointsGraphInfo'
 
 // CSS
-import './Matchup.scss'
+import './TeamStats.scss'
 
 // Actions
 import { fetchNBATeamMatchStats } from 'Actions'
 
 // Helpers
 import { colorComparator } from 'Helpers'
+import options from './options'
 
-class MatchupGraph extends React.Component {
+class PointsGraph extends React.Component {
   state = {
     selectedOption1: '',
     selectedOption2: ''
   }
 
   componentDidMount() {
-    const { fetchNBATeamMatchStats, matchup } = this.props
-    if (matchup) {
-      fetchNBATeamMatchStats(matchup.id)
-    }
+    const { fetchNBATeamMatchStats, matchId } = this.props
+    fetchNBATeamMatchStats(matchId)
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.matchup.id && !this.props.matchup
-      || newProps.matchup.id !== this.props.matchup.id) {
-      this.props.fetchNBATeamMatchStats(newProps.matchup.id)
-    }
-
-    if (newProps.matchup && newProps.teamMatchStats) {
-      const teamOptions = this.teamOptions(newProps.matchup)
+    if (newProps.summary && newProps.teamMatchStats) {
+      const teamOptions = this.teamOptions(newProps.summary)
 
       this.setState({
         selectedOption1: teamOptions[0].value,
@@ -50,10 +45,10 @@ class MatchupGraph extends React.Component {
   }
 
   determineColors () {
-    const { matchup } = this.props
-    const homeColor = matchup.home.colors.primary.slice(1)
-    const awayColor = matchup.away.colors.primary.slice(1)
-    const secondaryAwayColor = matchup.away.colors.secondary.slice(1)
+    const { summary } = this.props
+    const homeColor = summary.home.colors.primary.slice(1)
+    const awayColor = summary.away.colors.primary.slice(1)
+    const secondaryAwayColor = summary.away.colors.secondary.slice(1)
 
     const ratio1 = colorComparator(homeColor, awayColor)
     const ratio2 = colorComparator(homeColor, secondaryAwayColor)
@@ -67,10 +62,10 @@ class MatchupGraph extends React.Component {
   }
 
   teamMatchStatsData () {
-    const { teamMatchStats, matchup } = this.props
+    const { teamMatchStats, summary } = this.props
     const labels = ['Q1', 'Q2', 'Q3', 'Q4']
     const datasets = []
-    if (teamMatchStats && matchup) {
+    if (teamMatchStats && summary) {
       const teamPoints = {
         away: { points: [], avg_points: [] },
         home: { points: [], avg_points: [] }
@@ -86,7 +81,7 @@ class MatchupGraph extends React.Component {
       })
 
       const awayPoints = {
-        label: `${matchup.away.name} Points`,
+        label: `${summary.away.name} Points`,
         fill: false,
         lineTension: 0.1,
         cubicInterpolationMode: 'linear',
@@ -101,7 +96,7 @@ class MatchupGraph extends React.Component {
         data: teamPoints.away.points
       }
       const awayAvgPoints = {
-        label: `${matchup.away.name} Average Points`,
+        label: `${summary.away.name} Average Points`,
         fill: false,
         lineTension: 0.1,
         cubicInterpolationMode: 'linear',
@@ -115,7 +110,7 @@ class MatchupGraph extends React.Component {
       }
 
       const homePoints = {
-        label: `${matchup.home.name} Points`,
+        label: `${summary.home.name} Points`,
         fill: false,
         lineTension: 0.1,
         cubicInterpolationMode: 'linear',
@@ -130,7 +125,7 @@ class MatchupGraph extends React.Component {
         data: teamPoints.home.points
       }
       const homeAvgPoints = {
-        label: `${matchup.home.name} Average Points`,
+        label: `${summary.home.name} Average Points`,
         fill: false,
         lineTension: 0.1,
         cubicInterpolationMode: 'linear',
@@ -150,8 +145,8 @@ class MatchupGraph extends React.Component {
     return { labels, datasets }
   }
 
-  teamOptions (matchup) {
-    const updatedSummary = matchup || this.props.matchup
+  teamOptions (summary) {
+    const updatedSummary = summary || this.props.summary
 
     if (!updatedSummary) { return {} }
 
@@ -164,9 +159,9 @@ class MatchupGraph extends React.Component {
   }
 
   render () {
-    const { teamMatchStats, matchup, fetchingTeamStats } = this.props
+    const { teamMatchStats, summary } = this.props
 
-    if (teamMatchStats && matchup && !fetchingTeamStats) {
+    if (teamMatchStats && summary) {
       return (
         <Card label='Points by quarter'>
           <div styleName="points-graph">
@@ -203,36 +198,7 @@ class MatchupGraph extends React.Component {
                   width={600}
                   height={300}
                   data={this.teamMatchStatsData()}
-                  options={{
-                    maintainAspectRatio: false,
-                    scales: {
-                      yAxes: [{
-                        ticks: {
-                          stepSize: 2
-                        },
-                        scaleLabel: {
-                          display: true,
-                          labelString: 'Points',
-                          fontStyle: 'bold'
-                        }
-                      }],
-                      xAxes: [{
-                        scaleLabel: {
-                          display: true,
-                          labelString: 'Quarters',
-                          fontStyle: 'bold'
-                        }
-                      }]
-                    },
-                    layout: {
-                      padding: {
-                        left: 40,
-                        right: 40,
-                        top: 0,
-                        bottom: 0
-                      }
-                    }
-                  }}
+                  options={options}
                 />
               </div>
             </Row>
@@ -252,23 +218,21 @@ class MatchupGraph extends React.Component {
   }
 }
 
-MatchupGraph.defaultProps = {
+PointsGraph.defaultProps = {
   teamMatchStats: null,
-  matchup: null,
-  fetchingTeamStats: false
+  summary: null
 }
 
-MatchupGraph.propTypes = {
+PointsGraph.propTypes = {
   teamMatchStats: PropTypes.object,
-  matchup: PropTypes.object,
+  summary: PropTypes.object,
   fetchNBATeamMatchStats: PropTypes.func.isRequired,
-  fetchingTeamStats: PropTypes.bool
+  matchId: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
   teamMatchStats: routines.nba.teamMatchStats,
-  matchup: routines.nba.matchup,
-  fetchingTeamStats: routines.isLoading.FETCH_NBA_TEAM_MATCH_STATS
+  summary: routines.nba.summary
 })
 
 const mapDispatchToProps = {
@@ -278,4 +242,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MatchupGraph)
+)(PointsGraph)
