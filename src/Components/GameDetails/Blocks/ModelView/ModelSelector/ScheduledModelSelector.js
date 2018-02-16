@@ -24,7 +24,7 @@ class ScheduledModelSelector extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (!newProps.fetchingModel && this.props.fetchingModel && this.props.prediction.id) {
+    if (newProps.model.id !== this.props.model.id && this.props.model.id) {
       this.openModels()
     }
   }
@@ -178,12 +178,14 @@ class ScheduledModelSelector extends React.Component {
 ScheduledModelSelector.defaultProps = {
   predictions: [],
   prediction: {},
+  model: {},
   fetchingModel: false
 }
 
 ScheduledModelSelector.propTypes = {
   predictions: PropTypes.array,
   prediction: PropTypes.object,
+  model: PropTypes.object,
   updateNBAMatchesModels: PropTypes.func.isRequired,
   fetchNBAModel: PropTypes.func.isRequired,
   fetchNBAPrediction: PropTypes.func.isRequired,
@@ -193,6 +195,7 @@ ScheduledModelSelector.propTypes = {
 const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
+  model: routines.nba.model,
   fetchingModel: routines.callingApi.FETCH_NBA_MODEL
 })
 

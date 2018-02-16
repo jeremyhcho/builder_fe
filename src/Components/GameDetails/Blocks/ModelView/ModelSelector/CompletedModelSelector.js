@@ -25,7 +25,7 @@ class CompletedModelSelector extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (!newProps.fetchingModel && this.props.fetchingModel && this.props.prediction.id) {
+    if (newProps.model.id !== this.props.model.id && this.props.model.id) {
       this.openModels()
     }
   }
@@ -178,12 +178,14 @@ class CompletedModelSelector extends React.Component {
 CompletedModelSelector.defaultProps = {
   predictions: [],
   prediction: {},
+  model: {},
   fetchingModel: false
 }
 
 CompletedModelSelector.propTypes = {
   predictions: PropTypes.array,
   prediction: PropTypes.object,
+  model: PropTypes.object,
   fetchNBAModel: PropTypes.func.isRequired,
   fetchNBAPrediction: PropTypes.func.isRequired,
   fetchingModel: PropTypes.bool
@@ -192,6 +194,7 @@ CompletedModelSelector.propTypes = {
 const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
+  model: routines.nba.model,
   fetchingModel: routines.callingApi.FETCH_NBA_MODEL
 })
 
