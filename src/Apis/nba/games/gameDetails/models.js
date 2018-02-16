@@ -10,7 +10,7 @@ export const getPrediction = (predictionId) => (
 
 export const putNBAPrediction = (predictionId, params) => (
   axios.put(`/api/nba/v1/predictions/${predictionId}`, {
-    matches_model: params
+    prediction: params
   })
 )
 
