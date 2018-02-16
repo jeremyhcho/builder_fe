@@ -9,9 +9,6 @@ import './RecentPredictions.scss'
 // Icons
 import RightArrow from 'Assets/Icons/right-arrow.svg'
 
-// Components
-import { Card } from 'Components/Common'
-
 const PredictionItem = ({ prediction, index, history }) => {
   const resultClass = classNames('result', prediction.result)
   const convertedSpread = () => {
@@ -27,58 +24,56 @@ const PredictionItem = ({ prediction, index, history }) => {
   const marginTop = index === 0 ? '0' : '20px'
 
   return (
-    <Card style={{ marginTop, height: 'auto' }} onClick={navigateToGame}>
-      <div styleName='prediction'>
-        <div styleName='headers'>
-          <div className='semibold label'>
-            <span className='small' styleName={resultClass} style={{ textAlign: 'center' }}>
-              {prediction.result.toUpperCase()}
-            </span>
-          </div>
-
-          <div className='semibold label'>
-            Game
-          </div>
-
-          <div className='semibold label'>
-            Score
-          </div>
-
-          <div className='semibold label'>
-            Pick
-          </div>
-
+    <div styleName='prediction' style={{ marginTop, height: 'auto' }} onClick={navigateToGame}>
+      <div styleName='headers'>
+        <div className='semibold label'>
+          <span className='small' styleName={resultClass} style={{ textAlign: 'center' }}>
+            {prediction.result.toUpperCase()}
+          </span>
         </div>
 
-        <div styleName='cells' style={{ marginTop: '5px' }}>
-          <div
-            className='semibold'
-            style={{
-              textOverflow: 'ellipsis',
-              overflow: 'hidden',
-              whiteSpace: 'nowrap',
-              display: 'block'
-            }}
-          >
-            {prediction.name}
-          </div>
-
-          <div className='semibold'>
-            {prediction.away_team_name} @ {prediction.home_team_name}
-          </div>
-
-          <div className='semibold'>
-            {prediction.away_team_points} - {prediction.home_team_points}
-          </div>
-
-          <div className='semibold'>
-            {prediction[`${prediction.pick.match_type}_team_name`]} {convertedSpread()}
-          </div>
+        <div className='semibold label'>
+          Game
         </div>
 
-        <RightArrow />
+        <div className='semibold label'>
+          Score
+        </div>
+
+        <div className='semibold label'>
+          Pick
+        </div>
+
       </div>
-    </Card>
+
+      <div styleName='cells' style={{ marginTop: '5px' }}>
+        <div
+          className='semibold'
+          style={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            display: 'block'
+          }}
+        >
+          {prediction.name}
+        </div>
+
+        <div className='semibold'>
+          {prediction.away_team_name} @ {prediction.home_team_name}
+        </div>
+
+        <div className='semibold'>
+          {prediction.away_team_points} - {prediction.home_team_points}
+        </div>
+
+        <div className='semibold'>
+          {prediction[`${prediction.pick.match_type}_team_name`]} {convertedSpread()}
+        </div>
+      </div>
+
+      <RightArrow />
+    </div>
   )
 }
 

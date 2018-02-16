@@ -18,6 +18,8 @@
     padding: 20px 25px;
     cursor: pointer;
     flex-wrap: wrap;
+    background-color: var(--lightest-gray);
+    border-radius: var(--border-radius);
 
     &:last-child {
       margin-bottom: 0;

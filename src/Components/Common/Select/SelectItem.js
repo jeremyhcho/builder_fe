@@ -15,7 +15,7 @@ const SelectItem = ({ option, onClick, disabled }) => {
   }
 
   return (
-    <li styleName={listItemClass} onMouseDown={handleClick}>
+    <li styleName={listItemClass} onMouseUp={handleClick}>
       {option.label}
     </li>
   )

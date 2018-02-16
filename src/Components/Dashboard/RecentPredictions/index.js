@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { uniqBy } from 'lodash'
 
 // Components
 import PredictionItem from './PredictionItem'
-import { Card } from 'Components/Common'
+import { Card, Select } from 'Components/Common'
 
 // Actions
 import { fetchRecentPredictions } from 'Actions'
@@ -16,8 +17,37 @@ import './RecentPredictions.scss'
 import ColoredAppIcon from 'Assets/Icons/colored-app-cancel.svg'
 
 class RecentPredictions extends React.Component {
+  state = {
+    selectedModelId: null
+  }
+
   componentDidMount () {
     this.props.fetchRecentPredictions()
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.predictions.length && !this.props.predictions.length) {
+      this.setState({ selectedModelId: newProps.predictions[0].model_id })
+    }
+  }
+
+  getModels () {
+    const filteredPredictions = uniqBy(this.props.predictions, prediction => prediction.model_id)
+
+    return filteredPredictions.map(prediction => ({
+      label: prediction.name,
+      value: prediction.model_id
+    }))
+  }
+
+  filteredPredictions () {
+    return this.props.predictions.filter(prediction => (
+      prediction.model_id === this.state.selectedModelId
+    ))
+  }
+
+  changeModel = (e, option) => {
+    this.setState({ selectedModelId: option.value })
   }
 
   renderPredictions () {
@@ -42,13 +72,32 @@ class RecentPredictions extends React.Component {
       )
     }
 
-    return this.props.predictions.map((prediction, index) => (
-      <PredictionItem
-        prediction={prediction}
-        key={prediction.id}
-        index={index}
-      />
-    ))
+    return (
+      <Card
+        label="Yesterday's Predictions"
+        wrapperStyle={{ padding: '45px 30px' }}
+        style={{ marginTop: 0 }}
+      >
+        <div style={{ width: '200px', marginBottom: '20px' }}>
+          <Select
+            defaultText='Select a Model'
+            options={this.getModels()}
+            onChange={this.changeModel}
+            selectedVal={this.state.selectedModelId}
+          />
+        </div>
+
+        {
+          this.filteredPredictions().map((prediction, index) => (
+            <PredictionItem
+              prediction={prediction}
+              key={prediction.id}
+              index={index}
+            />
+          ))
+        }
+      </Card>
+    )
   }
 
   render () {
