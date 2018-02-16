@@ -133,8 +133,8 @@ Specs.propTypes = {
 
 const mapStateToProps = ({ ...state, routines }) => ({
   specs: selector(state, 'specs'),
-  creatingModel: routines.callingApi.CREATE_NBA_MODEL,
-  updatingModel: routines.callingApi.UPDATE_NBA_MODEL
+  creatingModel: routines.isLoading.CREATE_NBA_MODEL,
+  updatingModel: routines.isLoading.UPDATE_NBA_MODEL
 })
 
 export default connect(

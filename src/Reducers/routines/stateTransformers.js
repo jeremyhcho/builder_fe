@@ -39,8 +39,8 @@ const transform = (state, reducerKey, transformAction, loaderKey, response) => {
     return {
       ...state,
       [reducerKey[0]]: data,
-      callingApi: {
-        ...state.callingApi,
+      isLoading: {
+        ...state.isLoading,
         [loaderKey]: false
       }
     }
@@ -80,8 +80,8 @@ const transform = (state, reducerKey, transformAction, loaderKey, response) => {
 
   const RETURNSTATE = {
     ...state,
-    callingApi: {
-      ...state.callingApi,
+    isLoading: {
+      ...state.isLoading,
       [loaderKey]: false
     }
   }

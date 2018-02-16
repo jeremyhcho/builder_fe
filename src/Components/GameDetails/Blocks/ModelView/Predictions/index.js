@@ -132,8 +132,8 @@ Predictions.propTypes = {
 const mapStateToProps = ({ routines }) => ({
   prediction: routines.nba.prediction,
   summary: routines.nba.summary,
-  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION,
-  fetchingModel: routines.callingApi.FETCH_NBA_MODEL
+  fetchingPrediction: routines.isLoading.FETCH_NBA_PREDICTION,
+  fetchingModel: routines.isLoading.FETCH_NBA_MODEL
 })
 
 export default connect(

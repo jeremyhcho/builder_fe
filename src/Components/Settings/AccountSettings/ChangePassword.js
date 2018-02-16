@@ -114,7 +114,7 @@ ChangePassword.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  changingPassword: routines.callingApi.UPDATE_PASSWORD,
+  changingPassword: routines.isLoading.UPDATE_PASSWORD,
   changePasswordFailed: routines.error.UPDATE_PASSWORD
 })
 

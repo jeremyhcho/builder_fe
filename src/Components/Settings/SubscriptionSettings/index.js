@@ -41,7 +41,7 @@ SubscriptionSettings.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   billing: routines.billing,
-  fetchingSubscription: routines.callingApi.FETCH_SUBSCRIPTION
+  fetchingSubscription: routines.isLoading.FETCH_SUBSCRIPTION
 })
 
 export default connect(

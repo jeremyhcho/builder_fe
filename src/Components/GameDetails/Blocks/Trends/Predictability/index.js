@@ -211,7 +211,7 @@ Predictability.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   summary: routines.nba.summary,
-  fetchingPredictability: routines.callingApi.FETCH_NBA_PREDICTABILITY,
+  fetchingPredictability: routines.isLoading.FETCH_NBA_PREDICTABILITY,
   predictability: routines.nba.predictability
 })
 

@@ -117,7 +117,7 @@ ModelView.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
-  fetchingPredictions: routines.callingApi.FETCH_NBA_PREDICTIONS,
+  fetchingPredictions: routines.isLoading.FETCH_NBA_PREDICTIONS,
   summary: routines.nba.summary
 })
 

@@ -130,7 +130,7 @@ DeleteModel.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  deletingModel: routines.callingApi.DELETE_NBA_MODEL
+  deletingModel: routines.isLoading.DELETE_NBA_MODEL
 })
 
 export default connect(

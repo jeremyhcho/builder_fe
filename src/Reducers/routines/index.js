@@ -9,7 +9,7 @@ import teamDetails from './teamDetails'
 const initialState = {
   auth: {},
   nba: {},
-  callingApi: {},
+  isLoading: {},
   error: {},
   admin: {},
   dashboard: {}
@@ -63,8 +63,8 @@ const routines = (state = initialState, action) => {
     case 'REQUEST': {
       return {
         ...state,
-        callingApi: {
-          ...state.callingApi,
+        isLoading: {
+          ...state.isLoading,
           [action.loaderKey]: true
         },
         error: {
@@ -80,8 +80,8 @@ const routines = (state = initialState, action) => {
     case 'FAIL': {
       return {
         ...state,
-        callingApi: {
-          ...state.callingApi,
+        isLoading: {
+          ...state.isLoading,
           [action.loaderKey]: false
         },
         error: {

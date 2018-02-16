@@ -176,8 +176,8 @@ const makeMapStateToProps = () => {
   const getSubscription = makeFilterSubscriptions()
   return ({ routines }) => ({
     subscription: getSubscription(routines).subscription,
-    creatingSubscription: routines.callingApi.CREATE_SUBSCRIPTION,
-    updatingSubscription: routines.callingApi.UPDATE_SUBSCRIPTION
+    creatingSubscription: routines.isLoading.CREATE_SUBSCRIPTION,
+    updatingSubscription: routines.isLoading.UPDATE_SUBSCRIPTION
   })
 }
 

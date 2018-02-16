@@ -72,8 +72,8 @@ CreatePayment.propTypes = {
 
 const mapStateToProps = ({ ...state, auth, routines }) => ({
   userId: auth.authState.user.id,
-  creatingBilling: routines.callingApi.CREATE_BILLING,
-  creatingSubscription: routines.callingApi.CREATE_SUBSCRIPTION,
+  creatingBilling: routines.isLoading.CREATE_BILLING,
+  creatingSubscription: routines.isLoading.CREATE_SUBSCRIPTION,
   plan: selector(state, 'plan')
 })
 

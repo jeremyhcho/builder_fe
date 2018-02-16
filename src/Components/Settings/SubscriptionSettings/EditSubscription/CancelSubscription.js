@@ -88,7 +88,7 @@ CancelSubscription.propTypes = {
 
 const mapStateToProps = ({ auth, routines }) => ({
   userId: auth.authState.user.id,
-  deletingSubscription: routines.callingApi.DELETE_SUBSCRIPTION,
+  deletingSubscription: routines.isLoading.DELETE_SUBSCRIPTION,
 })
 
 const mapDispatchToProps = {

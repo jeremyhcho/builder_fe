@@ -268,7 +268,7 @@ MatchupGraph.propTypes = {
 const mapStateToProps = ({ routines }) => ({
   teamMatchStats: routines.nba.teamMatchStats,
   matchup: routines.nba.matchup,
-  fetchingTeamStats: routines.callingApi.FETCH_NBA_TEAM_MATCH_STATS
+  fetchingTeamStats: routines.isLoading.FETCH_NBA_TEAM_MATCH_STATS
 })
 
 const mapDispatchToProps = {

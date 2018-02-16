@@ -126,8 +126,8 @@ AnnouncementItem.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  publishingAnnouncement: routines.callingApi.PUBLISH_ANNOUNCEMENT,
-  deletingAnnouncement: routines.callingApi.DELETE_ANNOUNCEMENT
+  publishingAnnouncement: routines.isLoading.PUBLISH_ANNOUNCEMENT,
+  deletingAnnouncement: routines.isLoading.DELETE_ANNOUNCEMENT
 })
 
 export default withRouter(connect(

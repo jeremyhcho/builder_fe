@@ -139,7 +139,7 @@ Models.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   models: routines.nba.models,
-  fetchingModels: routines.callingApi.FETCH_NBA_MODELS
+  fetchingModels: routines.isLoading.FETCH_NBA_MODELS
 })
 
 const mapDispatchToProps = {

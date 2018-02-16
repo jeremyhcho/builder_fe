@@ -125,8 +125,8 @@ const makeMapStateToProps = () => {
   return ({ routines, auth }) => ({
     userId: auth.authState.user.id,
     subscription: getSubscription(routines).subscription,
-    deletingSubscription: routines.callingApi.DELETE_SUBSCRIPTION,
-    creatingSubscription: routines.callingApi.CREATE_SUBSCRIPTION
+    deletingSubscription: routines.isLoading.DELETE_SUBSCRIPTION,
+    creatingSubscription: routines.isLoading.CREATE_SUBSCRIPTION
   })
 }
 

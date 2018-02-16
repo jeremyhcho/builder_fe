@@ -199,7 +199,7 @@ const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
   model: routines.nba.model,
-  fetchingModel: routines.callingApi.FETCH_NBA_MODEL
+  fetchingModel: routines.isLoading.FETCH_NBA_MODEL
 })
 
 const mapDispatchToProps = {

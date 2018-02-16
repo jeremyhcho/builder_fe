@@ -142,7 +142,7 @@ CreateAnnouncement.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  creatingAnnouncement: routines.callingApi.CREATE_ANNOUNCEMENT
+  creatingAnnouncement: routines.isLoading.CREATE_ANNOUNCEMENT
 })
 
 const mapDispatchToProps = {

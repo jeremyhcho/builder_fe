@@ -155,7 +155,7 @@ EditAnnouncement.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  updatingAnnouncement: routines.callingApi.UPDATE_ANNOUNCEMENT,
+  updatingAnnouncement: routines.isLoading.UPDATE_ANNOUNCEMENT,
   announcement: routines.admin.fetchAnnouncement
 })
 

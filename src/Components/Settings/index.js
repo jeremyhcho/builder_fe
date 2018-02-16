@@ -66,7 +66,7 @@ Settings.propTypes = {
 
 const mapStateToProps = ({ auth, routines }) => ({
   user: auth.authState.user,
-  fetchingBilling: routines.callingApi.FETCH_BILLING
+  fetchingBilling: routines.isLoading.FETCH_BILLING
 })
 
 const mapDispatchToProps = {
