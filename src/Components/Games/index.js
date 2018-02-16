@@ -11,7 +11,7 @@ import GamesList from './GamesList'
 // CSS
 import './Games.scss'
 
-const Games = ({ games, fetchingGames }) => (
+const Games = ({ games, fetchingGames, location: { state: locationState } }) => (
   <DocumentTitle title='Quartz - NBA Schedule' header='Games'>
     <div>
       <Row style={{ padding: '0 65px' }}>
@@ -23,7 +23,7 @@ const Games = ({ games, fetchingGames }) => (
             <Spinner lg show />
           </div>
         ) : (
-          <GamesList games={games} />
+          <GamesList games={games} locationState={locationState} />
         )
       }
     </div>
@@ -37,7 +37,8 @@ Games.defaultProps = {
 
 Games.propTypes = {
   games: PropTypes.array,
-  fetchingGames: PropTypes.bool
+  fetchingGames: PropTypes.bool,
+  location: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({

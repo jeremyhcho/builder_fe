@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import 'moment-timezone'
 import { withRouter } from 'react-router-dom'
 import { Row, Col } from 'react-styled-flexboxgrid'
@@ -35,7 +36,8 @@ class GameCard extends React.Component {
   }
 
   render () {
-    const { game } = this.props
+    const { game, isTrial } = this.props
+
     const awayTeam = game.away.name.toUpperCase()
     const awayCity = game.away.city
 
@@ -44,6 +46,10 @@ class GameCard extends React.Component {
 
     return (
       <Row styleName="game-container" middle='xs' onClick={this.viewMatch}>
+        {isTrial && game.trial && (
+          <p styleName="free-game">FREE GAME</p>
+        )}
+
         <Col xs={4} style={{ textAlign: 'right', paddingRight: '50px', position: 'relative' }}>
           <div style={{ display: 'inline-block' }}>
             <p className="small label">{awayCity}</p>
@@ -105,7 +111,14 @@ class GameCard extends React.Component {
 
 GameCard.propTypes = {
   game: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  isTrial: PropTypes.bool.isRequired
 }
 
-export default withRouter(GameCard)
+const mapStateToProps = ({ auth }) => ({
+  isTrial: auth.authState.user.trial
+})
+
+export default withRouter(connect(
+  mapStateToProps
+)(GameCard))
