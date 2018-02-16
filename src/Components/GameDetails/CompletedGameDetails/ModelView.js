@@ -48,7 +48,7 @@ class ModelView extends React.Component {
               <NoModelsIcon height={256} width={256} />
 
               <h1 className="bold" style={{ marginTop: '15px' }}>
-                Your account doesn't have any predictions made for this game
+                No predictions were made for this game
               </h1>
             </div>
           </div>

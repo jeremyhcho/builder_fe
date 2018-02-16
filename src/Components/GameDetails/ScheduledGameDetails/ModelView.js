@@ -51,9 +51,9 @@ class ModelView extends React.Component {
               <h1 className="bold" style={{ marginTop: '15px' }}>
                 {
                   this.props.summary.status === 'INPROGRESS' ? (
-                    'None of your models created predictions for this game'
+                    'No predictions were made for this game'
                   ) : (
-                    'You have not created any models'
+                    "Oops, you haven't created any models."
                   )
                 }
               </h1>
