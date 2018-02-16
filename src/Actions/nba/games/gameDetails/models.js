@@ -28,7 +28,7 @@ export const fetchNBAPredictions = createRoutine({
 export const updateNBAPrediction = createRoutine({
   prefix: UPDATE_NBA_PREDICTION,
   api: putNBAPrediction,
-  reducerKey: ['nba', 'matchesModels'],
+  reducerKey: ['nba', 'predictions'],
   transform: 'updateByIdAndChange'
 })
 
