@@ -27,7 +27,6 @@ class Announcements extends React.Component {
         style={{ width: '100%', marginTop: 0 }}
         wrapperStyle={{
           padding: '45px 30px',
-          overflowY: 'auto',
           height: '500px'
         }}
       >

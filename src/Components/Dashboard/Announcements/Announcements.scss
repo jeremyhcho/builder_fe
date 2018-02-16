@@ -1,4 +1,7 @@
 .announcements {
+  height: 100%;
+  overflow-y: auto;
+
   a {
     color: var(--dark-blue);
     text-decoration: underline;
