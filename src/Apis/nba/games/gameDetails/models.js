@@ -8,8 +8,8 @@ export const getPrediction = (predictionId) => (
   axios.get(`/api/nba/v1/predictions/${predictionId}`)
 )
 
-export const putNBAMatchesModels = (modelId, params) => (
-  axios.put(`/api/nba/v1/matches_models/${modelId}`, {
+export const putNBAPrediction = (predictionId, params) => (
+  axios.put(`/api/nba/v1/predictions/${predictionId}`, {
     matches_model: params
   })
 )

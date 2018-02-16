@@ -18,7 +18,7 @@ import ColoredAppIcon from 'Assets/Icons/colored-app-cancel.svg'
 
 class RecentPredictions extends React.Component {
   state = {
-    selectedModelId: null
+    selectedModelId: this.props.predictions.length && this.props.predictions[0].model_id
   }
 
   componentDidMount () {
