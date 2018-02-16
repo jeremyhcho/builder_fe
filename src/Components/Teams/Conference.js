@@ -59,6 +59,15 @@ class Conference extends React.Component {
                           {team.name}
                         </span>
                       </p>
+
+                      <img
+                        src={team.image}
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          marginLeft: '20px'
+                        }}
+                      />
                     </div>
 
                     <div className='semibold small' styleName='team-record'>

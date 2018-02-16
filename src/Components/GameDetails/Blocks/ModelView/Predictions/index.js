@@ -10,7 +10,7 @@ import PredictionsInfo from './PredictionsInfo'
 // CSS
 import './Predictions.scss'
 
-const Predictions = ({ prediction, summary, fetchingPrediction }) => {
+const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel }) => {
   const convertNumber = (num) => {
     if (num > 0) {
       return `+${num}`
@@ -26,7 +26,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction }) => {
     return null
   }
 
-  if (!Object.keys(prediction).length || fetchingPrediction) {
+  if (!Object.keys(prediction).length || fetchingPrediction || fetchingModel) {
     return (
       <Card label="Prediction" subText={<PredictionsInfo />}>
         <div
@@ -118,19 +118,22 @@ const Predictions = ({ prediction, summary, fetchingPrediction }) => {
 Predictions.defaultProps = {
   summary: {},
   prediction: {},
-  fetchingPrediction: false
+  fetchingPrediction: false,
+  fetchingModel: false
 }
 
 Predictions.propTypes = {
   summary: PropTypes.object,
   prediction: PropTypes.object,
-  fetchingPrediction: PropTypes.bool
+  fetchingPrediction: PropTypes.bool,
+  fetchingModel: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
   prediction: routines.nba.prediction,
   summary: routines.nba.summary,
-  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION
+  fetchingPrediction: routines.callingApi.FETCH_NBA_PREDICTION,
+  fetchingModel: routines.callingApi.FETCH_NBA_MODEL
 })
 
 export default connect(
