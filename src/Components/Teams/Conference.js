@@ -4,7 +4,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { withRouter } from 'react-router'
 
 // Components
-import { Card } from 'Components/Common'
+import { Card, Tooltip } from 'Components/Common'
 
 // CSS
 import './Teams.scss'
@@ -12,7 +12,20 @@ import './Teams.scss'
 // SVG
 import RightArrow from 'Assets/Icons/right-arrow.svg'
 
+// Helpers
+import { precisionRound } from 'Helpers'
+
+const hundredths = precisionRound(2)
+
 class Conference extends React.Component {
+  getStreakColor (streak) {
+    if (streak[0] === 'W') {
+      return <p style={{ color: 'var(--green)' }}>{streak}</p>
+    }
+
+    return <p style={{ color: 'var(--red)' }}>{streak}</p>
+  }
+
   conferenceLabel () {
     const { teams } = this.props
     const firstLetter = teams[0].conference.slice(0, 1)
@@ -29,11 +42,54 @@ class Conference extends React.Component {
   render () {
     const { teams } = this.props
 
+    const conferenceLabel = this.conferenceLabel()
+
     return (
       <Col xs={12} styleName='conference'>
         <p className='semibold'>
-          {this.conferenceLabel()}
+          {conferenceLabel}
         </p>
+
+        <Row style={{ padding: '0 30px', cursor: 'default' }}>
+          <Col xs={6} style={{ marginRight: '-15px' }} />
+          <Col xs={6}>
+            <Row center='xs'>
+              <Col xs={3}>
+                <p className='semibold small'>Wins / Losses</p>
+              </Col>
+
+              <Col xs={3}>
+                <p
+                  className='semibold small'
+                  data-tip-for={`${conferenceLabel} PCT`}
+                >
+                  PCT
+                </p>
+                <Tooltip id={`${conferenceLabel} PCT`} pos='top'>Winning percentage</Tooltip>
+              </Col>
+
+              <Col xs={3}>
+                <p
+                  className='semibold small'
+                  data-tip-for={`${conferenceLabel} PPG`}
+                >
+                  PPG
+                </p>
+                <Tooltip id={`${conferenceLabel} PPG`} pos='top'>Points per game</Tooltip>
+              </Col>
+
+              <Col xs={3}>
+                <p
+                  className='semibold small'
+                  data-tip-for={`${conferenceLabel} STRK`}
+                >
+                  STRK
+                </p>
+                <Tooltip id={`${conferenceLabel} STRK`} pos='top'>Current streak</Tooltip>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
 
         <Row>
           <Col xs={12}>
@@ -71,14 +127,23 @@ class Conference extends React.Component {
                     </div>
 
                     <div className='semibold small' styleName='team-record'>
-                      <p
-                        style={{
-                          lineHeight: '17px',
-                          verticalAlign: 'middle'
-                        }}
-                      >
-                        {team.wins}W - {team.losses}L
-                      </p>
+                      <Row center='xs'>
+                        <Col xs={3}>
+                          <p>{team.wins}W - {team.losses}L</p>
+                        </Col>
+
+                        <Col xs={3}>
+                          <p>{hundredths(team.wins / (team.wins + team.losses))}</p>
+                        </Col>
+
+                        <Col xs={3}>
+                          <p>{team.ppg}</p>
+                        </Col>
+
+                        <Col xs={3}>
+                          {this.getStreakColor(team.streak)}
+                        </Col>
+                      </Row>
                     </div>
 
                     <div styleName='right-arrow' style={{ lineHeight: '11px' }}>

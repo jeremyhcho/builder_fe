@@ -21,11 +21,13 @@
       .team-details {
         display: flex;
         align-items: center;
-        flex: 4;
+        flex: 1;
       }
 
       .team-record {
         flex: 1;
+        line-height: 17px;
+        vertical-align: middle;
       }
 
       .right-arrow {
