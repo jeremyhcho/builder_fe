@@ -53,21 +53,21 @@ class Conference extends React.Component {
                         {index + 1}
                       </p>
 
+                      <img
+                        src={team.image}
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          marginRight: '15px'
+                        }}
+                      />
+
                       <p className='label semibold' style={{ display: 'inline-block' }}>
                         {team.city}&nbsp;
                         <span className='semibold' style={{ color: 'var(--font-color)' }}>
                           {team.name}
                         </span>
                       </p>
-
-                      <img
-                        src={team.image}
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          marginLeft: '20px'
-                        }}
-                      />
                     </div>
 
                     <div className='semibold small' styleName='team-record'>

@@ -23,7 +23,10 @@ const TeamDetails = ({ teamDetails }) => {
   return (
     <Row styleName="team-details">
       <Col xs={12} styleName="header">
-        <p className="semibold">{teamDetails.full_name}</p>
+        <img src={teamDetails.image} style={{ width: '35px', height: '35px' }} />
+        <p className="semibold" style={{ marginLeft: '10px' }}>
+          {teamDetails.full_name}
+        </p>
       </Col>
 
       <Row around='xs' styleName="details">
@@ -51,7 +54,10 @@ const TeamDetails = ({ teamDetails }) => {
         </div>
 
         <div styleName="details-card">
-          <h4 className="semibold">{getMatchType(teamDetails.next_match)} {teamDetails.next_match.short_name}</h4>
+          <h4 className="semibold" style={{ display: 'flex', alignItems: 'center' }}>
+            {getMatchType(teamDetails.next_match)}
+            <img src={teamDetails.next_match.image} style={{ width: '35px', height: '35px' }} />
+          </h4>
           <p className="semibold label">Next Match</p>
         </div>
       </Row>
