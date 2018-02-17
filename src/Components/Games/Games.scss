@@ -69,6 +69,17 @@
       margin-bottom: 0;
     }
 
+    .noGames-card {
+      border-bottom: 1px solid var(--light-gray);
+      border-radius: 2px;
+      transition: all 300ms ease;
+      transform: perspective(1px) translateZ(0);
+      background-color: #FFF;
+      height: 240px;
+      width: 100%;
+      position: relative;
+    }
+
     .day-card {
       padding: 20px 0px;
       display: flex;

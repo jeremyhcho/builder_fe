@@ -38,12 +38,6 @@ class GameCard extends React.Component {
   render () {
     const { game, isTrial } = this.props
 
-    const awayTeam = game.away.name.toUpperCase()
-    const awayCity = game.away.city
-
-    const homeTeam = game.home.name.toUpperCase()
-    const homeCity = game.home.city
-
     return (
       <Row styleName="game-container" middle='xs' onClick={this.viewMatch}>
         {isTrial && game.trial && (
@@ -52,8 +46,8 @@ class GameCard extends React.Component {
 
         <Col xs={4} style={{ textAlign: 'right', paddingRight: '50px', position: 'relative' }}>
           <div style={{ display: 'inline-block' }}>
-            <p className="small label">{awayCity}</p>
-            <h1 className="bold">{awayTeam}</h1>
+            <p className="small label">{game.away.city}</p>
+            <h1 className="bold">{game.away.name.toUpperCase()}</h1>
             <p className='small'>{game.away.wins}-{game.away.losses}</p>
           </div>
 
@@ -99,8 +93,8 @@ class GameCard extends React.Component {
           />
 
           <div style={{ display: 'inline-block' }}>
-            <p className="small label">{homeCity}</p>
-            <h1 className="bold">{homeTeam}</h1>
+            <p className="small label">{game.home.city}</p>
+            <h1 className="bold">{game.home.name.toUpperCase()}</h1>
             <p className='small'>{game.home.wins}-{game.home.losses}</p>
           </div>
         </Col>
