@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
 import { Link } from 'react-router-dom'
 import { groupBy } from 'lodash'
+import moment from 'moment'
 
 // CSS
 import './Games.scss'
@@ -71,13 +73,20 @@ class GamesList extends React.Component {
           <Row style={{ width: '100%', maxWidth: '1600px', position: 'relative' }}>
             <Col xs={12}>
               {
-                Object.keys(groupedMatches).map((date) => (
+                Object.keys(groupedMatches).length ? (
+                  Object.keys(groupedMatches).map((date) => (
+                    <DayWrapper
+                      games={groupedMatches[date]}
+                      key={date}
+                      date={date}
+                    />
+                  ))
+                ) : (
                   <DayWrapper
-                    games={groupedMatches[date]}
-                    key={date}
-                    date={date}
+                    games={this.props.games}
+                    date={moment(this.props.dateNow).tz('America/New_York').format('D dddd MMMM')}
                   />
-                ))
+                )
               }
             </Col>
           </Row>
@@ -93,7 +102,14 @@ GamesList.defaultProps = {
 
 GamesList.propTypes = {
   games: PropTypes.array.isRequired,
-  locationState: PropTypes.object
+  locationState: PropTypes.object,
+  dateNow: PropTypes.object.isRequired
 }
 
-export default GamesList
+const mapStateToProps = ({ nba }) => ({
+  dateNow: nba.dates.now
+})
+
+export default connect(
+  mapStateToProps
+)(GamesList)

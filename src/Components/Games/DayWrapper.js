@@ -9,34 +9,36 @@ import GameCard from './GameCard'
 // CSS
 import './Games.scss'
 
-class DayWrapper extends React.Component {
-  render () {
-    const { games, date } = this.props
-    const day = date.split(' ')[0]
-    const dayofWeek = date.split(' ')[1].toUpperCase()
-    const month = date.split(' ')[2].slice(0, 3).toUpperCase()
-    const gamesLengthLabel = classNames('gamesLength', {
-      oneGame: games.length === 1
-    })
-    const cardInfoStyle = classNames('card-info', {
-      oneGame: games.length === 1
-    })
-    return (
-      <Row styleName="day-wrapper" style={{ position: 'relative' }}>
-        <Col xs={2} styleName="day-card">
-          <div styleName={cardInfoStyle}>
-            <h4 className='semibold' style={{ textAlign: 'center' }}>{dayofWeek}</h4>
-            <h1 className="bold" style={{ textAlign: 'center' }}>{month} {day}</h1>
-            <p
-              className="semibold label"
-              styleName={gamesLengthLabel}
-            >
-              {games.length} {games.length === 1 ? ('Game') : ('Games')}
-            </p>
-          </div>
-        </Col>
-        <Col xs={10}>
-          {
+const DayWrapper = ({ games, date }) => {
+  const day = date.split(' ')[0]
+  const dayofWeek = date.split(' ')[1].toUpperCase()
+  const month = date.split(' ')[2].slice(0, 3).toUpperCase()
+
+  const gamesLengthLabel = classNames('gamesLength', {
+    oneGame: games.length <= 1
+  })
+  const cardInfoStyle = classNames('card-info', {
+    oneGame: games.length <= 1
+  })
+
+  return (
+    <Row styleName="day-wrapper" style={{ position: 'relative' }}>
+      <Col xs={2} styleName="day-card">
+        <div styleName={cardInfoStyle}>
+          <h4 className='semibold' style={{ textAlign: 'center' }}>{dayofWeek}</h4>
+          <h1 className="bold" style={{ textAlign: 'center' }}>{month} {day}</h1>
+          <p
+            className="semibold label"
+            styleName={gamesLengthLabel}
+          >
+            {games.length} {games.length === 1 ? ('Game') : ('Games')}
+          </p>
+        </div>
+      </Col>
+
+      <Col xs={10}>
+        {
+          games.length ? (
             games.map(game => {
               return (
                 <Row key={game.id}>
@@ -46,11 +48,17 @@ class DayWrapper extends React.Component {
                 </Row>
               )
             })
-          }
-        </Col>
-      </Row>
-    )
-  }
+          ) : (
+            <Row styleName="noGames-card" center='xs' middle='xs'>
+              <Col xs={12}>
+                <h1 className="semibold label">No games scheduled</h1>
+              </Col>
+            </Row>
+          )
+        }
+      </Col>
+    </Row>
+  )
 }
 
 DayWrapper.defaultProps = {
