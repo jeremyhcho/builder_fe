@@ -13,12 +13,27 @@ import LeftArrow from 'Assets/Icons/left-arrow.svg'
 import './GameCard.scss'
 
 class GameCard extends React.Component {
-  getWinner () {
+  getWinner (teamPoints) {
     const { game } = this.props
 
-    if (game.away.points > game.home.points) return game.away.points
+    let opponent
 
-    return game.home.points
+    if (teamPoints === game.away.points) opponent = game.home.points
+    if (teamPoints === game.home.points) opponent = game.away.points
+
+    if (teamPoints > opponent) return true
+    return false
+  }
+
+  getLoser (teamPoints) {
+    const { game } = this.props
+
+    let opponent
+    if (teamPoints === game.away.points) opponent = game.home.points
+    if (teamPoints === game.home.points) opponent = game.away.points
+
+    if (teamPoints < opponent) return true
+    return false
   }
 
   viewMatch = () => {
@@ -59,13 +74,11 @@ class GameCard extends React.Component {
             textAlign: 'right',
             paddingRight: '50px',
             position: 'relative',
-            color: this.getWinner() === game.home.points ? 'var(--gray)' : null
+            color: this.getLoser(game.away.points) ? 'rgba(72, 84, 93, 0.4)' : null
           }}
         >
           <div style={{ display: 'inline-block' }}>
-            <p
-              className={this.getWinner() === game.home.points ? 'small' : 'small label'}
-            >
+            <p className={this.getLoser(game.away.points) ? 'small' : 'small label'}>
               {game.away.city}
             </p>
             <h1 className="bold">{game.away.name.toUpperCase()}</h1>
@@ -90,10 +103,10 @@ class GameCard extends React.Component {
           style={{
             textAlign: 'center',
             position: 'relative',
-            color: this.getWinner() === game.home.points ? 'var(--gray)' : null
+            color: this.getLoser(game.away.points) ? 'rgba(72, 84, 93, 0.4)' : null
           }}
         >
-          {this.getWinner() === game.away.points && <LeftArrow height={26} styleName='left-arrow' />}
+          {this.getWinner(game.away.points) && <LeftArrow height={26} styleName='left-arrow' />}
           <h2 className="bold">{game.away.points}</h2>
         </Col>
 
@@ -109,10 +122,10 @@ class GameCard extends React.Component {
           style={{
             textAlign: 'center',
             position: 'relative',
-            color: this.getWinner() === game.away.points ? 'var(--gray)' : null
+            color: this.getLoser(game.home.points) ? 'rgba(72, 84, 93, 0.4)' : null
           }}
         >
-          {this.getWinner() === game.home.points && <LeftArrow height={26} styleName='right-arrow' />}
+          {this.getWinner(game.home.points) && <LeftArrow height={26} styleName='right-arrow' />}
           <h2 className="bold">{game.home.points}</h2>
         </Col>
 
@@ -121,7 +134,7 @@ class GameCard extends React.Component {
           style={{
             paddingLeft: '50px',
             position: 'relative',
-            color: this.getWinner() === game.away.points ? 'var(--gray)' : null
+            color: this.getLoser(game.home.points) ? 'rgba(72, 84, 93, 0.4)' : null
           }}
         >
           <img
@@ -137,9 +150,7 @@ class GameCard extends React.Component {
           />
 
           <div style={{ display: 'inline-block' }}>
-            <p
-              className={this.getWinner() === game.home.points ? 'small label' : 'small'}
-            >
+            <p className={this.getLoser(game.home.points) ? 'small' : 'small label'}>
               {game.home.city}
             </p>
             <h1 className="bold">{game.home.name.toUpperCase()}</h1>
