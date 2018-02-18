@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -283,11 +282,11 @@ class TeamAts extends React.Component {
             </Row>
             <div styleName="team-ats">
               {
-                teamAts.map((ats, i) => (
+                teamAts.map(ats => (
                   <Row
                     center='xs'
                     styleName="ats-row"
-                    key={i}
+                    key={ats.id}
                   >
                     <Col
                       xs={3}
