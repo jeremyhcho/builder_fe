@@ -15,10 +15,10 @@ const DayWrapper = ({ games, date }) => {
   const month = date.split(' ')[2].slice(0, 3).toUpperCase()
 
   const gamesLengthLabel = classNames('gamesLength', {
-    oneGame: games.length <= 1
+    oneGame: games.length === 1
   })
   const cardInfoStyle = classNames('card-info', {
-    oneGame: games.length <= 1
+    oneGame: games.length === 1
   })
 
   return (

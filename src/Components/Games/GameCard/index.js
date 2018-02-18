@@ -7,11 +7,20 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Icons
 import AtSign from 'Assets/Icons/at-sign.svg'
+import LeftArrow from 'Assets/Icons/left-arrow.svg'
 
 // CSS
 import './GameCard.scss'
 
 class GameCard extends React.Component {
+  getWinner () {
+    const { game } = this.props
+
+    if (game.away.points > game.home.points) return game.away.points
+
+    return game.home.points
+  }
+
   viewMatch = () => {
     const { history, game } = this.props
     history.push(`${history.location.pathname}/${game.id}`)
@@ -44,9 +53,21 @@ class GameCard extends React.Component {
           <p styleName="free-game">FREE GAME</p>
         )}
 
-        <Col xs={4} style={{ textAlign: 'right', paddingRight: '50px', position: 'relative' }}>
+        <Col
+          xs={4}
+          style={{
+            textAlign: 'right',
+            paddingRight: '50px',
+            position: 'relative',
+            color: this.getWinner() === game.home.points ? 'var(--gray)' : null
+          }}
+        >
           <div style={{ display: 'inline-block' }}>
-            <p className="small label">{game.away.city}</p>
+            <p
+              className={this.getWinner() === game.home.points ? 'small' : 'small label'}
+            >
+              {game.away.city}
+            </p>
             <h1 className="bold">{game.away.name.toUpperCase()}</h1>
             <p className='small'>{game.away.wins}-{game.away.losses}</p>
           </div>
@@ -64,8 +85,16 @@ class GameCard extends React.Component {
           />
         </Col>
 
-        <Col xs={1} style={{ textAlign: 'center' }}>
-          <p className="bold">{game.away.points}</p>
+        <Col
+          xs={1}
+          style={{
+            textAlign: 'center',
+            position: 'relative',
+            color: this.getWinner() === game.home.points ? 'var(--gray)' : null
+          }}
+        >
+          {this.getWinner() === game.away.points && <LeftArrow height={26} styleName='left-arrow' />}
+          <h2 className="bold">{game.away.points}</h2>
         </Col>
 
         <Col xs={2} styleName="col-direction">
@@ -75,11 +104,26 @@ class GameCard extends React.Component {
           </p>
         </Col>
 
-        <Col xs={1} style={{ textAlign: 'center' }}>
-          <p className="bold">{game.home.points}</p>
+        <Col
+          xs={1}
+          style={{
+            textAlign: 'center',
+            position: 'relative',
+            color: this.getWinner() === game.away.points ? 'var(--gray)' : null
+          }}
+        >
+          {this.getWinner() === game.home.points && <LeftArrow height={26} styleName='right-arrow' />}
+          <h2 className="bold">{game.home.points}</h2>
         </Col>
 
-        <Col xs={4} style={{ paddingLeft: '50px', position: 'relative' }}>
+        <Col
+          xs={4}
+          style={{
+            paddingLeft: '50px',
+            position: 'relative',
+            color: this.getWinner() === game.away.points ? 'var(--gray)' : null
+          }}
+        >
           <img
             src={game.home.image}
             style={{
@@ -93,7 +137,11 @@ class GameCard extends React.Component {
           />
 
           <div style={{ display: 'inline-block' }}>
-            <p className="small label">{game.home.city}</p>
+            <p
+              className={this.getWinner() === game.home.points ? 'small label' : 'small'}
+            >
+              {game.home.city}
+            </p>
             <h1 className="bold">{game.home.name.toUpperCase()}</h1>
             <p className='small'>{game.home.wins}-{game.home.losses}</p>
           </div>
