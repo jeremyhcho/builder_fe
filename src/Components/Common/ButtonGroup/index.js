@@ -45,6 +45,7 @@ class ButtonGroup extends React.Component {
 
             return (
               <button
+                type="button"
                 styleName={buttonItemClass}
                 style={buttonStyle}
                 key={button.key}
