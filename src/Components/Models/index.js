@@ -5,7 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Button, Spinner, DocumentTitle } from 'Components/Common'
-import CreateModel from './CreateModel'
+// import CreateModel from './CreateModel'
 import ModelCard from './ModelCard'
 import NoModelsIcon from 'Assets/Icons/missing-content.svg'
 
@@ -113,7 +113,7 @@ class Models extends React.Component {
               </Button>
             </Col>
 
-            <CreateModel toggle={this.toggleModal} isOpen={modalOpen} />
+            {/* <CreateModel toggle={this.toggleModal} isOpen={modalOpen} /> */}
           </Row>
 
           {this.renderModels()}
