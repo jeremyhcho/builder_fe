@@ -19,14 +19,12 @@ class Modal extends React.Component {
       this.setState({ isOpen: newProps.isOpen })
 
       if (newProps.isOpen) {
-        console.log('add event listener')
         document.addEventListener('keydown', this.handleEsc, false)
       }
     }
   }
 
   closeModal () {
-    console.log('remove event listener')
     document.removeEventListener('keydown', this.handleEsc, false)
 
     this.props.toggle()
