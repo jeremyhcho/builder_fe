@@ -18,8 +18,10 @@ import { clearRoutine } from 'Routines'
 import { makeGetModelPredictions } from 'Helpers/Selectors'
 
 class ViewModel extends React.Component {
-  componentDidMount () {
-    this.props.fetchNBAModel(this.props.model.id)
+  componentWillReceiveProps (newProps) {
+    if (newProps.isOpen && !this.props.isOpen) {
+      this.props.fetchNBAModel(newProps.model.id)
+    }
   }
 
   toggleAndClearState () {

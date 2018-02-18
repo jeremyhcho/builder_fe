@@ -14,7 +14,7 @@ class Modal extends React.Component {
     this.content.focus()
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (newProps.isOpen !== this.props.isOpen) {
       this.setState({ isOpen: newProps.isOpen })
 

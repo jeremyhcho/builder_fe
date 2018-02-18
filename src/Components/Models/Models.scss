@@ -1,6 +1,10 @@
 .models {
-  padding-left: 65px;
+  margin-left: 65px;
   height: calc(100% - 60px);
+  max-width: 1600px;
+
+  .model-header {
+  }
 
   .model-overlay {
     position: absolute;

@@ -95,7 +95,7 @@ class Models extends React.Component {
     return (
       <DocumentTitle title='Quartz - NBA Models' header='Models'>
         <div styleName="models">
-          <Row>
+          <Row styleName="model-header">
             <Col xs={2}>
               <Button
                 onClick={this.toggleModal}
