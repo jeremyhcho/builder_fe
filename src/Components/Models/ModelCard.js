@@ -184,14 +184,12 @@ class ModelCard extends React.Component {
                 <View />
                 <Tooltip id={`view-${model.id}`} pos='top'>View</Tooltip>
               </div>
-              {
-                viewModel &&
-                <ViewModel
-                  isOpen
-                  toggle={this.toggleViewModal}
-                  model={model}
-                />
-              }
+
+              <ViewModel
+                isOpen={viewModel}
+                toggle={this.toggleViewModal}
+                model={model}
+              />
             </Col>
 
             <Col xs={2}>
@@ -199,14 +197,12 @@ class ModelCard extends React.Component {
                 <Edit />
                 <Tooltip id={`edit-${model.id}`} pos='top'>Edit</Tooltip>
               </div>
-              {
-                editModel &&
-                <CreateModel
-                  isOpen
-                  toggle={this.toggleModal}
-                  model={model}
-                />
-              }
+
+              <CreateModel
+                isOpen={editModel}
+                toggle={this.toggleModal}
+                model={model}
+              />
             </Col>
 
             <Col xs={2}>
@@ -214,14 +210,12 @@ class ModelCard extends React.Component {
                 <Delete />
                 <Tooltip id={`delete-${model.id}`} pos='top'>Delete</Tooltip>
               </div>
-              {
-                deleteModel &&
-                <DeleteModel
-                  isOpen
-                  toggle={this.toggleDeleteModal}
-                  model={model}
-                />
-              }
+
+              <DeleteModel
+                isOpen={deleteModel}
+                toggle={this.toggleDeleteModal}
+                model={model}
+              />
             </Col>
           </Row>
         </div>

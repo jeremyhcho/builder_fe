@@ -113,10 +113,7 @@ class Models extends React.Component {
               </Button>
             </Col>
 
-            {
-              modalOpen &&
-              <CreateModel toggle={this.toggleModal} isOpen />
-            }
+            <CreateModel toggle={this.toggleModal} isOpen={modalOpen} />
           </Row>
 
           {this.renderModels()}
