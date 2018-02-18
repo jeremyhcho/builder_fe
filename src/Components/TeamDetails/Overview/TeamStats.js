@@ -59,7 +59,7 @@ class TeamStats extends React.Component {
         <div styleName="team-stats">
           <div styleName="team-stats-row">
             <div styleName="team-stats-column team">
-              <p className="label semibold" styleName="label">
+              <p className="label" styleName="label">
                 TEAM
               </p>
 
@@ -79,7 +79,7 @@ class TeamStats extends React.Component {
                   <div key={stat} styleName="team-stats-column">
                     <div>
                       <p
-                        className="label semibold"
+                        className="label"
                         data-tip-for={flatStat.short}
                         styleName="label"
                       >

@@ -119,8 +119,8 @@ class Conference extends React.Component {
                         }}
                       />
 
-                      <p className='label small' style={{ display: 'inline-block' }}>
-                        {team.city}&nbsp;
+                      <p className='label' style={{ display: 'inline-block' }}>
+                        <span className='small'>{team.city}&nbsp;</span>
                         <span className='semibold' style={{ color: 'var(--font-color)' }}>
                           {team.name}
                         </span>

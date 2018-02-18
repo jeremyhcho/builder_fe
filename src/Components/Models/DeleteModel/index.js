@@ -100,12 +100,8 @@ class DeleteModel extends React.Component {
         wrapperStyle={{ width: '500px' }}
       >
         <div style={{ padding: '25px 25px 10px', lineHeight: '25px' }}>
-          <p>
-            Deleting model: <span className="semibold">{model.name}</span>
-          </p>
           <p className="small">
-            <span style={{ color: 'var(--red)' }}>Warning</span>
-            : A deleted model cannot be restored and all its predictions will be lost.
+            A deleted model cannot be restored and all its predictions will be lost.
           </p>
 
           <div styleName={formStyle}>
