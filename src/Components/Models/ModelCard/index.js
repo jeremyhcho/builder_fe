@@ -3,25 +3,25 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Bar } from 'react-chartjs-2'
 import { Row, Col } from 'react-styled-flexboxgrid'
-// import classNames from 'classnames'
 
 // Components
 import { Card, Toggle, Tooltip } from 'Components/Common'
-import CreateModel from './CreateModel'
-import DeleteModel from './DeleteModel'
-import ViewModel from './ViewModel'
+import CreateModel from '../CreateModel'
+import DeleteModel from '../DeleteModel'
+import ViewModel from '../ViewModel'
 import View from 'Assets/Icons/models/eye-17.svg'
 import Edit from 'Assets/Icons/models/pen-01.svg'
 import Delete from 'Assets/Icons/models/trash.svg'
 
 // CSS
-import './Models.scss'
+import './ModelCard.scss'
 
 // Actions
 import { updateNBAModel } from 'Actions'
 
 // Helpers
 import { nbaFlatStat } from 'Helpers'
+import options from './options'
 
 class ModelCard extends React.Component {
   state = {
@@ -110,42 +110,12 @@ class ModelCard extends React.Component {
     const { model } = this.props
     const { editModel, deleteModel, viewModel } = this.state
 
-    const options = {
-      legend: {
-        display: false
-      },
-      animation: {
-        duration: 0
-      },
-      tooltips: {
-        enabled: false,
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            fontSize: 10,
-            padding: 4,
-            min: 0,
-            max: 10
-          }
-        }],
-        xAxes: [{
-          ticks: {
-            fontSize: 7,
-            callback: (label) => label.short,
-          },
-          gridLines: {
-            display: false
-          }
-        }]
-      }
-    }
-
     return (
       <Card
         style={{
           margin: '0 15px 15px 0',
-          display: 'inline-block'
+          display: 'inline-block',
+          borderRadius: 'var(--border-radius)'
         }}
       >
         <div styleName="model-card">

@@ -1,0 +1,49 @@
+.model-card {
+  box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
+  border-radius: var(--border-radius);
+
+  .header {
+    padding: 20px;
+    color: #fff;
+    margin: 0;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .bar-graph {
+    padding: 35px 35px 0;
+  }
+
+  .actions {
+    padding: 10px 35px 20px;
+
+    .toggle {
+      position: absolute;
+      margin: 0;
+      left: 50px;
+      bottom: 25px;
+    }
+
+    .buttons {
+      position: relative;
+      margin-left: 20px;
+      border-radius: 50%;
+      height: 35px;
+      width: 35px;
+      padding-top: 9px;
+      transition: all 200ms ease;
+      cursor: pointer;
+
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:hover {
+        background-color: var(--light-gray);
+      }
+    }
+  }
+}

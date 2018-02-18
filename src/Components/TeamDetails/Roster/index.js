@@ -44,7 +44,7 @@ class Roster extends React.Component {
         }}
       >
         <div style={{ margin: '20px 0' }}>
-          <h4 className="semibold">{teamDetails.full_name} Roster</h4>
+          <p className="semibold">{teamDetails.full_name} Roster</p>
         </div>
 
         <Row style={{ padding: '25px 40px 0' }}>
