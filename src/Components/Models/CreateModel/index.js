@@ -1,31 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+// import { Row, Col } from 'react-styled-flexboxgrid'
+import { reduxForm, Field, formValueSelector } from 'redux-form'
+import classNames from 'classnames'
 
 // Components
-import ModelType from './ModelType'
-import ModelInfo from './ModelInfo'
-import Specs from './Specs'
-import {
-  Modal,
-  Stepper
-} from 'Components/Common'
+import { DocumentTitle, FieldInput, FieldToggle } from 'Components/Common'
+
+// Icons
+import StandardIcon from 'Assets/Icons/models/align-bottom.svg'
+import AdvancedIcon from 'Assets/Icons/models/chart-bars.svg'
 
 // CSS
 import './CreateModel.scss'
 
-// Actions
-import { createNBAModel, updateNBAModel } from 'Actions'
-
 // Helpers
+import { presence, maxChar } from 'Helpers/Validators'
 import modelValidate from './modelValidate'
 
-class CreateModel extends React.Component {
-  state = {
-    step: 0,
-  }
+const selector = formValueSelector('model')
+const maxChar20 = maxChar(20)
 
+class CreateModel extends React.Component {
   componentWillMount () {
     const { model, initialize } = this.props
 
@@ -56,173 +53,96 @@ class CreateModel extends React.Component {
     }
   }
 
-  componentWillReceiveProps (newProps) {
-    if (!newProps.creatingModel && this.props.creatingModel) {
-      this.props.toggle()
-    }
-
-    if (!newProps.updatingModel && this.props.updatingModel) {
-      this.props.toggle()
-    }
-  }
-
-  getStepList () {
-    if (this.props.model) {
-      return ['Details', 'Specs']
-    }
-
-    return ['Type', 'Details', 'Specs']
-  }
-
-  getModelStatus (status) {
-    if (status) return 'ACTIVE'
-    return 'INACTIVE'
-  }
-
-  createModel = ({ Name, specs, status }) => {
-    this.props.createNBAModel({
-      name: Name,
-      specs,
-      status: this.getModelStatus(status)
-    })
-  }
-
-  editModel = ({ Name, specs, status }) => {
-    this.props.updateNBAModel(this.props.model.id, {
-      model: {
-        name: Name,
-        specs,
-        status: this.getModelStatus(status)
-      }
-    })
-  }
-
-  handleNext = () => {
-    this.setState({ step: this.state.step + 1 })
-  }
-
-  handleBack = () => {
-    this.setState({ step: this.state.step - 1 })
-  }
-
-  renderStepDescription () {
-    if (this.props.model) {
-      const stepDescriptions = [
-        'Choose a name and the current status for this model',
-        'Use the sliders to customize your model specs'
-      ]
-
-      return stepDescriptions[this.state.step]
-    }
-
-    const stepDescriptions = [
-      'Select the type of model you want to create',
-      'Choose a name and the current status for this model',
-      'Use the sliders to customize your model specs'
-    ]
-
-    return stepDescriptions[this.state.step]
-  }
-
-  renderModalView () {
-    const { model } = this.props
-
-    if (model) {
-      const modelViews = [
-        <ModelInfo
-          onSubmit={this.handleNext}
-          handleBack={this.handleBack}
-        />,
-        <Specs
-          model={this.props.model}
-          handleBack={this.handleBack}
-          onSubmit={this.props.model ? this.editModel : this.createModel}
-        />
-      ]
-
-      return modelViews[this.state.step]
-    }
-
-    const modelViews = [
-      <ModelType
-        onSubmit={this.handleNext}
-        handleClose={this.props.toggle}
-      />,
-      <ModelInfo
-        onSubmit={this.handleNext}
-        handleBack={this.handleBack}
-      />,
-      <Specs
-        model={this.props.model}
-        handleBack={this.handleBack}
-        onSubmit={this.props.model ? this.editModel : this.createModel}
-      />
-    ]
-
-    return modelViews[this.state.step]
+  changeModelType = (type) => {
+    this.props.change('type', type)
   }
 
   render () {
-    const { toggle, isOpen, model } = this.props
-    const { step } = this.state
+    const modelTypes = [
+      {
+        type: 'standard',
+        icon: StandardIcon
+      },
+      {
+        type: 'advanced',
+        icon: AdvancedIcon
+      }
+    ]
 
     return (
-      <Modal
-        header={model ? 'Edit Model' : 'Create Model'}
-        toggle={toggle}
-        isOpen={isOpen}
-        bodyStyle={{ height: '420px', paddingBottom: '60px', overflow: 'hidden' }}
-        wrapperStyle={{ minWidth: '800px' }}
+      <DocumentTitle
+        title='Quartz - NBA Models'
+        header='Create Model'
+        backUrl='/models'
       >
-        <div styleName="modal-body">
-          <div style={{ textAlign: 'center' }}>
-            <Stepper
-              steps={this.getStepList()}
-              activeStep={step}
+        <div styleName="create-models">
+          <form>
+            <Field
+              component={FieldInput}
+              name="Name"
+              type="text"
+              placeholder="Enter Model Name"
+              validate={[presence, maxChar20]}
             />
 
-            <p className="label" style={{ marginTop: '10px' }}>
-              {this.renderStepDescription()}
-            </p>
-          </div>
+            <Field
+              name="status"
+              component={FieldToggle}
+            />
 
-          {this.renderModalView()}
+            <div>
+              {
+                modelTypes.map(({ type, icon: ModelIcon }) => {
+                  const modelTypeStyle = classNames('model-type-card', {
+                    selected: type === this.props.type,
+                    disabled: type === 'advanced'
+                  })
+
+                  return (
+                    <div
+                      styleName={modelTypeStyle}
+                      key={type}
+                      onClick={type !== 'advanced' ? () => this.changeModelType(type) : null}
+                    >
+                      <ModelIcon height={120} width={120} />
+                      <p className="semibold">{type[0].toUpperCase() + type.substr(1)} Model</p>
+                      {
+                        type === 'advanced' &&
+                        <p className="small label">This model is currently not available</p>
+                      }
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </form>
         </div>
-      </Modal>
+      </DocumentTitle>
     )
   }
 }
 
 CreateModel.defaultProps = {
-  creatingModel: false,
-  updatingModel: false,
-  model: null
+  type: ''
+}
+
+CreateModel.defaultProps = {
+  model: {}
 }
 
 CreateModel.propTypes = {
-  toggle: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  createNBAModel: PropTypes.func.isRequired,
-  updateNBAModel: PropTypes.func.isRequired,
-  creatingModel: PropTypes.bool,
-  updatingModel: PropTypes.bool,
+  type: PropTypes.string,
   model: PropTypes.object,
-  initialize: PropTypes.func.isRequired
+  initialize: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ routines }) => ({
-  creatingModel: routines.isLoading.CREATE_NBA_MODEL,
-  updatingModel: routines.isLoading.UPDATE_NBA_MODEL
+const mapStateToProps = ({ ...state }) => ({
+  type: selector(state, 'type')
 })
 
-const mapDispatchToProps = {
-  createNBAModel,
-  updateNBAModel
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(reduxForm({
   form: 'model',
   validate: modelValidate

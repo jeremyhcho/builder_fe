@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
-// Components
+// Components & Icons
 import { Button, Spinner, DocumentTitle } from 'Components/Common'
 // import CreateModel from './CreateModel'
 import ModelCard from './ModelCard'
@@ -19,16 +19,12 @@ import PlusIcon from 'Assets/Icons/plus.svg'
 import { fetchNBAModels } from 'Actions'
 
 class Models extends React.Component {
-  state = {
-    modalOpen: false
-  }
-
   componentDidMount () {
     this.props.fetchNBAModels()
   }
 
-  toggleModal = () => {
-    this.setState({ modalOpen: !this.state.modalOpen })
+  navigateToCreateModel = () => {
+    this.props.history.push('/models/create')
   }
 
   renderModelColor (index) {
@@ -81,7 +77,6 @@ class Models extends React.Component {
   }
 
   render () {
-    const { modalOpen } = this.state
     const { fetchingModels, models } = this.props
 
     if (fetchingModels || !models) {
@@ -98,7 +93,7 @@ class Models extends React.Component {
           <Row>
             <Col xs={2}>
               <Button
-                onClick={this.toggleModal}
+                onClick={this.navigateToCreateModel}
                 style={{ position: 'relative' }}
               >
                 <PlusIcon
@@ -112,8 +107,6 @@ class Models extends React.Component {
                 <span style={{ marginLeft: '20px' }}>Create Model</span>
               </Button>
             </Col>
-
-            {/* <CreateModel toggle={this.toggleModal} isOpen={modalOpen} /> */}
           </Row>
 
           {this.renderModels()}
@@ -130,6 +123,7 @@ Models.defaultProps = {
 
 Models.propTypes = {
   models: PropTypes.array,
+  history: PropTypes.object.isRequired,
   fetchNBAModels: PropTypes.func.isRequired,
   fetchingModels: PropTypes.bool,
 }
