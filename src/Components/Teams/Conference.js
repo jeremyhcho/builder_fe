@@ -15,7 +15,8 @@ import RightArrow from 'Assets/Icons/right-arrow.svg'
 // Helpers
 import { precisionRound } from 'Helpers'
 
-const hundredths = precisionRound(2)
+const roundThree = precisionRound(3)
+const roundTwo = precisionRound(3)
 
 class Conference extends React.Component {
   getStreakColor (streak) {
@@ -55,7 +56,7 @@ class Conference extends React.Component {
           <Col xs={6}>
             <Row center='xs'>
               <Col xs={3}>
-                <p className='semibold small'>Wins / Losses</p>
+                <p className='semibold small'>W - L</p>
               </Col>
 
               <Col xs={3}>
@@ -133,11 +134,11 @@ class Conference extends React.Component {
                         </Col>
 
                         <Col xs={3}>
-                          <p>{hundredths(team.wins / (team.wins + team.losses))}</p>
+                          <p>{roundThree(team.wins / (team.wins + team.losses)) * 100}%</p>
                         </Col>
 
                         <Col xs={3}>
-                          <p>{team.ppg}</p>
+                          <p>{roundTwo(team.ppg)}</p>
                         </Col>
 
                         <Col xs={3}>

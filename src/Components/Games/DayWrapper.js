@@ -51,7 +51,7 @@ const DayWrapper = ({ games, date }) => {
           ) : (
             <Row styleName="noGames-card" center='xs' middle='xs'>
               <Col xs={12}>
-                <h1 className="semibold label">No games scheduled</h1>
+                <h1 className="semibold label">No Scheduled Games</h1>
               </Col>
             </Row>
           )
