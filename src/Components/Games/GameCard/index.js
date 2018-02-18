@@ -57,11 +57,8 @@ class GameCard extends React.Component {
       case 'CLOSED':
         return 'FINAL'
 
-      case 'POSTPONED'
-        return 'POSTPONED'
-
       default:
-        return null
+        return game.status
     }
   }
 
