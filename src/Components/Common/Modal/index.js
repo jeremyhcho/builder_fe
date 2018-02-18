@@ -10,22 +10,38 @@ class Modal extends React.Component {
     isOpen: this.props.isOpen,
   }
 
+  componentDidMount () {
+    this.content.focus()
+    document.addEventListener('keydown', this.handleEsc, false)
+  }
+
   componentWillReceiveProps(newProps) {
     if (newProps.isOpen !== this.props.isOpen) {
       this.setState({ isOpen: newProps.isOpen })
     }
   }
 
+  closeModal () {
+    document.removeEventListener('keydown', this.handleEsc, false)
+
+    this.props.toggle()
+  }
+
+  handleEsc = (e) => {
+    if (e.keyCode === 27) {
+      this.closeModal()
+    }
+  }
+
   handleOutsideClicks = (e) => {
     if (!this.content.contains(e.target) && this.state.isOpen) {
-      this.props.toggle()
+      this.closeModal()
     }
   }
 
   render () {
     const {
       header,
-      toggle,
       children,
       footer,
       // isOpen,
@@ -44,7 +60,12 @@ class Modal extends React.Component {
         styleName={modalStyle}
         onClick={modal ? null : this.handleOutsideClicks}
       >
-        <div styleName="modal-container" style={wrapperStyle} ref={ref => this.content = ref}>
+        <div
+          styleName="modal-container"
+          style={wrapperStyle}
+          ref={ref => this.content = ref}
+          tabIndex="0"
+        >
           <div styleName="header">
             <div className="flex">
               {
@@ -57,7 +78,7 @@ class Modal extends React.Component {
             <button
               type="button"
               styleName="exit-button"
-              onClick={toggle}
+              onClick={() => this.closeModal()}
             >
               <i
                 className="fa fa-times"
