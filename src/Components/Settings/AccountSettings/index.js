@@ -18,9 +18,7 @@ class AccountSettings extends React.Component {
       <div styleName="account-settings">
         <Row>
           <Col xs={12}>
-            <SettingsSubSection
-              label="Account details"
-            >
+            <SettingsSubSection label="Account details">
               <AccountDetails />
             </SettingsSubSection>
           </Col>
@@ -28,9 +26,7 @@ class AccountSettings extends React.Component {
 
         <Row>
           <Col xs={12}>
-            <SettingsSubSection
-              label="Payment"
-            >
+            <SettingsSubSection label="Payment">
               <PaymentSettings />
             </SettingsSubSection>
           </Col>
