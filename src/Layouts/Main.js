@@ -104,7 +104,7 @@ const MainLayout = ({
           width: '100%',
           height: '100vh',
           minWidth: '964px',
-          minHeight: '700px'
+          minHeight: '500px'
         }}
       >
         <Header />
