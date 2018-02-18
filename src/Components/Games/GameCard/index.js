@@ -50,12 +50,15 @@ class GameCard extends React.Component {
         if (time.minutes() === 0) return time.format('hA')
 
         return time.format('h:mmA')
+
       case 'INPROGRESS':
         return 'IN PROGRESS'
+
       case 'CLOSED':
         return 'FINAL'
+
       default:
-        return null
+        return game.status
     }
   }
 

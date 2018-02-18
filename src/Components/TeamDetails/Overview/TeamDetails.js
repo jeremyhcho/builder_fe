@@ -12,14 +12,6 @@ import { ordinal } from 'Helpers'
 import './Overview.scss'
 
 const TeamDetails = ({ teamDetails }) => {
-  const getMatchType = (game) => {
-    if (game.match_type === 'HOME') {
-      return 'vs'
-    }
-
-    return '@'
-  }
-
   return (
     <Row styleName="team-details">
       <Col xs={12} styleName="header">
@@ -55,7 +47,6 @@ const TeamDetails = ({ teamDetails }) => {
 
         <div styleName="details-card">
           <h4 className="semibold" style={{ display: 'flex', alignItems: 'center' }}>
-            {getMatchType(teamDetails.next_match)}
             <img src={teamDetails.next_match.image} style={{ width: '35px', height: '35px' }} />
           </h4>
           <p className="semibold label">Next Match</p>

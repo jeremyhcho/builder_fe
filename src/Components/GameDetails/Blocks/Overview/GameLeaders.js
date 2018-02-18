@@ -87,6 +87,14 @@ class GameLeaders extends React.Component {
                         {summary.away.leaders[selected].first_name.slice(0, 1)}. {' '}
                         {summary.away.leaders[selected].last_name}
                       </p>
+                      <img
+                        src={summary.away.image}
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          marginLeft: '10px'
+                        }}
+                      />
                     </Row>
                   </Col>
                   {
@@ -113,6 +121,14 @@ class GameLeaders extends React.Component {
                         {summary.home.leaders[selected].first_name.slice(0, 1)}. {' '}
                         {summary.home.leaders[selected].last_name}
                       </p>
+                      <img
+                        src={summary.home.image}
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          marginLeft: '10px'
+                        }}
+                      />
                     </Row>
                   </Col>
                   {
