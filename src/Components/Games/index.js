@@ -47,6 +47,5 @@ const mapStateToProps = ({ routines }) => ({
 })
 
 export default connect(
-  mapStateToProps,
-  null
+  mapStateToProps
 )(Games)

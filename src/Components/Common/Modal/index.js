@@ -10,16 +10,17 @@ class Modal extends React.Component {
     isOpen: this.props.isOpen,
   }
 
-  componentDidMount () {
-    this.content.focus()
-  }
-
   componentWillReceiveProps (newProps) {
     if (newProps.isOpen !== this.props.isOpen) {
-      this.setState({ isOpen: newProps.isOpen })
-
       if (newProps.isOpen) {
-        document.addEventListener('keydown', this.handleEsc, false)
+        this.setState({ isOpen: true }, () => {
+          this.content.focus()
+          document.addEventListener('keydown', this.handleEsc, false)
+        })
+      }
+
+      if (!newProps.isOpen) {
+        this.setState({ isOpen: false })
       }
     }
   }
@@ -55,9 +56,15 @@ class Modal extends React.Component {
       footerStyle
       // ...props
     } = this.props
+
     const modalStyle = classNames('modal', {
       isOpen: this.state.isOpen
     })
+
+    if (!this.state.isOpen) {
+      return null
+    }
+
     return (
       <div
         styleName={modalStyle}
