@@ -185,6 +185,29 @@ class TeamAts extends React.Component {
                 transform: 'translate(-50%, -50%)'
               }}
             >
+              <h4 className='semibold'>{ties}</h4>
+              <p className='semibold label'>Ties</p>
+            </div>
+          </Card>
+
+          <Card
+            wrapperStyle={{
+              padding: '25px',
+              textAlign: 'center',
+              height: '110px',
+              width: '140px',
+              position: 'relative'
+            }}
+            style={{ marginTop: '57px', marginRight: '20px' }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'
+              }}
+            >
               <h4 className='semibold'>{roundOne(((wins + ties) / (wins + losses + ties)) * 100)}%</h4>
               <p className='semibold label'>Cover %</p>
             </div>
