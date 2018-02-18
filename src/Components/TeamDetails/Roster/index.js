@@ -78,7 +78,7 @@ class Roster extends React.Component {
                 </Col>
 
                 <Col xs={4}>
-                  <p>{player.last_name}, {player.first_name}</p>
+                  <p>{player.first_name} {player.last_name}</p>
                 </Col>
 
                 <Col xs={2}>
