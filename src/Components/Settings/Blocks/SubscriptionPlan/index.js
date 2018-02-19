@@ -104,7 +104,7 @@ class SubscriptionPlan extends React.Component {
 
     return (
       <Card
-        style={{ display: 'inline-block' }}
+        style={{ display: 'inline-block', margin: '0' }}
         wrapperStyle={this.state.style}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}

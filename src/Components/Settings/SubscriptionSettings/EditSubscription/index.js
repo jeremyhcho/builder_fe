@@ -51,7 +51,7 @@ class EditSubscription extends React.Component {
     }
 
     return (
-      <div style={{ textAlign: 'center', margin: '10px 0' }}>
+      <div style={{ textAlign: 'center', marginTop: '25px' }}>
         {
           deletingSubscription ? (
             <Spinner show xs />
@@ -65,6 +65,7 @@ class EditSubscription extends React.Component {
             </Button>
           )
         }
+
         <CancelSubscription
           isOpen={this.state.openModal}
           toggle={this.toggleModal}
