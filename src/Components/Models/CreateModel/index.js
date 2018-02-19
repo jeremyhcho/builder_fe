@@ -23,8 +23,6 @@ class CreateModel extends React.Component {
   componentWillMount () {
     const { model, initialize, history } = this.props
 
-    console.log(model, history)
-
     if (!history.location.state || history.location.state.from !== '/models') {
       history.push({ pathname: '/models' })
     }

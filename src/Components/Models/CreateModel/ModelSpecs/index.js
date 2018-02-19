@@ -26,7 +26,10 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
       return (
         <Row middle='xs'>
           <Error height={16} />
-          <p style={{ color: 'var(--red)', marginLeft: '-5px' }}>
+          <p
+            className="semibold"
+            style={{ color: 'var(--red)', marginLeft: '-5px' }}
+          >
             {Math.abs(requiredDifference)} points exceeded
           </p>
         </Row>
@@ -35,7 +38,12 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
       return (
         <Row middle='xs'>
           <Error height={16} />
-          <p style={{ marginLeft: '-5px' }}>{Math.abs(requiredDifference)} points available</p>
+          <p
+            className="semibold"
+            style={{ marginLeft: '-5px' }}
+          >
+            {Math.abs(requiredDifference)} points available
+          </p>
         </Row>
       )
     }
