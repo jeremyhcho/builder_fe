@@ -1,0 +1,23 @@
+.model-specs {
+  .labels {
+    margin: 0;
+    padding: 20px 40px;
+    background-color: var(--navy-blue);
+    color: #fff;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .values {
+    margin: 0;
+    padding: 20px 40px;
+
+    .slider-row {
+      margin: 20px 0;
+    }
+  }
+
+  .footer {
+    margin: 0;
+    padding: 0 20px 20px;
+  }
+}

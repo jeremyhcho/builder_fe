@@ -37,7 +37,7 @@ class Conference extends React.Component {
   }
 
   navigateToTeam (id) {
-    return () => this.props.history.push(`/teams/${id}`)
+    return () => this.props.history.push({ pathname: `/teams/${id}` })
   }
 
   render () {

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Bar } from 'react-chartjs-2'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import { withRouter } from 'react-router-dom'
 
 // Components
 import { Card, Toggle, Tooltip } from 'Components/Common'
-import CreateModel from '../CreateModel'
 import DeleteModel from '../DeleteModel'
 import ViewModel from '../ViewModel'
 import View from 'Assets/Icons/models/eye-17.svg'
@@ -26,7 +26,6 @@ import options from './options'
 class ModelCard extends React.Component {
   state = {
     hovered: false,
-    editModel: false,
     deleteModel: false,
     viewModel: false
   }
@@ -58,10 +57,6 @@ class ModelCard extends React.Component {
     })
   }
 
-  toggleModal = () => {
-    this.setState({ editModel: !this.state.editModel })
-  }
-
   toggleDeleteModal = () => {
     this.setState({ deleteModel: !this.state.deleteModel })
   }
@@ -75,6 +70,13 @@ class ModelCard extends React.Component {
       return true
     }
     return false
+  }
+
+  navigateToEditModel = () => {
+    this.props.history.push({
+      pathname: '/models/create',
+      state: { from: 'edit', model: this.props.model }
+    })
   }
 
   renderData () {
@@ -108,7 +110,7 @@ class ModelCard extends React.Component {
 
   render () {
     const { model } = this.props
-    const { editModel, deleteModel, viewModel } = this.state
+    const { deleteModel, viewModel } = this.state
 
     return (
       <Card
@@ -163,16 +165,10 @@ class ModelCard extends React.Component {
             </Col>
 
             <Col xs={2}>
-              <div styleName="buttons" onClick={this.toggleModal} data-tip-for={`edit-${model.id}`}>
+              <div styleName="buttons" onClick={this.navigateToEditModel} data-tip-for={`edit-${model.id}`}>
                 <Edit />
                 <Tooltip id={`edit-${model.id}`} pos='top'>Edit</Tooltip>
               </div>
-
-              <CreateModel
-                isOpen={editModel}
-                toggle={this.toggleModal}
-                model={model}
-              />
             </Col>
 
             <Col xs={2}>
@@ -197,14 +193,15 @@ class ModelCard extends React.Component {
 ModelCard.propTypes = {
   model: PropTypes.object.isRequired,
   updateNBAModel: PropTypes.func.isRequired,
-  color: PropTypes.object.isRequired
+  color: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {
   updateNBAModel
 }
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(ModelCard)
+)(ModelCard))
