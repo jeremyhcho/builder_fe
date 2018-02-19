@@ -1,5 +1,4 @@
 import { createRoutine } from 'Routines'
-import { push } from 'react-router-redux'
 
 // Actions
 import { openSnackbar } from 'Actions'
@@ -41,10 +40,7 @@ export const createNBAModel = createRoutine({
   api: postNBAModel,
   reducerKey: ['nba', 'models'],
   transform: 'concat',
-  onSuccess: () => {
-    openSnackbar('Model created', 3000)
-    return push({ pathname: '/models' })
-  }
+  onSuccess: () => openSnackbar('Model created', 3000)
 })
 
 export const removeNBAModel = createRoutine({
@@ -60,8 +56,5 @@ export const updateNBAModel = createRoutine({
   api: putNBAModel,
   reducerKey: ['nba', 'models'],
   transform: 'updateByIdAndReplace',
-  onSuccess: () => {
-    openSnackbar('Model updated', 3000)
-    return push({ pathname: '/models' })
-  }
+  onSuccess: () => openSnackbar('Model updated', 3000)
 })

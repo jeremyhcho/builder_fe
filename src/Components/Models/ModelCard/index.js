@@ -74,8 +74,8 @@ class ModelCard extends React.Component {
 
   navigateToEditModel = () => {
     this.props.history.push({
-      pathname: '/models/create',
-      state: { from: 'edit', model: this.props.model }
+      pathname: `/models/create/${this.props.model.id}`,
+      state: { model: this.props.model }
     })
   }
 
@@ -89,7 +89,7 @@ class ModelCard extends React.Component {
         borderColor: this.renderColor().primary,
         borderWidth: 1,
         data: Object.values(model.specs).map(specValue => {
-          if (specValue === '0') return '0.1'
+          if (specValue === '0' || !specValue) return '0.1'
           return specValue
         })
       }

@@ -42,9 +42,6 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
     return null
   }
 
-  const specsTotal = Object.values(specs)
-    .reduce((total, value) => parseInt(total, 10) + parseInt(value, 10))
-
   const renderSubmitButton = () => {
     if (updatingModel || creatingModel) {
       return <Button loading />
@@ -52,6 +49,9 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
 
     return <Button type="submit">Submit</Button>
   }
+
+  const specsTotal = Object.values(specs)
+    .reduce((total, value) => parseInt(total, 10) + parseInt(value, 10))
 
   return (
     <Card label="Specs" style={{ width: '800px' }}>

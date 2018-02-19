@@ -21,40 +21,39 @@ import specKeys from './specKeys'
 
 class CreateModel extends React.Component {
   componentWillMount () {
-    const { initialize, history } = this.props
+    const { model, initialize } = this.props
 
-    const locationState = history.location.state
-
-    if (!locationState) {
-      return history.push({ pathname: '/models' })
-    }
-
-    if (locationState.from === 'create') {
+    if (!model) {
       const specs = {}
 
       specKeys.forEach(spec => specs[spec] = 0)
 
-      return initialize({
+      initialize({
         type: 'standard',
         status: true,
         specs
       })
-    } else if (locationState.from === 'edit') {
-      const currentModel = locationState.model
-      return initialize({
-        type: currentModel.type,
-        specs: currentModel.specs,
-        Name: currentModel.name,
-        status: currentModel.status === 'ACTIVE'
+    } else {
+      initialize({
+        type: model.type,
+        status: model.status === 'ACTIVE',
+        specs: model.specs,
+        Name: model.name
       })
     }
-
-    return history.push({ pathname: '/models' })
   }
 
   componentWillReceiveProps (newProps) {
     if (newProps.submitFailed && !this.props.submitFailed) {
       this.modelContainer.scrollTop = 0
+    }
+
+    if (!newProps.creatingModel && this.props.creatingModel) {
+      this.props.history.push({ pathname: '/models' })
+    }
+
+    if (!newProps.updatingModel && this.props.updatingModel) {
+      this.props.history.push({ pathanme: '/models' })
     }
   }
 
@@ -72,7 +71,7 @@ class CreateModel extends React.Component {
   }
 
   editModel = ({ Name, specs, status }) => {
-    this.props.updateNBAModel(this.props.history.location.state.model.id, {
+    this.props.updateNBAModel(this.props.model.id, {
       model: {
         name: Name,
         specs,
@@ -82,19 +81,17 @@ class CreateModel extends React.Component {
   }
 
   render () {
-    const { history } = this.props
+    const { model, handleSubmit } = this.props
+
     return (
       <DocumentTitle
         title='Quartz - NBA Models'
-        header={history.location.state.model ? 'Edit Model' : 'Create Model'}
+        header={model ? 'Edit Model' : 'Create Model'}
         backUrl='/models'
       >
         <div styleName="create-models" ref={ref => this.modelContainer = ref}>
           <form
-            onSubmit={
-              history.location.state.model ? this.props.handleSubmit(this.editModel)
-                : this.props.handleSubmit(this.createModel)
-            }
+            onSubmit={model ? handleSubmit(this.editModel) : handleSubmit(this.createModel)}
             style={{ display: 'inline-block' }}
           >
             <ModelInfo />
@@ -106,14 +103,28 @@ class CreateModel extends React.Component {
   }
 }
 
+CreateModel.defaultProps = {
+  creatingModel: false,
+  updatingModel: false,
+  model: null
+}
+
 CreateModel.propTypes = {
   history: PropTypes.object.isRequired,
+  model: PropTypes.object,
   initialize: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
   submitFailed: PropTypes.bool.isRequired,
   createNBAModel: PropTypes.func.isRequired,
-  updateNBAModel: PropTypes.func.isRequired
+  updateNBAModel: PropTypes.func.isRequired,
+  creatingModel: PropTypes.bool,
+  updatingModel: PropTypes.bool,
+  handleSubmit: PropTypes.func.isRequired,
 }
+
+const mapStateToProps = ({ routines }) => ({
+  creatingModel: routines.isLoading.CREATE_NBA_MODEL,
+  updatingModel: routines.isLoading.UPDATE_NBA_MODEL
+})
 
 const mapDispatchToProps = {
   createNBAModel,
@@ -121,7 +132,7 @@ const mapDispatchToProps = {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(reduxForm({
   form: 'model',

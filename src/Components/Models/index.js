@@ -5,7 +5,6 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components & Icons
 import { Button, Spinner, DocumentTitle } from 'Components/Common'
-// import CreateModel from './CreateModel'
 import ModelCard from './ModelCard'
 import NoModelsIcon from 'Assets/Icons/missing-content.svg'
 
@@ -24,7 +23,7 @@ class Models extends React.Component {
   }
 
   navigateToCreateModel = () => {
-    this.props.history.push({ pathname: '/models/create', state: { from: 'create' } })
+    this.props.history.push({ pathname: '/models/create' })
   }
 
   renderModelColor (index) {
