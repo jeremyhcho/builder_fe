@@ -16,6 +16,6 @@ export const putNBAModel = (id, model) => (
   axios.put(`/api/nba/v1/models/${id}`, model)
 )
 
-export const getNBAModel = (id) => (
-  axios.get(`/api/nba/v1/models/${id}`)
+export const getNBAModel = (id, opts) => (
+  axios.get(`/api/nba/v1/models/${id}`, { params: opts })
 )

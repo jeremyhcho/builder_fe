@@ -4,7 +4,7 @@ const mutate = (response, transformAction, stateKey) => {
       return response
 
     case 'clear':
-      return null
+      return undefined
 
     case 'concat':
       return [...stateKey, response]

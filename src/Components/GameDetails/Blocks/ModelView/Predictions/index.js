@@ -10,13 +10,18 @@ import PredictionsInfo from './PredictionsInfo'
 // CSS
 import './Predictions.scss'
 
+// Helpers
+import { precisionRound } from 'Helpers'
+
+const roundOne = precisionRound(1)
+
 const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel }) => {
   const convertNumber = (num) => {
     if (num > 0) {
-      return `+${num}`
+      return `+${roundOne(num)}`
     }
 
-    return num
+    return roundOne(num)
   }
 
   const getColor = (value) => {
@@ -45,7 +50,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     {
       city: summary.away.city,
       name: summary.away.name,
-      predictedSpread: convertNumber(prediction.home_points - prediction.away_points),
+      predictedSpread: convertNumber(prediction.home_points - prediction.away_points) || 'EVEN',
       predictionValue: convertNumber(
         Number(prediction.vegas_away_line.spread) -
         Number(prediction.home_points - prediction.away_points)

@@ -160,7 +160,7 @@ class ModelCard extends React.Component {
               <ViewModel
                 isOpen={viewModel}
                 toggle={this.toggleViewModal}
-                model={model}
+                modelId={model.id}
               />
             </Col>
 

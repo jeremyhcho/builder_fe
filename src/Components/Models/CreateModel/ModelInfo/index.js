@@ -21,7 +21,7 @@ class ModelInfo extends React.Component {
     ]
 
     return (
-      <Card label="Model details" style={{ width: '800px' }}>
+      <Card label="Model Details" style={{ width: '800px' }}>
         <div styleName="model-details">
           <Row middle='xs' styleName="labels">
             <Col xs={4} style={{ textAlign: 'left' }}>

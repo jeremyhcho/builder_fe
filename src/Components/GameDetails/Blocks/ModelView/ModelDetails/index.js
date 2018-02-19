@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { groupBy } from 'lodash'
 import { Row } from 'react-styled-flexboxgrid'
 
 // CSS
@@ -18,39 +17,15 @@ const ModelDetails = ({ model }) => {
   }
 
   const getModelRecords = () => {
-    const predictions = model.predictions.filter(prediction => prediction.result)
-    const predictionResults = groupBy(predictions, prediction => {
-      if (!prediction.result) return 'TBD'
-      return prediction.result
-    })
-
-    const wins = predictionResults.win ? predictionResults.win.length : 0
-    const losses = predictionResults.loss ? predictionResults.loss.length : 0
-    const ties = predictionResults.tie ? predictionResults.tie.length : 0
-    const winRate = wins + losses > 0 ? tenths((wins / (wins + losses)) * 100) : null
-
-    let streak = 0
-    const recentPrediction = predictions[predictions.length - 1]
-    const lastGameResult = recentPrediction ? recentPrediction.result : null
-    for (let i = predictions.length - 1; i >= 0; i--) {
-      if (predictions[i].result === lastGameResult) streak++
-      else break;
-    }
-
-    const last5Games = groupBy(predictions.slice(-5), prediction => prediction.result)
-    const last5Wins = last5Games.win ? `W${last5Games.win.length}` : null
-    const last5Losses = last5Games.loss ? `L${last5Games.loss.length}` : null
-    const last5Ties = last5Games.tie ? `T${last5Games.tie.length}` : null
-
-    const last5 = [last5Wins, last5Losses, last5Ties].filter(result => result)
+    const { wins, losses, streak, last5 } = model
+    const winRate = wins + losses > 0 ? tenths(wins / (wins + losses) * 100) : 0
 
     return {
       wins,
       losses,
-      ties,
       winRate: winRate ? `${winRate}%` : 'N/A',
-      streak: lastGameResult ? `${lastGameResult[0].toUpperCase()}${streak}` : 'N/A',
-      last5: last5.length ? last5.join(' - ') : 'N/A'
+      streak: streak || 'N/A',
+      last5: last5 || 'N/A'
     }
   }
 
@@ -96,7 +71,7 @@ const ModelDetails = ({ model }) => {
 
       <div styleName="stats-card">
         <h4 className="semibold">
-          {modelRecords.last5}
+          {modelRecords.last5.wins}W - {modelRecords.last5.losses}L
         </h4>
         <p className="label">Last 5</p>
       </div>

@@ -60,7 +60,7 @@ class ModelHistory extends React.Component {
 
   filteredPredictions () {
     const { checkScheduled, checkClosed } = this.state
-    const { predictions } = this.props
+    const { predictions } = this.props.model
 
     if (checkClosed) {
       return predictions.filter(prediction => prediction.match.status === 'CLOSED')
@@ -188,7 +188,7 @@ class ModelHistory extends React.Component {
 }
 
 ModelHistory.propTypes = {
-  predictions: PropTypes.array.isRequired
+  model: PropTypes.object.isRequired
 }
 
 export default ModelHistory

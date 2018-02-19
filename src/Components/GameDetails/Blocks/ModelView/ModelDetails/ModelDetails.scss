@@ -3,7 +3,7 @@
   margin: 20px 0.5rem 0;
 
   .stats-card {
-    width: 140px;
+    min-width: 140px;
     height: 110px;
     background-color: #fff;
     border: 1px solid var(--light-gray);
