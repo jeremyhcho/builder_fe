@@ -62,5 +62,6 @@ export default connect(
   mapDispatchToProps
 )(reduxForm({
   form: 'deleteModel',
+  destroyOnUnmount: true,
   onSubmit: submit
 })(DeleteForm))

@@ -19,6 +19,12 @@ class DeleteModel extends React.Component {
     renderDeleteField: false
   }
 
+  componentWillReceiveProps (newProps) {
+    if (!newProps.isOpen) {
+      this.setState({ renderDeleteField: false })
+    }
+  }
+
   renderFooter () {
     const { deletingModel, toggle } = this.props
 
