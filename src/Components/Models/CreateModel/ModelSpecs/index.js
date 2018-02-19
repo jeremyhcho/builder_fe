@@ -7,6 +7,7 @@ import { formValueSelector, Field } from 'redux-form'
 // Components & Icons
 import { Card, FieldSlider, Button } from 'Components/Common'
 import Error from 'Assets/Icons/error.svg'
+import ModelSpecsInfo from './ModelSpecsInfo'
 
 // CSS
 import './ModelSpecs.scss'
@@ -54,7 +55,7 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
     .reduce((total, value) => parseInt(total, 10) + parseInt(value, 10))
 
   return (
-    <Card label="Specs" style={{ width: '800px' }}>
+    <Card label="Specs" style={{ width: '800px' }} subText={<ModelSpecsInfo />}>
       <div styleName="model-specs">
         <Row styleName="labels" center='xs' middle='xs'>
           <Col xs={4} style={{ textAlign: 'left' }}>
