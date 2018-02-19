@@ -57,7 +57,7 @@ class Schedule extends React.Component {
   }
 
   navigateToGame = (game) => {
-    this.props.history.push(`/games/${game.match_id}`)
+    this.props.history.push({ pathname: `/games/${game.match_id}` })
   }
 
   render () {

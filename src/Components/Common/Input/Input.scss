@@ -15,6 +15,7 @@
     &.error {
       color: var(--red);
     }
+
     &.shouldFitContainer {
       top: 13px;
     }
@@ -75,7 +76,7 @@
       background-color: #FFF;
       box-shadow: 0 .1px 1px var(--blue);
     }
-    
+
     // Errored input
     &.error {
       border: 1px solid var(--red);

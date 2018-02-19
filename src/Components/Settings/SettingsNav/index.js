@@ -14,7 +14,7 @@ import './SettingsNav.scss'
 
 class SettingsNav extends React.Component {
   select = (route) => {
-    this.props.history.push(`/settings/${route}`)
+    this.props.history.push({ pathname: `/settings/${route}` })
   }
 
   renderNavItems () {

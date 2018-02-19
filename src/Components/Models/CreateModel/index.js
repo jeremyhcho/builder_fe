@@ -1,120 +1,104 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { Row, Col } from 'react-styled-flexboxgrid'
-import { reduxForm, Field, formValueSelector } from 'redux-form'
-import classNames from 'classnames'
+import { reduxForm } from 'redux-form'
+// import classNames from 'classnames'
 
 // Components
-import { DocumentTitle, FieldInput, FieldToggle } from 'Components/Common'
+import { DocumentTitle } from 'Components/Common'
+import ModelInfo from './ModelInfo'
+import ModelSpecs from './ModelSpecs'
 
-// Icons
-import StandardIcon from 'Assets/Icons/models/align-bottom.svg'
-import AdvancedIcon from 'Assets/Icons/models/chart-bars.svg'
+// Actions
+import { createNBAModel, updateNBAModel } from 'Actions'
 
 // CSS
 import './CreateModel.scss'
 
 // Helpers
-import { presence, maxChar } from 'Helpers/Validators'
 import modelValidate from './modelValidate'
-
-const selector = formValueSelector('model')
-const maxChar20 = maxChar(20)
+import specKeys from './specKeys'
 
 class CreateModel extends React.Component {
   componentWillMount () {
-    const { model, initialize } = this.props
+    const { initialize, history } = this.props
 
-    if (model) {
-      initialize({
-        type: model.type,
-        specs: model.specs,
-        Name: model.name,
-        status: model.status === 'ACTIVE'
-      })
-    } else {
-      initialize({
+    const locationState = history.location.state
+
+    if (!locationState) {
+      return history.push({ pathname: '/models' })
+    }
+
+    if (locationState.from === 'create') {
+      const specs = {}
+
+      specKeys.forEach(spec => specs[spec] = 0)
+
+      return initialize({
         type: 'standard',
         status: true,
-        specs: {
-          field_goals_made: 0,
-          three_points_made: 0,
-          field_goals_pct: 0,
-          offensive_rebounds: 0,
-          assists: 0,
-          turnovers: 0,
-          offensive_points_per_possession: 0,
-          defensive_points_per_possession: 0,
-          offensive_rating: 0,
-          defensive_rating: 0
-        }
+        specs
       })
+    } else if (locationState.from === 'edit') {
+      const currentModel = locationState.model
+      return initialize({
+        type: currentModel.type,
+        specs: currentModel.specs,
+        Name: currentModel.name,
+        status: currentModel.status === 'ACTIVE'
+      })
+    }
+
+    return history.push({ pathname: '/models' })
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.submitFailed && !this.props.submitFailed) {
+      this.modelContainer.scrollTop = 0
     }
   }
 
-  changeModelType = (type) => {
-    this.props.change('type', type)
+  getModelStatus (status) {
+    if (status) return 'ACTIVE'
+    return 'INACTIVE'
+  }
+
+  createModel = ({ Name, specs, status }) => {
+    this.props.createNBAModel({
+      name: Name,
+      specs,
+      status: this.getModelStatus(status)
+    })
+  }
+
+  editModel = ({ Name, specs, status }) => {
+    this.props.updateNBAModel(this.props.history.location.state.model.id, {
+      model: {
+        name: Name,
+        specs,
+        status: this.getModelStatus(status)
+      }
+    })
   }
 
   render () {
-    const modelTypes = [
-      {
-        type: 'standard',
-        icon: StandardIcon
-      },
-      {
-        type: 'advanced',
-        icon: AdvancedIcon
-      }
-    ]
-
+    const { history } = this.props
     return (
       <DocumentTitle
         title='Quartz - NBA Models'
-        header='Create Model'
+        header={history.location.state.model ? 'Edit Model' : 'Create Model'}
         backUrl='/models'
       >
-        <div styleName="create-models">
-          <form>
-            <Field
-              component={FieldInput}
-              name="Name"
-              type="text"
-              placeholder="Enter Model Name"
-              validate={[presence, maxChar20]}
-            />
-
-            <Field
-              name="status"
-              component={FieldToggle}
-            />
-
-            <div>
-              {
-                modelTypes.map(({ type, icon: ModelIcon }) => {
-                  const modelTypeStyle = classNames('model-type-card', {
-                    selected: type === this.props.type,
-                    disabled: type === 'advanced'
-                  })
-
-                  return (
-                    <div
-                      styleName={modelTypeStyle}
-                      key={type}
-                      onClick={type !== 'advanced' ? () => this.changeModelType(type) : null}
-                    >
-                      <ModelIcon height={120} width={120} />
-                      <p className="semibold">{type[0].toUpperCase() + type.substr(1)} Model</p>
-                      {
-                        type === 'advanced' &&
-                        <p className="small label">This model is currently not available</p>
-                      }
-                    </div>
-                  )
-                })
-              }
-            </div>
+        <div styleName="create-models" ref={ref => this.modelContainer = ref}>
+          <form
+            onSubmit={
+              history.location.state.model ? this.props.handleSubmit(this.editModel)
+                : this.props.handleSubmit(this.createModel)
+            }
+            style={{ display: 'inline-block' }}
+          >
+            <ModelInfo />
+            <ModelSpecs />
           </form>
         </div>
       </DocumentTitle>
@@ -122,27 +106,23 @@ class CreateModel extends React.Component {
   }
 }
 
-CreateModel.defaultProps = {
-  type: ''
-}
-
-CreateModel.defaultProps = {
-  model: {}
-}
-
 CreateModel.propTypes = {
-  type: PropTypes.string,
-  model: PropTypes.object,
+  history: PropTypes.object.isRequired,
   initialize: PropTypes.func.isRequired,
-  change: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  submitFailed: PropTypes.bool.isRequired,
+  createNBAModel: PropTypes.func.isRequired,
+  updateNBAModel: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ ...state }) => ({
-  type: selector(state, 'type')
-})
+const mapDispatchToProps = {
+  createNBAModel,
+  updateNBAModel
+}
 
 export default connect(
-  mapStateToProps
+  null,
+  mapDispatchToProps
 )(reduxForm({
   form: 'model',
   validate: modelValidate

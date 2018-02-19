@@ -1,7 +1,8 @@
 .create-models {
   padding-left: 65px;
-  height: calc(100% - 60px);
-  max-width: 1600px;
+  height: calc(100vh - 120px);
+  max-width: 1200px;
+  overflow-y: auto;
 
   .model-type-card {
     display: flex;
