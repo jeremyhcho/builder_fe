@@ -71,6 +71,9 @@ class Slider extends React.Component {
         inputValue: min,
         inputWidth: this.findInputWidth(min)
       }, () => {
+        if (onChange) {
+          onChange(this.state.value)
+        }
         this.offsetFill(this.state.value, max)
       })
     } else if (e.target.value > max) {
@@ -79,6 +82,9 @@ class Slider extends React.Component {
         inputValue: e.target.value,
         inputWidth: this.findInputWidth(max)
       }, () => {
+        if (onChange) {
+          onChange(this.state.value)
+        }
         this.offsetFill(this.state.value, max)
       })
     } else {
