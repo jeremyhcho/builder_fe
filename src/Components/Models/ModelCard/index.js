@@ -75,7 +75,7 @@ class ModelCard extends React.Component {
   navigateToEditModel = () => {
     this.props.history.push({
       pathname: `/models/create/${this.props.model.id}`,
-      state: { model: this.props.model }
+      state: { from: '/models' }
     })
   }
 

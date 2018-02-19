@@ -21,7 +21,11 @@ import specKeys from './specKeys'
 
 class CreateModel extends React.Component {
   componentWillMount () {
-    const { model, initialize } = this.props
+    const { model, initialize, history } = this.props
+
+    if (!history.location.state || history.location.state.from !== '/models') {
+      history.push({ pathname: '/models' })
+    }
 
     if (!model) {
       const specs = {}

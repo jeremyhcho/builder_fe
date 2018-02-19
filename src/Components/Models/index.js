@@ -23,7 +23,10 @@ class Models extends React.Component {
   }
 
   navigateToCreateModel = () => {
-    this.props.history.push({ pathname: '/models/create' })
+    this.props.history.push({
+      pathname: '/models/create',
+      state: { from: '/models' }
+    })
   }
 
   renderModelColor (index) {
