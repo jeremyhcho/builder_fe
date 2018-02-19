@@ -140,5 +140,6 @@ export default connect(
   mapDispatchToProps
 )(reduxForm({
   form: 'model',
+  destroyOnUnmount: true,
   validate: modelValidate
 })(CreateModel))
