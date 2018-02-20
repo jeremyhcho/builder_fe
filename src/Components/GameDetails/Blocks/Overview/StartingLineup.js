@@ -49,7 +49,7 @@ class StartingLineup extends React.Component {
           wrapperStyle={{ padding: '50px 0', textAlign: 'center', lineHeight: '30px' }}
         >
           <BanIcon />
-          <p className='label'>Lineups are not yet available for this game</p>
+          <p className='label'>Lineups are currently unvailable for this game</p>
         </Card>
       )
     }

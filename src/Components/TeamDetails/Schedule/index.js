@@ -134,9 +134,20 @@ class Schedule extends React.Component {
                       </Col>
 
                       <Col xs={4}>
-                        <p>
-                          {this.getMatchType(game)} {game.opponent.city} {game.opponent.name}
-                        </p>
+                        <Row middle='xs'>
+                          <p>
+                            {this.getMatchType(game)} {game.opponent.city} {game.opponent.name}
+                          </p>
+
+                          <img
+                            src={game.opponent.image}
+                            style={{
+                              height: '20px',
+                              width: '20px',
+                              marginLeft: '10px'
+                            }}
+                          />
+                        </Row>
                       </Col>
 
                       <Col xs={3}>
