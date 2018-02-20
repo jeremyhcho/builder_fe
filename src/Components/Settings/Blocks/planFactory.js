@@ -4,12 +4,15 @@ const planFactory = {
   'basic-plan': {
     price: 30,
     features: ['Access to basic models', 'Access to predictions', 'Use up to 1 active model'],
-    icon: QuartzIcon
+    icon: QuartzIcon,
+    color: 'var(--blue)'
   },
   'advanced-plan': {
     price: 50,
     features: ['Access to all basic features', 'Unlimited active models', 'Access to advanced models'],
-    icon: QuartzIcon
+    icon: QuartzIcon,
+    color: 'var(--gold)',
+    disabled: true
   }
 }
 

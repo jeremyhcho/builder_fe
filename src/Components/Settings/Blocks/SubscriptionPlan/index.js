@@ -17,9 +17,8 @@ import './SubscriptionPlan.scss'
 import { makeFilterSubscriptions } from 'Helpers/Selectors'
 
 const initialStyle = {
-  height: '220px',
-  width: '400px',
-  padding: '30px',
+  height: '380px',
+  width: '260px',
   position: 'relative',
   transition: 'all 200ms ease'
 }
@@ -59,7 +58,7 @@ class SubscriptionPlan extends React.Component {
     if (subscription && subscription.plan.id === plan) {
       return (
         <p
-          style={{ ...buttonStyle, cursor: 'default' }}
+          style={{ ...buttonStyle, bottom: '30px', cursor: 'default' }}
           className="semibold"
         >
           You are currently on this plan
@@ -67,14 +66,14 @@ class SubscriptionPlan extends React.Component {
       )
     }
 
-    if (plan === 'advanced-plan') {
+    if (planFactory[plan].disabled) {
       return (
         <Button
           style={buttonStyle}
           disabled
           shouldFitContainer
         >
-          This plan is currently unavailable
+          Currently unavailable
         </Button>
       )
     }
@@ -97,56 +96,75 @@ class SubscriptionPlan extends React.Component {
     )
   }
 
+  renderRibbon () {
+    const { subscription, plan } = this.props
+
+    if (subscription && subscription.plan.id === plan) {
+      return <div styleName="ribbon"><span>SUBSCRIBED</span></div>
+    }
+
+    return null
+  }
+
   render () {
     const { plan } = this.props
 
-    // const PlanIcon = planFactory[plan].icon
-
     return (
       <Card
-        style={{ display: 'inline-block', margin: '0' }}
-        wrapperStyle={this.state.style}
+        style={{
+          display: 'inline-block',
+          margin: '0',
+        }}
+        wrapperStyle={{
+          ...this.state.style,
+          opacity: planFactory[plan].disabled ? '0.8' : '1'
+        }}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
         <div styleName="subscription-plan">
-          <Row styleName="plan-details" middle='xs' start='xs'>
-            <Col xs={5}>
-              {/* <div styleName="icon-row">
-                <PlanIcon width={35} height={35} />
-              </div> */}
+          {this.renderRibbon()}
 
-              <div>
-                <p className="semibold">{plan.toUpperCase()}</p>
-
-                <div styleName="price">
-                  <span className="semibold" styleName="dollar">$</span>
-                  <span className="semibold" styleName="amount">{planFactory[plan].price}</span>
-                  <span className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
-                </div>
-              </div>
+          <Row center='xs'>
+            <Col xs={12}>
+              <p
+                className="semibold small"
+                style={{ color: planFactory[plan].color }}
+              >
+                {plan.split('-')[0].toUpperCase()}
+              </p>
             </Col>
 
-            <Col xs={7}>
-              <div styleName="features">
-                {
-                  planFactory[plan].features.map(feature => (
-                    <div
-                      key={feature}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginBottom: '5px'
-                      }}
-                    >
-                      <CheckIcon height={10} width={10} style={{ marginRight: '10px' }} />
-                      <p style={{ textAlign: 'left' }}>{feature}</p>
-                    </div>
-                  ))
-                }
+            <Col xs={12}>
+              <div styleName="price">
+                <span className="semibold" styleName="dollar">$</span>
+                <span className="semibold" styleName="amount">{planFactory[plan].price}</span>
+                <span className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
               </div>
             </Col>
           </Row>
+
+          <hr
+            style={{
+              borderBottom: `1px solid ${planFactory[plan].color}`
+            }}
+          />
+
+          <div styleName="features" center='xs'>
+            {
+              planFactory[plan].features.map(feature => (
+                <Row key={feature} center='xs' middle='xs' style={{ marginBottom: '10px' }}>
+                  <Col xs={3}>
+                    <CheckIcon height={10} width={10} style={{ marginRight: '10px' }} />
+                  </Col>
+
+                  <Col xs={9}>
+                    <p style={{ textAlign: 'left' }} className="small">{feature}</p>
+                  </Col>
+                </Row>
+              ))
+            }
+          </div>
 
           <Row>
             {this.renderButton()}
