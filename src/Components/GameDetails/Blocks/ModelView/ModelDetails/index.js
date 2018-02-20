@@ -11,8 +11,8 @@ import { precisionRound } from 'Helpers'
 
 const tenths = precisionRound(1)
 
-const ModelDetails = ({ model }) => {
-  if (!Object.keys(model).length) {
+const ModelDetails = ({ model, prediction }) => {
+  if (!Object.keys(model).length || !Object.keys(prediction).length) {
     return <div />
   }
 
@@ -36,13 +36,25 @@ const ModelDetails = ({ model }) => {
     return 'var(--font-color)'
   }
 
+  const getResultColor = () => {
+    if (prediction.result === 'win') return 'var(--green)'
+    else if (prediction.result === 'loss') return 'var(--red)'
+
+    return 'var(--font-color)'
+  }
+
   const modelRecords = getModelRecords()
 
   return (
     <Row middle='xs' between='xs' styleName="model-stats">
       <div styleName="stats-card">
-        <h4 className="semibold">{model.type[0].toUpperCase() + model.type.substr(1)}</h4>
-        <p className="label">Type</p>
+        <h4
+          className="semibold"
+          style={{ color: getResultColor() }}
+        >
+          {prediction.result.toUpperCase()}
+        </h4>
+        <p className="label">Result</p>
       </div>
 
       <div styleName="stats-card">
@@ -80,15 +92,18 @@ const ModelDetails = ({ model }) => {
 }
 
 ModelDetails.defaultProps = {
-  model: {}
+  model: {},
+  prediction: {}
 }
 
 ModelDetails.propTypes = {
-  model: PropTypes.object
+  model: PropTypes.object,
+  prediction: PropTypes.object
 }
 
 const mapStateToProps = ({ routines }) => ({
-  model: routines.nba.model
+  model: routines.nba.model,
+  prediction: routines.nba.prediction
 })
 
 export default connect(
