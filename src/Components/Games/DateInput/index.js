@@ -111,7 +111,13 @@ class DateInput extends React.Component {
           <Input
             value={moment(dates.now._i, 'YYYY-MM-DD').format('MM/DD/YYYY')}
             type="text"
-            style={{ fontWeight: '600', backgroundColor: '#FFF', letterSpacing: '1.5px', outline: 'none' }}
+            style={{
+              fontWeight: '600',
+              backgroundColor: '#FFF',
+              letterSpacing: '1.5px',
+              outline: 'none',
+              cursor: 'pointer'
+            }}
             onBlur={this.closeDateInput}
             inputRef={ref => this.dateInput = ref}
             required
@@ -122,6 +128,7 @@ class DateInput extends React.Component {
             icon={<i className="fa fa-calendar" aria-hidden="true" onClick={this.openDateInput} />}
           />
         </div>
+
         {isOpened
           ? <div styleName="calendar">
             <CalendarStateless
