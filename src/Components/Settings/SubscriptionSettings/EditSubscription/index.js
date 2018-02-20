@@ -57,11 +57,11 @@ class EditSubscription extends React.Component {
             <Spinner show xs />
           ) : (
             <Button
-              secondary={subscription ? true : subscription}
+              danger={subscription ? true : subscription}
               disabled={!subscription}
               onClick={this.toggleModal}
             >
-              Cancel current subscription
+              Cancel subscription
             </Button>
           )
         }

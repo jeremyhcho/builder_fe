@@ -38,12 +38,6 @@ class ScheduledModelSelector extends React.Component {
     document.removeEventListener('click', this.handleOutsideClick, false)
   }
 
-  getMatchType () {
-    if (this.props.summary.away.match_type === 'AWAY') return '@'
-
-    return 'vs'
-  }
-
   fetchModelAndPrediction (modelId, predictionId) {
     this.props.fetchNBAModel(modelId)
     this.props.fetchNBAPrediction(predictionId)
@@ -156,7 +150,7 @@ class ScheduledModelSelector extends React.Component {
   }
 
   render () {
-    const { prediction, summary } = this.props
+    const { prediction } = this.props
 
     if (!Object.keys(prediction).length) {
       return <div />
@@ -180,16 +174,6 @@ class ScheduledModelSelector extends React.Component {
           {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
         </div>
 
-        <Row middle='xs' around='xs' styleName="match">
-          <img src={summary.away.image} style={{ height: '20px', width: '20px' }} />
-          <p className="small">{summary.away.name}</p>
-
-          <p>{this.getMatchType()}</p>
-
-          <p className="small">{summary.home.name}</p>
-          <img src={summary.home.image} style={{ height: '20px', width: '20px' }} />
-        </Row>
-
         {this.renderModelList()}
       </div>
     )
@@ -200,7 +184,6 @@ ScheduledModelSelector.defaultProps = {
   predictions: [],
   prediction: {},
   model: {},
-  summary: {},
   fetchingModel: false
 }
 
@@ -208,7 +191,6 @@ ScheduledModelSelector.propTypes = {
   predictions: PropTypes.array,
   prediction: PropTypes.object,
   model: PropTypes.object,
-  summary: PropTypes.object,
   updateNBAPrediction: PropTypes.func.isRequired,
   fetchNBAModel: PropTypes.func.isRequired,
   fetchNBAPrediction: PropTypes.func.isRequired,
@@ -219,7 +201,6 @@ const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
   model: routines.nba.model,
-  summary: routines.nba.summary,
   fetchingModel: routines.isLoading.FETCH_NBA_MODEL
 })
 
