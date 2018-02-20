@@ -12,6 +12,35 @@ import { ordinal } from 'Helpers'
 import './Overview.scss'
 
 const TeamDetails = ({ teamDetails }) => {
+  const getStreak = () => {
+    const streakOutcome = teamDetails.streak[0].toUpperCase()
+
+    if (streakOutcome === 'W') {
+      return (
+        <h4 className="semibold" style={{ color: 'var(--green)' }}>
+          {streakOutcome}
+          {teamDetails.streak.substr(1)}
+        </h4>
+      )
+    }
+
+    if (streakOutcome === 'L') {
+      return (
+        <h4 className="semibold" style={{ color: 'var(--red)' }}>
+          {streakOutcome}
+          {teamDetails.streak.substr(1)}
+        </h4>
+      )
+    }
+
+    return (
+      <h4 className="semibold">
+        {streakOutcome}
+        {teamDetails.streak.substr(1)}
+      </h4>
+    )
+  }
+
   return (
     <Row styleName="team-details">
       <Col xs={12} styleName="header">
@@ -38,10 +67,7 @@ const TeamDetails = ({ teamDetails }) => {
         </div>
 
         <div styleName="details-card">
-          <h4 className="semibold">
-            {teamDetails.streak[0].toUpperCase()}
-            {teamDetails.streak.substr(1)}
-          </h4>
+          {getStreak()}
           <p className="semibold label">Streak</p>
         </div>
 

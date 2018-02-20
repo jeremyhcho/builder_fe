@@ -4,7 +4,7 @@ import React from 'react'
 import { InfoBubble } from 'Components/Common'
 
 const PredictionsInfo = () => (
-  <InfoBubble pos="bottomRight" width={400}>
+  <InfoBubble pos="right" width={400}>
     Water. Earth. Fire. Air. Long ago, the four nations
     lived together in harmony. Then, everything changed when the
     Fire Nation attacked. Only the Avatar, master of all four elements,
