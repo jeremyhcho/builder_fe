@@ -8,7 +8,7 @@ import { Row } from 'react-styled-flexboxgrid'
 import { Button } from 'Components/Common'
 
 // Icons
-import CardEditIcon from 'Assets/Icons/settings/card_edit_white.svg'
+import CardEditIcon from 'Assets/Icons/settings/fc-card-edit.svg'
 
 // CSS
 import './AccountSettings.scss'
@@ -16,7 +16,7 @@ import './AccountSettings.scss'
 // Helpers
 import { makeFilterSubscriptions } from 'Helpers/Selectors'
 
-const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
+const PaymentDetails = ({ card, subscription, toggleUpdate }) => {
   const convertToMonth = (month) => {
     if (month.toString().length === 1) {
       return `0${month}`
@@ -37,7 +37,7 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
     <div>
       <Row middle='xs' styleName="row">
         <div styleName="col">
-          <p>Name on card:</p>
+          <p className="label">Name on card:</p>
         </div>
 
         <div>
@@ -47,7 +47,7 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
 
       <Row middle='xs' styleName="row">
         <div styleName="col">
-          <p>Card number:</p>
+          <p className="label">Card number:</p>
         </div>
 
         <div>
@@ -57,7 +57,7 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
 
       <Row middle='xs' styleName="row">
         <div styleName="col">
-          <p>Expires:</p>
+          <p className="label">Expires:</p>
         </div>
 
         <div>
@@ -65,19 +65,19 @@ const PaymentDetails = ({ card, toggleUpdate, subscription }) => {
         </div>
       </Row>
 
-      <Row middle='xs' styleName="row">
+      <Row middle='xs' styleName="end-row">
         <div styleName="col">
-          <p>Next payment date:</p>
+          <p className="label">Next payment date:</p>
         </div>
 
         <div styleName="col">
           <p>{renderPaymentDate()}</p>
         </div>
 
-        <div style={{ marginLeft: 'auto', paddingRight: '25px' }}>
-          <Button onClick={toggleUpdate}>
-            <div style={{ display: 'flex', alignItems: 'center', color: '#fff' }}>
-              <CardEditIcon style={{ marginRight: '5px', height: '18px' }} />
+        <div styleName="change-payment">
+          <Button secondary onClick={toggleUpdate}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <CardEditIcon style={{ marginRight: '5px' }} height={14} />
               <p>Change</p>
             </div>
           </Button>

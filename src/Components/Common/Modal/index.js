@@ -96,7 +96,7 @@ class Modal extends React.Component {
                 style={{
                   position: 'absolute',
                   top: '9px',
-                  left: '10.5px',
+                  left: '11px',
                   fontSize: '18px'
                 }}
               />

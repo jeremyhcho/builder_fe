@@ -15,7 +15,7 @@ import './Header.scss'
 
 // Assets
 import ProfileIcon from 'Assets/Icons/profile.svg'
-import AccountSettingsIcon from 'Assets/Icons/settings/a-edit-2.svg'
+import AccountSettingsIcon from 'Assets/Icons/settings/fc-cog.svg'
 import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
 // Actions
