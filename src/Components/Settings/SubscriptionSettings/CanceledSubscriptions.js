@@ -35,7 +35,7 @@ const CanceledSubscriptions = ({ canceledSubscriptions }) => {
                 </div>
               </Row>
 
-              <Row middle='xs' styleName="row">
+              <Row middle='xs' styleName="end-row">
                 <p className="label">This subscription will end at {convertUnix(subscription.current_period_end)} and will not be billed</p>
               </Row>
             </div>

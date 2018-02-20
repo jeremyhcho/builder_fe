@@ -11,8 +11,14 @@ import './SubscriptionSettings.scss'
 const PlanDetails = ({ subscription }) => (
   <div>
     {
-      planFactory[subscription.plan.id].features.map(feature => (
-        <Row styleName="row" key={feature}>
+      planFactory[subscription.plan.id].features.map((feature, index) => (
+        <Row
+          key={feature}
+          styleName={
+            index === planFactory[subscription.plan.id].features.length - 1
+              ? 'end-row' : 'row'
+          }
+        >
           <p>{feature}</p>
         </Row>
       ))

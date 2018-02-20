@@ -14,7 +14,7 @@ import { makeFilterSubscriptions } from 'Helpers/Selectors'
 
 class SubscriptionDetails extends React.Component {
   state = {
-    showPlans: true
+    showPlans: false
   }
 
   toggleShowPlans = () => {

@@ -20,6 +20,7 @@ const initialStyle = {
   height: '380px',
   width: '260px',
   position: 'relative',
+  margin: '0 20px',
   transition: 'all 200ms ease'
 }
 
@@ -36,7 +37,7 @@ class SubscriptionPlan extends React.Component {
     this.setState({
       style: {
         ...this.state.style,
-        boxShadow: '0px 4px 4px var(--gray)'
+        boxShadow: '0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3)'
       }
     })
   }
