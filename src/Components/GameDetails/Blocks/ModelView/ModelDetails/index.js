@@ -47,15 +47,26 @@ const ModelDetails = ({ model, prediction }) => {
 
   return (
     <Row middle='xs' between='xs' styleName="model-stats">
-      <div styleName="stats-card">
-        <h4
-          className="semibold"
-          style={{ color: getResultColor() }}
-        >
-          {prediction.result.toUpperCase()}
-        </h4>
-        <p className="label">Result</p>
-      </div>
+      {
+        prediction.result ? (
+          <div styleName="stats-card">
+            <h4
+              className="semibold"
+              style={{ color: getResultColor() }}
+            >
+              {prediction.result.toUpperCase()}
+            </h4>
+            <p className="label">Result</p>
+          </div>
+        ) : (
+          <div styleName="stats-card">
+            <h4 className="semibold">
+              {model.type[0].toUpperCase()}{model.type.substr(1)}
+            </h4>
+            <p className="label">Type</p>
+          </div>
+        )
+      }
 
       <div styleName="stats-card">
         <h4 className="semibold">

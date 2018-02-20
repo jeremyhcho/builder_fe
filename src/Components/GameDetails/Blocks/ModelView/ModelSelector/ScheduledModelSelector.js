@@ -38,6 +38,12 @@ class ScheduledModelSelector extends React.Component {
     document.removeEventListener('click', this.handleOutsideClick, false)
   }
 
+  getMatchType () {
+    if (this.props.summary.away.match_type === 'AWAY') return '@'
+
+    return 'vs'
+  }
+
   fetchModelAndPrediction (modelId, predictionId) {
     this.props.fetchNBAModel(modelId)
     this.props.fetchNBAPrediction(predictionId)
@@ -150,7 +156,7 @@ class ScheduledModelSelector extends React.Component {
   }
 
   render () {
-    const { prediction } = this.props
+    const { prediction, summary } = this.props
 
     if (!Object.keys(prediction).length) {
       return <div />
@@ -161,19 +167,29 @@ class ScheduledModelSelector extends React.Component {
     })
 
     return (
-      <div styleName="model-selector">
-        <div
-          key="model-name"
-          styleName="model-name"
-          onClick={this.openModels}
-          onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
-          onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
-        >
-          <h4 className="semibold">{prediction.name}</h4>
-          <div styleName={arrowIconStyle}>
-            {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
-          </div>
+      <div
+        key="model-name"
+        styleName="model-selector"
+        onClick={this.openModels}
+        onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
+        onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
+      >
+        <p styleName="model-name" className="semibold small">{prediction.name}</p>
+
+        <div styleName={arrowIconStyle}>
+          {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
         </div>
+
+        <Row middle='xs' around='xs' styleName="match">
+          <img src={summary.away.image} style={{ height: '20px', width: '20px' }} />
+          <p className="small">{summary.away.name}</p>
+
+          <p>{this.getMatchType()}</p>
+
+          <p className="small">{summary.home.name}</p>
+          <img src={summary.home.image} style={{ height: '20px', width: '20px' }} />
+        </Row>
+
         {this.renderModelList()}
       </div>
     )
@@ -184,6 +200,7 @@ ScheduledModelSelector.defaultProps = {
   predictions: [],
   prediction: {},
   model: {},
+  summary: {},
   fetchingModel: false
 }
 
@@ -191,6 +208,7 @@ ScheduledModelSelector.propTypes = {
   predictions: PropTypes.array,
   prediction: PropTypes.object,
   model: PropTypes.object,
+  summary: PropTypes.object,
   updateNBAPrediction: PropTypes.func.isRequired,
   fetchNBAModel: PropTypes.func.isRequired,
   fetchNBAPrediction: PropTypes.func.isRequired,
@@ -201,6 +219,7 @@ const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
   model: routines.nba.model,
+  summary: routines.nba.summary,
   fetchingModel: routines.isLoading.FETCH_NBA_MODEL
 })
 
