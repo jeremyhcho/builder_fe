@@ -47,7 +47,7 @@ class Schedule extends React.Component {
         </p>
       ) : (
         <p>
-          <span style={{ color: 'var(--red)' }} className="semibold">L</span>
+          <span style={{ color: 'var(--dark-red)' }} className="semibold">L</span>
           {' '}{game.points}-{game.opponent.points}
         </p>
       )

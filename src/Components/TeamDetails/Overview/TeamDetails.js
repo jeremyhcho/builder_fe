@@ -26,7 +26,7 @@ const TeamDetails = ({ teamDetails }) => {
 
     if (streakOutcome === 'L') {
       return (
-        <h4 className="semibold" style={{ color: 'var(--red)' }}>
+        <h4 className="semibold" style={{ color: 'var(--dark-red)' }}>
           {streakOutcome}
           {teamDetails.streak.substr(1)}
         </h4>

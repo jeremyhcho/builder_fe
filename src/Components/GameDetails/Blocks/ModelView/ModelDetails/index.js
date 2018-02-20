@@ -31,14 +31,14 @@ const ModelDetails = ({ model, prediction }) => {
 
   const getStreakColor = (streak) => {
     if (streak[0] === 'W') return 'var(--green)'
-    else if (streak[0] === 'L') return 'var(--red)'
+    else if (streak[0] === 'L') return 'var(--dark-red)'
 
     return 'var(--font-color)'
   }
 
   const getResultColor = () => {
     if (prediction.result === 'win') return 'var(--green)'
-    else if (prediction.result === 'loss') return 'var(--red)'
+    else if (prediction.result === 'loss') return 'var(--dark-red)'
 
     return 'var(--font-color)'
   }

@@ -24,7 +24,7 @@ class Conference extends React.Component {
       return <p style={{ color: 'var(--green)' }}>{streak}</p>
     }
 
-    return <p style={{ color: 'var(--red)' }}>{streak}</p>
+    return <p style={{ color: 'var(--dark-red)' }}>{streak}</p>
   }
 
   conferenceLabel () {

@@ -30,9 +30,10 @@ class TrendStats extends React.Component {
   calculateWinRate ({ wins, losses }) {
     const totalGames = wins + losses
     const winrate = tenths((wins / totalGames) * 100)
+
     if (winrate < 50) {
       return (
-        <p className="semibold" style={{ color: 'var(--red)' }}>
+        <p className="semibold" style={{ color: 'var(--dark-red)' }}>
           ({tenths((wins / totalGames) * 100)}%)
         </p>
       )

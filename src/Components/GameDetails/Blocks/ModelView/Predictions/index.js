@@ -26,7 +26,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
 
   const getColor = (value) => {
     if (value > 0) return 'var(--green)'
-    else if (value < 0) return 'var(--red)'
+    else if (value < 0) return 'var(--dark-red)'
 
     return null
   }

@@ -49,7 +49,7 @@ class RecentGames extends React.Component {
         W{counter}
       </span>
     ) : (
-      <span style={{ color: 'var(--red)', marginLeft: '5px' }} className="semibold">
+      <span style={{ color: 'var(--dark-red)', marginLeft: '5px' }} className="semibold">
         L{counter}
       </span>
     )
