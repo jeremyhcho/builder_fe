@@ -7,7 +7,9 @@ import NavItem from './NavItem'
 
 // Icons
 import AccountEditIcon from 'Assets/Icons/settings/account-edit.svg'
-import ListIcon from 'Assets/Icons/settings/list.svg'
+import SelectedAccountEditIcon from 'Assets/Icons/settings/blue-account-edit.svg'
+import ListIcon from 'Assets/Icons/settings/fc-list.svg'
+import SelectedListIcon from 'Assets/Icons/settings/blue-list.svg'
 
 // CSS
 import './SettingsNav.scss'
@@ -22,12 +24,14 @@ class SettingsNav extends React.Component {
       {
         name: 'Account',
         icon: AccountEditIcon,
+        selectedIcon: SelectedAccountEditIcon,
         select: this.select,
         route: 'account'
       },
       {
         name: 'Subscription',
         icon: ListIcon,
+        selectedIcon: SelectedListIcon,
         select: this.select,
         route: 'subscription'
       }
@@ -38,6 +42,7 @@ class SettingsNav extends React.Component {
         key={item.name}
         name={item.name}
         icon={item.icon}
+        selectedIcon={item.selectedIcon}
         route={item.route}
         select={item.select}
         selected={this.props.location.pathname.slice(10).match(item.route)}

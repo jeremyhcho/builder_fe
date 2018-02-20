@@ -15,7 +15,7 @@ class NavItem extends React.Component {
   }
 
   render () {
-    const { name, selected, icon: Icon } = this.props
+    const { name, selected, icon: Icon, selectedIcon: SelectedIcon } = this.props
     const navItemStyle = classNames('nav-item', {
       selected
     })
@@ -26,7 +26,11 @@ class NavItem extends React.Component {
 
     return (
       <div styleName={navItemStyle} onClick={this.handleClick}>
-        <Icon styleName={iconStyle} width={14} height={14} />
+        {
+          selected ? <SelectedIcon styleName={iconStyle} width={14} height={14} />
+            : <Icon styleName={iconStyle} width={14} height={14} />
+        }
+
         <p>{name}</p>
       </div>
     )
@@ -40,6 +44,7 @@ NavItem.defaultProps = {
 NavItem.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.func.isRequired,
+  selectedIcon: PropTypes.func.isRequired,
   selected: PropTypes.array,
   select: PropTypes.func.isRequired,
   route: PropTypes.string.isRequired

@@ -25,7 +25,7 @@ class AccountDetails extends React.Component {
       <div>
         <Row middle='xs' styleName="row">
           <div styleName="col">
-            <p>Email:</p>
+            <p className="label">Email:</p>
           </div>
 
           <div>
@@ -33,9 +33,9 @@ class AccountDetails extends React.Component {
           </div>
         </Row>
 
-        <Row middle='xs' styleName="row">
+        <Row middle='xs' styleName="end-row">
           <div styleName="col">
-            <p>Password:</p>
+            <p className="label">Password:</p>
           </div>
 
           <div>

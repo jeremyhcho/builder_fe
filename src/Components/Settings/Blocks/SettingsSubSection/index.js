@@ -4,14 +4,26 @@ import PropTypes from 'prop-types'
 // CSS
 import './SettingsSubSection.scss'
 
-const SettingsSubSection = ({ label, icon: Icon, children, subText }) => (
+const SettingsSubSection = ({
+  label,
+  icon: Icon,
+  children,
+  subText,
+  headerButton: HeaderButton
+}) => (
   <div styleName="settings-subsection">
     <div styleName="section-header">
-      <Icon style={{ marginRight: '10px' }} />
-      <p className="semibold">{label} {subText && <span className="label"> - {subText}</span>}</p>
+      <div>
+        <Icon style={{ marginRight: '10px' }} />
+        <p className="small">{label.toUpperCase()} {subText && <span className="label"> - {subText}</span>}</p>
+      </div>
+
+      <div>
+        {HeaderButton && <HeaderButton />}
+      </div>
     </div>
 
-    <hr />
+    {/* <hr /> */}
 
     <div styleName="section-body">
       {children}
@@ -22,7 +34,8 @@ const SettingsSubSection = ({ label, icon: Icon, children, subText }) => (
 SettingsSubSection.defaultProps = {
   icon: () => null,
   children: null,
-  subText: ''
+  subText: '',
+  headerButton: null
 }
 
 SettingsSubSection.propTypes = {
@@ -32,7 +45,8 @@ SettingsSubSection.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array
-  ])
+  ]),
+  headerButton: PropTypes.func
 }
 
 export default SettingsSubSection

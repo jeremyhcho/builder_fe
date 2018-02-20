@@ -4,7 +4,7 @@
   }
 
   .end-row {
-    margin: 0 0 40px;
+    margin: 0;
   }
 
   .col {
@@ -17,4 +17,11 @@
     box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
     font-size: 11px;
   }
+}
+
+
+.change-payment {
+  position: absolute;
+  top: -50px;
+  right: 25px;
 }

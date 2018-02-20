@@ -11,7 +11,6 @@ import PaymentDetails from './PaymentDetails'
 import PaymentForm from '../Blocks/PaymentForm'
 
 // Icons
-import UpdateCardIcon from 'Assets/Icons/settings/card_update.svg'
 import AlertIcon from 'Assets/Icons/settings/alert.svg'
 
 // CSS
@@ -97,6 +96,7 @@ class PaymentSettings extends React.Component {
                 card={billing.sources.data[0]}
                 toggleUpdate={this.toggleUpdateCard}
               />
+
               <form onSubmit={handleSubmit(this.updateCard)}>
                 <Modal
                   header="Changing payment information"
@@ -105,13 +105,7 @@ class PaymentSettings extends React.Component {
                   footer={this.renderFooter()}
                   wrapperStyle={{ width: '600px' }}
                 >
-                  <div>
-                    <div style={{ textAlign: 'center', margin: '20px 0' }}>
-                      <UpdateCardIcon />
-                      <p className="small label">Change existing payment method</p>
-                    </div>
-                    <PaymentForm userId={userId} />
-                  </div>
+                  <PaymentForm userId={userId} />
                 </Modal>
               </form>
             </div>
