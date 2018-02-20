@@ -6,6 +6,7 @@ const path = require('path')
 const auth = require('http-auth')
 
 const app = express()
+const sslRedirect = require('heroku-ssl-redirect')
 
 // API Proxy
 const httpProxy = require('http-proxy')
@@ -22,6 +23,7 @@ const basic = auth.basic({
 const basicMiddleware = auth.connect(basic)
 
 app.use(cookieParser())
+app.use(sslRedirect())
 
 // Static Assets
 app.use(express.static('dist'))
