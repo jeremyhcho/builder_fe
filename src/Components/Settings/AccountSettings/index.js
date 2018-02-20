@@ -6,9 +6,6 @@ import SettingsSubSection from '../Blocks/SettingsSubSection'
 import PaymentSettings from './PaymentSettings'
 import AccountDetails from './AccountDetails'
 
-// Icons
-// import CreditIcon from 'Assets/Icons/settings/credit_locked.svg'
-
 // CSS
 import './AccountSettings.scss'
 
