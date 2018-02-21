@@ -114,11 +114,12 @@ class SubscriptionPlan extends React.Component {
       <Card
         style={{
           display: 'inline-block',
-          margin: '0',
+          margin: '0'
         }}
         wrapperStyle={{
           ...this.state.style,
-          opacity: planFactory[plan].disabled ? '0.8' : '1'
+          opacity: planFactory[plan].disabled ? '0.8' : '1',
+          border: `2px solid ${planFactory[plan].color}`
         }}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
