@@ -15,7 +15,6 @@ class Modal extends React.Component {
       if (newProps.isOpen) {
         this.setState({ isOpen: true }, () => {
           this.content.focus()
-          console.log('ADDING EVENT LISTENER')
           document.addEventListener('keydown', this.handleEsc, false)
         })
       }
