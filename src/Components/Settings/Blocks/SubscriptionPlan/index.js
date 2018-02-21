@@ -5,7 +5,6 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { Card, Button } from 'Components/Common'
-import planFactory from '../planFactory'
 
 // Icons
 import CheckIcon from 'Assets/Icons/green-check.svg'
@@ -14,7 +13,7 @@ import CheckIcon from 'Assets/Icons/green-check.svg'
 import './SubscriptionPlan.scss'
 
 // Helpers
-import { makeFilterSubscriptions } from 'Helpers/Selectors'
+import { makeFilterSubscriptions, planFactory } from 'Helpers/Selectors'
 
 const initialStyle = {
   height: '380px',

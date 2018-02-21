@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
+import { withRouter, Route } from 'react-router'
 
 // Global CSS
 import './Assets/Stylesheets/Main.scss'
@@ -10,6 +10,7 @@ import './Assets/Stylesheets/Main.scss'
 // Layouts
 import MainLayout from 'Layouts/Main'
 import AuthLayout from 'Layouts/Auth'
+import LandingPageLayout from 'Layouts/LandingPage'
 
 // Components
 import AuthorizedRoute from 'Components/AuthorizedRoute'
@@ -43,6 +44,7 @@ class App extends React.Component {
     return (
       <div className='main'>
         <Switch>
+          <Route path='/secret' component={LandingPageLayout} />
           <UnauthorizedRoute path='/auth' component={AuthLayout} />
           <AuthorizedRoute path='/' component={MainLayout} />
         </Switch>

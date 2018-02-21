@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'react-styled-flexboxgrid'
 
-// Components
-import planFactory from '../Blocks/planFactory'
-
 // CSS
 import './SubscriptionSettings.scss'
+
+// Helpers
+import { planFactory } from 'Helpers'
 
 const PlanDetails = ({ subscription }) => (
   <div>
