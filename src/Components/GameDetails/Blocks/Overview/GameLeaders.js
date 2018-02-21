@@ -2,19 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import { uniqueId } from 'lodash'
 
 // Components
-import { Card, ButtonGroup } from 'Components/Common'
+import { Card, ButtonGroup, Tooltip } from 'Components/Common'
 import OverviewSpinner from './OverviewSpinner'
 
 // CSS
 import './Overview.scss'
 
-const Headers = {
-  points: ['PTS', 'FG', 'FT'],
-  rebounds: ['REB', 'OREB', 'DREB'],
-  assists: ['AST', 'TO', 'MIN']
+// Helpers
+import { nbaFlatStat } from 'Helpers'
+
+const statHeaders = {
+  points: ['points', 'field_goals_made', 'free_throws_made'],
+  rebounds: ['rebounds', 'offensive_rebounds', 'defensive_rebounds'],
+  assists: ['assists', 'turnovers', 'minutes']
 }
 
 const buttons = [
@@ -30,7 +32,9 @@ class GameLeaders extends React.Component {
 
   valueFactory (matchType) {
     const { summary } = this.props
+
     const stats = summary[matchType].leaders[this.state.selected].stats
+
     const values = {
       points: [
         stats.points,
@@ -55,98 +59,82 @@ class GameLeaders extends React.Component {
   render () {
     const { summary } = this.props
     const { selected } = this.state
+
+    if (!summary) {
+      return <OverviewSpinner label="Game Leaders" />
+    }
+
     return (
       <div>
-        {
-          summary ? (
-            <Card label="Game Leaders" wrapperStyle={{ padding: '25px' }}>
-              <Row middle='xs'>
-                <ButtonGroup
-                  buttons={buttons}
-                  onChange={(e, button) => this.setState({ selected: button.key })}
-                  defaultKey="points"
-                />
-              </Row>
+        <Card label="Game Leaders" wrapperStyle={{ padding: '25px' }}>
+          <Row middle='xs'>
+            <ButtonGroup
+              buttons={buttons}
+              onChange={(e, button) => this.setState({ selected: button.key })}
+              defaultKey="points"
+            />
+          </Row>
 
-              <div styleName="stat-container">
-                <Row between='xs' center='xs' middle='xs' styleName="stat-label">
-                  <Col xs={5} />
-                  {Headers[selected].map(stat => (
-                    <Col xs={2} key={stat}>
-                      <p className="semibold label small" key={stat}>{stat}</p>
+          <div styleName="stat-container">
+            <Row between='xs' center='xs' middle='xs' styleName="stat-label">
+              <Col xs={5} />
+
+              {
+                statHeaders[selected].map((stat, i) => (
+                  <Col xs={2} key={stat} data-tip-for={`${statHeaders[selected][i]}`}>
+                    <p className="semibold label small" key={stat}>{nbaFlatStat(stat).short}</p>
+                    <Tooltip pos="top" id={`${statHeaders[selected][i]}`}>
+                      {nbaFlatStat(stat).full}
+                    </Tooltip>
+                  </Col>
+                ))
+              }
+            </Row>
+
+            {
+              ['away', 'home'].map(teamType => (
+                <div styleName="stat-container" key={teamType}>
+                  <Row
+                    between='xs'
+                    center='xs'
+                    middle='xs'
+                    styleName="stats"
+                  >
+                    <Col xs={5}>
+                      <Row middle='xs'>
+                        <p styleName="stat-position" className="label small">
+                          {summary[teamType].leaders[selected].position}
+                        </p>
+
+                        <p className="semibold">
+                          {summary[teamType].leaders[selected].first_name.slice(0, 1)}. {' '}
+                          {summary[teamType].leaders[selected].last_name}
+                        </p>
+
+                        <img
+                          src={summary[teamType].image}
+                          style={{
+                            width: '20px',
+                            height: '20px',
+                            marginLeft: '10px'
+                          }}
+                        />
+                      </Row>
                     </Col>
-                  ))}
-                </Row>
-                <Row between='xs' center='xs' middle='xs' styleName="stats">
-                  <Col xs={5}>
-                    <Row middle='xs'>
-                      <p styleName="stat-position" className="label small">
-                        {summary.away.leaders[selected].position}
-                      </p>
-                      <p className="semibold">
-                        {summary.away.leaders[selected].first_name.slice(0, 1)}. {' '}
-                        {summary.away.leaders[selected].last_name}
-                      </p>
-                      <img
-                        src={summary.away.image}
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          marginLeft: '10px'
-                        }}
-                      />
-                    </Row>
-                  </Col>
-                  {
-                    this.valueFactory('away').map(statValue => {
-                      return (
-                        <Col xs={2} key={uniqueId('stat_value_')}>
-                          <p className="bold">{statValue}</p>
-                        </Col>
-                      )
-                    })
-                  }
-                </Row>
-              </div>
 
-              <div styleName="stat-container">
-                <Row between='xs' center='xs' middle='xs' styleName="stat-label">
-                  <Col xs={5} />
-                </Row>
-                <Row between='xs' center='xs' middle='xs' styleName="stats">
-                  <Col xs={5}>
-                    <Row middle='xs'>
-                      <p styleName="stat-position" className="label small">{summary.home.leaders[selected].position}</p>
-                      <p className="semibold">
-                        {summary.home.leaders[selected].first_name.slice(0, 1)}. {' '}
-                        {summary.home.leaders[selected].last_name}
-                      </p>
-                      <img
-                        src={summary.home.image}
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          marginLeft: '10px'
-                        }}
-                      />
-                    </Row>
-                  </Col>
-                  {
-                    this.valueFactory('home').map(statValue => {
-                      return (
-                        <Col xs={2} key={uniqueId('stat_value_')}>
-                          <p className="bold">{statValue}</p>
+                    {
+                      this.valueFactory(teamType).map((statValue, i) => (
+                        <Col xs={2} key={`${teamType}-${statHeaders[selected][i]}`}>
+                          <p className="semibold">{statValue}</p>
                         </Col>
-                      )
-                    })
-                  }
-                </Row>
-              </div>
-            </Card>
-          ) : (
-            <OverviewSpinner label="Game Leaders" />
-          )
-        }
+                      ))
+                    }
+                  </Row>
+                </div>
+              ))
+            }
+          </div>
+        </Card>
       </div>
     )
   }
