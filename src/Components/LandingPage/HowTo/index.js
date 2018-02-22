@@ -17,17 +17,17 @@ const HowTo = () => {
           <p>Giant cool picture #2</p>
         </Col>
 
-        <Col xs={4}>
+        <Col md={4} sm={6} xs={12} styleName="info-1">
           <ModelIcon height={80} width={80} />
           <p>Create models</p>
         </Col>
 
-        <Col xs={4}>
+        <Col md={4} sm={6} xs={12} styleName="info-1">
           <SpaceshipIcon height={80} width={80} />
           <p>Generate predictions</p>
         </Col>
 
-        <Col xs={4}>
+        <Col md={4} xs={12} styleName="info-1">
           <PodiumIcon height={80} width={80} />
           <p>Improve your bets</p>
         </Col>

@@ -10,7 +10,7 @@ const LandingPageTheme = {
       lg: 76
     },
     breakpoints: {
-      xs: 30, // 480px
+      xs: 0, // 480px
       sm: 37.5, // 600px
       md: 52.5, // 840px
       lg: 60, // 960px
