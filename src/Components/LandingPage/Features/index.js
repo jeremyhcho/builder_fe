@@ -10,14 +10,14 @@ import NFLIcon from 'Assets/Icons/landingPage/blue-football.svg'
 import MLBIcon from 'Assets/Icons/landingPage/blue-baseball.svg'
 
 // CSS
-import './LandingPage.scss'
+import './Features.scss'
 
 const Features = () => {
   const features = [
     {
       icon: ModelIcon,
       title: 'Models',
-      description: 'Customize your own models using...'
+      description: 'Create your own models'
     },
     {
       icon: ChartIcon,

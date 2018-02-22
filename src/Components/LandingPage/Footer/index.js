@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // CSS
-import '../LandingPage.scss'
+import './Footer.scss'
 
 class Footer extends React.Component {
   render () {

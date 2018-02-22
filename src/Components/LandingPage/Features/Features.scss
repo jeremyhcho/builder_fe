@@ -1,0 +1,40 @@
+.features {
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  padding-top: 120px;
+  border-top: 1px solid #f2f2f2;
+
+  .col-1000 {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .feature {
+    display: flex;
+    float: left;
+    margin-bottom: 120px;
+    padding: 0 20px;
+
+    .left {
+      margin-right: 25px;
+    }
+
+    .right {
+      h2 {
+        font-size: 21px;
+        font-weight: 400;
+        color: #2a2a2a;
+      }
+
+      p {
+        margin: 15px 0 0 0;
+        font-size: 17px;
+        color: #737376;
+        font-weight: 300;
+        letter-spacing: .3px;
+        line-height: 25px;
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
+    }
+  }
+}

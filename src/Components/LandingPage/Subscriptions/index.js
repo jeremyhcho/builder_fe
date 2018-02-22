@@ -5,7 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import SubscriptionPlan from './SubscriptionPlan'
 
 // CSS
-import '../LandingPage.scss'
+import './Subscriptions.scss'
 
 // Helpers
 import { planFactory } from 'Helpers'

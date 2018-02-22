@@ -7,7 +7,7 @@ import PodiumIcon from 'Assets/Icons/landingPage/blue-podium-trophy.svg'
 import SpaceshipIcon from 'Assets/Icons/landingPage/blue-spaceship.svg'
 
 // CSS
-import './LandingPage.scss'
+import './HowTo.scss'
 
 const HowTo = () => {
   return (

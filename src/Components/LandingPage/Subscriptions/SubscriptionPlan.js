@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { planFactory } from 'Helpers'
 
 // CSS
-import '../LandingPage.scss'
+import './Subscriptions.scss'
 
 const SubscriptionPlan = ({ plan, active }) => {
   return (
