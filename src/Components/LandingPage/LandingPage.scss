@@ -137,8 +137,12 @@
         }
       }
 
-      .feature {
+      .features-container {
+        margin: 30px 0;
 
+        .feature {
+
+        }
       }
 
       > .action {
@@ -177,6 +181,27 @@
   font-weight: 500;
 }
 
+.action2 {
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  outline: 0;
+  transition: all .25s ease;
+
+  &.blue {
+    background-color: #5aa2e6;
+    color: #fff;
+
+    &:hover {
+      background-color: darken(#5aa2e6, 5%);
+      box-shadow: 0 6px 12px 0 rgba(60, 144, 223, 0.3);
+    }
+  }
+}
+
 .action {
   padding: 13px 22px 15px 22px;
   border-radius: 100px;
@@ -202,22 +227,22 @@
   }
 
   &.red {
-    background-image: linear-gradient(-180deg, #fd7054 0, #ff3b6a 100%);
-    box-shadow: 0 7px 29px 0 rgba(254, 89, 105, .3);
+    background-image: linear-gradient(-180deg, lighten(#D03D3C, 10%) 0, #D03D3C 100%);
+    box-shadow: 0 7px 29px 0 rgba(208, 61, 60, 0.3);
     color: #fff;
 
     &:hover {
-      box-shadow: 0 7px 34px 0 rgba(254, 89, 105, .5);
+      box-shadow: 0 7px 34px 0 rgba(208, 61, 60, 0.5);
     }
   }
 
   &.green {
-    background-image: linear-gradient(-180deg, lighten(#0CCE6B, 5%) 0, var(--dark-green) 100%);
-    box-shadow: 0 7px 29px 0 rgba(12, 206, 107, 0.3);
+    background-image: linear-gradient(-180deg, lighten(#0AA958, 10%) 0, var(--dark-green) 100%);
+    box-shadow: 0 7px 29px 0 rgba(10, 169, 88, 0.3);
     color: #fff;
 
     &:hover {
-      box-shadow: 0 7px 34px 0 rgba(12, 206, 107, 0.5);
+      box-shadow: 0 7px 34px 0 rgba(10, 169, 88, 0.5);
     }
   }
 

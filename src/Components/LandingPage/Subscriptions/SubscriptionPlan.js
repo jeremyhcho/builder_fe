@@ -7,7 +7,7 @@ import { planFactory } from 'Helpers'
 // CSS
 import '../LandingPage.scss'
 
-const SubscriptionPlan = ({ plan, color, active }) => {
+const SubscriptionPlan = ({ plan, active }) => {
   return (
     <div
       styleName={active === plan ? 'subscription-plan active' : 'subscription-plan'}
@@ -15,25 +15,34 @@ const SubscriptionPlan = ({ plan, color, active }) => {
       <p styleName="plan">{plan.split('-')[0].toUpperCase()}</p>
 
       <div styleName="price">
-        <span className="semibold" styleName="dollar">$</span>
-        <span className="semibold" styleName="amount">{planFactory[plan].price}</span>
-        <span className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
+        {
+          plan === 'trial' ? (
+            <span styleName="amount" className="semibold">{planFactory[plan].price}</span>
+          ) : (
+            [
+              <span key="dollar" className="semibold" styleName="dollar">$</span>,
+              <span key="amount" className="semibold" styleName="amount">{planFactory[plan].price}</span>,
+              <span key="mo" className="small" style={{ letterSpacing: '0.5px' }}>/mo</span>
+            ]
+          )
+        }
       </div>
 
-      {
-        planFactory[plan].features.map(feature => (
-          <p key={feature}>{feature}</p>
-        ))
-      }
+      <div styleName="features-container">
+        {
+          planFactory[plan].features.map(feature => (
+            <p key={feature}>{feature}</p>
+          ))
+        }
+      </div>
 
-      <button styleName={`action ${color}`}>Subscribe</button>
+      <button styleName='action2 blue' style={{ marginBottom: '10px' }}>Subscribe</button>
     </div>
   )
 }
 
 SubscriptionPlan.propTypes = {
   plan: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
   active: PropTypes.string.isRequired
 }
 

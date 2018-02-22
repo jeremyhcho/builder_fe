@@ -1,8 +1,8 @@
 import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
 
 const planFactory = {
-  free: {
-    price: 0,
+  trial: {
+    price: 'FREE',
     features: ['One active model', 'One prediction per day'],
     icon: QuartzIcon,
     color: 'var(--green)'

@@ -53,7 +53,7 @@ const Features = () => {
           features.map(({ icon: Icon, title, description }) => (
             <Col xs={4} styleName="feature" key={title}>
               <div styleName="left">
-                <Icon height={28} width={28} />
+                <Icon width={28} height={28} />
               </div>
 
               <div styleName="right">
