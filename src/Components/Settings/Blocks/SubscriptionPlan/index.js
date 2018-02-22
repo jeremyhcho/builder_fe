@@ -13,7 +13,8 @@ import CheckIcon from 'Assets/Icons/green-check.svg'
 import './SubscriptionPlan.scss'
 
 // Helpers
-import { makeFilterSubscriptions, planFactory } from 'Helpers/Selectors'
+import { makeFilterSubscriptions } from 'Helpers/Selectors'
+import { planFactory } from 'Helpers'
 
 const initialStyle = {
   height: '380px',
