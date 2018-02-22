@@ -41,7 +41,7 @@ class Header extends React.Component {
 
           <Col xs={6} styleName="right">
             <div>
-              <img src='./macbook_pro.jpg' />
+              <img src='/macbook_pro.jpg' />
             </div>
           </Col>
         </Row>

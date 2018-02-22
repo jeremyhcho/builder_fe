@@ -94,7 +94,7 @@ const config = {
         ]
       },
       {
-        test: /\.(jpe?g|png|gif)$/,
+        test: /\.(jpe?g|jpg|png|gif)$/,
         use: [
           'file-loader',
           'image-webpack-loader'
