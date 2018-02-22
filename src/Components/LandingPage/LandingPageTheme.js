@@ -13,10 +13,7 @@ const LandingPageTheme = {
       xs: 30, // 480px
       sm: 37.5, // 600px
       md: 52.5, // 840px
-      ml: 60, // 960px
-      lg: 80, // 1280px
-      xl: 90, // 1440px
-      xxl: 100 // 1600px
+      lg: 60, // 960px
     }
   }
 }

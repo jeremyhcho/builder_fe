@@ -15,9 +15,7 @@ const Header = () => (
           <QuartzIcon
             width={58}
             height={58}
-            style={{
-              marginRight: '20px'
-            }}
+            style={{ marginRight: '20px' }}
           />
 
           <h1 styleName="title">Quartz</h1>
