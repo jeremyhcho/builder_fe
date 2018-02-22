@@ -5,13 +5,13 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
 
 // CSS
-import './LandingPage.scss'
+import './Header.scss'
 
 const Header = () => (
   <div styleName="header">
-    <Row center='xs' between='xs' styleName="col-1000">
-      <Col lg={6} xs={12} styleName="left">
-        <Row middle='xs'>
+    <Row between='xs' styleName="col-1000">
+      <Col md={6} xs={12} styleName="left">
+        <Row middle='xs' styleName="intro">
           <QuartzIcon
             width={58}
             height={58}
@@ -19,12 +19,13 @@ const Header = () => (
               marginRight: '20px'
             }}
           />
-          <h1 styleName="title">Quartz</h1>
-        </Row>
 
-        <p styleName="description">
-          A grape! Because who can get a watermelon in their mouth.
-        </p>
+          <h1 styleName="title">Quartz</h1>
+
+          <p styleName="description">
+            A grape! Because who can get a watermelon in their mouth.
+          </p>
+        </Row>
 
         <Row styleName="cta">
           <button styleName="action blue">
@@ -37,10 +38,10 @@ const Header = () => (
         </Row>
       </Col>
 
-      <Col lg={6} xs={12} styleName="right">
-        <div>
+      <Col md={6} xs={12} styleName="right">
+        <Row center='xs'>
           <h1>Cheese! It's milk that you chew...</h1>
-        </div>
+        </Row>
       </Col>
     </Row>
   </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { ThemeProvider } from 'styled-components'
 import { Grid } from 'react-styled-flexboxgrid'
 
 // Components
@@ -11,16 +12,21 @@ import Footer from './Footer'
 // CSS
 import './LandingPage.scss'
 
+// Helpers
+import LandingPageTheme from './LandingPageTheme'
+
 class LandingPage extends React.Component {
   render () {
     return (
-      <Grid fluid styleName="landing-page">
-        <Header />
-        <Features />
-        <HowTo />
-        <Subscriptions />
-        <Footer />
-      </Grid>
+      <ThemeProvider theme={LandingPageTheme}>
+        <Grid fluid styleName="landing-page">
+          <Header />
+          <Features />
+          <HowTo />
+          <Subscriptions />
+          <Footer />
+        </Grid>
+      </ThemeProvider>
     )
   }
 }
