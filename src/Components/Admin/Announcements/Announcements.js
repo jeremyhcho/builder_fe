@@ -43,7 +43,10 @@ class Announcements extends React.Component {
         <p className='semibold' style={{ marginBottom: '5px' }}>Draft</p>
         {
           unpublishedAnnouncements.map(announcement => (
-            <AnnouncementItem announcement={announcement} key={announcement.id} />
+            <AnnouncementItem
+              announcement={announcement}
+              key={announcement.id}
+            />
           ))
         }
       </div>
@@ -60,7 +63,10 @@ class Announcements extends React.Component {
         <p className='semibold' style={{ marginBottom: '5px' }}>Published</p>
         {
           publishedAnnouncements.map(announcement => (
-            <AnnouncementItem announcement={announcement} key={announcement.id} />
+            <AnnouncementItem
+              announcement={announcement}
+              key={announcement.id}
+            />
           ))
         }
       </div>

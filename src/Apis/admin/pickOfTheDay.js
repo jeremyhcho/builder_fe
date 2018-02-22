@@ -1,7 +1,7 @@
 import { axios } from 'Apis'
 
-export const apiCreatePickOfTheDay = (pickOfTheDay) => (
-  axios.post('/api/v1/pick_of_the_days', { pickOfTheDay })
+export const apiCreatePickOfTheDay = (potd) => (
+  axios.post('/api/v1/pick_of_the_days', { potd })
 )
 
 export const apiFetchPickOfTheDays = () => (
@@ -12,8 +12,8 @@ export const apiDeletePickOfTheDay = (id) => (
   axios.delete(`/api/v1/pick_of_the_days/${id}`)
 )
 
-export const apiUpdatePickOfTheDay = (id, pickOfTheDay) => (
-  axios.put(`/api/v1/pick_of_the_days/${id}`, { pickOfTheDay })
+export const apiUpdatePickOfTheDay = (id, potd) => (
+  axios.put(`/api/v1/pick_of_the_days/${id}`, { potd })
 )
 
 export const apiFetchPickOfTheDay = (id) => (

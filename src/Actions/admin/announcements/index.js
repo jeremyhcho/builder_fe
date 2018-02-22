@@ -59,7 +59,7 @@ export const deleteAnnouncement = createRoutine({
   api: apiDeleteAnnouncement,
   reducerKey: ['admin', 'fetchAnnouncements'],
   transform: 'removeById',
-  onSuccess: () => openSnackbar('Announcement deleted', 3000)
+  onSuccess: () => openSnackbar('Announcement Deleted', 3000)
 })
 
 export const publishAnnouncement = createRoutine({

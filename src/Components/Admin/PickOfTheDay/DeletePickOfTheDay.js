@@ -9,20 +9,20 @@ import { Button, Modal } from 'Components/Common'
 import ErrorIcon from 'Assets/Icons/error.svg'
 
 // Actions
-import { deleteAnnouncement } from 'Actions'
+import { deletePickOfTheDay } from 'Actions'
 
-class DeleteAnnouncement extends React.Component {
-  deleteAnnouncement = () => {
-    this.props.deleteAnnouncement(this.props.announcement.id)
+class DeletePickOfTheDay extends React.Component {
+  deletePickOfTheDay = () => {
+    this.props.deletePickOfTheDay(this.props.potd.id)
   }
 
   renderFooter () {
     return [
       <Button
-        flat={!this.props.deletingAnnouncement}
-        disabled={this.props.deletingAnnouncement}
+        flat={!this.props.deletingPickOfTheDay}
+        disabled={this.props.deletingPickOfTheDay}
         shouldFitContainer
-        onClick={this.props.deletingAnnouncement ? null : this.props.toggle}
+        onClick={this.props.deletingPickOfTheDay ? null : this.props.toggle}
         key="cancel"
       >
         Cancel
@@ -30,9 +30,9 @@ class DeleteAnnouncement extends React.Component {
       <Button
         danger
         shouldFitContainer
-        onClick={this.props.deletingAnnouncement ? null : this.deleteAnnouncement}
+        onClick={this.props.deletingPickOfTheDay ? null : this.deletePickOfTheDay}
         key="delete"
-        loading={this.props.deletingAnnouncement}
+        loading={this.props.deletingPickOfTheDay}
       >
         Delete
       </Button>
@@ -42,7 +42,7 @@ class DeleteAnnouncement extends React.Component {
   render () {
     return (
       <Modal
-        header="Delete Announcement"
+        header="Delete Pick of the Day"
         headerIcon={ErrorIcon}
         isOpen={this.props.isOpen}
         toggle={this.props.toggle}
@@ -57,23 +57,27 @@ class DeleteAnnouncement extends React.Component {
   }
 }
 
-DeleteAnnouncement.defaultProps = {
-  deletingAnnouncement: false
+DeletePickOfTheDay.defaultProps = {
+  deletingPickOfTheDay: false
 }
 
-DeleteAnnouncement.propTypes = {
-  announcement: PropTypes.object.isRequired,
-  toggle: PropTypes.func.isRequired,
+DeletePickOfTheDay.propTypes = {
+  potd: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  deleteAnnouncement: PropTypes.func.isRequired,
-  deletingAnnouncement: PropTypes.bool
+  toggle: PropTypes.func.isRequired,
+  deletePickOfTheDay: PropTypes.func.isRequired,
+  deletingPickOfTheDay: PropTypes.bool
 }
+
+const mapStateToProps = ({ routines }) => ({
+  deletingPickOfTheDay: routines.callingApi.DELETE_PICK_OF_THE_DAY
+})
 
 const mapDispatchToProps = {
-  deleteAnnouncement
+  deletePickOfTheDay
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(DeleteAnnouncement)
+)(DeletePickOfTheDay)
