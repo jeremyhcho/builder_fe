@@ -24,7 +24,7 @@ const navItems = [
   {
     icon: Dashboard,
     selectedIcon: DashboardSelected,
-    route: '/',
+    route: '/dashboard',
     key: 'dashboard',
     sectionName: 'Dashboard'
   },
@@ -73,7 +73,7 @@ class SideNav extends React.Component {
       <div styleName="sidenav">
         <div
           styleName="logo"
-          onClick={() => this.props.history.push('/')}
+          onClick={() => this.props.history.push({ pathname: '/dashboard' })}
         >
           <PlaceholderIcon
             width={25}

@@ -9,12 +9,6 @@ import './Subscriptions.scss'
 // Helpers
 import { planFactory } from 'Helpers'
 
-const colors = [
-  'green',
-  'blue',
-  'red'
-]
-
 class Subscriptions extends React.Component {
   state = {
     active: 'basic-plan'
@@ -31,11 +25,10 @@ class Subscriptions extends React.Component {
       <div styleName="subscriptions">
         <div center='xs' styleName="col-1000">
           {
-            Object.keys(planFactory).map((plan, i) => (
+            Object.keys(planFactory).map(plan => (
               <div key={plan} onClick={this.switchActivePlan(plan)}>
                 <SubscriptionPlan
                   plan={plan}
-                  color={colors[i]}
                   active={this.state.active}
                 />
               </div>

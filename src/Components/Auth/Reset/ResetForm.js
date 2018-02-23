@@ -16,9 +16,15 @@ const minChar8 = minChar(8)
 const equalityPassword = equality('Password')
 
 // Actions
-import { updateUserPassword } from 'Actions'
+import { updateUserPassword, openSnackbar } from 'Actions'
 
 class ResetForm extends React.Component {
+  componentWillReceiveProps (newProps) {
+    if (!newProps.updatingUser && this.props.updatingUser) {
+      this.props.openSnackbar('Password changed', 3000)
+    }
+  }
+
   onSubmit = ({ Password }) => {
     const { userId, token } = this.props
 
@@ -69,15 +75,22 @@ ResetForm.propTypes = {
   updateUserPassword: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired
+  userId: PropTypes.string.isRequired,
+  updatingUser: PropTypes.bool.isRequired,
+  openSnackbar: PropTypes.func.isRequired
 }
 
+const mapStateToProps = ({ auth }) => ({
+  updatingUser: auth.reset.updatingUser
+})
+
 const mapDispatchToProps = {
-  updateUserPassword
+  updateUserPassword,
+  openSnackbar
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(reduxForm({
   form: 'reset'
