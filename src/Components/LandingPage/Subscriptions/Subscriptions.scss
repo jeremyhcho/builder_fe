@@ -23,16 +23,12 @@
     box-shadow: 0 0 2px 0 rgba(44,47,51,.15), 0 3px 16px 0 #e9e9ea, inset 0 -4px 8px 0 rgba(0,0,0,.03);
     transition: all .25s ease;
 
-    > p {
-      font-weight: 600;
-    }
-
     &.active {
       transform: scale(1.1);
     }
 
     .plan {
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .price {
