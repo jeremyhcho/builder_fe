@@ -61,7 +61,7 @@ export const publishPickOfTheDay = createRoutine({
   onSuccess: () => openSnackbar('Pick of the Day Published', 3000)
 })
 
-export const editPickOfTheDay = createRoutine({
+export const updatePickOfTheDay = createRoutine({
   prefix: UPDATE_PICK_OF_THE_DAY,
   api: apiUpdatePickOfTheDay,
   reducerKey: ['admin', 'pickOfTheDays'],

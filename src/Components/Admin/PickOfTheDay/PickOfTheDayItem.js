@@ -55,6 +55,7 @@ class PickOfTheDayItem extends React.Component {
             <div
               styleName='icon-wrapper'
               data-tip-for={`potd-edit-${potd.id}`}
+              onClick={this.navigateToEdit}
             >
               <EditPencil />
               <Tooltip id={`potd-edit-${potd.id}`} pos='top'>

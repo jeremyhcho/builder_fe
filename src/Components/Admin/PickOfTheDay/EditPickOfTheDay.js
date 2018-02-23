@@ -1,17 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import moment from 'moment'
+import moment from 'moment'
 
 // React Quill
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
 // Actions
-import { updatePickOfTheDay, fetchPickOfTheDay } from 'Actions'
+import { updatePickOfTheDay, fetchPickOfTheDay, fetchPickOfTheDays } from 'Actions'
 
 // Components
-import { Card, DocumentTitle } from 'Components/Common'
+import { Button, Input, Card, DocumentTitle } from 'Components/Common'
+
+
+// Icons
+import LeftArrow from 'Assets/Icons/left-arrow.svg'
 
 // CSS
 import './PickOfTheDay.scss'
@@ -25,6 +29,30 @@ class EditPickOfTheDay extends React.Component {
 
   componentDidMount () {
     this.props.fetchPickOfTheDay(this.props.match.params.id)
+
+    if (!this.props.potds) this.props.fetchPickOfTheDays()
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.potd.id && !this.state.title && !this.state.body) {
+      this.setState({
+        title: newProps.potd.title,
+        body: newProps.potd.body
+      })
+    }
+
+    if (!newProps.updatingPickOfTheDay && this.props.updatingPickOfTheDay) {
+      this.props.history.push({ pathname: '/admin/potd', state: { from: `/admin/potd/edit/${this.props.potd.id}` } })
+    }
+  }
+
+  updatePickOfTheDay = () => {
+    const { title, body } = this.state
+
+    this.props.updatePickOfTheDay(this.props.potd.id, {
+      title,
+      body
+    })
   }
 
   handleBodyChange = (body) => {
@@ -110,6 +138,10 @@ class EditPickOfTheDay extends React.Component {
   }
 
   render () {
+    if (!Object.keys(this.props.potd).length || !this.props.potds) {
+      return <div />
+    }
+
     return (
       <DocumentTitle
         title='Quartz - Pick of the Day'
@@ -129,24 +161,30 @@ class EditPickOfTheDay extends React.Component {
 
 EditPickOfTheDay.defaultProps = {
   updatingPickOfTheDay: false,
-  potd: {}
+  potd: {},
+  potds: null
 }
 
 EditPickOfTheDay.propTypes = {
   fetchPickOfTheDay: PropTypes.func.isRequired,
+  fetchPickOfTheDays: PropTypes.func.isRequired,
   updatePickOfTheDay: PropTypes.func.isRequired,
   updatingPickOfTheDay: PropTypes.bool,
   match: PropTypes.object.isRequired,
-  potd: PropTypes.object
+  potd: PropTypes.object,
+  potds: PropTypes.array,
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
   updatingPickOfTheDay: routines.callingApi.UPDATE_PICK_OF_THE_DAY,
-  potd: routines.admin.fetchPickOfTheDay
+  potd: routines.admin.pickOfTheDay,
+  potds: routines.admin.pickOfTheDays
 })
 
 const mapDispatchToProps = {
   fetchPickOfTheDay,
+  fetchPickOfTheDays,
   updatePickOfTheDay
 }
 
