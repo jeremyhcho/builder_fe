@@ -33,19 +33,6 @@ class SubscriptionPlan extends React.Component {
     this.props.select(this.props.plan)
   }
 
-  handleMouseOver = () => {
-    this.setState({
-      style: {
-        ...this.state.style,
-        boxShadow: '0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3)'
-      }
-    })
-  }
-
-  handleMouseOut = () => {
-    this.setState({ style: initialStyle })
-  }
-
   renderButton () {
     const { subscription, plan, updatingSubscription, creatingSubscription } = this.props
     const buttonStyle = {
@@ -119,10 +106,9 @@ class SubscriptionPlan extends React.Component {
         wrapperStyle={{
           ...this.state.style,
           opacity: planFactory[plan].disabled ? '0.8' : '1',
-          border: `2px solid ${planFactory[plan].color}`
+          boxShadow: '0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3)',
+          border: 'none'
         }}
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
       >
         <div styleName="subscription-plan">
           {this.renderRibbon()}
