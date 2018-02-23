@@ -38,7 +38,13 @@ const Header = () => (
 
       <Col md={6} xs={12} styleName="right">
         <Row center='xs'>
-          <h1>Cheese! It's milk that you chew...</h1>
+          <img
+            src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.jpg"
+            style={{
+              height: '100%',
+              width: '100%'
+            }}
+          />
         </Row>
       </Col>
     </Row>

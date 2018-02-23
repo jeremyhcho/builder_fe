@@ -14,7 +14,13 @@ const HowTo = () => {
     <section styleName="how-to">
       <Row center='xs' styleName="col-1000">
         <Col xs={12} style={{ margin: '50px 0 ' }}>
-          <p>Giant cool picture #2</p>
+          <img
+            src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.jpg"
+            style={{
+              height: '100%',
+              width: '100%'
+            }}
+          />
         </Col>
 
         <Col md={4} sm={6} xs={12} styleName="info-1">

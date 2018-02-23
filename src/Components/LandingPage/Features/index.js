@@ -2,12 +2,12 @@ import React from 'react'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Icons
-import AnalyticsIcon from 'Assets/Icons/landingPage/blue-analytics.svg'
-import ChartIcon from 'Assets/Icons/landingPage/blue-bar-chart.svg'
-import ModelIcon from 'Assets/Icons/landingPage/blue-model-sm.svg'
-import NBAIcon from 'Assets/Icons/landingPage/blue-basket.svg'
-import NFLIcon from 'Assets/Icons/landingPage/blue-football.svg'
-import MLBIcon from 'Assets/Icons/landingPage/blue-baseball-cap.svg'
+import StockIcon from 'Assets/Icons/landingPage/bb-stock.svg'
+import ChartIcon from 'Assets/Icons/landingPage/bb-chart.svg'
+import ModelIcon from 'Assets/Icons/landingPage/bb-model.svg'
+import NBAIcon from 'Assets/Icons/landingPage/bb-basketball.svg'
+import NFLIcon from 'Assets/Icons/landingPage/bb-football.svg'
+import MLBIcon from 'Assets/Icons/landingPage/bb-baseball-cap.svg'
 
 // CSS
 import './Features.scss'
@@ -25,7 +25,7 @@ const Features = () => {
       description: 'Analyze trends and statistics'
     },
     {
-      icon: AnalyticsIcon,
+      icon: StockIcon,
       title: 'Compare',
       description: 'Compare your models with others'
     },
