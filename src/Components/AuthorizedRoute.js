@@ -3,7 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
+// Components
+import LandingPageLayout from 'Layouts/LandingPage'
+
 const AuthorizedRoute = ({ component: Component, authorized, user, ...rest }) => {
+  if (location.pathname === '/') {
+    return (
+      <LandingPageLayout {...rest} />
+    )
+  }
+
   return (
     <Route
       {...rest}
@@ -21,7 +30,8 @@ const AuthorizedRoute = ({ component: Component, authorized, user, ...rest }) =>
 AuthorizedRoute.propTypes = {
   component: PropTypes.func.isRequired,
   authorized: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  path: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({

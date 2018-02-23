@@ -10,15 +10,15 @@ class Footer extends React.Component {
       <div styleName="footer">
         <Row center='xs'>
           <Col xs={4} styleName="copyright">
-            <p>Copyright bullshit</p>
+            <p>Copyright</p>
           </Col>
 
           <Col xs={4} styleName="social-media">
-            <p>Social Media link bullshit</p>
+            <p>Social Media link</p>
           </Col>
 
           <Col xs={4} styleName="contact">
-            <p>Contact address bullshit</p>
+            <p>Contact address</p>
           </Col>
         </Row>
       </div>

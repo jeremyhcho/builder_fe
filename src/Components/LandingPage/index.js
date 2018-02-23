@@ -13,14 +13,16 @@ import './LandingPage.scss'
 // Helpers
 // import LandingPageTheme from './LandingPageTheme'
 
-const LandingPage = () => (
-  <div styleName="landing-page">
-    <Header />
-    <Features />
-    <HowTo />
-    <Subscriptions />
-    <Footer />
-  </div>
-)
+const LandingPage = () => {
+  return (
+    <div styleName="landing-page">
+      <Header />
+      <Features />
+      <HowTo />
+      <Subscriptions />
+      <Footer />
+    </div>
+  )
+}
 
 export default LandingPage

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 // import Loadable from 'react-loadable'
@@ -108,6 +108,7 @@ const MainLayout = ({
         }}
       >
         <Header />
+
         <div
           style={{
             height: 'calc(100% - 95px)',
@@ -116,12 +117,13 @@ const MainLayout = ({
           }}
         >
           <Switch>
-            <Route exact path='/' component={Dashboard} />
+            <Route exact path='/dashboard' component={Dashboard} />
             <Route path='/admin' component={AdminLayout} />
             <Route path='/games' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />
             <Route path='/models' component={ModelsLayout} />
             <Route path='/settings' component={SettingsLayout} />
+            <Redirect to='/dashboard' />
           </Switch>
         </div>
       </div>

@@ -1,3 +1,6 @@
+import { createRoutine } from 'Routines'
+
+// Constants
 import {
   CLEAR_LOGIN_ERROR,
   AUTHORIZE,
@@ -6,6 +9,9 @@ import {
   LOGOUT,
   FETCH_USER,
 } from 'Constants'
+
+// Apis
+import { logout } from 'Apis'
 
 export const clearLoginError = () => ({
   type: CLEAR_LOGIN_ERROR
@@ -26,9 +32,11 @@ export const loginUser = (params) => ({
   params
 })
 
-export const logoutUser = (params) => ({
-  type: LOGOUT,
-  params
+export const logoutUser = createRoutine({
+  prefix: LOGOUT,
+  reducerKey: [],
+  transform: () => null,
+  api: logout
 })
 
 export const fetchUser = () => ({
