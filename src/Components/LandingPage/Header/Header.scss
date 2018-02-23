@@ -3,7 +3,7 @@
   padding: 60px 0 60px;
   background-color: rgba(255, 255, 255, 0.8);
 
-  @media screen and (min-width: 840px) {
+  @media only screen and (min-width: 840px) {
     padding: 132px 0 122px 0;
   }
 
@@ -14,7 +14,7 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    @media screen and (min-width: 840px) {
+    @media only screen and (min-width: 840px) {
       justify-content: space-between;
     }
   }
@@ -25,7 +25,7 @@
     flex: 0 0 auto;
     flex-basis: 100%;
 
-    @media screen and (min-width: 840px) {
+    @media only screen and (min-width: 840px) {
       flex-basis: 50%;
     }
 
@@ -34,6 +34,13 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      @media only screen and (min-width: 840px) {
+        justify-content: start;
+        text-align: left;
+      }
 
       .title {
         font-size: 4.2rem;
@@ -63,17 +70,19 @@
         width: 180px;
       }
 
-      @media screen and (min-width: 480px) {
-        margin: 0 20px 20px 0;
+      @media only screen and (min-width: 480px) {
         flex-direction: row;
 
         button {
           width: auto;
-          margin: 0 20px 0 0;
+
+          &:first-child {
+            margin: 0 20px 20px 0;
+          }
         }
       }
 
-      @media screen and (min-width: 840px) {
+      @media only screen and (min-width: 840px) {
         justify-content: start;
       }
     }
@@ -89,7 +98,7 @@
       flex-wrap: wrap;
     }
 
-    @media screen and (min-width: 840px) {
+    @media only screen and (min-width: 840px) {
       flex-basis: 50%;
     }
   }
@@ -103,7 +112,7 @@
   border: none;
   cursor: pointer;
   outline: 0;
-  transition: all .25s ease;
+  transition: box-shadow .25s ease, transform .25s ease;
   max-width: 200px;
 
   &:hover {
