@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 // Components
 import EditSubscription from './EditSubscription'
@@ -15,6 +16,14 @@ import { makeFilterSubscriptions } from 'Helpers/Selectors'
 class SubscriptionDetails extends React.Component {
   state = {
     showPlans: false
+  }
+
+  componentWillMount () {
+    const { history } = this.props
+
+    if (history.location.state && history.location.state.from === '/') {
+      this.setState({ showPlans: true })
+    }
   }
 
   toggleShowPlans = () => {
@@ -64,12 +73,14 @@ class SubscriptionDetails extends React.Component {
 
 SubscriptionDetails.defaultProps = {
   subscription: null,
-  canceledSubscriptions: []
+  canceledSubscriptions: [],
+  history: null
 }
 
 SubscriptionDetails.propTypes = {
   subscription: PropTypes.object,
-  canceledSubscriptions: PropTypes.array
+  canceledSubscriptions: PropTypes.array,
+  history: PropTypes.object
 }
 
 const makeMapStateToProps = () => {
@@ -83,6 +94,6 @@ const makeMapStateToProps = () => {
   return mapStateToProps
 }
 
-export default connect(
+export default withRouter(connect(
   makeMapStateToProps
-)(SubscriptionDetails)
+)(SubscriptionDetails))
