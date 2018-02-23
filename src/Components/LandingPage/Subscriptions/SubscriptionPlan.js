@@ -19,7 +19,12 @@ const SubscriptionPlan = ({ plan, active, history, authorized }) => {
     <div
       styleName={active === plan ? 'subscription-plan active' : 'subscription-plan'}
     >
-      <p styleName="plan">{plan.split('-')[0].toUpperCase()}</p>
+      <p
+        style={{ color: planFactory[plan].color }}
+        styleName="plan"
+      >
+        {plan.split('-')[0].toUpperCase()}
+      </p>
 
       <div styleName="price">
         {

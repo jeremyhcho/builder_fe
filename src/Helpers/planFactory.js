@@ -5,7 +5,7 @@ const planFactory = {
     price: 'FREE',
     features: ['One active model', 'One prediction per day'],
     icon: QuartzIcon,
-    color: 'var(--green)'
+    color: 'var(--font-color)'
   },
   'basic-plan': {
     price: 30,
