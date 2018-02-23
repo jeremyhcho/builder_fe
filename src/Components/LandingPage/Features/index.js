@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Icons
 import StockIcon from 'Assets/Icons/landingPage/bb-stock.svg'
@@ -48,10 +47,10 @@ const Features = () => {
 
   return (
     <section styleName="features">
-      <Row styleName="col-1000">
+      <div styleName="col-1000">
         {
           features.map(({ icon: Icon, title, description }) => (
-            <Col lg={4} sm={6} xs={12} styleName="feature" key={title}>
+            <section styleName="feature" key={title}>
               <div styleName="left">
                 <Icon width={28} height={28} />
               </div>
@@ -60,10 +59,10 @@ const Features = () => {
                 <h2>{title}</h2>
                 <p>{description}</p>
               </div>
-            </Col>
+            </section>
           ))
         }
-      </Row>
+      </div>
     </section>
   )
 }

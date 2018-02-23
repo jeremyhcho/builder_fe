@@ -1,18 +1,40 @@
 // Header
 .header {
-  padding: 132px 0 122px 0;
+  padding: 60px 0 60px;
   background-color: rgba(255, 255, 255, 0.8);
+
+  @media screen and (min-width: 840px) {
+    padding: 132px 0 122px 0;
+  }
 
   .col-1000 {
     max-width: 1000px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media screen and (min-width: 840px) {
+      justify-content: space-between;
+    }
   }
 
   .left {
     max-width: 335px;
     padding-bottom: 20px;
+    flex: 0 0 auto;
+    flex-basis: 100%;
+
+    @media screen and (min-width: 840px) {
+      flex-basis: 50%;
+    }
+
 
     .intro {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
       .title {
         font-size: 4.2rem;
         font-weight: 500;
@@ -29,16 +51,47 @@
     }
 
     .cta {
+      display: flex;
+      flex-wrap: wrap;
       margin-bottom: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
 
       button {
-        margin-right: 20px;
+        margin: 0 0 20px 0;
+        width: 180px;
+      }
+
+      @media screen and (min-width: 480px) {
+        margin: 0 20px 20px 0;
+        flex-direction: row;
+
+        button {
+          width: auto;
+          margin: 0 20px 0 0;
+        }
+      }
+
+      @media screen and (min-width: 840px) {
+        justify-content: start;
       }
     }
   }
 
   .right {
-    cursor: pointer;
+    flex: 0 0 auto;
+    flex-basis: 100%;
+
+    > div {
+      flex: 0 1 auto;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media screen and (min-width: 840px) {
+      flex-basis: 50%;
+    }
   }
 }
 
@@ -96,35 +149,6 @@
 
     &:hover {
       box-shadow: 0 0 2px 0 rgba(44,47,51,.15), 0 3px 26px 0 #d9d9df, inset 0 -4px 8px 0 rgba(0,0,0,.03);
-    }
-  }
-}
-
-@media (max-width: 839px) {
-  .header {
-    padding: 60px 0 60px;
-
-    .col-1000 {
-      justify-content: center;
-    }
-
-    .intro {
-      justify-content: center;
-      text-align: center;
-    }
-
-    .cta {
-      justify-content: center;
-
-      @media (max-width: 479px) {
-        flex-direction: column;
-        align-items: center;
-
-        button {
-          margin: 0 0 20px 0;
-          width: 180px;
-        }
-      }
     }
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import SubscriptionPlan from './SubscriptionPlan'
@@ -30,19 +29,19 @@ class Subscriptions extends React.Component {
   render () {
     return (
       <div styleName="subscriptions">
-        <Row center='xs' styleName="col-1000">
+        <div center='xs' styleName="col-1000">
           {
             Object.keys(planFactory).map((plan, i) => (
-              <Col key={plan} onClick={this.switchActivePlan(plan)}>
+              <div key={plan} onClick={this.switchActivePlan(plan)}>
                 <SubscriptionPlan
                   plan={plan}
                   color={colors[i]}
                   active={this.state.active}
                 />
-              </Col>
+              </div>
             ))
           }
-        </Row>
+        </div>
       </div>
     )
   }

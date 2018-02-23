@@ -1,6 +1,4 @@
 import React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { Grid } from 'react-styled-flexboxgrid'
 
 // Components
 import Header from './Header'
@@ -13,22 +11,16 @@ import Footer from './Footer'
 import './LandingPage.scss'
 
 // Helpers
-import LandingPageTheme from './LandingPageTheme'
+// import LandingPageTheme from './LandingPageTheme'
 
-class LandingPage extends React.Component {
-  render () {
-    return (
-      <ThemeProvider theme={LandingPageTheme}>
-        <Grid fluid styleName="landing-page">
-          <Header />
-          <Features />
-          <HowTo />
-          <Subscriptions />
-          <Footer />
-        </Grid>
-      </ThemeProvider>
-    )
-  }
-}
+const LandingPage = () => (
+  <div styleName="landing-page">
+    <Header />
+    <Features />
+    <HowTo />
+    <Subscriptions />
+    <Footer />
+  </div>
+)
 
 export default LandingPage

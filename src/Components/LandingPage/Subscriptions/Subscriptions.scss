@@ -6,11 +6,16 @@
   .col-1000 {
     max-width: 1000px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
   }
 
   .subscription-plan {
     min-width: 250px;
     margin: 10px 0;
+    flex: 0 0 auto;
     text-align: center;
     padding: 10px 50px 20px;
     background-color: #fff;

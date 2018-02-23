@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Icons
 import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
@@ -8,10 +7,10 @@ import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
 import './Header.scss'
 
 const Header = () => (
-  <div styleName="header">
-    <Row between='xs' styleName="col-1000">
-      <Col md={6} xs={12} styleName="left">
-        <Row middle='xs' styleName="intro">
+  <header styleName="header">
+    <main styleName="col-1000">
+      <section styleName="left">
+        <div styleName="intro">
           <QuartzIcon
             width={58}
             height={58}
@@ -23,9 +22,9 @@ const Header = () => (
           <p styleName="description">
             A grape! Because who can get a watermelon in their mouth.
           </p>
-        </Row>
+        </div>
 
-        <Row styleName="cta">
+        <div styleName="cta">
           <button styleName="action blue">
             Start free trial
           </button>
@@ -33,11 +32,11 @@ const Header = () => (
           <button styleName="action flat">
             Log in
           </button>
-        </Row>
-      </Col>
+        </div>
+      </section>
 
-      <Col md={6} xs={12} styleName="right">
-        <Row center='xs'>
+      <section styleName="right">
+        <div>
           <img
             src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.jpg"
             style={{
@@ -45,10 +44,10 @@ const Header = () => (
               width: '100%'
             }}
           />
-        </Row>
-      </Col>
-    </Row>
-  </div>
+        </div>
+      </section>
+    </main>
+  </header>
 )
 
 export default Header
