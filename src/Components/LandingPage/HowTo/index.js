@@ -13,12 +13,13 @@ const HowTo = () => {
   return (
     <section styleName="how-to">
       <Row center='xs' styleName="col-1000">
-        <Col xs={12} style={{ margin: '50px 0 ' }}>
+        <Col xs={12} style={{ margin: '50px 0', padding: '0 18%' }}>
           <img
             src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.jpg"
             style={{
               height: '100%',
-              width: '100%'
+              width: '100%',
+              marginBottom: '20px'
             }}
           />
         </Col>
