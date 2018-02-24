@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 
 import './StatsCard.scss'
 
-const StatsCard = ({ title, labels, values, uniqueKey, style }) => (
+const StatsCard = ({ title, subText, labels, values, uniqueKey, style }) => (
   /* eslint-disable react/no-array-index-key */
   <div style={{ marginTop: '35px', height: '100%', ...style }}>
-    <p className="semibold" style={{ margin: '0 10px 5px' }}>{title}</p>
+    <div className="flex" style={{ alignItems: 'center' }}>
+      <p className="semibold" style={{ margin: '0 10px 5px' }}>{title}</p>
+      {subText}
+    </div>
 
     <div styleName='stats-card'>
       <div styleName="row labels">
@@ -77,7 +80,8 @@ const StatsCard = ({ title, labels, values, uniqueKey, style }) => (
 StatsCard.defaultProps = {
   title: '',
   values: [],
-  style: {}
+  style: {},
+  subText: null
 }
 
 StatsCard.propTypes = {
@@ -95,7 +99,8 @@ StatsCard.propTypes = {
     return null
   },
   uniqueKey: PropTypes.string.isRequired,
-  style: PropTypes.object
+  style: PropTypes.object,
+  subText: PropTypes.node
 }
 
 export default StatsCard

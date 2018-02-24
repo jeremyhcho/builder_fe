@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 // Components
 import { StatsCard, Card, Spinner } from 'Components/Common'
+import PredictionsInfo from './PredictionsInfo'
 
 // Helpers
 import { precisionRound } from 'Helpers'
@@ -104,6 +105,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
   return (
     <StatsCard
       title="Prediction"
+      subText={<PredictionsInfo />}
       labels={['TEAM', 'PREDICTED SPREAD', 'PREDICTION VALUE']}
       values={getPredictionValues()}
       uniqueKey='Prediction'
