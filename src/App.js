@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
+import { Helmet } from 'react-helmet'
 
 // Global CSS
 import './Assets/Stylesheets/Main.scss'
@@ -39,9 +40,19 @@ class App extends React.Component {
     }
   }
 
+  getMetaTag () {
+    if (this.props.history.location.pathname === '/') {
+      return [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
+    }
+
+    return [{ name: 'viewport', content: 'default' }]
+  }
+
   render () {
     return (
       <div className='main'>
+        <Helmet meta={this.getMetaTag()} />
+
         <Switch>
           <UnauthorizedRoute path='/auth' component={AuthLayout} />
           <AuthorizedRoute path='/' component={MainLayout} />
@@ -53,7 +64,8 @@ class App extends React.Component {
 
 App.propTypes = {
   fetchUser: PropTypes.func.isRequired,
-  authorized: PropTypes.bool.isRequired
+  authorized: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
