@@ -1,9 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
-import { StatsCard, Card, Spinner } from 'Components/Common'
+import { Card, Spinner } from 'Components/Common'
+import PredictionsInfo from './PredictionsInfo'
+
+// CSS
+import './Predictions.scss'
 
 // Helpers
 import { precisionRound } from 'Helpers'
@@ -28,7 +33,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
 
   if (!Object.keys(prediction).length || fetchingPrediction || fetchingModel) {
     return (
-      <Card label="Prediction">
+      <Card label="Prediction" subText={<PredictionsInfo />}>
         <div
           style={{
             textAlign: 'center',
@@ -45,7 +50,6 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     {
       city: summary.away.city,
       name: summary.away.name,
-      image: summary.away.image,
       predictedSpread: convertNumber(prediction.home_points - prediction.away_points) || 'EVEN',
       predictionValue: convertNumber(
         Number(prediction.vegas_away_line.spread) -
@@ -55,7 +59,6 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     {
       city: summary.home.city,
       name: summary.home.name,
-      image: summary.home.image,
       predictedSpread: convertNumber(prediction.away_points - prediction.home_points) || 'EVEN',
       predictionValue: convertNumber(
         Number(prediction.vegas_home_line.spread) -
@@ -64,50 +67,56 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     }
   ]
 
-  const getPredictionValues = () => {
-    return predictions.map(team => (
-      [
-        <div
-          key={`${team.name}-team`}
-          style={{
-            display: 'flex',
-            alignItems: 'center'
-          }}
-        >
-          <img
-            src={team.image}
-            style={{ width: '40px', height: '40px', marginRight: '10px' }}
-          />
-
-          <div>
-            <p className="small label">{team.city}</p>
-            <p className="semibold">{team.name}</p>
-          </div>
-        </div>,
-        <p
-          className="semibold"
-          key={`${team.name}-predictedSpread`}
-        >
-          {team.predictedSpread}
-        </p>,
-        <p
-          className="semibold"
-          key={`${team.name}-predictionValue`}
-          style={{ color: getColor(team.predictionValue) }}
-        >
-          {team.predictionValue}
-        </p>
-      ]
-    ))
-  }
-
   return (
-    <StatsCard
-      title="Prediction"
-      labels={['TEAM', 'PREDICTED SPREAD', 'PREDICTION VALUE']}
-      values={getPredictionValues()}
-      uniqueKey='Prediction'
-    />
+    <Card
+      label="Prediction"
+      styleName="prediction"
+      subText={<PredictionsInfo />}
+    >
+      <Row middle='xs' center='xs' styleName="prediction-section">
+        <Col xs={4}>
+          <p className="label small">TEAM</p>
+        </Col>
+
+        <Col xs={4}>
+          <p className="label small">PREDICTED SPREAD</p>
+        </Col>
+
+        <Col xs={4}>
+          <p className="label small">PREDICTION VALUE</p>
+        </Col>
+      </Row>
+
+      {
+        predictions.map(team => (
+          <Row middle='xs' center='xs' styleName="prediction-section" key={team.name}>
+            <Col xs={4}>
+              <Row start='xs'>
+                <Col xsOffset={4}>
+                  <p className="small label">{team.city}</p>
+                  <p className="semibold">{team.name}</p>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col xs={4}>
+              <p className="semibold">
+                {team.predictedSpread}
+              </p>
+            </Col>
+
+            <Col xs={4}>
+              <p
+                className="semibold"
+                style={{ color: getColor(team.predictionValue) }}
+              >
+                {team.predictionValue}
+              </p>
+            </Col>
+          </Row>
+        ))
+      }
+    </Card>
   )
 }
 

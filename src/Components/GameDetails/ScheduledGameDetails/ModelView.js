@@ -82,7 +82,7 @@ class ModelView extends React.Component {
           </div>
         </Row>
 
-        <Row style={{ marginBottom: '-50px' }}>
+        <Row>
           <Col xs={7}>
             <Predictions />
           </Col>

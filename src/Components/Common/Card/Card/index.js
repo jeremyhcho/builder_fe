@@ -15,6 +15,7 @@ const Card = ({ wrapperStyle, label, subText, children, style, ...props }) => (
       }
       {subText}
     </div>
+
     <div styleName="card" style={wrapperStyle}>
       {children}
     </div>

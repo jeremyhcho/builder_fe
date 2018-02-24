@@ -1,12 +1,18 @@
 .stats-card {
   border: 1px solid var(--light-gray);
   border-radius: var(--border-radius);
-  width: 400px;
   padding: 20px 40px;
+  background-color: #fff;
 
   .row {
     display: flex;
     flex-wrap: wrap;
+    padding: 10px;
+    align-items: center;
+
+    &.labels {
+      margin-bottom: 10px;
+    }
   }
 
   .col {
@@ -14,9 +20,15 @@
   }
 
   .values {
-    margin: -10px;
+    margin: -10px -10px 0px;
     padding: 10px;
     box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
-    /* border-radius: var(--border-radius); */
+    background-color: #fff;
+
+    .value {
+      background-color: var(--lightest-gray);
+      padding: 20px 0;
+      margin: 0 10px;
+    }
   }
 }
