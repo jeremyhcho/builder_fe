@@ -12,13 +12,22 @@ class Tooltip extends React.Component {
 
   componentDidMount () {
     this.target = document.querySelector(`[data-tip-for='${this.props.id}']`)
-    this.target.addEventListener('mouseenter', this.mouseEnter)
-    this.target.addEventListener('mouseleave', this.mouseLeave)
+
+    if ('ontouchstart' in window) {
+      console.log('Tooltips in mobile are disabled')
+    } else {
+      this.target.addEventListener('mouseenter', this.openToolTip)
+      this.target.addEventListener('mouseleave', this.closeToolTip)
+    }
   }
 
   componentWillUnmount () {
-    this.target.removeEventListener('mouseenter', this.mouseEnter)
-    this.target.removeEventListener('mouseleave', this.mouseLeave)
+    if ('ontouchstart' in window) {
+      console.log('Tooltips in mobile are disabled')
+    } else {
+      this.target.removeEventListener('mouseenter', this.openToolTip)
+      this.target.removeEventListener('mouseleave', this.closeToolTip)
+    }
   }
 
   getPos () {
@@ -52,11 +61,11 @@ class Tooltip extends React.Component {
     }
   }
 
-  mouseEnter = () => {
+  openToolTip = () => {
     this.setState({ hovered: true })
   }
 
-  mouseLeave = () => {
+  closeToolTip = () => {
     this.setState({ hovered: false })
   }
 
