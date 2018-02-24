@@ -3,7 +3,15 @@ import PropTypes from 'prop-types'
 
 import './StatsCard.scss'
 
-const StatsCard = ({ title, subText, labels, values, uniqueKey, style }) => (
+const StatsCard = ({
+  title,
+  subText,
+  children,
+  labels,
+  values,
+  uniqueKey,
+  style
+}) => (
   /* eslint-disable react/no-array-index-key */
   <div style={{ marginTop: '35px', height: '100%', ...style }}>
     <div className="flex" style={{ alignItems: 'center' }}>
@@ -12,6 +20,10 @@ const StatsCard = ({ title, subText, labels, values, uniqueKey, style }) => (
     </div>
 
     <div styleName='stats-card'>
+      <div>
+        {children}
+      </div>
+
       <div styleName="row labels">
         {
           labels.map((label, i) => {
@@ -29,7 +41,7 @@ const StatsCard = ({ title, subText, labels, values, uniqueKey, style }) => (
             }
 
             return (
-              <div styleName="col" key={label}>
+              <div styleName="col first" key={label}>
                 <p className="label small">{label}</p>
               </div>
             )
@@ -59,7 +71,7 @@ const StatsCard = ({ title, subText, labels, values, uniqueKey, style }) => (
 
                   return (
                     <div
-                      styleName="col"
+                      styleName="col first"
                       key={`${uniqueKey}-${primaryIndex}-${secondaryIndex}`}
                     >
                       <div>
@@ -81,7 +93,8 @@ StatsCard.defaultProps = {
   title: '',
   values: [],
   style: {},
-  subText: null
+  subText: null,
+  children: null
 }
 
 StatsCard.propTypes = {
@@ -100,7 +113,13 @@ StatsCard.propTypes = {
   },
   uniqueKey: PropTypes.string.isRequired,
   style: PropTypes.object,
-  subText: PropTypes.node
+  subText: PropTypes.node,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.node,
+    PropTypes.element
+  ])
 }
 
 export default StatsCard

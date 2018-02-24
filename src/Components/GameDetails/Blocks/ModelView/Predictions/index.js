@@ -11,6 +11,9 @@ import { precisionRound } from 'Helpers'
 
 const roundOne = precisionRound(1)
 
+// CSS
+import './Predictions.scss'
+
 const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel }) => {
   const convertNumber = (num) => {
     if (num > 0) {
@@ -70,14 +73,11 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       [
         <div
           key={`${team.name}-team`}
-          style={{
-            display: 'flex',
-            alignItems: 'center'
-          }}
+          styleName="team"
         >
           <img
             src={team.image}
-            style={{ width: '40px', height: '40px', marginRight: '10px' }}
+            styleName="logo"
           />
 
           <div>
@@ -86,12 +86,14 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
           </div>
         </div>,
         <p
+          styleName="value"
           className="semibold"
           key={`${team.name}-predictedSpread`}
         >
           {team.predictedSpread}
         </p>,
         <p
+          styleName="value"
           className="semibold"
           key={`${team.name}-predictionValue`}
           style={{ color: getColor(team.predictionValue) }}
