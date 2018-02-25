@@ -1,45 +1,61 @@
 import React from 'react'
-
-// Icons
-import ModelIcon from 'Assets/Icons/landingPage/blue-model.svg'
-import PodiumIcon from 'Assets/Icons/landingPage/blue-podium-trophy.svg'
-import SpaceshipIcon from 'Assets/Icons/landingPage/blue-spaceship.svg'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 // CSS
 import './HowTo.scss'
 
-const HowTo = () => {
+const HowTo = ({ history, authorized }) => {
+  const routeToModel = () => {
+    if (authorized) {
+      return history.push({ pathname: '/models', state: { from: '/' } })
+    }
+
+    return history.push({ pathname: '/auth/login', state: { from: '/' } })
+  }
+
   return (
     <section styleName="how-to">
       <div styleName="col-1000">
-        <div styleName="image-2">
+        <div styleName='left'>
           <img
             src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.jpg"
             style={{
-              height: '100%',
-              width: '100%',
-              marginBottom: '20px'
+              maxHeight: '100%',
+              position: 'absolute',
+              right: '0'
             }}
           />
         </div>
 
-        <div styleName="info-1">
-          <ModelIcon height={80} width={80} />
-          <p>Create models</p>
-        </div>
+        <div styleName="right">
+          <header styleName="header">
+            The phone. Bringing you closer to people... who have phones
+          </header>
 
-        <div styleName="info-1">
-          <SpaceshipIcon height={80} width={80} />
-          <p>Generate predictions</p>
-        </div>
+          <p styleName="description">
+            Bagels and donuts. Round food..for every mood.
+          </p>
 
-        <div md={4} xs={12} styleName="info-2">
-          <PodiumIcon height={80} width={80} />
-          <p>Improve your bets</p>
+          <button styleName="action flat" onClick={routeToModel}>
+            Create a model
+          </button>
         </div>
       </div>
     </section>
   )
 }
 
-export default HowTo
+HowTo.propTypes = {
+  history: PropTypes.object.isRequired,
+  authorized: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = ({ auth }) => ({
+  authorized: auth.authState.authorized
+})
+
+export default withRouter(connect(
+  mapStateToProps
+)(HowTo))

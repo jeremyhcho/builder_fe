@@ -10,44 +10,70 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-  }
 
-  .image-2 {
-    flex-basis: 100%;
-    margin: 20px 0 50px;
-    padding: 0 18%;
-  }
+    .left {
+      display: none;
+      width: 45%;
+      height: 540px;
+      position: relative;
 
-  .info-1 {
-    margin: 30px 0;
-    flex-basis: 100%;
-
-    @media only screen and (min-width: 600px) {
-      margin: 0;
-      flex-basis: 50%;
+      @media only screen and (min-width: 840px) {
+        display: block;
+      }
     }
 
-    @media only screen and (min-width: 840px) {
-      flex-basis: 33.33%;
+    .right {
+      width: 100%;
+      padding: 0;
+      text-align: center;
+
+      @media only screen and (min-width: 840px) {
+        width: 55%;
+        padding-left: 50px;
+        padding-bottom: 30px;
+        box-sizing: border-box;
+        text-align: left;
+      }
+
+      .header {
+        font-size: 33px;
+        font-weight: 300;
+      }
+
+      .description {
+        font-size: 20px;
+        font-weight: 300;
+        color: #737376;
+      }
+
+      .action {
+        padding: 13px 22px 15px 22px;
+        border-radius: 100px;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        outline: 0;
+        transition: box-shadow .25s ease, transform .25s ease;
+        max-width: 200px;
+        margin-top: 20px;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+
+        &.flat {
+          padding: 11px 20px 12px 20px;
+          border: none;
+          background-color: #fff;
+          box-shadow: 0 0 2px 0 rgba(44,47,51,.15), 0 3px 16px 0 #e9e9ea, inset 0 -4px 8px 0 rgba(0,0,0,.03);
+          border-radius: 100px;
+
+          &:hover {
+            box-shadow: 0 0 2px 0 rgba(44,47,51,.15), 0 3px 26px 0 #d9d9df, inset 0 -4px 8px 0 rgba(0,0,0,.03);
+          }
+        }
+      }
     }
-  }
-
-  .info-2 {
-    margin: 30px 0;
-    flex-basis: 100%;
-
-    @media only screen and (min-width: 600px) {
-      margin: 0;
-    }
-
-    @media only screen and (min-width: 840px) {
-      flex-basis: 33.33%
-    }
-  }
-
-  p {
-    font-size: 20px;
-    font-weight: 300;
-    color: #737376;
   }
 }

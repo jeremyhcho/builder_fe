@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Col } from 'react-styled-flexboxgrid'
 
 // CSS
 import './Footer.scss'
@@ -8,19 +7,19 @@ class Footer extends React.Component {
   render () {
     return (
       <div styleName="footer">
-        <Row center='xs'>
-          <Col xs={4} styleName="copyright">
+        <div styleName="col-1000">
+          <div styleName="copyright">
             <p>Copyright</p>
-          </Col>
+          </div>
 
-          <Col xs={4} styleName="social-media">
+          <div styleName="social-media">
             <p>Social Media link</p>
-          </Col>
+          </div>
 
-          <Col xs={4} styleName="contact">
+          <div styleName="contact">
             <p>Contact address</p>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     )
   }

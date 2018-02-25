@@ -4,7 +4,7 @@ import React from 'react'
 import Header from './Header'
 import Features from './Features'
 import HowTo from './HowTo'
-import Subscriptions from './Subscriptions'
+import Closer from './Closer'
 import Footer from './Footer'
 
 // CSS
@@ -19,7 +19,7 @@ const LandingPage = () => {
       <Header />
       <Features />
       <HowTo />
-      <Subscriptions />
+      <Closer />
       <Footer />
     </div>
   )

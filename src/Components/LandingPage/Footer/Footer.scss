@@ -1,16 +1,42 @@
 .footer {
-  margin-top: 10px;
+  margin-top: 90px;
   padding-bottom: 10px;
 
-  .copyright {
+  .col-1000 {
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 
+    @media only screen and (min-width: 840px) {
+      justify-content: space-around;
+      height: 150px;
+    }
+  }
+
+  .copyright {
+    flex-basis: 50%;
+
+    @media only screen and (min-width: 840px) {
+      flex-basis: 33.33%;
+    }
   }
 
   .social-media {
+    flex-basis: 50%;
 
+    @media only screen and (min-width: 840px) {
+      flex-basis: 33.33%;
+    }
   }
 
   .contact {
+    flex-basis: 100%;
 
+    @media only screen and (min-width: 840px) {
+      flex-basis: 33.33%;
+    }
   }
 }
