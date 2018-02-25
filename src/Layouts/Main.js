@@ -90,7 +90,7 @@ const MainLayout = ({
   }
 
   return (
-    <main style={{ display: 'flex', overflow: 'hidden' }}>
+    <main style={{ display: 'flex', overflowY: 'hidden' }}>
       <Pusher
         channel={`builder_api_${userId}`}
         event='notification_received'
