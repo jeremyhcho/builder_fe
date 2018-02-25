@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
+import { QuartzLink } from 'Components/Common'
+
 // CSS
 import './Tab.scss'
 
@@ -18,6 +20,8 @@ class Tab extends React.Component {
 
   onClick = (tabItem) => {
     return (e) => {
+      // e.preventDefault()
+
       if (tabItem.key === this.state.selectedTabItem.key || tabItem.disabled) {
         return null
       }
@@ -48,6 +52,23 @@ class Tab extends React.Component {
               selected: tabItem.key === this.state.selectedTabItem.key,
               disabled: tabItem.disabled === true
             })
+
+            if (tabItem.route) {
+              return (
+                <li
+                  styleName={tabItemClass}
+                  key={tabItem.key}
+                >
+                  <QuartzLink
+                    to={{ pathname: `${tabItem.route}` }}
+                    onClick={this.onClick(tabItem)}
+                    style={{ width: '100%', height: '100%' }}
+                  >
+                    {tabItem.label}
+                  </QuartzLink>
+                </li>
+              )
+            }
 
             return (
               <li
