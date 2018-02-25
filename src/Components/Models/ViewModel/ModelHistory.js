@@ -9,10 +9,13 @@ import { Checkbox, QuartzLink } from 'Components/Common'
 // Icons
 import BanIcon from 'Assets/Icons/ban.svg'
 
-// Actions
-
 // CSS
 import './ViewModel.scss'
+
+// Helpers
+import { precisionRound } from 'Helpers'
+
+const roundTwo = precisionRound(2)
 
 class ModelHistory extends React.Component {
   state = {
@@ -72,6 +75,17 @@ class ModelHistory extends React.Component {
     }
 
     return predictions
+  }
+
+  parsePredictionText (prediction) {
+    const awayPoints = prediction.away_points
+    const homePoints = prediction.home_points
+    const winner = awayPoints > homePoints ? 'away' : 'home'
+    const winningSpread = awayPoints > homePoints ? (
+      homePoints - awayPoints
+    ) : awayPoints - homePoints
+
+    return `${prediction.match[`${winner}`].short_name} ${roundTwo(winningSpread)}`
   }
 
   render () {
@@ -150,7 +164,7 @@ class ModelHistory extends React.Component {
 
                       <Col xs={2}>
                         <p className="semibold">
-                          {prediction.away_points} - {prediction.home_points}
+                          {this.parsePredictionText(prediction)}
                         </p>
                       </Col>
 
