@@ -4,7 +4,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import moment from 'moment'
 
 // Components
-import { Checkbox } from 'Components/Common'
+import { Checkbox, QuartzLink } from 'Components/Common'
 
 // Icons
 import BanIcon from 'Assets/Icons/ban.svg'
@@ -135,42 +135,44 @@ class ModelHistory extends React.Component {
             {
               filteredPredictions.length ? (
                 this.filteredPredictions().map(prediction => (
-                  <Row center='xs' styleName="prediction-values" key={prediction.id}>
-                    <Col xs={4}>
-                      <Row around='xs'>
-                        <p className="label">
-                          {moment(new Date(prediction.match.date)).format('MM/DD/YY')}
-                        </p>
+                  <QuartzLink to={{ pathname: `/games/${prediction.match.id}/models` }} key={prediction.id}>
+                    <Row center='xs' styleName="prediction-values">
+                      <Col xs={4}>
+                        <Row around='xs'>
+                          <p className="label">
+                            {moment(new Date(prediction.match.date)).format('MM/DD/YY')}
+                          </p>
+                          <p className="semibold">
+                            {prediction.match.away.short_name} @ {prediction.match.home.short_name}
+                          </p>
+                        </Row>
+                      </Col>
+
+                      <Col xs={2}>
                         <p className="semibold">
-                          {prediction.match.away.short_name} @ {prediction.match.home.short_name}
+                          {prediction.away_points} - {prediction.home_points}
                         </p>
-                      </Row>
-                    </Col>
+                      </Col>
 
-                    <Col xs={2}>
-                      <p className="semibold">
-                        {prediction.away_points} - {prediction.home_points}
-                      </p>
-                    </Col>
+                      <Col xs={2}>
+                        <p className="semibold">
+                          {prediction.match.away.points} - {prediction.match.home.points}
+                        </p>
+                      </Col>
 
-                    <Col xs={2}>
-                      <p className="semibold">
-                        {prediction.match.away.points} - {prediction.match.home.points}
-                      </p>
-                    </Col>
+                      <Col xs={2}>
+                        <p className="semibold">
+                          {this.getPick(prediction)}
+                        </p>
+                      </Col>
 
-                    <Col xs={2}>
-                      <p className="semibold">
-                        {this.getPick(prediction)}
-                      </p>
-                    </Col>
-
-                    <Col xs={2}>
-                      <p className="semibold">
-                        {this.getResult(prediction.result)}
-                      </p>
-                    </Col>
-                  </Row>
+                      <Col xs={2}>
+                        <p className="semibold">
+                          {this.getResult(prediction.result)}
+                        </p>
+                      </Col>
+                    </Row>
+                  </QuartzLink>
                 ))
               ) : (
                 <div styleName="missing-predictions">
