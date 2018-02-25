@@ -6,7 +6,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import moment from 'moment'
 
 // Component
-import { Card } from 'Components/Common'
+import { Card, QuartzLink } from 'Components/Common'
 import { OverviewSpinner } from 'Components/GameDetails/Blocks'
 
 // Icons
@@ -46,19 +46,21 @@ class MatchupDetails extends React.Component {
 
     return (
       <div styleName="matchup-details">
-        <div
-          className="semibold"
-          styleName="view-button"
-          onMouseEnter={() => this.setState({ viewHover: true })}
-          onMouseLeave={() => this.setState({ viewHover: false })}
-          onClick={() => this.routeToMatch(matchup.id)}
-        >
-          View
-          {
-            this.state.viewHover ? <BlueRightArrowIcon styleName="arrow-icon" />
-              : <RightArrowIcon styleName="arrow-icon" />
-          }
-        </div>
+        <QuartzLink to={{ pathname: `/games/${matchup.id}/overview` }}>
+          <div
+            className="semibold"
+            styleName="view-button"
+            onMouseEnter={() => this.setState({ viewHover: true })}
+            onMouseLeave={() => this.setState({ viewHover: false })}
+          >
+            View
+            {
+              this.state.viewHover ? <BlueRightArrowIcon styleName="arrow-icon" />
+                : <RightArrowIcon styleName="arrow-icon" />
+            }
+          </div>
+        </QuartzLink>
+
         <Card
           subText={
             <p
