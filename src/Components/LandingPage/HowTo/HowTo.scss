@@ -13,7 +13,7 @@
 
     .left {
       display: none;
-      width: 45%;
+      width: 50%;
       height: 540px;
       position: relative;
 
@@ -28,7 +28,7 @@
       text-align: center;
 
       @media only screen and (min-width: 840px) {
-        width: 55%;
+        width: 50%;
         padding-left: 50px;
         padding-bottom: 30px;
         box-sizing: border-box;
