@@ -9,7 +9,7 @@ const modelValidate = (values) => {
     const specsTotal = Object.values(values.specs)
       .reduce((total, val) => parseInt(total, 10) + parseInt(val, 10))
 
-    if (specsTotal !== 50) {
+    if (specsTotal !== 25) {
       const specErrors = {}
       specErrors.field_goals_made = 'ERROR MESSAGE'
       errors.specs = specErrors

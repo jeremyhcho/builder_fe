@@ -13,7 +13,7 @@ import RemoveIcon from 'Assets/Icons/dr-remove-lg.svg'
 // Helpers
 import { precisionRound } from 'Helpers'
 
-const roundOne = precisionRound(1)
+const roundOne = precisionRound(2)
 
 // CSS
 import './Predictions.scss'

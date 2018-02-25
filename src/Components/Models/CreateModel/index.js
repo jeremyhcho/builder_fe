@@ -29,7 +29,7 @@ class CreateModel extends React.Component {
     if (!model) {
       const specs = {}
 
-      specKeys.forEach(spec => specs[spec] = 0)
+      specKeys.forEach(spec => specs[spec] = 1)
 
       initialize({
         type: 'standard',
