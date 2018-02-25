@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 // Components
 import { StatsCard, Card, Spinner } from 'Components/Common'
@@ -9,6 +8,7 @@ import PredictionsInfo from './PredictionsInfo'
 
 // Icons
 import CheckIcon from 'Assets/Icons/green-check.svg'
+import RemoveIcon from 'Assets/Icons/dr-remove-lg.svg'
 
 // Helpers
 import { precisionRound } from 'Helpers'
@@ -80,6 +80,22 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     }
   ]
 
+  const renderResultIcon = (currentTeam, winner) => {
+    const iconStyle = {
+      position: 'absolute',
+      left: '-20px',
+      top: '20px'
+    }
+
+    if (currentTeam.name === winner.name) {
+      return prediction.result === 'win'
+        ? <CheckIcon style={iconStyle} height={16} width={16} />
+        : <RemoveIcon style={iconStyle} height={16} width={16} />
+    }
+
+    return null
+  }
+
   const getPredictionValues = () => {
     return predictions.map((team, i, teamPredictions) => {
       const awayTeam = teamPredictions[0]
@@ -91,10 +107,6 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       } else {
         winner = homeTeam
       }
-
-      const spreadValue = classNames('spread-value', {
-        winner: team.name === winner.name
-      })
 
       return (
         [
@@ -112,25 +124,27 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
               <p className="semibold">{team.name}</p>
             </div>
           </div>,
-          <p
-            styleName={spreadValue}
-            className="semibold"
-            key={`${team.name}-predictedSpread`}
-          >
-            {team.name === winner.name ? team.predictedSpread : ' '}
-            {
-              summary.status === 'CLOSED'
-                && team.name === winner.name
-                ? <CheckIcon style={{ position: 'absolute', right: '15px' }} /> : null
-            }
-          </p>,
+
+          <div style={{ position: 'relative' }}>
+            {renderResultIcon(team, winner)}
+
+            <p
+              styleName="value"
+              className="semibold"
+              key={`${team.name}-vegas`}
+            >
+              {team.vegas}
+            </p>
+          </div>,
+
           <p
             styleName="value"
             className="semibold"
-            key={`${team.name}-vegas`}
+            key={`${team.name}-predictedSpread`}
           >
-            {team.vegas}
+            {team.predictedSpread}
           </p>,
+
           <p
             styleName="value"
             className="semibold"
@@ -148,7 +162,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     <StatsCard
       title="Prediction"
       subText={<PredictionsInfo />}
-      labels={['TEAM', 'PREDICTED SPREAD', 'VEGAS', 'PREDICTION VALUE']}
+      labels={['TEAM', 'VEGAS', 'PREDICTED SPREAD', 'PREDICTION VALUE']}
       values={getPredictionValues()}
       uniqueKey='Prediction'
     />
