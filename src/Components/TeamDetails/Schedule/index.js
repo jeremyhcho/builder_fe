@@ -5,7 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import moment from 'moment'
 
 // Components
-import { Card, Spinner } from 'Components/Common'
+import { Card, Spinner, QuartzLink } from 'Components/Common'
 
 // Actions
 import { fetchNBATeamSchedule } from 'Actions'
@@ -124,40 +124,42 @@ class Schedule extends React.Component {
 
                 {
                   schedule[month].map(game => (
-                    <Row
+                    <QuartzLink
                       key={game.date}
+                      to={{ pathname: `/games/${game.match_id}` }}
                       styleName="row values"
-                      onClick={() => this.navigateToGame(game)}
                     >
-                      <Col xs={3}>
-                        <p>{moment(new Date(game.date)).format('ddd, MMM D')}</p>
-                      </Col>
+                      <Row>
+                        <Col xs={3}>
+                          <p>{moment(new Date(game.date)).format('ddd, MMM D')}</p>
+                        </Col>
 
-                      <Col xs={4}>
-                        <Row middle='xs'>
-                          <p>
-                            {this.getMatchType(game)} {game.opponent.city} {game.opponent.name}
-                          </p>
+                        <Col xs={4}>
+                          <Row middle='xs'>
+                            <p>
+                              {this.getMatchType(game)} {game.opponent.city} {game.opponent.name}
+                            </p>
 
-                          <img
-                            src={game.opponent.image}
-                            style={{
-                              height: '20px',
-                              width: '20px',
-                              marginLeft: '10px'
-                            }}
-                          />
-                        </Row>
-                      </Col>
+                            <img
+                              src={game.opponent.image}
+                              style={{
+                                height: '20px',
+                                width: '20px',
+                                marginLeft: '10px'
+                              }}
+                            />
+                          </Row>
+                        </Col>
 
-                      <Col xs={3}>
-                        {this.getResult(game)}
-                      </Col>
+                        <Col xs={3}>
+                          {this.getResult(game)}
+                        </Col>
 
-                      <Col xs={2}>
-                        <p>{moment(new Date(game.date)).format('h:mm')} EST</p>
-                      </Col>
-                    </Row>
+                        <Col xs={2}>
+                          <p>{moment(new Date(game.date)).format('h:mm')} EST</p>
+                        </Col>
+                      </Row>
+                    </QuartzLink>
                   ))
                 }
               </div>

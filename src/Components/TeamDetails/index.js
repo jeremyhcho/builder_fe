@@ -16,28 +16,35 @@ import { fetchNBATeamDetails } from 'Actions'
 // CSS
 import './TeamDetails.scss'
 
-const tabItems = [
-  { label: 'Overview', key: 'overview' },
-  { label: 'Schedule', key: 'schedule' },
-  { label: 'Roster', key: 'roster' }
-]
-
 class TeamDetails extends React.Component {
+  state = { selected: this.getCurrentRouteKey() }
+
   componentDidMount () {
     this.props.fetchNBATeamDetails(this.props.match.params.id)
   }
 
-  handleNavigation = (e, menuItem) => {
-    this.setState({ selected: menuItem.key })
-    this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
-  }
-
-  render () {
+  getCurrentRouteKey () {
     const path = this.props.location.pathname.split('/')
     const route = path.slice(path.length - 1)[0]
+
     let routeKey
     if (!isNaN(route)) routeKey = 'overview'
     else routeKey = route
+
+    return routeKey
+  }
+
+  handleNavigation = (e, menuItem) => {
+    this.setState({ selected: menuItem.key })
+  }
+
+  render () {
+    const tabItems = [
+      { label: 'Overview', key: 'overview', route: `${this.props.match.url}/overview` },
+      { label: 'Schedule', key: 'schedule', route: `${this.props.match.url}/schedule` },
+      { label: 'Roster', key: 'roster', route: `${this.props.match.url}/roster` }
+    ]
+
 
     return (
       <DocumentTitle title='Quartz - NBA Team Details' header='Team Details' backUrl='/teams'>
@@ -47,7 +54,7 @@ class TeamDetails extends React.Component {
               <Tab
                 tabs={tabItems}
                 onChange={this.handleNavigation}
-                selectedKey={routeKey}
+                selectedKey={this.state.selected}
                 listStyle={{ maxWidth: '420px', marginTop: '30px' }}
               />
             </Col>
@@ -78,7 +85,6 @@ TeamDetails.defaultProps = {
 TeamDetails.propTypes = {
   teamDetails: PropTypes.object,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   fetchNBATeamDetails: PropTypes.func.isRequired
 }
