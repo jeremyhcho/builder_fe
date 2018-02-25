@@ -13,7 +13,6 @@ import { updatePickOfTheDay, fetchPickOfTheDay, fetchPickOfTheDays } from 'Actio
 // Components
 import { Button, Input, Card, DocumentTitle } from 'Components/Common'
 
-
 // Icons
 import LeftArrow from 'Assets/Icons/left-arrow.svg'
 

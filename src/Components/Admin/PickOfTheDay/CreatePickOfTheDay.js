@@ -8,7 +8,7 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
 // Actions
-import { createPickOfTheDay } from 'Actions'
+import { createPickOfTheDay, fetchPickOfTheDays } from 'Actions'
 
 // Components
 import { Button, Input, Card, DocumentTitle } from 'Components/Common'
@@ -24,6 +24,10 @@ class CreatePickOfTheDay extends React.Component {
     title: '',
     body: '',
     showPreview: false
+  }
+
+  componentDidMount () {
+    if (!this.props.potd) this.props.fetchPickOfTheDays()
   }
 
   createPickOfTheDay = () => {
@@ -141,20 +145,25 @@ class CreatePickOfTheDay extends React.Component {
 }
 
 CreatePickOfTheDay.defaultProps = {
-  creatingPickOfTheDay: false
+  creatingPickOfTheDay: false,
+  potd: null
 }
 
 CreatePickOfTheDay.propTypes = {
   createPickOfTheDay: PropTypes.func.isRequired,
-  creatingPickOfTheDay: PropTypes.bool
+  fetchPickOfTheDays: PropTypes.func.isRequired,
+  creatingPickOfTheDay: PropTypes.bool,
+  potd: PropTypes.array
 }
 
 const mapStateToProps = ({ routines }) => ({
-  creatingPickOfTheDay: routines.callingApi.CREATE_PICK_OF_THE_DAY
+  creatingPickOfTheDay: routines.callingApi.CREATE_PICK_OF_THE_DAY,
+  potd: routines.admin.pickOfTheDays
 })
 
 const mapDispatchToProps = {
-  createPickOfTheDay
+  createPickOfTheDay,
+  fetchPickOfTheDays
 }
 
 export default connect(
