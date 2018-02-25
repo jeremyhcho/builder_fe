@@ -20,8 +20,6 @@ class Tab extends React.Component {
 
   onClick = (tabItem) => {
     return (e) => {
-      // e.preventDefault()
-
       if (tabItem.key === this.state.selectedTabItem.key || tabItem.disabled) {
         return null
       }
