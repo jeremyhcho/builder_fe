@@ -9,9 +9,6 @@ import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
 // CSS
 import './Header.scss'
 
-// Actions
-import { logoutUser } from 'Actions'
-
 class Header extends React.Component {
   componentWillReceiveProps (newProps) {
     if (!newProps.authorized && this.props.authorized) {
@@ -21,10 +18,6 @@ class Header extends React.Component {
 
   routeToQuartz = () => {
     this.props.history.push({ pathname: '/dashboard', state: { from: '/' } })
-  }
-
-  logOut = () => {
-    this.props.logoutUser()
   }
 
   routeToSignup = () => {
@@ -46,13 +39,6 @@ class Header extends React.Component {
           styleName="action blue"
         >
           Go to Quartz
-        </button>,
-        <button
-          onClick={this.logOut}
-          key="button-2"
-          styleName="action flat"
-        >
-          Log out
         </button>
       ]
     }
@@ -120,19 +106,13 @@ class Header extends React.Component {
 
 Header.propTypes = {
   history: PropTypes.object.isRequired,
-  authorized: PropTypes.bool.isRequired,
-  logoutUser: PropTypes.func.isRequired,
+  authorized: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ auth }) => ({
   authorized: auth.authState.authorized
 })
 
-const mapDispatchToProps = {
-  logoutUser
-}
-
 export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Header))
