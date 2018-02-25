@@ -35,7 +35,7 @@ class ViewModel extends React.Component {
         <Modal
           header='Model Details'
           isOpen={isOpen}
-          wrapperStyle={{ width: '800px', maxWidth: '100%', height: '600px' }}
+          wrapperStyle={{ width: '800px', height: '600px' }}
           toggle={this.toggleAndClearState}
         >
           <div style={{ textAlign: 'center', padding: '200px 0' }}>
@@ -50,7 +50,7 @@ class ViewModel extends React.Component {
         header={model.name}
         toggle={this.toggleAndClearState}
         isOpen={isOpen}
-        wrapperStyle={{ width: '800px', maxWidth: '100%', height: '600px' }}
+        wrapperStyle={{ width: '800px', height: '600px' }}
       >
         <div styleName="view-model">
           {

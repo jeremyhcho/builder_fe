@@ -74,7 +74,7 @@ class Modal extends React.Component {
       >
         <div
           styleName="modal-container"
-          style={wrapperStyle}
+          style={{ ...wrapperStyle }}
           ref={ref => this.content = ref}
           tabIndex="0"
         >
