@@ -20,11 +20,17 @@ import './Predictions.scss'
 
 const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel }) => {
   const convertNumber = (num) => {
-    if (num > 0) {
-      return `+${roundOne(num)}`
+    const convertedNum = roundOne(num)
+
+    if (convertedNum === 0) {
+      return 'EVEN'
     }
 
-    return roundOne(num)
+    if (convertedNum > 0) {
+      return `+${convertedNum}`
+    }
+
+    return convertedNum
   }
 
   const getColor = (value) => {
@@ -55,7 +61,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       name: summary.away.name,
       image: summary.away.image,
       vegas: prediction.vegas_away_line.spread,
-      predictedSpread: convertNumber(prediction.home_points - prediction.away_points) || 'EVEN',
+      predictedSpread: convertNumber(prediction.home_points - prediction.away_points),
       predictionValue: convertNumber(
         Number(prediction.vegas_away_line.spread) -
         Number(prediction.home_points - prediction.away_points)
@@ -66,7 +72,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       name: summary.home.name,
       image: summary.home.image,
       vegas: prediction.vegas_home_line.spread,
-      predictedSpread: convertNumber(prediction.away_points - prediction.home_points) || 'EVEN',
+      predictedSpread: convertNumber(prediction.away_points - prediction.home_points),
       predictionValue: convertNumber(
         Number(prediction.vegas_home_line.spread) -
         Number(prediction.away_points - prediction.home_points)
