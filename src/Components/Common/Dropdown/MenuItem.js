@@ -28,11 +28,12 @@ const MenuItem = ({ onClick, children, disabled, icon: Icon }) => {
 
 MenuItem.defaultProps = {
   disabled: false,
-  icon: null
+  icon: null,
+  onClick: () => null
 }
 
 MenuItem.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool.isRequired,
   icon: PropTypes.node,
   children: PropTypes.oneOfType([

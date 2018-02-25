@@ -24,6 +24,7 @@
     .row {
       padding: 10px 10px;
       margin: 0;
+      border-radius: var(--border-radius);
 
       &.label {
         border-bottom: 1px solid var(--lightest-gray);

@@ -68,10 +68,12 @@ class DateInput extends React.Component {
   changeCalendar = ({ day, month, year }) => {
     // Prevents users from changing to next month unless it is the last day of the month
     const lastDateOfMonth = moment().daysInMonth()
+
     if ((month > moment().month() + 1 && year === moment().year()) &&
         moment().date() !== lastDateOfMonth) {
       return
     }
+
     this.setState({ day, month, year })
   }
 
@@ -85,6 +87,7 @@ class DateInput extends React.Component {
     if (e.iso !== this.props.dates.now._i) {
       this.props.fetchNBAGames(this.getFromAndTo(e.iso))
     }
+
     this.closeCalendar()
   }
 

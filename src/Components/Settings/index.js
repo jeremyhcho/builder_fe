@@ -26,7 +26,7 @@ class Settings extends React.Component {
     const { fetchingBilling, ...routerProps } = this.props
 
     return (
-      <DocumentTitle title='Quartz - Settings' header='Settings' backUrl='/'>
+      <DocumentTitle title='Quartz - Settings' header='Settings' backUrl='/dashboard'>
         <div styleName="settings">
           <SettingsNav {...routerProps} />
 

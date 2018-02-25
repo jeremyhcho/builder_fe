@@ -9,7 +9,8 @@
     border-bottom: 3px solid transparent;
     user-select: none;
     flex: 1;
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
+    height: 40px;
 
     &.selected {
       transition: border 150ms ease;

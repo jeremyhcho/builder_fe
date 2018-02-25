@@ -4,7 +4,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { withRouter } from 'react-router'
 
 // Components
-import { Card, Tooltip } from 'Components/Common'
+import { Card, Tooltip, QuartzLink } from 'Components/Common'
 
 // CSS
 import './Teams.scss'
@@ -96,62 +96,64 @@ class Conference extends React.Component {
           <Col xs={12}>
             {
               teams.map((team, index) => (
-                <Card key={team.id} style={{ height: 'auto', marginTop: '10px' }}>
-                  <div styleName='team-item' onClick={this.navigateToTeam(team.id)}>
-                    <div styleName='team-details'>
-                      <p
-                        className='semibold'
-                        style={{
-                          display: 'inline-block',
-                          marginRight: '10px',
-                          width: '20px'
-                        }}
-                      >
-                        {index + 1}
-                      </p>
+                <QuartzLink to={`/teams/${team.id}`} key={team.id}>
+                  <Card style={{ height: 'auto', marginTop: '10px' }}>
+                    <div styleName='team-item'>
+                      <div styleName='team-details'>
+                        <p
+                          className='semibold'
+                          style={{
+                            display: 'inline-block',
+                            marginRight: '10px',
+                            width: '20px'
+                          }}
+                        >
+                          {index + 1}
+                        </p>
 
-                      <img
-                        src={team.image}
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          marginRight: '15px'
-                        }}
-                      />
+                        <img
+                          src={team.image}
+                          style={{
+                            width: '20px',
+                            height: '20px',
+                            marginRight: '15px'
+                          }}
+                        />
 
-                      <p className='label' style={{ display: 'inline-block' }}>
-                        <span className='small'>{team.city}&nbsp;</span>
-                        <span className='semibold' style={{ color: 'var(--font-color)' }}>
-                          {team.name}
-                        </span>
-                      </p>
+                        <p className='label' style={{ display: 'inline-block' }}>
+                          <span className='small'>{team.city}&nbsp;</span>
+                          <span className='semibold' style={{ color: 'var(--font-color)' }}>
+                            {team.name}
+                          </span>
+                        </p>
+                      </div>
+
+                      <div className='semibold small' styleName='team-record'>
+                        <Row center='xs'>
+                          <Col xs={3}>
+                            <p>{team.wins}W - {team.losses}L</p>
+                          </Col>
+
+                          <Col xs={3}>
+                            <p>{roundOne((team.wins / (team.wins + team.losses)) * 100)}%</p>
+                          </Col>
+
+                          <Col xs={3}>
+                            <p>{roundTwo(team.ppg)}</p>
+                          </Col>
+
+                          <Col xs={3}>
+                            {this.getStreakColor(team.streak)}
+                          </Col>
+                        </Row>
+                      </div>
+
+                      <div styleName='right-arrow' style={{ lineHeight: '11px' }}>
+                        <RightArrow />
+                      </div>
                     </div>
-
-                    <div className='semibold small' styleName='team-record'>
-                      <Row center='xs'>
-                        <Col xs={3}>
-                          <p>{team.wins}W - {team.losses}L</p>
-                        </Col>
-
-                        <Col xs={3}>
-                          <p>{roundOne((team.wins / (team.wins + team.losses)) * 100)}%</p>
-                        </Col>
-
-                        <Col xs={3}>
-                          <p>{roundTwo(team.ppg)}</p>
-                        </Col>
-
-                        <Col xs={3}>
-                          {this.getStreakColor(team.streak)}
-                        </Col>
-                      </Row>
-                    </div>
-
-                    <div styleName='right-arrow' style={{ lineHeight: '11px' }}>
-                      <RightArrow />
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </QuartzLink>
               ))
             }
           </Col>
