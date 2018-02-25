@@ -20,7 +20,7 @@ const selector = formValueSelector('model')
 
 const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
   const getSpecsDifference = (specsTotal) => {
-    const requiredDifference = specsTotal - 50
+    const requiredDifference = specsTotal - 25
 
     if (requiredDifference > 0) {
       return (
@@ -80,7 +80,7 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
                   <Field
                     name={`specs.${stat}`}
                     component={FieldSlider}
-                    min={0}
+                    min={1}
                     max={10}
                     showInputControl
                   />

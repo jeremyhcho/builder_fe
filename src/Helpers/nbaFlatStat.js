@@ -120,6 +120,21 @@ const nbaFlatStat = (stat) => {
     case 'fast_break_pct':
       return { short: 'FB%', full: 'Fast Break %' }
 
+    case 'turnover_pct':
+      return { short: 'TO%', full: 'Turnover %' }
+
+    case 'oreb_pct':
+      return { short: 'OREB%', full: 'Offensive REB %' }
+
+    case 'ft_pct':
+      return { short: 'FT%', full: 'Free Throw %' }
+
+    case 'rest':
+      return { short: 'Rest', full: 'Rest' }
+
+    case 'rpm':
+      return { short: 'RPM', full: 'Real Plus Minus' }
+
     default: {
       return { short: null, full: null }
     }

@@ -1,14 +1,9 @@
 const specKeys = [
-  'field_goals_pct',
-  'three_points_made',
-  'free_throws_made',
-  'offensive_rebounds',
-  'defensive_rebounds',
-  'assists',
-  'turnovers',
-  'blocks',
-  'steals',
-  'efficiency'
+  'effective_fg_pct',
+  'turnover_pct',
+  'oreb_pct',
+  'ft_pct',
+  'rpm'
 ]
 
 export default specKeys

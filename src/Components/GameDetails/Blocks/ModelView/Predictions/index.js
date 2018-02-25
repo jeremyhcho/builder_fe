@@ -13,7 +13,7 @@ import CheckIcon from 'Assets/Icons/green-check.svg'
 // Helpers
 import { precisionRound } from 'Helpers'
 
-const roundOne = precisionRound(1)
+const roundOne = precisionRound(2)
 
 // CSS
 import './Predictions.scss'
