@@ -8,7 +8,7 @@ import './Sliders.scss'
 
 class Sliders extends React.Component {
   state = {
-    defaultSlider: 500,
+    defaultSlider: 4,
     disabledSlider: 500,
     inputSlider: 500
   }
@@ -27,10 +27,10 @@ class Sliders extends React.Component {
             name="defaultSlider"
             value={defaultSlider}
             min={0}
-            max={1000}
+            max={10}
             onChange={this.handleChange}
           />
-          <p>The value of the slider is: {defaultSlider} from a range of 0 to 1000</p>
+          <p>The value of the slider is: {defaultSlider} from a range of 0 to 10</p>
         </div>
 
         <div styleName="slider-container">
@@ -38,8 +38,8 @@ class Sliders extends React.Component {
           <Slider
             name="disabledSlider"
             value={disabledSlider}
-            min={0}
-            max={1000}
+            min={50}
+            max={100}
             onChange={this.handleChange}
             disabled
           />

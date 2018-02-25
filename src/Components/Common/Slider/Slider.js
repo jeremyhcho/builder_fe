@@ -32,8 +32,8 @@ class Slider extends React.Component {
 
   componentDidMount() {
     /* eslint-disable react/no-did-mount-set-state */
-    const { value, max, disabled } = this.props
-    if (!disabled) this.offsetFill(this.state.value, max)
+    const { value, disabled } = this.props
+    if (!disabled) this.offsetFill(this.state.value)
     this.setState({ inputWidth: this.findInputWidth(value) })
     /* eslint-enable react/no-did-mount-set-state */
   }
@@ -46,7 +46,7 @@ class Slider extends React.Component {
         inputValue: newProps.value,
         inputWidth: this.findInputWidth(newProps.value)
       }, () => {
-        if (!this.props.disabled) this.offsetFill(this.state.value, newProps.max)
+        if (!this.props.disabled) this.offsetFill(this.state.value)
       })
     }
   }
@@ -74,7 +74,7 @@ class Slider extends React.Component {
         if (onChange) {
           onChange(this.state.value)
         }
-        this.offsetFill(this.state.value, max)
+        this.offsetFill(this.state.value)
       })
     } else if (e.target.value > max) {
       this.setState({
@@ -85,7 +85,7 @@ class Slider extends React.Component {
         if (onChange) {
           onChange(this.state.value)
         }
-        this.offsetFill(this.state.value, max)
+        this.offsetFill(this.state.value)
       })
     } else {
       this.setState({
@@ -97,7 +97,7 @@ class Slider extends React.Component {
         if (onChange) {
           onChange(this.state.value)
         }
-        this.offsetFill(this.state.value, max)
+        this.offsetFill(this.state.value)
       })
     }
   }
@@ -119,13 +119,16 @@ class Slider extends React.Component {
         inputValue: max,
         value: max
       }, () => {
-        this.offsetFill(this.state.value, max)
+        this.offsetFill(this.state.value)
       })
     }
   }
 
-  offsetFill = (currentValue, maxValue) => {
-    let percentageValue = currentValue / maxValue
+  offsetFill = (currentValue) => {
+    // offsets the fill on the slider
+    const maxRange = this.props.max - this.props.min
+
+    let percentageValue = (currentValue - this.props.min) / maxRange
     const width = this.slider.offsetWidth
     let thumbPosition = percentageValue * width
     if (percentageValue > 0.95) {
@@ -144,7 +147,8 @@ class Slider extends React.Component {
   }
 
   offsetValuePos = () => {
-    const percentage = this.state.value / this.props.max
+    // offsets the value that is shown on top of the thumb if enabled
+    const percentage = (this.state.value - this.props.min) / (this.props.max - this.props.min)
     const { width: labelRefWidth } = this.labelRef.getBoundingClientRect()
     const thumbOffset = 9 - (labelRefWidth / 2)
     const sliderMaxWidth = this.slider.offsetWidth
