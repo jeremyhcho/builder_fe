@@ -62,12 +62,12 @@ class MatchupDetails extends React.Component {
         <Card
           subText={
             <p
+              className='small'
               style={{
                 padding: '4px 8px',
-                backgroundColor: 'var(--blue)',
-                color: '#fff',
+                backgroundColor: 'var(--navy-blue)',
+                color: '#FFF',
                 borderRadius: 'var(--border-radius)',
-                fontWeight: '600',
                 margin: '0 0 4px 12px'
               }}
             >
