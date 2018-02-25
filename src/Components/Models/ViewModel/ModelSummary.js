@@ -20,7 +20,7 @@ const ModelSummary = ({ model }) => {
       { label: 'Losses', value: losses },
       { label: 'Ties', value: ties },
       { label: 'Win Rate', value: winRate ? `${tenths(winRate * 100)}%` : 'N/A' },
-      { label: 'Last 5', value: `${last5.wins}W - ${last5.losses}L` }
+      { label: 'Last 5', value: last5 ? `${last5.wins}W - ${last5.losses}L` : 'N/A' }
     ]
   }
 
