@@ -77,7 +77,6 @@ class ModelHistory extends React.Component {
   render () {
     const filteredPredictions = this.filteredPredictions()
 
-    console.log(filteredPredictions)
     return (
       <div styleName="model-history">
         <p
