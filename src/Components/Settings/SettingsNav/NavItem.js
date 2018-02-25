@@ -2,30 +2,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
+// Components
+import { QuartzLink } from 'Components/Common'
+
 // CSS
 import './SettingsNav.scss'
 
-class NavItem extends React.Component {
-  handleClick = () => {
-    const { selected, route, select } = this.props
+const NavItem = ({ name, route, selected, icon: Icon, selectedIcon: SelectedIcon }) => {
+  const navItemStyle = classNames('nav-item', {
+    selected
+  })
 
-    if (!selected) {
-      select(route)
-    }
-  }
+  const iconStyle = classNames('icon', {
+    selected
+  })
 
-  render () {
-    const { name, selected, icon: Icon, selectedIcon: SelectedIcon } = this.props
-    const navItemStyle = classNames('nav-item', {
-      selected
-    })
-
-    const iconStyle = classNames('icon', {
-      selected
-    })
-
-    return (
-      <div styleName={navItemStyle} onClick={this.handleClick}>
+  return (
+    <QuartzLink to={{ pathname: `/settings/${route}` }}>
+      <div styleName={navItemStyle}>
         {
           selected ? <SelectedIcon styleName={iconStyle} width={14} height={14} />
             : <Icon styleName={iconStyle} width={14} height={14} />
@@ -33,8 +27,8 @@ class NavItem extends React.Component {
 
         <p>{name}</p>
       </div>
-    )
-  }
+    </QuartzLink>
+  )
 }
 
 NavItem.defaultProps = {
@@ -46,7 +40,6 @@ NavItem.propTypes = {
   icon: PropTypes.func.isRequired,
   selectedIcon: PropTypes.func.isRequired,
   selected: PropTypes.array,
-  select: PropTypes.func.isRequired,
   route: PropTypes.string.isRequired
 }
 
