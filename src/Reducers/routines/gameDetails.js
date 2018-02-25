@@ -2,6 +2,7 @@ const gameDetails = [
   'summary',
   'matchup',
   'predictions',
+  'model',
   'previousMeetings',
   'matchesModels',
   'aggregateTotals',
