@@ -14,24 +14,30 @@ import Matchup from './Matchup'
 import '../GameDetails.scss'
 
 class ScheduledGameDetails extends React.Component {
+  state = { selected: this.getCurrentRouteKey() }
+
+  getCurrentRouteKey () {
+    const path = this.props.location.pathname.split('/')
+    const route = path.slice(path.length - 1)[0]
+
+    let routeKey
+    if (!isNaN(route)) routeKey = 'overview'
+    else routeKey = route
+
+    return routeKey
+  }
+
   handleNavigation = (e, menuItem) => {
     this.setState({ selected: menuItem.key })
-    this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
   }
 
   render () {
     const tabItems = [
-      { label: 'Overview', key: 'overview' },
-      { label: 'Models', key: 'models' },
-      { label: 'Trends', key: 'trends' },
-      { label: 'Matchup', key: 'matchup' }
+      { label: 'Overview', key: 'overview', route: `${this.props.match.url}/overview` },
+      { label: 'Models', key: 'models', route: `${this.props.match.url}/models` },
+      { label: 'Trends', key: 'trends', route: `${this.props.match.url}/trends` },
+      { label: 'Matchup', key: 'matchup', route: `${this.props.match.url}/matchup` }
     ]
-
-    const path = this.props.location.pathname.split('/')
-    const route = path.slice(path.length - 1)[0]
-    let routeKey
-    if (!isNaN(route)) routeKey = 'overview'
-    else routeKey = route
 
     return (
       <DocumentTitle title='Quartz - NBA Game Details' header='Game Details' backUrl='/games'>
@@ -40,12 +46,13 @@ class ScheduledGameDetails extends React.Component {
             <Col xs={12}>
               <Tab
                 tabs={tabItems}
-                selectedKey={routeKey}
+                selectedKey={this.state.selected}
                 onChange={this.handleNavigation}
                 listStyle={{ maxWidth: '560px', marginTop: '30px' }}
               />
             </Col>
           </Row>
+
           <div className="matches-scroller" styleName="section">
             <Switch>
               <Route exact path='/games/:id/overview' component={Overview} />
@@ -63,7 +70,6 @@ class ScheduledGameDetails extends React.Component {
 
 ScheduledGameDetails.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 }
 

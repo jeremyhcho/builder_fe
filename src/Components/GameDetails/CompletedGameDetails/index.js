@@ -14,24 +14,30 @@ import TeamStats from './TeamStats'
 import '../GameDetails.scss'
 
 class CompletedGameDetails extends React.Component {
+  state = { selected: this.getCurrentRouteKey() }
+
+  getCurrentRouteKey () {
+    const path = this.props.location.pathname.split('/')
+    const route = path.slice(path.length - 1)[0]
+
+    let routeKey
+    if (!isNaN(route)) routeKey = 'overview'
+    else routeKey = route
+
+    return routeKey
+  }
+
   handleNavigation = (e, menuItem) => {
     this.setState({ selected: menuItem.key })
-    this.props.history.push(`${this.props.match.url}/${menuItem.key}`)
   }
 
   render () {
     const tabItems = [
-      { label: 'Overview', key: 'overview' },
-      { label: 'Models', key: 'models' },
-      { label: 'Player Stats', key: 'players' },
-      { label: 'Team Stats', key: 'teams' }
+      { label: 'Overview', key: 'overview', route: `${this.props.match.url}/overview` },
+      { label: 'Models', key: 'models', route: `${this.props.match.url}/models` },
+      { label: 'Player Stats', key: 'players', route: `${this.props.match.url}/players` },
+      { label: 'Team Stats', key: 'teams', route: `${this.props.match.url}/teams` }
     ]
-
-    const path = this.props.location.pathname.split('/')
-    const route = path.slice(path.length - 1)[0]
-    let routeKey
-    if (!isNaN(route)) routeKey = 'overview'
-    else routeKey = route
 
     return (
       <DocumentTitle title='Quartz - NBA Game Details' header='Game Details' backUrl='/games'>
@@ -40,7 +46,7 @@ class CompletedGameDetails extends React.Component {
             <Col xs={12}>
               <Tab
                 tabs={tabItems}
-                selectedKey={routeKey}
+                selectedKey={this.state.selected}
                 onChange={this.handleNavigation}
                 listStyle={{ maxWidth: '560px', marginTop: '30px' }}
               />
@@ -64,7 +70,6 @@ class CompletedGameDetails extends React.Component {
 
 CompletedGameDetails.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 }
 
