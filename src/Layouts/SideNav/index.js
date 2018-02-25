@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 
 // Components
-import { Tooltip } from 'Components/Common'
+import { Tooltip, QuartzLink } from 'Components/Common'
 
 // Icons
 import Games from 'Assets/Icons/nav/games.svg'
@@ -56,14 +56,10 @@ class SideNav extends React.Component {
     selectedItem: ''
   }
 
-  handleClick = (key, route) => {
-    const { history } = this.props
-
+  handleClick = (key) => {
     return () => {
       this.setState({
         selectedItem: key
-      }, () => {
-        history.push(route)
       })
     }
   }
@@ -89,19 +85,19 @@ class SideNav extends React.Component {
             })
 
             return (
-              <div
-                key={key}
-                styleName={navItemStyle}
-                onClick={this.handleClick(key, route)}
-                selected={selected}
-                data-tip-for={`side-nav-item-${key}`}
-              >
-                <Tooltip id={`side-nav-item-${key}`} pos='right'>{sectionName}</Tooltip>
-                {selected ?
-                  <SelectedIcon height={20} width={20} />
-                  : <Icon height={20} width={20} />
-                }
-              </div>
+              <QuartzLink to={`${route}`} onClick={this.handleClick(key)} key={key}>
+                <div
+                  styleName={navItemStyle}
+                  selected={selected}
+                  data-tip-for={`side-nav-item-${key}`}
+                >
+                  <Tooltip id={`side-nav-item-${key}`} pos='right'>{sectionName}</Tooltip>
+                  {selected ?
+                    <SelectedIcon height={20} width={20} />
+                    : <Icon height={20} width={20} />
+                  }
+                </div>
+              </QuartzLink>
             )
           })
         }
