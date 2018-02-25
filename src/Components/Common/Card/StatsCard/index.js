@@ -30,7 +30,7 @@ const StatsCard = ({
             if (i !== 0) {
               return (
                 <div
-                  className="small"
+                  className="small label"
                   styleName="col"
                   style={{ textAlign: 'center' }}
                   key={label}

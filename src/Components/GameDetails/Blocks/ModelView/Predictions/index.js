@@ -1,10 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 // Components
 import { StatsCard, Card, Spinner } from 'Components/Common'
 import PredictionsInfo from './PredictionsInfo'
+
+// Icons
+import CheckIcon from 'Assets/Icons/green-check.svg'
 
 // Helpers
 import { precisionRound } from 'Helpers'
@@ -50,6 +54,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       city: summary.away.city,
       name: summary.away.name,
       image: summary.away.image,
+      vegas: prediction.vegas_away_line.spread,
       predictedSpread: convertNumber(prediction.home_points - prediction.away_points) || 'EVEN',
       predictionValue: convertNumber(
         Number(prediction.vegas_away_line.spread) -
@@ -60,6 +65,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       city: summary.home.city,
       name: summary.home.name,
       image: summary.home.image,
+      vegas: prediction.vegas_home_line.spread,
       predictedSpread: convertNumber(prediction.away_points - prediction.home_points) || 'EVEN',
       predictionValue: convertNumber(
         Number(prediction.vegas_home_line.spread) -
@@ -69,46 +75,74 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
   ]
 
   const getPredictionValues = () => {
-    return predictions.map(team => (
-      [
-        <div
-          key={`${team.name}-team`}
-          styleName="team"
-        >
-          <img
-            src={team.image}
-            styleName="logo"
-          />
+    return predictions.map((team, i, teamPredictions) => {
+      const awayTeam = teamPredictions[0]
+      const homeTeam = teamPredictions[1]
 
-          <div>
-            <p className="small label">{team.city}</p>
-            <p className="semibold">{team.name}</p>
-          </div>
-        </div>,
-        <p
-          styleName="value"
-          className="semibold"
-          key={`${team.name}-predictedSpread`}
-        >
-          {team.predictedSpread}
-        </p>,
-        <p
-          styleName="value"
-          className="semibold"
-          key={`${team.name}-predictionValue`}
-          style={{ color: getColor(team.predictionValue) }}
-        >
-          {team.predictionValue}
-        </p>
-      ]
-    ))
+      let winner
+      if (awayTeam.predictedSpread < homeTeam.predictedSpread) {
+        winner = awayTeam
+      } else {
+        winner = homeTeam
+      }
+
+      const spreadValue = classNames('spread-value', {
+        winner: team.name === winner.name
+      })
+
+      return (
+        [
+          <div
+            key={`${team.name}-team`}
+            styleName="team"
+          >
+            <img
+              src={team.image}
+              styleName="logo"
+            />
+
+            <div>
+              <p className="small label">{team.city}</p>
+              <p className="semibold">{team.name}</p>
+            </div>
+          </div>,
+          <p
+            styleName={spreadValue}
+            className="semibold"
+            key={`${team.name}-predictedSpread`}
+          >
+            {team.name === winner.name ? team.predictedSpread : ' '}
+            {
+              summary.status === 'CLOSED'
+                && team.name === winner.name
+                ? <CheckIcon style={{ position: 'absolute', right: '15px' }} /> : null
+            }
+          </p>,
+          <p
+            styleName="value"
+            className="semibold"
+            key={`${team.name}-vegas`}
+          >
+            {team.vegas}
+          </p>,
+          <p
+            styleName="value"
+            className="semibold"
+            key={`${team.name}-predictionValue`}
+            style={{ color: getColor(team.predictionValue) }}
+          >
+            {team.predictionValue}
+          </p>
+        ]
+      )
+    })
   }
 
   return (
     <StatsCard
       title="Prediction"
       subText={<PredictionsInfo />}
-      labels={['TEAM', 'PREDICTED SPREAD', 'PREDICTION VALUE']}
+      labels={['TEAM', 'PREDICTED SPREAD', 'VEGAS', 'PREDICTION VALUE']}
       values={getPredictionValues()}
       uniqueKey='Prediction'
     />
