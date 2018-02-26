@@ -8,7 +8,10 @@
   padding-right: 2rem;
   padding-left: 2rem;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
 
   p {
     -webkit-margin-before: 1em;
