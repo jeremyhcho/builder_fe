@@ -50,7 +50,7 @@ class Help extends React.Component {
             <Switch>
               <Route exact path='/help/faq' component={Faq} />
               <Route exact path='/help/tos' component={Tos} />
-              <Redirect to='/help/tos' />
+              <Redirect to='/help/faq' />
             </Switch>
           </div>
         </section>
