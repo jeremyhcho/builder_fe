@@ -37,7 +37,7 @@ const AuthLayout = () => (
   <div styleName='auth-wrapper'>
     <Row styleName='auth-card'>
       <Row middle='xs' styleName='branding-logo'>
-        <PlaceholderIcon style={{ marginLeft: '5px', width: '40px', height: '40px' }} />
+        <PlaceholderIcon style={{ width: '32px', height: '32px' }} />
       </Row>
 
       <Col
