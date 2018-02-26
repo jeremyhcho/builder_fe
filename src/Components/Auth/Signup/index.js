@@ -68,9 +68,6 @@ class Signup extends React.Component {
           <h1 className="semibold">
             Get your free Quartz account now.
           </h1>
-          <p className="small label" style={{ margin: '15px 0' }}>
-            Try Quartz free and get a prediction every day
-          </p>
         </div>
 
         <SignupForm />

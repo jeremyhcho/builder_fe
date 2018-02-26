@@ -1,10 +1,10 @@
 .auth-wrapper {
   background-color: var(--lightest-gray);
-  height: 100%;
   overflow: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 45px 0;
 
   .auth-card {
     background-color: #fff;
@@ -15,15 +15,15 @@
     box-shadow: 0 8px 6px -6px var(--dark-gray);
     position: relative;
     min-width: 960px;
-    min-height: 578px;
+    min-height: 635px;
     max-width: calc(960px * 1.2);
     max-height: calc(578px * 1.2);
     background-color: var(--lightest-gray);
 
     .branding-logo {
       position: absolute;
-      top: 15px;
-      left: 20px;
+      top: 30px;
+      left: 65px;
       z-index: 1;
     }
   }

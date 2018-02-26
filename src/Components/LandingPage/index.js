@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 // Components
 import Header from './Header'
@@ -16,6 +17,14 @@ import './LandingPage.scss'
 const LandingPage = () => {
   return (
     <div styleName="landing-page">
+      <Helmet>
+        <style type='text/css'>
+          {`
+            #Smallchat { display: block !important; }
+          `}
+        </style>
+      </Helmet>
+
       <Header />
       <Features />
       <HowTo />

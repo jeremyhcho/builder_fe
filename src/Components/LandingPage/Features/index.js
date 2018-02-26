@@ -45,7 +45,7 @@ const Features = () => {
     },
     {
       icon: NFLIcon,
-      title: 'Successful',
+      title: 'Success',
       description: 'We\'re constantly improving our internal model and finding edges for you. ' +
                    'Let us help you start winning today!'
     }
