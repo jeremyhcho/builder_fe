@@ -1,11 +1,11 @@
 import React from 'react'
 
 // CSS
-import './Faq.scss'
+import './HelpBlock.scss'
 
 const Faq = () => (
   /* eslint-disable max-len */
-  <main styleName="faq">
+  <main styleName="help-block-1">
     <header>
       Frequently asked questions
     </header>

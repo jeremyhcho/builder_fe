@@ -1,12 +1,12 @@
 import React from 'react'
 
 // CSS
-import './Tos.scss'
+import './HelpBlock.scss'
 
 const Tos = () => {
   return (
     /* eslint-disable max-len */
-    <main styleName="terms-of-service">
+    <main styleName="help-block-1">
       <header>
         Terms of service
       </header>
