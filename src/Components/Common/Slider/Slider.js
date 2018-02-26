@@ -68,7 +68,7 @@ class Slider extends React.Component {
     if (e.target.value < min || !e.target.value.length) {
       this.setState({
         value: min,
-        inputValue: min,
+        inputValue: e.target.value || 0,
         inputWidth: this.findInputWidth(min)
       }, () => {
         if (onChange) {
@@ -112,7 +112,16 @@ class Slider extends React.Component {
   }
 
   resetInputValue = () => {
-    const { max } = this.props
+    const { max, min } = this.props
+
+    if (this.state.inputValue < min) {
+      this.setState({
+        inputValue: min,
+        value: min
+      }, () => {
+        this.offsetFill(this.state.value)
+      })
+    }
 
     if (this.state.inputValue > max) {
       this.setState({
