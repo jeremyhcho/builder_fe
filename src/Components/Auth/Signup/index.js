@@ -76,9 +76,20 @@ class Signup extends React.Component {
         <SignupForm />
 
         <div styleName="tos">
-          <p className="small label">By signing up, you agree to our</p>
-          <QuartzLink to={{ pathname: '/help/tos' }}>
-            <p className="semibold">Terms & Privacy Policy</p>
+          <p className="small label" style={{ display: 'inline-block' }}>
+            By signing up, you are agreeing to our
+          </p>
+
+          <QuartzLink
+            to={{ pathname: '/help/tos' }}
+            style={{ display: 'inline-block', marginLeft: '3px' }}
+          >
+            <p
+              className='small'
+              style={{ color: 'var(--blue)', textDecoration: 'underline' }}
+            >
+              terms of service
+            </p>
           </QuartzLink>
         </div>
 
