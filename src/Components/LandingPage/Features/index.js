@@ -15,33 +15,39 @@ const Features = () => {
   const features = [
     {
       icon: ModelIcon,
-      title: 'Models',
-      description: 'Create your own models'
+      title: 'Customize',
+      description: 'Adjust the prioritized metrics on your models and ' +
+                   'find the model that works for you.'
     },
     {
       icon: ChartIcon,
-      title: 'Graphs',
-      description: 'Analyze trends and statistics'
+      title: 'Insights',
+      description: 'How well does a team do after a loss? Per quarter? ' +
+                   'We pull the insights you need to succeed.'
     },
     {
       icon: StockIcon,
       title: 'Compare',
-      description: 'Compare your models with others'
+      description: 'Quartz aggregates models and matches correlated data to ' +
+                   '"crowd source" predictions through the app.'
     },
     {
       icon: NBAIcon,
-      title: 'NBA',
-      description: 'Full library of NBA games and stats'
+      title: 'Automation',
+      description: 'Manually adjusting data is tedious. Predictions are automated and ensures' +
+                   ' your predictions stay on top of the news.'
     },
     {
       icon: MLBIcon,
-      title: 'MLB',
-      description: 'Coming soon...'
+      title: 'Seamless',
+      description: 'Forget spreadsheets, forget manual data entry. Find where the value' +
+                   ' is with a few clicks of your mouse.'
     },
     {
       icon: NFLIcon,
-      title: 'NFL',
-      description: 'Coming soon...'
+      title: 'Successful',
+      description: 'We\'re constantly improving our internal model and finding edges for you. ' +
+                   'Let us help you start winning today!'
     }
   ]
 
@@ -56,7 +62,7 @@ const Features = () => {
               </div>
 
               <div styleName="right">
-                <h2>{title}</h2>
+                <h2 style={{ fontWeight: '600' }}>{title.toUpperCase()}</h2>
                 <p>{description}</p>
               </div>
             </section>

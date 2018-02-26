@@ -24,9 +24,11 @@
     padding-bottom: 20px;
     flex: 0 0 auto;
     flex-basis: 100%;
+    display: flex;
+    align-items: center;
 
     @media only screen and (min-width: 840px) {
-      flex-basis: 50%;
+      flex-basis: 35%;
     }
 
 
@@ -50,7 +52,7 @@
       .description {
         font-size: 25px;
         margin-top: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         font-weight: 300;
         color: #7f7f81;
         line-height: 1.5;
@@ -99,7 +101,7 @@
     }
 
     @media only screen and (min-width: 840px) {
-      flex-basis: 50%;
+      flex-basis: 65%;
     }
   }
 }

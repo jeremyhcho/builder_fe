@@ -22,15 +22,15 @@ const Closer = ({ authorized, history }) => {
       <div styleName="col-1000">
         <div styleName="content">
           <header styleName="header">
-            Pants. Like shorts, but longer.
+            Take your hobby to the next level.
           </header>
 
           <button styleName="action blue" onClick={routeToSignup}>
-            Start free trial now
+            Open your free beta account
           </button>
 
           <div styleName='version'>
-            Version alpha - 0.9.0
+            Beta v1.1.5
           </div>
         </div>
       </div>

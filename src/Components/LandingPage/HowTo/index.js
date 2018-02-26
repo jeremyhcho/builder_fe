@@ -20,7 +20,7 @@ const HowTo = ({ history, authorized }) => {
       <div styleName="col-1000">
         <div styleName='left'>
           <img
-            src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.jpg"
+            src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/quartz_models.png"
             style={{
               maxHeight: '100%',
               position: 'absolute',
@@ -31,15 +31,16 @@ const HowTo = ({ history, authorized }) => {
 
         <div styleName="right">
           <header styleName="header">
-            The phone. Bringing you closer to people... who have phones
+            Find value in the your picks. Every day.
           </header>
 
           <p styleName="description">
-            Bagels and donuts. Round food..for every mood.
+            Focus on one game a day or all of them. Quartz is an advanced data
+            tool at your disposal.
           </p>
 
           <button styleName="action flat" onClick={routeToModel}>
-            Create a model
+            Sign me up
           </button>
         </div>
       </div>

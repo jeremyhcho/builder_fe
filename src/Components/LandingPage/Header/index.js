@@ -50,7 +50,7 @@ class Header extends React.Component {
           styleName="action blue"
           onClick={this.routeToSignup}
         >
-          Start free trial
+          Sign up for free
         </button>,
         <button
           onClick={this.routeToLogin}
@@ -68,29 +68,29 @@ class Header extends React.Component {
       <header styleName="header">
         <main styleName="col-1000">
           <section styleName="left">
-            <div styleName="intro">
-              <QuartzIcon
-                width={58}
-                height={58}
-                style={{ marginRight: '20px' }}
-              />
+            <div>
+              <div styleName="intro">
+                <QuartzIcon
+                  width={58}
+                  height={58}
+                  style={{ marginRight: '20px' }}
+                />
 
-              <h1 styleName="title">Quartz</h1>
+                <p styleName="description">
+                  Quartz makes sports modeling easier than ever.
+                </p>
+              </div>
 
-              <p styleName="description">
-                Take your hobby to the next level.
-              </p>
-            </div>
-
-            <div styleName="cta">
-              {this.renderCTA()}
+              <div styleName="cta">
+                {this.renderCTA()}
+              </div>
             </div>
           </section>
 
           <section styleName="right">
             <div>
               <img
-                src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.jpg"
+                src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/macbook_pro.png"
                 style={{
                   height: '100%',
                   width: '100%'
