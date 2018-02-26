@@ -2,31 +2,24 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-// import Loadable from 'react-loadable'
 
 // Components
-// import Loader from 'Components/Common/Loader'
+import { Button } from 'Components/Common'
 import Header from './Header'
 import SideNav from './SideNav'
 import Pusher from 'Components/Pusher'
-import Dashboard from 'Components/Dashboard'
+import DashboardLayout from './Dashboard'
 import GamesLayout from './Games'
 import TeamsLayout from './Teams'
 import SettingsLayout from './Settings'
 import ModelsLayout from './Models'
 import AdminLayout from './Admin'
-import { Button } from 'Components/Common'
 
 // Assets
 import Lock from 'Assets/Icons/lock.svg'
 
 // const CalendarContainer = Loadable({
 //   loader: () => import('../../containers/Calendar'),
-//   loading: Loader
-// })
-//
-// const DashboardContainer = Loadable({
-//   loader: () => import('../../containers/Dashboard'),
 //   loading: Loader
 // })
 
@@ -117,7 +110,7 @@ const MainLayout = ({
           }}
         >
           <Switch>
-            <Route exact path='/dashboard' component={Dashboard} />
+            <Route path='/dashboard' component={DashboardLayout} />
             <Route path='/admin' component={AdminLayout} />
             <Route path='/games' component={GamesLayout} />
             <Route path='/teams' component={TeamsLayout} />

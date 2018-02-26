@@ -1,15 +1,11 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
 // Components
-import Teams from 'Components/Teams'
-import TeamDetails from 'Components/TeamDetails'
+import { Loading } from 'Components/Common'
 
-const TeamsLayout = () => (
-  <Switch>
-    <Route exact path='/teams' component={Teams} />
-    <Route path='/teams/:id' component={TeamDetails} />
-  </Switch>
-)
+const TeamsLayout = Loadable({
+  loader: () => import('./TeamsRoute'),
+  loading: Loading
+})
 
 export default TeamsLayout

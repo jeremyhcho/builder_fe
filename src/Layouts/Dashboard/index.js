@@ -3,9 +3,9 @@ import Loadable from 'react-loadable'
 // Components
 import { Loading } from 'Components/Common'
 
-const ModelsLayout = Loadable({
-  loader: () => import('./ModelsRoute'),
+const DashboardLayout = Loadable({
+  loader: () => import('./DashboardRoute'),
   loading: Loading
 })
 
-export default ModelsLayout
+export default DashboardLayout
