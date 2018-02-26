@@ -6,7 +6,6 @@ import { Line } from 'react-chartjs-2'
 
 // Components
 import { Select, Card, Spinner } from 'Components/Common'
-import MatchupGraphInfo from './MatchupGraphInfo'
 
 // CSS
 import './MatchupGraph.scss'
@@ -170,7 +169,7 @@ class MatchupGraph extends React.Component {
 
     if (teamMatchStats && matchup && !fetchingTeamStats) {
       return (
-        <Card label='Points by quarter' subText={<MatchupGraphInfo />}>
+        <Card label='Points by quarter'>
           <div styleName="points-graph">
             <Row center='xs'>
               <div style={{ width: '220px', margin: '10px 30px' }}>
@@ -214,7 +213,7 @@ class MatchupGraph extends React.Component {
       )
     }
     return (
-      <Card label="Points by quarter" subText={<MatchupGraphInfo />}>
+      <Card label="Points by quarter">
         <Row center='xs' middle='xs' style={{ height: '567px' }}>
           <Col xs={12}>
             <Spinner lg show />
