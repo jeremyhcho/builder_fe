@@ -17,11 +17,13 @@
     align-items: center;
     padding: 20px 0;
     border-bottom: 1px solid var(--light-gray);
+    flex-direction: column;
 
     @media only screen and (min-width: 480px) {
       background-color: rgba(255, 255, 255, 0.9);
       justify-content: space-between;
       padding: 20px 20%;
+      flex-direction: row;
     }
 
     .left {
@@ -31,6 +33,14 @@
       span {
         font-size: 2.6rem;
         font-weight: 600;
+      }
+    }
+
+    .middle {
+      margin-top: 20px;
+
+      @media only screen and (min-width: 480px) {
+        display: none;
       }
     }
 
@@ -53,7 +63,11 @@
     border: 1px solid var(--light-gray);
     border-radius: var(--border-radius);
     background-color: #fff;
-    margin: 50px 8%;
+    margin: 0;
+
+    @media only screen and (min-width: 480px) {
+      margin: 50px 8%;
+    }
 
     .title {
       border-bottom: 1px solid var(--light-gray);
