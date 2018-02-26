@@ -41,7 +41,10 @@ class App extends React.Component {
   }
 
   getMetaTag () {
-    if (this.props.history.location.pathname === '/') {
+    const { history } = this.props
+
+    if (history.location.pathname === '/'
+      || history.location.pathname.includes('/help')) {
       return [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
     }
 

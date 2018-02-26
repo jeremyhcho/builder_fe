@@ -1,11 +1,26 @@
 .sidenav {
   padding: 25px;
   flex: 1;
+  min-width: 150px;
   border-right: 1px solid var(--light-gray);
 
   .help-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
+    .left {
+      flex: 1;
+      text-align: left;
+    }
+
+    .right {
+      flex: 1;
+      text-align: right;
+    }
+
+    &:hover {
+      transition: all 200ms ease;
+      color: var(--blue);
+    }
   }
 }
