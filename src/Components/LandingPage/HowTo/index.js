@@ -31,7 +31,7 @@ const HowTo = ({ history, authorized }) => {
 
         <div styleName="right">
           <header styleName="header">
-            Find value in the your picks. Every day.
+            Find value in your picks. Every day.
           </header>
 
           <p styleName="description">
@@ -40,7 +40,7 @@ const HowTo = ({ history, authorized }) => {
           </p>
 
           <button styleName="action flat" onClick={routeToModel}>
-            Sign me up
+            Create your first model
           </button>
         </div>
       </div>

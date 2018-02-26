@@ -35,7 +35,7 @@ const Features = () => {
       icon: NBAIcon,
       title: 'Automation',
       description: 'Manually adjusting data is tedious. Predictions are automated and ensures' +
-                   ' your predictions stay on top of the news.'
+                   ' that they stay on top of the news.'
     },
     {
       icon: MLBIcon,
