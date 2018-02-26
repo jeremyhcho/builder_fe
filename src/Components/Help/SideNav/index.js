@@ -17,8 +17,13 @@ class SideNav extends React.Component {
           <li>
             <QuartzLink to='/help/faq'>
               <div styleName="help-item">
-                <p className="semibold">FAQ</p>
-                <RightIcon height={16} width={16} />
+                <div styleName="left">
+                  <p className="semibold">FAQ</p>
+                </div>
+
+                <div styleName="right">
+                  <RightIcon height={16} width={16} />
+                </div>
               </div>
             </QuartzLink>
           </li>
@@ -26,8 +31,13 @@ class SideNav extends React.Component {
           <li>
             <QuartzLink to='/help/tos'>
               <div styleName="help-item">
-                <p className="semibold">Terms of use</p>
-                <RightIcon height={16} width={16} />
+                <div styleName="left">
+                  <p className="semibold">Terms of service</p>
+                </div>
+
+                <div styleName="right">
+                  <RightIcon height={16} width={16} />
+                </div>
               </div>
             </QuartzLink>
           </li>

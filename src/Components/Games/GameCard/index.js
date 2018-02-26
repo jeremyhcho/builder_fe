@@ -19,23 +19,29 @@ class GameCard extends React.Component {
   getWinner (teamPoints) {
     const { game } = this.props
 
-    let opponent
+    if (game.status === 'CLOSED') {
+      let opponent
 
-    if (teamPoints === game.away.points) opponent = game.home.points
-    if (teamPoints === game.home.points) opponent = game.away.points
+      if (teamPoints === game.away.points) opponent = game.home.points
+      if (teamPoints === game.home.points) opponent = game.away.points
 
-    if (teamPoints > opponent) return true
+      if (teamPoints > opponent) return true
+    }
+
     return false
   }
 
   getLoser (teamPoints) {
     const { game } = this.props
 
-    let opponent
-    if (teamPoints === game.away.points) opponent = game.home.points
-    if (teamPoints === game.home.points) opponent = game.away.points
+    if (game.status === 'CLOSED') {
+      let opponent
+      if (teamPoints === game.away.points) opponent = game.home.points
+      if (teamPoints === game.home.points) opponent = game.away.points
 
-    if (teamPoints < opponent) return true
+      if (teamPoints < opponent) return true
+    }
+
     return false
   }
 
