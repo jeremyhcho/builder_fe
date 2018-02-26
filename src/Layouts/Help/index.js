@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Help from 'Component/Common'
+import Help from 'Components/Help'
 
 const HelpLayout = () => (
   <Switch>

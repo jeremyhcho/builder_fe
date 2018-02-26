@@ -1,0 +1,11 @@
+.sidenav {
+  padding: 25px;
+  flex: 1;
+  border-right: 1px solid var(--light-gray);
+
+  .help-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

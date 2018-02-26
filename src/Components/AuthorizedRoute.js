@@ -14,7 +14,7 @@ const AuthorizedRoute = ({ component: Component, authorized, user, ...rest }) =>
     )
   }
 
-  if (location.pathname === '/help') {
+  if (location.pathname.includes('/help')) {
     return (
       <HelpLayout {...rest} />
     )
