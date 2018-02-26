@@ -31,6 +31,20 @@ class TeamStats extends React.Component {
     this.setState({ highlightedStat: stat })
   }
 
+  convertStat (stat, value) {
+    if (value === undefined || value === null) return '-'
+
+    if (stat === 'field_goals_pct') {
+      // field goals % edge case
+      return `${tenths(value * 100)}%`
+    }
+
+    let roundedStat = tenths(value)
+    if (stat.includes('pct')) roundedStat = `${roundedStat}%`
+
+    return roundedStat
+  }
+
   render () {
     const { teamStats, summary } = this.props
 
@@ -94,14 +108,6 @@ class TeamStats extends React.Component {
                   last: index === list.length - 1
                 })
 
-                let awayRoundedStat = tenths(teamStats[0][stat])
-                let homeRoundedStat = tenths(teamStats[1][stat])
-
-                if (stat.includes('pct')) {
-                  awayRoundedStat = `${awayRoundedStat}%`
-                  homeRoundedStat = `${homeRoundedStat}%`
-                }
-
                 return (
                   <div styleName="key-column stats" key={stat}>
                     <div>
@@ -122,7 +128,7 @@ class TeamStats extends React.Component {
                       onMouseOver={() => this.setState({ highlightedRow: 'away' })}
                       onMouseOut={() => this.setState({ highlightedRow: null })}
                     >
-                      {awayRoundedStat === undefined ? '-' : awayRoundedStat}
+                      {this.convertStat(stat, teamStats[0][stat])}
                     </p>
 
                     <p
@@ -130,7 +136,7 @@ class TeamStats extends React.Component {
                       onMouseOver={() => this.setState({ highlightedRow: 'home' })}
                       onMouseOut={() => this.setState({ highlightedRow: null })}
                     >
-                      {homeRoundedStat === undefined ? '-' : homeRoundedStat}
+                      {this.convertStat(stat, teamStats[1][stat])}
                     </p>
                   </div>
                 )
