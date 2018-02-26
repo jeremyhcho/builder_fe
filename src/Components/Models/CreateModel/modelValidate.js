@@ -11,7 +11,7 @@ const modelValidate = (values) => {
 
     if (specsTotal !== 25) {
       const specErrors = {}
-      specErrors.field_goals_made = 'ERROR MESSAGE'
+      specErrors.effective_fg_pct = 'ERROR MESSAGE'
       errors.specs = specErrors
     }
   }
