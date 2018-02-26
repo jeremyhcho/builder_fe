@@ -121,7 +121,7 @@ CreateModel.propTypes = {
   updateNBAModel: PropTypes.func.isRequired,
   creatingModel: PropTypes.bool,
   updatingModel: PropTypes.bool,
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
