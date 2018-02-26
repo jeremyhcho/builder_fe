@@ -13,7 +13,9 @@ const Card = ({ wrapperStyle, label, subText, children, style, ...props }) => (
           </p>
         )
       }
-      {subText}
+      <div style={{ display: 'inline-block', marginBottom: '5px' }}>
+        {subText}
+      </div>
     </div>
 
     <div styleName="card" style={wrapperStyle}>

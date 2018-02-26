@@ -5,14 +5,26 @@ import { InfoBubble } from 'Components/Common'
 
 const PredictionsInfo = () => (
   <InfoBubble pos="right" width={400}>
-    Water. Earth. Fire. Air. Long ago, the four nations
-    lived together in harmony. Then, everything changed when the
-    Fire Nation attacked. Only the Avatar, master of all four elements,
-    could stop them, but when the world needed him most, he vanished.
-    A hundred years passed and my brother and I discovered the new
-    Avatar, an airbender named Aang. And although his airbending
-    skills are great, he has a lot to learn before he's ready to
-    save anyone. But I believe Aang can save the world.
+    <p className='label' style={{ textAlign: 'left' }}>WHAT IS THIS?</p>
+
+    <p style={{ textAlign: 'left', marginTop: '10px' }}>
+      The "Prediction" block shows the raw prediction made by the model selected
+      above. The three columns indicate the following:
+    </p>
+
+    <p style={{ textAlign: 'left', marginTop: '20px' }}>
+      <span className='semibold'>VEGAS:</span> The closing line of the game.
+    </p>
+
+    <p style={{ textAlign: 'left', marginTop: '5px' }}>
+      <span className='semibold'>PREDICTED SPREAD:</span> The spread prediction of your model.
+    </p>
+
+    <p style={{ textAlign: 'left', marginTop: '5px' }}>
+      <span className='semibold'>PREDICTION VALUE:</span> The amount of padded
+      points tailing this prediction has against the Vegas line. A positive number
+      denotes a "good" value for taking the Vegas line.
+    </p>
   </InfoBubble>
 )
 

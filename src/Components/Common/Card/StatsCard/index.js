@@ -16,7 +16,9 @@ const StatsCard = ({
   <div style={{ marginTop: '35px', height: '100%', ...style }}>
     <div className="flex" style={{ alignItems: 'center' }}>
       <p className="semibold" style={{ margin: '0 10px 5px' }}>{title}</p>
-      {subText}
+      <div style={{ display: 'inline-block', marginBottom: '5px' }}>
+        {subText}
+      </div>
     </div>
 
     <div styleName='stats-card'>

@@ -7,6 +7,7 @@ import { formValueSelector, Field } from 'redux-form'
 // Components & Icons
 import { Card, FieldSlider, Button } from 'Components/Common'
 import Error from 'Assets/Icons/error.svg'
+import StatDetail from './StatDetail'
 import ModelSpecsInfo from './ModelSpecsInfo'
 
 // CSS
@@ -17,6 +18,37 @@ import { nbaFlatStat } from 'Helpers'
 import specKeys from '../specKeys'
 
 const selector = formValueSelector('model')
+const infoTexts = {
+  effective_fg_pct: {
+    text: 'Effective FG % measure how successful a team is from the field.' +
+          ' It adjusts the normal FG % to account for the fact that three-point' +
+          ' field goals count for three points while field goals only count for two.',
+    impact: 'high'
+  },
+  turnover_pct: {
+    text: 'Turnover % measures how often a team turns the ball over. Finding the percentage' +
+          ' gives a better indicator of turnovers because some teams average more possessions' +
+          ' than others.',
+    impact: 'medium'
+  },
+  oreb_pct: {
+    text: 'Offensive REB % measures a team\'s ability to get offensive rebounds. Offensive' +
+          ' rebounds creates second chance points and ultimately leads to more points.',
+    impact: 'medium'
+  },
+  ft_pct: {
+    text: 'Free Throw % doesn\'t measure free throws made divided by free throws attempted. Instead, ' +
+          ' it awards teams for the ability to get to the line and is indicated by' +
+          ' free throws made divided by field goals attempted.',
+    impact: 'low'
+  },
+  rpm: {
+    text: 'RPM or Real Plus Minus is a player assigned metric that measures an individual player\'s' +
+          ' average estimated impact per 100 possessions. Quartz uses RPM to predict how player news' +
+          ' will affect the outcome of the game.',
+    impact: 'high'
+  }
+}
 
 const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
   const getSpecsDifference = (specsTotal) => {
@@ -72,8 +104,19 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
           {
             specKeys.map(stat => (
               <Row styleName="slider-row" key={stat} middle='xs'>
-                <Col xs={4} style={{ textAlign: 'left' }}>
-                  <p className="small label">{nbaFlatStat(stat).full.toUpperCase()}</p>
+                <Col xs={4} style={{ display: 'flex', alignItems: 'center' }}>
+                  <p
+                    style={{ display: 'inline-block' }}
+                    className="small label"
+                  >
+                    {nbaFlatStat(stat).full.toUpperCase()}
+                  </p>
+                  <StatDetail
+                    pos='top'
+                    width={400}
+                    text={infoTexts[stat].text}
+                    impact={infoTexts[stat].impact}
+                  />
                 </Col>
 
                 <Col xs={8}>

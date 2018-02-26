@@ -1,12 +1,8 @@
 .value {
-  background: lighten(#F4F5F7, 1.5%);
+  background: var(--lightest-gray);
   padding: 20px 0;
   margin: 0 10px;
-
-  &:hover {
-    transition: all 500ms ease;
-    background: linear-gradient(45deg, #f7f8f9, #F4F5F7);
-  }
+  border-radius: 3px;
 }
 
 .spread-value {

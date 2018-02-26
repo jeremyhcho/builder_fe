@@ -80,17 +80,21 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     }
   ]
 
-  const renderResultIcon = (currentTeam, winner) => {
+  const renderResultIcon = (currentTeam, positiveValTeam) => {
     const iconStyle = {
       position: 'absolute',
       left: '-20px',
       top: '20px'
     }
 
-    if (currentTeam.name === winner.name) {
-      return prediction.result === 'win'
-        ? <CheckIcon style={iconStyle} height={16} width={16} />
-        : <RemoveIcon style={iconStyle} height={16} width={16} />
+    if (currentTeam.name === positiveValTeam.name) {
+      if (prediction.result === 'win') {
+        return <CheckIcon style={iconStyle} height={16} width={16} />
+      } else if (prediction.result === 'loss') {
+        return <RemoveIcon style={iconStyle} height={16} width={16} />
+      }
+
+      return null
     }
 
     return null
@@ -101,11 +105,11 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       const awayTeam = teamPredictions[0]
       const homeTeam = teamPredictions[1]
 
-      let winner
-      if (awayTeam.predictedSpread < homeTeam.predictedSpread) {
-        winner = awayTeam
+      let positiveValTeam
+      if (parseFloat(awayTeam.predictedSpread) > 0) {
+        positiveValTeam = awayTeam
       } else {
-        winner = homeTeam
+        positiveValTeam = homeTeam
       }
 
       return (
@@ -126,7 +130,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
           </div>,
 
           <div style={{ position: 'relative' }}>
-            {renderResultIcon(team, winner)}
+            {renderResultIcon(team, positiveValTeam)}
 
             <p
               styleName="value"

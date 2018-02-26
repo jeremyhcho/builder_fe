@@ -4,15 +4,14 @@ import React from 'react'
 import { InfoBubble } from 'Components/Common'
 
 const ModelSpecsInfo = () => (
-  <InfoBubble pos="bottomRight" width={500}>
-    Water. Earth. Fire. Air. Long ago, the four nations
-    lived together in harmony. Then, everything changed when the
-    Fire Nation attacked. Only the Avatar, master of all four elements,
-    could stop them, but when the world needed him most, he vanished.
-    A hundred years passed and my brother and I discovered the new
-    Avatar, an airbender named Aang. And although his airbending
-    skills are great, he has a lot to learn before he's ready to
-    save anyone. But I believe Aang can save the world.
+  <InfoBubble pos="right" width={500}>
+    <p className='label' style={{ textAlign: 'left' }}>WHAT DOES THIS DO?</p>
+
+    <p style={{ marginTop: '10px', textAlign: 'left' }}>
+      Quartz models allow you to assign weights onto crucial stats that are used to
+      create predictions. A higher value indicates a greater importance of the specific
+      metric in your model. A combination of different values will generate different predictions.
+    </p>
   </InfoBubble>
 )
 
