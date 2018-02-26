@@ -38,7 +38,7 @@ class Header extends React.Component {
           key="button-1"
           styleName="action blue"
         >
-          Go to Quartz
+          Open Quartz
         </button>
       ]
     }
@@ -78,7 +78,7 @@ class Header extends React.Component {
               <h1 styleName="title">Quartz</h1>
 
               <p styleName="description">
-                A grape! Because who can get a watermelon in their mouth.
+                Take your hobby to the next level.
               </p>
             </div>
 

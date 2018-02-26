@@ -8,7 +8,7 @@ import {
   CompletedModelSelector,
   ModelDetails,
   Predictions,
-  TotalPrediction,
+  // TotalPrediction,
   SpreadPrediction
 } from 'Components/GameDetails/Blocks'
 
@@ -68,18 +68,18 @@ class ModelView extends React.Component {
           </div>
         </Row>
 
-        <Row>
-          <Col xs={7}>
+        <Row style={{ maxWidth: '801px' }}>
+          <Col xs={12}>
             <Predictions />
           </Col>
 
-          <Col xs={5}>
+          {/* <Col xs={5}>
             <TotalPrediction />
-          </Col>
+          </Col> */}
         </Row>
 
-        <Row>
-          <Col xs={7}>
+        <Row style={{ maxWidth: '801px' }}>
+          <Col xs={12}>
             <SpreadPrediction />
           </Col>
         </Row>

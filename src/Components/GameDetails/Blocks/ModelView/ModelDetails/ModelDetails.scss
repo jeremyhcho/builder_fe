@@ -13,5 +13,9 @@
     justify-content: center;
     margin-right: 20px;
     flex-direction: column;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

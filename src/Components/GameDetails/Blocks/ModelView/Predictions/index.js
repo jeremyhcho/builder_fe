@@ -37,7 +37,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     if (value > 0) return 'var(--green)'
     else if (value < 0) return 'var(--dark-red)'
 
-    return null
+    return 'N/A'
   }
 
   if (!Object.keys(prediction).length || fetchingPrediction || fetchingModel) {
@@ -60,23 +60,23 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       city: summary.away.city,
       name: summary.away.name,
       image: summary.away.image,
-      vegas: prediction.vegas_away_line.spread,
+      vegas: prediction.vegas_away_line ? prediction.vegas_away_line.spread : 'N/A',
       predictedSpread: convertNumber(prediction.home_points - prediction.away_points),
-      predictionValue: convertNumber(
+      predictionValue: prediction.vegas_away_line ? convertNumber(
         Number(prediction.vegas_away_line.spread) -
         Number(prediction.home_points - prediction.away_points)
-      )
+      ) : 'N/A'
     },
     {
       city: summary.home.city,
       name: summary.home.name,
       image: summary.home.image,
-      vegas: prediction.vegas_home_line.spread,
+      vegas: prediction.vegas_home_line ? prediction.vegas_home_line.spread : 'N/A',
       predictedSpread: convertNumber(prediction.away_points - prediction.home_points),
-      predictionValue: convertNumber(
+      predictionValue: prediction.vegas_home_line ? convertNumber(
         Number(prediction.vegas_home_line.spread) -
         Number(prediction.away_points - prediction.home_points)
-      )
+      ) : 'N/A'
     }
   ]
 
