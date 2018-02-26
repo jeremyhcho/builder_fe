@@ -20,7 +20,7 @@ import specKeys from '../specKeys'
 const selector = formValueSelector('model')
 const infoTexts = {
   effective_fg_pct: {
-    text: 'Effective FG % measure how successful a team is from the field.' +
+    text: 'Effective FG % measures how successful a team is from the field.' +
           ' It adjusts the normal FG % to account for the fact that three-point' +
           ' field goals count for three points while field goals only count for two.',
     impact: 'high'
