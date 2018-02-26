@@ -33,6 +33,11 @@
     background-color: var(--lightest-gray);
   }
 
+  .main {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .semibold {
     font-weight: 600;
   }
@@ -134,8 +139,6 @@ html, body {
 main {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 }
 
 h1, h2, h3, h4, p {
