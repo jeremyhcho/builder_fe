@@ -9,7 +9,7 @@ const AnnouncementItem = ({ announcement }) => (
   /* eslint-disable react/no-danger */
   <div styleName='announcement'>
     <p className='label small'>
-      {moment(announcement.published_date).format('dddd, MMMM Mo')}
+      {moment(announcement.published_date).format('dddd, MMMM Do')}
     </p>
 
     <h3 className='semibold' style={{ marginTop: '8px' }}>{announcement.title}</h3>
