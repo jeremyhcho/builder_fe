@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 /*
-  ** timedOut: when loading takes forever - 10000 (ms)
-  ** pastDelay: load after delay - 200 (ms)
-  ** error: load if loading fails
+  ** timedOut: true when loading gets past -default- 10000 (ms)
+  ** pastDelay: true when still loading after delay -default- 200 (ms)
+  ** error: true if loading fails
 */
 
 const Loading = ({ timedOut, pastDelay, error }) => {
