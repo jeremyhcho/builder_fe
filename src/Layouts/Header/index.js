@@ -9,14 +9,13 @@ import Notifications from './Notifications'
 
 // Icons
 import LeftArrowIcon from 'Assets/Icons/left-arrow.svg'
+import ProfileIcon from 'Assets/Icons/profile.svg'
+import AccountSettingsIcon from 'Assets/Icons/settings/fc-cog.svg'
+import HelpIcon from 'Assets/Icons/fc-help.svg'
+import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
 // CSS
 import './Header.scss'
-
-// Assets
-import ProfileIcon from 'Assets/Icons/profile.svg'
-import AccountSettingsIcon from 'Assets/Icons/settings/fc-cog.svg'
-import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
 
 // Actions
 import { logoutUser, fetchNotifications } from 'Actions'
@@ -63,7 +62,14 @@ class Header extends React.Component {
                   icon={<AccountSettingsIcon width={14} height={14} />}
                   onClick={this.navigateSettings}
                 >
-                  <span>Settings</span>
+                  Settings
+                </IconMenuItem>
+
+                <IconMenuItem
+                  icon={<HelpIcon width={14} height={14} />}
+                  onClick={() => this.props.history.push({ pathname: '/help' })}
+                >
+                  Help
                 </IconMenuItem>
 
                 <IconMenuItem
