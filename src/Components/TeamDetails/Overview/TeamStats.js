@@ -24,6 +24,11 @@ class TeamStats extends React.Component {
   convertStat (stat, value) {
     if (value === undefined || value === null) return '-'
 
+    if (stat === 'field_goals_pct') {
+      // field goals % edge case
+      return `${tenths(value * 100)}%`
+    }
+
     let roundedStat = tenths(value)
     if (stat.includes('pct')) roundedStat = `${roundedStat}%`
 
