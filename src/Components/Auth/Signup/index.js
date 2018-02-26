@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 // Components
 import SignupForm from './SignupForm'
-import { Button } from 'Components/Common'
+import { Button, QuartzLink } from 'Components/Common'
 
 // CSS
 import './Signup.scss'
@@ -69,11 +69,18 @@ class Signup extends React.Component {
             Get your free Quartz account now.
           </h1>
           <p className="small label" style={{ margin: '15px 0' }}>
-            Try Quartz free for 7 days with access to basic models
+            Try Quartz free and get a prediction every day
           </p>
         </div>
 
         <SignupForm />
+
+        <div styleName="tos">
+          <p className="small label">By signing up, you agree to our</p>
+          <QuartzLink to={{ pathname: '/help/tos' }}>
+            <p className="semibold">Terms & Privacy Policy</p>
+          </QuartzLink>
+        </div>
 
         <p styleName="login-link" className="small">
           <Link to="/auth/login">Already have an account? Log in</Link>

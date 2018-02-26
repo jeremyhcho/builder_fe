@@ -5,11 +5,18 @@ import { Route, Redirect } from 'react-router-dom'
 
 // Components
 import LandingPageLayout from 'Layouts/LandingPage'
+import HelpLayout from 'Layouts/Help'
 
 const AuthorizedRoute = ({ component: Component, authorized, user, ...rest }) => {
   if (location.pathname === '/') {
     return (
       <LandingPageLayout {...rest} />
+    )
+  }
+
+  if (location.pathname.includes('/help')) {
+    return (
+      <HelpLayout {...rest} />
     )
   }
 
