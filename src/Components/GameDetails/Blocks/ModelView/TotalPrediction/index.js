@@ -8,7 +8,6 @@ import { fetchNBAAggregateTotals } from 'Actions'
 
 // Components
 import { Card, Spinner } from 'Components/Common'
-import TotalPredictionInfo from './TotalPredictionInfo'
 
 // Helpers
 import options from './options'
@@ -47,7 +46,6 @@ class TotalPrediction extends React.Component {
       <Card
         label="Prediction Distribution (Total)"
         wrapperStyle={{ padding: '28px 20px' }}
-        subText={<TotalPredictionInfo />}
       >
         {
           !Object.keys(aggregateTotals).length || !prediction ? (
