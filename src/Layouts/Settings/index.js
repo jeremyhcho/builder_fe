@@ -1,13 +1,11 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
 // Components
-import Settings from 'Components/Settings'
+import { Loading } from 'Components/Common'
 
-const SettingsLayout = () => (
-  <Switch>
-    <Route path='/settings' component={Settings} />
-  </Switch>
-)
+const SettingsLayout = Loadable({
+  loader: () => import('./SettingsRoute'),
+  loading: Loading
+})
 
 export default SettingsLayout
