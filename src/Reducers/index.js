@@ -24,6 +24,10 @@ const appReducer = combineReducers({
 })
 
 const rootReducer = (state, action) => {
+  if (action.type === '@@router/LOCATION_CHANGE') {
+    if (window.Appcues) window.Appcues.start()
+  }
+
   if (action.type === 'auth/LOGOUT') {
     /* eslint-disable no-param-reassign */
     state = undefined

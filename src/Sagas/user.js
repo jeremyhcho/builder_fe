@@ -64,7 +64,11 @@ function* callSendRecoveryEmail ({ email }) {
 function* callFetchUser () {
   try {
     const { data } = yield call(fetchUser)
-    yield put(authorize(data))
+    const user = yield put(authorize(data))
+    window.Appcues.identify(user.id, {
+      email: user.email,
+      trial: user.trial
+    })
   } catch ({ response }) {
     yield put(unauthorize())
   }
