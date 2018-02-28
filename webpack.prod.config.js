@@ -32,7 +32,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: '[name].[chunkhash].js',
+    filename: '[name].[chunkhash].js',
     filename: '[name].js',
     publicPath: '/'
   },
