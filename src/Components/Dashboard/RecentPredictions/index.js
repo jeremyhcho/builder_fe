@@ -79,7 +79,7 @@ class RecentPredictions extends React.Component {
     return (
       <Card
         label="Yesterday's Predictions"
-        wrapperStyle={{ padding: '45px 30px' }}
+        wrapperStyle={{ padding: '45px 30px', overflowY: 'auto', height: '500px' }}
         style={{ marginTop: 0 }}
       >
         <div style={{ width: '200px', marginBottom: '20px' }}>
