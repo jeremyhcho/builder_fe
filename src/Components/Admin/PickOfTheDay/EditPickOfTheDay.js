@@ -8,7 +8,7 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
 // Actions
-import { updateAnnouncement, fetchAnnouncement } from 'Actions'
+import { updatePickOfTheDay, fetchPickOfTheDay, fetchPickOfTheDays } from 'Actions'
 
 // Components
 import { Button, Input, Card, DocumentTitle } from 'Components/Common'
@@ -17,9 +17,9 @@ import { Button, Input, Card, DocumentTitle } from 'Components/Common'
 import LeftArrow from 'Assets/Icons/left-arrow.svg'
 
 // CSS
-import './Announcements.scss'
+import './PickOfTheDay.scss'
 
-class EditAnnouncement extends React.Component {
+class EditPickOfTheDay extends React.Component {
   state = {
     title: '',
     body: '',
@@ -27,22 +27,28 @@ class EditAnnouncement extends React.Component {
   }
 
   componentDidMount () {
-    this.props.fetchAnnouncement(this.props.match.params.id)
+    this.props.fetchPickOfTheDay(this.props.match.params.id)
+
+    if (!this.props.potds) this.props.fetchPickOfTheDays()
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.announcement.id && !this.state.title && !this.state.body) {
+    if (newProps.potd.id && !this.state.title && !this.state.body) {
       this.setState({
-        title: newProps.announcement.title,
-        body: newProps.announcement.body
+        title: newProps.potd.title,
+        body: newProps.potd.body
       })
+    }
+
+    if (!newProps.updatingPickOfTheDay && this.props.updatingPickOfTheDay) {
+      this.props.history.push({ pathname: '/admin/potd', state: { from: `/admin/potd/edit/${this.props.potd.id}` } })
     }
   }
 
-  updateAnnouncement = () => {
+  updatePickOfTheDay = () => {
     const { title, body } = this.state
 
-    this.props.updateAnnouncement(this.props.announcement.id, {
+    this.props.updatePickOfTheDay(this.props.potd.id, {
       title,
       body
     })
@@ -62,18 +68,16 @@ class EditAnnouncement extends React.Component {
 
   renderForm () {
     const { title, body } = this.state
-
     return (
       <div>
         <Input
           type='text'
-          placeholder='Official Alpha Begins'
+          placeholder='Pick of the Day'
           value={title}
           onChange={this.handleChange('title')}
           label='Title'
           shouldFitContainer
         />
-
         <p style={{ marginTop: '30px', marginBottom: '5px' }}>Body</p>
         <ReactQuill
           value={body}
@@ -86,7 +90,7 @@ class EditAnnouncement extends React.Component {
           shouldFitContainer
           style={{ marginTop: '30px' }}
         >
-          Preview announcement
+          Preview Pick of the Day
         </Button>
       </div>
     )
@@ -121,11 +125,11 @@ class EditAnnouncement extends React.Component {
         <Button
           primary
           shouldFitContainer
-          onClick={this.updateAnnouncement}
+          onClick={this.updatePickOfTheDay}
           style={{ marginTop: '30px' }}
-          loading={this.props.updatingAnnouncement}
+          loading={this.props.updatingPickOfTheDay}
         >
-          Update announcement
+          Update Pick of the Day
         </Button>
       </div>
     )
@@ -133,13 +137,17 @@ class EditAnnouncement extends React.Component {
   }
 
   render () {
+    if (!Object.keys(this.props.potd).length || !this.props.potds) {
+      return <div />
+    }
+
     return (
       <DocumentTitle
-        title='Quartz - Announcements'
-        header='Edit Announcement'
-        backUrl='/admin/announcements'
+        title='Quartz - Pick of the Day'
+        header='Edit Pick of the Day'
+        backUrl='/admin/potd'
       >
-        <div styleName='create-announcements-container'>
+        <div styleName='create-potd-container'>
           <Card wrapperStyle={{ padding: '45px 30px' }}>
             {this.state.showPreview && this.renderPreview()}
             {!this.state.showPreview && this.renderForm()}
@@ -150,30 +158,36 @@ class EditAnnouncement extends React.Component {
   }
 }
 
-EditAnnouncement.defaultProps = {
-  updatingAnnouncement: false,
-  announcement: {}
+EditPickOfTheDay.defaultProps = {
+  updatingPickOfTheDay: false,
+  potd: {},
+  potds: null
 }
 
-EditAnnouncement.propTypes = {
-  updateAnnouncement: PropTypes.func.isRequired,
-  updatingAnnouncement: PropTypes.bool,
+EditPickOfTheDay.propTypes = {
+  fetchPickOfTheDay: PropTypes.func.isRequired,
+  fetchPickOfTheDays: PropTypes.func.isRequired,
+  updatePickOfTheDay: PropTypes.func.isRequired,
+  updatingPickOfTheDay: PropTypes.bool,
   match: PropTypes.object.isRequired,
-  fetchAnnouncement: PropTypes.func.isRequired,
-  announcement: PropTypes.object
+  potd: PropTypes.object,
+  potds: PropTypes.array,
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({
-  updatingAnnouncement: routines.isLoading.UPDATE_ANNOUNCEMENT,
-  announcement: routines.admin.fetchAnnouncement
+  updatingPickOfTheDay: routines.callingApi.UPDATE_PICK_OF_THE_DAY,
+  potd: routines.admin.pickOfTheDay,
+  potds: routines.admin.pickOfTheDays
 })
 
 const mapDispatchToProps = {
-  updateAnnouncement,
-  fetchAnnouncement
+  fetchPickOfTheDay,
+  fetchPickOfTheDays,
+  updatePickOfTheDay
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditAnnouncement)
+)(EditPickOfTheDay)

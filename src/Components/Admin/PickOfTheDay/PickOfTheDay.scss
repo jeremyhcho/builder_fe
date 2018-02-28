@@ -1,0 +1,64 @@
+.potd-container {
+  padding: 45px 65px;
+  position: relative;
+  max-width: 1300px;
+  height: 100%;
+  overflow-y: auto;
+
+  .title {
+    display: flex;
+    flex: 8;
+    line-height: 30px;
+  }
+
+  .actions {
+    display: flex;
+    flex: 1;
+
+    > li {
+      display: flex;
+      flex: 1;
+
+      .icon-wrapper {
+        border-radius: 50%;
+        cursor: pointer;
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        transition: background-color 200ms;
+
+        &:hover {
+          background-color: var(--lightest-gray);
+        }
+
+        svg {
+          margin-top: 7px;
+        }
+      }
+    }
+  }
+}
+
+.create-potd-container {
+  padding: 10px 60px;
+  max-width: 1300px;
+  height: 100%;
+  overflow-y: auto;
+
+  .preview {
+    a {
+      color: var(--dark-blue);
+      text-decoration: underline;
+    }
+
+    ol, ul {
+      list-style-position: inside;
+    }
+
+    li {
+      list-style-type: inherit;
+      margin-bottom: 5px;
+    }
+  }
+}

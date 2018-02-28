@@ -3,39 +3,41 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Actions
-import { publishAnnouncement } from 'Actions'
+import { publishPickOfTheDay } from 'Actions'
 
 // Components
 import { Button, Modal } from 'Components/Common'
 
-class PublishAnnouncement extends React.Component {
-  publishAnnouncement = () => {
-    this.props.publishAnnouncement(this.props.announcement.id, { is_published: true })
+class PublishPickOfTheDay extends React.Component {
+  publishPickOfTheDay = () => {
+    this.props.publishPickOfTheDay(this.props.potd.id, { is_published: true })
   }
 
   renderBody () {
-    if (this.props.announcement.is_published) {
+    if (this.props.potd.is_published) {
       return (
         <div style={{ padding: '25px 25px 10px', lineHeight: '25px' }}>
-          <p>This announcement is already published</p>
+          <p>This Pick of the Day is already published</p>
         </div>
       )
     }
 
     return (
       <div style={{ padding: '25px 25px 10px', lineHeight: '25px' }}>
-        <p>Are you sure you want to publish this announcement?</p>
+        <p>Are you sure you want to publish this Pick of the Day?</p>
       </div>
     )
   }
 
   renderFooter () {
-    if (this.props.announcement.is_published) {
+    const { publishingPickOfTheDay, toggle, potd } = this.props
+
+    if (potd.is_published) {
       return [
         <Button
           secondary
           shouldFitContainer
-          onClick={this.props.toggle}
+          onClick={toggle}
           key="cancel"
         >
           Cancel
@@ -45,9 +47,10 @@ class PublishAnnouncement extends React.Component {
 
     return [
       <Button
-        flat
+        flat={!publishingPickOfTheDay}
+        disabled={publishingPickOfTheDay}
         shouldFitContainer
-        onClick={this.props.toggle}
+        onClick={publishingPickOfTheDay ? null : toggle}
         key="cancel"
       >
         Cancel
@@ -55,9 +58,9 @@ class PublishAnnouncement extends React.Component {
       <Button
         success
         shouldFitContainer
-        onClick={this.publishingAnnouncement ? null : this.publishAnnouncement}
+        onClick={this.props.publishingPickOfTheDay ? null : this.publishPickOfTheDay}
         key="publish"
-        loading={this.props.publishingAnnouncement}
+        loading={this.props.publishingPickOfTheDay}
       >
         Publish
       </Button>
@@ -71,7 +74,7 @@ class PublishAnnouncement extends React.Component {
         isOpen={this.props.isOpen}
         toggle={this.props.toggle}
         footer={this.renderFooter()}
-        wrapperStyle={{ width: '500px' }}
+        bodyStyle={{ width: '500px' }}
       >
         {this.renderBody()}
       </Modal>
@@ -79,23 +82,27 @@ class PublishAnnouncement extends React.Component {
   }
 }
 
-PublishAnnouncement.defaultProps = {
-  publishingAnnouncement: false
+PublishPickOfTheDay.defaultProps = {
+  publishingPickOfTheDay: false
 }
 
-PublishAnnouncement.propTypes = {
-  announcement: PropTypes.object.isRequired,
+PublishPickOfTheDay.propTypes = {
+  potd: PropTypes.object.isRequired,
   toggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  publishAnnouncement: PropTypes.func.isRequired,
-  publishingAnnouncement: PropTypes.bool
+  publishPickOfTheDay: PropTypes.func.isRequired,
+  publishingPickOfTheDay: PropTypes.bool
 }
 
+const mapStateToProps = ({ routines }) => ({
+  publishingPickOfTheDay: routines.callingApi.PUBLISH_PICK_OF_THE_DAY
+})
+
 const mapDispatchToProps = {
-  publishAnnouncement
+  publishPickOfTheDay
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(PublishAnnouncement)
+)(PublishPickOfTheDay)

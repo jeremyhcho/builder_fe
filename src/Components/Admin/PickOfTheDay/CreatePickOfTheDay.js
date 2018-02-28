@@ -8,7 +8,7 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
 // Actions
-import { updateAnnouncement, fetchAnnouncement } from 'Actions'
+import { createPickOfTheDay, fetchPickOfTheDays } from 'Actions'
 
 // Components
 import { Button, Input, Card, DocumentTitle } from 'Components/Common'
@@ -17,9 +17,9 @@ import { Button, Input, Card, DocumentTitle } from 'Components/Common'
 import LeftArrow from 'Assets/Icons/left-arrow.svg'
 
 // CSS
-import './Announcements.scss'
+import './PickOfTheDay.scss'
 
-class EditAnnouncement extends React.Component {
+class CreatePickOfTheDay extends React.Component {
   state = {
     title: '',
     body: '',
@@ -27,22 +27,13 @@ class EditAnnouncement extends React.Component {
   }
 
   componentDidMount () {
-    this.props.fetchAnnouncement(this.props.match.params.id)
+    if (!this.props.potd) this.props.fetchPickOfTheDays()
   }
 
-  componentWillReceiveProps (newProps) {
-    if (newProps.announcement.id && !this.state.title && !this.state.body) {
-      this.setState({
-        title: newProps.announcement.title,
-        body: newProps.announcement.body
-      })
-    }
-  }
-
-  updateAnnouncement = () => {
+  createPickOfTheDay = () => {
     const { title, body } = this.state
 
-    this.props.updateAnnouncement(this.props.announcement.id, {
+    this.props.createPickOfTheDay({
       title,
       body
     })
@@ -67,7 +58,7 @@ class EditAnnouncement extends React.Component {
       <div>
         <Input
           type='text'
-          placeholder='Official Alpha Begins'
+          placeholder='Pick of the Day'
           value={title}
           onChange={this.handleChange('title')}
           label='Title'
@@ -75,18 +66,22 @@ class EditAnnouncement extends React.Component {
         />
 
         <p style={{ marginTop: '30px', marginBottom: '5px' }}>Body</p>
-        <ReactQuill
-          value={body}
-          onChange={this.handleBodyChange}
-        />
+
+        <div style={{ height: '500px' }}>
+          <ReactQuill
+            value={body}
+            onChange={this.handleBodyChange}
+            style={{ height: '100%' }}
+          />
+        </div>
 
         <Button
           primary
           onClick={this.togglePreview}
           shouldFitContainer
-          style={{ marginTop: '30px' }}
+          style={{ marginTop: '70px' }}
         >
-          Preview announcement
+          Preview Pick Of The Day
         </Button>
       </div>
     )
@@ -110,7 +105,7 @@ class EditAnnouncement extends React.Component {
           Edit
         </Button>
 
-        <p className='label small'>{moment().format('dddd, MMMM Mo')}</p>
+        <p className='label small'>{moment().format('dddd, MMM Mo')}</p>
         <h3 className='semibold' style={{ marginTop: '8px' }}>{title}</h3>
         <div
           styleName='preview'
@@ -121,25 +116,24 @@ class EditAnnouncement extends React.Component {
         <Button
           primary
           shouldFitContainer
-          onClick={this.updateAnnouncement}
-          style={{ marginTop: '30px' }}
-          loading={this.props.updatingAnnouncement}
+          onClick={this.createPickOfTheDay}
+          style={{ marginTop: '70px' }}
+          loading={this.props.creatingPickOfTheDay}
         >
-          Update announcement
+          Create pick of the day
         </Button>
       </div>
     )
-    /* eslint-enable react/no-danger */
   }
 
   render () {
     return (
       <DocumentTitle
-        title='Quartz - Announcements'
-        header='Edit Announcement'
-        backUrl='/admin/announcements'
+        title='Quartz - Pick of the Day'
+        header='New Pick of the Day'
+        backUrl='/admin/potd'
       >
-        <div styleName='create-announcements-container'>
+        <div styleName='create-potd-container'>
           <Card wrapperStyle={{ padding: '45px 30px' }}>
             {this.state.showPreview && this.renderPreview()}
             {!this.state.showPreview && this.renderForm()}
@@ -150,30 +144,29 @@ class EditAnnouncement extends React.Component {
   }
 }
 
-EditAnnouncement.defaultProps = {
-  updatingAnnouncement: false,
-  announcement: {}
+CreatePickOfTheDay.defaultProps = {
+  creatingPickOfTheDay: false,
+  potd: null
 }
 
-EditAnnouncement.propTypes = {
-  updateAnnouncement: PropTypes.func.isRequired,
-  updatingAnnouncement: PropTypes.bool,
-  match: PropTypes.object.isRequired,
-  fetchAnnouncement: PropTypes.func.isRequired,
-  announcement: PropTypes.object
+CreatePickOfTheDay.propTypes = {
+  createPickOfTheDay: PropTypes.func.isRequired,
+  fetchPickOfTheDays: PropTypes.func.isRequired,
+  creatingPickOfTheDay: PropTypes.bool,
+  potd: PropTypes.array
 }
 
 const mapStateToProps = ({ routines }) => ({
-  updatingAnnouncement: routines.isLoading.UPDATE_ANNOUNCEMENT,
-  announcement: routines.admin.fetchAnnouncement
+  creatingPickOfTheDay: routines.callingApi.CREATE_PICK_OF_THE_DAY,
+  potd: routines.admin.pickOfTheDays
 })
 
 const mapDispatchToProps = {
-  updateAnnouncement,
-  fetchAnnouncement
+  createPickOfTheDay,
+  fetchPickOfTheDays
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditAnnouncement)
+)(CreatePickOfTheDay)
