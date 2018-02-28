@@ -7,11 +7,8 @@ import { connect } from 'react-redux'
 import { verifyAdmin } from 'Actions'
 
 // Components
-import {
-  Announcements,
-  CreateAnnouncement,
-  EditAnnouncement
-} from 'Components/Admin'
+import AnnouncementLayout from './AnnouncementLayout'
+import PickOfTheDayLayout from './PickOfTheDayLayout'
 
 class AdminRoute extends React.Component {
   componentDidMount () {
@@ -35,9 +32,8 @@ class AdminRoute extends React.Component {
 
     return (
       <Switch>
-        <Route exact path='/admin/announcements' component={Announcements} />
-        <Route exact path='/admin/announcements/new' component={CreateAnnouncement} />
-        <Route exact path='/admin/announcements/edit/:id' component={EditAnnouncement} />
+        <Route path='/admin/announcements' component={AnnouncementLayout} />
+        <Route path='/admin/potd' component={PickOfTheDayLayout} />
         <Redirect to='/admin/announcements' from='/admin' />
       </Switch>
     )
