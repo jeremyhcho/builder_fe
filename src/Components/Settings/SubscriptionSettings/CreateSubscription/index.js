@@ -18,6 +18,7 @@ class CreateSubscription extends React.Component {
   }
 
   togglePlanSelected = () => {
+    console.log('Something')
     this.setState({ planSelected: !this.state.planSelected })
   }
 
