@@ -5,10 +5,8 @@ import { withRouter } from 'react-router-dom'
 
 // Components
 import EditSubscription from './EditSubscription'
-import CanceledSubscriptions from './CanceledSubscriptions'
 import SettingsSubSection from '../Blocks/SettingsSubSection'
-import ActiveSubscriptions from './ActiveSubscriptions'
-import PlanDetails from './PlanDetails'
+import UserSubscriptions from './UserSubscriptions'
 
 // Selectors
 import { makeFilterSubscriptions } from 'Helpers/Selectors'
@@ -44,25 +42,12 @@ class SubscriptionDetails extends React.Component {
     return (
       <div>
         <SettingsSubSection label="Your subscriptions">
-          <ActiveSubscriptions
+          <UserSubscriptions
             toggleShowPlans={this.toggleShowPlans}
             subscription={subscription}
-            canceledSusbcriptions={canceledSubscriptions}
+            canceledSubscriptions={canceledSubscriptions}
           />
-
-          {
-            canceledSubscriptions.length ? (
-              <CanceledSubscriptions canceledSubscriptions={canceledSubscriptions} />
-            ) : null
-          }
         </SettingsSubSection>
-
-        {
-          subscription &&
-          <SettingsSubSection label="Plan details" subText={subscription.plan.name}>
-            <PlanDetails subscription={subscription} />
-          </SettingsSubSection>
-        }
 
         <SettingsSubSection label="Payment history">
           <p className="label">Under construction</p>

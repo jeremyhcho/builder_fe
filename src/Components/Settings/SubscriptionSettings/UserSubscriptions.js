@@ -4,12 +4,13 @@ import { Row } from 'react-styled-flexboxgrid'
 import moment from 'moment'
 
 // Icons
+import { Button } from 'Components/Common'
 import AlertIcon from 'Assets/Icons/settings/alert.svg'
 
 // CSS
 import './SubscriptionSettings.scss'
 
-const ActiveSubscriptions = ({ subscription, toggleShowPlans }) => {
+const UserSubscriptions = ({ subscription, toggleShowPlans, canceledSubscriptions }) => {
   const convertUnix = (date) => {
     return moment.unix(date).format('MMM DD, YYYY')
   }
@@ -60,9 +61,44 @@ const ActiveSubscriptions = ({ subscription, toggleShowPlans }) => {
     )
   }
 
-  // if (!subscription && canceledSubscriptions.length) {
-  //   return <h1>Reactivate Subscription</h1>
-  // }
+  if (!subscription && canceledSubscriptions.length) {
+    return (
+      <div>
+        <Row middle='xs' styleName="row">
+          <div styleName="col">
+            <p>Active subscription: </p>
+          </div>
+          <div>
+            <p>{canceledSubscriptions[0].plan.name}</p>
+          </div>
+        </Row>
+
+        <Row middle='xs' styleName="row">
+          <div styleName="col">
+            <p>
+              Subscribed since:
+            </p>
+          </div>
+          <div>
+            {convertUnix(canceledSubscriptions[0].created)}
+          </div>
+        </Row>
+
+        <p styleName="row" className="label">
+          You've canceled your subscription at {convertUnix(canceledSubscriptions[0].canceled_at)}.
+          {' '} This subscription will end
+          {' '} {convertUnix(canceledSubscriptions[0].current_period_end)} unless you choose
+          {' '} to reactivate your account.
+        </p>
+
+        <div styleName="end-row">
+          <Button onClick={toggleShowPlans}>
+            Reactivate subscription
+          </Button>
+        </div>
+      </div>
+    )
+  }
 
   // Customer that is not subscribed to a plan
   return (
@@ -83,14 +119,14 @@ const ActiveSubscriptions = ({ subscription, toggleShowPlans }) => {
   )
 }
 
-ActiveSubscriptions.defaultProps = {
+UserSubscriptions.defaultProps = {
   subscription: null
 }
 
-ActiveSubscriptions.propTypes = {
+UserSubscriptions.propTypes = {
   toggleShowPlans: PropTypes.func.isRequired,
   subscription: PropTypes.object,
-  // canceledSubscriptions: PropTypes.array.isRequired
+  canceledSubscriptions: PropTypes.array.isRequired
 }
 
-export default ActiveSubscriptions
+export default UserSubscriptions
