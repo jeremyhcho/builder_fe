@@ -47,6 +47,7 @@ class SubscriptionDetails extends React.Component {
           <ActiveSubscriptions
             toggleShowPlans={this.toggleShowPlans}
             subscription={subscription}
+            canceledSusbcriptions={canceledSubscriptions}
           />
 
           {

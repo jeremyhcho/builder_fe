@@ -19,5 +19,25 @@
   .footer {
     margin: 0;
     padding: 0 20px 20px;
+
+    .submit-button {
+      position: absolute;
+      top: 0;
+      left: -99999px;
+
+      &.show {
+        position: relative;
+      }
+    }
+
+    .disabled-button {
+      position: absolute;
+      top: 0;
+      left: -99999px;
+
+      &.show {
+        position: relative;
+      }
+    }
   }
 }

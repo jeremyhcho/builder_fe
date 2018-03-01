@@ -7,6 +7,14 @@
     color: #fff;
     border-radius: 3px 3px 0 0;
     text-align: center;
+
+    .fa-required {
+      color: var(--red);
+      font-size: 6px;
+      margin-left: 4px;
+      margin-top: -2.4px;
+      vertical-align: middle;
+    }
   }
 
   .values {

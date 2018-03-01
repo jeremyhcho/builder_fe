@@ -60,6 +60,10 @@ const ActiveSubscriptions = ({ subscription, toggleShowPlans }) => {
     )
   }
 
+  // if (!subscription && canceledSubscriptions.length) {
+  //   return <h1>Reactivate Subscription</h1>
+  // }
+
   // Customer that is not subscribed to a plan
   return (
     <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -85,7 +89,8 @@ ActiveSubscriptions.defaultProps = {
 
 ActiveSubscriptions.propTypes = {
   toggleShowPlans: PropTypes.func.isRequired,
-  subscription: PropTypes.object
+  subscription: PropTypes.object,
+  // canceledSubscriptions: PropTypes.array.isRequired
 }
 
 export default ActiveSubscriptions

@@ -25,7 +25,12 @@ class ModelInfo extends React.Component {
         <div styleName="model-details">
           <Row middle='xs' styleName="labels">
             <Col xs={4} style={{ textAlign: 'left' }}>
-              <p className="small">MODEL NAME</p>
+              <p className="small">
+                MODEL NAME
+                <span styleName="fa-required">
+                  <i className="fa fa-asterisk" aria-hidden="true" />
+                </span>
+              </p>
             </Col>
 
             <Col xsOffset={2} xs={4}>
