@@ -28,7 +28,7 @@
     color: var(--font-color);
     background-color: var(--lightest-gray);
     &:not(.disabled):hover {
-      background-color: darken(#F4F5F7, 2.5%);
+      background-color: darken(#F4F5F7, 4%);
     }
   }
 
