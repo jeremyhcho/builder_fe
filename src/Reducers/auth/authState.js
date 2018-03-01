@@ -1,7 +1,8 @@
 import {
   AUTHORIZE,
   UNAUTHORIZE,
-  CREATE_USER_SUCCESS
+  CREATE_USER_SUCCESS,
+  VERIFY_USER_SUCCESS
 } from 'Constants'
 
 const initialState = {
@@ -19,7 +20,10 @@ const authState = (state = initialState, action) => {
       return { ...state, authorized: false, fetchingUser: false, user: {} }
 
     case CREATE_USER_SUCCESS:
-      return { ...state, user: action.user, fetchingUser: false }
+      return { ...state, fetchingUser: false }
+
+    case VERIFY_USER_SUCCESS:
+      return { ...state, user: { ...state.user, is_verified: true } }
 
     default:
       return state

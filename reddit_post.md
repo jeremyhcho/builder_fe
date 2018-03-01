@@ -1,20 +1,24 @@
 ## **Quartz Dailies**
 
-**Season Record: 2-3**
+**Season Record: 5-3**
 
 Build your own simple models with [**Quartz**](https://www.quartzapp.com) or find us on [twitter](https://twitter.com/Quartz_App).
 
+---
+
 &nbsp;
 
-### **Yesterday**
+### [**Yesterday**](https://www.reddit.com/r/sportsbook/comments/80j9xq/nba_daily_discussion_22718_tuesday/duxbiuh/)
+
+Our model hit the mark yesterday on all 3 posted matches with a combined variance of 1 point across three games.
+
+&nbsp;
 
 | Game      | Pick        | Result |
 | --------- | ----------- | ------ |
-| HOU @ UTA	| HOU -2	    | ✅ |
-| IND @ DAL |	IND -3.5    | ❌ |
-| LAL @ ATL |	ATL +2.5    | ❌ |
-| CHI @ BKN | CHI +5      | ❌ |
-| MIN @ SAC | MIN -5.5    | ✅ |
+| LAC @ DEN	| LAC +5	    | ✅ |
+| PHI @ MIA | MIA +1      | ✅ |
+| BKN @ CLE | BKN +10.5   | ✅ |
 
 &nbsp;
 

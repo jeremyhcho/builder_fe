@@ -13,7 +13,8 @@ const initialState = {
   error: '',
   creatingUser: false,
   userCreated: false,
-  sendingEmail: false
+  sendingEmail: false,
+  user: {}
 }
 
 const signup = (state = initialState, action) => {
@@ -29,7 +30,8 @@ const signup = (state = initialState, action) => {
         ...state,
         creatingUser: false,
         error: '',
-        userCreated: true
+        userCreated: true,
+        user: action.user
       }
 
     case CREATE_USER_FAIL:
