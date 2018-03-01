@@ -44,18 +44,17 @@ function* initializeRoutine ({
     if (onSuccess) {
       yield put(onSuccess())
     }
-  } catch (error) {
+  } catch ({ response }) {
     yield put({
       type: actionTypes.FAIL,
       key: reducerKey,
       loaderKey,
-      error
+      error: response.data
     })
 
     if (onFail) {
       yield put(onFail())
     }
-    console.error(`${loaderKey} api call failed`, error)
   }
 }
 function* watchRoutineInit () {

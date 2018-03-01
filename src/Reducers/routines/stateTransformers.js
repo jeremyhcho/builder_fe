@@ -78,6 +78,10 @@ const transform = (state, reducerKey, transformAction, loaderKey, response) => {
     return { ...state }
   }
 
+  if (reducerKey[0] === 'error') {
+    return { ...state }
+  }
+
   const RETURNSTATE = {
     ...state,
     isLoading: {

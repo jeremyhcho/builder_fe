@@ -61,34 +61,34 @@ const routines = (state = initialState, action) => {
   const type = action.type.slice(action.type.lastIndexOf('/') + 1)
   switch (type) {
     case 'REQUEST': {
-      return {
+      const requestState = {
         ...state,
         isLoading: {
           ...state.isLoading,
           [action.loaderKey]: true
-        },
-        error: {
-          ...state.error,
-          [action.loaderKey]: false
         }
       }
+
+      return transform(
+        requestState, ['error', ...action.key], 'replace', action.loaderKey, false
+      )
     }
 
     case 'SUCCESS':
       return transform(state, action.key, action.transform, action.loaderKey, action.response)
 
     case 'FAIL': {
-      return {
+      const failState = {
         ...state,
         isLoading: {
           ...state.isLoading,
           [action.loaderKey]: false
-        },
-        error: {
-          ...state.error,
-          [action.loaderKey]: true
         }
       }
+
+      return transform(
+        failState, ['error', ...action.key], 'replace', action.loaderKey, action.error
+      )
     }
 
     default:
