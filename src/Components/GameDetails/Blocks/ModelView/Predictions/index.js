@@ -106,7 +106,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       const homeTeam = teamPredictions[1]
 
       let positiveValTeam
-      if (parseFloat(awayTeam.predictedValue) > 0) {
+      if (parseFloat(awayTeam.predictionValue) > 0) {
         positiveValTeam = awayTeam
       } else {
         positiveValTeam = homeTeam
