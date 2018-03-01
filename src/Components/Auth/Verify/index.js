@@ -38,7 +38,7 @@ class Verify extends React.Component {
 
   componentWillReceiveProps () {
     if (this.props.user.is_verified) {
-      history.push({ pathname: '/' })
+      history.push({ pathname: '/dashboard' })
     }
   }
 

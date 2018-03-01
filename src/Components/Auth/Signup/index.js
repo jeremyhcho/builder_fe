@@ -108,7 +108,7 @@ Signup.propTypes = {
 
 const mapStateToProps = ({ auth }) => ({
   userCreated: auth.signup.userCreated,
-  user: auth.authState.user,
+  user: auth.signup.user,
   sendingEmail: auth.signup.sendingEmail
 })
 

@@ -22,7 +22,11 @@ const UnauthorizedRoute = ({
     <Route
       {...rest}
       render={componentProps => {
-        return (user.is_verified || (authorized && !user.is_verified)) ? (
+        if (location.pathname === '/auth/verify') {
+          return <Component {...componentProps} />
+        }
+
+        return user.id ? (
           <Redirect to={redirectUrl === '/' ? '/dashboard' : redirectUrl} />
         ) : (
           <Component {...componentProps} />
