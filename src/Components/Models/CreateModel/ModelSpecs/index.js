@@ -50,7 +50,7 @@ const infoTexts = {
   }
 }
 
-const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
+const ModelSpecs = ({ creatingModel, updatingModel, specs, modelName }) => {
   const getSpecsDifference = (specsTotal) => {
     const requiredDifference = specsTotal - 25
 
@@ -80,15 +80,40 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
     .reduce((total, value) => parseInt(total, 10) + parseInt(value, 10))
 
   const renderSubmitButton = () => {
+    let disabledButtonStyle
+    let submitButtonStyle
+    if (specsTotal !== 25 || !modelName) {
+      disabledButtonStyle = {
+        position: 'relative'
+      }
+
+      submitButtonStyle = {
+        position: 'absolute',
+        top: '0',
+        left: '-99999px'
+      }
+    } else {
+      disabledButtonStyle = {
+        position: 'absolute',
+        top: '0',
+        left: '-99999px'
+      }
+
+      submitButtonStyle = {
+        position: 'relative'
+      }
+    }
+
     if (updatingModel || creatingModel) {
       return <Button loading />
     }
 
-    if (specsTotal !== 25) {
-      return <Button disabled>Submit</Button>
-    }
-
-    return <Button type="submit">Submit</Button>
+    return (
+      [
+        <Button style={disabledButtonStyle} key="disabled" disabled>Submit</Button>,
+        <Button style={submitButtonStyle} key="submit" type="submit">Submit</Button>
+      ]
+    )
   }
 
   return (
@@ -154,17 +179,20 @@ const ModelSpecs = ({ creatingModel, updatingModel, specs }) => {
 ModelSpecs.defaultProps = {
   specs: {},
   creatingModel: false,
-  updatingModel: false
+  updatingModel: false,
+  modelName: ''
 }
 
 ModelSpecs.propTypes = {
   specs: PropTypes.object,
   creatingModel: PropTypes.bool,
-  updatingModel: PropTypes.bool
+  updatingModel: PropTypes.bool,
+  modelName: PropTypes.string
 }
 
 const mapStateToProps = ({ ...state, routines }) => ({
   specs: selector(state, 'specs'),
+  modelName: selector(state, 'Name'),
   creatingModel: routines.isLoading.CREATE_NBA_MODEL,
   updatingModel: routines.isLoading.UPDATE_NBA_MODEL
 })

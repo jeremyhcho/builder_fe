@@ -22,7 +22,7 @@ const Button = ({
   ...props
 }) => {
   const buttonClass = classNames('btn', {
-    primary: primary || (!secondary && !flat),
+    primary: primary || (!secondary && !flat && !disabled),
     secondary,
     flat,
     disabled,
@@ -65,7 +65,7 @@ Button.defaultProps = {
   shouldFitContainer: false,
   children: '',
   loading: false,
-  onClick: () => null,
+  onClick: () => null
 }
 
 Button.propTypes = {
