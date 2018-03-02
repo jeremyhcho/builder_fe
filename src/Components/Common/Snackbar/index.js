@@ -43,7 +43,7 @@ class Snackbar extends React.Component {
     if (this.state.show) {
       this.setState({ show: false }, () => {
         document.removeEventListener('click', this.handleOutsideClicks, false)
-        this.props.closeSnackbar()
+        this.props.dispatch(closeSnackbar())
       })
     }
   }
@@ -58,7 +58,7 @@ class Snackbar extends React.Component {
   }
 
   render () {
-    const { message, children } = this.props
+    const { message, children, action } = this.props
 
     const snackBarContainer = classNames('snackbar', {
       show: this.state.show
@@ -75,6 +75,16 @@ class Snackbar extends React.Component {
           <div styleName="snackbar-content">
             <div styleName={snackBarText}>
               <span>{message}</span>
+
+              {
+                action &&
+                <span
+                  styleName="action-label"
+                  onClick={() => this.props.dispatch(action.onClick)}
+                >
+                  {action.label}
+                </span>
+              }
             </div>
           </div>
         </div>
@@ -85,7 +95,8 @@ class Snackbar extends React.Component {
 
 Snackbar.defaultProps = {
   message: '',
-  autoCloseDuration: null
+  autoCloseDuration: null,
+  action: null
 }
 
 Snackbar.propTypes = {
@@ -95,21 +106,21 @@ Snackbar.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]).isRequired,
-  closeSnackbar: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  action: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
+  })
 }
 
 const mapStateToProps = ({ snackbar }) => ({
   message: snackbar.message,
-  autoCloseDuration: snackbar.autoCloseDuration
+  autoCloseDuration: snackbar.autoCloseDuration,
+  action: snackbar.action
 })
 
-const mapDispatchToProps = {
-  closeSnackbar
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Snackbar)
 
 /* eslint-enable react/no-unused-prop-types */
