@@ -2,7 +2,8 @@ import moment from 'moment'
 
 // Constants
 import {
-  FETCH_NBA_GAMES,
+  // FETCH_NBA_GAMES,
+  UPDATE_NBA_GAMES,
   CHANGE_SORT_STATS_KEY
 } from 'Constants'
 
@@ -27,8 +28,17 @@ const initialState = {
 const nbaReducer = (state = initialState, action) => {
   switch (action.type) {
     // DateInput
-    case FETCH_NBA_GAMES: {
-      const { now, from, to } = action.payload[0]
+    // case FETCH_NBA_GAMES: {
+    //   const { now, from, to } = action.payload[0]
+    //
+    //   return {
+    //     ...state,
+    //     dates: { now, from, to }
+    //   }
+    // }
+
+    case UPDATE_NBA_GAMES: {
+      const { now, from, to } = action
 
       return {
         ...state,

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { withRouter } from 'react-router-dom'
 
 // Components
 import { CalendarStateless } from '@atlaskit/calendar'
@@ -11,24 +12,37 @@ import { Input } from 'Components/Common'
 import './DateInput.scss'
 
 // Actions
-import { fetchNBAGames } from 'Actions'
+import { updateNBAGames } from 'Actions'
 
 class DateInput extends React.Component {
   state = {
     isOpened: false,
-    day: moment().date(),
-    month: moment().month() + 1,
-    year: moment().year(),
+    day: this.props.location.search.slice(14),
+    month: this.props.location.search.slice(11, 13),
+    year: this.props.location.search.slice(6, 10)
   }
 
   componentWillMount() {
-    // sets input date to current date
-    this.props.fetchNBAGames(this.getFromAndTo(this.props.dates.now._i))
+    if (this.props.location.search.length) {
+      return this.props.updateNBAGames(this.getFromAndTo(this.props.location.search.slice(6)))
+    }
+
+    this.props.updateNBAGames(this.getFromAndTo(this.props.dates.now._i))
+    return this.props.history.push({
+      pathname: '/games',
+      search: `date=${this.props.dates.now._i}`
+    })
   }
 
   componentDidMount() {
     // prevent selecting text in Date Input field
     this.dateInput.addEventListener('select', this.preventDateSelection(), false)
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.location.search !== this.props.location.search) {
+      this.props.updateNBAGames(this.getFromAndTo(newProps.location.search.slice(6)))
+    }
   }
 
   componentWillUnmount() {
@@ -85,7 +99,11 @@ class DateInput extends React.Component {
   handleSelect = (e) => {
     // sets date when selected from calendar
     if (e.iso !== this.props.dates.now._i) {
-      this.props.fetchNBAGames(this.getFromAndTo(e.iso))
+      this.props.history.push({
+        pathname: '/games',
+        search: `date=${e.iso}`
+      })
+      // this.props.fetchNBAGames(this.getFromAndTo(e.iso))
     }
 
     this.closeCalendar()
@@ -108,6 +126,7 @@ class DateInput extends React.Component {
   render () {
     const { isOpened, day, month, year } = this.state
     const { dates } = this.props
+
     return (
       <div styleName="date-input">
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -157,7 +176,9 @@ class DateInput extends React.Component {
 
 DateInput.propTypes = {
   dates: PropTypes.object.isRequired,
-  fetchNBAGames: PropTypes.func.isRequired,
+  updateNBAGames: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
@@ -165,10 +186,10 @@ const mapStateToProps = ({ nba }) => ({
 })
 
 const mapDispatchToProps = {
-  fetchNBAGames
+  updateNBAGames
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(DateInput)
+)(DateInput))

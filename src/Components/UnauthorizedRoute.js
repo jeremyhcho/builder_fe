@@ -27,7 +27,7 @@ const UnauthorizedRoute = ({
         }
 
         return user.id ? (
-          <Redirect to={redirectUrl === '/' ? '/dashboard' : redirectUrl} />
+          <Redirect to={redirectUrl === '/' ? '/dashboard' : `${redirectUrl}${location.state.from.search}`} />
         ) : (
           <Component {...componentProps} />
         )

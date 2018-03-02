@@ -2,7 +2,7 @@ import moment from 'moment'
 import { createRoutine } from 'Routines'
 
 // Constants
-import { FETCH_NBA_GAMES } from 'Constants'
+import { FETCH_NBA_GAMES, UPDATE_NBA_GAMES } from 'Constants'
 
 // Apis
 import { getNBAGames } from 'Apis'
@@ -16,4 +16,11 @@ export const fetchNBAGames = createRoutine({
       ...game, date: moment(new Date(game.date))
     }))
   )
+})
+
+export const updateNBAGames = ({ now, from, to }) => ({
+  type: UPDATE_NBA_GAMES,
+  now,
+  from,
+  to
 })
