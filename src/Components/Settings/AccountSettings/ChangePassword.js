@@ -107,7 +107,10 @@ ChangePassword.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   changePassword: PropTypes.func.isRequired,
   changingPassword: PropTypes.bool,
-  changePasswordFailed: PropTypes.bool,
+  changePasswordFailed: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ]),
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired
@@ -115,7 +118,7 @@ ChangePassword.propTypes = {
 
 const mapStateToProps = ({ routines }) => ({
   changingPassword: routines.isLoading.UPDATE_PASSWORD,
-  changePasswordFailed: routines.error.UPDATE_PASSWORD
+  changePasswordFailed: routines.error.passwordChanged
 })
 
 const mapDispatchToProps = {
