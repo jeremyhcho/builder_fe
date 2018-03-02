@@ -17,17 +17,17 @@ import { updateNBAGames } from 'Actions'
 class DateInput extends React.Component {
   state = {
     isOpened: false,
-    day: this.props.location.search.slice(14),
-    month: this.props.location.search.slice(11, 13),
-    year: this.props.location.search.slice(6, 10)
+    year: this.props.dates.now._i.slice(0, 4),
+    month: this.props.dates.now._i.slice(5, 7),
+    day: this.props.dates.now._i.slice(8),
   }
 
   componentWillMount() {
     if (this.props.location.search.length) {
-      return this.props.updateNBAGames(this.getFromAndTo(this.props.location.search.slice(6)))
+      return this.props.updateNBAGames(this.props.parseDate(this.props.location.search.slice(6)))
     }
 
-    this.props.updateNBAGames(this.getFromAndTo(this.props.dates.now._i))
+    this.props.updateNBAGames(this.props.parseDate(this.props.dates.now._i))
     return this.props.history.push({
       pathname: '/games',
       search: `date=${this.props.dates.now._i}`
@@ -41,22 +41,12 @@ class DateInput extends React.Component {
 
   componentWillReceiveProps (newProps) {
     if (newProps.location.search !== this.props.location.search) {
-      this.props.updateNBAGames(this.getFromAndTo(newProps.location.search.slice(6)))
+      this.props.updateNBAGames(this.props.parseDate(newProps.location.search.slice(6)))
     }
   }
 
   componentWillUnmount() {
     this.dateInput.removeEventListener('select', this.preventDateSelection(), false)
-  }
-
-  getFromAndTo (date) {
-    const now = moment(date)
-    // beginning of current date in EST
-    const from = moment(`${date} 21:00:00`).subtract(1, 'day')
-    // end of specified date
-    const to = moment(`${date} 20:59:59`)
-
-    return { now, from, to }
   }
 
   getDisabledDates () {
@@ -103,7 +93,7 @@ class DateInput extends React.Component {
         pathname: '/games',
         search: `date=${e.iso}`
       })
-      // this.props.fetchNBAGames(this.getFromAndTo(e.iso))
+      // this.props.fetchNBAGames(this.props.parseDate(e.iso))
     }
 
     this.closeCalendar()
@@ -178,7 +168,8 @@ DateInput.propTypes = {
   dates: PropTypes.object.isRequired,
   updateNBAGames: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  parseDate: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({
