@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { groupBy } from 'lodash'
 import moment from 'moment'
 
@@ -38,17 +38,12 @@ class GamesList extends React.Component {
     const groupedMatches = this.groupedMatches()
 
     return (
-      <Row style={{ position: 'relative' }}>
-        {locationState && locationState.isTrial && (
-          <div className="small" styleName="trial-warning">
-            <p>
-              Trial accounts only have access to free games
-            </p>
-            <p>
-              Click <Link styleName="link" to={{ pathname: '/settings/subscription' }}>here</Link> to subscribe
-            </p>
-          </div>
-        )}
+      <div styleName="games-list">
+        {
+          locationState && locationState.isTrial && (
+            <Redirect to={{ pathname: '/settings/subscription', state: { from: '/games' } }} />
+          )
+        }
 
         <p
           className='small'
@@ -57,8 +52,6 @@ class GamesList extends React.Component {
             display: 'block',
             textAlign: 'right',
             padding: '0 35px 10px 0',
-            maxWidth: '1600px',
-            marginLeft: '65px'
           }}
         >
           All times displayed in EST
@@ -91,7 +84,7 @@ class GamesList extends React.Component {
             </Col>
           </Row>
         </div>
-      </Row>
+      </div>
     )
   }
 }
