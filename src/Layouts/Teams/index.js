@@ -1,7 +1,7 @@
 import Loadable from 'react-loadable'
 
 // Components
-import { Loading } from 'Components/Common'
+import Loading from 'Layouts/Loading'
 
 const TeamsLayout = Loadable({
   loader: () => import('./TeamsRoute'),
