@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { Row } from 'react-styled-flexboxgrid'
 
 // Components
-import { Spinner, DocumentTitle } from 'Components/Common'
+import { DocumentTitle } from 'Components/Common'
+import DelayedLoader from 'Layouts/Loading/DelayedLoader'
 import DateInput from './DateInput'
 import GamesList from './GamesList'
 
@@ -19,9 +20,10 @@ const Games = ({ games, fetchingGames, location: { state: locationState } }) => 
       </Row>
       {
         fetchingGames ? (
-          <div className="loader">
-            <Spinner lg show />
-          </div>
+          <DelayedLoader />
+          // <div className="loader">
+          //   <Spinner lg show />
+          // </div>
         ) : (
           <GamesList games={games} locationState={locationState} />
         )
