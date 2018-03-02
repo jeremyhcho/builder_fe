@@ -26,9 +26,11 @@ class PaymentSettings extends React.Component {
 
   componentWillReceiveProps (newProps) {
     // Toggle after billing information has been updated
-    if (!newProps.updatingBilling && this.props.updatingBilling) {
+
+    if (!newProps.updatingBilling && this.props.updatingBilling && !newProps.cardError) {
       this.toggleUpdateCard()
     }
+    /* eslint-enable react/no-unused-prop-types */
   }
 
   updateCard = ({ Name }) => {
@@ -84,7 +86,7 @@ class PaymentSettings extends React.Component {
 
   render () {
     const { billing, userId, handleSubmit } = this.props
-
+    /* eslint-disable react/no-unused-prop-types */
     return (
       <div>
         {
@@ -118,7 +120,8 @@ class PaymentSettings extends React.Component {
 
 PaymentSettings.defaultProps = {
   billing: {},
-  updatingBilling: false
+  updatingBilling: false,
+  cardError: false
 }
 
 PaymentSettings.propTypes = {
@@ -127,13 +130,18 @@ PaymentSettings.propTypes = {
   stripe: PropTypes.object.isRequired,
   updatingBilling: PropTypes.bool,
   userId: PropTypes.number.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  cardError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ])
 }
 
 const mapStateToProps = ({ auth, routines }) => ({
   userId: auth.authState.user.id,
   billing: routines.billing,
   updatingBilling: routines.isLoading.UPDATE_BILLING,
+  cardError: routines.error.billing
 })
 
 const mapDispatchToProps = {

@@ -49,7 +49,7 @@ function* initializeRoutine ({
       type: actionTypes.FAIL,
       key: reducerKey,
       loaderKey,
-      error: response.data
+      error: typeof response.data === 'string' && response.data.includes('!DOCTYPE html') ? false : response.data
     })
 
     if (onFail) {

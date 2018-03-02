@@ -16,7 +16,7 @@ import './AccountSettings.scss'
 // Helpers
 import { makeFilterSubscriptions } from 'Helpers/Selectors'
 
-const PaymentDetails = ({ card, subscription, toggleUpdate }) => {
+const PaymentDetails = ({ card, subscription, toggleUpdate, canceledSubscriptions }) => {
   const convertToMonth = (month) => {
     if (month.toString().length === 1) {
       return `0${month}`
@@ -28,6 +28,10 @@ const PaymentDetails = ({ card, subscription, toggleUpdate }) => {
   const renderPaymentDate = () => {
     if (subscription) {
       return moment.unix(subscription.current_period_end).format('MMM DD, YYYY')
+    }
+
+    if (!subscription && canceledSubscriptions.length) {
+      return moment.unix(canceledSubscriptions[0].current_period_end).format('MMM DD, YYYY')
     }
 
     return 'Not subscribed'
@@ -88,19 +92,22 @@ const PaymentDetails = ({ card, subscription, toggleUpdate }) => {
 }
 
 PaymentDetails.defaultProps = {
-  subscription: null
+  subscription: null,
+  canceledSubscriptions: []
 }
 
 PaymentDetails.propTypes = {
   card: PropTypes.object.isRequired,
   toggleUpdate: PropTypes.func.isRequired,
-  subscription: PropTypes.object
+  subscription: PropTypes.object,
+  canceledSubscriptions: PropTypes.array
 }
 
 const makeMapStateToProps = () => {
   const getSubscription = makeFilterSubscriptions()
   return ({ routines }) => ({
-    subscription: getSubscription(routines).subscription
+    subscription: getSubscription(routines).subscription,
+    canceledSubscriptions: getSubscription(routines).canceledSubscriptions
   })
 }
 
