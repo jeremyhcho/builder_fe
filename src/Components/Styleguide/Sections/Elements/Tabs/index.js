@@ -16,14 +16,18 @@ const tabItems = [
 ]
 
 class Tabs extends React.Component {
+  state = {
+    selected: null
+  }
+
   render () {
     return (
       <div className='flex' styleName='tabs'>
         <div className='flex'>
           <Tab
             tabs={tabItems}
-            onChange={(menuItem) => this.setState({ selected: menuItem.key })}
-            selectedKey='manager'
+            onChange={(e, menuItem) => this.setState({ selected: menuItem.key })}
+            selectedKey={this.state.selected}
           />
         </div>
       </div>
