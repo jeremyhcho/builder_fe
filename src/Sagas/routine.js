@@ -42,7 +42,7 @@ function* initializeRoutine ({
     })
 
     if (onSuccess) {
-      yield put(onSuccess())
+      yield put(onSuccess(...payload))
     }
   } catch ({ response }) {
     yield put({
