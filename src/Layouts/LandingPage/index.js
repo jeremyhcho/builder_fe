@@ -1,9 +1,10 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
-// Components
-import LandingPage from 'Components/LandingPage'
+import { Loading } from 'Components/Common'
 
-const LandingPageLayout = () => <Route to='/' component={LandingPage} />
+const LandingPageLayout = Loadable({
+  loader: () => import('./LandingPageRoute'),
+  loading: Loading
+})
 
 export default LandingPageLayout

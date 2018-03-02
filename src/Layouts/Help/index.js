@@ -1,12 +1,10 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
-import Help from 'Components/Help'
+import { Loading } from 'Components/Common'
 
-const HelpLayout = () => (
-  <Switch>
-    <Route to='/help' component={Help} />
-  </Switch>
-)
+const HelpLayout = Loadable({
+  loader: () => import('./HelpRoute'),
+  loading: Loading
+})
 
 export default HelpLayout
