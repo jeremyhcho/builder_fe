@@ -23,7 +23,7 @@ class Tabs extends React.Component {
           <Tab
             tabs={tabItems}
             onChange={(menuItem) => this.setState({ selected: menuItem.key })}
-            defaultKey='manager'
+            selectedKey='manager'
           />
         </div>
       </div>

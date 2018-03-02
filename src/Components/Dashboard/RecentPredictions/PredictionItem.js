@@ -22,7 +22,7 @@ const PredictionItem = ({ prediction, index, history }) => {
   const navigateToGame = () => history.push({ pathname: `/games/${prediction.match_id}/overview` })
 
   const marginTop = index === 0 ? '0' : '20px'
-  console.log(prediction.result, prediction)
+
   return (
     <div styleName='prediction' style={{ marginTop, height: 'auto' }} onClick={navigateToGame}>
       <div styleName='headers'>
