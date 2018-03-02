@@ -21,9 +21,6 @@ const Games = ({ games, fetchingGames, location: { state: locationState } }) => 
       {
         fetchingGames ? (
           <DelayedLoader />
-          // <div className="loader">
-          //   <Spinner lg show />
-          // </div>
         ) : (
           <GamesList games={games} locationState={locationState} />
         )

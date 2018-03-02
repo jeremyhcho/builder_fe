@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components & Icons
-import { Button, Spinner, DocumentTitle } from 'Components/Common'
+import { Button, DocumentTitle } from 'Components/Common'
+import DelayedLoader from 'Layouts/Loading/DelayedLoader'
 import ModelCard from './ModelCard'
 import NoModelsIcon from 'Assets/Icons/missing-content.svg'
 
@@ -82,11 +83,7 @@ class Models extends React.Component {
     const { fetchingModels, models } = this.props
 
     if (fetchingModels || !models) {
-      return (
-        <div className="loader">
-          <Spinner lg show />
-        </div>
-      )
+      return <DelayedLoader />
     }
 
     return (

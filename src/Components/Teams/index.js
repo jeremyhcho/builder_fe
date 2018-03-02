@@ -8,7 +8,8 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import './Teams.scss'
 
 // Components
-import { Spinner, DocumentTitle } from 'Components/Common'
+import { DocumentTitle } from 'Components/Common'
+import DelayedLoader from 'Layouts/Loading/DelayedLoader'
 import Conference from './Conference'
 
 // Actions
@@ -25,11 +26,7 @@ class Teams extends React.Component {
 
   render () {
     if (!this.props.teams.length || this.props.fetchingNBATeams) {
-      return (
-        <div className="loader">
-          <Spinner show lg />
-        </div>
-      )
+      return <DelayedLoader />
     }
 
     const teamsGroupedByConference = this.teamsGroupedByConference()

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 // Components
 import DelayedLoader from './DelayedLoader'
+// import TimedOutLoader from './TimedOutLoader'
 
 /*
   ** timedOut: true when loading gets past -default- 10000 (ms)
@@ -16,7 +17,7 @@ const Loading = ({ timedOut, pastDelay, error }) => {
   } else if (pastDelay) {
     return <DelayedLoader />
   } else if (timedOut) {
-    return <div />
+    return <DelayedLoader />
   }
 
   return <div />
