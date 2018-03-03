@@ -34,8 +34,10 @@ class GamesList extends React.Component {
   }
 
   render () {
-    const { locationState } = this.props
+    const { locationState, dateNow } = this.props
     const groupedMatches = this.groupedMatches()
+
+    console.log(groupedMatches, dateNow)
 
     return (
       <div styleName="games-list">
