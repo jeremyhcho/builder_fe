@@ -28,7 +28,7 @@ const PredictionItem = ({ prediction, index, history }) => {
       <div styleName='headers'>
         <div className='semibold label'>
           <span className='small' styleName={resultClass} style={{ textAlign: 'center' }}>
-            {prediction.result.toUpperCase()}
+            {prediction.result ? prediction.result.toUpperCase() : 'N/A'}
           </span>
         </div>
 
