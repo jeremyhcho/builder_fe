@@ -133,6 +133,7 @@ class ScheduledModelSelector extends React.Component {
                       ) : (
                         <div ref={ref => this.toggleCol = ref}>
                           <Toggle
+                            toggleStyles={{ padding: '20px', cursor: 'pointer' }}
                             name={matchModel.id}
                             checked={this.checkModelStatus(matchModel.status)}
                             onChange={() => this.changeModelStatus(matchModel)}

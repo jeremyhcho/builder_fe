@@ -5,7 +5,7 @@ import classNames from 'classnames'
 // CSS
 import './Toggle.scss'
 
-const Toggle = ({ checked, onChange, disabled, ...inputProps }) => {
+const Toggle = ({ checked, onChange, disabled, toggleStyles, ...inputProps }) => {
   const checkedClass = classNames('box', {
     checked,
     disabled,
@@ -13,7 +13,7 @@ const Toggle = ({ checked, onChange, disabled, ...inputProps }) => {
   })
 
   return (
-    <label styleName="toggle">
+    <label styleName="toggle" style={toggleStyles}>
       <input
         type="checkbox"
         checked={checked}
@@ -29,10 +29,15 @@ const Toggle = ({ checked, onChange, disabled, ...inputProps }) => {
   )
 }
 
+Toggle.defaultProps = {
+  toggleStyles: {}
+}
+
 Toggle.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  toggleStyles: PropTypes.object
 }
 
 Toggle.defaultProps = {

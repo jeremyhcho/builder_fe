@@ -119,12 +119,12 @@ class CompletedModelSelector extends React.Component {
                 <p className="semibold">{matchModel.type[0].toUpperCase() + matchModel.type.substr(1)}</p>
               </Col>
 
-              <Col xs={3}>
+              <Col xs={2}>
                 <p className="label">Result</p>
                 <p className="semibold">{this.getResult(matchModel.result)}</p>
               </Col>
 
-              <Col xs={1}>
+              <Col xs={2}>
                 {
                   this.props.fetchingModel
                     && matchModel.id === this.state.changingModel.id ? (
@@ -133,6 +133,7 @@ class CompletedModelSelector extends React.Component {
                       <div ref={ref => this.toggleCol = ref}>
                         <Toggle
                           name={matchModel.id}
+                          toggleStyles={{ padding: '20px', cursor: 'pointer' }}
                           disabled
                           checked={this.checkModelStatus(matchModel.status)}
                           onChange={() => null}
