@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // Components
 import GameDetails from './GameDetails'
+import BetLog from './BetLog'
 import { QuartzLink } from 'Components/Common'
 
 // CSS
@@ -11,7 +12,16 @@ import './GameCard.scss'
 
 class GameCard extends React.Component {
   state = {
-    showBets: false
+    showBets: true,
+    cardHeight: 0
+  }
+
+  getCardHeight (cardHeight) {
+    this.setState({ cardHeight })
+  }
+
+  toggleShowBets = () => {
+    this.setState({ showBets: !this.state.showBets })
   }
 
   render () {
@@ -19,7 +29,18 @@ class GameCard extends React.Component {
 
     return (
       <div styleName="game-card">
-        <GameDetails game={game} isTrial={isTrial} />
+        <GameDetails
+          game={game}
+          isTrial={isTrial}
+          toggleShowBets={this.toggleShowBets}
+          getCardHeight={(height) => this.getCardHeight(height)}
+        />
+
+        <BetLog
+          game={game}
+          toggleShowBets={this.toggleShowBets}
+          show={this.state.showBets}
+        />
 
         <QuartzLink to={{ pathname: `/games/${game.id}` }}>
           <div styleName="cta-row">

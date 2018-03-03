@@ -13,21 +13,6 @@ class GamesList extends React.Component {
     document.body.style.overflow = 'auto'
   }
 
-  // groupedMatches() {
-  //   const groupedMatches = groupBy(this.props.games, (game) => (
-  //     game.date.tz('America/New_York').format('D dddd MMMM')
-  //   ))
-  //   // split games by date, then sort games by time of the day
-  //   for (const date in groupedMatches) {
-  //     if (groupedMatches[date]) {
-  //       groupedMatches[date].sort((gameA, gameB) => (
-  //         gameA.date.format('H.mm') - gameB.date.format('H.mm')
-  //       ))
-  //     }
-  //   }
-  //
-  //   return groupedMatches
-  // }
   getDate () {
     return this.props.games[0].date.tz('America/New_York').format('D dddd MMMM')
   }
@@ -69,7 +54,9 @@ class GamesList extends React.Component {
         >
           {
             this.sortedGames().map(game => (
-              <GameCard game={game} key={game.id} />
+              <div styleName="game-container" key={game.id}>
+                <GameCard game={game} />
+              </div>
             ))
           }
         </div>

@@ -34,76 +34,107 @@
         &:last-child {
           margin-left: 20px;
         }
-
-        &:hover {
-          transition: transform 500ms ease;
-          transform: scale(1.04);
-        }
       }
     }
   }
 
   .match-row {
-    display: flex;
-    align-items: center;
     margin-bottom: 40px;
 
-    .left {
+    .game-status {
+      margin-bottom: 10px;
+    }
+
+    .team-row {
       display: flex;
-      flex-basis: 41.66%;
-      align-items: center;
+      line-height: 40px;
 
-      .team {
-        text-align: right;
-        flex-basis: 41.66%;
-      }
-
-      .logo {
-        flex-basis: 33.33%;
-        text-align: center;
+      .left {
+        display: flex;
+        flex: 5;
 
         img {
-          width: 45px;
-          height: 45px;
+          width: 40px;
+          height: 40px;
+          margin-right: 20px;
+        }
+
+        h4 {
+          margin-right: 10px;
+        }
+
+        .team-name {
+          font-weight: 600;
+
+          &.loser {
+            color: var(--dark-gray);
+          }
         }
       }
 
-      .points {
-        text-align: left;
-        flex-basis: 25%;
-      }
-    }
-
-    .center {
-      text-align: center;
-      flex-basis: 12.66%;
-    }
-
-    .right {
-      flex-basis: 41.66%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-
-      .team {
-        flex-basis: 41.66%;
-      }
-
-      .logo {
-        flex-basis: 33.33%;
-        text-align: center;
-
-        img {
-          width: 45px;
-          height: 45px;
-        }
-      }
-
-      .points {
+      .right {
+        flex: 1;
         text-align: right;
-        flex-basis: 25%;
+        margin-right: 10px;
       }
     }
+
+    // .left {
+    //   display: flex;
+    //   flex-basis: 41.66%;
+    //   align-items: center;
+    //
+    //   .team {
+    //     text-align: right;
+    //     flex-basis: 41.66%;
+    //   }
+    //
+    //   .logo {
+    //     flex-basis: 33.33%;
+    //     text-align: center;
+    //
+    //     img {
+    //       width: 45px;
+    //       height: 45px;
+    //     }
+    //   }
+    //
+    //   .points {
+    //     text-align: left;
+    //     flex-basis: 25%;
+    //   }
+    // }
+    //
+    // .center {
+    //   text-align: center;
+    //   flex-basis: 12.66%;
+    // }
+    //
+    // .right {
+    //   flex-basis: 41.66%;
+    //   display: flex;
+    //   justify-content: flex-end;
+    //   align-items: center;
+    //
+    //   .team {
+    //     flex-basis: 41.66%;
+    //   }
+    //
+    //   .logo {
+    //     flex-basis: 33.33%;
+    //     text-align: center;
+    //
+    //     img {
+    //       width: 45px;
+    //       height: 45px;
+    //     }
+    //   }
+    //
+    //   .points {
+    //     text-align: right;
+    //     flex-basis: 25%;
+    //   }
+    // }
   }
 
   .spread-row {

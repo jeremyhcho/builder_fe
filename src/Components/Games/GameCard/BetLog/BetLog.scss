@@ -1,0 +1,28 @@
+.bet-log {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+  background-color: #fff;
+  width: 100%;
+  transition: right 200ms ease, transform 200ms ease;
+
+  &.show {
+    right: 0;
+    top: 0;
+    transform: translateX(0);
+  }
+
+  .header {
+    display: flex;
+  }
+
+  .units {
+
+  }
+
+  .pick {
+
+  }
+}

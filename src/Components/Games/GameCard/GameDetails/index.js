@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import 'moment-timezone'
 
 // Icons
-import AtSign from 'Assets/Icons/at-sign.svg'
+// import AtSign from 'Assets/Icons/at-sign.svg'
 import ArrowUp from 'Assets/Icons/dg-arrow-up.svg'
 import ArrowDown from 'Assets/Icons/dr-arrow-down.svg'
 import HeartAdd from 'Assets/Icons/heart-add.svg'
@@ -13,140 +13,154 @@ import WindowAdd from 'Assets/Icons/window-add.svg'
 // CSS
 import './GameDetails.scss'
 
-const GameDetails = ({ game, isTrial }) => {
-  const renderLabel = () => {
-    if (isTrial && game.trial) return 'free game'
+class GameDetails extends React.Component {
+  componentDidMount () {
+    if (this.gameCard) {
+      this.props.getCardHeight(this.gameCard.clientHeight)
+    }
+  }
+
+  renderLabel () {
+    if (this.props.isTrial && this.props.game.trial) return 'free game'
     return 'standard'
   }
 
-  const labelStyle = classNames('label', {
-    free: isTrial && game.trial
-  })
-
-  const renderGameStatus = () => {
+  renderGameStatus () {
+    const { game } = this.props
     const time = game.date.tz('America/New_York')
 
     switch (game.status) {
       case 'SCHEDULED':
         if (time.minutes() === 0) return time.format('hA')
 
-        return time.format('h:mmA')
+        return `Scheduled ${time.format('h:mm A')}`
 
       case 'INPROGRESS':
-        return 'IN PROGRESS'
+        return 'In progress'
 
       case 'CLOSED':
-        return 'FINAL'
+        return 'Final'
 
       default:
         return game.status
     }
   }
 
-  const renderSpreadStats = (team) => ({
-    moneyLine: game[team].odds.moneyline,
-    spread: game[team].odds.spread,
-    spreadOdds: game[team].odds.spread_odds,
-    total: game[team].odds.total
-  })
+  renderSpreadStats (team) {
+    const { game } = this.props
 
-  return (
-    <div styleName="game-details">
-      <div styleName="label-row">
-        <div styleName="left">
-          <p styleName={labelStyle} className="small label">
-            {renderLabel()}
-          </p>
-        </div>
+    return ({
+      moneyLine: game[team].odds.moneyline,
+      spread: game[team].odds.spread,
+      spreadOdds: game[team].odds.spread_odds,
+      total: game[team].odds.total
+    })
+  }
 
-        <div styleName="right">
-          <span><HeartAdd height={18} width={18} /></span>
-          <span><WindowAdd height={18} width={18} /></span>
-        </div>
-      </div>
+  render () {
+    const { game, isTrial, toggleShowBets } = this.props
 
-      <div styleName="match-row">
-        <div styleName="left">
-          <div styleName="team">
-            <p className="semibold small label">{game.away.city}</p>
-            <h4 className="semibold">{game.away.name}</h4>
+    const labelStyle = classNames('label', {
+      free: isTrial && game.trial
+    })
+
+    return (
+      <div styleName="game-details" ref={gameCard => this.gameCard = gameCard}>
+        <div styleName="label-row">
+          <div styleName="left">
+            <p styleName={labelStyle} className="small label">
+              {this.renderLabel()}
+            </p>
           </div>
 
-          <div styleName="logo">
-            <img src={game.away.image} />
-          </div>
+          <div styleName="right">
+            <span>
+              <HeartAdd height={18} width={18} />
+            </span>
 
-
-          <div styleName="points">
-            <h4 className="semibold">{game.away.points}</h4>
-          </div>
-        </div>
-
-        <div styleName="center">
-          <AtSign width={16} height={16} />
-          <p className="semibold">
-            {renderGameStatus()}
-          </p>
-        </div>
-
-        <div styleName="right">
-          <div styleName="points">
-            <h4 className="semibold">{game.home.points}</h4>
-          </div>
-
-          <div styleName="logo">
-            <img src={game.home.image} />
-          </div>
-
-          <div styleName="team">
-            <p className="semibold small label">{game.home.city}</p>
-            <h4 className="semibold">{game.home.name}</h4>
+            <span onClick={toggleShowBets}>
+              <WindowAdd height={18} width={18} />
+            </span>
           </div>
         </div>
-      </div>
 
-      <div styleName="spread-row">
-        <div styleName="labels">
-          <p className="label" styleName="money-line">moneyline</p>
-          <p className="label" styleName="spread">spread</p>
-          <p className="label" styleName="total">total</p>
-        </div>
+        <div styleName="match-row">
+          <h4 styleName="game-status" className="semibold">{this.renderGameStatus()}</h4>
 
-        <div styleName="values">
           {
             ['away', 'home'].map(team => {
-              const spreadStats = renderSpreadStats(team)
+              const loser = game.away.points > game.home.points ? 'home' : 'away'
+
+              const teamNameStyle = classNames('team-name', {
+                loser: team === loser
+              })
 
               return (
-                <div key={team} styleName="value-row">
-                  <div styleName="value money-line">
+                <div styleName="team-row" key={team}>
+                  <div styleName="left">
                     <img src={game[team].image} />
-                    <p>{spreadStats.moneyLine}</p>
+
+                    <h4 styleName={teamNameStyle}>{game[team].city} {game[team].name}</h4>
+
+                    <p styleName={teamNameStyle}>
+                      {`(${game[team].wins}-${game[team].losses})`}
+                    </p>
                   </div>
 
-                  <div styleName="value spread">
-                    <img src={game[team].image} />
-                    <p>{spreadStats.spread} {`(${spreadStats.spreadOdds})`}</p>
-                  </div>
-
-                  <div styleName="value total">
-                    {team === 'away' ? <ArrowUp height={14} width={14} />
-                      : <ArrowDown height={14} width={14} />}
-                    <p>{spreadStats.total}</p>
+                  <div styleName="right">
+                    <h1 className="semibold">{game[team].points}</h1>
                   </div>
                 </div>
               )
             })
           }
         </div>
+
+        <div styleName="spread-row">
+          <div styleName="labels">
+            <p className="label small" styleName="money-line">moneyline</p>
+            <p className="label small" styleName="spread">spread</p>
+            <p className="label small" styleName="total">total</p>
+          </div>
+
+          <div styleName="values">
+            {
+              ['away', 'home'].map(team => {
+                const spreadStats = this.renderSpreadStats(team)
+
+                return (
+                  <div key={team} styleName="value-row">
+                    <div styleName="value money-line">
+                      <img src={game[team].image} />
+                      <p className="small">{spreadStats.moneyLine}</p>
+                    </div>
+
+                    <div styleName="value spread">
+                      <img src={game[team].image} />
+                      <p className="small">{spreadStats.spread} {`(${spreadStats.spreadOdds})`}</p>
+                    </div>
+
+                    <div styleName="value total">
+                      {team === 'away' ? <ArrowUp height={14} width={14} />
+                        : <ArrowDown height={14} width={14} />}
+                      <p className="small">{spreadStats.total}</p>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 GameDetails.propTypes = {
   game: PropTypes.object.isRequired,
-  isTrial: PropTypes.bool.isRequired
+  isTrial: PropTypes.bool.isRequired,
+  toggleShowBets: PropTypes.func.isRequired,
+  getCardHeight: PropTypes.func.isRequired
 }
 
 export default GameDetails
