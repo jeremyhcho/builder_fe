@@ -26,7 +26,6 @@ class DateInput extends React.Component {
     if (this.props.location.search.length) {
       return this.props.updateNBAGames(this.props.parseDate(this.props.location.search.slice(6)))
     }
-
     this.props.updateNBAGames(this.props.parseDate(this.props.dates.now._i))
     return this.props.history.push({
       pathname: '/games',
@@ -40,9 +39,23 @@ class DateInput extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.location.search !== this.props.location.search) {
-      this.props.updateNBAGames(this.props.parseDate(newProps.location.search.slice(6)))
+    if (!newProps.location.search.length) {
+      const today = moment(moment().format('YYYY-MM-DD'))._i
+      this.props.updateNBAGames(this.props.parseDate(today))
+      return this.props.history.push({
+        pathname: '/games',
+        search: `date=${today}`
+      })
     }
+
+    if (newProps.dates.now._i !== this.props.dates.now._i) {
+      return this.props.history.push({
+        pathname: '/games',
+        search: `date=${newProps.dates.now._i}`
+      })
+    }
+
+    return null
   }
 
   componentWillUnmount() {
@@ -89,11 +102,11 @@ class DateInput extends React.Component {
   handleSelect = (e) => {
     // sets date when selected from calendar
     if (e.iso !== this.props.dates.now._i) {
-      this.props.history.push({
-        pathname: '/games',
-        search: `date=${e.iso}`
-      })
-      // this.props.fetchNBAGames(this.props.parseDate(e.iso))
+      // this.props.history.push({
+      //   pathname: '/games',
+      //   search: `date=${e.iso}`
+      // })
+      this.props.updateNBAGames(this.props.parseDate(e.iso))
     }
 
     this.closeCalendar()

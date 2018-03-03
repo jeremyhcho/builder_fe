@@ -26,10 +26,9 @@ class Games extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.location.search !== this.props.location.search) {
-      this.props.fetchNBAGames(this.getFromAndTo(
-        newProps.location.search.slice(6)
-      ))
+    if (newProps.location.search !== this.props.location.search
+      && newProps.location.search.length) {
+      this.props.fetchNBAGames(this.getFromAndTo(newProps.location.search.slice(6)))
     }
   }
 
@@ -52,6 +51,7 @@ class Games extends React.Component {
           <Row style={{ padding: '0 65px' }}>
             <DateInput parseDate={this.getFromAndTo} />
           </Row>
+
           {
             fetchingGames ? (
               <DelayedLoader />
