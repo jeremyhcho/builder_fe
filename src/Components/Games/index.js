@@ -48,7 +48,7 @@ class Games extends React.Component {
     return (
       <DocumentTitle title='Quartz - NBA Schedule' header='Games'>
         <div>
-          <Row style={{ padding: '0 65px' }}>
+          <Row style={{ padding: '0 65px', margin: '0' }}>
             <DateInput parseDate={this.getFromAndTo} />
           </Row>
 

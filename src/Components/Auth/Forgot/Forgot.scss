@@ -27,7 +27,7 @@
   }
 
   .email-sent {
-    box-shadow: 0 4px 8px -2px rgba(9, 30, 66, .28), 0 0 1px rgba(9, 30, 66, .3);
+    box-shadow: var(--box-shadow);
     padding: 20px;
   }
 
