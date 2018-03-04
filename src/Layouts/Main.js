@@ -14,6 +14,7 @@ import TeamsLayout from './Teams'
 import SettingsLayout from './Settings'
 import ModelsLayout from './Models'
 import AdminLayout from './Admin'
+import BetsLayout from './Bets'
 
 // Assets
 import Lock from 'Assets/Icons/lock.svg'
@@ -116,6 +117,7 @@ const MainLayout = ({
             <Route path='/teams' component={TeamsLayout} />
             <Route path='/models' component={ModelsLayout} />
             <Route path='/settings' component={SettingsLayout} />
+            <Route path='/bets' component={BetsLayout} />
             <Redirect to='/dashboard' />
           </Switch>
         </div>

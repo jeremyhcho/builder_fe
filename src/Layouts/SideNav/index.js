@@ -16,6 +16,8 @@ import Dashboard from 'Assets/Icons/nav/dashboard.svg'
 import DashboardSelected from 'Assets/Icons/nav/dashboardSelected.svg'
 import Models from 'Assets/Icons/nav/model.svg'
 import ModelsSelected from 'Assets/Icons/nav/modelSelected.svg'
+import Bets from 'Assets/Icons/nav/bets.svg'
+import BetsSelected from 'Assets/Icons/nav/betsSelected.svg'
 
 // CSS
 import './SideNav.scss'
@@ -48,6 +50,13 @@ const navItems = [
     route: '/models',
     key: 'models',
     sectionName: 'Models'
+  },
+  {
+    icon: Bets,
+    selectedIcon: BetsSelected,
+    route: '/bets',
+    key: 'bets',
+    sectionName: 'Bets'
   }
 ]
 

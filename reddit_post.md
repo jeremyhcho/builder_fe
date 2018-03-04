@@ -1,6 +1,6 @@
 ## **Quartz Dailies**
 
-**Season Record: 5-3**
+**Season Record: 13-10 (56.5%)**
 
 Build your own simple models with [**Quartz**](https://www.quartzapp.com) or find us on [twitter](https://twitter.com/Quartz_App).
 
@@ -8,17 +8,21 @@ Build your own simple models with [**Quartz**](https://www.quartzapp.com) or fin
 
 &nbsp;
 
-### [**Yesterday**](https://www.reddit.com/r/sportsbook/comments/80j9xq/nba_daily_discussion_22718_tuesday/duxbiuh/)
+### [**Yesterday**](https://www.reddit.com/r/sportsbook/comments/81bey1/nba_daily_discussion_3218_friday/dv390p6/)
 
-Our model hit the mark yesterday on all 3 posted matches with a combined variance of 1 point across three games.
+Wiggins missing all three of his free throws near the end of regulation cost us from ending positive, but shit happens. Shoutout to the guy who went 7-3 with his Quartz model last night!
 
 &nbsp;
 
 | Game      | Pick        | Result |
 | --------- | ----------- | ------ |
-| LAC @ DEN	| LAC +5	    | ✅ |
-| PHI @ MIA | MIA +1      | ✅ |
-| BKN @ CLE | BKN +10.5   | ✅ |
+| MIN @ UTA	| MIN +7	    | ❌ |
+| GSW @ ATL |	GSW -13     | ❌ |
+| DAL @ CHI |	CHI +2      | ✅ |
+| CHA @ PHI |	CHA +4.5    | ❌ |
+| IND @ MIL |	IND +4      | ✅ |
+| NYK @ LAC |	NYK +9      | ❌ |
+| TOR @ WAS |	TOR -4      | ✅ |
 
 &nbsp;
 
@@ -26,9 +30,13 @@ Our model hit the mark yesterday on all 3 posted matches with a combined varianc
 
 | Game      | Pick        | Value   |
 | --------- | ----------- | ------- |
-| LAC @ DEN	| LAC +5	    | +7.75   |
-| PHI @ MIA |	MIA +1      | +1.33   |
+| DET @ MIA	| DET +6	    | +3.72   |
+| BOS @ HOU |	BOS +8      | +3.87   |
 | BKN @ CLE |	BKN +10.5   | +4.53   |
+| DEN @ CLE | DEN +5      | +4.93   |
+| LAL @ SAS | LAL +5.5    | +5.16   |
+| OKC @ POR | OKC +4.5    | +2.63   |
+
 
 &nbsp;
 

@@ -1,10 +1,13 @@
-// games
+// Games
 export * from './games'
 export * from './games/gameDetails'
 
-// teams
+// Teams
 export * from './teams'
 export * from './teams/teamDetails'
 
-// models
+// Models
 export * from './models'
+
+// Bets
+export * from './bets'
