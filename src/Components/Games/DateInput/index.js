@@ -117,6 +117,7 @@ class DateInput extends React.Component {
     if (e.relatedTarget && e.relatedTarget.getAttribute('aria-label') === 'calendar') {
       return
     }
+
     this.closeCalendar()
   }
 
