@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import 'moment-timezone'
 
+// Components
+import { Tooltip } from 'Components/Common'
+
 // Icons
 // import AtSign from 'Assets/Icons/at-sign.svg'
 import ArrowUp from 'Assets/Icons/dg-arrow-up.svg'
@@ -14,12 +17,6 @@ import WindowAdd from 'Assets/Icons/window-add.svg'
 import './GameDetails.scss'
 
 class GameDetails extends React.Component {
-  componentDidMount () {
-    if (this.gameCard) {
-      this.props.getCardHeight(this.gameCard.clientHeight)
-    }
-  }
-
   renderLabel () {
     if (this.props.isTrial && this.props.game.trial) return 'free game'
     return 'standard'
@@ -58,14 +55,18 @@ class GameDetails extends React.Component {
   }
 
   render () {
-    const { game, isTrial, toggleShowBets } = this.props
+    const { game, isTrial, toggleShowBets, showBets } = this.props
+
+    const gameDetailsStyle = classNames('game-details', {
+      hide: showBets
+    })
 
     const labelStyle = classNames('label', {
       free: isTrial && game.trial
     })
 
     return (
-      <div styleName="game-details" ref={gameCard => this.gameCard = gameCard}>
+      <div styleName={gameDetailsStyle}>
         <div styleName="label-row">
           <div styleName="left">
             <p styleName={labelStyle} className="small label">
@@ -75,11 +76,17 @@ class GameDetails extends React.Component {
 
           <div styleName="right">
             <span>
-              <HeartAdd height={18} width={18} />
+              <HeartAdd height={18} width={18} data-tip-for="heart-add" />
+              <Tooltip id="heart-add" pos="left">
+                Add a snackbar
+              </Tooltip>
             </span>
 
             <span onClick={toggleShowBets}>
-              <WindowAdd height={18} width={18} />
+              <WindowAdd height={18} width={18} data-tip-for="bets" />
+              <Tooltip id="bets" pos="bottom">
+                Bet log
+              </Tooltip>
             </span>
           </div>
         </div>
@@ -160,7 +167,7 @@ GameDetails.propTypes = {
   game: PropTypes.object.isRequired,
   isTrial: PropTypes.bool.isRequired,
   toggleShowBets: PropTypes.func.isRequired,
-  getCardHeight: PropTypes.func.isRequired
+  showBets: PropTypes.bool.isRequired
 }
 
 export default GameDetails

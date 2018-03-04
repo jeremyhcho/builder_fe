@@ -1,5 +1,6 @@
 .bet-log {
   position: absolute;
+  padding: 25px 25px 0;
   z-index: 1;
   top: 0;
   right: 0;
@@ -7,22 +8,72 @@
   background-color: #fff;
   width: 100%;
   transition: right 200ms ease, transform 200ms ease;
+  pointer-events: none;
 
   &.show {
+    // z-index: 1;
     right: 0;
     top: 0;
     transform: translateX(0);
+    pointer-events: all;
   }
 
   .header {
     display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h4 {
+      margin-left: 20px;
+    }
   }
 
-  .units {
-
+  .spread-buttons {
+    margin-bottom: 40px;
   }
 
-  .pick {
 
+  .row {
+    display: flex;
+
+    &.units {
+      margin-bottom: 40px;
+      align-items: center;
+    }
+
+    &.pick {
+
+    }
+
+    .left {
+      flex: 1;
+      position: relative;
+
+      span {
+        position: absolute;
+        top: 2px;
+        right: 5px;
+      }
+    }
+
+    .right {
+      flex: 5;
+      padding-left: 10px;
+
+      .team-cards {
+        text-align: center;
+        padding: 25px 35px;
+        box-shadow: var(--box-shadow);
+
+        &:first-child {
+          margin-right: 30px;
+        }
+
+        img {
+          width: 75px;
+          height: 75px;
+        }
+      }
+    }
   }
 }

@@ -16,10 +16,6 @@ class GameCard extends React.Component {
     cardHeight: 0
   }
 
-  getCardHeight (cardHeight) {
-    this.setState({ cardHeight })
-  }
-
   toggleShowBets = () => {
     this.setState({ showBets: !this.state.showBets })
   }
@@ -32,8 +28,8 @@ class GameCard extends React.Component {
         <GameDetails
           game={game}
           isTrial={isTrial}
+          showBets={this.state.showBets}
           toggleShowBets={this.toggleShowBets}
-          getCardHeight={(height) => this.getCardHeight(height)}
         />
 
         <BetLog

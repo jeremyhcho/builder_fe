@@ -1,6 +1,11 @@
 .game-details {
   padding: 25px 25px 0;
 
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .label-row {
     display: flex;
     align-items: center;
@@ -78,63 +83,6 @@
         margin-right: 10px;
       }
     }
-
-    // .left {
-    //   display: flex;
-    //   flex-basis: 41.66%;
-    //   align-items: center;
-    //
-    //   .team {
-    //     text-align: right;
-    //     flex-basis: 41.66%;
-    //   }
-    //
-    //   .logo {
-    //     flex-basis: 33.33%;
-    //     text-align: center;
-    //
-    //     img {
-    //       width: 45px;
-    //       height: 45px;
-    //     }
-    //   }
-    //
-    //   .points {
-    //     text-align: left;
-    //     flex-basis: 25%;
-    //   }
-    // }
-    //
-    // .center {
-    //   text-align: center;
-    //   flex-basis: 12.66%;
-    // }
-    //
-    // .right {
-    //   flex-basis: 41.66%;
-    //   display: flex;
-    //   justify-content: flex-end;
-    //   align-items: center;
-    //
-    //   .team {
-    //     flex-basis: 41.66%;
-    //   }
-    //
-    //   .logo {
-    //     flex-basis: 33.33%;
-    //     text-align: center;
-    //
-    //     img {
-    //       width: 45px;
-    //       height: 45px;
-    //     }
-    //   }
-    //
-    //   .points {
-    //     text-align: right;
-    //     flex-basis: 25%;
-    //   }
-    // }
   }
 
   .spread-row {
