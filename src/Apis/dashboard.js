@@ -7,3 +7,7 @@ export const apiFetchPublishedAnnouncements = () => (
 export const apiFetchRecentPredictions = () => (
   axios.get('/api/nba/v1/predictions/recent')
 )
+
+export const apiFetchDashboardPotd = () => (
+  axios.get('/api/v1/pick_of_the_days', { params: { dashboard: true } })
+)

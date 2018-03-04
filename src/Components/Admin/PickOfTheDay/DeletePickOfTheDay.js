@@ -70,7 +70,7 @@ DeletePickOfTheDay.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  deletingPickOfTheDay: routines.callingApi.DELETE_PICK_OF_THE_DAY
+  deletingPickOfTheDay: routines.isLoading.DELETE_PICK_OF_THE_DAY
 })
 
 const mapDispatchToProps = {

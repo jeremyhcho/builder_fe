@@ -82,6 +82,22 @@ class EditPickOfTheDay extends React.Component {
         <ReactQuill
           value={body}
           onChange={this.handleBodyChange}
+          modules={{
+            toolbar: [
+              { size: ['small', 'medium', 'large', 'huge'] },
+              'bold',
+              'italic',
+              'underline',
+              'strike',
+              { list: 'ordered' },
+              { list: 'bullet' },
+              'blockquote',
+              'align',
+              'image',
+              'link',
+              { color: [] }
+            ]
+          }}
         />
 
         <Button
@@ -176,7 +192,7 @@ EditPickOfTheDay.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  updatingPickOfTheDay: routines.callingApi.UPDATE_PICK_OF_THE_DAY,
+  updatingPickOfTheDay: routines.isLoading.UPDATE_PICK_OF_THE_DAY,
   potd: routines.admin.pickOfTheDay,
   potds: routines.admin.pickOfTheDays
 })

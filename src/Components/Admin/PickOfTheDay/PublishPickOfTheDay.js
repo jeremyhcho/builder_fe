@@ -95,7 +95,7 @@ PublishPickOfTheDay.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  publishingPickOfTheDay: routines.callingApi.PUBLISH_PICK_OF_THE_DAY
+  publishingPickOfTheDay: routines.isLoading.PUBLISH_PICK_OF_THE_DAY
 })
 
 const mapDispatchToProps = {

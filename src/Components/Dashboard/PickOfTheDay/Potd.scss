@@ -1,0 +1,27 @@
+.potd {
+  max-height: 500px;
+  overflow-y: auto;
+
+  a {
+    color: var(--dark-blue);
+    text-decoration: underline;
+  }
+
+  ol, ul {
+    list-style-position: inside;
+    margin-left: 30px;
+  }
+
+  li {
+    list-style-type: inherit;
+    margin-bottom: 5px;
+  }
+
+  strong {
+    margin-right: 5px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

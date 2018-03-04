@@ -72,6 +72,22 @@ class CreatePickOfTheDay extends React.Component {
             value={body}
             onChange={this.handleBodyChange}
             style={{ height: '100%' }}
+            modules={{
+              toolbar: [
+                { size: ['small', 'medium', 'large', 'huge'] },
+                'bold',
+                'italic',
+                'underline',
+                'strike',
+                { list: 'ordered' },
+                { list: 'bullet' },
+                'blockquote',
+                'align',
+                'image',
+                'link',
+                { color: [] }
+              ]
+            }}
           />
         </div>
 
@@ -157,7 +173,7 @@ CreatePickOfTheDay.propTypes = {
 }
 
 const mapStateToProps = ({ routines }) => ({
-  creatingPickOfTheDay: routines.callingApi.CREATE_PICK_OF_THE_DAY,
+  creatingPickOfTheDay: routines.isLoading.CREATE_PICK_OF_THE_DAY,
   potd: routines.admin.pickOfTheDays
 })
 
