@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import moment from 'moment'
+import moment from 'moment-timezone'
 
 // Components
 import { Card } from 'Components/Common'
@@ -22,7 +22,7 @@ class PickOfTheDay extends React.Component {
     return (
       <Card label='Pick of the Day' style={{ margin: 0 }} wrapperStyle={{ padding: '40px' }}>
         <p className='label small'>
-          {moment(this.props.potd.published_date).format('dddd, MMMM Do')}
+          {moment(this.props.potd.published_date).tz('America/Los_Angeles').format('dddd, MMMM Do')}
         </p>
 
         <h3 className='semibold' style={{ marginTop: '8px' }}>{this.props.potd.title}</h3>
