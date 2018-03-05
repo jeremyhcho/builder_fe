@@ -18,7 +18,21 @@ import { getNBAMatchBet } from 'Helpers/Selectors'
 
 class BetLog extends React.Component {
   state = {
-    selectedBet: 'moneyline'
+    selectedBet: this.getInitialBet()
+  }
+
+  getInitialBet () {
+    const { game } = this.props
+
+    if (game.away.odds.moneyline) {
+      return 'moneyline'
+    }
+
+    if (game.away.odds.spread) {
+      return 'spread'
+    }
+
+    return 'total'
   }
 
   getMatchBetType () {

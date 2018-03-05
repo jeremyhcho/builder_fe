@@ -29,7 +29,7 @@
   }
 
   .spread-buttons {
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,7 +45,7 @@
 
       .cta {
         position: absolute;
-        top: -76px;
+        top: -127px;
         right: 0;
       }
     }
@@ -68,12 +68,12 @@
     }
 
     .right {
-      width: 250px;
+      width: 280px;
       padding-left: 10px;
 
       .team-card {
         text-align: center;
-        padding: 15px 25px;
+        padding: 15px 0;
         box-shadow: var(--box-shadow);
         cursor: pointer;
         position: relative;

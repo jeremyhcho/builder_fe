@@ -5,13 +5,15 @@ import { groupBy } from 'lodash'
 import moment from 'moment-timezone'
 
 // Actions
-import { fetchNBABets } from 'Actions'
+import { fetchNBABets, closeBetModal } from 'Actions'
 
 // Components
 import {
   DocumentTitle,
   Tab,
-  Checkbox
+  Checkbox,
+  Modal,
+  Button
 } from 'Components/Common'
 import BetsByDay from './BetsByDay'
 
@@ -57,7 +59,7 @@ class Bets extends React.Component {
   filterByDate (bets) {
     if (this.state.dateFilter === 'today') {
       return bets.filter(bet => (
-        moment(new Date(bet.updated_at))
+        moment(new Date(bet.match.date))
           .tz(moment.tz.guess())
           .isSame(moment.tz(moment.tz.guess()), 'day')
       ))
@@ -65,7 +67,7 @@ class Bets extends React.Component {
 
     if (this.state.dateFilter === 'yesterday') {
       return bets.filter(bet => (
-        moment(new Date(bet.updated_at))
+        moment(new Date(bet.match.date))
           .tz(moment.tz.guess())
           .isSame(moment.tz(moment.tz.guess()).subtract(1, 'day'))
       ))
@@ -96,7 +98,7 @@ class Bets extends React.Component {
   groupedBets () {
     return (
       groupBy(this.filteredBets(), (bet) => (
-        moment(new Date(bet.updated_at)).tz(moment.tz.guess()).format('MMMM Do, YYYY')
+        moment(new Date(bet.match.date)).tz(moment.tz.guess()).format('MMMM Do, YYYY')
       ))
     )
   }
@@ -137,6 +139,46 @@ class Bets extends React.Component {
     return num > 0 ? 'var(--dark-green)' : 'var(--dark-red)'
   }
 
+  renderBetForm () {
+    const { bets, betId } = this.props
+
+    if (!bets.length || betId === 0) {
+      return null
+    }
+
+    const bet = bets.find(bet => bet.id === this.props.betId)
+
+    return (
+      <div styleName='bet-edit' />
+    )
+  }
+
+  renderBetModal () {
+    return (
+      <Modal
+        header='Edit Bet'
+        toggle={this.props.closeBetModal}
+        isOpen={this.props.openBetModal}
+        footer={[
+          <Button
+            flat
+            key="cancel"
+          >
+            Cancel
+          </Button>,
+          <Button
+            primary
+            key="delete"
+          >
+            Save
+          </Button>
+        ]}
+      >
+        {this.renderBetForm()}
+      </Modal>
+    )
+  }
+
   render () {
     const groupedBets = this.groupedBets()
     const netResult = this.parseNetResult(groupedBets)
@@ -154,6 +196,7 @@ class Bets extends React.Component {
     return (
       <DocumentTitle title='Quartz - NBA Bets' header='Bets'>
         <div styleName='bets'>
+          {this.renderBetModal()}
           <Tab
             tabs={tabItems}
             selectedKey={this.state.dateFilter}
@@ -264,15 +307,21 @@ Bets.defaultProps = {
 
 Bets.propTypes = {
   fetchNBABets: PropTypes.func.isRequired,
-  bets: PropTypes.array
+  bets: PropTypes.array,
+  openBetModal: PropTypes.bool.isRequired,
+  betId: PropTypes.number.isRequired,
+  closeBetModal: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ routines }) => ({
-  bets: routines.nba.bets
+const mapStateToProps = ({ routines, nba }) => ({
+  bets: routines.nba.bets,
+  openBetModal: nba.bets.openBetModal,
+  betId: nba.bets.modalBetId
 })
 
 const mapDispatchToProps = {
-  fetchNBABets
+  fetchNBABets,
+  closeBetModal
 }
 
 export default connect(
