@@ -40,7 +40,11 @@
         }
       }
 
-      span {
+      .date {
+        margin-left: 10px;
+      }
+
+      .free {
         margin-left: 10px;
         color: var(--green);
         font-style: italic;
@@ -99,6 +103,12 @@
         flex: 1;
         text-align: right;
         margin-right: 10px;
+        position: relative;
+
+        .pointer-icon {
+          position: absolute;
+          top: 11px;
+        }
       }
     }
   }

@@ -13,6 +13,7 @@ import ArrowDown from 'Assets/Icons/red-arrow-down.svg'
 import HeartAdd from 'Assets/Icons/heart-add.svg'
 import WindowAdd from 'Assets/Icons/window-add.svg'
 import GrayWindowAdd from 'Assets/Icons/gray-window-add.svg'
+import LeftTriangle from 'Assets/Icons/left-triangle.svg'
 
 // CSS
 import './GameStats.scss'
@@ -37,6 +38,10 @@ class GameStats extends React.Component {
   renderGameStatus () {
     const time = this.props.game.date.tz('America/New_York')
     return time.format('h:mm A')
+  }
+
+  renderGameDate () {
+    return this.props.game.date.tz('America/New_York').format('ddd, M/D')
   }
 
   renderSpreadStats (team) {
@@ -81,9 +86,11 @@ class GameStats extends React.Component {
               {this.renderLabel()}
             </p>
 
+            <span className="small label" styleName="date">{this.renderGameDate()}</span>
+
             {
               isTrial && game.trial &&
-              <span>FREE</span>
+              <span styleName="free">FREE</span>
             }
           </div>
 
@@ -137,6 +144,10 @@ class GameStats extends React.Component {
 
                   <div styleName="right">
                     <h1 className="semibold">{game[team].points}</h1>
+                    {
+                      team !== loser &&
+                      <LeftTriangle styleName="pointer-icon" />
+                    }
                   </div>
                 </div>
               )

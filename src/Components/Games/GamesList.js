@@ -14,7 +14,11 @@ class GamesList extends React.Component {
   }
 
   getDate () {
-    return this.props.games[0].date.tz('America/New_York').format('D dddd MMMM')
+    if (this.props.games.length) {
+      return this.props.games[0].date.tz('America/New_York').format('dddd MMM D')
+    }
+
+    return null
   }
 
   sortedGames () {
@@ -25,7 +29,7 @@ class GamesList extends React.Component {
 
   render () {
     const { locationState } = this.props
-
+    console.log(this.scroller)
     return (
       <div styleName="games-list">
         {
@@ -34,17 +38,17 @@ class GamesList extends React.Component {
           )
         }
 
-        <p
-          className='small'
+        <div
           style={{
-            width: '100%',
-            display: 'block',
-            textAlign: 'right',
-            padding: '0 35px 10px 0',
+            padding: '15px 35px 10px 75px',
+            textAlign: 'right'
           }}
         >
-          All times displayed in EST
-        </p>
+          <p className='small'>
+            All times displayed in EST
+          </p>
+        </div>
+
 
         <div
           styleName="matches-container"
