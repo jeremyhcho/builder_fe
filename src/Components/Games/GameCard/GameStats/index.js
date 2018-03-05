@@ -62,7 +62,7 @@ class GameStats extends React.Component {
     }
 
     return ({
-      moneyline: game[team].odds.moneyline || '0',
+      moneyline: game[team].odds.moneyline || '-',
       spread: game[team].odds.spread || '-',
       spreadOdds: game[team].odds.spread_odds || '-',
       total: game[team].odds.total || '-'
