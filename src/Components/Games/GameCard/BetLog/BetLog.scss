@@ -57,7 +57,7 @@
     }
 
     .left {
-      flex: 1;
+      width: 80px;
       position: relative;
 
       span {
@@ -68,12 +68,12 @@
     }
 
     .right {
-      flex: 5;
+      width: 250px;
       padding-left: 10px;
 
       .team-card {
         text-align: center;
-        padding: 25px 35px;
+        padding: 15px 25px;
         box-shadow: var(--box-shadow);
         cursor: pointer;
         position: relative;
@@ -100,12 +100,12 @@
         }
 
         &:first-child {
-          margin-right: 30px;
+          margin-right: 20px;
         }
 
         img {
-          width: 75px;
-          height: 75px;
+          width: 55px;
+          height: 55px;
         }
 
         &:hover {

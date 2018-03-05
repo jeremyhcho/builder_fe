@@ -7,10 +7,16 @@ import './Bets.scss'
 // Helpers
 import { precisionRound } from 'Helpers'
 
+// Components
+import { IconDropdown, IconMenuItem } from 'Components/Common'
+
 // Assets
 import GreenArrowUp from 'Assets/Icons/green-arrow-up.svg'
 import RedArrowDown from 'Assets/Icons/red-arrow-down.svg'
 import AtSign from 'Assets/Icons/at-sign.svg'
+import Dots from 'Assets/Icons/horizontal-dots.svg'
+import Remove from 'Assets/Icons/remove.svg'
+import Edit from 'Assets/Icons/edit-pencil.svg'
 
 const roundTwo = precisionRound(2)
 
@@ -77,63 +83,90 @@ class BetsByDay extends React.Component {
         <ul>
           {
             bets.map(bet => (
-              <li key={bet.id} styleName='bet'>
-                <div styleName='col' style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <img
-                      src={bet.match.away.image}
-                      style={{
-                        width: '24px',
-                        height: '24px',
-                        marginRight: '5px'
-                      }}
-                    />
+              <li key={bet.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
+                <div styleName='bet'>
+                  <div styleName='col' style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <img
+                        src={bet.match.away.image}
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          marginRight: '5px'
+                        }}
+                      />
 
-                    <AtSign width={12} height={12} />
+                      <AtSign width={12} height={12} />
 
-                    <img
-                      src={bet.match.home.image}
-                      style={{
-                        width: '24px',
-                        height: '24px',
-                        marginLeft: '5px'
-                      }}
-                    />
+                      <img
+                        src={bet.match.home.image}
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          marginLeft: '5px'
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div styleName='col'>
+                    <p className='label small'>Type</p>
+                    <p className='semibold' style={{ marginTop: '4px' }}>
+                      {bet.bet_type.slice(0, 1).toUpperCase() + bet.bet_type.slice(1)}
+                    </p>
+                  </div>
+
+                  <div styleName='col'>
+                    <p className='label small'>Pick</p>
+                    {this.parsePickCol(bet)}
+                  </div>
+
+                  <div styleName='col'>
+                    <p className='label small'>Odds</p>
+                    <p className='semibold' style={{ marginTop: '4px' }}>{bet.odds}</p>
+                  </div>
+
+                  <div styleName='col'>
+                    <p className='label small'>Risk</p>
+                    <p className='semibold' style={{ marginTop: '4px' }}>{bet.units}U</p>
+                  </div>
+
+                  <div styleName='col'>
+                    <p className='label small'>To Win</p>
+                    <p className='semibold' style={{ marginTop: '4px' }}>
+                      {this.calculateWinInUnits(bet)}U
+                    </p>
+                  </div>
+
+                  <div styleName='col' style={{ display: 'flex', alignItems: 'center' }}>
+                    <p className='semibold'>{this.renderResult(bet)}</p>
                   </div>
                 </div>
 
-                <div styleName='col'>
-                  <p className='label small'>Type</p>
-                  <p className='semibold' style={{ marginTop: '4px' }}>
-                    {bet.bet_type.slice(0, 1).toUpperCase() + bet.bet_type.slice(1)}
-                  </p>
-                </div>
+                <IconDropdown
+                  icon={
+                    <Dots
+                      width={14}
+                      height={14}
+                      style={{
+                        transform: 'rotate(90deg)',
+                        marginTop: '6px'
+                      }}
+                    />
+                  }
+                  listStyle={{ width: '200px' }}
+                  onClick={() => console.log('Hello')}
+                  wrapperStyle={{ marginLeft: '5px' }}
+                  horizontalReverse
+                >
+                  <IconMenuItem icon={<Edit width={14} height={14} />}>
+                    Edit
+                  </IconMenuItem>
 
-                <div styleName='col'>
-                  <p className='label small'>Pick</p>
-                  {this.parsePickCol(bet)}
-                </div>
-
-                <div styleName='col'>
-                  <p className='label small'>Odds</p>
-                  <p className='semibold' style={{ marginTop: '4px' }}>{bet.odds}</p>
-                </div>
-
-                <div styleName='col'>
-                  <p className='label small'>Risk</p>
-                  <p className='semibold' style={{ marginTop: '4px' }}>{bet.units}U</p>
-                </div>
-
-                <div styleName='col'>
-                  <p className='label small'>To Win</p>
-                  <p className='semibold' style={{ marginTop: '4px' }}>
-                    {this.calculateWinInUnits(bet)}U
-                  </p>
-                </div>
-
-                <div styleName='col' style={{ display: 'flex', alignItems: 'center' }}>
-                  <p className='semibold'>{this.renderResult(bet)}</p>
-                </div>
+                  <IconMenuItem icon={<Remove width={16} height={16} />}>
+                    Delete
+                  </IconMenuItem>
+                </IconDropdown>
               </li>
             ))
           }

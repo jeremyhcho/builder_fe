@@ -7,8 +7,8 @@ import classNames from 'classnames'
 import { InfoBubble, Slider, Button } from 'Components/Common'
 
 // Icons
-import UpArrow from 'Assets/Icons/green-arrow-up'
-import DownArrow from 'Assets/Icons/red-arrow-down'
+import UpArrow from 'Assets/Icons/green-arrow-up.svg'
+import DownArrow from 'Assets/Icons/red-arrow-down.svg'
 import WhiteCheck from 'Assets/Icons/white-check.svg'
 
 // CSS
@@ -166,8 +166,8 @@ class BetType extends React.Component {
       const overUnderTag = { marginBottom: '8px' }
       return ([
         team === 'away'
-          ? <UpArrow height={50} width={75} key="image" />
-          : <DownArrow height={50} width={75} key="image" />,
+          ? <UpArrow height={30} width={45} key="image" />
+          : <DownArrow height={30} width={45} key="image" />,
 
         team === 'away'
           ? <p className="semibold label" style={overUnderTag} key="over">OVER</p>

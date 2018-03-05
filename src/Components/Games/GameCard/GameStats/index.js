@@ -137,17 +137,23 @@ class GameStats extends React.Component {
               return (
                 <div styleName="team-row" key={team}>
                   <div styleName="left">
-                    <img src={game[team].image} />
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <img src={game[team].image} />
+                    </div>
 
-                    <h4 styleName={teamNameStyle}>{game[team].city} {game[team].name}</h4>
+                    <div>
+                      <h4 className='semibold' styleName={teamNameStyle} style={{ fontSize: '16px' }}>
+                        {game[team].city} {game[team].name}
+                      </h4>
 
-                    <p styleName={teamNameStyle}>
-                      {`(${game[team].wins}-${game[team].losses})`}
-                    </p>
+                      <p className='small' styleName={teamNameStyle}>
+                        {`(${game[team].wins}-${game[team].losses})`}
+                      </p>
+                    </div>
                   </div>
 
                   <div styleName="right">
-                    <h1 className="semibold">{game[team].points}</h1>
+                    <h2 className="semibold">{game[team].points}</h2>
                     {
                       team !== loser && game.status === 'CLOSED' &&
                       <LeftTriangle styleName="pointer-icon" />

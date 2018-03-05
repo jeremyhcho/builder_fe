@@ -30,14 +30,7 @@ class GamesList extends React.Component {
           )
         }
 
-        <div
-          style={{
-            padding: '15px 35px 10px 75px',
-            textAlign: 'right',
-            maxWidth: '1600px',
-            marginLeft: '65px'
-          }}
-        >
+        <div styleName='timezone'>
           <p className='small'>
             All times displayed in EST
           </p>
@@ -50,7 +43,7 @@ class GamesList extends React.Component {
             this.scroller = ref
           }}
         >
-          <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', maxWidth: '1600px' }}>
+          <div styleName='matches-sub-container'>
             {
               this.sortedGames().map(game => (
                 <div styleName="game-container" key={game.id}>

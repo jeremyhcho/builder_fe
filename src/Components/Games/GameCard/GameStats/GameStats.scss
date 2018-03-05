@@ -73,7 +73,7 @@
   }
 
   .match-row {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 
     .game-status {
       font-size: 1.8rem;
@@ -82,16 +82,16 @@
 
     .team-row {
       display: flex;
-      line-height: 40px;
+      margin-bottom: 15px;
 
       .left {
         display: flex;
         flex: 5;
 
         img {
-          width: 40px;
-          height: 40px;
-          margin-right: 20px;
+          width: 30px;
+          height: 30px;
+          margin-right: 10px;
         }
 
         h4 {
@@ -99,8 +99,6 @@
         }
 
         .team-name {
-          font-weight: 600;
-
           &.loser {
             color: var(--dark-gray);
           }
@@ -115,7 +113,7 @@
 
         .pointer-icon {
           position: absolute;
-          top: 11px;
+          top: 5px;
         }
       }
     }
