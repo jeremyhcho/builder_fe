@@ -27,15 +27,13 @@ class ButtonGroup extends React.Component {
     if (defaultKey) {
       return buttons.find(buttonItem => buttonItem.key === defaultKey && !buttonItem.disabled)
     }
-    console.log(buttons, buttons[0])
+
     return buttons.find(buttonItem => !buttonItem.disabled)
   }
 
   render () {
     const { buttons, defaultKey, buttonStyle, ...props } = this.props
-    console.log(this.state)
-    console.log('buttons; ', buttons)
-    console.log(this.getInitialButton())
+
     return (
       <div styleName='button' {...props}>
         {
