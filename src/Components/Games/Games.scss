@@ -13,11 +13,10 @@
 
 .games-list {
   position: relative;
-  max-width: 1600px;
   width: 100%;
 
   .matches-container {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 175px);
     padding: 10px 0 65px 65px;
     overflow-y: auto;
     display: flex;

@@ -37,7 +37,12 @@ class GameStats extends React.Component {
 
   renderGameStatus () {
     const time = this.props.game.date.tz('America/New_York')
-    return time.format('h:mm A')
+
+    if (time.format('h:mm').split(':')[1] === '30') {
+      return time.format('h:mm A')
+    }
+
+    return time.format('h A')
   }
 
   renderGameDate () {
@@ -86,8 +91,6 @@ class GameStats extends React.Component {
               {this.renderLabel()}
             </p>
 
-            <span className="small label" styleName="date">{this.renderGameDate()}</span>
-
             {
               isTrial && game.trial &&
               <span styleName="free">FREE</span>
@@ -96,8 +99,8 @@ class GameStats extends React.Component {
 
           <div styleName="right">
             <span>
-              <HeartAdd height={18} width={18} data-tip-for="heart-add" />
-              <Tooltip id="heart-add" pos="left">
+              <HeartAdd height={18} width={18} data-tip-for={`${game.id}-heart-add`} />
+              <Tooltip id={`${game.id}-heart-add`} pos="top">
                 Add a snackbar
               </Tooltip>
             </span>
@@ -106,8 +109,8 @@ class GameStats extends React.Component {
               game.away.odds && game.home.odds ? (
                 <span onClick={toggleShowBets} style={{ cursor: 'pointer' }}>
                   <WindowAdd height={18} width={18} data-tip-for={`${game.id}-bets`} />
-                  <Tooltip id={`${game.id}-bets`} pos="bottom">
-                    Bet log
+                  <Tooltip id={`${game.id}-bets`} pos="top">
+                    Add Bet
                   </Tooltip>
                 </span>
               ) : (
@@ -120,6 +123,8 @@ class GameStats extends React.Component {
         </div>
 
         <div styleName="match-row">
+          <span className="small label" styleName="date">{this.renderGameDate()}</span>
+
           <div styleName="game-status" className="semibold">{this.renderGameStatus()}</div>
 
           {

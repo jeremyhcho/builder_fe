@@ -77,13 +77,16 @@
         box-shadow: var(--box-shadow);
         cursor: pointer;
         position: relative;
+        border-radius: 3px;
+        border: 2px solid transparent;
+        transition: transform 200ms ease;
 
         span {
           position: absolute;
           width: 25px;
           height: 25px;
           border-radius: 50%;
-          background-color: var(--green);
+          background-color: var(--blue);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -92,7 +95,7 @@
         }
 
         &.selected {
-          background-color: var(--lightest-gray);
+          border: 2px solid var(--blue);
           cursor: default;
         }
 
@@ -107,9 +110,7 @@
 
         &:hover {
           &:not(.selected) {
-            transition: background-color 200ms ease, transform 200ms ease;
             transform: scale(1.05);
-            background-color: var(--lightest-gray);
           }
         }
       }

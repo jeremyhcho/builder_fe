@@ -9,7 +9,7 @@
   .label-row {
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     .left {
       flex-basis: 50%;
@@ -24,11 +24,11 @@
         display: inline-block;
 
         &.scheduled {
-          background-color: var(--green);
+          background-color: var(--dark-blue);
         }
 
         &.closed {
-          background-color: var(--blue)
+          background-color: var(--tooltip-color);
         }
 
         &.inprogress {
@@ -36,12 +36,12 @@
         }
 
         &.free {
-          background-color: var(--green);
+          background-color: var(--dark-green);
         }
       }
 
       .date {
-        margin-left: 10px;
+        margin-right: 10px;
       }
 
       .free {
