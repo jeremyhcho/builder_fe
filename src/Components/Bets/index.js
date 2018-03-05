@@ -140,17 +140,18 @@ class Bets extends React.Component {
   }
 
   renderBetForm () {
-    const { bets, betId } = this.props
-
-    if (!bets.length || betId === 0) {
-      return null
-    }
-
-    const bet = bets.find(bet => bet.id === this.props.betId)
-
-    return (
-      <div styleName='bet-edit' />
-    )
+    // const { bets, betId } = this.props
+    //
+    // if (!bets.length || betId === 0) {
+    //   return null
+    // }
+    //
+    // const bet = bets.find(bet => bet.id === this.props.betId)
+    //
+    // return (
+    //   <div styleName='bet-edit' />
+    // )
+    return <div />
   }
 
   renderBetModal () {
