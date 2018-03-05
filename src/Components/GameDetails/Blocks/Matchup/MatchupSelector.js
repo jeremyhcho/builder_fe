@@ -19,14 +19,6 @@ class MatchupSelector extends React.Component {
     }
   }
 
-  findMatchType (matchup) {
-    if (matchup.away.match_type === 'AWAY') {
-      return matchup.away.short_name
-    }
-
-    return matchup.home.short_name
-  }
-
   render () {
     const { previousMeetings, fetchNBAMatchup, summary } = this.props
 
@@ -35,7 +27,7 @@ class MatchupSelector extends React.Component {
     }
 
     const options = previousMeetings.map(matchup => ({
-      label: `${moment(new Date(matchup.date)).format('MM/DD/YYYY')} @ ${this.findMatchType(matchup)}`,
+      label: `${moment(new Date(matchup.date)).format('MM/DD/YYYY')} @ ${matchup.home.short_name}`,
       value: matchup.id
     }))
 

@@ -3,6 +3,10 @@
   max-width: 1200px;
 
   .conference {
+    &:last-child {
+      padding-bottom: 30px;
+    }
+
     .team-item {
       cursor: pointer;
       display: flex;

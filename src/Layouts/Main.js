@@ -106,8 +106,7 @@ const MainLayout = ({
         <div
           style={{
             height: 'calc(100% - 95px)',
-            marginTop: '35px',
-            paddingBottom: '35px'
+            marginTop: '35px'
           }}
         >
           <Switch>
