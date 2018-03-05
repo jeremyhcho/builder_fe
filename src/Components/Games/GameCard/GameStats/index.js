@@ -145,7 +145,7 @@ class GameStats extends React.Component {
                   <div styleName="right">
                     <h1 className="semibold">{game[team].points}</h1>
                     {
-                      team !== loser &&
+                      team !== loser && game.status === 'CLOSED' &&
                       <LeftTriangle styleName="pointer-icon" />
                     }
                   </div>

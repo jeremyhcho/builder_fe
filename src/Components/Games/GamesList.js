@@ -29,7 +29,7 @@ class GamesList extends React.Component {
 
   render () {
     const { locationState } = this.props
-    console.log(this.scroller)
+
     return (
       <div styleName="games-list">
         {
