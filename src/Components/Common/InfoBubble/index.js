@@ -48,7 +48,8 @@ class InfoBubble extends React.Component {
       right: pos === 'right',
       bottom: pos === 'bottom',
       left: pos === 'left',
-      bottomRight: pos === 'bottomRight'
+      bottomRight: pos === 'bottomRight',
+      topRight: pos === 'topRight'
     })
 
     return (
@@ -88,7 +89,8 @@ InfoBubble.propTypes = {
     'right',
     'bottom',
     'left',
-    'bottomRight'
+    'bottomRight',
+    'topRight'
   ]).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.string,

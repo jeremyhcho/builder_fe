@@ -97,7 +97,11 @@ class BetType extends React.Component {
           match_id: game.id,
           bet_type: betType,
           units,
-          pick: selectedTeam.type === 'away' ? 'over' : 'under',
+          pick: selectedTeam.type === 'away' ? (
+            `O${game[selectedTeam.type].odds.total}`
+          ) : (
+            `U${game[selectedTeam.type].odds.total}`
+          ),
           odds: game[selectedTeam.type].odds.total_odds
         }
         break;
@@ -120,12 +124,12 @@ class BetType extends React.Component {
     }
 
     if (!Object.keys(matchBet).length) {
-      return <Button onClick={this.submitBet}>Submit bet</Button>
+      return <Button success onClick={this.submitBet}>Create</Button>
     }
 
     return (
-      <Button onClick={() => this.submitBet(matchBet.id)}>
-        Edit bet
+      <Button success onClick={() => this.submitBet(matchBet.id)}>
+        Save
       </Button>
     )
   }
@@ -179,8 +183,17 @@ class BetType extends React.Component {
             <p className="semibold">Units</p>
 
             <span>
-              <InfoBubble pos="bottomRight" width={300}>
-                Two plus two is four minus one thats three quick mafs.
+              <InfoBubble pos="topRight" width={300}>
+                <p
+                  className='small label'
+                  style={{ textAlign: 'left' }}
+                >
+                  WHAT IS THIS?
+                </p>
+
+                <p style={{ textAlign: 'left', marginTop: '10px' }}>
+                  Units denotes the amount of currency in "units" placed on the bet.
+                </p>
               </InfoBubble>
             </span>
           </div>
@@ -206,8 +219,17 @@ class BetType extends React.Component {
             <p className="semibold">Pick</p>
 
             <span>
-              <InfoBubble pos="bottomRight" width={300}>
-                Two plus two is four minus one thats three quick mafs.
+              <InfoBubble pos="topRight" width={300}>
+                <p
+                  className='small label'
+                  style={{ textAlign: 'left' }}
+                >
+                  WHAT IS THIS?
+                </p>
+
+                <p style={{ textAlign: 'left', marginTop: '10px' }}>
+                  "Pick" represents what side of the line you take on the given bet.
+                </p>
               </InfoBubble>
             </span>
           </div>
