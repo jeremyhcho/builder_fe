@@ -2,6 +2,7 @@ import { precisionRound } from 'Helpers'
 
 const ones = precisionRound(0)
 const tenths = precisionRound(1)
+const hundredths = precisionRound(2)
 
 const options = {
   linear: true,
@@ -17,6 +18,9 @@ const options = {
     callbacks: {
       title: (tooltips) => {
         return `Model win rate: ${tenths(tooltips[0].xLabel * 100)}%`
+      },
+      label: (tooltips) => {
+        return `Model spread prediction: ${hundredths(tooltips.yLabel)}`
       }
     }
   },

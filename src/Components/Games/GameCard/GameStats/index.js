@@ -72,7 +72,6 @@ class GameStats extends React.Component {
     })
 
     const labelStyle = classNames('label', {
-      free: isTrial && game.trial,
       scheduled: game.status === 'SCHEDULED',
       inprogress: game.status === 'INPROGRESS',
       closed: game.status === 'CLOSED'

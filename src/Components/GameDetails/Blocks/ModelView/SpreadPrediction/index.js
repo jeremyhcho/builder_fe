@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
 import regression from 'regression'
 import { uniqBy } from 'lodash'
+import outliers from 'outliers'
 
 // Components
 import {
@@ -79,6 +80,8 @@ class SpreadPrediction extends React.Component {
       { x: prediction.win_percent, y: prediction.spread }
     )).sort((a, b) => a.x - b.x)
 
+    const filteredDataPoints = dataPoints.filter(outliers('x'))
+
     if (!dataPoints.length) {
       return {}
     }
@@ -88,7 +91,7 @@ class SpreadPrediction extends React.Component {
         type: 'scatter',
         label: 'Model spread prediction',
         fill: false,
-        data: dataPoints,
+        data: filteredDataPoints,
         backgroundColor: '#3C90DF',
         borderColor: '#3C90DF',
         pointRadius: 1,
@@ -105,11 +108,11 @@ class SpreadPrediction extends React.Component {
         data: [
           {
             x: dataPoints[0].x,
-            y: this.getRegressionPoint(dataPoints[0].x)
+            y: this.getRegressionPoint(filteredDataPoints[0].x)
           },
           {
             x: dataPoints[dataPoints.length - 1].x,
-            y: this.getRegressionPoint(dataPoints[dataPoints.length - 1].x)
+            y: this.getRegressionPoint(filteredDataPoints[filteredDataPoints.length - 1].x)
           }
         ],
         lineTension: 0,
@@ -124,7 +127,7 @@ class SpreadPrediction extends React.Component {
         type: 'line',
         label: 'Vegas line spread',
         fill: false,
-        data: uniqBy(dataPoints, points => points.x).map(points => (
+        data: uniqBy(filteredDataPoints, points => points.x).map(points => (
           { x: points.x, y: aggregateSpreads[selected].vegas_spread }
         )),
         lineTension: 0,
