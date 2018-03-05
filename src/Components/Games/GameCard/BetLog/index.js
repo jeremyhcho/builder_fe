@@ -57,11 +57,14 @@ class BetLog extends React.Component {
         </header>
 
         <div styleName="spread-buttons">
-          <ButtonGroup
-            buttons={this.getBetTypes()}
-            onChange={(e, button) => this.setState({ selectedBet: button.key })}
-            defaultKey='moneyline'
-          />
+          {
+            game.away.odds &&
+            <ButtonGroup
+              buttons={this.getBetTypes()}
+              onChange={(e, button) => this.setState({ selectedBet: button.key })}
+              defaultKey='moneyline'
+            />
+          }
         </div>
 
         {
