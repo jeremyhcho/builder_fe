@@ -3,21 +3,36 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Components
-import GameDetails from './GameDetails'
+import GameStats from './GameStats'
 import BetLog from './BetLog'
 import { QuartzLink } from 'Components/Common'
 
 // CSS
 import './GameCard.scss'
 
+// Actions
+import { fetchNBAMatchBet } from 'Actions'
+
+// Helpers
+import { getNBAMatchBet } from 'Helpers/Selectors'
+
 class GameCard extends React.Component {
   state = {
-    showBets: true,
-    cardHeight: 0
+    showBets: false
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.matchBet && !this.props.matchBet) {
+      this.setState({ showBets: !this.state.showBets })
+    }
   }
 
   toggleShowBets = () => {
-    this.setState({ showBets: !this.state.showBets })
+    if (this.props.matchBet) {
+      return this.setState({ showBets: !this.state.showBets })
+    }
+
+    return this.props.fetchNBAMatchBet(this.props.game.id)
   }
 
   render () {
@@ -25,7 +40,7 @@ class GameCard extends React.Component {
 
     return (
       <div styleName="game-card">
-        <GameDetails
+        <GameStats
           game={game}
           isTrial={isTrial}
           showBets={this.state.showBets}
@@ -38,6 +53,8 @@ class GameCard extends React.Component {
           show={this.state.showBets}
         />
 
+        <hr />
+
         <QuartzLink to={{ pathname: `/games/${game.id}` }}>
           <div styleName="cta-row">
             <p className="semibold">View Details</p>
@@ -48,15 +65,30 @@ class GameCard extends React.Component {
   }
 }
 
-GameCard.propTypes = {
-  game: PropTypes.object.isRequired,
-  isTrial: PropTypes.bool.isRequired
+GameCard.defaultProps = {
+  matchBet: null
 }
 
-const mapStateToProps = ({ auth }) => ({
-  isTrial: auth.authState.user.trial
-})
+GameCard.propTypes = {
+  game: PropTypes.object.isRequired,
+  isTrial: PropTypes.bool.isRequired,
+  fetchNBAMatchBet: PropTypes.func.isRequired,
+  matchBet: PropTypes.array
+}
+
+const makeMapStateToProps = () => {
+  const getBet = getNBAMatchBet()
+  return ({ routines, auth }, { game }) => ({
+    matchBet: getBet(routines, game.id),
+    isTrial: auth.authState.user.trial
+  })
+}
+
+const mapDispatchToProps = {
+  fetchNBAMatchBet
+}
 
 export default connect(
-  mapStateToProps
+  makeMapStateToProps,
+  mapDispatchToProps
 )(GameCard)

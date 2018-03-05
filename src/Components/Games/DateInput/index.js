@@ -102,10 +102,6 @@ class DateInput extends React.Component {
   handleSelect = (e) => {
     // sets date when selected from calendar
     if (e.iso !== this.props.dates.now._i) {
-      // this.props.history.push({
-      //   pathname: '/games',
-      //   search: `date=${e.iso}`
-      // })
       this.props.updateNBAGames(this.props.parseDate(e.iso))
     }
 

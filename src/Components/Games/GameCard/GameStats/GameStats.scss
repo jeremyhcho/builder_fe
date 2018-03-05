@@ -9,7 +9,7 @@
   .label-row {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     .left {
       flex-basis: 50%;
@@ -17,14 +17,33 @@
       .label {
         padding: 4px 8px;
         color: #fff;
+        font-weight: 600;
         border-radius: var(--border-radius);
         text-transform: uppercase;
         background-color: var(--blue);
         display: inline-block;
 
+        &.scheduled {
+          background-color: var(--green);
+        }
+
+        &.closed {
+          background-color: var(--blue)
+        }
+
+        &.inprogress {
+          background-color: var(--gold);
+        }
+
         &.free {
           background-color: var(--green);
         }
+      }
+
+      span {
+        margin-left: 10px;
+        color: var(--green);
+        font-style: italic;
       }
     }
 
@@ -34,8 +53,6 @@
       justify-content: flex-end;
 
       span {
-        cursor: pointer;
-
         &:last-child {
           margin-left: 20px;
         }
@@ -47,6 +64,7 @@
     margin-bottom: 40px;
 
     .game-status {
+      font-size: 1.8rem;
       margin-bottom: 10px;
     }
 

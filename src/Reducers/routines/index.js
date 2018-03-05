@@ -75,7 +75,14 @@ const routines = (state = initialState, action) => {
     }
 
     case 'SUCCESS':
-      return transform(state, action.key, action.transform, action.loaderKey, action.response)
+      return transform(
+        state,
+        action.key,
+        action.transform,
+        action.loaderKey,
+        action.response,
+        action.payload
+      )
 
     case 'FAIL': {
       const failState = {

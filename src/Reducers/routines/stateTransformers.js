@@ -1,4 +1,5 @@
-const mutate = (response, transformAction, stateKey) => {
+const mutate = (response, transformAction, stateKey, payload) => {
+  // stateKey is currentState of the reducerKey's value
   switch (transformAction) {
     case 'replace':
       return response
@@ -6,8 +7,13 @@ const mutate = (response, transformAction, stateKey) => {
     case 'clear':
       return undefined
 
-    case 'concat':
+    case 'concat': {
+      if (!stateKey) {
+        return [response]
+      }
+
       return [...stateKey, response]
+    }
 
     case 'remove':
       return null
@@ -28,14 +34,14 @@ const mutate = (response, transformAction, stateKey) => {
       })
 
     default: {
-      return transformAction(response)
+      return transformAction(response, stateKey, payload)
     }
   }
 }
 
-const transform = (state, reducerKey, transformAction, loaderKey, response) => {
+const transform = (state, reducerKey, transformAction, loaderKey, response, payload) => {
   if (reducerKey.length === 1) {
-    const data = mutate(response, transformAction, state[reducerKey[0]])
+    const data = mutate(response, transformAction, state[reducerKey[0]], payload)
     return {
       ...state,
       [reducerKey[0]]: data,
@@ -60,7 +66,7 @@ const transform = (state, reducerKey, transformAction, loaderKey, response) => {
         [currentKey]: { ...state[currentKey] }
       })
     } else if (i === reducerKey.length - 1) {
-      const data = mutate(response, transformAction, stackedKeys[currentKey])
+      const data = mutate(response, transformAction, stackedKeys[currentKey], payload)
 
       Object.assign(stackedKeys, {
         ...stackedKeys,

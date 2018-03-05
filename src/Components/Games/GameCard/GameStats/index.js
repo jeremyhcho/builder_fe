@@ -8,46 +8,51 @@ import { Tooltip } from 'Components/Common'
 
 // Icons
 // import AtSign from 'Assets/Icons/at-sign.svg'
-import ArrowUp from 'Assets/Icons/dg-arrow-up.svg'
-import ArrowDown from 'Assets/Icons/dr-arrow-down.svg'
+import ArrowUp from 'Assets/Icons/green-arrow-up.svg'
+import ArrowDown from 'Assets/Icons/red-arrow-down.svg'
 import HeartAdd from 'Assets/Icons/heart-add.svg'
 import WindowAdd from 'Assets/Icons/window-add.svg'
+import GrayWindowAdd from 'Assets/Icons/gray-window-add.svg'
 
 // CSS
-import './GameDetails.scss'
+import './GameStats.scss'
 
-class GameDetails extends React.Component {
+class GameStats extends React.Component {
   renderLabel () {
-    if (this.props.isTrial && this.props.game.trial) return 'free game'
-    return 'standard'
+    switch (this.props.game.status) {
+      case 'SCHEDULED':
+        return 'UPCOMING'
+
+      case 'INPROGRESS':
+        return 'IN PROGRESS'
+
+      case 'CLOSED':
+        return 'FINAL'
+
+      default:
+        return 'FINAL'
+    }
   }
 
   renderGameStatus () {
-    const { game } = this.props
-    const time = game.date.tz('America/New_York')
-
-    switch (game.status) {
-      case 'SCHEDULED':
-        if (time.minutes() === 0) return time.format('hA')
-
-        return `Scheduled ${time.format('h:mm A')}`
-
-      case 'INPROGRESS':
-        return 'In progress'
-
-      case 'CLOSED':
-        return 'Final'
-
-      default:
-        return game.status
-    }
+    const time = this.props.game.date.tz('America/New_York')
+    return time.format('h:mm A')
   }
 
   renderSpreadStats (team) {
     const { game } = this.props
 
+    if (!game[team].odds) {
+      return {
+        moneyline: '-',
+        spread: '-',
+        spreadOdds: '-',
+        total: '-'
+      }
+    }
+
     return ({
-      moneyLine: game[team].odds.moneyline,
+      moneyline: game[team].odds.moneyline,
       spread: game[team].odds.spread,
       spreadOdds: game[team].odds.spread_odds,
       total: game[team].odds.total
@@ -62,7 +67,10 @@ class GameDetails extends React.Component {
     })
 
     const labelStyle = classNames('label', {
-      free: isTrial && game.trial
+      free: isTrial && game.trial,
+      scheduled: game.status === 'SCHEDULED',
+      inprogress: game.status === 'INPROGRESS',
+      closed: game.status === 'CLOSED'
     })
 
     return (
@@ -72,6 +80,11 @@ class GameDetails extends React.Component {
             <p styleName={labelStyle} className="small label">
               {this.renderLabel()}
             </p>
+
+            {
+              isTrial && game.trial &&
+              <span>FREE</span>
+            }
           </div>
 
           <div styleName="right">
@@ -82,24 +95,32 @@ class GameDetails extends React.Component {
               </Tooltip>
             </span>
 
-            <span onClick={toggleShowBets}>
-              <WindowAdd height={18} width={18} data-tip-for="bets" />
-              <Tooltip id="bets" pos="bottom">
-                Bet log
-              </Tooltip>
-            </span>
+            {
+              game.away.odds && game.home.odds ? (
+                <span onClick={toggleShowBets} style={{ cursor: 'pointer' }}>
+                  <WindowAdd height={18} width={18} data-tip-for={`${game.id}-bets`} />
+                  <Tooltip id={`${game.id}-bets`} pos="bottom">
+                    Bet log
+                  </Tooltip>
+                </span>
+              ) : (
+                <span style={{ cursor: 'not-allowed' }}>
+                  <GrayWindowAdd height={18} width={18} />
+                </span>
+              )
+            }
           </div>
         </div>
 
         <div styleName="match-row">
-          <h4 styleName="game-status" className="semibold">{this.renderGameStatus()}</h4>
+          <div styleName="game-status" className="semibold">{this.renderGameStatus()}</div>
 
           {
             ['away', 'home'].map(team => {
               const loser = game.away.points > game.home.points ? 'home' : 'away'
 
               const teamNameStyle = classNames('team-name', {
-                loser: team === loser
+                loser: team === loser && game.status === 'CLOSED'
               })
 
               return (
@@ -139,7 +160,7 @@ class GameDetails extends React.Component {
                   <div key={team} styleName="value-row">
                     <div styleName="value money-line">
                       <img src={game[team].image} />
-                      <p className="small">{spreadStats.moneyLine}</p>
+                      <p className="small">{spreadStats.moneyline}</p>
                     </div>
 
                     <div styleName="value spread">
@@ -163,11 +184,11 @@ class GameDetails extends React.Component {
   }
 }
 
-GameDetails.propTypes = {
+GameStats.propTypes = {
   game: PropTypes.object.isRequired,
   isTrial: PropTypes.bool.isRequired,
   toggleShowBets: PropTypes.func.isRequired,
   showBets: PropTypes.bool.isRequired
 }
 
-export default GameDetails
+export default GameStats

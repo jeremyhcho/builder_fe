@@ -10,6 +10,7 @@
   letter-spacing: 0.5px;
   transition: all 150ms ease;
   pointer-events: none;
+  z-index: 5000;
 
   &.hovered {
     opacity: 1;

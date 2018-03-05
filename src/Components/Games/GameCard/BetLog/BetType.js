@@ -1,0 +1,277 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import classNames from 'classnames'
+
+// Components
+import { InfoBubble, Slider, Button } from 'Components/Common'
+
+// Icons
+import UpArrow from 'Assets/Icons/green-arrow-up'
+import DownArrow from 'Assets/Icons/red-arrow-down'
+import WhiteCheck from 'Assets/Icons/white-check.svg'
+
+// CSS
+import './BetLog.scss'
+
+// Actions
+import { createNBABet, updateNBABet } from 'Actions'
+
+class BetType extends React.Component {
+  state = {
+    units: this.props.matchBet.units || 0,
+    selectedTeam: this.getSelectedTeam(this.props.matchBet)
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.betType !== this.props.betType) {
+      this.setState({
+        units: newProps.matchBet.units || 0,
+        selectedTeam: this.getSelectedTeam(newProps.matchBet)
+      })
+    }
+  }
+
+  getSelectedTeam (matchBet) {
+    if (matchBet.bet_type === 'total') {
+      const totalPick = matchBet.pick === 'over' ? 'away' : 'home'
+
+      return {
+        type: totalPick,
+        id: this.props.game[totalPick].team_id
+      }
+    }
+
+    return {
+      type: this.findTeamType(matchBet.team_id) || null,
+      id: matchBet.team_id || null
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  selectTeam = (team) => {
+    return () => {
+      this.setState({ selectedTeam: { type: team, id: this.props.game[team].team_id } })
+    }
+  }
+
+  findTeamType (teamId) {
+    const { game } = this.props
+    if (!teamId) return null
+
+    return game.away.team_id === teamId ? 'away' : 'home'
+  }
+
+  submitBet = (betId) => {
+    const { game, betType } = this.props
+    const { units, selectedTeam } = this.state
+    let createdBet
+
+    switch (betType) {
+      case 'moneyline':
+        createdBet = {
+          match_id: game.id,
+          team_id: selectedTeam.id,
+          bet_type: betType,
+          units,
+          odds: game[selectedTeam.type].odds.moneyline
+        }
+        break;
+
+      case 'spread':
+        createdBet = {
+          match_id: game.id,
+          team_id: selectedTeam.id,
+          bet_type: betType,
+          units,
+          pick: game[selectedTeam.type].odds[betType],
+          odds: game[selectedTeam.type].odds.spread_odds
+        }
+        break;
+
+      case 'total':
+        createdBet = {
+          match_id: game.id,
+          bet_type: betType,
+          units,
+          pick: selectedTeam.type === 'away' ? 'over' : 'under',
+          odds: game[selectedTeam.type].odds.total_odds
+        }
+        break;
+
+      default:
+        return createdBet = null
+    }
+
+    if (betId) {
+      return this.props.updateNBABet(betId, createdBet)
+    }
+
+    return this.props.createNBABet(createdBet)
+  }
+
+  renderButton () {
+    const { matchBet, creatingMatchBet, updatingMatchBet } = this.props
+    if (creatingMatchBet || updatingMatchBet) {
+      return <Button loading />
+    }
+
+    if (!Object.keys(matchBet).length) {
+      return <Button onClick={this.submitBet}>Submit bet</Button>
+    }
+
+    return (
+      <Button onClick={() => this.submitBet(matchBet.id)}>
+        Edit bet
+      </Button>
+    )
+  }
+
+  renderTeamCard (team) {
+    const { game, betType } = this.props
+
+    if (betType === 'moneyline') {
+      return ([
+        <img src={game[team].image} key='image' />,
+        <p className="semibold" key='value'>
+          {game[team].odds[betType]}
+        </p>
+      ])
+    }
+
+    if (betType === 'spread') {
+      return ([
+        <img src={game[team].image} key='image' />,
+        <p className="semibold" key='value'>
+          {game[team].odds[betType]} {`(${game[team].odds.spread_odds})`}
+        </p>
+      ])
+    }
+
+    if (betType === 'total') {
+      const overUnderTag = { marginBottom: '8px' }
+      return ([
+        team === 'away'
+          ? <UpArrow height={50} width={75} key="image" />
+          : <DownArrow height={50} width={75} key="image" />,
+
+        team === 'away'
+          ? <p className="semibold label" style={overUnderTag} key="over">OVER</p>
+          : <p className="semibold label" style={overUnderTag} key="under">UNDER</p>,
+
+        <p className="semibold" key='value'>
+          {game[team].odds[betType]} {`(${game[team].odds.total_odds})`}
+        </p>
+      ])
+    }
+
+    return null
+  }
+
+  render () {
+    return (
+      [
+        <div styleName="row units" key="units">
+          <div styleName="left">
+            <p className="semibold">Units</p>
+
+            <span>
+              <InfoBubble pos="bottomRight" width={300}>
+                Two plus two is four minus one thats three quick mafs.
+              </InfoBubble>
+            </span>
+          </div>
+
+          <div styleName="right">
+            <Slider
+              name="units"
+              value={this.state.units}
+              min={0}
+              max={10}
+              step={0.5}
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div styleName="cta">
+            {this.renderButton()}
+          </div>
+        </div>,
+
+        <div styleName="row pick" key="pick">
+          <div styleName="left">
+            <p className="semibold">Pick</p>
+
+            <span>
+              <InfoBubble pos="bottomRight" width={300}>
+                Two plus two is four minus one thats three quick mafs.
+              </InfoBubble>
+            </span>
+          </div>
+
+          <div styleName="right">
+            {
+              ['away', 'home'].map(team => {
+                const selected = this.state.selectedTeam.type === team
+                const teamCardStyle = classNames('team-card', {
+                  selected
+                })
+
+
+                return (
+                  <div
+                    styleName={teamCardStyle}
+                    onClick={this.selectTeam(team)}
+                    key={team}
+                  >
+                    {
+                      selected &&
+                      <span>
+                        <WhiteCheck />
+                      </span>
+                    }
+                    {this.renderTeamCard(team)}
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+      ]
+    )
+  }
+}
+
+BetType.defaultProps = {
+  matchBet: {},
+  creatingMatchBet: false,
+  updatingMatchBet: false
+}
+
+BetType.propTypes = {
+  betType: PropTypes.string.isRequired,
+  matchBet: PropTypes.object,
+  game: PropTypes.object.isRequired,
+  createNBABet: PropTypes.func.isRequired,
+  updateNBABet: PropTypes.func.isRequired,
+  creatingMatchBet: PropTypes.bool,
+  updatingMatchBet: PropTypes.bool
+}
+
+const mapStateToProps = ({ routines }) => ({
+  creatingMatchBet: routines.isLoading.CREATE_NBA_BET,
+  updatingMatchBet: routines.isLoading.UPDATE_NBA_BET
+})
+
+const mapDispatchToProps = {
+  createNBABet,
+  updateNBABet
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BetType)
