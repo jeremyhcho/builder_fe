@@ -5,7 +5,9 @@ import {
   FETCH_NBA_BETS,
   FETCH_NBA_MATCH_BET,
   CREATE_NBA_BET,
-  UPDATE_NBA_BET
+  UPDATE_NBA_BET,
+  OPEN_BET_MODAL,
+  CLOSE_BET_MODAL
 } from 'Constants'
 
 // Apis
@@ -70,4 +72,13 @@ export const updateNBABet = createRoutine({
       })
     }
   }
+})
+
+export const openBetModal = (betId) => ({
+  type: OPEN_BET_MODAL,
+  betId
+})
+
+export const closeBetModal = () => ({
+  type: CLOSE_BET_MODAL
 })

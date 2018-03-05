@@ -3,7 +3,9 @@ import moment from 'moment'
 // Constants
 import {
   UPDATE_NBA_GAMES,
-  CHANGE_SORT_STATS_KEY
+  CHANGE_SORT_STATS_KEY,
+  OPEN_BET_MODAL,
+  CLOSE_BET_MODAL
 } from 'Constants'
 
 const initialState = {
@@ -22,6 +24,10 @@ const initialState = {
       starter: { stat: 'minutes', ascending: true },
       bench: { stat: 'minutes', ascending: true },
     }
+  },
+  bets: {
+    openBetModal: false,
+    modalBetId: 0
   }
 }
 
@@ -60,6 +66,11 @@ const nbaReducer = (state = initialState, action) => {
       }
     }
 
+    case OPEN_BET_MODAL:
+      return { ...state, bets: { openBetModal: true, modalBetId: action.betId } }
+
+    case CLOSE_BET_MODAL:
+      return { ...state, bets: { openBetModal: false, modalBetId: 0 } }
 
     case '@@router/LOCATION_CHANGE':
       return {

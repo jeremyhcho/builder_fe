@@ -41,7 +41,7 @@ class BetType extends React.Component {
 
   getSelectedTeam (matchBet) {
     if (matchBet.bet_type === 'total') {
-      const totalPick = matchBet.pick === 'over' ? 'away' : 'home'
+      const totalPick = matchBet.pick[0] === 'O' ? 'away' : 'home'
 
       return {
         type: totalPick,
@@ -146,7 +146,9 @@ class BetType extends React.Component {
 
     if (betType === 'moneyline') {
       return ([
-        <img src={game[team].image} key='image' />,
+        <div style={{ padding: '0 33px' }}>
+          <img src={game[team].image} key='image' />
+        </div>,
         <p className="semibold" key='value'>
           {game[team].odds[betType]}
         </p>
@@ -155,7 +157,9 @@ class BetType extends React.Component {
 
     if (betType === 'spread') {
       return ([
-        <img src={game[team].image} key='image' />,
+        <div style={{ padding: '0 33px' }}>
+          <img src={game[team].image} key='image' />
+        </div>,
         <p className="semibold" key='value'>
           {game[team].odds[betType]} {`(${game[team].odds.spread_odds})`}
         </p>
@@ -165,14 +169,18 @@ class BetType extends React.Component {
     if (betType === 'total') {
       const overUnderTag = { marginBottom: '8px' }
       return ([
-        team === 'away'
-          ? <UpArrow height={30} width={45} key="image" />
-          : <DownArrow height={30} width={45} key="image" />,
-
-        team === 'away'
-          ? <p className="semibold label" style={overUnderTag} key="over">OVER</p>
-          : <p className="semibold label" style={overUnderTag} key="under">UNDER</p>,
-
+        <div style={{ padding: '0 38px' }}>
+          {
+            team === 'away'
+              ? <UpArrow height={30} width={45} key="image" />
+              : <DownArrow height={30} width={45} key="image" />
+          }
+          {
+            team === 'away'
+              ? <p className="semibold label" style={overUnderTag} key="over">OVER</p>
+              : <p className="semibold label" style={overUnderTag} key="under">UNDER</p>
+          }
+        </div>,
         <p className="semibold" key='value'>
           {game[team].odds[betType]} {`(${game[team].odds.total_odds})`}
         </p>
@@ -185,6 +193,17 @@ class BetType extends React.Component {
   render () {
     return (
       [
+        <div styleName='row' key='message' style={{ marginBottom: '25px' }}>
+          <p className='label'>
+            {
+              Object.keys(this.props.matchBet).length ? (
+                'Odds and spread might have changed since your current bet. Saving' +
+                ' will apply the current odds and spread.'
+              ) : null
+            }
+          </p>
+        </div>,
+
         <div styleName="row units" key="units">
           <div styleName="left">
             <p className="semibold">Units</p>

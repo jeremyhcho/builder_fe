@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { every } from 'lodash'
 
 // CSS
 import './ButtonGroup.scss'
@@ -26,6 +27,10 @@ class ButtonGroup extends React.Component {
 
     if (defaultKey) {
       return buttons.find(buttonItem => buttonItem.key === defaultKey && !buttonItem.disabled)
+    }
+
+    if (every(buttons, (button) => button.disabled)) {
+      return buttons[0]
     }
 
     return buttons.find(buttonItem => !buttonItem.disabled)
