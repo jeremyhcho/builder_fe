@@ -62,7 +62,6 @@ class BetLog extends React.Component {
             <ButtonGroup
               buttons={this.getBetTypes()}
               onChange={(e, button) => this.setState({ selectedBet: button.key })}
-              defaultKey='moneyline'
             />
           }
         </div>
