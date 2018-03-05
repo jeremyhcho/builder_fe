@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 // Components
-import { ButtonGroup } from 'Components/Common'
+import { ButtonGroup, Spinner } from 'Components/Common'
 import BetType from './BetType'
 
 // Icons
@@ -29,7 +29,7 @@ class BetLog extends React.Component {
   }
 
   render () {
-    const { game, toggleShowBets, matchBet } = this.props
+    const { game, closeBets, matchBet, show } = this.props
 
     const betLogStyle = classNames('bet-log', {
       show: this.props.show
@@ -45,7 +45,7 @@ class BetLog extends React.Component {
       <div styleName={betLogStyle}>
         <header styleName="header">
           <LeftArrow
-            onClick={toggleShowBets}
+            onClick={closeBets}
             style={{ cursor: 'pointer' }}
           />
 
@@ -61,11 +61,16 @@ class BetLog extends React.Component {
         </div>
 
         {
-          !matchBet ? <div /> : (
+          !matchBet ? (
+            <div style={{ textAlign: 'center', padding: '70px 0' }}>
+              <Spinner lg show />
+            </div>
+          ) : (
             <BetType
               game={game}
               matchBet={this.getMatchBetType()}
               betType={this.state.selectedBet}
+              show={show}
             />
           )
         }
@@ -81,7 +86,7 @@ BetLog.defaultProps = {
 BetLog.propTypes = {
   game: PropTypes.object.isRequired,
   show: PropTypes.bool.isRequired,
-  toggleShowBets: PropTypes.func.isRequired,
+  closeBets: PropTypes.func.isRequired,
   matchBet: PropTypes.array
 }
 

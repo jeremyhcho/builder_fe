@@ -70,7 +70,7 @@ class GameStats extends React.Component {
   }
 
   render () {
-    const { game, isTrial, toggleShowBets, showBets } = this.props
+    const { game, isTrial, openBets, showBets } = this.props
 
     const gameDetailsStyle = classNames('game-details', {
       hide: showBets
@@ -86,13 +86,13 @@ class GameStats extends React.Component {
       <div styleName={gameDetailsStyle}>
         <div styleName="label-row">
           <div styleName="left">
-            <p styleName={labelStyle} className="small label">
+            <p styleName={labelStyle} className="small">
               {this.renderLabel()}
             </p>
 
             {
               isTrial && game.trial &&
-              <span styleName="free">FREE</span>
+              <span styleName="free">free</span>
             }
           </div>
 
@@ -106,7 +106,7 @@ class GameStats extends React.Component {
 
             {
               game.away.odds && game.home.odds ? (
-                <span onClick={toggleShowBets} style={{ cursor: 'pointer' }}>
+                <span onClick={openBets} style={{ cursor: 'pointer' }}>
                   <WindowAdd height={18} width={18} data-tip-for={`${game.id}-bets`} />
                   <Tooltip id={`${game.id}-bets`} pos="top">
                     Add Bet
@@ -202,7 +202,7 @@ class GameStats extends React.Component {
 GameStats.propTypes = {
   game: PropTypes.object.isRequired,
   isTrial: PropTypes.bool.isRequired,
-  toggleShowBets: PropTypes.func.isRequired,
+  openBets: PropTypes.func.isRequired,
   showBets: PropTypes.bool.isRequired
 }
 

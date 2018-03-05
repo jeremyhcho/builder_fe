@@ -30,6 +30,13 @@ class BetType extends React.Component {
         selectedTeam: this.getSelectedTeam(newProps.matchBet)
       })
     }
+
+    if (newProps.show && !this.props.show && newProps.matchBet) {
+      this.setState({
+        units: newProps.matchBet.units || 0,
+        selectedTeam: this.getSelectedTeam(newProps.matchBet)
+      })
+    }
   }
 
   getSelectedTeam (matchBet) {
@@ -277,6 +284,7 @@ BetType.propTypes = {
   betType: PropTypes.string.isRequired,
   matchBet: PropTypes.object,
   game: PropTypes.object.isRequired,
+  show: PropTypes.bool.isRequired,
   createNBABet: PropTypes.func.isRequired,
   updateNBABet: PropTypes.func.isRequired,
   creatingMatchBet: PropTypes.bool,

@@ -34,10 +34,18 @@
         &.inprogress {
           background-color: var(--gold);
         }
+      }
 
-        &.free {
-          background-color: var(--dark-green);
-        }
+      span {
+        padding: 4px 8px;
+        color: #fff;
+        font-weight: 600;
+        border-radius: var(--border-radius);
+        text-transform: uppercase;
+        background-color: var(--blue);
+        display: inline-block;
+        margin-left: 8px;
+        background-color: var(--dark-green);
       }
 
       .date {

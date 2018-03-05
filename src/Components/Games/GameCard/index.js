@@ -21,18 +21,18 @@ class GameCard extends React.Component {
     showBets: false
   }
 
-  componentWillReceiveProps (newProps) {
-    if (newProps.matchBet && !this.props.matchBet) {
-      this.setState({ showBets: !this.state.showBets })
-    }
+  openBets = () => {
+    this.setState({
+      showBets: true
+    }, () => {
+      if (!this.props.matchBet) {
+        this.props.fetchNBAMatchBet(this.props.game.id)
+      }
+    })
   }
 
-  toggleShowBets = () => {
-    if (this.props.matchBet) {
-      return this.setState({ showBets: !this.state.showBets })
-    }
-
-    return this.props.fetchNBAMatchBet(this.props.game.id)
+  closeBets = () => {
+    this.setState({ showBets: false })
   }
 
   render () {
@@ -44,12 +44,12 @@ class GameCard extends React.Component {
           game={game}
           isTrial={isTrial}
           showBets={this.state.showBets}
-          toggleShowBets={this.toggleShowBets}
+          openBets={this.openBets}
         />
 
         <BetLog
           game={game}
-          toggleShowBets={this.toggleShowBets}
+          closeBets={this.closeBets}
           show={this.state.showBets}
         />
 
