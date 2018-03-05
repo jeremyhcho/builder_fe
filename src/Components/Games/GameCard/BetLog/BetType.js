@@ -120,7 +120,7 @@ class BetType extends React.Component {
   renderButton () {
     const { matchBet, creatingMatchBet, updatingMatchBet } = this.props
     if (creatingMatchBet || updatingMatchBet) {
-      return <Button loading />
+      return <Button success loading />
     }
 
     if (!Object.keys(matchBet).length) {

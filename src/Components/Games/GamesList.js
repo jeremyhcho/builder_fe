@@ -13,14 +13,6 @@ class GamesList extends React.Component {
     document.body.style.overflow = 'auto'
   }
 
-  getDate () {
-    if (this.props.games.length) {
-      return this.props.games[0].date.tz('America/New_York').format('dddd MMM D')
-    }
-
-    return null
-  }
-
   sortedGames () {
     return this.props.games.sort((gameA, gameB) => (
       gameA.date.format('H.mm') - gameB.date.format('H.mm')
