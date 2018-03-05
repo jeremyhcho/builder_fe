@@ -22,6 +22,11 @@ class GamesList extends React.Component {
   render () {
     const { locationState } = this.props
 
+    const secretDivs = []
+    for (let i = this.props.games.length % 3; i < 3 || i === 0; i++) {
+      secretDivs.push(<div styleName="game-container" key={this.props.games.length + i} />)
+    }
+
     return (
       <div styleName="games-list">
         {
@@ -51,6 +56,8 @@ class GamesList extends React.Component {
                 </div>
               ))
             }
+
+            {secretDivs}
           </div>
         </div>
       </div>

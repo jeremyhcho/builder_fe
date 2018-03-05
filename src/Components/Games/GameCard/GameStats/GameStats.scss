@@ -42,20 +42,13 @@
         font-weight: 600;
         border-radius: var(--border-radius);
         text-transform: uppercase;
-        background-color: var(--blue);
         display: inline-block;
-        margin-left: 8px;
         background-color: var(--dark-green);
+        margin-right: 8px;
       }
 
       .date {
         margin-right: 10px;
-      }
-
-      .free {
-        margin-left: 10px;
-        color: var(--green);
-        font-style: italic;
       }
     }
 

@@ -86,14 +86,14 @@ class GameStats extends React.Component {
       <div styleName={gameDetailsStyle}>
         <div styleName="label-row">
           <div styleName="left">
+            {
+              isTrial && game.trial &&
+              <span className="small">free</span>
+            }
+
             <p styleName={labelStyle} className="small">
               {this.renderLabel()}
             </p>
-
-            {
-              isTrial && game.trial &&
-              <span styleName="free">free</span>
-            }
           </div>
 
           <div styleName="right">
