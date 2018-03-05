@@ -18,15 +18,12 @@ import { fetchNBAGames } from 'Actions'
 
 class Games extends React.Component {
   componentDidMount () {
-    if (this.props.location.search) {
-      this.props.fetchNBAGames(this.getFromAndTo(
-        this.props.location.search.slice(6)
-      ))
-    }
+    this.props.fetchNBAGames(this.getFromAndTo(this.props.dates.now._i))
   }
 
   componentWillReceiveProps (newProps) {
     if (newProps.dates.now._i !== this.props.dates.now._i) {
+      console.log('fetch and push!', newProps.dates.now._i)
       this.props.fetchNBAGames(this.getFromAndTo(newProps.dates.now._i))
       this.props.history.push({ pathname: '/games', search: `date=${newProps.dates.now._i}` })
     }

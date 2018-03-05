@@ -21,7 +21,7 @@ const GamesListRoute = ({ location }) => {
   const todayDate = moment(moment().format('YYYY-MM-DD'))
 
   if (!dateQueryRe(location.search)) {
-    return <Redirect to={{ pathname: 'games', search: `date=${todayDate._i}` }} />
+    return <Redirect to={{ pathname: 'games', search: `date=${todayDate._i}`, state: { from: 'sidenav' } }} />
   }
 
   return <Route exact path='/games' component={Games} />

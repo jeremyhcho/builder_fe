@@ -8,7 +8,8 @@ import {
 
 const initialState = {
   dates: {
-    now: moment(moment().format('YYYY-MM-DD')),
+    now: moment(location.search.slice(6)),
+    // now: moment(moment().format('YYYY-MM-DD')),
     from: {},
     to: {}
   },
