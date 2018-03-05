@@ -28,18 +28,22 @@ class BetLog extends React.Component {
     return matchBet.find(bet => bet.bet_type === selectedBet)
   }
 
+  getBetTypes () {
+    const { game } = this.props
+
+    return [
+      { label: 'Moneyline', key: 'moneyline', disabled: !game.away.odds.moneyline },
+      { label: 'Spread', key: 'spread', disabled: !game.away.odds.spread },
+      { label: 'Total', key: 'total', disabled: !game.away.odds.total }
+    ]
+  }
+
   render () {
     const { game, closeBets, matchBet, show } = this.props
 
     const betLogStyle = classNames('bet-log', {
       show: this.props.show
     })
-
-    const betTypes = [
-      { label: 'Moneyline', key: 'moneyline' },
-      { label: 'Spread', key: 'spread' },
-      { label: 'Total', key: 'total' }
-    ]
 
     return (
       <div styleName={betLogStyle}>
@@ -54,7 +58,7 @@ class BetLog extends React.Component {
 
         <div styleName="spread-buttons">
           <ButtonGroup
-            buttons={betTypes}
+            buttons={this.getBetTypes()}
             onChange={(e, button) => this.setState({ selectedBet: button.key })}
             defaultKey='moneyline'
           />

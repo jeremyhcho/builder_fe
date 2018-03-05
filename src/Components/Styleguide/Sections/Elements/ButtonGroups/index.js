@@ -23,6 +23,7 @@ class ButtonGroups extends React.Component {
       { label: 'Button 2', key: 'Button2' },
       { label: 'Disabled Button', key: 'Button3', disabled: true }
     ]
+
     return (
       <div styleName="buttonGroup-wrapper">
         <div>

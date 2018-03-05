@@ -23,14 +23,7 @@ class DateInput extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.location.search.length) {
-      return this.props.updateNBAGames(this.props.parseDate(this.props.location.search.slice(6)))
-    }
-    this.props.updateNBAGames(this.props.parseDate(this.props.dates.now._i))
-    return this.props.history.push({
-      pathname: '/games',
-      search: `date=${this.props.dates.now._i}`
-    })
+    this.props.updateNBAGames(this.props.parseDate(this.props.location.search.slice(6)))
   }
 
   componentDidMount() {
@@ -39,19 +32,16 @@ class DateInput extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (!newProps.location.search.length) {
-      const today = moment(moment().format('YYYY-MM-DD'))._i
-      this.props.updateNBAGames(this.props.parseDate(today))
-      return this.props.history.push({
-        pathname: '/games',
-        search: `date=${today}`
-      })
+    if (newProps.location.search !== this.props.location.search && this.props.location.search
+      && newProps.location.search) {
+      this.props.updateNBAGames(this.props.parseDate(newProps.location.search.slice(6)))
     }
 
     if (newProps.dates.now._i !== this.props.dates.now._i) {
-      return this.props.history.push({
-        pathname: '/games',
-        search: `date=${newProps.dates.now._i}`
+      return this.setState({
+        year: Number(newProps.dates.now._i.slice(0, 4)),
+        month: Number(newProps.dates.now._i.slice(5, 7)),
+        day: Number(newProps.dates.now._i.slice(8))
       })
     }
 
@@ -178,7 +168,7 @@ DateInput.propTypes = {
   dates: PropTypes.object.isRequired,
   updateNBAGames: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  // history: PropTypes.object.isRequired,
   parseDate: PropTypes.func.isRequired
 }
 

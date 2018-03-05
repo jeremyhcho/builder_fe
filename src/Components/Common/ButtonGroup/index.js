@@ -25,10 +25,10 @@ class ButtonGroup extends React.Component {
     const { buttons, defaultKey } = this.props
 
     if (defaultKey) {
-      return buttons.find(buttonItem => buttonItem.key === defaultKey)
+      return buttons.find(buttonItem => buttonItem.key === defaultKey && !buttonItem.disabled)
     }
 
-    return buttons[0]
+    return buttons.find(buttonItem => !buttonItem.disabled)
   }
 
   render () {

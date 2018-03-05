@@ -26,9 +26,9 @@ class Games extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.location.search !== this.props.location.search
-      && newProps.location.search.length) {
-      this.props.fetchNBAGames(this.getFromAndTo(newProps.location.search.slice(6)))
+    if (newProps.dates.now._i !== this.props.dates.now._i) {
+      this.props.fetchNBAGames(this.getFromAndTo(newProps.dates.now._i))
+      this.props.history.push({ pathname: '/games', search: `date=${newProps.dates.now._i}` })
     }
   }
 
@@ -74,11 +74,14 @@ Games.propTypes = {
   games: PropTypes.array,
   fetchingGames: PropTypes.bool,
   fetchNBAGames: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  dates: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
-const mapStateToProps = ({ routines }) => ({
+const mapStateToProps = ({ routines, nba }) => ({
   games: routines.nba.games,
+  dates: nba.dates,
   fetchingGames: routines.isLoading.FETCH_NBA_GAMES
 })
 
