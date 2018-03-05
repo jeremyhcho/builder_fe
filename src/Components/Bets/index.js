@@ -151,6 +151,7 @@ class Bets extends React.Component {
     // return (
     //   <div styleName='bet-edit' />
     // )
+    console.log(this.props.betId)
     return <div />
   }
 
