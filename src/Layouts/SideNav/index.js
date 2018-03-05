@@ -56,7 +56,7 @@ const navItems = [
     selectedIcon: BetsSelected,
     route: '/bets',
     key: 'bets',
-    sectionName: 'Bets'
+    sectionName: 'Bet History'
   }
 ]
 

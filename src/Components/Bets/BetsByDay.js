@@ -10,6 +10,7 @@ import { precisionRound } from 'Helpers'
 // Assets
 import GreenArrowUp from 'Assets/Icons/green-arrow-up.svg'
 import RedArrowDown from 'Assets/Icons/red-arrow-down.svg'
+import AtSign from 'Assets/Icons/at-sign.svg'
 
 const roundTwo = precisionRound(2)
 
@@ -63,7 +64,7 @@ class BetsByDay extends React.Component {
     return bet.result === 'win' ? (
       <span style={{ color: 'var(--dark-green)' }}>{`+${net}U`}</span>
     ) : (
-      <span style={{ color: 'var(--dark-red)' }}>{`-${net}U`}</span>
+      <span style={{ color: 'var(--dark-red)' }}>{`-${bet.units}U`}</span>
     )
   }
 
@@ -77,6 +78,30 @@ class BetsByDay extends React.Component {
           {
             bets.map(bet => (
               <li key={bet.id} styleName='bet'>
+                <div styleName='col' style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <img
+                      src={bet.match.away.image}
+                      style={{
+                        width: '24px',
+                        height: '24px',
+                        marginRight: '5px'
+                      }}
+                    />
+
+                    <AtSign width={12} height={12} />
+
+                    <img
+                      src={bet.match.home.image}
+                      style={{
+                        width: '24px',
+                        height: '24px',
+                        marginLeft: '5px'
+                      }}
+                    />
+                  </div>
+                </div>
+
                 <div styleName='col'>
                   <p className='label small'>Type</p>
                   <p className='semibold' style={{ marginTop: '4px' }}>
