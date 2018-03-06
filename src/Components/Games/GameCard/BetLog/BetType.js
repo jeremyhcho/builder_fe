@@ -131,7 +131,15 @@ class BetType extends React.Component {
     }
 
     if (!Object.keys(matchBet).length) {
-      return <Button success onClick={this.submitBet}>Create</Button>
+      return (
+        <Button
+          success={this.state.selectedTeam.type}
+          disabled={!this.state.selectedTeam.type}
+          onClick={this.state.selectedTeam.type ? this.submitBet : null}
+        >
+          Create
+        </Button>
+      )
     }
 
     return (
