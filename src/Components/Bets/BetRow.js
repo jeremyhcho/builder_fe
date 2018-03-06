@@ -82,6 +82,12 @@ class BetRow extends React.Component {
 
     const net = this.calculateWinInUnits(bet)
 
+    if (bet.result === 'tie') {
+      return (
+        <span style={{ color: 'var(--gold)' }}>PUSH</span>
+      )
+    }
+
     return bet.result === 'win' ? (
       <span style={{ color: 'var(--dark-green)' }}>{`+${net}U`}</span>
     ) : (

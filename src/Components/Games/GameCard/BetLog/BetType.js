@@ -165,7 +165,7 @@ class BetType extends React.Component {
 
     if (betType === 'spread') {
       return ([
-        <div style={{ padding: '0 33px' }} key='image'>
+        <div style={{ padding: '0 33px' }} key='img'>
           <img src={game[team].image} />
         </div>,
         <p className="semibold" key='value'>
@@ -177,7 +177,7 @@ class BetType extends React.Component {
     if (betType === 'total') {
       const overUnderTag = { marginBottom: '8px' }
       return ([
-        <div style={{ padding: '0 38px' }} key="image">
+        <div style={{ padding: '0 38px' }} key='img'>
           {
             team === 'away'
               ? <UpArrow height={30} width={45} />
@@ -201,7 +201,7 @@ class BetType extends React.Component {
   render () {
     return (
       [
-        <div styleName='row' key='message' style={{ marginBottom: '25px' }}>
+        <div styleName='row' key='message' style={{ marginBottom: '25px', position: 'relative' }}>
           <p className='label'>
             {
               Object.keys(this.props.matchBet).length ? (
@@ -210,8 +210,11 @@ class BetType extends React.Component {
               ) : null
             }
           </p>
-        </div>,
 
+          <div styleName="cta">
+            {this.renderButton()}
+          </div>
+        </div>,
         <div styleName="row units" key="units">
           <div styleName="left">
             <p className="semibold">Units</p>
@@ -242,12 +245,7 @@ class BetType extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-
-          <div styleName="cta">
-            {this.renderButton()}
-          </div>
         </div>,
-
         <div styleName="row pick" key="pick">
           <div styleName="left">
             <p className="semibold">Pick</p>

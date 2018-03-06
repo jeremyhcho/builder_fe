@@ -66,17 +66,15 @@ class Bets extends React.Component {
   filterByDate (bets) {
     if (this.state.dateFilter === 'today') {
       return bets.filter(bet => (
-        moment(new Date(bet.match.date))
-          .tz(moment.tz.guess())
-          .isSame(moment.tz(moment.tz.guess()), 'day')
+        moment().isSame(new Date(bet.match.date), 'day')
       ))
     }
 
     if (this.state.dateFilter === 'yesterday') {
       return bets.filter(bet => (
-        moment(new Date(bet.match.date))
-          .tz(moment.tz.guess())
-          .isSame(moment.tz(moment.tz.guess()).subtract(1, 'day'))
+        moment()
+          .subtract(1, 'day')
+          .isSame(moment(new Date(bet.match.date)), 'day')
       ))
     }
 
@@ -116,21 +114,29 @@ class Bets extends React.Component {
         return (100 / parseInt(bet.odds.slice(1), 10)) * bet.units
       }
 
+      if (bet.result === 'tie') {
+        return 0
+      }
+
       return bet.units * -1
     }
 
-    return bet.result === 'win' ? (
-      ((parseInt(bet.odds.slice(1), 10) / 100) * bet.units)
-    ) : (
-      bet.units * -1
-    )
+    if (bet.result === 'win') {
+      return ((parseInt(bet.odds.slice(1), 10) / 100) * bet.units)
+    }
+
+    if (bet.result === 'tie') {
+      return 0
+    }
+
+    return bet.units * -1
   }
 
   parseNetResult (groupedBets) {
     const net = Object.keys(groupedBets).reduce((accum, key) => (
       accum + (
         groupedBets[key]
-          .filter(bet => bet.result)
+          .filter(bet => bet.result === 'win' || bet.result === 'loss')
           .reduce((net, bet) => net + this.calculateWinInUnits(bet), 0)
       )
     ), 0)
@@ -188,6 +194,7 @@ class Bets extends React.Component {
     const totalUnits = Object.keys(groupedBets).reduce((accum, key) => (
       accum + (
         groupedBets[key]
+          .filter(bet => bet.result === 'win' || bet.result === 'loss')
           .reduce((net, bet) => net + bet.units, 0)
       )
     ), 0)
