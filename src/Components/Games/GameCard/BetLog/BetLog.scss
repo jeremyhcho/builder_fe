@@ -42,18 +42,18 @@
       margin-bottom: 40px;
       align-items: center;
       position: relative;
-
-      .cta {
-        position: absolute;
-        top: -127px;
-        right: 0;
-      }
     }
 
     &.pick {
       .right {
         display: flex;
       }
+    }
+
+    .cta {
+      position: absolute;
+      top: -51px;
+      right: 0;
     }
 
     .left {
