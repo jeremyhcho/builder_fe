@@ -10,7 +10,7 @@ import { Tooltip } from 'Components/Common'
 // import AtSign from 'Assets/Icons/at-sign.svg'
 import ArrowUp from 'Assets/Icons/green-arrow-up.svg'
 import ArrowDown from 'Assets/Icons/red-arrow-down.svg'
-import HeartAdd from 'Assets/Icons/heart-add.svg'
+// import HeartAdd from 'Assets/Icons/heart-add.svg'
 import WindowAdd from 'Assets/Icons/window-add.svg'
 import GrayWindowAdd from 'Assets/Icons/gray-window-add.svg'
 import LeftTriangle from 'Assets/Icons/left-triangle.svg'
@@ -97,12 +97,12 @@ class GameStats extends React.Component {
           </div>
 
           <div styleName="right">
-            <span>
+            {/* <span>
               <HeartAdd height={18} width={18} data-tip-for={`${game.id}-heart-add`} />
               <Tooltip id={`${game.id}-heart-add`} pos="top">
                 Add a snackbar
               </Tooltip>
-            </span>
+            </span> */}
 
             {
               game.away.odds && game.home.odds ? (
