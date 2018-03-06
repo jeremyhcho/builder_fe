@@ -22,10 +22,6 @@ class DateInput extends React.Component {
     day: Number(this.props.dates.now._i.slice(8)) || null,
   }
 
-  componentWillMount() {
-    this.props.updateNBAGames(this.props.parseDate(this.props.location.search.slice(6)))
-  }
-
   componentDidMount() {
     // prevent selecting text in Date Input field
     this.dateInput.addEventListener('select', this.preventDateSelection(), false)
