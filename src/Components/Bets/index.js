@@ -16,6 +16,7 @@ import {
   Button
 } from 'Components/Common'
 import BetsByDay from './BetsByDay'
+import EditBet from './EditBet'
 
 // CSS
 import './Bets.scss'
@@ -139,28 +140,13 @@ class Bets extends React.Component {
     return num > 0 ? 'var(--dark-green)' : 'var(--dark-red)'
   }
 
-  renderBetForm () {
-    // const { bets, betId } = this.props
-    //
-    // if (!bets.length || betId === 0) {
-    //   return null
-    // }
-    //
-    // const bet = bets.find(bet => bet.id === this.props.betId)
-    //
-    // return (
-    //   <div styleName='bet-edit' />
-    // )
-    console.log(this.props.betId)
-    return <div />
-  }
-
   renderBetModal () {
     return (
       <Modal
         header='Edit Bet'
         toggle={this.props.closeBetModal}
         isOpen={this.props.openBetModal}
+        wrapperStyle={{ width: '650px' }}
         footer={[
           <Button
             flat
@@ -176,7 +162,9 @@ class Bets extends React.Component {
           </Button>
         ]}
       >
-        {this.renderBetForm()}
+        <EditBet
+          bet={this.props.bets.find(bet => bet.id === this.props.betId)}
+        />
       </Modal>
     )
   }

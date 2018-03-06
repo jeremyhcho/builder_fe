@@ -8,10 +8,20 @@ import {
   CLOSE_BET_MODAL
 } from 'Constants'
 
+// Helpers
+import { getDateQuery } from 'Helpers'
+
+const getCurrentDate = () => {
+  if (getDateQuery(location.search)) {
+    return moment(location.search.slice(6))
+  }
+
+  return moment(moment().format('YYYY-MM-DD'))
+}
+
 const initialState = {
   dates: {
-    now: moment(location.search.slice(6)),
-    // now: moment(moment().format('YYYY-MM-DD')),
+    now: getCurrentDate(),
     from: {},
     to: {}
   },

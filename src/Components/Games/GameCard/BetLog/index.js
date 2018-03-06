@@ -24,6 +24,8 @@ class BetLog extends React.Component {
   getInitialBet () {
     const { game } = this.props
 
+    if (!game.away.odds) return null
+
     if (game.away.odds.moneyline) {
       return 'moneyline'
     }

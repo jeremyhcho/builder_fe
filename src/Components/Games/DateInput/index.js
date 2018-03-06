@@ -17,9 +17,9 @@ import { updateNBAGames } from 'Actions'
 class DateInput extends React.Component {
   state = {
     isOpened: false,
-    year: Number(this.props.dates.now._i.slice(0, 4)),
-    month: Number(this.props.dates.now._i.slice(5, 7)),
-    day: Number(this.props.dates.now._i.slice(8)),
+    year: Number(this.props.dates.now._i.slice(0, 4)) || null,
+    month: Number(this.props.dates.now._i.slice(5, 7)) || null,
+    day: Number(this.props.dates.now._i.slice(8)) || null,
   }
 
   componentWillMount() {
