@@ -66,17 +66,15 @@ class Bets extends React.Component {
   filterByDate (bets) {
     if (this.state.dateFilter === 'today') {
       return bets.filter(bet => (
-        moment(new Date(bet.match.date))
-          .tz(moment.tz.guess())
-          .isSame(moment.tz(moment.tz.guess()), 'day')
+        moment().isSame(new Date(bet.match.date), 'day')
       ))
     }
 
     if (this.state.dateFilter === 'yesterday') {
       return bets.filter(bet => (
-        moment(new Date(bet.match.date))
-          .tz(moment.tz.guess())
-          .isSame(moment.tz(moment.tz.guess()).subtract(1, 'day'))
+        moment()
+          .subtract(1, 'day')
+          .isSame(moment(new Date(bet.match.date)), 'day')
       ))
     }
 
