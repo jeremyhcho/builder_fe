@@ -15,3 +15,7 @@ export const postNBABet = (bet) => (
 export const editNBABet = (betId, bet) => (
   axios.put(`/api/nba/v1/bets/${betId}`, { bet })
 )
+
+export const deleteNBABet = (betId) => (
+  axios.delete(`/api/nba/v1/bets/${betId}`)
+)

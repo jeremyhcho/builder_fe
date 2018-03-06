@@ -24,11 +24,12 @@ const IconMenuItem = ({ onClick, children, disabled, icon }) => {
 }
 
 IconMenuItem.defaultProps = {
-  disabled: false
+  disabled: false,
+  onClick: () => null
 }
 
 IconMenuItem.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   icon: PropTypes.node.isRequired,
   disabled: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([

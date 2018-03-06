@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 
 // Assets
 import GreenArrowUp from 'Assets/Icons/green-arrow-up.svg'
@@ -14,7 +15,7 @@ import Edit from 'Assets/Icons/edit-pencil.svg'
 import { precisionRound } from 'Helpers'
 
 // Actions
-import { openBetModal } from 'Actions'
+import { openBetModal, removeNBABet } from 'Actions'
 
 // CSS
 import './Bets.scss'
@@ -90,9 +91,13 @@ class BetRow extends React.Component {
 
   render () {
     const { bet } = this.props
+    const betStyle = classNames('bet', {
+      deleting: this.props.deletingNBABet
+    })
+
     return (
       <li key={bet.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-        <div styleName='bet'>
+        <div styleName={betStyle}>
           <div styleName='col' style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <img
@@ -174,7 +179,10 @@ class BetRow extends React.Component {
             Edit
           </IconMenuItem>
 
-          <IconMenuItem icon={<Remove width={16} height={16} />}>
+          <IconMenuItem
+            icon={<Remove width={16} height={16} />}
+            onClick={() => this.props.removeNBABet(bet.id)}
+          >
             Delete
           </IconMenuItem>
         </IconDropdown>
@@ -183,16 +191,27 @@ class BetRow extends React.Component {
   }
 }
 
+const mapStateToProps = ({ routines }) => ({
+  deletingNBABet: routines.isLoading.deletingNBABet
+})
+
 const mapDispatchToProps = {
-  openBetModal
+  openBetModal,
+  removeNBABet
+}
+
+BetRow.defaultProps = {
+  deletingNBABet: false
 }
 
 BetRow.propTypes = {
   bet: PropTypes.object.isRequired,
-  openBetModal: PropTypes.func.isRequired
+  openBetModal: PropTypes.func.isRequired,
+  removeNBABet: PropTypes.func.isRequired,
+  deletingNBABet: PropTypes.bool
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(BetRow)

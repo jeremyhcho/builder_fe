@@ -5,7 +5,7 @@ import { groupBy } from 'lodash'
 import moment from 'moment-timezone'
 
 // Actions
-import { fetchNBABets, closeBetModal } from 'Actions'
+import { fetchNBABets, closeBetModal, submitEditBet } from 'Actions'
 
 // Components
 import {
@@ -47,6 +47,12 @@ class Bets extends React.Component {
 
   componentDidMount () {
     this.props.fetchNBABets()
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (!newProps.updatingMatchBet && this.props.updatingMatchBet) {
+      this.props.closeBetModal()
+    }
   }
 
   handleChange = (e, menuItem) => {
@@ -146,16 +152,20 @@ class Bets extends React.Component {
         header='Edit Bet'
         toggle={this.props.closeBetModal}
         isOpen={this.props.openBetModal}
-        wrapperStyle={{ width: '650px' }}
+        wrapperStyle={{ width: '500px' }}
+        bodyStyle={{ padding: '25px', margin: '0 auto 0 10px' }}
         footer={[
           <Button
             flat
+            onClick={this.props.updatingMatchBet ? null : this.props.closeBetModal}
             key="cancel"
           >
             Cancel
           </Button>,
           <Button
-            primary
+            primary={!this.props.updatingMatchBet}
+            loading={this.props.updatingMatchBet}
+            onClick={this.props.updatingMatchBet ? null : this.props.submitEditBet}
             key="delete"
           >
             Save
@@ -292,7 +302,8 @@ class Bets extends React.Component {
 }
 
 Bets.defaultProps = {
-  bets: []
+  bets: [],
+  updatingMatchBet: false
 }
 
 Bets.propTypes = {
@@ -300,18 +311,22 @@ Bets.propTypes = {
   bets: PropTypes.array,
   openBetModal: PropTypes.bool.isRequired,
   betId: PropTypes.number.isRequired,
-  closeBetModal: PropTypes.func.isRequired
+  closeBetModal: PropTypes.func.isRequired,
+  updatingMatchBet: PropTypes.bool,
+  submitEditBet: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ routines, nba }) => ({
   bets: routines.nba.bets,
   openBetModal: nba.bets.openBetModal,
-  betId: nba.bets.modalBetId
+  betId: nba.bets.modalBetId,
+  updatingMatchBet: routines.isLoading.UPDATE_NBA_MATCH_BET
 })
 
 const mapDispatchToProps = {
   fetchNBABets,
-  closeBetModal
+  closeBetModal,
+  submitEditBet
 }
 
 export default connect(

@@ -3,11 +3,15 @@ import { createRoutine } from 'Routines'
 // Constants
 import {
   FETCH_NBA_BETS,
+  UPDATE_NBA_BET,
+  DELETE_NBA_BET,
   FETCH_NBA_MATCH_BET,
   CREATE_NBA_BET,
-  UPDATE_NBA_BET,
+  UPDATE_NBA_MATCH_BET,
   OPEN_BET_MODAL,
-  CLOSE_BET_MODAL
+  CLOSE_BET_MODAL,
+  SUBMIT_EDIT_BET,
+  CLOSE_EDIT_BET
 } from 'Constants'
 
 // Apis
@@ -15,7 +19,8 @@ import {
   getNBABets,
   getNBAMatchBet,
   postNBABet,
-  editNBABet
+  editNBABet,
+  deleteNBABet
 } from 'Apis'
 
 // Actions
@@ -26,6 +31,32 @@ export const fetchNBABets = createRoutine({
   api: getNBABets,
   reducerKey: ['nba', 'bets'],
   transform: 'replace'
+})
+
+export const updateNBABet = createRoutine({
+  prefix: UPDATE_NBA_BET,
+  api: editNBABet,
+  reducerKey: ['nba', 'bets'],
+  transform: (response, stateKey) => {
+    return stateKey.map(bet => {
+      if (bet.id === response.id) {
+        return response
+      }
+
+      return bet
+    })
+  },
+  onSuccess: () => openSnackbar('Bet updated', 3000)
+})
+
+export const removeNBABet = createRoutine({
+  prefix: DELETE_NBA_BET,
+  api: deleteNBABet,
+  reducerKey: ['nba', 'bets'],
+  transform: (response, stateKey) => {
+    return stateKey.filter(bet => bet.id !== response.id)
+  },
+  onSuccess: () => openSnackbar('Bet deleted', 3000)
 })
 
 export const fetchNBAMatchBet = createRoutine({
@@ -53,8 +84,8 @@ export const createNBABet = createRoutine({
   }
 })
 
-export const updateNBABet = createRoutine({
-  prefix: UPDATE_NBA_BET,
+export const updateNBAMatchBet = createRoutine({
+  prefix: UPDATE_NBA_MATCH_BET,
   api: editNBABet,
   reducerKey: ['nba', 'matchBets'],
   onSuccess: () => openSnackbar('Bet updated', 3000),
@@ -72,6 +103,14 @@ export const updateNBABet = createRoutine({
       })
     }
   }
+})
+
+export const submitEditBet = () => ({
+  type: SUBMIT_EDIT_BET
+})
+
+export const closeEditBet = () => ({
+  type: CLOSE_EDIT_BET
 })
 
 export const openBetModal = (betId) => ({

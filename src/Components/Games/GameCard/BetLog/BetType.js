@@ -15,7 +15,7 @@ import WhiteCheck from 'Assets/Icons/white-check.svg'
 import './BetLog.scss'
 
 // Actions
-import { createNBABet, updateNBABet } from 'Actions'
+import { createNBABet, updateNBAMatchBet } from 'Actions'
 
 class BetType extends React.Component {
   state = {
@@ -118,7 +118,7 @@ class BetType extends React.Component {
     }
 
     if (betId) {
-      return this.props.updateNBABet(betId, createdBet)
+      return this.props.updateNBAMatchBet(betId, createdBet)
     }
 
     return this.props.createNBABet(createdBet)
@@ -146,8 +146,8 @@ class BetType extends React.Component {
 
     if (betType === 'moneyline') {
       return ([
-        <div style={{ padding: '0 33px' }}>
-          <img src={game[team].image} key='image' />
+        <div style={{ padding: '0 33px' }} key='image'>
+          <img src={game[team].image} />
         </div>,
         <p className="semibold" key='value'>
           {game[team].odds[betType]}
@@ -157,8 +157,8 @@ class BetType extends React.Component {
 
     if (betType === 'spread') {
       return ([
-        <div style={{ padding: '0 33px' }}>
-          <img src={game[team].image} key='image' />
+        <div style={{ padding: '0 33px' }} key='image'>
+          <img src={game[team].image} />
         </div>,
         <p className="semibold" key='value'>
           {game[team].odds[betType]} {`(${game[team].odds.spread_odds})`}
@@ -169,16 +169,16 @@ class BetType extends React.Component {
     if (betType === 'total') {
       const overUnderTag = { marginBottom: '8px' }
       return ([
-        <div style={{ padding: '0 38px' }}>
+        <div style={{ padding: '0 38px' }} key="image">
           {
             team === 'away'
-              ? <UpArrow height={30} width={45} key="image" />
-              : <DownArrow height={30} width={45} key="image" />
+              ? <UpArrow height={30} width={45} />
+              : <DownArrow height={30} width={45} />
           }
           {
             team === 'away'
-              ? <p className="semibold label" style={overUnderTag} key="over">OVER</p>
-              : <p className="semibold label" style={overUnderTag} key="under">UNDER</p>
+              ? <p className="semibold label" style={overUnderTag}>OVER</p>
+              : <p className="semibold label" style={overUnderTag}>UNDER</p>
           }
         </div>,
         <p className="semibold" key='value'>
@@ -305,19 +305,19 @@ BetType.propTypes = {
   game: PropTypes.object.isRequired,
   show: PropTypes.bool.isRequired,
   createNBABet: PropTypes.func.isRequired,
-  updateNBABet: PropTypes.func.isRequired,
+  updateNBAMatchBet: PropTypes.func.isRequired,
   creatingMatchBet: PropTypes.bool,
   updatingMatchBet: PropTypes.bool
 }
 
 const mapStateToProps = ({ routines }) => ({
   creatingMatchBet: routines.isLoading.CREATE_NBA_BET,
-  updatingMatchBet: routines.isLoading.UPDATE_NBA_BET
+  updatingMatchBet: routines.isLoading.UPDATE_NBA_MATCH_BET
 })
 
 const mapDispatchToProps = {
   createNBABet,
-  updateNBABet
+  updateNBAMatchBet
 }
 
 export default connect(

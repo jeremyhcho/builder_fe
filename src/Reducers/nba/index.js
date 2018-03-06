@@ -5,7 +5,9 @@ import {
   UPDATE_NBA_GAMES,
   CHANGE_SORT_STATS_KEY,
   OPEN_BET_MODAL,
-  CLOSE_BET_MODAL
+  CLOSE_BET_MODAL,
+  SUBMIT_EDIT_BET,
+  CLOSE_EDIT_BET
 } from 'Constants'
 
 // Helpers
@@ -37,7 +39,8 @@ const initialState = {
   },
   bets: {
     openBetModal: false,
-    modalBetId: 0
+    modalBetId: 0,
+    submitEditBet: false
   }
 }
 
@@ -81,6 +84,12 @@ const nbaReducer = (state = initialState, action) => {
 
     case CLOSE_BET_MODAL:
       return { ...state, bets: { openBetModal: false, modalBetId: 0 } }
+
+    case SUBMIT_EDIT_BET:
+      return { ...state, bets: { ...state.bets, submitEditBet: true } }
+
+    case CLOSE_EDIT_BET:
+      return { ...state, bets: { ...state.bets, submitEditBet: false } }
 
     case '@@router/LOCATION_CHANGE':
       return {
