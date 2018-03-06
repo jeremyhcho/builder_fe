@@ -107,7 +107,7 @@ class SpreadPrediction extends React.Component {
         function: this.getRegressionPoint,
         data: [
           {
-            x: dataPoints[0].x,
+            x: filteredDataPoints[0].x,
             y: this.getRegressionPoint(filteredDataPoints[0].x)
           },
           {

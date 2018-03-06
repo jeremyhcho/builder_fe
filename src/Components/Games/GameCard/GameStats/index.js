@@ -57,7 +57,8 @@ class GameStats extends React.Component {
         moneyline: '-',
         spread: '-',
         spreadOdds: '-',
-        total: '-'
+        total: '-',
+        totalOdds: '-'
       }
     }
 
@@ -65,7 +66,8 @@ class GameStats extends React.Component {
       moneyline: game[team].odds.moneyline || '-',
       spread: game[team].odds.spread || '-',
       spreadOdds: game[team].odds.spread_odds || '-',
-      total: game[team].odds.total || '-'
+      total: game[team].odds.total || '-',
+      totalOdds: game[team].odds.total_odds || '-'
     })
   }
 
@@ -192,7 +194,7 @@ class GameStats extends React.Component {
                     <div styleName="value total">
                       {team === 'away' ? <ArrowUp height={14} width={14} />
                         : <ArrowDown height={14} width={14} />}
-                      <p className="small">{spreadStats.total}</p>
+                      <p className="small">{spreadStats.total} {`(${spreadStats.totalOdds})`}</p>
                     </div>
                   </div>
                 )
