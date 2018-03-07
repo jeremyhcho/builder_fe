@@ -15,12 +15,14 @@ class GamesList extends React.Component {
 
   sortedGames () {
     return this.props.games.sort((gameA, gameB) => (
-      gameA.date.format('H.mm') - gameB.date.format('H.mm')
+      gameA.date.diff(gameB.date)
     ))
   }
 
   render () {
     const { locationState } = this.props
+    console.log(this.props.games)
+    console.log(this.sortedGames())
 
     const secretDivs = []
     for (let i = this.props.games.length % 3; i < 3 || i === 0; i++) {
