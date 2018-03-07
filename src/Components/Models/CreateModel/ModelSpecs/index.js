@@ -27,7 +27,7 @@ const ModelSpecs = ({ creatingModel, updatingModel }) => {
     <div styleName="model-specs">
       <div styleName='model-create-row'>
         <div styleName="label">
-          <p className="semibold label">Specs</p>
+          <p className="label">Specs</p>
 
           <span>
             <ModelSpecsInfo />

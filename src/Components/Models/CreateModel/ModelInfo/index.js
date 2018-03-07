@@ -8,8 +8,8 @@ import classNames from 'classnames'
 import { FieldInput, FieldToggle } from 'Components/Common'
 
 // Icons
-import Water from 'Assets/Icons/drops.svg'
-import Fire from 'Assets/Icons/energy.svg'
+import Water from 'Assets/Icons/sliders.svg'
+import Fire from 'Assets/Icons/tools.svg'
 import WhiteCheck from 'Assets/Icons/white-check.svg'
 
 // CSS
@@ -36,16 +36,10 @@ class ModelInfo extends React.Component {
 
     return (
       <section styleName="model-info">
-        <header>
-          <h4 className="semibold">Model details || Create your model</h4>
-          <p className="small label">Cool ass subtext earth water fire air banh mi</p>
-        </header>
-
-
         <div styleName="model-create-row">
           <div styleName="label">
-            <p className="semibold label">
-              Model name {' '}
+            <p className="label">
+              Name {' '}
               <span style={{ color: 'var(--red)' }}>*</span>
             </p>
           </div>
@@ -56,7 +50,7 @@ class ModelInfo extends React.Component {
               component={FieldInput}
               name="name"
               type="text"
-              placeholder="My first model"
+              placeholder="My First Model"
               validate={[presence, maxChar20]}
             />
           </div>
@@ -64,7 +58,7 @@ class ModelInfo extends React.Component {
 
         <div styleName="model-create-row">
           <div styleName="label">
-            <p className="semibold label">Model type</p>
+            <p className="label">Type</p>
           </div>
 
           <div styleName="input">
@@ -100,7 +94,7 @@ class ModelInfo extends React.Component {
 
         <div styleName="model-create-row">
           <div styleName="label">
-            <p className="semibold label">Model status</p>
+            <p className="label">Status</p>
           </div>
 
           <div styleName="input">
@@ -110,7 +104,8 @@ class ModelInfo extends React.Component {
             >
               An inactive model will still generate predictions for
               scheduled games but not affect its winrate.
-              You can toggle the status of a model anytime you want.
+              You can toggle the status of a model for an individual game in the respective
+              "Game Details" section.
             </div>
 
             <Field
