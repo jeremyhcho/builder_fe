@@ -178,8 +178,8 @@ class EditBet extends React.Component {
 
         <div styleName='row' key='message' style={{ marginBottom: '25px' }}>
           <p className='label'>
-            Odds and spread might have changed since your current bet. Saving {' '}
-            will apply the current odds and spread.
+            The current line might be different from your existing bet. Saving {' '}
+            will override apply the current line to the bet.
           </p>
         </div>
 

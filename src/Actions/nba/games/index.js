@@ -13,7 +13,7 @@ export const fetchNBAGames = createRoutine({
   reducerKey: ['nba', 'games'],
   transform: (response) => (
     response.map(game => ({
-      ...game, date: moment(new Date(game.date))
+      ...game, date: moment.utc(game.date)
     }))
   )
 })
