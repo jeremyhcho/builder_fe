@@ -35,6 +35,8 @@ class Slider extends React.Component {
     const { value, disabled } = this.props
     if (!disabled) this.offsetFill(this.state.value)
     this.setState({ inputWidth: this.findInputWidth(value) })
+
+    window.addEventListener('resize', this.updateSliderDimensions, false)
     /* eslint-enable react/no-did-mount-set-state */
   }
 
@@ -51,6 +53,10 @@ class Slider extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.updateSliderDimensions, false)
+  }
+
   onFocus = (e) => {
     e.target.select()
   }
@@ -60,6 +66,10 @@ class Slider extends React.Component {
     this.setState({
       showValue: true
     })
+  }
+
+  updateSliderDimensions = () => {
+    this.offsetFill(this.state.value)
   }
 
   handleChange = (e) => {

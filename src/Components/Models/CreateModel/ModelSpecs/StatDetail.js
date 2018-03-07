@@ -20,7 +20,7 @@ const impacts = {
 }
 
 const StatDetail = ({ text, impact }) => (
-  <InfoBubble pos="top" width={400} style={{ display: 'inline-block', marginLeft: '5px' }}>
+  <InfoBubble pos="top" width={400} style={{ display: 'inline-block', marginLeft: '8px' }}>
     <p
       className='semibold'
       style={{ textAlign: 'left' }}

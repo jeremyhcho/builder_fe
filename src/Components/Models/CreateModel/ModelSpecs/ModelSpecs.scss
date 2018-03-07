@@ -1,43 +1,50 @@
 .model-specs {
-  .labels {
-    margin: 0;
-    padding: 20px 40px;
-    background-color: var(--navy-blue);
-    color: #fff;
-    border-radius: 3px 3px 0 0;
-  }
+  padding-top: 20px;
 
-  .values {
-    margin: 0;
-    padding: 20px 40px;
+  .model-create-row {
+    display: flex;
+    justify-content: flex-start;
+    padding: 40px 0;
 
-    .slider-row {
-      margin: 20px 0;
-    }
-  }
+    .label {
+      display: flex;
+      flex: 1;
 
-  .footer {
-    margin: 0;
-    padding: 0 20px 20px;
-
-    .submit-button {
-      position: absolute;
-      top: 0;
-      left: -99999px;
-
-      &.show {
-        position: relative;
+      span {
+        margin: 2px 0 0 8px;
       }
     }
 
-    .disabled-button {
-      position: absolute;
-      top: 0;
-      left: -99999px;
+    .input {
+      flex: 4;
 
-      &.show {
-        position: relative;
+      .specs-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+
+        .specs-label {
+          display: flex;
+          align-items: center;
+          flex: 1;
+          text-transform: uppercase;
+        }
+
+        .specs-slider {
+          flex: 2;
+          padding-right: 5%;
+        }
       }
     }
+  }
+
+  .cta {
+    text-align: right;
+  }
+
+  .specs-error {
+    text-align: right;
+    padding-right: 25px;
+    color: var(--red);
   }
 }

@@ -1,18 +1,17 @@
 /* eslint-disable no-underscore-dangle */
-const modelValidate = (values) => {
+const modelValidate = ({ name, type, status, ...specs }) => {
   const errors = {}
-  if (!values.type) {
+
+  if (!type) {
     errors.type = 'You must choose a model type'
   }
 
-  if (values.specs) {
-    const specsTotal = Object.values(values.specs)
+  if (Object.keys(specs).length) {
+    const specsTotal = Object.values(specs)
       .reduce((total, val) => parseInt(total, 10) + parseInt(val, 10))
 
     if (specsTotal !== 25) {
-      const specErrors = {}
-      specErrors.effective_fg_pct = `${25 - specsTotal}`
-      errors.specs = specErrors
+      errors[Object.keys(specs)[0]] = `${25 - specsTotal}`
     }
   }
   /* eslint-enable no-underscore-dangle */

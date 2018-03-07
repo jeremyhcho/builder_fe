@@ -1,9 +1,16 @@
 import React from 'react'
-import { Field } from 'redux-form'
-import { Row, Col } from 'react-styled-flexboxgrid'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Field, formValueSelector, change } from 'redux-form'
+import classNames from 'classnames'
 
 // Components
-import { FieldInput, FieldToggle, ButtonGroup, Card } from 'Components/Common'
+import { FieldInput, FieldToggle } from 'Components/Common'
+
+// Icons
+import Water from 'Assets/Icons/drops.svg'
+import Fire from 'Assets/Icons/energy.svg'
+import WhiteCheck from 'Assets/Icons/white-check.svg'
 
 // CSS
 import './ModelInfo.scss'
@@ -11,71 +18,121 @@ import './ModelInfo.scss'
 // Helpers
 import { presence, maxChar } from 'Helpers/Validators'
 
+const modelSelector = formValueSelector('model')
+const changeModelType = (modelType) => change('model', 'type', modelType)
+
 const maxChar20 = maxChar(20)
 
 class ModelInfo extends React.Component {
+  changeModelType = (modelType) => {
+    return () => this.props.dispatch(changeModelType(modelType))
+  }
+
   render () {
-    const modelTypeButtons = [
-      { label: 'Standard', key: 'standard' },
-      { label: 'Advanced', key: 'advanced', disabled: true }
+    const modelTypes = [
+      { label: 'Standard', key: 'standard', icon: Water },
+      { label: 'Advanced', key: 'advanced', icon: Fire, disabled: true }
     ]
 
     return (
-      <Card label="Details" style={{ width: '800px' }}>
-        <div styleName="model-details">
-          <Row middle='xs' styleName="labels">
-            <Col xs={4} style={{ textAlign: 'left' }}>
-              <p className="small">
-                MODEL NAME
-                <span styleName="fa-required">
-                  <i className="fa fa-asterisk" aria-hidden="true" />
-                </span>
-              </p>
-            </Col>
+      <section styleName="model-info">
+        <header>
+          <h4 className="semibold">Model details || Create your model</h4>
+          <p className="small label">Cool ass subtext earth water fire air banh mi</p>
+        </header>
 
-            <Col xsOffset={2} xs={4}>
-              <p className="small">MODEL TYPE</p>
-            </Col>
 
-            <Col xs={2}>
-              <p className="small">STATUS</p>
-            </Col>
-          </Row>
+        <div styleName="model-create-row">
+          <div styleName="label">
+            <p className="semibold label">
+              Model name {' '}
+              <span style={{ color: 'var(--red)' }}>*</span>
+            </p>
+          </div>
 
-          <Row middle='xs' styleName="values">
-            <Col xs={4} style={{ textAlign: 'left' }}>
-              <Field
-                component={FieldInput}
-                name="Name"
-                shouldFitContainer
-                type="text"
-                label="name"
-                isLabelHidden
-                style={{ margin: '0' }}
-                placeholder="My First Model"
-                validate={[presence, maxChar20]}
-              />
-            </Col>
-
-            <Col xsOffset={2} xs={4}>
-              <ButtonGroup
-                buttons={modelTypeButtons}
-                onChange={(button) => this.setState({ selected: button.key })}
-                defaultKey='standard'
-              />
-            </Col>
-
-            <Col xs={2}>
-              <Field
-                name="status"
-                component={FieldToggle}
-              />
-            </Col>
-          </Row>
+          <div styleName="input">
+            <Field
+              style={{ margin: '0' }}
+              component={FieldInput}
+              name="name"
+              type="text"
+              placeholder="My first model"
+              validate={[presence, maxChar20]}
+            />
+          </div>
         </div>
-      </Card>
+
+        <div styleName="model-create-row">
+          <div styleName="label">
+            <p className="semibold label">Model type</p>
+          </div>
+
+          <div styleName="input">
+            {
+              modelTypes.map(({ label, key, icon: Icon, disabled }) => {
+                const selected = key === this.props.modelType
+                const modelTypeCardStyle = classNames('model-type-card', {
+                  selected: key === this.props.modelType,
+                  disabled
+                })
+
+                return (
+                  <div
+                    styleName={modelTypeCardStyle}
+                    key={key}
+                    onClick={!disabled ? this.changeModelType(key) : null}
+                  >
+                    {
+                      selected &&
+                      <span>
+                        <WhiteCheck />
+                      </span>
+                    }
+
+                    <Icon height={65} width={65} style={{ opacity: '0.65' }} />
+                    <p className="semibold">{label}</p>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+
+        <div styleName="model-create-row">
+          <div styleName="label">
+            <p className="semibold label">Model status</p>
+          </div>
+
+          <div styleName="input">
+            <div
+              className="small label"
+              style={{ marginBottom: '25px', width: '40%' }}
+            >
+              An inactive model will still generate predictions for
+              scheduled games but not affect its winrate.
+              You can toggle the status of a model anytime you want.
+            </div>
+
+            <Field
+              name="status"
+              component={FieldToggle}
+            />
+          </div>
+        </div>
+      </section>
     )
   }
 }
 
-export default ModelInfo
+ModelInfo.propTypes = {
+  modelType: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  modelType: modelSelector(state, 'type')
+})
+
+export default connect(
+  mapStateToProps
+)(ModelInfo)

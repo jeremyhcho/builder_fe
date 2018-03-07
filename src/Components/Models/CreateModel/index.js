@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+import { reduxForm, getFormSyncErrors } from 'redux-form'
 
 // Components
 import { DocumentTitle } from 'Components/Common'
@@ -15,8 +15,8 @@ import { createNBAModel, updateNBAModel } from 'Actions'
 import './CreateModel.scss'
 
 // Helpers
-import modelValidate from './modelValidate'
 import specKeys from './specKeys'
+import modelValidate from './modelValidate'
 
 class CreateModel extends React.Component {
   componentWillMount () {
@@ -34,20 +34,22 @@ class CreateModel extends React.Component {
       initialize({
         type: 'standard',
         status: true,
-        specs
+        ...specs
       })
     } else {
       initialize({
         type: model.type,
         status: model.status === 'ACTIVE',
-        specs: model.specs,
-        Name: model.name
+        name: model.name,
+        ...model.specs
       })
     }
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.submitFailed && !this.props.submitFailed) {
+    /* eslint-disable react/no-unused-prop-types */
+    if (newProps.submitFailed && !this.props.submitFailed
+      && newProps.submitErrors.name) {
       this.modelContainer.scrollTop = 0
     }
 
@@ -65,20 +67,24 @@ class CreateModel extends React.Component {
     return 'INACTIVE'
   }
 
-  createModel = ({ Name, specs, status }) => {
+  createModel = ({ name, status, type, ...specs }) => {
     this.props.createNBAModel({
-      name: Name,
-      specs,
-      status: this.getModelStatus(status)
+      name,
+      status: this.getModelStatus(status),
+      specs: {
+        ...specs
+      }
     })
   }
 
-  editModel = ({ Name, specs, status }) => {
+  editModel = ({ name, type, status, ...specs }) => {
     this.props.updateNBAModel(this.props.model.id, {
       model: {
-        name: Name,
-        specs,
-        status: this.getModelStatus(status)
+        name,
+        status: this.getModelStatus(status),
+        specs: {
+          ...specs
+        }
       }
     })
   }
@@ -94,6 +100,7 @@ class CreateModel extends React.Component {
       >
         <div styleName="create-models" ref={ref => this.modelContainer = ref}>
           <form
+            styleName="model-form"
             onSubmit={model ? handleSubmit(this.editModel) : handleSubmit(this.createModel)}
             style={{ display: 'inline-block' }}
           >
@@ -121,12 +128,14 @@ CreateModel.propTypes = {
   updateNBAModel: PropTypes.func.isRequired,
   creatingModel: PropTypes.bool,
   updatingModel: PropTypes.bool,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  submitErrors: PropTypes.object.isRequired
 }
 
-const mapStateToProps = ({ routines }) => ({
+const mapStateToProps = ({ routines, ...state }) => ({
   creatingModel: routines.isLoading.CREATE_NBA_MODEL,
-  updatingModel: routines.isLoading.UPDATE_NBA_MODEL
+  updatingModel: routines.isLoading.UPDATE_NBA_MODEL,
+  submitErrors: getFormSyncErrors('model')(state)
 })
 
 const mapDispatchToProps = {

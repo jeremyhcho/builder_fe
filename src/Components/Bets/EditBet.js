@@ -170,7 +170,6 @@ class EditBet extends React.Component {
 
   render () {
     const { bet } = this.props
-    console.log(bet)
 
     return (
       <div styleName="edit-bet-modal">

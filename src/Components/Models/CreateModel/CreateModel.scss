@@ -4,6 +4,13 @@
   max-width: 1200px;
   overflow-y: auto;
 
+  .model-form {
+    background-color: #fff;
+    padding: 25px 40px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray);
+  }
+
   .model-type-card {
     display: flex;
     align-items: center;
