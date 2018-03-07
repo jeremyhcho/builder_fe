@@ -9,7 +9,7 @@ import Notifications from './Notifications'
 
 // Icons
 import LeftArrowIcon from 'Assets/Icons/left-arrow.svg'
-import ProfileIcon from 'Assets/Icons/profile.svg'
+import MenuIcon from 'Assets/Icons/menu.svg'
 import AccountSettingsIcon from 'Assets/Icons/settings/fc-cog.svg'
 import HelpIcon from 'Assets/Icons/fc-help.svg'
 import SignoutIcon from 'Assets/Icons/settings/input-12.svg'
@@ -56,7 +56,7 @@ class Header extends React.Component {
               <IconDropdown
                 horizontalReverse
                 listStyle={{ minWidth: '200px' }}
-                icon={<ProfileIcon style={{ marginTop: '5px' }} />}
+                icon={<MenuIcon style={{ marginTop: '5px' }} />}
               >
                 <IconMenuItem
                   icon={<AccountSettingsIcon width={14} height={14} />}

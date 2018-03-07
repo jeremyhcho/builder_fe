@@ -11,7 +11,7 @@ import { Login, Signup, Forgot, Reset, Verify } from 'Components/Auth'
 
 // Icons
 import PlaceholderIcon from 'Assets/Icons/blue-q-1.svg'
-import PodiumIcon from 'Assets/Icons/podium.svg'
+import RocketVector from 'Assets/Icons/rocket-vector.svg'
 
 // const LoginContainer = Loadable({
 //   loader: () => import('../../containers/Session/Login'),
@@ -102,7 +102,7 @@ const AuthLayout = () => (
             with actionable insights from Quartz analytics
           </p>
 
-          <PodiumIcon
+          <RocketVector
             style={{
               width: '100%',
               height: '100%',

@@ -1,16 +1,4 @@
 .model-info {
-
-  header {
-    padding: 20px 0;
-    text-align: center;
-
-    h4 {
-      display: inline-block;
-      padding-bottom: 10px;
-      text-transform: uppercase;
-    }
-  }
-
   .model-create-row {
     display: flex;
     align-items: center;
@@ -42,8 +30,12 @@
         }
 
         &.disabled {
-          background-color: rgba(0, 0, 0, 0.075);
+          background-color: var(--lightest-gray);
           cursor: not-allowed;
+
+          p {
+            color: var(--dark-gray);
+          }
         }
 
         &.selected {
