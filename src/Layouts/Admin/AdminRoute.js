@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -9,6 +9,8 @@ import { verifyAdmin } from 'Actions'
 // Components
 import AnnouncementLayout from './AnnouncementLayout'
 import PickOfTheDayLayout from './PickOfTheDayLayout'
+import AdminDashboard from 'Components/Admin/Dashboard'
+import UsersLayout from './UsersLayout'
 
 class AdminRoute extends React.Component {
   componentDidMount () {
@@ -32,9 +34,10 @@ class AdminRoute extends React.Component {
 
     return (
       <Switch>
+        <Route exact path='/admin' component={AdminDashboard} />
         <Route path='/admin/announcements' component={AnnouncementLayout} />
         <Route path='/admin/potd' component={PickOfTheDayLayout} />
-        <Redirect to='/admin/announcements' from='/admin' />
+        <Route path='/admin/users' component={UsersLayout} />
       </Switch>
     )
   }

@@ -1,0 +1,26 @@
+.admin-dashboard {
+  display: flex;
+  padding: 15px 0 0 65px;
+
+  .section-cell {
+    display: flex;
+    flex: 1;
+    border: 1px solid var(--light-gray);
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    text-align: center;
+    padding: 50px 35px;
+    align-items: center;
+    margin-right: 30px;
+    transition: transform 200ms;
+
+    > h4 {
+      margin-left: 15px;
+    }
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 8px -6px var(--gray);
+    }
+  }
+}

@@ -40,6 +40,24 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
     return 'N/A'
   }
 
+  const parsePredictionValue = (matchType) => {
+    const teamLine = prediction[`vegas_${matchType}_line`]
+
+    if (!teamLine) {
+      return 'N/A'
+    }
+
+    const opposingPoints = matchType === 'home' ? prediction.away_points : prediction.home_points
+
+    if (teamLine.spread === 'PK-110') {
+      return convertNumber(0 - Number(opposingPoints - prediction[`${matchType}_points`]))
+    }
+
+    return convertNumber(
+      Number(teamLine.spread) - Number(opposingPoints - prediction[`${matchType}_points`])
+    )
+  }
+
   if (!Object.keys(prediction).length || fetchingPrediction || fetchingModel) {
     return (
       <Card label="Prediction">
@@ -62,10 +80,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       image: summary.away.image,
       vegas: prediction.vegas_away_line ? prediction.vegas_away_line.spread : 'N/A',
       predictedSpread: convertNumber(prediction.home_points - prediction.away_points),
-      predictionValue: prediction.vegas_away_line ? convertNumber(
-        Number(prediction.vegas_away_line.spread) -
-        Number(prediction.home_points - prediction.away_points)
-      ) : 'N/A'
+      predictionValue: parsePredictionValue('away')
     },
     {
       city: summary.home.city,
@@ -73,10 +88,7 @@ const Predictions = ({ prediction, summary, fetchingPrediction, fetchingModel })
       image: summary.home.image,
       vegas: prediction.vegas_home_line ? prediction.vegas_home_line.spread : 'N/A',
       predictedSpread: convertNumber(prediction.away_points - prediction.home_points),
-      predictionValue: prediction.vegas_home_line ? convertNumber(
-        Number(prediction.vegas_home_line.spread) -
-        Number(prediction.away_points - prediction.home_points)
-      ) : 'N/A'
+      predictionValue: parsePredictionValue('home')
     }
   ]
 
