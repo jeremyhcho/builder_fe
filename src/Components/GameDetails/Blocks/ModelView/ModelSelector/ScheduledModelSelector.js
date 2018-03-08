@@ -96,6 +96,7 @@ class ScheduledModelSelector extends React.Component {
   }
 
   renderModelList () {
+    const { summary } = this.props
     const modelListStyle = classNames('model-list', {
       show: this.state.modelsOpen
     })
@@ -135,8 +136,12 @@ class ScheduledModelSelector extends React.Component {
                           <Toggle
                             toggleStyles={{ padding: '20px', cursor: 'pointer' }}
                             name={matchModel.id}
+                            disabled={summary.status === 'INPROGRESS'}
                             checked={this.checkModelStatus(matchModel.status)}
-                            onChange={() => this.changeModelStatus(matchModel)}
+                            onChange={
+                              summary.status === 'INPROGRESS'
+                                ? null : () => this.changeModelStatus(matchModel)
+                            }
                           />
                         </div>
                       )
@@ -185,10 +190,12 @@ ScheduledModelSelector.defaultProps = {
   predictions: [],
   prediction: {},
   model: {},
-  fetchingModel: false
+  fetchingModel: false,
+  summary: {}
 }
 
 ScheduledModelSelector.propTypes = {
+  summary: PropTypes.object,
   predictions: PropTypes.array,
   prediction: PropTypes.object,
   model: PropTypes.object,
@@ -202,6 +209,7 @@ const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
   model: routines.nba.model,
+  summary: routines.nba.summary,
   fetchingModel: routines.isLoading.FETCH_NBA_MODEL
 })
 
