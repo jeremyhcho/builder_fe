@@ -15,7 +15,7 @@ export const fetchNBAGames = createRoutine({
     response.map(game => ({
       ...game, date: moment.utc(new Date(game.date))
     }))
-  }
+  )
 })
 
 export const updateNBAGames = (date) => ({
