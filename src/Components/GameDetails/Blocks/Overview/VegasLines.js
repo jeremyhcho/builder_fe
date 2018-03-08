@@ -23,10 +23,14 @@ class VegasLines extends React.Component {
 
   renderSpread (line) {
     if (line.spread) {
+      if (line.spread === '0') {
+        return `PK (${line.spread_odds})`
+      }
+
       return `${line.spread} (${line.spread_odds})`
     }
 
-    return 'N/A'
+    return '-'
   }
 
   renderTotals (line, type) {
@@ -34,7 +38,7 @@ class VegasLines extends React.Component {
       return `${type}${line.total} (${line.total_odds})`
     }
 
-    return 'N/A'
+    return '-'
   }
 
   render () {

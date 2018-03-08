@@ -54,7 +54,9 @@ class BetRow extends React.Component {
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <img src={teamLogo} style={{ width: '24px', height: '24px' }} key={1} />
-        <span className='semibold' key={2}>{bet.pick}</span>
+        <span className='semibold' key={2}>
+          {bet.pick === '0' ? 'PK' : bet.pick}
+        </span>
       </div>
     )
   }

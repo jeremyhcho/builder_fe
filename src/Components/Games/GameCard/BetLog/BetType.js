@@ -169,7 +169,8 @@ class BetType extends React.Component {
           <img src={game[team].image} />
         </div>,
         <p className="semibold" key='value'>
-          {game[team].odds[betType]} {`(${game[team].odds.spread_odds})`}
+          {game[team].odds[betType] === '0' ? 'PK' : game[team].odds[betType]}
+          {` (${game[team].odds.spread_odds})`}
         </p>
       ])
     }

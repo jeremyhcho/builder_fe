@@ -51,6 +51,7 @@ class GameStats extends React.Component {
 
   renderSpreadStats (team) {
     const { game } = this.props
+    let spread
 
     if (!game[team].odds) {
       return {
@@ -62,9 +63,17 @@ class GameStats extends React.Component {
       }
     }
 
+    if (game[team].odds.spread) {
+      if (game[team].odds.spread === '0') {
+        spread = 'PK'
+      } else {
+        spread = game[team].odds.spread
+      }
+    }
+
     return ({
       moneyline: game[team].odds.moneyline || '-',
-      spread: game[team].odds.spread || '-',
+      spread: spread || '-',
       spreadOdds: game[team].odds.spread_odds || '-',
       total: game[team].odds.total || '-',
       totalOdds: game[team].odds.total_odds || '-'
