@@ -7,7 +7,7 @@ import { UPDATE_NBA_GAMES } from 'Constants'
 
 const getCurrentDate = () => {
   if (getDateQuery(location.search)) {
-    return moment(location.search.slice(6))
+    return moment(location.search.slice(6), 'YYYY-MM-DD')
   }
 
   return moment(moment().format('YYYY-MM-DD'))

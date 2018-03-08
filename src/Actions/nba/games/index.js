@@ -11,11 +11,11 @@ export const fetchNBAGames = createRoutine({
   prefix: FETCH_NBA_GAMES,
   api: getNBAGames,
   reducerKey: ['nba', 'games'],
-  transform: (response) => (
-    response.map(game => ({
-      ...game, date: moment.utc(game.date)
+  transform: (response) => {
+    return response.map(game => ({
+      ...game, date: moment(new Date(game.date))
     }))
-  )
+  }
 })
 
 export const updateNBAGames = ({ now, from, to }) => ({
