@@ -21,8 +21,6 @@ class GamesList extends React.Component {
 
   render () {
     const { locationState } = this.props
-    console.log(this.props.games)
-    console.log(this.sortedGames())
 
     const secretDivs = []
     for (let i = this.props.games.length % 3; i < 3 || i === 0; i++) {

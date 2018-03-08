@@ -15,12 +15,10 @@ export const fetchNBAGames = createRoutine({
     response.map(game => ({
       ...game, date: moment.utc(new Date(game.date))
     }))
-  )
+  }
 })
 
-export const updateNBAGames = ({ now, from, to }) => ({
+export const updateNBAGames = (date) => ({
   type: UPDATE_NBA_GAMES,
-  now,
-  from,
-  to
+  date
 })
