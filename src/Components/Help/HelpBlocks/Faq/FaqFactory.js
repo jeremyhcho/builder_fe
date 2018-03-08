@@ -10,7 +10,7 @@ const FaqFactory = [
   },
   {
     question: 'Will Quartz be supporting sports other than NBA?',
-    answer: 'Definitely! We currently have MLB and NFL in the pipeline'
+    answer: 'Definitely! We currently have MLB and NFL in the pipeline'.
   },
   {
     question: 'What features are coming soon?',
