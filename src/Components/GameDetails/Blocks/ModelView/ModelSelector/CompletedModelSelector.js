@@ -164,14 +164,18 @@ class CompletedModelSelector extends React.Component {
       <div
         key="model-name"
         styleName="model-selector"
-        onClick={this.openModels}
-        onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
-        onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
       >
-        <p styleName="model-name" className="semibold small">{prediction.name}</p>
+        <div
+          styleName="selector"
+          onClick={this.openModels}
+          onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
+          onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
+        >
+          <p styleName="model-name" className="semibold small">{prediction.name}</p>
 
-        <div styleName={arrowIconStyle}>
-          {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
+          <span styleName={arrowIconStyle}>
+            {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
+          </span>
         </div>
 
         {this.renderModelList()}

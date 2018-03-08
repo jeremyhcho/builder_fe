@@ -14,21 +14,11 @@ import { getDateQuery } from 'Helpers'
 import { updateNBAGames } from 'Actions'
 
 const GamesListRoute = ({ location, updateNBAGames }) => {
-  const todayDate = moment(moment().format('YYYY-MM-DD'))
-
-  const getFromAndTo = (date) => {
-    const now = moment(date)
-    // beginning of current date in EST
-    const from = moment(`${date} 21:00:00`).subtract(1, 'day')
-    // end of specified date
-    const to = moment(`${date} 20:59:59`)
-
-    return { now, from, to }
-  }
+  const todayDate = moment().format('YYYY-MM-DD')
 
   if (!getDateQuery(location.search)) {
-    updateNBAGames(getFromAndTo(todayDate._i))
-    return <Redirect to={{ pathname: '/games', search: `date=${todayDate._i}`, state: { from: 'sidenav' } }} />
+    updateNBAGames(todayDate)
+    return <Redirect to={{ pathname: '/games', search: `date=${todayDate}`, state: { from: 'sidenav' } }} />
   }
 
   return <Route exact path='/games' component={Games} />

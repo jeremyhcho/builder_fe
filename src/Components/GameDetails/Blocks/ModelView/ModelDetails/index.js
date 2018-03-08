@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Row } from 'react-styled-flexboxgrid'
+// import { Row } from 'react-styled-flexboxgrid'
 
 // CSS
 import './ModelDetails.scss'
@@ -46,7 +46,7 @@ const ModelDetails = ({ model, prediction }) => {
   const modelRecords = getModelRecords()
 
   return (
-    <Row middle='xs' between='xs' styleName="model-stats">
+    <section styleName="model-stats">
       {
         prediction.result ? (
           <div styleName="stats-card">
@@ -98,7 +98,7 @@ const ModelDetails = ({ model, prediction }) => {
         </h4>
         <p className="label">Last 5</p>
       </div>
-    </Row>
+    </section>
   )
 }
 

@@ -15,7 +15,7 @@ class GamesList extends React.Component {
 
   sortedGames () {
     return this.props.games.sort((gameA, gameB) => (
-      gameA.date.format('H.mm') - gameB.date.format('H.mm')
+      gameA.date.diff(gameB.date)
     ))
   }
 

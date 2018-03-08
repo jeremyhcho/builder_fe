@@ -96,6 +96,7 @@ class ScheduledModelSelector extends React.Component {
   }
 
   renderModelList () {
+    const { summary } = this.props
     const modelListStyle = classNames('model-list', {
       show: this.state.modelsOpen
     })
@@ -114,7 +115,7 @@ class ScheduledModelSelector extends React.Component {
               styleName="match-model"
               onClick={(e) => this.changeModel(e, matchModel)}
             >
-              <Col xs={6}>
+              <Col xs={6} styleName="name">
                 <p className="label">Name</p>
                 <p className="semibold clip">{matchModel.name}</p>
               </Col>
@@ -135,8 +136,12 @@ class ScheduledModelSelector extends React.Component {
                           <Toggle
                             toggleStyles={{ padding: '20px', cursor: 'pointer' }}
                             name={matchModel.id}
+                            disabled={summary.status === 'INPROGRESS'}
                             checked={this.checkModelStatus(matchModel.status)}
-                            onChange={() => this.changeModelStatus(matchModel)}
+                            onChange={
+                              summary.status === 'INPROGRESS'
+                                ? null : () => this.changeModelStatus(matchModel)
+                            }
                           />
                         </div>
                       )
@@ -165,14 +170,18 @@ class ScheduledModelSelector extends React.Component {
       <div
         key="model-name"
         styleName="model-selector"
-        onClick={this.openModels}
-        onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
-        onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
       >
-        <p styleName="model-name" className="semibold small">{prediction.name}</p>
+        <div
+          styleName="selector"
+          onClick={this.openModels}
+          onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
+          onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
+        >
+          <p styleName="model-name" className="semibold small">{prediction.name}</p>
 
-        <div styleName={arrowIconStyle}>
-          {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
+          <span styleName={arrowIconStyle}>
+            {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
+          </span>
         </div>
 
         {this.renderModelList()}
@@ -185,10 +194,12 @@ ScheduledModelSelector.defaultProps = {
   predictions: [],
   prediction: {},
   model: {},
-  fetchingModel: false
+  fetchingModel: false,
+  summary: {}
 }
 
 ScheduledModelSelector.propTypes = {
+  summary: PropTypes.object,
   predictions: PropTypes.array,
   prediction: PropTypes.object,
   model: PropTypes.object,
@@ -202,6 +213,7 @@ const mapStateToProps = ({ routines }) => ({
   predictions: routines.nba.predictions,
   prediction: routines.nba.prediction,
   model: routines.nba.model,
+  summary: routines.nba.summary,
   fetchingModel: routines.isLoading.FETCH_NBA_MODEL
 })
 

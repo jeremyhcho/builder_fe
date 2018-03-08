@@ -30,6 +30,9 @@ class GameStats extends React.Component {
       case 'CLOSED':
         return 'FINAL'
 
+      case 'POSTPONED':
+        return 'POSTPONED'
+
       default:
         return 'FINAL'
     }
@@ -89,7 +92,7 @@ class GameStats extends React.Component {
 
     const labelStyle = classNames('label', {
       scheduled: game.status === 'SCHEDULED',
-      inprogress: game.status === 'INPROGRESS',
+      inprogress: game.status === 'INPROGRESS' || game.status === 'POSTPONED',
       closed: game.status === 'CLOSED'
     })
 
