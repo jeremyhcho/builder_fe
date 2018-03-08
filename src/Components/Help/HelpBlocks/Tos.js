@@ -3,6 +3,8 @@ import React from 'react'
 // CSS
 import './HelpBlock.scss'
 
+const lastUpdated = 'February 17th, 2018'
+
 const Tos = () => {
   return (
     /* eslint-disable max-len */
@@ -145,7 +147,7 @@ const Tos = () => {
 
       <section styleName="sub-section">
         <p styleName="footer">
-          This Terms of Use policy was last updated on February 17th, 2018.
+          This Terms of Use policy was last updated on {lastUpdated}.
         </p>
       </section>
     </main>
