@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Row } from 'react-styled-flexboxgrid'
-import moment from 'moment'
 
 // Components
 import { DocumentTitle } from 'Components/Common'
@@ -18,24 +17,14 @@ import { fetchNBAGames } from 'Actions'
 
 class Games extends React.Component {
   componentDidMount () {
-    return this.props.fetchNBAGames(this.getFromAndTo(this.props.dates.now._i))
+    return this.props.fetchNBAGames(this.props.dates.selectedDate)
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.dates.now._i !== this.props.dates.now._i) {
-      this.props.fetchNBAGames(this.getFromAndTo(newProps.dates.now._i))
-      this.props.history.push({ pathname: '/games', search: `date=${newProps.dates.now._i}` })
+    if (newProps.dates.selectedDate !== this.props.dates.selectedDate) {
+      this.props.fetchNBAGames(newProps.dates.selectedDate)
+      this.props.history.push({ pathname: '/games', search: `date=${newProps.dates.selectedDate}` })
     }
-  }
-
-  getFromAndTo (date) {
-    const now = moment(date)
-    // beginning of current date in EST
-    const from = moment(`${date} 21:00:00`).subtract(1, 'day')
-    // end of specified date
-    const to = moment(`${date} 20:59:59`)
-
-    return { now, from, to }
   }
 
   render () {
@@ -45,7 +34,7 @@ class Games extends React.Component {
       <DocumentTitle title='Quartz - NBA Schedule' header='Games'>
         <div>
           <Row style={{ padding: '0 65px', margin: '0' }}>
-            <DateInput parseDate={this.getFromAndTo} />
+            <DateInput />
           </Row>
 
           {

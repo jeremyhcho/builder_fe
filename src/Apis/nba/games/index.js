@@ -1,10 +1,10 @@
 import moment from 'moment'
 import { axios } from 'Apis'
 
-export const getNBAGames = ({ now }) => {
-  console.log(now)
-  const from = moment.tz(`${now._i} 05:00`, 'America/New_York')
-  const to = moment.tz(`${now._i} 04:59:59`, 'America/New_York').add(1, 'day')
+export const getNBAGames = (selectedDate) => {
+  const from = moment.tz(`${selectedDate} 05:00`, 'America/New_York')
+  const to = moment.tz(`${selectedDate} 04:59:59`, 'America/New_York').add(1, 'day')
+
   return axios.get('/api/nba/v1/matches', {
     params: {
       from,

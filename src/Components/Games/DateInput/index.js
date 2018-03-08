@@ -17,9 +17,9 @@ import { updateNBAGames } from 'Actions'
 class DateInput extends React.Component {
   state = {
     isOpened: false,
-    year: Number(this.props.dates.now._i.slice(0, 4)) || null,
-    month: Number(this.props.dates.now._i.slice(5, 7)) || null,
-    day: Number(this.props.dates.now._i.slice(8)) || null,
+    year: Number(this.props.dates.selectedDate.slice(0, 4)) || null,
+    month: Number(this.props.dates.selectedDate.slice(5, 7)) || null,
+    day: Number(this.props.dates.selectedDate.slice(8)) || null,
   }
 
   componentDidMount() {
@@ -30,14 +30,14 @@ class DateInput extends React.Component {
   componentWillReceiveProps (newProps) {
     if (newProps.location.search !== this.props.location.search && this.props.location.search
       && newProps.location.search) {
-      this.props.updateNBAGames(this.props.parseDate(newProps.location.search.slice(6)))
+      this.props.updateNBAGames(newProps.location.search.slice(6))
     }
 
-    if (newProps.dates.now._i !== this.props.dates.now._i) {
+    if (newProps.dates.selectedDate !== this.props.dates.selectedDate) {
       return this.setState({
-        year: Number(newProps.dates.now._i.slice(0, 4)),
-        month: Number(newProps.dates.now._i.slice(5, 7)),
-        day: Number(newProps.dates.now._i.slice(8))
+        year: Number(newProps.dates.selectedDate.slice(0, 4)),
+        month: Number(newProps.dates.selectedDate.slice(5, 7)),
+        day: Number(newProps.dates.selectedDate.slice(8))
       })
     }
 
@@ -87,8 +87,8 @@ class DateInput extends React.Component {
 
   handleSelect = (e) => {
     // sets date when selected from calendar
-    if (e.iso !== this.props.dates.now._i) {
-      this.props.updateNBAGames(this.props.parseDate(e.iso))
+    if (e.iso !== this.props.dates.selectedDate) {
+      this.props.updateNBAGames(e.iso)
     }
 
     this.closeCalendar()
@@ -117,7 +117,7 @@ class DateInput extends React.Component {
       <div styleName="date-input">
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Input
-            value={moment(dates.now._i, 'YYYY-MM-DD').format('MM/DD/YYYY')}
+            value={moment(dates.selectedDate, 'YYYY-MM-DD').format('MM/DD/YYYY')}
             type="text"
             style={{
               fontWeight: '600',
@@ -141,7 +141,7 @@ class DateInput extends React.Component {
           ? <div styleName="calendar">
             <CalendarStateless
               className="calendar"
-              selected={dates.now._i}
+              selected={dates.selectedDate}
               day={day}
               month={month}
               year={year}
@@ -163,9 +163,7 @@ class DateInput extends React.Component {
 DateInput.propTypes = {
   dates: PropTypes.object.isRequired,
   updateNBAGames: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
-  // history: PropTypes.object.isRequired,
-  parseDate: PropTypes.func.isRequired
+  location: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ nba }) => ({

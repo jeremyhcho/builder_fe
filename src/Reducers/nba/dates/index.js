@@ -7,30 +7,20 @@ import { UPDATE_NBA_GAMES } from 'Constants'
 
 const getCurrentDate = () => {
   if (getDateQuery(location.search)) {
-    return moment(location.search.slice(6), 'YYYY-MM-DD')
+    return location.search.slice(6)
   }
 
-  return moment(moment().format('YYYY-MM-DD'))
+  return moment().format('YYYY-MM-DD')
 }
 
 const initialState = {
-  now: getCurrentDate(),
-  from: {},
-  to: {}
+  selectedDate: getCurrentDate()
 }
 
 const dateReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_NBA_GAMES: {
-      const { now, from, to } = action
-
-      return {
-        ...state,
-        now,
-        from,
-        to
-      }
-    }
+    case UPDATE_NBA_GAMES:
+      return { ...state, selectedDate: action.date }
 
     default:
       return state

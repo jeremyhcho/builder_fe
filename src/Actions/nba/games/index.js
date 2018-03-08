@@ -18,9 +18,7 @@ export const fetchNBAGames = createRoutine({
   }
 })
 
-export const updateNBAGames = ({ now, from, to }) => ({
+export const updateNBAGames = (date) => ({
   type: UPDATE_NBA_GAMES,
-  now,
-  from,
-  to
+  date
 })
