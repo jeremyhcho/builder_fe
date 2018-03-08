@@ -115,7 +115,7 @@ class ScheduledModelSelector extends React.Component {
               styleName="match-model"
               onClick={(e) => this.changeModel(e, matchModel)}
             >
-              <Col xs={6}>
+              <Col xs={6} styleName="name">
                 <p className="label">Name</p>
                 <p className="semibold clip">{matchModel.name}</p>
               </Col>
@@ -170,14 +170,18 @@ class ScheduledModelSelector extends React.Component {
       <div
         key="model-name"
         styleName="model-selector"
-        onClick={this.openModels}
-        onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
-        onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
       >
-        <p styleName="model-name" className="semibold small">{prediction.name}</p>
+        <div
+          styleName="selector"
+          onClick={this.openModels}
+          onMouseEnter={() => this.setState({ hovered: !this.state.hovered })}
+          onMouseLeave={() => this.setState({ hovered: !this.state.hovered })}
+        >
+          <p styleName="model-name" className="semibold small">{prediction.name}</p>
 
-        <div styleName={arrowIconStyle}>
-          {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
+          <span styleName={arrowIconStyle}>
+            {this.state.hovered ? <BlueRightIcon /> : <RightIcon />}
+          </span>
         </div>
 
         {this.renderModelList()}

@@ -58,15 +58,8 @@ class ModelView extends React.Component {
 
     return (
       <div style={{ maxWidth: '1300px', width: '100%' }}>
-        <Row>
-          <Col xs={12}>
-            <CompletedModelSelector />
-          </Col>
-
-          <div>
-            <ModelDetails />
-          </div>
-        </Row>
+        <CompletedModelSelector />
+        <ModelDetails />
 
         <Row style={{ maxWidth: '801px' }}>
           <Col xs={12}>
