@@ -82,7 +82,7 @@ class SpreadPrediction extends React.Component {
 
     const filteredDataPoints = dataPoints.filter(outliers('x'))
 
-    if (!dataPoints.length) {
+    if (!filteredDataPoints.length) {
       return {}
     }
 
@@ -111,7 +111,7 @@ class SpreadPrediction extends React.Component {
             y: this.getRegressionPoint(filteredDataPoints[0].x)
           },
           {
-            x: dataPoints[dataPoints.length - 1].x,
+            x: filteredDataPoints[filteredDataPoints.length - 1].x,
             y: this.getRegressionPoint(filteredDataPoints[filteredDataPoints.length - 1].x)
           }
         ],
