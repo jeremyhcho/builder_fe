@@ -36,15 +36,15 @@ import RocketVector from 'Assets/Icons/rocket-vector.svg'
 const AuthLayout = () => (
   <div styleName='auth-wrapper'>
     <Row styleName='auth-card'>
-      <Row middle='xs' styleName='branding-logo'>
-        <PlaceholderIcon style={{ width: '40px', height: '40px' }} />
-      </Row>
-
       <Col
         xs={12}
         sm={6}
         styleName="auth-form"
       >
+        <div styleName='branding-logo'>
+          <PlaceholderIcon style={{ width: '40px', height: '40px' }} />
+        </div>
+
         <Switch>
           <Route exact path='/auth/login' component={Login} />
           <Route exact path='/auth/signup' component={Signup} />
