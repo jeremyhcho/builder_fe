@@ -8,7 +8,7 @@ import NavItem from './NavItem'
 // Icons
 import AccountEditIcon from 'Assets/Icons/settings/account-edit.svg'
 import SelectedAccountEditIcon from 'Assets/Icons/settings/blue-account-edit.svg'
-import ListIcon from 'Assets/Icons/settings/fc-list.svg'
+import CardsIcon from 'Assets/Icons/settings/cards.svg'
 import SelectedListIcon from 'Assets/Icons/settings/blue-list.svg'
 
 // CSS
@@ -30,7 +30,7 @@ class SettingsNav extends React.Component {
       },
       {
         name: 'Subscription',
-        icon: ListIcon,
+        icon: CardsIcon,
         selectedIcon: SelectedListIcon,
         select: this.select,
         route: 'subscription'

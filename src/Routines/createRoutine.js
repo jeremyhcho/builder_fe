@@ -26,6 +26,7 @@ const createRoutine = ({
   onFail
 }) => {
   routineErrors(prefix, api, reducerKey, transform)
+  // DISPATCH INITIALIZE KEY
 
   const actionTypes = {
     TRIGGER: prefix,
