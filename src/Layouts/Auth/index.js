@@ -41,14 +41,9 @@ const AuthLayout = () => (
       </Row>
 
       <Col
-        xs={6}
-        style={{
-          overflow: 'hidden',
-          position: 'relative',
-          backgroundColor: '#fff',
-          borderTopLeftRadius: '3px',
-          borderBottomLeftRadius: '3px'
-        }}
+        xs={12}
+        sm={6}
+        styleName="auth-form"
       >
         <Switch>
           <Route exact path='/auth/login' component={Login} />
@@ -61,44 +56,14 @@ const AuthLayout = () => (
 
       <Col
         xs={6}
-        style={{
-          backgroundColor: 'var(--navy-blue)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderTopRightRadius: '3px',
-          borderBottomRightRadius: '3px',
-          position: 'relative'
-        }}
+        styleName="creative"
       >
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '85%'
-          }}
-        >
-          <h1
-            className='semibold'
-            style={{
-              textAlign: 'center',
-              color: '#fff',
-              marginBottom: '5px'
-            }}
-          >
+        <div styleName='content'>
+          <h1 className='semibold'>
             Reach new heights
           </h1>
 
-          <p
-            className='small'
-            style={{
-              color: '#fff',
-              textAlign: 'center',
-              marginBottom: '40px'
-            }}
-          >
+          <p className='small'>
             with actionable insights from Quartz analytics
           </p>
 

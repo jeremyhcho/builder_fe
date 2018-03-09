@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import { Helmet } from 'react-helmet'
+import { ThemeProvider } from 'styled-components'
 
 // Global CSS
 import './Assets/Stylesheets/Main.scss'
@@ -19,15 +20,8 @@ import UnauthorizedRoute from 'Components/UnauthorizedRoute'
 // Actions
 import { fetchUser } from 'Actions'
 
-// const PrimaryLayout = Loadable({
-//   loader: () => import('./layouts/Primary'),
-//   loading: Loader
-// })
-//
-// const SessionLayout = Loadable({
-//   loader: () => import('./layouts/Session'),
-//   loading: Loader
-// })
+// Helpers
+import { theme } from 'Helpers'
 
 class App extends React.Component {
   componentDidMount () {
@@ -44,7 +38,8 @@ class App extends React.Component {
     const { history } = this.props
 
     if (history.location.pathname === '/'
-      || history.location.pathname.includes('/help')) {
+      || history.location.pathname.includes('/help')
+      || history.location.pathname.includes('/auth')) {
       return [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
     }
 
@@ -56,10 +51,12 @@ class App extends React.Component {
       <div className='main'>
         <Helmet meta={this.getMetaTag()} />
 
-        <Switch>
-          <UnauthorizedRoute path='/auth' component={AuthLayout} />
-          <AuthorizedRoute path='/' component={MainLayout} />
-        </Switch>
+        <ThemeProvider theme={theme}>
+          <Switch>
+            <UnauthorizedRoute path='/auth' component={AuthLayout} />
+            <AuthorizedRoute path='/' component={MainLayout} />
+          </Switch>
+        </ThemeProvider>
       </div>
     )
   }
