@@ -12,6 +12,10 @@ import RightArrow from 'Assets/Icons/right-arrow.svg'
 const PredictionItem = ({ prediction, index, history }) => {
   const resultClass = classNames('result', prediction.result)
   const convertedSpread = () => {
+    if (prediction.pick.vegas_spread === 0) {
+      return 'PK'
+    }
+
     if (prediction.pick.vegas_spread > 0) {
       return `+${prediction.pick.vegas_spread}`
     }
@@ -28,7 +32,7 @@ const PredictionItem = ({ prediction, index, history }) => {
       <div styleName='headers'>
         <div className='semibold label'>
           <span className='small' styleName={resultClass} style={{ textAlign: 'center' }}>
-            {prediction.result ? prediction.result.toUpperCase() : 'N/A'}
+            {prediction.result ? prediction.result.toUpperCase() : '-'}
           </span>
         </div>
 
