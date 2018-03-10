@@ -40,7 +40,7 @@ class CreateSubscription extends React.Component {
     return (
       <div>
         <form onSubmit={this.props.handleSubmit(this.submitForm)}>
-          <SettingsSubSection label="Choose a plan">
+          <SettingsSubSection label="Choose a plan" noBox>
             <CreatePlan selectPlan={this.selectPlan} />
           </SettingsSubSection>
 

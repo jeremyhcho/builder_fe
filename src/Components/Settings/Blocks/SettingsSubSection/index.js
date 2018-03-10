@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 // CSS
 import './SettingsSubSection.scss'
@@ -9,6 +10,7 @@ const SettingsSubSection = ({
   icon: Icon,
   children,
   subText,
+  noBox,
   headerButton: HeaderButton
 }) => (
   <div styleName="settings-subsection">
@@ -25,7 +27,7 @@ const SettingsSubSection = ({
 
     {/* <hr /> */}
 
-    <div styleName="section-body">
+    <div styleName={classNames('section-body', { noBox })}>
       {children}
     </div>
   </div>
@@ -35,7 +37,8 @@ SettingsSubSection.defaultProps = {
   icon: () => null,
   children: null,
   subText: '',
-  headerButton: null
+  headerButton: null,
+  noBox: false
 }
 
 SettingsSubSection.propTypes = {
@@ -46,7 +49,8 @@ SettingsSubSection.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]),
-  headerButton: PropTypes.func
+  headerButton: PropTypes.func,
+  noBox: PropTypes.bool
 }
 
 export default SettingsSubSection

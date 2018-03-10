@@ -33,7 +33,7 @@ class SubscriptionDetails extends React.Component {
 
     if (this.state.showPlans) {
       return (
-        <SettingsSubSection label="Choose a plan">
+        <SettingsSubSection label="Choose a plan" noBox>
           <EditSubscription toggle={this.toggleShowPlans} />
         </SettingsSubSection>
       )
