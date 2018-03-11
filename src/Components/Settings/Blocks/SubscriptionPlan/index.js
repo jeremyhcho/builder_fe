@@ -132,11 +132,7 @@ class SubscriptionPlan extends React.Component {
             </Col>
           </Row>
 
-          <hr
-            style={{
-              borderBottom: `1px solid ${planFactory[plan].color}`
-            }}
-          />
+          <hr />
 
           <div styleName="features" center='xs'>
             {
