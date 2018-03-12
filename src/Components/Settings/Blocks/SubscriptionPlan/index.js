@@ -17,7 +17,7 @@ import { makeFilterSubscriptions } from 'Helpers/Selectors'
 import { planFactory } from 'Helpers'
 
 const initialStyle = {
-  height: '380px',
+  height: '360px',
   width: '260px',
   position: 'relative',
   margin: '0 20px',
