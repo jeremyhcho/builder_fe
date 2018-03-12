@@ -51,7 +51,7 @@ class PaymentSettings extends React.Component {
     return (
       <div style={{ textAlign: 'center', marginBottom: '10px' }}>
         <AlertIcon style={{ marginBottom: '10px', opacity: '0.7' }} />
-        <p>You are not subscribed to any plans on your Quartz account.</p>
+        <p>You are not subscribed to any plans on your Quze account.</p>
         <p>Click <Link to="/settings/subscription" style={{ color: 'var(--blue)' }}>here</Link> to subscribe for a payment plan.</p>
       </div>
     )

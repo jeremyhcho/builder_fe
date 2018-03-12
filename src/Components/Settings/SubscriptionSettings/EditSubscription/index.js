@@ -86,14 +86,14 @@ class EditSubscription extends React.Component {
         <Row center='xs'>
           <Col>
             <SubscriptionPlan
-              plan="basic-plan"
+              plan="single-plan"
               select={this.selectPlan}
             />
           </Col>
 
           <Col>
             <SubscriptionPlan
-              plan="advanced-plan"
+              plan="multi-plan"
               select={this.selectPlan}
             />
           </Col>

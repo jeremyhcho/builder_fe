@@ -1,8 +1,8 @@
-## **Quartz Dailies**
+## **Quze Dailies**
 
 **Season Record: 13-10 (56.5%)**
 
-Build your own simple models with [**Quartz**](https://www.quartzapp.com) or find us on [twitter](https://twitter.com/Quartz_App).
+Build your own simple models with [**Quze**](https://www.Quzeapp.com) or find us on [twitter](https://twitter.com/Quze_App).
 
 ---
 
@@ -10,7 +10,7 @@ Build your own simple models with [**Quartz**](https://www.quartzapp.com) or fin
 
 ### [**Yesterday**](https://www.reddit.com/r/sportsbook/comments/81bey1/nba_daily_discussion_3218_friday/dv390p6/)
 
-Wiggins missing all three of his free throws near the end of regulation cost us from ending positive, but shit happens. Shoutout to the guy who went 7-3 with his Quartz model last night!
+Wiggins missing all three of his free throws near the end of regulation cost us from ending positive, but shit happens. Shoutout to the guy who went 7-3 with his Quze model last night!
 
 &nbsp;
 

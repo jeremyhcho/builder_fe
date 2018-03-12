@@ -9,7 +9,7 @@ const SpreadPredictionInfo = () => (
 
     <p style={{ marginTop: '10px', textAlign: 'left' }}>
       This graph aggregates the active predictions for this game across existing
-      Quartz models and finds the best fit line between a model's win percent
+      Quze models and finds the best fit line between a model's win percent
       and the predicted spread.
     </p>
   </InfoBubble>

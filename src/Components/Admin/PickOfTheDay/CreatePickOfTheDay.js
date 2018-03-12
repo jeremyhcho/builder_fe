@@ -145,7 +145,7 @@ class CreatePickOfTheDay extends React.Component {
   render () {
     return (
       <DocumentTitle
-        title='Quartz - Pick of the Day'
+        title='Quze - Pick of the Day'
         header='New Pick of the Day'
         backUrl='/admin/potd'
       >

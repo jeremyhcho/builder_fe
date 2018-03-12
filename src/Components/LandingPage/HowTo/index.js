@@ -20,7 +20,7 @@ const HowTo = ({ history, authorized }) => {
       <div styleName="col-1000">
         <div styleName='left'>
           <img
-            src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/quartz_models.png"
+            src="https://s3-us-west-1.amazonaws.com/builder-api/data_exports/assets/Quze_models.png"
             style={{
               maxHeight: '100%',
               position: 'absolute',
@@ -35,7 +35,7 @@ const HowTo = ({ history, authorized }) => {
           </header>
 
           <p styleName="description">
-            Focus on one game a day or all of them. Quartz is an advanced data
+            Focus on one game a day or all of them. Quze is an advanced data
             tool at your disposal.
           </p>
 

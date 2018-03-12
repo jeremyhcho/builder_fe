@@ -137,15 +137,23 @@ class SubscriptionPlan extends React.Component {
           <div styleName="features" center='xs'>
             {
               planFactory[plan].features.map(feature => (
-                <Row key={feature} center='xs' middle='xs' style={{ marginBottom: '10px' }}>
-                  <Col xs={3}>
-                    <CheckIcon height={10} width={10} style={{ marginRight: '10px' }} />
-                  </Col>
-
-                  <Col xs={9}>
-                    <p style={{ textAlign: 'left' }} className="small">{feature}</p>
-                  </Col>
-                </Row>
+                <div key={feature} style={{ position: 'relative' }}>
+                  <CheckIcon
+                    height={10}
+                    width={10}
+                    style={{
+                      position: 'absolute',
+                      top: '2px',
+                      left: '5px'
+                    }}
+                  />
+                  <p
+                    className="small"
+                    style={{ textAlign: 'center', marginBottom: '10px' }}
+                  >
+                    {feature}
+                  </p>
+                </div>
               ))
             }
           </div>
@@ -167,7 +175,7 @@ SubscriptionPlan.defaultProps = {
 }
 
 SubscriptionPlan.propTypes = {
-  plan: PropTypes.oneOf(['basic-plan', 'advanced-plan']).isRequired,
+  plan: PropTypes.oneOf(['single-plan', 'multi-plan']).isRequired,
   select: PropTypes.func,
   subscription: PropTypes.object,
   creatingSubscription: PropTypes.bool,

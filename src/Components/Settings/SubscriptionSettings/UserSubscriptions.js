@@ -104,7 +104,7 @@ const UserSubscriptions = ({ subscription, toggleShowPlans, canceledSubscription
   return (
     <div style={{ textAlign: 'center', marginBottom: '20px' }}>
       <AlertIcon style={{ marginBottom: '10px', opacity: '0.7' }} />
-      <p>You are not subscribed to any plans on your Quartz account.</p>
+      <p>You are not subscribed to any plans on your Quze account.</p>
       <p>
         Click {' '}
         <span

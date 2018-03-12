@@ -41,6 +41,17 @@ class Models extends React.Component {
     return colors[index % 4]
   }
 
+
+  renderError () {
+    const { location } = this.props
+
+    if (location.state && location.state.error) {
+      return location.state.error
+    }
+
+    return ''
+  }
+
   renderModels () {
     const { models } = this.props
 
@@ -87,10 +98,10 @@ class Models extends React.Component {
     }
 
     return (
-      <DocumentTitle title='Quartz - NBA Models' header='Models'>
+      <DocumentTitle title='Quze - NBA Models' header='Models'>
         <div styleName="models">
-          <Row styleName="model-header">
-            <Col xs={2}>
+          <header styleName="model-header">
+            <div>
               <Button
                 onClick={this.navigateToCreateModel}
                 style={{ position: 'relative' }}
@@ -105,8 +116,12 @@ class Models extends React.Component {
 
                 <span style={{ marginLeft: '20px' }}>Create Model</span>
               </Button>
-            </Col>
-          </Row>
+            </div>
+
+            <p className="small" style={{ color: 'var(--red)', marginTop: '10px' }}>
+              {this.renderError()}
+            </p>
+          </header>
 
           {this.renderModels()}
         </div>
@@ -125,6 +140,7 @@ Models.propTypes = {
   history: PropTypes.object.isRequired,
   fetchNBAModels: PropTypes.func.isRequired,
   fetchingModels: PropTypes.bool,
+  location: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ routines }) => ({

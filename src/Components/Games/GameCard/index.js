@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 // Components
 import GameStats from './GameStats'
 import BetLog from './BetLog'
-import { QuartzLink } from 'Components/Common'
+import { QuzeLink } from 'Components/Common'
 
 // CSS
 import './GameCard.scss'
@@ -55,11 +55,11 @@ class GameCard extends React.Component {
 
         <hr />
 
-        <QuartzLink to={{ pathname: `/games/${game.id}` }}>
+        <QuzeLink to={{ pathname: `/games/${game.id}` }}>
           <div styleName="cta-row">
             <p className="semibold">View Details</p>
           </div>
-        </QuartzLink>
+        </QuzeLink>
       </div>
     )
   }

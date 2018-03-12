@@ -1,1 +1,1 @@
-Quartz - app
+Quze - app

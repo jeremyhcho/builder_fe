@@ -50,18 +50,16 @@ class GameDetails extends React.Component {
       return <Redirect to={{ pathname: '/games' }} />
     }
 
-    console.log(isTrial)
-
-    // if (isTrial && !summary.trial) {
-    //   return (
-    //     <Redirect
-    //       to={{
-    //         pathname: '/games',
-    //         state: { isTrial }
-    //       }}
-    //     />
-    //   )
-    // }
+    if (isTrial && !summary.trial) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/settings/subscription',
+            state: { isTrial }
+          }}
+        />
+      )
+    }
 
     return (
       <Switch>

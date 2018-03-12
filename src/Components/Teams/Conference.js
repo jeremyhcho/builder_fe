@@ -4,7 +4,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import { withRouter } from 'react-router'
 
 // Components
-import { Card, Tooltip, QuartzLink } from 'Components/Common'
+import { Card, Tooltip, QuzeLink } from 'Components/Common'
 
 // CSS
 import './Teams.scss'
@@ -96,7 +96,7 @@ class Conference extends React.Component {
           <Col xs={12}>
             {
               teams.map((team, index) => (
-                <QuartzLink to={`/teams/${team.id}`} key={team.id}>
+                <QuzeLink to={`/teams/${team.id}`} key={team.id}>
                   <Card style={{ height: 'auto', marginTop: '10px' }}>
                     <div styleName='team-item'>
                       <div styleName='team-details'>
@@ -153,7 +153,7 @@ class Conference extends React.Component {
                       </div>
                     </div>
                   </Card>
-                </QuartzLink>
+                </QuzeLink>
               ))
             }
           </Col>

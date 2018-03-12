@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'react-router-redux'
-import history from '../quartzHistory'
+import history from '../quzeHistory'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 
 // Root Reducer

@@ -39,7 +39,7 @@ const infoTexts = {
   },
   rpm: {
     text: 'RPM or Real Plus Minus is a player assigned metric that measures an individual player\'s' +
-          ' average estimated impact per 100 possessions. Quartz uses RPM to predict how player news' +
+          ' average estimated impact per 100 possessions. Quze uses RPM to predict how player news' +
           ' will affect the outcome of the game.',
     impact: 'high'
   }

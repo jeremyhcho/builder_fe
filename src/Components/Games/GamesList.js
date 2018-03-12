@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
 
 // CSS
 import './Games.scss'
@@ -20,8 +19,6 @@ class GamesList extends React.Component {
   }
 
   render () {
-    const { locationState } = this.props
-
     const secretDivs = []
     for (let i = this.props.games.length % 3; i < 3 || i === 0; i++) {
       secretDivs.push(<div styleName="game-container" key={this.props.games.length + i} />)
@@ -29,12 +26,6 @@ class GamesList extends React.Component {
 
     return (
       <div styleName="games-list">
-        {
-          locationState && locationState.isTrial && (
-            <Redirect to={{ pathname: '/settings/subscription', state: { from: '/games' } }} />
-          )
-        }
-
         <div styleName='timezone'>
           <p className='small'>
             All times displayed in EST
@@ -65,13 +56,8 @@ class GamesList extends React.Component {
   }
 }
 
-GamesList.defaultProps = {
-  locationState: null
-}
-
 GamesList.propTypes = {
-  games: PropTypes.array.isRequired,
-  locationState: PropTypes.object
+  games: PropTypes.array.isRequired
 }
 
 export default GamesList

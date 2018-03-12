@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { injectStripe } from 'react-stripe-elements'
 import { reduxForm } from 'redux-form'
+import { withRouter } from 'react-router-dom'
 
 // Components
 import CreatePlan from './CreatePlan'
@@ -36,11 +37,23 @@ class CreateSubscription extends React.Component {
     })
   }
 
+  trialUserWarning () {
+    const { location } = this.props
+    if (location.state && location.state.isTrial) {
+      return 'Only subscribed users can access non-free games!'
+    }
+
+    return ''
+  }
+
   render () {
     return (
       <div>
         <form onSubmit={this.props.handleSubmit(this.submitForm)}>
-          <SettingsSubSection label="Choose a plan" noBox>
+          <SettingsSubSection
+            label="Choose a plan"
+            warning={this.trialUserWarning()}
+          >
             <CreatePlan selectPlan={this.selectPlan} />
           </SettingsSubSection>
 
@@ -59,16 +72,19 @@ CreateSubscription.propTypes = {
   change: PropTypes.func.isRequired,
   createBillingInformation: PropTypes.func.isRequired,
   stripe: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {
   createBillingInformation
 }
 
-export default injectStripe(connect(
-  null,
-  mapDispatchToProps
-)(reduxForm({
-  form: 'billing',
-  initialValues: { plan: '' }
-})(CreateSubscription)))
+export default injectStripe(withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(reduxForm({
+    form: 'billing',
+    initialValues: { plan: '' }
+  })(CreateSubscription)))
+)

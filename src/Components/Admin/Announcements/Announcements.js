@@ -75,7 +75,7 @@ class Announcements extends React.Component {
 
   render () {
     return (
-      <DocumentTitle title='Quartz - Admin' header='Announcements'>
+      <DocumentTitle title='Quze - Admin' header='Announcements'>
         <div styleName='announcements-container'>
           <Button primary onClick={this.navigateToCreate} style={{ position: 'relative', marginBottom: '30px' }}>
             <PlusIcon

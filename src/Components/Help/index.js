@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 // Components
-import { QuartzLink, Dropdown, MenuItem } from 'Components/Common'
+import { QuzeLink, Dropdown, MenuItem } from 'Components/Common'
 import { Faq, Tos } from './HelpBlocks'
 import SideNav from './SideNav'
 
 // Icons
-import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
+import QuzeIcon from 'Assets/Icons/blue-q-1.svg'
 
 // CSS
 import './Help.scss'
@@ -17,15 +17,15 @@ const Help = ({ history }) => (
   <main styleName="help-section">
     <header styleName="header">
       <div styleName="left">
-        <QuartzIcon
+        <QuzeIcon
           width={30}
           height={30}
           style={{ marginRight: '20px' }}
         />
 
-        <QuartzLink to={{ pathname: '/' }}>
-          <span>Quartz</span>
-        </QuartzLink>
+        <QuzeLink to={{ pathname: '/' }}>
+          <span>Quze</span>
+        </QuzeLink>
       </div>
 
       <div styleName="middle">
@@ -41,11 +41,11 @@ const Help = ({ history }) => (
       </div>
 
       <div styleName="right">
-        <QuartzLink to={{ pathname: '/dashboard' }}>
+        <QuzeLink to={{ pathname: '/dashboard' }}>
           <span>
             Back to Home
           </span>
-        </QuartzLink>
+        </QuzeLink>
       </div>
     </header>
 

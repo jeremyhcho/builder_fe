@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 // Components
-import { QuartzLink } from 'Components/Common'
+import { QuzeLink } from 'Components/Common'
 
 // CSS
 import './SettingsNav.scss'
@@ -18,13 +18,13 @@ const NavItem = ({ name, route, selected, icon: Icon }) => {
   })
 
   return (
-    <QuartzLink to={{ pathname: `/settings/${route}` }}>
+    <QuzeLink to={{ pathname: `/settings/${route}` }}>
       <div styleName={navItemStyle}>
         <Icon styleName={iconStyle} width={14} height={14} />
 
         <p>{name}</p>
       </div>
-    </QuartzLink>
+    </QuzeLink>
   )
 }
 

@@ -1,7 +1,7 @@
 /* eslint react/prefer-stateless-function: 0 */
 import React from 'react'
 import { ConnectedRouter } from 'react-router-redux'
-import history from './quartzHistory'
+import history from './quzeHistory'
 
 // Components
 import App from './App'

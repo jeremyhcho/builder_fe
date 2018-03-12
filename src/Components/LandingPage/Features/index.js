@@ -28,7 +28,7 @@ const Features = () => {
     {
       icon: StockIcon,
       title: 'Compare',
-      description: 'Quartz aggregates models and matches correlated data to ' +
+      description: 'Quze aggregates models and matches correlated data to ' +
                    '"crowd source" predictions through the app.'
     },
     {

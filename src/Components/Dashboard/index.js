@@ -15,7 +15,7 @@ import './Dashboard.scss'
 class Dashboard extends React.Component {
   render () {
     return (
-      <DocumentTitle title='Quartz - Dashboard' header='Dashboard'>
+      <DocumentTitle title='Quze - Dashboard' header='Dashboard'>
         <div styleName='dashboard'>
           <Row style={{ maxWidth: '1300px' }}>
             <Col xs={12}>

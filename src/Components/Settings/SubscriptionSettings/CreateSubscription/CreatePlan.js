@@ -9,14 +9,14 @@ const CreatePlan = ({ selectPlan }) => (
   <Row center='xs'>
     <Col>
       <SubscriptionPlan
-        plan="basic-plan"
+        plan="single-plan"
         select={selectPlan}
       />
     </Col>
 
     <Col>
       <SubscriptionPlan
-        plan="advanced-plan"
+        plan="multi-plan"
         select={selectPlan}
       />
     </Col>

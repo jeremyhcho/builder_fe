@@ -64,7 +64,7 @@ const AuthLayout = () => (
           </h1>
 
           <p className='small'>
-            with actionable insights from Quartz analytics
+            with actionable insights from Quze analytics
           </p>
 
           <RocketVector

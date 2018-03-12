@@ -8,7 +8,7 @@ const ModelSpecsInfo = () => (
     <p className='label' style={{ textAlign: 'left' }}>WHAT DOES THIS DO?</p>
 
     <p style={{ marginTop: '10px', textAlign: 'left' }}>
-      Quartz models allow you to assign weights onto crucial stats that are used to
+      Quze models allow you to assign weights onto crucial stats that are used to
       create predictions. A higher value indicates a greater importance of the specific
       metric in your model. A combination of different values will generate different predictions.
     </p>

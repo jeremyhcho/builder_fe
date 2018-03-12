@@ -4,7 +4,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import moment from 'moment'
 
 // Components
-import { Checkbox, QuartzLink } from 'Components/Common'
+import { Checkbox, QuzeLink } from 'Components/Common'
 
 // Icons
 import BanIcon from 'Assets/Icons/ban.svg'
@@ -149,7 +149,7 @@ class ModelHistory extends React.Component {
             {
               filteredPredictions.length ? (
                 this.filteredPredictions().map(prediction => (
-                  <QuartzLink to={{ pathname: `/games/${prediction.match.id}/models` }} key={prediction.id}>
+                  <QuzeLink to={{ pathname: `/games/${prediction.match.id}/models` }} key={prediction.id}>
                     <Row center='xs' styleName="prediction-values">
                       <Col xs={4}>
                         <Row around='xs'>
@@ -186,7 +186,7 @@ class ModelHistory extends React.Component {
                         </p>
                       </Col>
                     </Row>
-                  </QuartzLink>
+                  </QuzeLink>
                 ))
               ) : (
                 <div styleName="missing-predictions">

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import { QuartzLink } from 'Components/Common'
+import { QuzeLink } from 'Components/Common'
 
 // Icons
 import RightIcon from 'Assets/Icons/right-arrow.svg'
@@ -15,7 +15,7 @@ class SideNav extends React.Component {
       <div styleName="sidenav">
         <ul>
           <li>
-            <QuartzLink to='/help/faq'>
+            <QuzeLink to='/help/faq'>
               <div styleName="help-item">
                 <div styleName="left">
                   <p className="semibold">FAQ</p>
@@ -25,11 +25,11 @@ class SideNav extends React.Component {
                   <RightIcon height={16} width={16} />
                 </div>
               </div>
-            </QuartzLink>
+            </QuzeLink>
           </li>
 
           <li>
-            <QuartzLink to='/help/tos'>
+            <QuzeLink to='/help/tos'>
               <div styleName="help-item">
                 <div styleName="left">
                   <p className="semibold">Terms of service</p>
@@ -39,7 +39,7 @@ class SideNav extends React.Component {
                   <RightIcon height={16} width={16} />
                 </div>
               </div>
-            </QuartzLink>
+            </QuzeLink>
           </li>
         </ul>
       </div>

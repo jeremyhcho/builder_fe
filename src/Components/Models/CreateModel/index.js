@@ -54,7 +54,14 @@ class CreateModel extends React.Component {
     }
 
     if (!newProps.creatingModel && this.props.creatingModel) {
-      this.props.history.push({ pathname: '/models' })
+      if (newProps.limitError && !newProps.limitError.models) {
+        this.props.history.push({ pathname: '/models' })
+      }
+
+      this.props.history.push({
+        pathname: '/models',
+        state: { error: newProps.limitError.models.messages.status[0] }
+      })
     }
 
     if (!newProps.updatingModel && this.props.updatingModel) {
@@ -94,7 +101,7 @@ class CreateModel extends React.Component {
 
     return (
       <DocumentTitle
-        title='Quartz - NBA Models'
+        title='Quze - NBA Models'
         header={model ? 'Edit Model' : 'Create Model'}
         backUrl='/models'
       >
@@ -116,7 +123,8 @@ class CreateModel extends React.Component {
 CreateModel.defaultProps = {
   creatingModel: false,
   updatingModel: false,
-  model: null
+  model: null,
+  limitError: false
 }
 
 CreateModel.propTypes = {
@@ -129,12 +137,17 @@ CreateModel.propTypes = {
   creatingModel: PropTypes.bool,
   updatingModel: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired,
-  submitErrors: PropTypes.object.isRequired
+  submitErrors: PropTypes.object.isRequired,
+  limitError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ])
 }
 
 const mapStateToProps = ({ routines, ...state }) => ({
   creatingModel: routines.isLoading.CREATE_NBA_MODEL,
   updatingModel: routines.isLoading.UPDATE_NBA_MODEL,
+  limitError: routines.error.nba,
   submitErrors: getFormSyncErrors('model')(state)
 })
 

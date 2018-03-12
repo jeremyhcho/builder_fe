@@ -117,7 +117,7 @@ class CreateAnnouncement extends React.Component {
   render () {
     return (
       <DocumentTitle
-        title='Quartz - Announcements'
+        title='Quze - Announcements'
         header='New Announcement'
         backUrl='/admin/announcements'
       >

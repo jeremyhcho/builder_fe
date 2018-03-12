@@ -40,7 +40,7 @@ class ScheduledGameDetails extends React.Component {
     ]
 
     return (
-      <DocumentTitle title='Quartz - NBA Game Details' header='Game Details' backUrl='/games'>
+      <DocumentTitle title='Quze - NBA Game Details' header='Game Details' backUrl='/games'>
         <div styleName="game-details scheduled">
           <Row styleName="tabs">
             <Col xs={12}>

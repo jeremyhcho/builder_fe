@@ -47,7 +47,7 @@ class TeamDetails extends React.Component {
 
 
     return (
-      <DocumentTitle title='Quartz - NBA Team Details' header='Team Details' backUrl='/teams'>
+      <DocumentTitle title='Quze - NBA Team Details' header='Team Details' backUrl='/teams'>
         <div styleName='team-details'>
           <Row styleName="tabs">
             <Col xs={12}>

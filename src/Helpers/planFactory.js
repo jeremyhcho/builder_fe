@@ -1,22 +1,22 @@
-import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
+import QuzeIcon from 'Assets/Icons/blue-q-1.svg'
 
 const planFactory = {
   trial: {
     price: 'FREE',
     features: ['One active model', 'One prediction per day'],
-    icon: QuartzIcon,
+    icon: QuzeIcon,
     color: 'var(--font-color)'
   },
-  'basic-plan': {
+  'single-plan': {
     price: 30,
     features: ['One active model', 'Unlimited predictions'],
-    icon: QuartzIcon,
+    icon: QuzeIcon,
     color: 'var(--blue)'
   },
-  'advanced-plan': {
+  'multi-plan': {
     price: 50,
-    features: ['All basic features', 'Advanced models'],
-    icon: QuartzIcon,
+    features: ['Up to three active models', 'Unlimited predictions'],
+    icon: QuzeIcon,
     color: 'var(--gold)',
     disabled: true
   }

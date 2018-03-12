@@ -5,7 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 import moment from 'moment'
 
 // Components
-import { Card, Spinner, QuartzLink } from 'Components/Common'
+import { Card, Spinner, QuzeLink } from 'Components/Common'
 
 // Actions
 import { fetchNBATeamSchedule } from 'Actions'
@@ -124,7 +124,7 @@ class Schedule extends React.Component {
 
                 {
                   schedule[month].map(game => (
-                    <QuartzLink
+                    <QuzeLink
                       key={game.date}
                       to={{ pathname: `/games/${game.match_id}` }}
                       styleName="row values"
@@ -159,7 +159,7 @@ class Schedule extends React.Component {
                           <p>{moment(new Date(game.date)).format('h:mm')} EST</p>
                         </Col>
                       </Row>
-                    </QuartzLink>
+                    </QuzeLink>
                   ))
                 }
               </div>

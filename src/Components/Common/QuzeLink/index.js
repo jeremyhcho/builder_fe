@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const QuartzLink = ({ children, style, ...linkProps }) => (
+const QuzeLink = ({ children, style, ...linkProps }) => (
   <Link
     {...linkProps}
     style={{
@@ -14,11 +14,11 @@ const QuartzLink = ({ children, style, ...linkProps }) => (
   </Link>
 )
 
-QuartzLink.defaultProps = {
+QuzeLink.defaultProps = {
   style: {}
 }
 
-QuartzLink.propTypes = {
+QuzeLink.propTypes = {
   style: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.node,
@@ -30,4 +30,4 @@ QuartzLink.propTypes = {
   ]).isRequired
 }
 
-export default QuartzLink
+export default QuzeLink

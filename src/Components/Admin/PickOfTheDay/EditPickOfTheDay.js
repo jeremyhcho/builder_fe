@@ -159,7 +159,7 @@ class EditPickOfTheDay extends React.Component {
 
     return (
       <DocumentTitle
-        title='Quartz - Pick of the Day'
+        title='Quze - Pick of the Day'
         header='Edit Pick of the Day'
         backUrl='/admin/potd'
       >

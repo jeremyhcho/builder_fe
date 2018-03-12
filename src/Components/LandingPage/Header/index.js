@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 // Icons
-import QuartzIcon from 'Assets/Icons/blue-q-1.svg'
+import QuzeIcon from 'Assets/Icons/blue-q-1.svg'
 
 // CSS
 import './Header.scss'
@@ -16,7 +16,7 @@ class Header extends React.Component {
     }
   }
 
-  routeToQuartz = () => {
+  routeToQuze = () => {
     this.props.history.push({ pathname: '/dashboard', state: { from: '/' } })
   }
 
@@ -34,11 +34,11 @@ class Header extends React.Component {
     if (authorized) {
       return [
         <button
-          onClick={this.routeToQuartz}
+          onClick={this.routeToQuze}
           key="button-1"
           styleName="action blue"
         >
-          Open Quartz
+          Open Quze
         </button>
       ]
     }
@@ -70,14 +70,14 @@ class Header extends React.Component {
           <section styleName="left">
             <div>
               <div styleName="intro">
-                <QuartzIcon
+                <QuzeIcon
                   width={58}
                   height={58}
                   style={{ marginRight: '20px' }}
                 />
 
                 <p styleName="description">
-                  Quartz makes sports modeling easier than ever.
+                  Quze makes sports modeling easier than ever.
                 </p>
               </div>
 

@@ -28,7 +28,7 @@ class Login extends React.Component {
       <div styleName="login">
         <div styleName="login-header">
           <h1 className="semibold">
-            Log in to your Quartz <br />account
+            Log in to your Quze <br />account
           </h1>
         </div>
 

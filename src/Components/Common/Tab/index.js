@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { QuartzLink } from 'Components/Common'
+import { QuzeLink } from 'Components/Common'
 
 // CSS
 import './Tab.scss'
@@ -57,13 +57,13 @@ class Tab extends React.Component {
                   styleName={tabItemClass}
                   key={tabItem.key}
                 >
-                  <QuartzLink
+                  <QuzeLink
                     to={{ pathname: `${tabItem.route}` }}
                     onClick={this.onClick(tabItem)}
                     style={{ width: '100%', height: '100%' }}
                   >
                     {tabItem.label}
-                  </QuartzLink>
+                  </QuzeLink>
                 </li>
               )
             }

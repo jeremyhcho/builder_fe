@@ -31,7 +31,7 @@ class Games extends React.Component {
     const { games, fetchingGames, location: { state: locationState } } = this.props
 
     return (
-      <DocumentTitle title='Quartz - NBA Schedule' header='Games'>
+      <DocumentTitle title='Quze - NBA Schedule' header='Games'>
         <div>
           <Row style={{ padding: '0 65px', margin: '0' }}>
             <DateInput />

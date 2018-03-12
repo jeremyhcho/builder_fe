@@ -201,7 +201,7 @@ class Bets extends React.Component {
     const roi = netResult === 0 ? 0 : roundTwo((netResult / totalUnits) * 100)
 
     return (
-      <DocumentTitle title='Quartz - NBA Bets' header='Bets'>
+      <DocumentTitle title='Quze - NBA Bets' header='Bets'>
         <div styleName='bets'>
           {this.renderBetModal()}
           <Tab

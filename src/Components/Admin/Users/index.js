@@ -33,7 +33,7 @@ class Users extends React.Component {
 
   render () {
     return (
-      <DocumentTitle title='Quartz - Admin Users' header='Users'>
+      <DocumentTitle title='Quze - Admin Users' header='Users'>
         <div styleName='admin-users'>
           <div styleName='toolbar'>
             <Input

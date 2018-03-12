@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import { DocumentTitle, QuartzLink } from 'Components/Common'
+import { DocumentTitle, QuzeLink } from 'Components/Common'
 
 // CSS
 import './Dashboard.scss'
@@ -35,11 +35,11 @@ const SECTIONS = [
 class AdminDashboard extends React.Component {
   render () {
     return (
-      <DocumentTitle title='Quartz - Admin Dashboard' header='Admin Dashboard'>
+      <DocumentTitle title='Quze - Admin Dashboard' header='Admin Dashboard'>
         <div styleName='admin-dashboard'>
           {
             SECTIONS.map(section => (
-              <QuartzLink
+              <QuzeLink
                 to={{ pathname: section.route }}
                 key={section.key}
               >
@@ -47,7 +47,7 @@ class AdminDashboard extends React.Component {
                   <section.icon width={30} height={30} />
                   <h4 className='semibold'>{section.label}</h4>
                 </div>
-              </QuartzLink>
+              </QuzeLink>
             ))
           }
         </div>

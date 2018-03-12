@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Components
-import { IconMenuItem, IconDropdown, QuartzLink } from 'Components/Common'
+import { IconMenuItem, IconDropdown, QuzeLink } from 'Components/Common'
 import Notifications from './Notifications'
 
 // Icons
@@ -41,9 +41,9 @@ class Header extends React.Component {
           <div styleName='title'>
             {
               this.props.backUrl && (
-                <QuartzLink to={{ pathname: this.props.backUrl }}>
+                <QuzeLink to={{ pathname: this.props.backUrl }}>
                   <LeftArrowIcon styleName="back-icon" />
-                </QuartzLink>
+                </QuzeLink>
               )
             }
             <h1 className="semibold">{this.props.header}</h1>

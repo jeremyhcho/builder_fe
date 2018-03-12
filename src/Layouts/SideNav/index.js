@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 
 // Components
-import { Tooltip, QuartzLink } from 'Components/Common'
+import { Tooltip, QuzeLink } from 'Components/Common'
 
 // Icons
 import Games from 'Assets/Icons/nav/games.svg'
@@ -94,7 +94,7 @@ class SideNav extends React.Component {
             })
 
             return (
-              <QuartzLink to={`${route}`} onClick={this.handleClick(key)} key={key}>
+              <QuzeLink to={`${route}`} onClick={this.handleClick(key)} key={key}>
                 <div
                   styleName={navItemStyle}
                   selected={selected}
@@ -106,7 +106,7 @@ class SideNav extends React.Component {
                     : <Icon height={20} width={20} />
                   }
                 </div>
-              </QuartzLink>
+              </QuzeLink>
             )
           })
         }

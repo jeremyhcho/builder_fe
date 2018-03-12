@@ -75,7 +75,7 @@ class PickOfTheDay extends React.Component {
 
   render () {
     return (
-      <DocumentTitle title='Quartz - Admin' header='Pick of the Days'>
+      <DocumentTitle title='Quze - Admin' header='Pick of the Days'>
         <div styleName='potd-container'>
           <Button
             primary
