@@ -26,7 +26,7 @@ const Tos = () => {
       <section styleName="sub-section">
         <p styleName="sub-header">2. Intellectual Property Rights</p>
         <p styleName="description">
-          Other than the content you own, under these Terms, Quze Insights LLC and/or its licensors own all the intellectual property rights and materials contained in this Website.
+          Other than the content you own, under these Terms, Quartz Insights LLC and/or its licensors own all the intellectual property rights and materials contained in this Website.
         </p>
         <p styleName="description">
           You are granted limited license only for purposes of viewing the material contained on this Website.
@@ -58,55 +58,55 @@ const Tos = () => {
         </ul>
 
         <p styleName="description">
-          Certain areas of this Website are restricted from being access by you and Quze Insights LLC may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.
+          Certain areas of this Website are restricted from being access by you and Quartz Insights LLC may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">4. Your content</p>
         <p styleName="description">
-          In these Website Standard Terms and Conditions, “Your Content” shall mean any audio, video text, images or other material you choose to display on this Website. By displaying Your Content, you grant Quze Insights LLC a non-exclusive, worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish, translate and distribute it in any and all media.
+          In these Website Standard Terms and Conditions, “Your Content” shall mean any audio, video text, images or other material you choose to display on this Website. By displaying Your Content, you grant Quartz Insights LLC a non-exclusive, worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish, translate and distribute it in any and all media.
         </p>
         <p styleName="description">
-          Your Content must be your own and must not be invading any third-party’s rights. Quze Insights LLC reserves the right to remove any of Your Content from this Website at any time without notice.
+          Your Content must be your own and must not be invading any third-party’s rights. Quartz Insights LLC reserves the right to remove any of Your Content from this Website at any time without notice.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">5. Disclaimer</p>
         <p styleName="description">
-          The materials on Quze Insights LLC's website are provided on an 'as is' basis. Quze Insights LLC makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+          The materials on Quartz Insights LLC's website are provided on an 'as is' basis. Quartz Insights LLC makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
         </p>
         <p styleName="description">
-          Further, Quze Insights LLC does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.
+          Further, Quartz Insights LLC does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">6. Limitations</p>
         <p styleName="description">
-          In no event shall Quze Insights LLC or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Quze Insights LLC's website, even if Quze Insights LLC or a Quze Insights LLC authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+          In no event shall Quartz Insights LLC or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Quartz Insights LLC's website, even if Quartz Insights LLC or a Quartz Insights LLC authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">7. Accuracy of Materials</p>
         <p styleName="description">
-          The materials appearing on Quze Insights LLC website could include technical, typographical, or photographic errors. Quze Insights LLC does not warrant that any of the materials on its website are accurate, complete or current. Quze Insights LLC may make changes to the materials contained on its website at any time without notice. However Quze Insights LLC does not make any commitment to update the materials.
+          The materials appearing on Quartz Insights LLC website could include technical, typographical, or photographic errors. Quartz Insights LLC does not warrant that any of the materials on its website are accurate, complete or current. Quartz Insights LLC may make changes to the materials contained on its website at any time without notice. However Quartz Insights LLC does not make any commitment to update the materials.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">8. Limitation of Liability</p>
         <p styleName="description">
-          In no event shall Quze Insights LLC, nor any of its officers, directors and employees, shall be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract.  Quze Insights LLC, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.
+          In no event shall Quartz Insights LLC, nor any of its officers, directors and employees, shall be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract.  Quartz Insights LLC, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">9. Indemnification</p>
         <p styleName="description">
-          You hereby indemnify to the fullest extent Quze Insights LLC from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.
+          You hereby indemnify to the fullest extent Quartz Insights LLC from and against any and/or all liabilities, costs, demands, causes of action, damages and expenses arising in any way related to your breach of any of the provisions of these Terms.
         </p>
       </section>
 
@@ -120,21 +120,21 @@ const Tos = () => {
       <section styleName="sub-section">
         <p styleName="sub-header">11. Variation of Terms</p>
         <p styleName="description">
-          Quze Insights LLC is permitted to revise these Terms at any time as it sees fit, and by using this Website you are expected to review these Terms on a regular basis.
+          Quartz Insights LLC is permitted to revise these Terms at any time as it sees fit, and by using this Website you are expected to review these Terms on a regular basis.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">12. Assignment</p>
         <p styleName="description">
-          The Quze Insights LLC is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.
+          The Quartz Insights LLC is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.
         </p>
       </section>
 
       <section styleName="sub-section">
         <p styleName="sub-header">13. Entire Agreement</p>
         <p styleName="description">
-          These Terms constitute the entire agreement between Quze Insights LLC and you in relation to your use of this Website, and supersede all prior agreements and understandings.
+          These Terms constitute the entire agreement between Quartz Insights LLC and you in relation to your use of this Website, and supersede all prior agreements and understandings.
         </p>
       </section>
 

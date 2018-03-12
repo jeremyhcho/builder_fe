@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Components
-import { IconMenuItem, IconDropdown, QuzeLink } from 'Components/Common'
+import { IconMenuItem, IconDropdown, QuzeLink, Button } from 'Components/Common'
 import Notifications from './Notifications'
 
 // Icons
@@ -34,6 +34,23 @@ class Header extends React.Component {
     history.push({ pathname: backUrl })
   }
 
+  renderSubscriptionButton () {
+    const { isTrial, history, location } = this.props
+
+    if (isTrial && !location.pathname.includes('/settings')) {
+      return (
+        <Button
+          style={{ marginRight: '20px' }}
+          onClick={() => history.push({ pathname: '/settings/subscription' })}
+        >
+          Subscribe
+        </Button>
+      )
+    }
+
+    return null
+  }
+
   render () {
     return (
       <div styleName='header'>
@@ -50,6 +67,8 @@ class Header extends React.Component {
           </div>
 
           <ul styleName='header-items'>
+            {this.renderSubscriptionButton()}
+
             <Notifications />
 
             <li>
@@ -89,15 +108,18 @@ class Header extends React.Component {
 
 Header.propTypes = {
   history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired,
   fetchNotifications: PropTypes.func.isRequired,
   header: PropTypes.string.isRequired,
-  backUrl: PropTypes.string.isRequired
+  backUrl: PropTypes.string.isRequired,
+  isTrial: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = ({ globalInfo }) => ({
+const mapStateToProps = ({ globalInfo, auth }) => ({
   header: globalInfo.header,
-  backUrl: globalInfo.backUrl
+  backUrl: globalInfo.backUrl,
+  isTrial: auth.authState.user.trial
 })
 
 const mapDispatchToProps = {

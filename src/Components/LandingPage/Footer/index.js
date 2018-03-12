@@ -11,15 +11,15 @@ const Footer = () => (
   <div styleName="footer">
     <div styleName="col-1000">
       <div styleName="copyright">
-        <p>Quze Insights LLC</p>
+        <p>Quartz Insights LLC</p>
       </div>
 
       <div styleName="social-media">
-        <a href='https://twitter.com/Quze_App'>
+        <a href='https://twitter.com/QuzeApp'>
           <Twitter height={24} width={24} />
         </a>
 
-        <a href='https://www.facebook.com/QuzeApplication/'>
+        <a>
           <Facebook />
         </a>
       </div>
@@ -33,7 +33,7 @@ const Footer = () => (
               textDecoration: 'underline',
               marginLeft: '3px'
             }}
-            href='mailto:support@Quzeapp.com'
+            href='mailto:support@quze.io'
           >
             Contact us
           </a>.
