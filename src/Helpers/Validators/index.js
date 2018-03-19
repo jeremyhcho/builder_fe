@@ -19,7 +19,7 @@ export const email = (value) => {
 export const equality = (inputName) => (value, form) => {
   // equality takes in the name(string) of an input
   if (form[inputName] === value) return null
-  return `${name[0].toUpperCase() + name.substr(1)}s do not match`
+  return `${inputName[0].toUpperCase() + inputName.substr(1)}s do not match`
 }
 
 export const match = (matchValue) => (value, form, input, name) => {
