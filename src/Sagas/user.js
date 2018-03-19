@@ -65,12 +65,6 @@ function* callFetchUser () {
   try {
     const { data } = yield call(fetchUser)
     const { user } = yield put(authorize(data))
-
-    window.Appcues.identify(user.id, {
-      email: user.email,
-      trial: user.trial,
-      is_verified: user.is_verified
-    })
   } catch ({ response }) {
     yield put(unauthorize())
   }
