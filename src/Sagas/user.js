@@ -64,7 +64,7 @@ function* callSendRecoveryEmail ({ email }) {
 function* callFetchUser () {
   try {
     const { data } = yield call(fetchUser)
-    const { user } = yield put(authorize(data))
+    yield put(authorize(data))
   } catch ({ response }) {
     yield put(unauthorize())
   }
