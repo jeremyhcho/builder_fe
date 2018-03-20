@@ -13,20 +13,34 @@ class Tooltip extends React.Component {
   componentDidMount () {
     this.target = document.querySelector(`[data-tip-for='${this.props.id}']`)
 
-    if ('ontouchstart' in window) {
-      console.log('Tooltips in mobile are disabled')
-    } else {
-      this.target.addEventListener('mouseenter', this.openToolTip)
-      this.target.addEventListener('mouseleave', this.closeToolTip)
+    if (!this.props.cta) {
+      if ('ontouchstart' in window) {
+        console.log('Tooltips in mobile are disabled')
+      } else {
+        this.target.addEventListener('mouseenter', this.openToolTip)
+        this.target.addEventListener('mouseleave', this.closeToolTip)
+      }
+    }
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.toggle && !this.props.toggle) {
+      this.setState({ hovered: true })
+    }
+
+    if (!newProps.toggle && this.props.toggle) {
+      this.setState({ hovered: false })
     }
   }
 
   componentWillUnmount () {
-    if ('ontouchstart' in window) {
-      console.log('Tooltips in mobile are disabled')
-    } else {
-      this.target.removeEventListener('mouseenter', this.openToolTip)
-      this.target.removeEventListener('mouseleave', this.closeToolTip)
+    if (!this.props.cta) {
+      if ('ontouchstart' in window) {
+        console.log('Tooltips in mobile are disabled')
+      } else {
+        this.target.removeEventListener('mouseenter', this.openToolTip)
+        this.target.removeEventListener('mouseleave', this.closeToolTip)
+      }
     }
   }
 
@@ -97,7 +111,7 @@ class Tooltip extends React.Component {
     })
   }
 
-  tooltipStyles () {
+  toolTipStyles () {
     return this.getPos()
   }
 
@@ -108,17 +122,43 @@ class Tooltip extends React.Component {
       hovered
     })
 
+    const overlayClass = classNames('tooltip-overlay', {
+      hide: !hovered
+    })
+
+    if (this.props.cta) {
+      return (
+        [
+          <div styleName={overlayClass} key='overlay' />,
+          <div
+            data-pos={this.props.pos}
+            styleName={tooltipClass}
+            style={this.toolTipStyles()}
+            ref={tooltip => this.tooltip = tooltip}
+            key='tooltip'
+          >
+            {this.props.children}
+          </div>
+        ]
+      )
+    }
+
     return (
       <div
         data-pos={this.props.pos}
         styleName={tooltipClass}
-        style={this.tooltipStyles()}
+        style={this.toolTipStyles()}
         ref={tooltip => this.tooltip = tooltip}
       >
         {this.props.children}
       </div>
     )
   }
+}
+
+Tooltip.defaultProps = {
+  cta: false,
+  toggle: false
 }
 
 Tooltip.propTypes = {
@@ -128,7 +168,9 @@ Tooltip.propTypes = {
     PropTypes.string,
     PropTypes.object,
     PropTypes.array
-  ]).isRequired
+  ]).isRequired,
+  toggle: PropTypes.bool,
+  cta: PropTypes.bool
 }
 
 export default Tooltip

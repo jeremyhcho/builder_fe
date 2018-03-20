@@ -55,7 +55,8 @@ class Modal extends React.Component {
       headerIcon: HeaderIcon,
       wrapperStyle,
       bodyStyle,
-      footerStyle
+      footerStyle,
+      hideExit
       // ...props
     } = this.props
 
@@ -78,32 +79,40 @@ class Modal extends React.Component {
           ref={ref => this.content = ref}
           tabIndex="0"
         >
-          <div styleName="header">
-            <div className="flex">
-              {
-                HeaderIcon ? (
-                  <HeaderIcon width={25} height={25} style={{ marginRight: '15px' }} />
-                ) : null
-              }
-              <h1 className='semibold' styleName="title">{header}</h1>
-            </div>
-            <button
-              type="button"
-              styleName="exit-button"
-              onClick={() => this.closeModal()}
-            >
-              <i
-                className="fa fa-times"
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  top: '9px',
-                  left: '11px',
-                  fontSize: '18px'
-                }}
-              />
-            </button>
-          </div>
+          {
+            header ? (
+              <div styleName="header">
+                <div className="flex">
+                  {
+                    HeaderIcon ? (
+                      <HeaderIcon width={25} height={25} style={{ marginRight: '15px' }} />
+                    ) : null
+                  }
+                  <h1 className='semibold' styleName="title">{header}</h1>
+                </div>
+
+                {
+                  hideExit &&
+                  <button
+                    type="button"
+                    styleName="exit-button"
+                    onClick={() => this.closeModal()}
+                  >
+                    <i
+                      className="fa fa-times"
+                      aria-hidden="true"
+                      style={{
+                        position: 'absolute',
+                        top: '9px',
+                        left: '11px',
+                        fontSize: '18px'
+                      }}
+                    />
+                  </button>
+                }
+              </div>
+            ) : null
+          }
 
           <div styleName="body" style={{ ...bodyStyle }}>
             {children}
@@ -130,7 +139,8 @@ Modal.defaultProps = {
   modal: true,
   wrapperStyle: {},
   bodyStyle: {},
-  footerStyle: {}
+  footerStyle: {},
+  hideExit: false
 }
 
 Modal.propTypes = {
@@ -143,7 +153,8 @@ Modal.propTypes = {
   modal: PropTypes.bool,
   wrapperStyle: PropTypes.object,
   bodyStyle: PropTypes.object,
-  footerStyle: PropTypes.object
+  footerStyle: PropTypes.object,
+  hideExit: PropTypes.bool
   /* Forces user to use one of the actions in the modal,
   clicking outside the modal will not trigger the state of the modal */
 }
