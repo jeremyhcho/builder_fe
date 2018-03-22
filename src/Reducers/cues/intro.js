@@ -4,7 +4,8 @@ import {
   OPEN_NBA_INTRO_MODEL_CUE,
   OPEN_NBA_INTRO_CREATE_MODEL_CUE,
   OPEN_NBA_INTRO_SUBMIT_MODEL_CUE,
-  OPEN_NBA_INTRO_CONGRATULATIONS_CUE
+  OPEN_NBA_INTRO_CONGRATULATIONS_CUE,
+  CLOSE_NBA_INTRO_CUE
 } from 'Constants'
 
 const initialState = {
@@ -31,6 +32,9 @@ const intro = (state = initialState, action) => {
 
     case OPEN_NBA_INTRO_CONGRATULATIONS_CUE:
       return { ...initialState, congratulationsModal: true }
+
+    case CLOSE_NBA_INTRO_CUE:
+      return { ...initialState }
 
     default:
       return state

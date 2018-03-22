@@ -39,11 +39,11 @@ class PickOfTheDay extends React.Component {
 }
 
 PickOfTheDay.defaultProps = {
-  potd: {}
+  potd: []
 }
 
 PickOfTheDay.propTypes = {
-  potd: PropTypes.object,
+  potd: PropTypes.array,
   fetchDashboardPotd: PropTypes.func.isRequired
 }
 

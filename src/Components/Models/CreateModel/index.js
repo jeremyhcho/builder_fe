@@ -9,7 +9,7 @@ import ModelInfo from './ModelInfo'
 import ModelSpecs from './ModelSpecs'
 
 // Actions
-import { createNBAModel, updateNBAModel } from 'Actions'
+import { createNBAModel, updateNBAModel, openNBAIntroCongratulationsCue } from 'Actions'
 
 // CSS
 import './CreateModel.scss'
@@ -56,6 +56,10 @@ class CreateModel extends React.Component {
     if (!newProps.creatingModel && this.props.creatingModel) {
       if (newProps.limitError && !newProps.limitError.models) {
         this.props.history.push({ pathname: '/models' })
+
+        if (newProps.modelSubmitCue) {
+          this.props.openNBAIntroCongratulationsCue()
+        }
       }
 
       this.props.history.push({
@@ -141,19 +145,23 @@ CreateModel.propTypes = {
   limitError: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.object
-  ])
+  ]),
+  modelSubmitCue: PropTypes.bool.isRequired,
+  openNBAIntroCongratulationsCue: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ routines, ...state }) => ({
+const mapStateToProps = ({ routines, cues, ...state }) => ({
   creatingModel: routines.isLoading.CREATE_NBA_MODEL,
   updatingModel: routines.isLoading.UPDATE_NBA_MODEL,
   limitError: routines.error.nba,
+  modelSubmitCue: cues.intro.modelSubmit,
   submitErrors: getFormSyncErrors('model')(state)
 })
 
 const mapDispatchToProps = {
   createNBAModel,
-  updateNBAModel
+  updateNBAModel,
+  openNBAIntroCongratulationsCue
 }
 
 export default connect(

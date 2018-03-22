@@ -8,25 +8,29 @@ import { Modal, Button } from 'Components/Common'
 // Icons
 import QuzeIcon from 'Assets/Icons/blue-q-1.svg'
 
-const WelcomeCue = ({ welcomeCue }) => (
+// Actions
+import { openNBAIntroModelCue } from 'Actions'
+
+const WelcomeCue = ({ welcomeCue, openNBAIntroModelCue }) => (
   <Modal
     isOpen={welcomeCue}
     wrapperStyle={{ width: '55%' }}
     bodyStyle={{
-      padding: '40px 25px',
+      padding: '40px 30px',
       textAlign: 'center'
     }}
     footer={[
       <Button
         secondary
         key='submit'
+        onClick={openNBAIntroModelCue}
       >
         <p className="semibold">Get Started!</p>
       </Button>
     ]}
   >
     <QuzeIcon height={100} width={100} style={{ marginBottom: '25px' }} />
-    <h1 className="semibold" style={{ marginBottom: '25px' }}>Hey there!</h1>
+    <h1 className="semibold" style={{ marginBottom: '40px' }}>Hey there!</h1>
 
     <p style={{ textAlign: 'left', lineHeight: '20px' }}>
       Quze is a tool to help you build simple sports models. Models automatically
@@ -44,13 +48,19 @@ const WelcomeCue = ({ welcomeCue }) => (
 )
 
 WelcomeCue.propTypes = {
-  welcomeCue: PropTypes.bool.isRequired
+  welcomeCue: PropTypes.bool.isRequired,
+  openNBAIntroModelCue: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ cues }) => ({
   welcomeCue: cues.intro.welcomeModal
 })
 
+const mapDispatchToProps = {
+  openNBAIntroModelCue
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(WelcomeCue)

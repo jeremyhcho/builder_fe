@@ -13,7 +13,7 @@ class Tooltip extends React.Component {
   componentDidMount () {
     this.target = document.querySelector(`[data-tip-for='${this.props.id}']`)
 
-    if (!this.props.cta) {
+    if (!this.props.cta && !this.props.toggle) {
       if ('ontouchstart' in window) {
         console.log('Tooltips in mobile are disabled')
       } else {
@@ -21,11 +21,34 @@ class Tooltip extends React.Component {
         this.target.addEventListener('mouseleave', this.closeToolTip)
       }
     }
+
+    if (this.props.cta) {
+      this.target.style = 'position: relative; z-index: 3002'
+    }
+    /* eslint-disable react/no-did-mount-set-state */
+    if (this.props.toggle) {
+      this.setState({ hovered: true }, () => {
+        const { top, left } = this.toolTipStyle()
+        this.tooltip.style.top = `${top}px`
+        this.tooltip.style.left = `${left}px`
+      })
+    }
+    /* eslint-enable react/no-did-mount-set-state */
   }
 
   componentWillReceiveProps (newProps) {
+    if (newProps.cta && !this.props.cta) {
+      this.target.removeEventListener('mouseenter', this.openToolTip)
+      this.target.removeEventListener('mouseleave', this.closeToolTip)
+      this.target.style = 'position: relative; z-index: 3002'
+    }
+
     if (newProps.toggle && !this.props.toggle) {
-      this.setState({ hovered: true })
+      this.setState({ hovered: true }, () => {
+        const { top, left } = this.toolTipStyle()
+        this.tooltip.style.top = `${top}px`
+        this.tooltip.style.left = `${left}px`
+      })
     }
 
     if (!newProps.toggle && this.props.toggle) {
@@ -111,46 +134,60 @@ class Tooltip extends React.Component {
     })
   }
 
-  toolTipStyles () {
+  toolTipStyle () {
     return this.getPos()
+  }
+
+  selectorStyle () {
+    if (!this.target) {
+      return null
+    }
+
+    const targetDimensions = this.target.getBoundingClientRect()
+
+    return {
+      width: targetDimensions.width,
+      height: targetDimensions.height,
+      top: targetDimensions.y,
+      left: targetDimensions.x
+    }
   }
 
   render () {
     const { hovered } = this.state
 
     const tooltipClass = classNames('tooltip', {
-      hovered
+      hovered,
+      cta: this.props.cta
     })
 
     const overlayClass = classNames('tooltip-overlay', {
-      hide: !hovered
+      show: hovered
     })
 
-    if (this.props.cta) {
-      return (
-        [
-          <div styleName={overlayClass} key='overlay' />,
-          <div
-            data-pos={this.props.pos}
-            styleName={tooltipClass}
-            style={this.toolTipStyles()}
-            ref={tooltip => this.tooltip = tooltip}
-            key='tooltip'
-          >
-            {this.props.children}
-          </div>
-        ]
-      )
-    }
-
     return (
-      <div
-        data-pos={this.props.pos}
-        styleName={tooltipClass}
-        style={this.toolTipStyles()}
-        ref={tooltip => this.tooltip = tooltip}
-      >
-        {this.props.children}
+      <div>
+        {
+          this.props.cta &&
+          [
+            <div styleName={overlayClass} key={`tooltip-overlay-${this.props.id}`} />,
+            <div
+              key={`tooltip-selector-${this.props.id}`}
+              ref={selector => this.selector = selector}
+              styleName='selector'
+              style={this.selectorStyle()}
+            />
+          ]
+        }
+
+        <div
+          data-pos={this.props.pos}
+          styleName={tooltipClass}
+          style={{ ...this.props.style, ...this.toolTipStyle() }}
+          ref={tooltip => this.tooltip = tooltip}
+        >
+          {this.props.children}
+        </div>
       </div>
     )
   }
@@ -158,7 +195,8 @@ class Tooltip extends React.Component {
 
 Tooltip.defaultProps = {
   cta: false,
-  toggle: false
+  toggle: false,
+  style: {}
 }
 
 Tooltip.propTypes = {
@@ -170,7 +208,8 @@ Tooltip.propTypes = {
     PropTypes.array
   ]).isRequired,
   toggle: PropTypes.bool,
-  cta: PropTypes.bool
+  cta: PropTypes.bool,
+  style: PropTypes.object
 }
 
 export default Tooltip

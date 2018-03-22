@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 
@@ -22,47 +23,55 @@ import BetsSelected from 'Assets/Icons/nav/betsSelected.svg'
 // CSS
 import './SideNav.scss'
 
-const navItems = [
-  {
-    icon: Dashboard,
-    selectedIcon: DashboardSelected,
-    route: '/dashboard',
-    key: 'dashboard',
-    sectionName: 'Dashboard'
-  },
-  {
-    icon: Games,
-    selectedIcon: GamesSelected,
-    route: '/games',
-    key: 'games',
-    sectionName: 'Games'
-  },
-  {
-    icon: Teams,
-    selectedIcon: TeamsSelected,
-    route: '/teams',
-    key: 'teams',
-    sectionName: 'Teams'
-  },
-  {
-    icon: Models,
-    selectedIcon: ModelsSelected,
-    route: '/models',
-    key: 'models',
-    sectionName: 'Models'
-  },
-  {
-    icon: Bets,
-    selectedIcon: BetsSelected,
-    route: '/bets',
-    key: 'bets',
-    sectionName: 'Bet History'
-  }
-]
+// Actions
+import { closeNBAIntroCue } from 'Actions'
 
 class SideNav extends React.Component {
   state = {
     selectedItem: ''
+  }
+
+  getNavItems () {
+    const navItems = [
+      {
+        icon: Dashboard,
+        selectedIcon: DashboardSelected,
+        route: '/dashboard',
+        key: 'dashboard',
+        sectionName: 'Dashboard'
+      },
+      {
+        icon: Games,
+        selectedIcon: GamesSelected,
+        route: '/games',
+        key: 'games',
+        sectionName: 'Games'
+      },
+      {
+        icon: Teams,
+        selectedIcon: TeamsSelected,
+        route: '/teams',
+        key: 'teams',
+        sectionName: 'Teams'
+      },
+      {
+        icon: Models,
+        selectedIcon: ModelsSelected,
+        route: '/models',
+        key: 'models',
+        sectionName: 'Models',
+        cta: this.props.modelNavigateCue
+      },
+      {
+        icon: Bets,
+        selectedIcon: BetsSelected,
+        route: '/bets',
+        key: 'bets',
+        sectionName: 'Bet History'
+      }
+    ]
+
+    return navItems
   }
 
   handleClick = (key) => {
@@ -71,6 +80,28 @@ class SideNav extends React.Component {
         selectedItem: key
       })
     }
+  }
+
+  renderToolTipBody (cta, sectionName) {
+    if (cta) {
+      return (
+        <div style={{ textAlign: 'left' }}>
+          <p style={{ lineHeight: '20px', marginBottom: '10px' }}>
+            Click here to navigate to the Models tab and create your first custom model!
+          </p>
+
+          <p
+            className="small label"
+            style={{ cursor: 'pointer' }}
+            onClick={() => this.props.closeNBAIntroCue()}
+          >
+            Hide these tips
+          </p>
+        </div>
+      )
+    }
+
+    return sectionName
   }
 
   render () {
@@ -87,26 +118,40 @@ class SideNav extends React.Component {
         </div>
 
         {
-          navItems.map(({ icon: Icon, selectedIcon: SelectedIcon, route, key, sectionName }) => {
+          this.getNavItems().map(({
+            icon: Icon, selectedIcon: SelectedIcon, route, key, sectionName, cta
+          }) => {
             const selected = route === this.props.history.location.pathname
             const navItemStyle = classNames('nav-item', {
               selected
             })
+            const toolTipKey = `side-nav-item-${key}`
 
             return (
-              <QuzeLink to={`${route}`} onClick={this.handleClick(key)} key={key}>
-                <div
-                  styleName={navItemStyle}
-                  selected={selected}
-                  data-tip-for={`side-nav-item-${key}`}
+              <div key={key}>
+                <QuzeLink to={`${route}`} onClick={this.handleClick(key, cta)}>
+                  <div
+                    styleName={navItemStyle}
+                    selected={selected}
+                    data-tip-for={toolTipKey}
+                  >
+                    {selected ?
+                      <SelectedIcon height={20} width={20} />
+                      : <Icon height={20} width={20} />
+                    }
+                  </div>
+                </QuzeLink>
+
+                <Tooltip
+                  id={toolTipKey}
+                  pos='right'
+                  cta={cta}
+                  toggle={key === 'models' ? this.props.modelNavigateCue : null}
+                  style={cta ? { maxWidth: '300px' } : {}}
                 >
-                  <Tooltip id={`side-nav-item-${key}`} pos='right'>{sectionName}</Tooltip>
-                  {selected ?
-                    <SelectedIcon height={20} width={20} />
-                    : <Icon height={20} width={20} />
-                  }
-                </div>
-              </QuzeLink>
+                  {this.renderToolTipBody(cta, sectionName)}
+                </Tooltip>
+              </div>
             )
           })
         }
@@ -116,7 +161,19 @@ class SideNav extends React.Component {
 }
 
 SideNav.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  modelNavigateCue: PropTypes.bool.isRequired,
+  closeNBAIntroCue: PropTypes.func.isRequired
 }
 
-export default withRouter(SideNav)
+const mapStateToProps = ({ cues }) => ({
+  modelNavigateCue: cues.intro.modelNavigate
+})
+
+const mapDispatchToProps = {
+  closeNBAIntroCue
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SideNav)
+)

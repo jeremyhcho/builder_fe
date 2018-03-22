@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components & Icons
-import { Button, DocumentTitle } from 'Components/Common'
+import { Button, DocumentTitle, Tooltip } from 'Components/Common'
+import { CongratulationsCue } from 'Components/Cues'
 import DelayedLoader from 'Layouts/Loading/DelayedLoader'
 import ModelCard from './ModelCard'
 import NoModelsIcon from 'Assets/Icons/missing-content.svg'
@@ -16,11 +17,20 @@ import './Models.scss'
 import PlusIcon from 'Assets/Icons/plus.svg'
 
 // Actions
-import { fetchNBAModels } from 'Actions'
+import {
+  fetchNBAModels,
+  openNBAIntroCreateModelCue,
+  openNBAIntroSubmitModelCue,
+  closeNBAIntroCue
+} from 'Actions'
 
 class Models extends React.Component {
   componentDidMount () {
     this.props.fetchNBAModels()
+
+    if (this.props.modelNavigateCue) {
+      this.props.openNBAIntroCreateModelCue()
+    }
   }
 
   navigateToCreateModel = () => {
@@ -28,6 +38,10 @@ class Models extends React.Component {
       pathname: '/models/create',
       state: { from: '/models' }
     })
+
+    if (this.props.modelCreateCue) {
+      this.props.openNBAIntroSubmitModelCue()
+    }
   }
 
   renderModelColor (index) {
@@ -90,6 +104,43 @@ class Models extends React.Component {
     )
   }
 
+  renderIntroCue () {
+    const { modelCreateCue, closeNBAIntroCue, congratulationsCue } = this.props
+
+    if (modelCreateCue) {
+      return (
+        <Tooltip
+          id='model-create-cue'
+          pos='right'
+          cta={modelCreateCue}
+          toggle={modelCreateCue}
+          style={{ maxWidth: '300px' }}
+        >
+          <div style={{ textAlign: 'left' }}>
+            <p style={{ lineHeight: '20px', marginBottom: '10px' }}>
+              You don't have any models created currently.
+              {' '} Click the button to Create your first model.
+            </p>
+
+            <p
+              className="small label"
+              style={{ cursor: 'pointer' }}
+              onClick={() => closeNBAIntroCue()}
+            >
+              Hide these tips
+            </p>
+          </div>
+        </Tooltip>
+      )
+    }
+
+    if (congratulationsCue) {
+      return <CongratulationsCue />
+    }
+
+    return null
+  }
+
   render () {
     const { fetchingModels, models } = this.props
 
@@ -105,6 +156,7 @@ class Models extends React.Component {
               <Button
                 onClick={this.navigateToCreateModel}
                 style={{ position: 'relative' }}
+                data-tip-for='model-create-cue'
               >
                 <PlusIcon
                   style={{
@@ -116,6 +168,8 @@ class Models extends React.Component {
 
                 <span style={{ marginLeft: '20px' }}>Create Model</span>
               </Button>
+
+              {this.renderIntroCue()}
             </div>
 
             <p className="small" style={{ color: 'var(--red)', marginTop: '10px' }}>
@@ -140,16 +194,28 @@ Models.propTypes = {
   history: PropTypes.object.isRequired,
   fetchNBAModels: PropTypes.func.isRequired,
   fetchingModels: PropTypes.bool,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  modelNavigateCue: PropTypes.bool.isRequired,
+  modelCreateCue: PropTypes.bool.isRequired,
+  congratulationsCue: PropTypes.bool.isRequired,
+  openNBAIntroCreateModelCue: PropTypes.func.isRequired,
+  openNBAIntroSubmitModelCue: PropTypes.func.isRequired,
+  closeNBAIntroCue: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ routines }) => ({
+const mapStateToProps = ({ routines, cues }) => ({
   models: routines.nba.models,
-  fetchingModels: routines.isLoading.FETCH_NBA_MODELS
+  fetchingModels: routines.isLoading.FETCH_NBA_MODELS,
+  modelCreateCue: cues.intro.modelCreate,
+  congratulationsCue: cues.intro.congratulationsModal,
+  modelNavigateCue: cues.intro.modelNavigate
 })
 
 const mapDispatchToProps = {
-  fetchNBAModels
+  fetchNBAModels,
+  openNBAIntroCreateModelCue,
+  openNBAIntroSubmitModelCue,
+  closeNBAIntroCue
 }
 
 export default connect(

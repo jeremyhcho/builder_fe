@@ -92,7 +92,7 @@ class Modal extends React.Component {
                 </div>
 
                 {
-                  hideExit &&
+                  !hideExit &&
                   <button
                     type="button"
                     styleName="exit-button"
