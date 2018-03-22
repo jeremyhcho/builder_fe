@@ -140,14 +140,15 @@ Modal.defaultProps = {
   wrapperStyle: {},
   bodyStyle: {},
   footerStyle: {},
-  hideExit: false
+  hideExit: false,
+  toggle: null
 }
 
 Modal.propTypes = {
   header: PropTypes.string,
   headerIcon: PropTypes.func,
   isOpen: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
+  toggle: PropTypes.func,
   children: PropTypes.node,
   footer: PropTypes.array,
   modal: PropTypes.bool,

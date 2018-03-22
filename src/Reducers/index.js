@@ -10,6 +10,7 @@ import snackBarReducer from './snackbar'
 import routines from './routines'
 import adminReducer from './admin'
 import globalInfoReducer from './globalInfo'
+import cuesReducer from './cues'
 
 const appReducer = combineReducers({
   auth,
@@ -20,7 +21,8 @@ const appReducer = combineReducers({
   snackbar: snackBarReducer,
   admin: adminReducer,
   globalInfo: globalInfoReducer,
-  routines
+  routines,
+  cues: cuesReducer
 })
 
 const rootReducer = (state, action) => {

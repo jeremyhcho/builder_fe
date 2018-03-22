@@ -26,7 +26,8 @@ import {
 // Actions
 import {
   authorize,
-  unauthorize
+  unauthorize,
+  openNBAIntroCue
 } from 'Actions'
 
 // Helpers
@@ -64,7 +65,13 @@ function* callSendRecoveryEmail ({ email }) {
 function* callFetchUser () {
   try {
     const { data } = yield call(fetchUser)
-    yield put(authorize(data))
+    const { user } = yield put(authorize(data))
+
+    if (user.is_verified) {
+      // if user is verified and first login...
+      // ADD FIRST LOGIN CONDITION
+      yield put(openNBAIntroCue())
+    }
   } catch ({ response }) {
     yield put(unauthorize())
   }

@@ -5,6 +5,7 @@ import { Row, Col } from 'react-styled-flexboxgrid'
 
 // Components
 import { DocumentTitle } from 'Components/Common'
+import { WelcomeCue } from 'Components/Cues'
 import Announcements from './Announcements'
 import RecentPredictions from './RecentPredictions'
 import PickOfTheDay from './PickOfTheDay'
@@ -32,6 +33,8 @@ class Dashboard extends React.Component {
               <RecentPredictions />
             </Col>
           </Row>
+
+          <WelcomeCue />
         </div>
       </DocumentTitle>
     )
