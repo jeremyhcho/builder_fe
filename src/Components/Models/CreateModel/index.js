@@ -60,12 +60,12 @@ class CreateModel extends React.Component {
         if (newProps.modelSubmitCue) {
           this.props.openNBAIntroCongratulationsCue()
         }
+      } else {
+        this.props.history.push({
+          pathname: '/models',
+          state: { error: newProps.limitError.models.messages.status[0] }
+        })
       }
-
-      this.props.history.push({
-        pathname: '/models',
-        state: { error: newProps.limitError.models.messages.status[0] }
-      })
     }
 
     if (!newProps.updatingModel && this.props.updatingModel) {

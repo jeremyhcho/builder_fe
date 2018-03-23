@@ -21,25 +21,25 @@ const CongratulationsCue = ({ congratulationsCue, closeNBAIntroCue, history }) =
   return (
     <Modal
       isOpen={congratulationsCue}
-      wrapperStyle={{ width: '55%' }}
+      wrapperStyle={{ width: '50%' }}
       bodyStyle={{
         padding: '40px 30px',
         textAlign: 'center'
       }}
       footer={[
         <Button
+          flat
+          key='close'
+          onClick={() => closeNBAIntroCue()}
+        >
+          Close
+        </Button>,
+        <Button
           secondary
           key='submit'
           onClick={() => browseGames()}
         >
           <p className="semibold">Browse today's games</p>
-        </Button>,
-        <Button
-          flat
-          key='close'
-          onClick={closeNBAIntroCue}
-        >
-          Close
         </Button>
       ]}
     >
